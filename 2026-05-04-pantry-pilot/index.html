@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PantryPilot — Cook what you have. Waste nothing.</title>
+  <meta name="description" content="PantryPilot tracks what's in your kitchen, suggests recipes from what you actually have, and auto-builds the smallest possible shopping list." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:wght@500;700;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="#" class="logo">
+        <span class="logo-mark">P</span>
+        <span class="logo-text">PantryPilot</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a href="#cta" class="btn btn-primary btn-sm">Get early access</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <span class="eyebrow">Now in private beta</span>
+          <h1>Cook what you have.<br/><span class="accent">Waste nothing.</span></h1>
+          <p class="lede">PantryPilot scans your kitchen, learns what's in it, and suggests dinners from what you already own. The shopping list is whatever's left.</p>
+          <form class="signup" id="signupForm">
+            <input type="email" required placeholder="you@kitchen.com" aria-label="Email address" />
+            <button type="submit" class="btn btn-primary">Join the beta</button>
+          </form>
+          <p class="signup-meta">Free for the first 10,000 cooks. No card required.</p>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="card card-1">
+            <div class="card-head">Tonight's pick</div>
+            <div class="card-title">Chickpea & lemon orzo</div>
+            <div class="card-meta">22 min · uses 9 of 11 pantry items</div>
+            <div class="card-bar"><span style="width: 82%"></span></div>
+          </div>
+          <div class="card card-2">
+            <div class="card-head">Pantry</div>
+            <ul class="pantry">
+              <li><span class="dot dot-fresh"></span>Spinach <em>2 days left</em></li>
+              <li><span class="dot dot-fresh"></span>Greek yogurt <em>5 days</em></li>
+              <li><span class="dot dot-warn"></span>Cherry tomatoes <em>tomorrow</em></li>
+              <li><span class="dot dot-fresh"></span>Orzo <em>2 cups</em></li>
+              <li><span class="dot dot-fresh"></span>Lemons <em>3</em></li>
+            </ul>
+          </div>
+          <div class="card card-3">
+            <div class="card-head">This week</div>
+            <div class="big-stat">$24</div>
+            <div class="card-sub">saved vs. last week</div>
+            <div class="big-stat-2">1.4 kg</div>
+            <div class="card-sub">food waste avoided</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="logos">
+      <div class="container">
+        <p class="logos-label">As seen in</p>
+        <div class="logos-row">
+          <span>Bon Appétit</span>
+          <span>The Kitchn</span>
+          <span>Lifehacker</span>
+          <span>Product Hunt #1</span>
+          <span>Fast Company</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="section">
+      <div class="container">
+        <h2 class="section-title">How it works</h2>
+        <p class="section-sub">Three steps from chaos cabinet to weeknight dinner.</p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <h3>Snap your pantry</h3>
+            <p>Point your camera at the shelf, fridge, or grocery haul. PantryPilot identifies items, quantities, and expiry windows in seconds.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <h3>Get tonight's plan</h3>
+            <p>We rank recipes by what's about to spoil, your taste profile, and how few extras you'd need to buy. Swipe to swap.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <h3>Shop the gaps</h3>
+            <p>One tap turns missing ingredients into a checkout-ready cart at your local grocer or delivery app.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">Built for real kitchens</h2>
+        <p class="section-sub">Not another recipe app. A kitchen brain that pays attention.</p>
+        <div class="features">
+          <div class="feature">
+            <div class="feature-icon" data-icon="scan"></div>
+            <h3>Camera-first inventory</h3>
+            <p>Recognizes 4,000+ ingredients, brands, and pack sizes from a single photo. Works offline.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon" data-icon="clock"></div>
+            <h3>Spoilage radar</h3>
+            <p>Predicts expiry from purchase date, storage conditions, and your past consumption. Nudges before things go bad.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon" data-icon="taste"></div>
+            <h3>Taste model</h3>
+            <p>Learns what you actually finish on your plate. Hates cilantro? It'll remember. Forever.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon" data-icon="cart"></div>
+            <h3>Smallest cart possible</h3>
+            <p>Optimizes for the fewest items, lowest cost, and most overlap across the week's meals.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon" data-icon="house"></div>
+            <h3>Household sync</h3>
+            <p>Roommates and partners share one pantry. No more duplicate milk.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon" data-icon="leaf"></div>
+            <h3>Footprint tracking</h3>
+            <p>See the carbon and water cost of every meal — and how much waste you've prevented this month.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container quote-wrap">
+        <blockquote class="quote">
+          <p>"I haven't thrown out a vegetable in six weeks. My grocery bill is down 31%. This is the first food app that actually changed how I cook."</p>
+          <footer>— Priya R., beta user since March</footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <section id="pricing" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">Simple pricing</h2>
+        <p class="section-sub">Start free. Upgrade when you're hooked.</p>
+        <div class="plans">
+          <div class="plan">
+            <h3>Home</h3>
+            <div class="price"><span class="price-num">$0</span><span class="price-period">forever</span></div>
+            <ul>
+              <li>Pantry scan, up to 50 items</li>
+              <li>3 recipe suggestions / day</li>
+              <li>Basic spoilage alerts</li>
+              <li>Single user</li>
+            </ul>
+            <a href="#cta" class="btn btn-ghost">Start free</a>
+          </div>
+          <div class="plan plan-featured">
+            <span class="plan-badge">Most popular</span>
+            <h3>Kitchen</h3>
+            <div class="price"><span class="price-num">$6</span><span class="price-period">/ month</span></div>
+            <ul>
+              <li>Unlimited pantry items</li>
+              <li>Full week meal planning</li>
+              <li>Household sync (up to 5)</li>
+              <li>One-tap grocery checkout</li>
+              <li>Footprint tracking</li>
+            </ul>
+            <a href="#cta" class="btn btn-primary">Get Kitchen</a>
+          </div>
+          <div class="plan">
+            <h3>Pro Cook</h3>
+            <div class="price"><span class="price-num">$14</span><span class="price-period">/ month</span></div>
+            <ul>
+              <li>Everything in Kitchen</li>
+              <li>Macro & dietary targets</li>
+              <li>Bulk-cook batch planner</li>
+              <li>Priority API for smart fridges</li>
+            </ul>
+            <a href="#cta" class="btn btn-ghost">Go Pro</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section">
+      <div class="container faq-wrap">
+        <h2 class="section-title">Questions</h2>
+        <div class="faq">
+          <details>
+            <summary>Do I have to scan everything I own?</summary>
+            <p>No. Scan a shelf, a grocery bag, or just type a few staples. The model fills gaps and asks when it's unsure.</p>
+          </details>
+          <details>
+            <summary>What about dietary restrictions?</summary>
+            <p>Set allergens, diet (vegan, halal, keto, etc.), and dislikes once. PantryPilot will never suggest something you can't eat.</p>
+          </details>
+          <details>
+            <summary>Which grocers integrate?</summary>
+            <p>At launch: Instacart, Amazon Fresh, Walmart, Tesco, Ocado, and Whole Foods. More coming weekly.</p>
+          </details>
+          <details>
+            <summary>Is my data sold?</summary>
+            <p>Never. We make money from subscriptions, not your shopping list. Your pantry data stays yours and is encrypted at rest.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="cta" class="cta">
+      <div class="container cta-inner">
+        <h2>Stop throwing food away.</h2>
+        <p>Join 12,000 cooks already on the beta waitlist.</p>
+        <form class="signup signup-light" id="ctaForm">
+          <input type="email" required placeholder="you@kitchen.com" aria-label="Email address" />
+          <button type="submit" class="btn btn-dark">Get early access</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <a href="#" class="logo">
+          <span class="logo-mark">P</span>
+          <span class="logo-text">PantryPilot</span>
+        </a>
+        <p class="footer-tag">Cook what you have.</p>
+      </div>
+      <div class="footer-cols">
+        <div>
+          <h4>Product</h4>
+          <a href="#how">How it works</a>
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <a href="#">About</a>
+          <a href="#">Blog</a>
+          <a href="#">Careers</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 PantryPilot, Inc.</span>
+      <span>Made for kitchens that hate waste.</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
