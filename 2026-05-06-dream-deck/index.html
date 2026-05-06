@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DreamDeck — See the patterns inside your sleep</title>
+  <meta name="description" content="DreamDeck is an AI-powered dream journal that surfaces recurring symbols, themes, and emotional patterns from your dreams over time." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="aurora" aria-hidden="true">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+  </div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark">◐</span>
+      <span class="logo-text">DreamDeck</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#demo">Try it</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+    <a href="#demo" class="btn btn-ghost">Get early access</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">Private. Encrypted. Always yours.</p>
+      <h1>Your dreams are trying to tell you something.</h1>
+      <p class="lead">DreamDeck turns half-remembered fragments into a living map of your subconscious — recurring symbols, emotional weather, and the people who haunt your sleep.</p>
+      <form class="hero-form" id="waitlist">
+        <input type="email" placeholder="you@dreaming.com" aria-label="Email address" required />
+        <button type="submit">Join the waitlist</button>
+      </form>
+      <p class="microcopy" id="form-msg">2,418 dreamers already on the list.</p>
+    </section>
+
+    <section class="card-row" id="features">
+      <article class="card">
+        <div class="card-icon">✶</div>
+        <h3>Whisper to capture</h3>
+        <p>Mumble it into your phone before your eyes fully open. Voice-to-text catches every shard.</p>
+      </article>
+      <article class="card">
+        <div class="card-icon">◇</div>
+        <h3>Symbol graph</h3>
+        <p>See how water, your mother, and that one corridor connect across months of sleep.</p>
+      </article>
+      <article class="card">
+        <div class="card-icon">◑</div>
+        <h3>Mood weather</h3>
+        <p>Track the emotional climate of your nights against your waking life.</p>
+      </article>
+      <article class="card">
+        <div class="card-icon">∞</div>
+        <h3>Private by design</h3>
+        <p>End-to-end encrypted. We can't read your dreams. Neither can anyone else.</p>
+      </article>
+    </section>
+
+    <section class="how" id="how">
+      <h2>Three steps from fog to insight</h2>
+      <ol class="steps">
+        <li>
+          <span class="step-num">01</span>
+          <h4>Log it groggy</h4>
+          <p>Voice or text, fragments welcome. The faster you capture, the more you keep.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h4>Let DreamDeck connect</h4>
+          <p>Our model tags symbols, characters, settings, and feelings — and links them across entries.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h4>Read your patterns</h4>
+          <p>Weekly insight cards reveal the recurring themes you'd otherwise miss.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="demo" id="demo">
+      <div class="demo-copy">
+        <h2>Try a 30-second taste</h2>
+        <p>Type a fragment of a dream — real or imagined. We'll surface a symbol reading. No account needed.</p>
+      </div>
+      <div class="demo-panel">
+        <label for="dream-input">Last night I dreamed…</label>
+        <textarea id="dream-input" placeholder="…I was back in my childhood house, but the hallway kept stretching. There was water under the door."></textarea>
+        <button id="analyze-btn">Read my dream</button>
+        <div class="demo-output" id="demo-output" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+      <h2>Simple as a sleep cycle</h2>
+      <div class="plans">
+        <article class="plan">
+          <h3>Drifter</h3>
+          <p class="price">Free</p>
+          <ul>
+            <li>Unlimited entries</li>
+            <li>Voice capture</li>
+            <li>Basic symbol tagging</li>
+          </ul>
+          <button class="btn btn-ghost">Start free</button>
+        </article>
+        <article class="plan featured">
+          <p class="badge">Most chosen</p>
+          <h3>Lucid</h3>
+          <p class="price">$6<span>/mo</span></p>
+          <ul>
+            <li>Everything in Drifter</li>
+            <li>Symbol graph & mood weather</li>
+            <li>Weekly insight letters</li>
+            <li>Apple Health & Oura sync</li>
+          </ul>
+          <button class="btn btn-primary">Go Lucid</button>
+        </article>
+        <article class="plan">
+          <h3>Oneironaut</h3>
+          <p class="price">$14<span>/mo</span></p>
+          <ul>
+            <li>Everything in Lucid</li>
+            <li>Therapist-shareable reports</li>
+            <li>Custom symbol dictionaries</li>
+          </ul>
+          <button class="btn btn-ghost">Go deeper</button>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 DreamDeck. Built quietly, while you sleep.</p>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Security</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
