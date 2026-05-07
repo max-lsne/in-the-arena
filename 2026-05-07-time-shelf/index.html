@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TimeShelf — Try wanting it tomorrow</title>
+  <meta name="description" content="TimeShelf is a cold-storage inbox for everything you almost bought. Park your impulses, let them age, and act only on the ones that survive the wait." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22"><rect x="3" y="9" width="26" height="3" rx="1" fill="currentColor"/><rect x="3" y="20" width="26" height="3" rx="1" fill="currentColor"/><rect x="7" y="13" width="3" height="6" fill="currentColor"/><rect x="14" y="13" width="3" height="6" fill="currentColor"/><rect x="21" y="13" width="3" height="6" fill="currentColor"/></svg>
+      </span>
+      <span class="logo-text">TimeShelf</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#demo">Try it</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+    <a href="#waitlist" class="btn btn-ghost">Get early access</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">A calm room between the want and the buy.</p>
+      <h1>Try wanting it <em>tomorrow</em>.</h1>
+      <p class="lead">TimeShelf is a cold-storage inbox for everything you almost bought, almost read, almost subscribed to. Park it, let it age, and act only on what survives the wait.</p>
+      <form class="hero-form" id="waitlist">
+        <input type="email" placeholder="you@later.com" aria-label="Email address" required />
+        <button type="submit">Join the waitlist</button>
+      </form>
+      <p class="microcopy" id="form-msg">1,847 quietly impatient people on the list.</p>
+
+      <div class="hero-shelf" aria-hidden="true">
+        <div class="shelf-row">
+          <span class="shelf-item">Espresso machine</span>
+          <span class="shelf-item">Online course</span>
+          <span class="shelf-item">Standing desk</span>
+        </div>
+        <div class="shelf-plank"></div>
+        <div class="shelf-row">
+          <span class="shelf-item">Hardback novel</span>
+          <span class="shelf-item">Newsletter</span>
+          <span class="shelf-item dim">— 14 more</span>
+        </div>
+        <div class="shelf-plank"></div>
+      </div>
+    </section>
+
+    <section class="card-row" id="features">
+      <article class="card">
+        <div class="card-icon">◷</div>
+        <h3>Park anywhere</h3>
+        <p>Share sheet, browser extension, paste a link. One tap moves it off your mind.</p>
+      </article>
+      <article class="card">
+        <div class="card-icon">▢</div>
+        <h3>Cold storage</h3>
+        <p>Choose 7, 30, or 90 days. The item disappears from view. No reminders, no nags.</p>
+      </article>
+      <article class="card">
+        <div class="card-icon">◐</div>
+        <h3>Survival report</h3>
+        <p>When the timer ends, you only see what's still there. Most things quietly fade.</p>
+      </article>
+      <article class="card">
+        <div class="card-icon">∑</div>
+        <h3>Regret math</h3>
+        <p>Running totals of money saved, shelf time logged, items abandoned for good.</p>
+      </article>
+    </section>
+
+    <section class="how" id="how">
+      <h2>Three steps from impulse to intention</h2>
+      <ol class="steps">
+        <li>
+          <span class="step-num">01</span>
+          <h4>Shelf it</h4>
+          <p>The next time you almost click "Buy now", click "Shelf it" instead. Two seconds, zero guilt.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h4>Forget it</h4>
+          <p>Your shelf goes dark for the duration you picked. We won't remind you. That's the point.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h4>Decide on purpose</h4>
+          <p>When the wait ends, choose with a calmer brain. Most days, the want is already gone.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="demo" id="demo">
+      <div class="demo-copy">
+        <h2>Park something now.</h2>
+        <p>Type a thing you've been eyeing. Pick how long to leave it on the shelf. We'll keep it for you, locally — no account, no cloud.</p>
+        <p class="microcopy small">Saved in this browser only. Refresh and it's still there.</p>
+      </div>
+      <div class="demo-panel">
+        <label for="want-input">What do you almost want?</label>
+        <input id="want-input" type="text" placeholder="A new mechanical keyboard…" maxlength="80" />
+        <div class="duration-row" role="radiogroup" aria-label="Shelf duration">
+          <label class="chip"><input type="radio" name="dur" value="7" /> <span>7 days</span></label>
+          <label class="chip"><input type="radio" name="dur" value="30" checked /> <span>30 days</span></label>
+          <label class="chip"><input type="radio" name="dur" value="90" /> <span>90 days</span></label>
+        </div>
+        <button id="shelf-btn">Shelf it</button>
+
+        <div class="shelf-display" id="shelf-display" aria-live="polite"></div>
+
+        <div class="shelf-stats" id="shelf-stats">
+          <div><strong id="stat-on">0</strong><span>on the shelf</span></div>
+          <div><strong id="stat-survived">0</strong><span>survived the wait</span></div>
+          <div><strong id="stat-abandoned">0</strong><span>quietly abandoned</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+      <h2>Pricing, with a deliberate pause.</h2>
+      <div class="plans">
+        <article class="plan">
+          <h3>Shelf</h3>
+          <p class="price">Free</p>
+          <ul>
+            <li>Up to 50 active items</li>
+            <li>7 / 30 / 90 day waits</li>
+            <li>Browser extension</li>
+            <li>Local-first storage</li>
+          </ul>
+          <button class="btn btn-ghost">Start shelving</button>
+        </article>
+        <article class="plan featured">
+          <p class="badge">Most chosen</p>
+          <h3>Cellar</h3>
+          <p class="price">$4<span>/mo</span></p>
+          <ul>
+            <li>Unlimited items</li>
+            <li>Custom wait durations</li>
+            <li>Money-saved tracking</li>
+            <li>Monthly survival report</li>
+            <li>Sync across devices</li>
+          </ul>
+          <button class="btn btn-primary">Go Cellar</button>
+        </article>
+        <article class="plan">
+          <h3>Vault</h3>
+          <p class="price">$9<span>/mo</span></p>
+          <ul>
+            <li>Everything in Cellar</li>
+            <li>Shared household shelves</li>
+            <li>Subscription-audit mode</li>
+            <li>End-of-year regret report</li>
+          </ul>
+          <button class="btn btn-ghost">Go Vault</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="closing">
+      <blockquote>
+        <p>"The strongest filter you can put on a purchase is a Tuesday."</p>
+        <cite>— TimeShelf, basically</cite>
+      </blockquote>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 TimeShelf. Built slowly, on purpose.</p>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Manifesto</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
