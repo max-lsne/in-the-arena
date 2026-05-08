@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quorum — Decide together, without the group chat spiral</title>
+  <meta name="description" content="Quorum is a tiny app for groups who can't agree. Private votes, fast reveals, the option everyone can live with." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22"><circle cx="10" cy="10" r="4" fill="currentColor"/><circle cx="22" cy="10" r="4" fill="currentColor" opacity="0.7"/><circle cx="10" cy="22" r="4" fill="currentColor" opacity="0.5"/><circle cx="22" cy="22" r="4" fill="currentColor"/></svg>
+      </span>
+      <span class="logo-text">Quorum</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#demo">Try it</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+    <a href="#waitlist" class="btn btn-ghost">Get early access</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">A calm room for group decisions.</p>
+      <h1>Decide together, <em>without</em> the group chat spiral.</h1>
+      <p class="lead">Quorum is a tiny app for groups who can't agree on where to eat, what to watch, or when to meet. Everyone votes privately, the app surfaces overlap, and the "what do <em>you</em> want?" loop ends in under a minute.</p>
+      <form class="hero-form" id="waitlist">
+        <input type="email" placeholder="you@yourcrew.com" aria-label="Email address" required />
+        <button type="submit">Join the waitlist</button>
+      </form>
+      <p class="microcopy" id="form-msg">2,314 indecisive groups already in line.</p>
+
+      <div class="hero-room" aria-hidden="true">
+        <div class="room-header">
+          <span class="room-dot"></span>
+          <span class="room-title">friday-dinner</span>
+          <span class="room-meta">4 votes in</span>
+        </div>
+        <div class="room-options">
+          <div class="opt">
+            <span class="opt-name">Thai place</span>
+            <div class="opt-bar"><span style="width: 78%"></span></div>
+            <span class="opt-score">3.9</span>
+          </div>
+          <div class="opt winner">
+            <span class="opt-name">Diner on 5th</span>
+            <div class="opt-bar"><span style="width: 86%"></span></div>
+            <span class="opt-score">4.3 ✓</span>
+          </div>
+          <div class="opt">
+            <span class="opt-name">That new ramen</span>
+            <div class="opt-bar"><span style="width: 54%"></span></div>
+            <span class="opt-score">2.7</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card-row" id="features">
+      <article class="card">
+        <div class="card-icon">◐</div>
+        <h3>Private votes</h3>
+        <p>Each person rates options 1–5 alone. No anchoring, no peer pressure, no polite lying.</p>
+      </article>
+      <article class="card">
+        <div class="card-icon">◇</div>
+        <h3>Floor, not ceiling</h3>
+        <p>Quorum surfaces the option nobody hates — the one everyone can actually live with.</p>
+      </article>
+      <article class="card">
+        <div class="card-icon">⌁</div>
+        <h3>One link, no accounts</h3>
+        <p>Open a room, share the URL, you're done. Works on phones, laptops, in 30 seconds.</p>
+      </article>
+      <article class="card">
+        <div class="card-icon">⏱</div>
+        <h3>Soft deadlines</h3>
+        <p>Set a timer. When it ends, the room reveals — even if Casey forgot, again.</p>
+      </article>
+    </section>
+
+    <section class="how" id="how">
+      <h2>Three steps from "I don't know" to "okay, let's go".</h2>
+      <ol class="steps">
+        <li>
+          <span class="step-num">01</span>
+          <h4>Open a room</h4>
+          <p>One question, one link. "Where to eat?" "What to watch?" "When to meet?" Anyone with the link can join.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h4>Drop options, vote in private</h4>
+          <p>Anyone can add an option. Each person rates them 1–5 alone — no live tally, no avatars next to scores.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h4>Reveal the overlap</h4>
+          <p>Quorum picks the highest floor: the option with the best worst-score. The thing everyone can live with.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="demo" id="demo">
+      <div class="demo-copy">
+        <h2>Try a room right now.</h2>
+        <p>Add a few options below, then have your imaginary teammates weigh in. Quorum will pick the consensus — the option with the highest floor, not the loudest fans.</p>
+        <p class="microcopy small">Saved in this browser only. Refresh and it's still here.</p>
+      </div>
+      <div class="demo-panel">
+        <label for="question-input">What's the question?</label>
+        <input id="question-input" type="text" placeholder="Where should we eat Friday?" maxlength="80" />
+
+        <div class="add-option-row">
+          <input id="option-input" type="text" placeholder="Add an option…" maxlength="48" />
+          <button id="add-option-btn" type="button">Add</button>
+        </div>
+
+        <div class="options-list" id="options-list" aria-live="polite"></div>
+
+        <div class="voter-row">
+          <label for="voter-name">Vote as</label>
+          <input id="voter-name" type="text" placeholder="Riley" maxlength="20" />
+          <button id="cast-btn" type="button">Cast votes</button>
+          <button id="reset-btn" type="button" class="ghost">Reset room</button>
+        </div>
+
+        <div class="result" id="result" hidden>
+          <p class="result-label">Consensus pick</p>
+          <p class="result-name" id="result-name">—</p>
+          <p class="result-detail" id="result-detail">No votes yet.</p>
+        </div>
+
+        <div class="room-stats">
+          <div><strong id="stat-options">0</strong><span>options on the table</span></div>
+          <div><strong id="stat-voters">0</strong><span>voters weighed in</span></div>
+          <div><strong id="stat-rooms">1</strong><span>room, this browser</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+      <h2>Pricing, decided by quorum.</h2>
+      <div class="plans">
+        <article class="plan">
+          <h3>Crew</h3>
+          <p class="price">Free</p>
+          <ul>
+            <li>Up to 8 people per room</li>
+            <li>Unlimited options</li>
+            <li>Soft deadlines (24h)</li>
+            <li>Mobile + desktop</li>
+          </ul>
+          <button class="btn btn-ghost">Open a room</button>
+        </article>
+        <article class="plan featured">
+          <p class="badge">Most chosen</p>
+          <h3>Council</h3>
+          <p class="price">$5<span>/mo</span></p>
+          <ul>
+            <li>Up to 30 people per room</li>
+            <li>Recurring rooms (weekly dinner, etc.)</li>
+            <li>Custom deadline lengths</li>
+            <li>Decision history</li>
+            <li>Slack + Discord integrations</li>
+          </ul>
+          <button class="btn btn-primary">Go Council</button>
+        </article>
+        <article class="plan">
+          <h3>Assembly</h3>
+          <p class="price">$12<span>/mo</span></p>
+          <ul>
+            <li>Everything in Council</li>
+            <li>Unlimited room size</li>
+            <li>Workspace templates</li>
+            <li>Decision exports + analytics</li>
+          </ul>
+          <button class="btn btn-ghost">Go Assembly</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="closing">
+      <blockquote>
+        <p>"The best group decisions aren't the ones everyone loves. They're the ones nobody had to fight for."</p>
+        <cite>— Quorum, basically</cite>
+      </blockquote>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Quorum. Quietly decided.</p>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Manifesto</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
