@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Driftnote — Catch thoughts before they drift</title>
+  <meta name="description" content="A voice-first thought catcher. Whisper an idea while walking — Driftnote clusters your half-thoughts into themes you can find again." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <circle cx="8" cy="20" r="2.4" fill="currentColor"/>
+          <circle cx="16" cy="11" r="2.4" fill="currentColor" opacity="0.85"/>
+          <circle cx="24" cy="22" r="2.4" fill="currentColor" opacity="0.7"/>
+          <path d="M8 20 L16 11 L24 22" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.5"/>
+        </svg>
+      </span>
+      <span class="logo-text">Driftnote</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#demo">Try it</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+    <a href="#waitlist" class="btn btn-ghost">Get early access</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">A quiet home for half-thoughts.</p>
+      <h1>Catch thoughts <em>before</em> they drift.</h1>
+      <p class="lead">Driftnote is a voice-first thought catcher. Whisper an idea while walking, waiting, or staring out a window — and watch it weave into a constellation of your thinking, themed and <em>findable</em>.</p>
+      <form class="hero-form" id="waitlist">
+        <input type="email" placeholder="you@somewhere.calm" aria-label="Email address" required />
+        <button type="submit">Join the waitlist</button>
+      </form>
+      <p class="microcopy" id="form-msg">3,108 thinkers already in line.</p>
+
+      <div class="hero-mock" aria-hidden="true">
+        <div class="mock-header">
+          <span class="mock-dot listening"></span>
+          <span class="mock-title">tuesday walk · 7:42am</span>
+          <span class="mock-meta">listening</span>
+        </div>
+        <div class="mock-transcript">
+          <p>"…and I keep wondering whether <em>quiet</em> is actually the product, or whether it's just the byproduct of the thing being small. I should write that down before—"</p>
+        </div>
+        <div class="mock-themes">
+          <span class="chip chip-amber">smallness</span>
+          <span class="chip chip-slate">product instincts</span>
+          <span class="chip chip-rose">echo · 4 mo ago</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card-row" id="features">
+      <article class="card">
+        <div class="card-icon">◔</div>
+        <h3>Walk-and-talk</h3>
+        <p>Tap once, talk, tap again. Transcript and audio both kept. No staring at a screen to capture a thought you'll lose in 30 seconds.</p>
+      </article>
+      <article class="card">
+        <div class="card-icon">✦</div>
+        <h3>Themes, not folders</h3>
+        <p>Driftnote clusters by what your thoughts are <em>about</em>. The same idea returning in three forms is the signal worth seeing.</p>
+      </article>
+      <article class="card">
+        <div class="card-icon">↺</div>
+        <h3>Echoes</h3>
+        <p>When today's thought rhymes with one from six months ago, Driftnote surfaces the older one — gently, in context, as you finish.</p>
+      </article>
+      <article class="card">
+        <div class="card-icon">⌖</div>
+        <h3>Lockbox by default</h3>
+        <p>Local-first. End-to-end encrypted sync. Sharing is opt-in, per-thought, and revocable. Your half-thoughts stay yours.</p>
+      </article>
+    </section>
+
+    <section class="how" id="how">
+      <h2>From fleeting to findable, in three steps.</h2>
+      <ol class="steps">
+        <li>
+          <span class="step-num">01</span>
+          <h4>Catch it</h4>
+          <p>One tap. Talk for as long as you want. Driftnote transcribes in the background — even offline. No editing, no formatting, no decisions.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h4>Let it weave</h4>
+          <p>Driftnote reads what's already there and finds the thread your new thought belongs on. You don't pick a folder. The folder picks you.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h4>Hear the echoes</h4>
+          <p>When a thought returns, Driftnote shows you the last time it visited. The pattern you couldn't see from inside the week becomes the prompt for next week.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="demo" id="demo">
+      <div class="demo-copy">
+        <h2>Drop in a few thoughts. Watch them weave.</h2>
+        <p>Type half-formed ideas below — or use the seeded ones — and hit <em>Weave</em>. Driftnote will cluster them into themes based on what they share, the way it would after a week of voice memos.</p>
+        <p class="microcopy small">Saved in this browser only. Refresh and it's still here.</p>
+      </div>
+      <div class="demo-panel">
+        <label for="thought-input">New thought</label>
+        <div class="capture-row">
+          <textarea id="thought-input" rows="2" placeholder="Mumble something half-formed…" maxlength="240"></textarea>
+          <button id="catch-btn" type="button" aria-label="Catch thought">
+            <span class="mic-dot"></span>
+            Catch
+          </button>
+        </div>
+
+        <div class="thoughts-list" id="thoughts-list" aria-live="polite"></div>
+
+        <div class="weave-row">
+          <button id="weave-btn" type="button">Weave into themes</button>
+          <button id="seed-btn" type="button" class="ghost">Use seeded thoughts</button>
+          <button id="reset-btn" type="button" class="ghost">Reset</button>
+        </div>
+
+        <div class="constellation" id="constellation" hidden>
+          <p class="constellation-label">Your constellation</p>
+          <div id="themes-out"></div>
+        </div>
+
+        <div class="note-stats">
+          <div><strong id="stat-thoughts">0</strong><span>thoughts caught</span></div>
+          <div><strong id="stat-themes">0</strong><span>themes emerging</span></div>
+          <div><strong id="stat-echoes">0</strong><span>echoes spotted</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+      <h2>Pricing, kept quiet.</h2>
+      <div class="plans">
+        <article class="plan">
+          <h3>Drift</h3>
+          <p class="price">Free</p>
+          <ul>
+            <li>Up to 200 thoughts</li>
+            <li>On-device transcription</li>
+            <li>Auto-themes</li>
+            <li>iOS + web</li>
+          </ul>
+          <button class="btn btn-ghost">Start drifting</button>
+        </article>
+        <article class="plan featured">
+          <p class="badge">Most kept</p>
+          <h3>Constellation</h3>
+          <p class="price">$6<span>/mo</span></p>
+          <ul>
+            <li>Unlimited thoughts</li>
+            <li>Echoes across all of time</li>
+            <li>Encrypted multi-device sync</li>
+            <li>Weekly woven digest</li>
+            <li>Voice export to obsidian / md</li>
+          </ul>
+          <button class="btn btn-primary">Go Constellation</button>
+        </article>
+        <article class="plan">
+          <h3>Atlas</h3>
+          <p class="price">$14<span>/mo</span></p>
+          <ul>
+            <li>Everything in Constellation</li>
+            <li>Theme search across teammates (opt-in)</li>
+            <li>Custom theme prompts</li>
+            <li>API + webhook</li>
+          </ul>
+          <button class="btn btn-ghost">Go Atlas</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="closing">
+      <blockquote>
+        <p>"The thoughts worth keeping aren't the polished ones. They're the ones that quietly come back, asking to be looked at again."</p>
+        <cite>— Driftnote, basically</cite>
+      </blockquote>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Driftnote. Caught quietly.</p>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Manifesto</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
