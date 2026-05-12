@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Halfpipe — Don't build the wrong startup.</title>
+  <meta name="description" content="Halfpipe sends your one-page pitch to 50 anonymous builders. Two days later you get one score, three sentences, and the courage to commit or kill it." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,800&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 36 24" width="28" height="20">
+          <path d="M2 22 Q 2 4 18 4 Q 34 4 34 22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+          <circle cx="18" cy="9" r="2.2" fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="logo-text">Halfpipe</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#features">What you get</a>
+      <a href="#demo">Try a run</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+    <a href="#waitlist" class="btn btn-ghost">Drop in</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Pre-validation for builders. Not surveys. Not friends.</p>
+        <h1>Don't build the wrong startup. <em>Test it from the top of the ramp.</em></h1>
+        <p class="lead">Halfpipe sends your one-page pitch to <em>50 anonymous builders</em> — founders, ex-founders, people shipping right now. Forty-eight hours later you get one score, three sentences, and the courage to either commit or kill it.</p>
+        <form class="hero-form" id="waitlist">
+          <input type="email" placeholder="you@yourdomain.com" aria-label="Email address" required />
+          <button type="submit">Get a ramp invite</button>
+        </form>
+        <p class="microcopy" id="form-msg">683 founders ahead of you. Next batch drops Tuesday.</p>
+      </div>
+
+      <div class="hero-mock" aria-hidden="true">
+        <div class="mock-head">
+          <span class="mock-dot"></span>
+          <span class="mock-dot"></span>
+          <span class="mock-dot"></span>
+          <span class="mock-id">run #0418 · closed 02:14 ago</span>
+        </div>
+        <div class="mock-score">
+          <div class="score-ring">
+            <svg viewBox="0 0 100 100" width="120" height="120">
+              <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="8"/>
+              <circle cx="50" cy="50" r="42" fill="none" stroke="var(--spark-400)" stroke-width="8" stroke-dasharray="264" stroke-dashoffset="86" stroke-linecap="round" transform="rotate(-90 50 50)"/>
+            </svg>
+            <div class="score-num">67</div>
+          </div>
+          <div class="score-body">
+            <p class="score-label">Would-Pay Score</p>
+            <p class="score-line">21 of 50 said they'd pay your asking price.</p>
+            <p class="score-line subtle">14 said yes at a lower price. 15 a hard no.</p>
+          </div>
+        </div>
+        <ul class="mock-quotes">
+          <li><span class="quote-tag">#34</span> "I'd pay $9 not $19. Make me feel that gap.&rdquo;</li>
+          <li><span class="quote-tag">#11</span> "Title's clever, landing page buries the work.&rdquo;</li>
+          <li><span class="quote-tag">#48</span> "Sell to ops people, not founders. Founders won't pay.&rdquo;</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card-row" id="features">
+      <article class="card">
+        <div class="card-icon">◎</div>
+        <h3>50 builders, not strangers</h3>
+        <p>Our panel is screened. Founders, ex-founders, people who shipped something this quarter. Not Mechanical Turk, not your group chat.</p>
+      </article>
+      <article class="card">
+        <div class="card-icon">⟁</div>
+        <h3>One number, not a survey</h3>
+        <p>You get a 0–100 Would-Pay Score and three sentences distilled from the panel. No vanity dashboards, no Likert charts to interpret.</p>
+      </article>
+      <article class="card">
+        <div class="card-icon">⏱</div>
+        <h3>48-hour turnaround</h3>
+        <p>Submit Tuesday morning, decide by Thursday. The point is to keep your week, not lose a month to "research".</p>
+      </article>
+      <article class="card">
+        <div class="card-icon">⌐</div>
+        <h3>Anonymous, both ways</h3>
+        <p>Builders never see who you are. You never see who they are. The only thing you keep is the signal — and your sanity.</p>
+      </article>
+    </section>
+
+    <section class="how" id="how">
+      <h2>How a run down the ramp works.</h2>
+      <ol class="steps">
+        <li>
+          <span class="step-num">01</span>
+          <h4>Write your one-pager</h4>
+          <p>One sentence of what it does, one paragraph of who it's for, a price, and a screenshot if you have one. Fifteen minutes, max.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h4>It drops to 50 builders</h4>
+          <p>Each one scores it on a single question — "would I pay this?" — and writes two lines of why. They don't see each other's answers.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h4>You get one number, three sentences</h4>
+          <p>Forty-eight hours later: a Would-Pay Score, three distilled takeaways, and a recommendation. Commit, pivot, or kill — but decide.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="demo" id="demo">
+      <div class="demo-copy">
+        <h2>Try a dry run. No builders harmed.</h2>
+        <p>This is a <em>practice ramp</em>: type a pitch, set your price, and we'll show you what a real run feels like — the wait, the score, the sentences. The numbers are mocked. The format is exact.</p>
+        <p class="microcopy small">Want a real run? Drop in above.</p>
+      </div>
+
+      <div class="demo-panel">
+        <label for="pitch-input">Your one-line pitch</label>
+        <div class="capture-row">
+          <input type="text" id="pitch-input" placeholder="e.g. A Calendly for therapists that handles insurance" maxlength="140" />
+        </div>
+
+        <label for="who-input">Who's it for</label>
+        <div class="capture-row">
+          <input type="text" id="who-input" placeholder="e.g. solo practitioners in private practice" maxlength="120" />
+        </div>
+
+        <div class="row-split">
+          <div>
+            <label for="price-input">Monthly price you'd charge</label>
+            <div class="price-row">
+              <span class="dollar">$</span>
+              <input type="range" id="price-input" min="0" max="300" step="1" value="19" />
+              <span class="price-out" id="price-out">19</span>
+              <span class="per">/mo</span>
+            </div>
+          </div>
+          <div>
+            <label for="hours-input">Hours sunk so far</label>
+            <div class="price-row">
+              <input type="range" id="hours-input" min="0" max="600" step="10" value="40" />
+              <span class="price-out" id="hours-out">40</span>
+              <span class="per">hrs</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cluster-row">
+          <button id="run-btn" type="button">Send it down the ramp</button>
+          <button id="reset-btn" type="button" class="ghost">Reset</button>
+        </div>
+
+        <div class="ramp" id="ramp">
+          <div class="dots" id="dots" aria-hidden="true"></div>
+          <p class="ramp-status" id="ramp-status">Builders are reviewing your pitch…</p>
+        </div>
+
+        <div class="result" id="result" hidden>
+          <div class="result-head">
+            <div class="ring">
+              <svg viewBox="0 0 100 100" width="92" height="92">
+                <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(0,0,0,0.07)" stroke-width="8"/>
+                <circle id="ring-arc" cx="50" cy="50" r="42" fill="none" stroke="var(--spark-500)" stroke-width="8" stroke-dasharray="264" stroke-dashoffset="264" stroke-linecap="round" transform="rotate(-90 50 50)"/>
+              </svg>
+              <div class="ring-num" id="ring-num">—</div>
+            </div>
+            <div class="result-meta">
+              <p class="result-label">Would-Pay Score</p>
+              <p class="result-line" id="result-line">—</p>
+              <p class="result-verdict" id="result-verdict">—</p>
+            </div>
+          </div>
+          <ul class="result-quotes" id="result-quotes"></ul>
+        </div>
+
+        <div class="stats">
+          <div><strong id="stat-runs">0</strong><span>practice runs</span></div>
+          <div><strong id="stat-yes">0</strong><span>"would pay" votes</span></div>
+          <div><strong id="stat-saved">0h</strong><span>build time saved*</span></div>
+        </div>
+        <p class="microcopy tiny">*estimate: hours sunk × 1 − (score / 100). Don't quote us at YC.</p>
+      </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+      <h2>Pricing, single take.</h2>
+      <div class="plans">
+        <article class="plan">
+          <h3>One Ramp</h3>
+          <p class="price">$19<span>/run</span></p>
+          <ul>
+            <li>50 anonymous builders</li>
+            <li>48-hour turnaround</li>
+            <li>Score + 3 takeaways</li>
+            <li>One reroll if score &lt; 30</li>
+          </ul>
+          <button class="btn btn-ghost">Send one down</button>
+        </article>
+        <article class="plan featured">
+          <p class="badge">Most kept</p>
+          <h3>Season Pass</h3>
+          <p class="price">$79<span>/quarter</span></p>
+          <ul>
+            <li>4 ramps per quarter</li>
+            <li>Trend view across runs</li>
+            <li>Unlimited rerolls under 30</li>
+            <li>Private comment threads</li>
+            <li>"Kill switch" worksheet</li>
+          </ul>
+          <button class="btn btn-primary">Get a pass</button>
+        </article>
+        <article class="plan">
+          <h3>Indoor Park</h3>
+          <p class="price">$299<span>/mo</span></p>
+          <ul>
+            <li>For accelerators, studios, VCs</li>
+            <li>Unlimited ramps</li>
+            <li>Custom builder panels</li>
+            <li>Aggregate cohort scores</li>
+            <li>API access</li>
+          </ul>
+          <button class="btn btn-ghost">Talk to us</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="closing">
+      <blockquote>
+        <p>"The biggest cost of a wrong idea isn't the build. It's the year."</p>
+        <cite>— Halfpipe, basically</cite>
+      </blockquote>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Halfpipe. Skate or quit.</p>
+    <div class="footer-links">
+      <a href="#">Builder panel</a>
+      <a href="#">Methodology</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
