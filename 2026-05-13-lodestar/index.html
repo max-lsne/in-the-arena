@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lodestar — The principles you've earned, when you actually need them.</title>
+  <meta name="description" content="Lodestar collects the principles you've learned the hard way and pulls one up the moment a hard decision lands. A quiet, daily anchor. A quarterly audit. Nothing else." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,800;9..144,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="paper-grain" aria-hidden="true"></div>
+  <div class="sky" aria-hidden="true">
+    <span class="star s1"></span>
+    <span class="star s2"></span>
+    <span class="star s3"></span>
+    <span class="star s4"></span>
+    <span class="star s5"></span>
+    <span class="star s6"></span>
+    <span class="star lode"></span>
+  </div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <path d="M16 3 L19 13 L29 13 L21 19 L24 29 L16 23 L8 29 L11 19 L3 13 L13 13 Z"
+                fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span>Lodestar</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#loop">The loop</a>
+      <a href="#demo">Try it</a>
+      <a href="#who">Who it's for</a>
+      <a href="#access" class="nav-cta">Request access</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">A quiet companion for hard decisions</p>
+      <h1>
+        The principles you've <em>earned</em>,<br />
+        when you actually <em>need</em> them.
+      </h1>
+      <p class="lede">
+        You spent ten years learning these. They live in journal margins, in chat
+        exports, in late conversations with mentors. Lodestar collects them in one
+        place — and pulls one up the moment the next hard decision lands.
+      </p>
+      <div class="hero-cta">
+        <a href="#demo" class="btn btn-primary">See it work</a>
+        <a href="#access" class="btn btn-ghost">Request access</a>
+      </div>
+      <p class="hero-foot">
+        <span class="dot"></span>
+        Private by default. Your principles never leave your device.
+      </p>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>You don't have a knowledge problem.<br /><em>You have a loading problem.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            The principle you needed on Tuesday was somewhere — in a Notes app,
+            a Slack DM to yourself, the margin of a book three moves ago. You
+            made the decision without it. A week later, you remembered.
+          </p>
+          <p>
+            Lodestar is the smallest possible fix: one place for the principles
+            you've actually earned, surfaced once a day, and one tap away when
+            the room gets heavy.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="loop" class="loop">
+      <h2 class="section-title">The loop</h2>
+      <ol class="loop-list">
+        <li>
+          <span class="loop-num">01</span>
+          <h3>Capture</h3>
+          <p>Add a principle the day you earn it. One sentence. The version that survives stress, not the inspirational one.</p>
+        </li>
+        <li>
+          <span class="loop-num">02</span>
+          <h3>Anchor</h3>
+          <p>Each morning, Lodestar surfaces one. You read it once. Notification done. That's the entire daily ritual.</p>
+        </li>
+        <li>
+          <span class="loop-num">03</span>
+          <h3>Use</h3>
+          <p>When a hard decision shows up, tag it to the principle that should have guided it. Even before the call is made.</p>
+        </li>
+        <li>
+          <span class="loop-num">04</span>
+          <h3>Audit</h3>
+          <p>Each quarter, see which principles actually fire and which never do. Sharpen the live ones. Retire the dead ones.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="demo" class="demo">
+      <div class="demo-head">
+        <h2 class="section-title">Try the anchor</h2>
+        <p>Seven sample principles. Pick one as today's anchor, or log a decision against the one that fits. Everything below runs in your browser.</p>
+      </div>
+
+      <div class="demo-grid">
+        <div class="anchor-card" id="anchor-card">
+          <p class="anchor-eyebrow">Today's anchor</p>
+          <blockquote id="anchor-text">Press <kbd>Draw anchor</kbd> to pull one.</blockquote>
+          <p class="anchor-meta" id="anchor-meta">No principle loaded yet.</p>
+          <div class="anchor-actions">
+            <button class="btn btn-primary" id="draw-btn" type="button">Draw anchor</button>
+            <button class="btn btn-ghost" id="keep-btn" type="button" disabled>Keep for the day</button>
+          </div>
+          <p class="kbd-hint">Tip: <kbd>J</kbd> next · <kbd>K</kbd> previous · <kbd>Space</kbd> draw</p>
+        </div>
+
+        <div class="principles-card">
+          <p class="anchor-eyebrow">Your principles · sample set</p>
+          <ul class="principles-list" id="principles-list"></ul>
+        </div>
+      </div>
+
+      <div class="log-card">
+        <div class="log-head">
+          <h3>Decision log</h3>
+          <p>Tag the next hard call to the principle that should guide it.</p>
+        </div>
+        <form class="log-form" id="log-form" autocomplete="off">
+          <label class="field">
+            <span>Decision you're weighing</span>
+            <input type="text" id="decision-input" placeholder="e.g. Take the smaller offer with the better team" maxlength="140" required />
+          </label>
+          <label class="field">
+            <span>Anchor it to</span>
+            <select id="principle-select" required></select>
+          </label>
+          <button class="btn btn-primary" type="submit">Log decision</button>
+        </form>
+        <ul class="log-list" id="log-list"></ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Built for the people who keep notebooks</h2>
+      <div class="who-grid">
+        <article>
+          <h3>Founders past the rookie season</h3>
+          <p>You've made the same mistake twice. You'd like the third time to be different.</p>
+        </article>
+        <article>
+          <h3>Operators in their tenth year</h3>
+          <p>You can feel your principles working in the rooms you're in. You'd like them louder.</p>
+        </article>
+        <article>
+          <h3>Writers, designers, the quietly stubborn</h3>
+          <p>You already keep a commonplace book. This is the part that calls you back.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="access" class="access">
+      <div class="access-card">
+        <p class="eyebrow">Early access · summer 2026</p>
+        <h2>One email when the first hundred slots open.</h2>
+        <form class="access-form" id="access-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@somewhere.com" />
+          <button class="btn btn-primary" type="submit">Hold a slot</button>
+        </form>
+        <p class="access-foot" id="access-foot">No newsletter. No drip. One email, the day it opens.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Lodestar</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · a small thing made carefully</span>
+    </div>
+    <div class="foot-right">
+      <a href="#loop">Loop</a>
+      <a href="#demo">Demo</a>
+      <a href="#access">Access</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
