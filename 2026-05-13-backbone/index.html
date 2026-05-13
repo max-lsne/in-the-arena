@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Backbone — Practice the conversation that scares you.</title>
+  <meta name="description" content="Backbone is an AI voice coach for the conversations you keep avoiding. Rehearse the raise, the no, the hard review — then go have it for real." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="paper" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 28 36" width="22" height="28">
+          <rect x="12" y="2" width="4" height="6" rx="1.4" fill="currentColor"/>
+          <rect x="11" y="9" width="6" height="4" rx="1.4" fill="currentColor"/>
+          <rect x="12" y="14" width="4" height="4" rx="1.4" fill="currentColor"/>
+          <rect x="11" y="19" width="6" height="4" rx="1.4" fill="currentColor"/>
+          <rect x="12" y="24" width="4" height="4" rx="1.4" fill="currentColor"/>
+          <rect x="11" y="29" width="6" height="5" rx="1.4" fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="logo-text">Backbone</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#rooms">The rooms</a>
+      <a href="#demo">Rehearse one</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+    <a href="#waitlist" class="btn btn-ghost">Start rehearsing</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">An AI voice coach for the conversation you keep avoiding.</p>
+        <h1>Practice the conversation that scares you. <em>Then have it.</em></h1>
+        <p class="lead">Backbone runs the other side of the conversation — your manager, your report, your co-founder — and pushes back the way they actually will. You leave with a script, a posture, and a scorecard. The fear stays in the rehearsal room.</p>
+        <form class="hero-form" id="waitlist">
+          <input type="email" placeholder="you@work.com" aria-label="Email address" required />
+          <button type="submit">Get a rehearsal slot</button>
+        </form>
+        <p class="microcopy" id="form-msg">Private beta. 1,212 in line. Tuesday cohort.</p>
+      </div>
+
+      <div class="hero-mock" aria-hidden="true">
+        <div class="mock-head">
+          <span class="mock-dot live"></span>
+          <span class="mock-id">rehearsal · the raise · 04:11</span>
+          <span class="mock-status">LIVE</span>
+        </div>
+        <div class="transcript">
+          <p class="line you"><span class="who">you</span>I think it's time we talked about my compensation.</p>
+          <p class="line them"><span class="who">"manager"</span>Sure. What did you have in mind?</p>
+          <p class="line you"><span class="who">you</span>Based on my impact this year, I'd like to move to $175.</p>
+          <p class="line them"><span class="who">"manager"</span>That's a 22% jump. Budgets are tight. Help me see why now.</p>
+          <p class="line you typing"><span class="who">you</span><span class="caret"></span></p>
+        </div>
+        <div class="mock-meter">
+          <div class="meter-row"><span>Posture</span><div class="bar"><i style="--w:78%"></i></div></div>
+          <div class="meter-row"><span>Specifics</span><div class="bar"><i style="--w:54%"></i></div></div>
+          <div class="meter-row"><span>Silence</span><div class="bar"><i style="--w:31%"></i></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card-row" id="rooms">
+      <p class="section-eyebrow">Pick a room. Walk in. Walk out steadier.</p>
+      <div class="rooms-grid">
+        <article class="room">
+          <p class="room-tag">salary</p>
+          <h3>The Raise</h3>
+          <p>You're underpaid and you know it. Practice the ask, the silence after, and the four pushbacks you'll get before "let me see what I can do."</p>
+        </article>
+        <article class="room">
+          <p class="room-tag">manager → report</p>
+          <h3>The Honest Review</h3>
+          <p>Someone on your team isn't where they need to be. Rehearse the sentence you've been rewriting in your head for three weeks.</p>
+        </article>
+        <article class="room">
+          <p class="room-tag">report → manager</p>
+          <h3>The No</h3>
+          <p>"I can't take this on" without the apology spiral. Hold the line through three reframes and a guilt trip.</p>
+        </article>
+        <article class="room">
+          <p class="room-tag">co-founder</p>
+          <h3>The Split</h3>
+          <p>Equity, roles, or "we want different things." The conversation that breaks companies — or saves them — depending on how it opens.</p>
+        </article>
+        <article class="room">
+          <p class="room-tag">client</p>
+          <h3>The Re-price</h3>
+          <p>Your rates are going up. They've been the same since you were nervous. Practice saying the new number without flinching.</p>
+        </article>
+        <article class="room">
+          <p class="room-tag">personal</p>
+          <h3>The Boundary</h3>
+          <p>The friend who borrows. The parent who criticizes. The roommate who never. The script you owe yourself before brunch.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="how" id="how">
+      <h2>How a rehearsal goes.</h2>
+      <ol class="steps">
+        <li>
+          <span class="step-num">01</span>
+          <h4>Brief the room</h4>
+          <p>Three sentences. Who you're talking to, what you want, and what you're afraid they'll say. Backbone uses it to build the other side.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h4>Talk it through — out loud</h4>
+          <p>You speak. The AI answers in voice, in character, with the difficulty dialed where you set it. It pushes back, dodges, and goes quiet — like real people do.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h4>Get the scorecard</h4>
+          <p>Posture, specificity, silence, recovery. Three lines you nailed, three you flinched on, one line to take into the real room.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="demo" id="demo">
+      <div class="demo-copy">
+        <h2>A dry run. Typed, not spoken.</h2>
+        <p>Pick a room, set the difficulty, and write your opening line. We'll mock a realistic pushback and grade your move. The voice version lives in the app — this is the cardboard version.</p>
+        <p class="microcopy small">No data leaves your browser.</p>
+      </div>
+
+      <div class="demo-panel">
+        <div class="room-pick" id="room-pick" role="tablist">
+          <button type="button" class="room-chip active" data-room="raise">The Raise</button>
+          <button type="button" class="room-chip" data-room="review">The Honest Review</button>
+          <button type="button" class="room-chip" data-room="no">The No</button>
+          <button type="button" class="room-chip" data-room="reprice">The Re-price</button>
+        </div>
+
+        <label for="goal-input">What you want from the conversation</label>
+        <div class="capture-row">
+          <input type="text" id="goal-input" placeholder="e.g. a $20k bump and a path to staff by Q4" maxlength="140" />
+        </div>
+
+        <label for="line-input">Your opening line</label>
+        <div class="capture-row">
+          <textarea id="line-input" rows="3" placeholder="Say it the way you'd say it. Out loud, in your head, whatever."></textarea>
+        </div>
+
+        <div class="row-split">
+          <div>
+            <label for="diff-input">Difficulty</label>
+            <div class="diff-row">
+              <input type="range" id="diff-input" min="1" max="5" step="1" value="3" />
+              <span class="diff-out" id="diff-out">3 — realistic</span>
+            </div>
+          </div>
+          <div>
+            <label for="style-input">Their style</label>
+            <select id="style-input">
+              <option value="warm">Warm, slow to decide</option>
+              <option value="terse">Terse, numbers-first</option>
+              <option value="evasive">Evasive, lots of "let me think"</option>
+              <option value="aggressive">Aggressive, talks over you</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="cluster-row">
+          <button id="run-btn" type="button">Run the rehearsal</button>
+          <button id="reset-btn" type="button" class="ghost">Reset</button>
+        </div>
+
+        <div class="stage" id="stage" hidden>
+          <div class="stage-head">
+            <span class="stage-dot"></span>
+            <span class="stage-label" id="stage-label">Rehearsal · The Raise</span>
+            <span class="stage-time" id="stage-time">00:00</span>
+          </div>
+          <div class="stage-transcript" id="stage-transcript"></div>
+        </div>
+
+        <div class="grade" id="grade" hidden>
+          <div class="grade-head">
+            <div class="ring">
+              <svg viewBox="0 0 100 100" width="84" height="84">
+                <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(20,18,12,0.08)" stroke-width="8"/>
+                <circle id="ring-arc" cx="50" cy="50" r="42" fill="none" stroke="var(--rust-500)" stroke-width="8" stroke-dasharray="264" stroke-dashoffset="264" stroke-linecap="round" transform="rotate(-90 50 50)"/>
+              </svg>
+              <div class="ring-num" id="ring-num">—</div>
+            </div>
+            <div class="grade-meta">
+              <p class="grade-label">Backbone score</p>
+              <p class="grade-line" id="grade-line">—</p>
+              <p class="grade-verdict" id="grade-verdict">—</p>
+            </div>
+          </div>
+          <div class="grade-bars" id="grade-bars"></div>
+          <div class="grade-notes">
+            <div>
+              <p class="note-head">What landed</p>
+              <ul id="note-good"></ul>
+            </div>
+            <div>
+              <p class="note-head">What to fix</p>
+              <ul id="note-fix"></ul>
+            </div>
+          </div>
+          <p class="take-home" id="take-home"></p>
+        </div>
+
+        <div class="stats">
+          <div><strong id="stat-runs">0</strong><span>rehearsals run</span></div>
+          <div><strong id="stat-best">—</strong><span>best score</span></div>
+          <div><strong id="stat-room">—</strong><span>most practiced room</span></div>
+        </div>
+        <p class="microcopy tiny">Mocked locally. The real product uses voice — this is just to show the shape.</p>
+      </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+      <h2>Pricing, no spine required.</h2>
+      <div class="plans">
+        <article class="plan">
+          <h3>One Rehearsal</h3>
+          <p class="price">$12<span>/session</span></p>
+          <ul>
+            <li>One 20-minute room</li>
+            <li>Voice or typed</li>
+            <li>Full scorecard</li>
+            <li>One take-home line</li>
+          </ul>
+          <button class="btn btn-ghost">Book one</button>
+        </article>
+        <article class="plan featured">
+          <p class="badge">Most rehearsed</p>
+          <h3>Standing Up</h3>
+          <p class="price">$29<span>/mo</span></p>
+          <ul>
+            <li>Unlimited rehearsals</li>
+            <li>All six rooms</li>
+            <li>Scorecard history & trend</li>
+            <li>"Day-of" warm-up — 5 min before the real thing</li>
+            <li>Real-person review, once a month</li>
+          </ul>
+          <button class="btn btn-primary">Get a spine</button>
+        </article>
+        <article class="plan">
+          <h3>For Teams</h3>
+          <p class="price">$9<span>/seat/mo</span></p>
+          <ul>
+            <li>For managers and HR</li>
+            <li>Custom rooms (your scenarios)</li>
+            <li>Anonymized cohort patterns</li>
+            <li>No transcripts to admin — ever</li>
+            <li>SSO + SOC 2</li>
+          </ul>
+          <button class="btn btn-ghost">Talk to us</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="closing">
+      <blockquote>
+        <p>"You don't rise to the level of your courage. You fall to the level of your rehearsals."</p>
+        <cite>— Backbone, paraphrasing somebody braver</cite>
+      </blockquote>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Backbone. Stand up straight.</p>
+    <div class="footer-links">
+      <a href="#">Method</a>
+      <a href="#">Privacy</a>
+      <a href="#">For coaches</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
