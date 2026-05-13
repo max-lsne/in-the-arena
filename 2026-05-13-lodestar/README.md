@@ -30,8 +30,8 @@ thing that surfaces first.
 - `styles.css` — parchment / ink / brass palette; Fraunces, Inter,
   JetBrains Mono.
 - `script.js` — seven sample principles, a "draw anchor" loop, a decision
-  log, and `J` / `K` / `Space` keyboard shortcuts. Everything runs in
-  the browser.
+  log that persists to `localStorage`, and `J` / `K` / `Space` keyboard
+  shortcuts. Everything runs in the browser.
 
 ## Running it
 

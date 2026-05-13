@@ -26,9 +26,45 @@
     emailInput: document.getElementById("email")
   };
 
+  const STORAGE_KEY = "lodestar:v1";
+
   let currentIndex = -1;
   let kept = null;
-  const log = [];
+  let log = [];
+
+  function safeStorage() {
+    try {
+      const t = "__lodestar_test__";
+      window.localStorage.setItem(t, t);
+      window.localStorage.removeItem(t);
+      return window.localStorage;
+    } catch (_) {
+      return null;
+    }
+  }
+  const storage = safeStorage();
+
+  function persist() {
+    if (!storage) return;
+    try {
+      storage.setItem(STORAGE_KEY, JSON.stringify({
+        log: log,
+        kept: kept ? kept.id : null,
+        keptDate: kept ? new Date().toISOString().slice(0, 10) : null
+      }));
+    } catch (_) { /* quota / private mode */ }
+  }
+
+  function restore() {
+    if (!storage) return null;
+    try {
+      const raw = storage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      return JSON.parse(raw);
+    } catch (_) {
+      return null;
+    }
+  }
 
   function renderPrincipleList() {
     els.list.innerHTML = "";
@@ -90,6 +126,7 @@
     els.anchorMeta.textContent = "kept for today · " + new Date().toLocaleDateString(undefined, { month: "short", day: "numeric" });
     els.keepBtn.disabled = true;
     els.keepBtn.textContent = "Anchored ✓";
+    persist();
   }
 
   function renderLog() {
@@ -136,6 +173,7 @@
     els.decisionInput.value = "";
     els.select.selectedIndex = 0;
     renderLog();
+    persist();
   }
 
   function handleAccess(evt) {
@@ -163,10 +201,31 @@
     });
   }
 
+  function hydrateFromStorage() {
+    const saved = restore();
+    if (!saved) { seedLog(); return; }
+    if (Array.isArray(saved.log) && saved.log.length > 0) {
+      log = saved.log.filter((e) => e && e.decision && e.principleText && e.stamp);
+    } else {
+      seedLog();
+    }
+    if (saved.kept && saved.keptDate === new Date().toISOString().slice(0, 10)) {
+      const k = PRINCIPLES.find((p) => p.id === saved.kept);
+      if (k) {
+        kept = k;
+        const idx = PRINCIPLES.indexOf(k);
+        setAnchor(idx);
+        els.anchorMeta.textContent = "kept for today · " + new Date().toLocaleDateString(undefined, { month: "short", day: "numeric" });
+        els.keepBtn.disabled = true;
+        els.keepBtn.textContent = "Anchored ✓";
+      }
+    }
+  }
+
   function boot() {
     renderPrincipleList();
     renderPrincipleSelect();
-    seedLog();
+    hydrateFromStorage();
     renderLog();
 
     els.drawBtn.addEventListener("click", drawRandom);
