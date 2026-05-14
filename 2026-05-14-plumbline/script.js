@@ -49,10 +49,56 @@
   const TAG_COLOR = Object.fromEntries(FOCUSES.map((f) => [f.id, f.color]));
   TAG_COLOR.unfit = "#7a6a55";
 
-  const state = {
+  const STORE_KEY = "plumbline.demo.v1";
+
+  const defaults = () => ({
     weights: Object.fromEntries(FOCUSES.map((f) => [f.id, f.stated])),
     ledger: LEDGER.map((it) => ({ ...it })),
-  };
+  });
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return defaults();
+      const parsed = JSON.parse(raw);
+      const base = defaults();
+      if (parsed && typeof parsed.weights === "object") {
+        FOCUSES.forEach((f) => {
+          const v = Number(parsed.weights[f.id]);
+          if (Number.isFinite(v) && v >= 0 && v <= 60) {
+            base.weights[f.id] = Math.round(v);
+          }
+        });
+      }
+      if (Array.isArray(parsed && parsed.ledger)) {
+        const byId = Object.fromEntries(base.ledger.map((it) => [it.id, it]));
+        parsed.ledger.forEach((it) => {
+          if (it && byId[it.id] && ALL_TAGS.includes(it.tag)) {
+            byId[it.id].tag = it.tag;
+          }
+        });
+      }
+      return base;
+    } catch (err) {
+      return defaults();
+    }
+  }
+
+  function saveState() {
+    try {
+      localStorage.setItem(
+        STORE_KEY,
+        JSON.stringify({
+          weights: state.weights,
+          ledger: state.ledger.map((it) => ({ id: it.id, tag: it.tag })),
+        })
+      );
+    } catch (err) {
+      /* storage unavailable — non-fatal */
+    }
+  }
+
+  const state = loadState();
 
   function totalStated() {
     return Object.values(state.weights).reduce((a, b) => a + b, 0);
@@ -121,6 +167,7 @@
         renderTotal();
         renderGauge();
         renderActuals();
+        saveState();
       });
 
       labelWrap.appendChild(slider);
@@ -175,6 +222,7 @@
         renderTagButton(tag, next);
         renderActuals();
         renderGauge();
+        saveState();
       });
 
       li.appendChild(left);
@@ -279,6 +327,29 @@
     });
   }
 
+  function handleReset() {
+    const link = document.getElementById("reset-demo");
+    if (!link) return;
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const fresh = defaults();
+      Object.assign(state.weights, fresh.weights);
+      state.ledger.forEach((it, i) => {
+        it.tag = fresh.ledger[i].tag;
+      });
+      try {
+        localStorage.removeItem(STORE_KEY);
+      } catch (err) {
+        /* ignore */
+      }
+      renderFocuses();
+      renderTotal();
+      renderLedger();
+      renderActuals();
+      renderGauge();
+    });
+  }
+
   function init() {
     renderFocuses();
     renderTotal();
@@ -286,6 +357,7 @@
     renderActuals();
     renderGauge();
     handleAccess();
+    handleReset();
   }
 
   if (document.readyState === "loading") {
