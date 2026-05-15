@@ -763,7 +763,20 @@ main, header, footer { position: relative; z-index: 1; }
 .foot-right a { color: var(--muted); text-decoration: none; }
 .foot-right a:hover { color: var(--text); }
 
-/* keyboard hints styling */
+/* keyboard hints */
+.key-hints {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin: 18px 0 0;
+  padding: 14px 4px 0;
+  border-top: 1px dashed var(--line-soft);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+.key-hints span { display: inline-flex; align-items: center; gap: 6px; }
 kbd {
   font-family: var(--mono);
   font-size: 11px;
@@ -774,7 +787,10 @@ kbd {
   border-radius: 5px;
   padding: 1px 6px;
   letter-spacing: 0.02em;
+  min-width: 16px;
+  text-align: center;
 }
+.key-hints kbd + kbd { margin-left: 1px; }
 
 /* responsive */
 @media (max-width: 960px) {

@@ -84,6 +84,52 @@
     render();
   });
 
+  // Keyboard shortcuts. Only fire while the spark log is roughly in view
+  // and the user isn't typing into a field.
+  const FLAVOR_KEYS  = { "1": "line", "2": "image", "3": "hunch" };
+  const VERDICT_KEYS = { "s": "spark", "k": "kindling", "e": "ember", "a": "ash" };
+  const logSectionEl = document.getElementById("log");
+
+  document.addEventListener("keydown", (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const t = e.target;
+    if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
+    if (!isLogInView()) return;
+
+    const k = e.key.toLowerCase();
+    if (k === "h" || k === "arrowleft") {
+      selectedIdx = (selectedIdx - 1 + sparks.length) % sparks.length;
+      render();
+      e.preventDefault();
+    } else if (k === "l" || k === "arrowright") {
+      selectedIdx = (selectedIdx + 1) % sparks.length;
+      render();
+      e.preventDefault();
+    } else if (k === "n") {
+      addBtn.click();
+      e.preventDefault();
+    } else if (k === "r") {
+      sparks = clone(SEED);
+      selectedIdx = 0;
+      render();
+      e.preventDefault();
+    } else if (FLAVOR_KEYS[k]) {
+      sparks[selectedIdx].flavor = FLAVOR_KEYS[k];
+      render();
+      e.preventDefault();
+    } else if (VERDICT_KEYS[k]) {
+      sparks[selectedIdx].verdict = VERDICT_KEYS[k];
+      render();
+      e.preventDefault();
+    }
+  });
+
+  function isLogInView() {
+    if (!logSectionEl) return false;
+    const r = logSectionEl.getBoundingClientRect();
+    return r.bottom > 80 && r.top < window.innerHeight - 80;
+  }
+
   // Email capture — purely client-side acknowledgement.
   joinForm.addEventListener("submit", (e) => {
     e.preventDefault();
