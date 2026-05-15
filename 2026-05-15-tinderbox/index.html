@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tinderbox — Catch sparks before they go cold</title>
+  <meta name="description" content="Tinderbox is a 5-second capture for the half-formed ideas you get at the worst moments — and a Sunday ash-sift that decides which ones are still warm enough to tend." />
+  <meta name="theme-color" content="#0f1216" />
+  <meta name="color-scheme" content="dark" />
+  <meta property="og:title" content="Tinderbox — Catch sparks before they go cold" />
+  <meta property="og:description" content="A 5-second capture for half-formed ideas and a Sunday ash-sift that decides which ones are still warm." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f1216'/%3E%3Cellipse cx='16' cy='25' rx='8' ry='1.6' fill='%23d8542a' opacity='0.55'/%3E%3Cpath d='M16 5 C18 9 14.5 11 16 14 C17 16 13.5 17 14 21 C14.4 24 17.8 24 19 21 C20.4 17.5 17 17 18.6 14 C19.5 12.5 18.5 9 16 5 Z' fill='%23f1923a'/%3E%3Cpath d='M16 11 C17 13 15.5 14 16 16 C16.4 17.5 14.8 18 15.2 20 C15.5 21.5 17.2 21.5 17.6 19.7 C18 18 16.4 17.6 17 16 C17.4 14.7 17 13 16 11 Z' fill='%23f3c97b'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="sparkfield" aria-hidden="true">
+    <span class="sf sf-1"></span>
+    <span class="sf sf-2"></span>
+    <span class="sf sf-3"></span>
+    <span class="sf sf-4"></span>
+    <span class="sf sf-5"></span>
+    <span class="sf sf-6"></span>
+    <span class="sf sf-7"></span>
+    <span class="sf sf-8"></span>
+  </div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 28 28" width="22" height="22">
+          <circle cx="14" cy="14" r="11" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.55"/>
+          <path d="M14 5 Q15.5 9 13 12 Q11 14 13 17 Q14.5 19 14 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <circle cx="14" cy="22.5" r="1.6" fill="currentColor"/>
+        </svg>
+      </span>
+      <span>Tinderbox</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#ritual">The ritual</a>
+      <a href="#log">Spark log</a>
+      <a href="#who">Who it's for</a>
+      <a href="#join" class="nav-cta">Hold a box</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">A 5-second capture &amp; a Sunday ash-sift</p>
+        <h1>
+          Catch sparks<br />
+          before they <em>go cold</em>.
+        </h1>
+        <p class="lede">
+          The best ideas hit you at the worst moments — at a red light, in
+          the shower, two minutes before a meeting. Tinderbox is a tiny
+          inbox that fits inside those moments. Drop a line. Tag it.
+          Forget it. On Sunday morning you sift the week's ash: which
+          sparks are still warm? Tend those. Let the rest go without
+          guilt.
+        </p>
+        <div class="hero-cta">
+          <a href="#log" class="btn btn-primary">Open a spark log</a>
+          <a href="#ritual" class="btn btn-ghost">See the ritual</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          Three taps to capture. One sift a week. No streaks, no scoring.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="ember">
+          <span class="log log-back"></span>
+          <span class="log log-front"></span>
+          <span class="coal coal-1"></span>
+          <span class="coal coal-2"></span>
+          <span class="coal coal-3"></span>
+          <span class="flame flame-1"></span>
+          <span class="flame flame-2"></span>
+          <span class="flame flame-3"></span>
+          <span class="spark spark-a"></span>
+          <span class="spark spark-b"></span>
+          <span class="spark spark-c"></span>
+          <span class="spark spark-d"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>Notes apps are a <em>cemetery</em>.<br />Your half-thoughts deserve a <em>hearth</em>.</h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            You open Apple Notes. You see 412 entries titled
+            <em>(no title)</em>. You close Apple Notes.
+          </p>
+          <p>
+            Capture is the easy half. What's missing is the second half —
+            a small, weekly ritual that says <em>this one's still warm,
+            this one's ash, both are fine.</em> Tinderbox is built around
+            that second half. Capture is the on-ramp; the sift is the
+            point.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ritual" class="ritual">
+      <h2 class="section-title">The ritual</h2>
+      <ol class="ritual-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Drop a spark</h3>
+          <p>One line. A phrase, a hunch, a half-question. No title field, no folder picker. Three taps from lock screen to logged.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Pick a flavor</h3>
+          <p>Line, image, or hunch. That's it. Three flavors keep the on-ramp short and the sift legible later. Re-flavoring is fine.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Sunday: sift the ash</h3>
+          <p>Sunday morning, 15 minutes. Each spark from the week gets one verdict — <em>tend</em> (it's kindling now) or <em>let go</em> (it's ash, no shame). Most are ash. That's the whole shape.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Tend the kindling</h3>
+          <p>Kindling gets one more Sunday. If it's still warm, it graduates to an <em>ember</em> — a thing you're actively working on. Embers leave the box. The box stays small.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="log" class="log-section">
+      <div class="log-head">
+        <h2 class="section-title">A week in the box</h2>
+        <p>One real week from a working novelist's notebook — 14 sparks dropped across seven days. Click any spark to re-flavor it, change its verdict, or capture a new one. The sift updates in your browser. Nothing leaves.</p>
+      </div>
+
+      <div class="log-card">
+        <div class="log-meta">
+          <div class="log-meta-block">
+            <p class="card-eyebrow">Owner · Week</p>
+            <p class="log-owner" id="log-owner">A working novelist · week 14 of the second draft</p>
+          </div>
+          <div class="log-meta-block log-totals" id="log-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="log-grid">
+          <div class="log-days">
+            <div class="day-axis" id="day-axis"></div>
+            <div class="spark-stage" id="spark-stage">
+              <!-- sparks inserted here -->
+            </div>
+          </div>
+
+          <aside class="log-detail" id="log-detail">
+            <p class="card-eyebrow">
+              Selected · spark <span id="selected-num">1</span> /
+              <span id="selected-day">Mon</span>
+            </p>
+            <p class="selected-text" id="selected-text">—</p>
+            <div class="detail-controls">
+              <div class="control-row">
+                <span class="control-label">Flavor</span>
+                <div class="flavor-picker" id="flavor-picker">
+                  <button type="button" data-flavor="line">Line</button>
+                  <button type="button" data-flavor="image">Image</button>
+                  <button type="button" data-flavor="hunch">Hunch</button>
+                </div>
+              </div>
+              <div class="control-row">
+                <span class="control-label">Verdict</span>
+                <div class="verdict-picker" id="verdict-picker">
+                  <button type="button" data-verdict="spark">Spark</button>
+                  <button type="button" data-verdict="kindling">Kindling</button>
+                  <button type="button" data-verdict="ember">Ember</button>
+                  <button type="button" data-verdict="ash">Ash</button>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="log-actions">
+          <button type="button" class="btn btn-ghost" id="add-spark">Capture a new spark</button>
+          <a href="#" class="reset-link" id="reset-log">Reset to the original week</a>
+        </div>
+
+        <p class="key-hints" aria-hidden="true">
+          <span><kbd>N</kbd> capture</span>
+          <span><kbd>H</kbd>/<kbd>L</kbd> prev / next</span>
+          <span><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> flavor</span>
+          <span><kbd>S</kbd><kbd>K</kbd><kbd>E</kbd><kbd>A</kbd> verdict</span>
+          <span><kbd>R</kbd> reset</span>
+        </p>
+      </div>
+
+      <div class="legend">
+        <h3>What the verdicts mean</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-spark"></span><div><strong>Spark.</strong> Fresh capture. Less than a week old. No commitment, no obligation. Most sparks die here, and that's the design.</div></li>
+          <li><span class="legend-swatch swatch-kindling"></span><div><strong>Kindling.</strong> Survived one Sunday sift. Still warm. Gets one more week to prove it's not a passing mood.</div></li>
+          <li><span class="legend-swatch swatch-ember"></span><div><strong>Ember.</strong> Graduated to active work. Leaves the box and joins your real tools — a Scrivener project, a sketchbook, a repo.</div></li>
+          <li><span class="legend-swatch swatch-ash"></span><div><strong>Ash.</strong> Let go on purpose. Not a failure — a finished thought. Ash is most of what a healthy box produces.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who keeps a tinderbox</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The novelist mid-draft</h3>
+          <p>Half a book in. Lines arrive on walks, in queues, between scenes. The box catches them so the page doesn't have to.</p>
+        </article>
+        <article>
+          <h3>The designer between briefs</h3>
+          <p>Visual hunches from a museum trip, a film, a tile floor. Most won't fit a project. The few that do, do.</p>
+        </article>
+        <article>
+          <h3>The researcher with a hunch problem</h3>
+          <p>You have eight half-questions a day, none of which justifies a doc. The box holds them cheaply, the sift keeps the few worth a doc.</p>
+        </article>
+        <article>
+          <h3>The slow founder</h3>
+          <p>Product ideas, hires, copy lines, gnawing doubts. You don't need them sorted today. You need them somewhere you'll actually look on Sunday.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="join" class="join">
+      <div class="join-card">
+        <p class="eyebrow">Closed beta · autumn 2026</p>
+        <h2>One email when the first boxes ship.</h2>
+        <p class="join-lede">A box is a small iOS &amp; web app. Three flavors, one weekly sift, an unceremonious "let go" pile. No AI summaries. No newsletter.</p>
+        <form class="join-form" id="join-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@some.address" />
+          <button class="btn btn-primary" type="submit">Hold a box</button>
+        </form>
+        <p class="join-foot" id="join-foot">One email when the first beta opens. No drip. Unsubscribe whenever — your sparks belong to you and only you.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Tinderbox</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · a small hearth for half-thoughts</span>
+    </div>
+    <div class="foot-right">
+      <a href="#ritual">Ritual</a>
+      <a href="#log">Log</a>
+      <a href="#join">Join</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
