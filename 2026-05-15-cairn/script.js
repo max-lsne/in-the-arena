@@ -55,7 +55,9 @@ const SEED = [
   { kind: 'made',       weight: 3, sentence: 'Chapter five through the first hard section. The middle holds.' },
 ];
 
-let state = {
+const STORAGE_KEY = 'cairn-demo-v1';
+
+let state = loadState() || {
   stones: SEED.map((s, i) => ({ ...s, week: i + 1 })),
   selected: SEED.length - 1,
 };
@@ -80,6 +82,7 @@ function render() {
   renderAxis();
   renderTotals();
   renderCurrent();
+  saveState();
 }
 
 function renderStage() {
@@ -167,6 +170,7 @@ addWeekBtn.addEventListener('click', () => {
 
 resetLink.addEventListener('click', e => {
   e.preventDefault();
+  try { localStorage.removeItem(STORAGE_KEY); } catch (_) { /* ignore */ }
   state = {
     stones: SEED.map((s, i) => ({ ...s, week: i + 1 })),
     selected: SEED.length - 1,
@@ -181,5 +185,35 @@ joinForm.addEventListener('submit', e => {
   joinFoot.textContent = `Held. We'll write to ${input.value} when the first season opens — once, and only then.`;
   input.value = '';
 });
+
+// ----- storage -----
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || !Array.isArray(parsed.stones)) return null;
+    for (const stone of parsed.stones) {
+      if (!KINDS.includes(stone.kind)) return null;
+      if (typeof stone.weight !== 'number') return null;
+      if (typeof stone.sentence !== 'string') return null;
+      if (typeof stone.week !== 'number') return null;
+    }
+    if (typeof parsed.selected !== 'number' || parsed.selected < 0 || parsed.selected >= parsed.stones.length) {
+      parsed.selected = parsed.stones.length - 1;
+    }
+    return parsed;
+  } catch (_) {
+    return null;
+  }
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (_) {
+    // storage full or disabled — fine, the demo still works
+  }
+}
 
 render();
