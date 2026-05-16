@@ -36,10 +36,11 @@
   const KEPT = 'kept';
   const PASSED = 'passed';
   const OPEN = 'open';
+  const STORE_KEY = 'lastlight:v1';
 
-  let entries = freshEntries();
+  let entries = loadEntries();
   let activeFilter = 'all';
-  let leaveDays = 21;
+  let leaveDays = loadLeaveDays();
 
   function freshEntries() {
     return SEED.map((row, idx) => ({
@@ -49,6 +50,52 @@
       state: OPEN,
       seeded: true,
     }));
+  }
+
+  function loadEntries() {
+    try {
+      const raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return freshEntries();
+      const parsed = JSON.parse(raw);
+      if (!parsed || !Array.isArray(parsed.entries)) return freshEntries();
+      return parsed.entries.map(e => ({
+        id: String(e.id || ''),
+        kind: String(e.kind || 'walk'),
+        text: String(e.text || ''),
+        state: e.state === KEPT || e.state === PASSED ? e.state : OPEN,
+        seeded: !!e.seeded,
+      }));
+    } catch (_) {
+      return freshEntries();
+    }
+  }
+
+  function loadLeaveDays() {
+    try {
+      const raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return 21;
+      const parsed = JSON.parse(raw);
+      const n = parseInt(parsed && parsed.leaveDays, 10);
+      if (!Number.isFinite(n) || n < 3 || n > 30) return 21;
+      return n;
+    } catch (_) {
+      return 21;
+    }
+  }
+
+  function persist() {
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify({
+        entries: entries,
+        leaveDays: leaveDays,
+      }));
+    } catch (_) {
+      /* quota or private mode — ignore */
+    }
+  }
+
+  function clearStore() {
+    try { localStorage.removeItem(STORE_KEY); } catch (_) {}
   }
 
   // ------------------------------------------------------------------
@@ -155,6 +202,9 @@
     lightSunEl.style.left = pct + '%';
     leaveDateValueEl.textContent = leaveDays + (leaveDays === 1 ? ' day' : ' days');
     lightRemainingEl.textContent = phraseFor(leaveDays);
+    if (parseInt(leaveDateInput.value, 10) !== leaveDays) {
+      leaveDateInput.value = String(leaveDays);
+    }
   }
 
   function phraseFor(days) {
@@ -175,6 +225,7 @@
         state: e.state === target ? OPEN : target,
       });
     });
+    persist();
     render();
   }
 
@@ -190,6 +241,7 @@
 
   leaveDateInput.addEventListener('input', evt => {
     leaveDays = parseInt(evt.target.value, 10) || 21;
+    persist();
     renderLight();
   });
 
@@ -206,6 +258,7 @@
       seeded: false,
     });
     addTextEl.value = '';
+    persist();
     render();
   });
 
@@ -218,6 +271,7 @@
     [...filtersEl.querySelectorAll('button')].forEach(b => {
       b.classList.toggle('is-active', b.dataset.filter === 'all');
     });
+    clearStore();
     render();
   });
 
