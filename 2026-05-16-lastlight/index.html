@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lastlight — A tender list for the last weeks of a place</title>
+  <meta name="description" content="Lastlight is a small companion for the final weeks of somewhere. Set a leave date. Add the small things you want to do one more time. The light goes down a little each day." />
+  <meta name="color-scheme" content="light" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="26">
+          <circle cx="16" cy="20" r="9" fill="currentColor" opacity="0.18" />
+          <circle cx="16" cy="20" r="6" fill="currentColor" opacity="0.45" />
+          <circle cx="16" cy="20" r="3" fill="currentColor" opacity="0.9" />
+          <path d="M16 4 L18 9 L16 7 L14 9 Z" fill="currentColor" opacity="0.55" />
+        </svg>
+      </span>
+      <span>Lastlight</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#list">Your list</a>
+      <a href="#who">Who it's for</a>
+      <a href="#hold" class="nav-cta">Hold a date</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">A companion for the last weeks of somewhere</p>
+        <h1>
+          A tender list<br />
+          for <em>the last weeks</em>.
+        </h1>
+        <p class="lede">
+          You are leaving in October. Or July. Or the second week of
+          a month you can already see. The boxes will get packed. The
+          forwarding will get filed. The harder part is the bench, the
+          counter, the corner where the river bends — the small things
+          you'll only do here. Lastlight keeps that list while there's
+          still light to do them in.
+        </p>
+        <div class="hero-cta">
+          <a href="#list" class="btn btn-primary">See a list</a>
+          <a href="#hold" class="btn btn-ghost">Hold a date</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One list. One date. No reminders. No streaks. No share button.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-window">
+          <span class="hero-sky"></span>
+          <span class="hero-sun"></span>
+          <span class="hero-horizon"></span>
+          <span class="hero-glow"></span>
+          <span class="hero-sill"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>Moving is logistics.<br /><em>Leaving</em> is a list.</h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            The packing app is for boxes. The to-do app is for
+            cancellations. Nothing is for the long walk along the canal,
+            or the cafe where the owner already knows your order, or the
+            friend who's been "soon, soon, soon" for two years.
+          </p>
+          <p>
+            Those are the things you'll miss. They aren't tasks. They're
+            a goodbye, written one line at a time. Lastlight is built to
+            hold that, and only that — for as many days as you have left.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Set a leave date</h3>
+          <p>The day you'll sleep somewhere else for good. Lastlight counts down only this. It will not nag. It will not buzz.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Add small things</h3>
+          <p>A walk. A table. A person. An errand you kept meaning to run. A quiet place. Add five, or fifty. There is no right number.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Tend the list</h3>
+          <p>When you do one, mark it <em>kept</em>. When you decide not to, mark it <em>passed</em>. Passing is part of leaving. The list narrows.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Take the trail with you</h3>
+          <p>On the day, the list closes. You get a small, plain page — what you kept, what you passed, the shape of the last weeks. That's it.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="list" class="list">
+      <div class="list-head">
+        <h2 class="section-title">A list, mid-leaving</h2>
+        <p>A fictional last month in a small city. Twenty-one entries. Mark anything <em>kept</em> or <em>passed</em>, add one of your own, slide the leave date — the light rebuilds in your browser. Nothing leaves.</p>
+      </div>
+
+      <div class="list-card">
+        <div class="list-meta">
+          <div class="list-meta-block">
+            <p class="card-eyebrow">Leaving</p>
+            <p class="list-place" id="list-place">A small city · the river side</p>
+          </div>
+          <div class="list-meta-block list-meta-totals" id="list-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="light-strip" aria-hidden="true">
+          <div class="light-strip-fill" id="light-strip-fill"></div>
+          <span class="light-strip-sun" id="light-strip-sun"></span>
+        </div>
+        <div class="light-meta">
+          <div>
+            <span class="card-eyebrow">Leave date</span>
+            <input id="leave-date" type="range" min="3" max="30" step="1" value="21" />
+            <span class="control-value" id="leave-date-value">21 days</span>
+          </div>
+          <div class="light-meta-right">
+            <span class="card-eyebrow">Light remaining</span>
+            <p class="light-remaining" id="light-remaining">about three weeks</p>
+          </div>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the list">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="walk" role="tab">Walk</button>
+          <button type="button" data-filter="table" role="tab">Table</button>
+          <button type="button" data-filter="people" role="tab">People</button>
+          <button type="button" data-filter="errand" role="tab">Errand</button>
+          <button type="button" data-filter="quiet" role="tab">Quiet</button>
+        </div>
+
+        <ul class="entries" id="entries">
+          <!-- entries inserted here -->
+        </ul>
+
+        <div class="list-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-kind" aria-label="Kind of thing">
+              <option value="walk">Walk</option>
+              <option value="table">Table</option>
+              <option value="people">People</option>
+              <option value="errand">Errand</option>
+              <option value="quiet">Quiet</option>
+            </select>
+            <input id="add-text" type="text" placeholder="One more pour-over at the corner cafe" maxlength="120" />
+            <button class="btn btn-primary" type="submit">Add to the list</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original list</a>
+        </div>
+      </div>
+
+      <div class="legend">
+        <h3>The five kinds of light</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-walk"></span><div><strong>Walk.</strong> A route, a view, a stretch of river. Somewhere your feet already know.</div></li>
+          <li><span class="legend-swatch swatch-table"></span><div><strong>Table.</strong> A meal, a coffee, a counter where someone says your name.</div></li>
+          <li><span class="legend-swatch swatch-people"></span><div><strong>People.</strong> One person, one short visit, before the city moves someone out of reach.</div></li>
+          <li><span class="legend-swatch swatch-errand"></span><div><strong>Errand.</strong> The small place you kept meaning to try, and now you have the excuse.</div></li>
+          <li><span class="legend-swatch swatch-quiet"></span><div><strong>Quiet.</strong> A bench, a stairwell, a roof. Somewhere to just sit and notice it once more.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who keeps a lastlight</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The renter on a 60-day notice</h3>
+          <p>The lease ends in October. Most of the small places on your list are within a mile of the apartment you're about to give back. Lastlight is the only thing that knows that.</p>
+        </article>
+        <article>
+          <h3>The student finishing a year abroad</h3>
+          <p>Six weeks left. Final papers are in the calendar. The cafe near the library, the train station bench, the river on Sunday morning — those aren't.</p>
+        </article>
+        <article>
+          <h3>The friend who got the job</h3>
+          <p>You said yes. The boxes are coming. Somewhere between the visa and the lease, the smaller list — the bookshop, the long walk, dinner with the people who watched you decide — needs its own page.</p>
+        </article>
+        <article>
+          <h3>The grandparent's last summer</h3>
+          <p>They're closing the house. One season left. The list is for them, and partly for you, and entirely for the small things you both want to do once more before the rooms go quiet.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="hold" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · summer 2026</p>
+        <h2>One email when Lastlight opens.</h2>
+        <p class="hold-lede">A list, a date, and the days between them. No app store ranking. No streak. No share card. Hold a date and we'll email you once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@somewhere.soon" />
+          <button class="btn btn-primary" type="submit">Hold a date</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first dates open. You can leave anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Lastlight</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · a small companion for leaving a place</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#list">List</a>
+      <a href="#hold">Hold</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
