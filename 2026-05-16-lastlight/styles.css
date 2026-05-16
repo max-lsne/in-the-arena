@@ -672,6 +672,11 @@ em {
   font-style: italic;
 }
 
+.entry.is-selected {
+  border-color: var(--ember);
+  box-shadow: 0 0 0 3px rgba(198, 107, 57, 0.16);
+}
+
 .entry-empty {
   display: block;
   text-align: center;
@@ -680,6 +685,35 @@ em {
   border: 1px dashed var(--line);
   color: var(--ink-faint);
   font-style: italic;
+}
+
+.kbd-help {
+  margin-top: 18px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: var(--cream-soft);
+  border: 1px dashed var(--line);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+.kbd-help strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.kbd-help kbd {
+  display: inline-block;
+  font: inherit;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  padding: 1px 6px;
+  margin: 0 1px;
+  color: var(--ink);
 }
 
 /* add form */

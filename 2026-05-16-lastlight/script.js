@@ -41,6 +41,16 @@
   let entries = loadEntries();
   let activeFilter = 'all';
   let leaveDays = loadLeaveDays();
+  let selectedId = null;
+
+  const FILTER_KEYS = {
+    '0': 'all',
+    '1': 'walk',
+    '2': 'table',
+    '3': 'people',
+    '4': 'errand',
+    '5': 'quiet',
+  };
 
   function freshEntries() {
     return SEED.map((row, idx) => ({
@@ -142,7 +152,13 @@
   function entryNode(entry) {
     const li = document.createElement('li');
     li.className = 'entry entry-' + entry.kind + ' state-' + entry.state;
+    if (entry.id === selectedId) li.classList.add('is-selected');
     li.dataset.id = entry.id;
+    li.addEventListener('click', evt => {
+      if (evt.target.closest('button')) return;
+      selectedId = entry.id;
+      renderEntries();
+    });
 
     const tag = document.createElement('span');
     tag.className = 'entry-tag';
@@ -264,15 +280,111 @@
 
   resetLink.addEventListener('click', evt => {
     evt.preventDefault();
+    resetDemo();
+  });
+
+  // ------------------------------------------------------------------
+  // Keyboard shortcuts
+  //
+  //   J / ArrowDown   next entry            K / ArrowUp     prev entry
+  //   Enter           keep selected         P               pass selected
+  //   N               focus the add input   Esc             clear selection
+  //   1-5             filter by kind        0               all kinds
+  //   [ / ]           -/+ one day on leave  R               reset demo
+  //
+  // Shortcuts are ignored while typing in form fields.
+
+  function isTyping(target) {
+    if (!target) return false;
+    const tag = target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return true;
+    return target.isContentEditable === true;
+  }
+
+  function visibleEntries() {
+    return entries.filter(e =>
+      activeFilter === 'all' ? true : e.kind === activeFilter
+    );
+  }
+
+  function moveSelection(step) {
+    const v = visibleEntries();
+    if (v.length === 0) { selectedId = null; renderEntries(); return; }
+    const idx = v.findIndex(e => e.id === selectedId);
+    let next;
+    if (idx === -1) next = step > 0 ? 0 : v.length - 1;
+    else next = (idx + step + v.length) % v.length;
+    selectedId = v[next].id;
+    renderEntries();
+    const el = entriesEl.querySelector('[data-id="' + selectedId + '"]');
+    if (el && el.scrollIntoView) el.scrollIntoView({ block: 'nearest' });
+  }
+
+  function setFilter(name) {
+    activeFilter = name;
+    [...filtersEl.querySelectorAll('button')].forEach(b => {
+      b.classList.toggle('is-active', b.dataset.filter === name);
+    });
+    if (selectedId && !visibleEntries().some(e => e.id === selectedId)) {
+      selectedId = null;
+    }
+    renderEntries();
+  }
+
+  function nudgeLeaveDays(delta) {
+    const next = Math.max(3, Math.min(30, leaveDays + delta));
+    if (next === leaveDays) return;
+    leaveDays = next;
+    persist();
+    renderLight();
+  }
+
+  function resetDemo() {
     entries = freshEntries();
     leaveDays = 21;
-    leaveDateInput.value = '21';
     activeFilter = 'all';
+    selectedId = null;
     [...filtersEl.querySelectorAll('button')].forEach(b => {
       b.classList.toggle('is-active', b.dataset.filter === 'all');
     });
     clearStore();
     render();
+  }
+
+  document.addEventListener('keydown', evt => {
+    if (evt.metaKey || evt.ctrlKey || evt.altKey) return;
+    if (isTyping(evt.target)) return;
+
+    const key = evt.key;
+
+    if (key === 'j' || key === 'ArrowDown') { evt.preventDefault(); moveSelection(1); return; }
+    if (key === 'k' || key === 'ArrowUp')   { evt.preventDefault(); moveSelection(-1); return; }
+
+    if (key === 'Enter') {
+      if (selectedId) { evt.preventDefault(); toggleState(selectedId, KEPT); }
+      return;
+    }
+    if (key === 'p' || key === 'P') {
+      if (selectedId) { evt.preventDefault(); toggleState(selectedId, PASSED); }
+      return;
+    }
+    if (key === 'Escape') {
+      if (selectedId) { evt.preventDefault(); selectedId = null; renderEntries(); }
+      return;
+    }
+    if (key === 'n' || key === 'N') {
+      evt.preventDefault();
+      addTextEl.focus();
+      return;
+    }
+    if (Object.prototype.hasOwnProperty.call(FILTER_KEYS, key)) {
+      evt.preventDefault();
+      setFilter(FILTER_KEYS[key]);
+      return;
+    }
+    if (key === '[') { evt.preventDefault(); nudgeLeaveDays(-1); return; }
+    if (key === ']') { evt.preventDefault(); nudgeLeaveDays(1); return; }
+    if (key === 'r' || key === 'R') { evt.preventDefault(); resetDemo(); return; }
   });
 
   // ------------------------------------------------------------------
