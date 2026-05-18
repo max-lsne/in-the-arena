@@ -193,6 +193,7 @@ const state = {
   marks: persisted ? persisted.marks : SEED.map((m) => ({ ...m, id: 'm' + m.d })),
   projectLength: persisted ? persisted.projectLength : 180,
   filter: 'all',
+  selectedId: null,
 };
 
 function $(sel, root = document) { return root.querySelector(sel); }
@@ -292,7 +293,9 @@ function renderMarks() {
     return;
   }
   for (const m of filtered) {
-    const li = el('li', { class: 'kind-' + m.k, dataset: { id: m.id } },
+    const isSelected = m.id === state.selectedId;
+    const cls = 'kind-' + m.k + (isSelected ? ' is-selected' : '');
+    const li = el('li', { class: cls, dataset: { id: m.id } },
       el('span', { class: 'mark-swatch' }),
       el('span', { class: 'mark-text' }, m.t),
       el('span', { class: 'mark-day' }, 'Day ' + m.d),
@@ -302,6 +305,10 @@ function renderMarks() {
       )
     );
     list.appendChild(li);
+  }
+  if (state.selectedId) {
+    const sel = list.querySelector('li.is-selected');
+    if (sel) sel.scrollIntoView({ block: 'nearest' });
   }
 }
 
@@ -344,20 +351,26 @@ function cycleKind(k) {
 
 function attachMarkActions() {
   $('#marks').addEventListener('click', (e) => {
-    const btn = e.target.closest('button[data-action]');
-    if (!btn) return;
     const li = e.target.closest('li[data-id]');
     if (!li) return;
     const id = li.dataset.id;
     const m = state.marks.find((x) => x.id === id);
     if (!m) return;
-    if (btn.dataset.action === 'remove') {
-      state.marks = state.marks.filter((x) => x.id !== id);
-    } else if (btn.dataset.action === 'cycle') {
-      m.k = cycleKind(m.k);
+    const btn = e.target.closest('button[data-action]');
+    if (btn) {
+      if (btn.dataset.action === 'remove') {
+        state.marks = state.marks.filter((x) => x.id !== id);
+        if (state.selectedId === id) state.selectedId = null;
+      } else if (btn.dataset.action === 'cycle') {
+        m.k = cycleKind(m.k);
+        state.selectedId = id;
+      }
+      saveState();
+      renderAll();
+      return;
     }
-    saveState();
-    renderAll();
+    state.selectedId = id;
+    renderMarks();
   });
 }
 
@@ -415,6 +428,109 @@ function attachHold() {
   });
 }
 
+function visibleMarks() {
+  const sorted = state.marks.slice().sort((a, b) => b.d - a.d);
+  return state.filter === 'all' ? sorted : sorted.filter((m) => m.k === state.filter);
+}
+
+function moveSelection(delta) {
+  const list = visibleMarks();
+  if (!list.length) { state.selectedId = null; return; }
+  const i = state.selectedId ? list.findIndex((m) => m.id === state.selectedId) : -1;
+  let next;
+  if (i === -1) {
+    next = delta > 0 ? 0 : list.length - 1;
+  } else {
+    next = Math.max(0, Math.min(list.length - 1, i + delta));
+  }
+  state.selectedId = list[next].id;
+}
+
+function setFilter(name) {
+  state.filter = name;
+  $$('#filters button').forEach((b) => b.classList.toggle('is-active', b.dataset.filter === name));
+  const list = visibleMarks();
+  if (state.selectedId && !list.some((m) => m.id === state.selectedId)) {
+    state.selectedId = null;
+  }
+  renderMarks();
+}
+
+function nudgeLength(delta) {
+  const input = $('#project-length');
+  const step = parseInt(input.step, 10) || 10;
+  const min = parseInt(input.min, 10) || 90;
+  const max = parseInt(input.max, 10) || 240;
+  const next = Math.max(min, Math.min(max, state.projectLength + delta * step));
+  if (next === state.projectLength) return;
+  state.projectLength = next;
+  state.marks = state.marks.filter((m) => m.d <= state.projectLength);
+  input.value = next;
+  saveState();
+  renderAll();
+}
+
+function resetEverything() {
+  state.marks = SEED.map((m) => ({ ...m, id: 'm' + m.d }));
+  state.projectLength = 180;
+  state.filter = 'all';
+  state.selectedId = null;
+  $('#project-length').value = 180;
+  $$('#filters button').forEach((b) => b.classList.toggle('is-active', b.dataset.filter === 'all'));
+  clearStored();
+  renderAll();
+}
+
+const FILTER_KEYS = { '0': 'all', '1': 'reach', '2': 'hold', '3': 'recede', '4': 'pause', '5': 'storm' };
+
+function attachKeys() {
+  document.addEventListener('keydown', (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const tag = (e.target.tagName || '').toUpperCase();
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+
+    const key = e.key;
+    if (key === 'j' || key === 'J' || key === 'ArrowDown') {
+      e.preventDefault(); moveSelection(1); renderMarks(); return;
+    }
+    if (key === 'k' || key === 'K' || key === 'ArrowUp') {
+      e.preventDefault(); moveSelection(-1); renderMarks(); return;
+    }
+    if (key === 'Enter') {
+      if (!state.selectedId) return;
+      const m = state.marks.find((x) => x.id === state.selectedId);
+      if (!m) return;
+      e.preventDefault();
+      m.k = cycleKind(m.k);
+      saveState();
+      renderAll();
+      return;
+    }
+    if (key === 'Backspace' || key === 'Delete') {
+      if (!state.selectedId) return;
+      e.preventDefault();
+      const id = state.selectedId;
+      const list = visibleMarks();
+      const i = list.findIndex((m) => m.id === id);
+      state.marks = state.marks.filter((x) => x.id !== id);
+      const after = visibleMarks();
+      state.selectedId = after.length ? after[Math.min(i, after.length - 1)].id : null;
+      saveState();
+      renderAll();
+      return;
+    }
+    if (key === 'n' || key === 'N') {
+      e.preventDefault();
+      $('#add-text').focus();
+      return;
+    }
+    if (key === '[') { e.preventDefault(); nudgeLength(-1); return; }
+    if (key === ']') { e.preventDefault(); nudgeLength(1); return; }
+    if (key === 'r' || key === 'R') { e.preventDefault(); resetEverything(); return; }
+    if (FILTER_KEYS[key] != null) { e.preventDefault(); setFilter(FILTER_KEYS[key]); }
+  });
+}
+
 function bootstrap() {
   $('#project-length').value = state.projectLength;
   attachFilters();
@@ -423,6 +539,7 @@ function bootstrap() {
   attachReset();
   attachMarkActions();
   attachHold();
+  attachKeys();
   renderAll();
   window.addEventListener('resize', renderChart);
 }

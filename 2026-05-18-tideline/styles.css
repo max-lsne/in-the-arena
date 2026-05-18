@@ -332,6 +332,10 @@ main, header, footer { position: relative; z-index: 1; }
   font-size: 14.5px; color: var(--ink);
 }
 .marks li:last-child { border-bottom: none; }
+.marks li.is-selected {
+  background: var(--foam);
+  box-shadow: inset 3px 0 0 var(--sea-deep);
+}
 .marks li .mark-swatch {
   width: 10px; height: 10px; border-radius: 999px; flex-shrink: 0;
   border: 1.5px solid var(--foam); box-shadow: 0 0 0 1.5px currentColor;
@@ -373,6 +377,20 @@ main, header, footer { position: relative; z-index: 1; }
   color: var(--stone-soft); text-decoration: none; border-bottom: 1px dotted var(--stone-soft);
 }
 .reset-link:hover { color: var(--ink-soft); border-bottom-color: var(--ink-soft); }
+
+.kbd-help {
+  margin: 22px 0 0; padding-top: 16px;
+  border-top: 1px solid var(--line-soft);
+  font-family: 'JetBrains Mono', monospace; font-size: 11.5px;
+  color: var(--stone); letter-spacing: 0.02em; line-height: 2;
+}
+.kbd-help strong { color: var(--ink-soft); font-weight: 600; margin-right: 6px; letter-spacing: 0.08em; text-transform: uppercase; font-size: 10.5px; }
+.kbd-help kbd {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  background: var(--strand-warm); border: 1px solid var(--line);
+  border-radius: 4px; padding: 1px 6px; color: var(--ink-soft);
+  box-shadow: 0 1px 0 var(--line);
+}
 
 /* legend */
 .legend {
