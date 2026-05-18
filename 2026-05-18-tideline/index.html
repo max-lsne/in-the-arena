@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tideline — A daily mark for slow, tidal work</title>
+  <meta name="description" content="Tideline is a small page for the long projects that don't move in straight lines. One mark a day on the strand, so months from now you can still see the shape of the year." />
+  <meta name="theme-color" content="#efe5d2" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#1f3a4a" media="(prefers-color-scheme: dark)" />
+  <meta name="color-scheme" content="light" />
+  <meta property="og:title" content="Tideline — A daily mark for slow, tidal work" />
+  <meta property="og:description" content="A small page for the long projects that don't move in straight lines. One mark a day on the strand, so months from now you can still see the shape of the year." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23efe5d2'/%3E%3Cpath d='M2 16 Q7 13 12 15 T22 14 T32 12' stroke='%233a6779' stroke-width='1.4' fill='none' opacity='0.55'/%3E%3Cpath d='M2 20 Q7 17 12 19 T22 18 T32 16' stroke='%232a4d61' stroke-width='1.6' fill='none' opacity='0.75'/%3E%3Cpath d='M2 24 L32 24' stroke='%231f3a4a' stroke-width='1.8' fill='none'/%3E%3Ccircle cx='10' cy='22' r='1.8' fill='%234f7a5d'/%3E%3Ccircle cx='18' cy='21' r='1.8' fill='%236b7682'/%3E%3Ccircle cx='24' cy='23' r='1.8' fill='%23b25a3c'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 36 28" width="28" height="22">
+          <path d="M0 18 Q6 14 12 17 T24 16 T36 14" stroke="currentColor" stroke-width="1.6" fill="none" opacity="0.45" />
+          <path d="M0 22 Q6 19 12 21 T24 20 T36 18" stroke="currentColor" stroke-width="1.6" fill="none" opacity="0.7" />
+          <path d="M0 26 L36 26" stroke="currentColor" stroke-width="1.6" fill="none" opacity="0.95" />
+        </svg>
+      </span>
+      <span>Tideline</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#strand">The strand</a>
+      <a href="#who">Who it's for</a>
+      <a href="#hold" class="nav-cta">Leave a mark</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">A daily mark for slow, tidal work</p>
+        <h1>
+          The line<br />
+          <em>draws itself</em>.
+        </h1>
+        <p class="lede">
+          Some work doesn't move in straight lines. The book in its
+          third draft. The thesis on its ninth chapter. The
+          renovation. The recovery. The language you've been getting
+          to know for two years. Each day you leave a small mark
+          where the work reached — out past yesterday, level with
+          it, or behind. The graph is the shape of the year.
+        </p>
+        <div class="hero-cta">
+          <a href="#strand" class="btn btn-primary">See a strand</a>
+          <a href="#hold" class="btn btn-ghost">Leave a mark</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One mark a day. No streak. No score. No notification.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-strand">
+          <span class="hero-sky"></span>
+          <span class="hero-sea"></span>
+          <span class="hero-wave hero-wave-1"></span>
+          <span class="hero-wave hero-wave-2"></span>
+          <span class="hero-line"></span>
+          <span class="hero-mark hero-mark-1"></span>
+          <span class="hero-mark hero-mark-2"></span>
+          <span class="hero-mark hero-mark-3"></span>
+          <span class="hero-mark hero-mark-4"></span>
+          <span class="hero-mark hero-mark-5"></span>
+          <span class="hero-mark hero-mark-6"></span>
+          <span class="hero-mark hero-mark-7"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>Slow work is <em>tidal</em>.<br />Not forward and forward.</h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            The streak app wants a clean staircase up. The to-do app
+            wants today empty. Neither of them knows what to do with
+            a draft that went backward by a chapter, or a week of
+            quiet that the work needed, or the Tuesday when the
+            roof leaked and the page didn't.
+          </p>
+          <p>
+            Those days belong on the line. Tideline is built for
+            the projects that take a season or three — to mark
+            them honestly, one day at a time, and to let the line
+            be the line.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Name one slow thing</h3>
+          <p>One project. Long. The kind you measure in months, not afternoons. The book. The thesis. The garden. The training plan.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Leave a mark each day</h3>
+          <p>Reach, hold, recede, pause, or storm. A word or two for what the work did. Sixty seconds. Closes the day.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Watch the line</h3>
+          <p>Each week, the marks join into a strand. Reaches climb. Recedes dip. Pauses leave a soft gap. Storms a darker one.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Read the year</h3>
+          <p>On the last day, the strand becomes a small printable map of the project — every mark in its month. That's it. No share card.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="strand" class="strand">
+      <div class="strand-head">
+        <h2 class="section-title">A strand, mid-draft</h2>
+        <p>A fictional six-month book draft. A hundred and twenty marks already laid down. Add today's, slide the project length, change a mark's kind — the line rebuilds in your browser. Nothing leaves.</p>
+      </div>
+
+      <div class="strand-card">
+        <div class="strand-meta">
+          <div class="strand-meta-block">
+            <p class="card-eyebrow">Project</p>
+            <p class="strand-project" id="strand-project">A second-draft novel · 180 days</p>
+          </div>
+          <div class="strand-meta-block strand-meta-totals" id="strand-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="line-chart" id="line-chart" aria-label="Marks over the project so far"></div>
+
+        <div class="line-meta">
+          <div>
+            <span class="card-eyebrow">Project length</span>
+            <input id="project-length" type="range" min="90" max="240" step="10" value="180" />
+            <span class="control-value" id="project-length-value">180 days</span>
+          </div>
+          <div class="line-meta-right">
+            <span class="card-eyebrow">Day of the project</span>
+            <p class="line-day" id="line-day">Day 120 of 180</p>
+          </div>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the marks">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="reach" role="tab">Reach</button>
+          <button type="button" data-filter="hold" role="tab">Hold</button>
+          <button type="button" data-filter="recede" role="tab">Recede</button>
+          <button type="button" data-filter="pause" role="tab">Pause</button>
+          <button type="button" data-filter="storm" role="tab">Storm</button>
+        </div>
+
+        <ul class="marks" id="marks">
+          <!-- marks inserted here -->
+        </ul>
+
+        <div class="strand-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-kind" aria-label="Kind of mark">
+              <option value="reach">Reach</option>
+              <option value="hold">Hold</option>
+              <option value="recede">Recede</option>
+              <option value="pause">Pause</option>
+              <option value="storm">Storm</option>
+            </select>
+            <input id="add-text" type="text" placeholder="Wrote into the bridge scene; came out of it shorter" maxlength="120" />
+            <button class="btn btn-primary" type="submit">Leave today's mark</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original draft</a>
+        </div>
+
+        <p class="kbd-help">
+          <strong>Keys:</strong>
+          <kbd>J</kbd>/<kbd>K</kbd> move ·
+          <kbd>Enter</kbd> change kind ·
+          <kbd>Del</kbd> remove ·
+          <kbd>N</kbd> add ·
+          <kbd>1</kbd>&ndash;<kbd>5</kbd> filter, <kbd>0</kbd> all ·
+          <kbd>[</kbd>/<kbd>]</kbd> project length ·
+          <kbd>R</kbd> reset.
+        </p>
+      </div>
+
+      <div class="legend">
+        <h3>The five kinds of mark</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-reach"></span><div><strong>Reach.</strong> The line moved out past yesterday. A new paragraph, a new measurement, a new mile.</div></li>
+          <li><span class="legend-swatch swatch-hold"></span><div><strong>Hold.</strong> The line stayed where it was. You sat with the work and didn't lose ground.</div></li>
+          <li><span class="legend-swatch swatch-recede"></span><div><strong>Recede.</strong> The line slipped. A revision pulled a chapter apart. The tide went back out.</div></li>
+          <li><span class="legend-swatch swatch-pause"></span><div><strong>Pause.</strong> Chosen quiet. A rest day, a Sabbath, a week with the work's blessing.</div></li>
+          <li><span class="legend-swatch swatch-storm"></span><div><strong>Storm.</strong> Life broke in. Not your choice. Not a failure. A mark all the same.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who keeps a tideline</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The novelist in a third draft</h3>
+          <p>The end is somewhere in November. Some weeks the chapter doubles in length. Some it halves. The streak app gave up months ago. Tideline doesn't mind a draft that goes backward.</p>
+        </article>
+        <article>
+          <h3>The PhD student in chapter nine</h3>
+          <p>Eighteen months in. The viva is a hill, not a deadline. The line is mostly hold and reach, with a storm in late February and a long pause for fieldwork. The shape is the work.</p>
+        </article>
+        <article>
+          <h3>The renovator in the bones of a house</h3>
+          <p>Drywall in March. Wiring in May. A summer of recedes when the inspector visited. The strand is a project plan that already happened — and a map of what came next.</p>
+        </article>
+        <article>
+          <h3>The person in a long recovery</h3>
+          <p>The good week. The bad one. The Tuesday that took a Wednesday with it. Tideline is the only place where holding is enough, and storm is a mark, not a fall.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="hold" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · autumn 2026</p>
+        <h2>One email when Tideline opens.</h2>
+        <p class="hold-lede">A project, a mark, and the year between them. No app store ranking. No streak. No share card. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@somewhere.slow" />
+          <button class="btn btn-primary" type="submit">Leave a mark</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first strands open. You can leave anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Tideline</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · a daily mark for slow, tidal work</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#strand">Strand</a>
+      <a href="#hold">Hold</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
