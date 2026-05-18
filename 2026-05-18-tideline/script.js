@@ -155,9 +155,43 @@ const KIND_DELTA = {
   storm: -0.2,
 };
 
+const STORAGE_KEY = 'tideline:v1';
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const data = JSON.parse(raw);
+    if (!data || !Array.isArray(data.marks)) return null;
+    const marks = data.marks
+      .filter((m) => m && typeof m.d === 'number' && KINDS.includes(m.k) && typeof m.t === 'string')
+      .map((m) => ({ d: m.d, k: m.k, t: m.t, id: m.id || 'm' + m.d }));
+    const projectLength = Number.isFinite(data.projectLength) ? data.projectLength : 180;
+    return { marks, projectLength };
+  } catch (_e) {
+    return null;
+  }
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      marks: state.marks,
+      projectLength: state.projectLength,
+    }));
+  } catch (_e) {
+    // storage full, private mode, etc. — silently drop.
+  }
+}
+
+function clearStored() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch (_e) { /* noop */ }
+}
+
+const persisted = loadState();
 const state = {
-  marks: SEED.map((m) => ({ ...m, id: 'm' + m.d })),
-  projectLength: 180,
+  marks: persisted ? persisted.marks : SEED.map((m) => ({ ...m, id: 'm' + m.d })),
+  projectLength: persisted ? persisted.projectLength : 180,
   filter: 'all',
 };
 
@@ -322,6 +356,7 @@ function attachMarkActions() {
     } else if (btn.dataset.action === 'cycle') {
       m.k = cycleKind(m.k);
     }
+    saveState();
     renderAll();
   });
 }
@@ -345,6 +380,7 @@ function attachAdd() {
     const d = nextDay();
     state.marks.push({ id: 'm' + Date.now(), d, k: kind, t: text });
     $('#add-text').value = '';
+    saveState();
     renderAll();
   });
 }
@@ -353,6 +389,7 @@ function attachLength() {
   $('#project-length').addEventListener('input', (e) => {
     state.projectLength = parseInt(e.target.value, 10) || 180;
     state.marks = state.marks.filter((m) => m.d <= state.projectLength);
+    saveState();
     renderAll();
   });
 }
@@ -365,6 +402,7 @@ function attachReset() {
     state.filter = 'all';
     $('#project-length').value = 180;
     $$('#filters button').forEach((b) => b.classList.toggle('is-active', b.dataset.filter === 'all'));
+    clearStored();
     renderAll();
   });
 }
@@ -378,6 +416,7 @@ function attachHold() {
 }
 
 function bootstrap() {
+  $('#project-length').value = state.projectLength;
   attachFilters();
   attachAdd();
   attachLength();
