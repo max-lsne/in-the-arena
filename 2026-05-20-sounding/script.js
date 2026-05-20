@@ -62,8 +62,36 @@ const BOTTOM_LABEL = {
   none: 'No bottom',
 };
 
+const STORAGE_KEY = 'sounding.v1';
+const DEFAULT_PROJECT = 'A writing desk · by hand';
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || !Array.isArray(parsed.soundings)) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({ soundings: state.soundings, project: state.project })
+    );
+  } catch {
+    /* localStorage may be unavailable (private mode, quota); fail quiet */
+  }
+}
+
+const stored = loadState();
 const state = {
-  soundings: SEED.map((s) => ({ ...s })),
+  soundings: stored ? stored.soundings.map((s) => ({ ...s })) : SEED.map((s) => ({ ...s })),
+  project: stored && stored.project ? stored.project : DEFAULT_PROJECT,
   filter: 'all',
   activeWeek: null,
 };
@@ -205,7 +233,17 @@ function escapeHtml(s) {
     .replace(/'/g, '&#39;');
 }
 
+function renderProject() {
+  const el = document.getElementById('chart-project');
+  if (!el) return;
+  const totalWeeks = state.soundings.length
+    ? Math.max(...state.soundings.map((s) => s.w))
+    : 0;
+  el.textContent = `${state.project} · week ${totalWeeks} of about 22`;
+}
+
 function renderAll() {
+  renderProject();
   renderTotals();
   renderSeabed();
   renderList();
@@ -234,16 +272,30 @@ document.getElementById('add-form').addEventListener('submit', (e) => {
   state.soundings.push({ w: nextWeek, ...facets, bottom, t: text });
   document.getElementById('add-text').value = '';
   state.activeWeek = nextWeek;
+  saveState();
   renderAll();
+});
+
+// editable project name
+document.getElementById('chart-project').addEventListener('click', () => {
+  const next = prompt('What is the project?', state.project);
+  if (next === null) return;
+  const trimmed = next.trim();
+  if (!trimmed) return;
+  state.project = trimmed;
+  saveState();
+  renderProject();
 });
 
 // reset
 document.getElementById('reset-demo').addEventListener('click', (e) => {
   e.preventDefault();
   state.soundings = SEED.map((s) => ({ ...s }));
+  state.project = DEFAULT_PROJECT;
   state.activeWeek = null;
   state.filter = 'all';
   document.querySelectorAll('#filters button').forEach((b) => b.classList.toggle('is-active', b.dataset.filter === 'all'));
+  try { localStorage.removeItem(STORAGE_KEY); } catch {}
   renderAll();
 });
 

@@ -226,7 +226,11 @@ main, header, footer { position: relative; z-index: 1; }
 .chart-project {
   font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500;
   margin: 0; letter-spacing: -0.01em;
+  cursor: pointer;
+  border-bottom: 1px dashed transparent;
+  transition: border-color 0.15s ease;
 }
+.chart-project:hover { border-bottom-color: var(--line); }
 .chart-meta-totals {
   display: flex; gap: 20px; flex-wrap: wrap;
   font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--ink-soft);
