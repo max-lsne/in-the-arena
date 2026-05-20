@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Chat {
+  id          String   @id
+  name        String
+  isGroup     Boolean
+  scanEnabled Boolean  @default(true)
+  tone        String?
+  createdAt   DateTime @default(now())
+
+  messages Message[]
+  drafts   Draft[]
+}
+
+model Message {
+  id          String   @id
+  chatId      String
+  authorName  String
+  authorPhone String?
+  body        String
+  fromMe      Boolean
+  timestamp   DateTime
+
+  interesting Boolean? @default(false)
+  scanScore   Float?
+  scanReason  String?
+  scannedAt   DateTime?
+
+  chat   Chat    @relation(fields: [chatId], references: [id])
+  drafts Draft[]
+
+  @@index([chatId, timestamp])
+  @@index([interesting])
+}
+
+enum DraftStatus {
+  PENDING
+  APPROVED
+  SENT
+  DISCARDED
+}
+
+model Draft {
+  id              String      @id @default(cuid())
+  chatId          String
+  replyToMessageId String?
+  body            String
+  status          DraftStatus @default(PENDING)
+  model           String
+  createdAt       DateTime    @default(now())
+  sentAt          DateTime?
+
+  chat           Chat     @relation(fields: [chatId], references: [id])
+  replyToMessage Message? @relation(fields: [replyToMessageId], references: [id])
+
+  @@index([status])
+}
+
+model Persona {
+  id        Int      @id @default(1)
+  about     String
+  voice     String
+  updatedAt DateTime @updatedAt
+}
