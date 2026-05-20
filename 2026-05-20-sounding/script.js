@@ -299,6 +299,94 @@ document.getElementById('reset-demo').addEventListener('click', (e) => {
   renderAll();
 });
 
+// keyboard shortcuts
+const BOTTOM_ORDER = ['sand', 'rock', 'kelp', 'none'];
+const FILTER_KEYS = { '0': 'all', '1': 'sand', '2': 'rock', '3': 'kelp', '4': 'none' };
+
+function activeSoundingIndex() {
+  if (state.activeWeek == null) return -1;
+  return state.soundings.findIndex((s) => s.w === state.activeWeek);
+}
+
+function moveActive(delta) {
+  const sorted = [...state.soundings].sort((a, b) => a.w - b.w);
+  if (!sorted.length) return;
+  let idx;
+  if (state.activeWeek == null) {
+    idx = delta > 0 ? 0 : sorted.length - 1;
+  } else {
+    const cur = sorted.findIndex((s) => s.w === state.activeWeek);
+    idx = Math.min(sorted.length - 1, Math.max(0, cur + delta));
+  }
+  state.activeWeek = sorted[idx].w;
+  renderSeabed();
+  renderList();
+}
+
+function cycleBottom(dir) {
+  const i = activeSoundingIndex();
+  if (i < 0) return;
+  const cur = BOTTOM_ORDER.indexOf(state.soundings[i].bottom);
+  const next = (cur + (dir || 1) + BOTTOM_ORDER.length) % BOTTOM_ORDER.length;
+  state.soundings[i].bottom = BOTTOM_ORDER[next];
+  saveState();
+  renderAll();
+}
+
+function nudgeBearing(delta) {
+  const i = activeSoundingIndex();
+  if (i < 0) return;
+  state.soundings[i].bearing = Math.min(5, Math.max(1, state.soundings[i].bearing + delta));
+  saveState();
+  renderAll();
+}
+
+function removeActive() {
+  const i = activeSoundingIndex();
+  if (i < 0) return;
+  state.soundings.splice(i, 1);
+  state.activeWeek = null;
+  saveState();
+  renderAll();
+}
+
+function applyFilter(key) {
+  state.filter = key;
+  document.querySelectorAll('#filters button').forEach((b) => b.classList.toggle('is-active', b.dataset.filter === key));
+  renderList();
+}
+
+document.addEventListener('keydown', (e) => {
+  const tag = (e.target.tagName || '').toLowerCase();
+  if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+  const k = e.key;
+  if (k === 'j' || k === 'J' || k === 'ArrowDown') { e.preventDefault(); moveActive(1); return; }
+  if (k === 'k' || k === 'K' || k === 'ArrowUp')   { e.preventDefault(); moveActive(-1); return; }
+  if (k === 'Enter') { e.preventDefault(); cycleBottom(1); return; }
+  if (k === 'Delete' || k === 'Backspace') { e.preventDefault(); removeActive(); return; }
+  if (k === 'n' || k === 'N') {
+    e.preventDefault();
+    const input = document.getElementById('add-text');
+    if (input) input.focus();
+    return;
+  }
+  if (k in FILTER_KEYS) { e.preventDefault(); applyFilter(FILTER_KEYS[k]); return; }
+  if (k === '[') { e.preventDefault(); nudgeBearing(-1); return; }
+  if (k === ']') { e.preventDefault(); nudgeBearing(1); return; }
+  if (k === 'r' || k === 'R') {
+    e.preventDefault();
+    state.soundings = SEED.map((s) => ({ ...s }));
+    state.project = DEFAULT_PROJECT;
+    state.activeWeek = null;
+    applyFilter('all');
+    try { localStorage.removeItem(STORAGE_KEY); } catch {}
+    renderAll();
+    return;
+  }
+});
+
 // hold form (signup)
 document.getElementById('hold-form').addEventListener('submit', (e) => {
   e.preventDefault();
