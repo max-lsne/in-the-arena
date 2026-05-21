@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Switchback — The long way is the way up</title>
+  <meta name="description" content="Switchback is a small page for the climb you can't take straight. A trail of legs — up, across, back — for the ridge worth standing on. Walk one leg at a time. The shape of the climb is the work." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <path d="M2 28 L10 22 L6 16 L16 12 L12 8 L22 6 L30 4"
+                stroke="currentColor" stroke-width="2.2" fill="none"
+                stroke-linejoin="round" stroke-linecap="round" />
+          <circle cx="2"  cy="28" r="2" fill="currentColor" />
+          <circle cx="30" cy="4"  r="2" fill="currentColor" />
+        </svg>
+      </span>
+      <span>Switchback</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#trail">The trail</a>
+      <a href="#who">Who walks it</a>
+      <a href="#hold" class="nav-cta">Cut a leg</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">A trail for the long climb</p>
+        <h1>
+          The long way<br />
+          <em>is the way up.</em>
+        </h1>
+        <p class="lede">
+          Some ridges do not have a straight line to the top. You
+          get there by going sideways, and sideways again, and
+          sometimes a hundred feet back down to find the bench
+          that goes up. Switchback is a small page for keeping the
+          trail honest as you cut it. One leg at a time. The
+          shape is the work.
+        </p>
+        <div class="hero-cta">
+          <a href="#trail" class="btn btn-primary">See a trail</a>
+          <a href="#hold" class="btn btn-ghost">Cut a leg</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One leg at a time. No streak. No arrow. No notification.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-ridge">
+          <svg viewBox="0 0 400 320" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="ridgeSky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#94abbf" stop-opacity="0.18" />
+                <stop offset="100%" stop-color="#94abbf" stop-opacity="0" />
+              </linearGradient>
+              <linearGradient id="ridgeRock" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#4a5560" stop-opacity="0.10" />
+                <stop offset="100%" stop-color="#4a5560" stop-opacity="0.22" />
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="400" height="320" fill="url(#ridgeSky)" />
+            <!-- the ridge silhouette -->
+            <path d="M0 300 L60 240 L120 200 L180 140 L240 100 L300 60 L360 40 L400 30 L400 320 L0 320 Z"
+                  fill="url(#ridgeRock)" />
+            <path d="M0 300 L60 240 L120 200 L180 140 L240 100 L300 60 L360 40 L400 30"
+                  stroke="#4a5560" stroke-width="1.5" fill="none" stroke-linejoin="round" opacity="0.6" />
+            <!-- the switchback trail -->
+            <path d="M20 300 L120 270 L60 240 L180 210 L100 180 L220 150 L150 130 L260 100 L200 80 L300 60 L260 50 L340 35"
+                  stroke="#1f3a2c" stroke-width="2.4" fill="none"
+                  stroke-linejoin="round" stroke-linecap="round" />
+            <!-- waypoints -->
+            <g fill="#1f3a2c">
+              <circle cx="20"  cy="300" r="3.6" />
+              <circle cx="120" cy="270" r="3.2" />
+              <circle cx="60"  cy="240" r="3.2" />
+              <circle cx="180" cy="210" r="3.2" />
+              <circle cx="100" cy="180" r="3.2" />
+              <circle cx="220" cy="150" r="3.2" />
+              <circle cx="150" cy="130" r="3.2" />
+              <circle cx="260" cy="100" r="3.2" />
+              <circle cx="200" cy="80"  r="3.2" />
+              <circle cx="300" cy="60"  r="3.2" />
+              <circle cx="260" cy="50"  r="3.2" />
+            </g>
+            <!-- the summit cairn -->
+            <g transform="translate(340, 30)">
+              <circle r="4.2" fill="#c46a4a" />
+              <circle r="8" fill="none" stroke="#c46a4a" stroke-width="1.2" opacity="0.45" />
+            </g>
+          </svg>
+        </div>
+        <span class="hero-tick hero-tick-1">summit</span>
+        <span class="hero-tick hero-tick-2">bench</span>
+        <span class="hero-tick hero-tick-3">trailhead</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>The straight line<br /><em>lies.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            Most roadmaps draw an arrow. The arrow is short and
+            straight and goes up. The arrow does not know about
+            the unclimbable face on the south side, the rotten
+            cornice at the col, the half-day traverse that ends
+            at a cliff and sends you back to the bench. The arrow
+            is for slide decks.
+          </p>
+          <p>
+            Switchback is for the work. A leg is the smallest
+            thing you can plan: a piece of the trail you can see
+            the end of. You name it, you give it a shape, and you
+            walk it. Some legs gain altitude. Some lose it. Most
+            of the long ones are sideways. The shape of all the
+            legs together is the climb.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Name one long ridge</h3>
+          <p>One climb. Hard. The kind you measure in months. The migration. The book. The roof. The recovery.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Cut a leg</h3>
+          <p>The smallest piece of trail you can see the end of. Give it a name, an aspect, an altitude.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Walk it. Or redraw it.</h3>
+          <p>If the line goes, set it. If it cliffs out, redraw it — take it off the map and cut a new one.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Read the shape</h3>
+          <p>The profile is your climb. The traverses, the doublebacks, the steep pitches that gain a thousand feet in a morning.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="trail" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A trail, mid-climb</h2>
+        <p>A fictional first ascent of an unnamed ridge in the eastern Sangres. Twelve legs cut so far, with the storm at the col and the false summit at hour eleven. Walk a leg, redraw one, add the next — the profile rebuilds in your browser. Nothing leaves.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">Climb</p>
+            <p class="chart-project" id="chart-project" title="Click to rename">An unnamed ridge · east Sangres · day 4 of about 5</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Altitude profile across the legs walked so far">
+          <p class="profile-axis-label top">summit</p>
+          <p class="profile-axis-label bot">trailhead</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the legs">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="scouted" role="tab">Scouted</button>
+          <button type="button" data-filter="walking" role="tab">Walking</button>
+          <button type="button" data-filter="set" role="tab">Set</button>
+          <button type="button" data-filter="redrawn" role="tab">Redrawn</button>
+        </div>
+
+        <ul class="legs" id="legs">
+          <!-- legs inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-aspect" aria-label="Aspect of the leg">
+              <option value="up">Up</option>
+              <option value="across">Across</option>
+              <option value="back">Back</option>
+            </select>
+            <input id="add-gain" type="number" step="50" value="200" aria-label="Altitude change in feet" />
+            <input id="add-name" type="text" placeholder="Name the leg — what you can see the end of" maxlength="80" />
+            <select id="add-state" aria-label="State of the leg">
+              <option value="scouted">Scouted</option>
+              <option value="walking">Walking</option>
+              <option value="set">Set</option>
+              <option value="redrawn">Redrawn</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Cut the leg</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original trail</a>
+        </div>
+      </div>
+
+      <div class="legend">
+        <h3>The three aspects</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-up"></span><div><strong>Up.</strong> A steep leg. Short, hard, big gain. The push.</div></li>
+          <li><span class="legend-swatch swatch-across"></span><div><strong>Across.</strong> A long sideways traverse. Small gain. The bench you walk to clear the face.</div></li>
+          <li><span class="legend-swatch swatch-back"></span><div><strong>Back.</strong> A deliberate doubling back. You lose altitude so the next leg can go up.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who walks a switchback</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The engineer mid-migration</h3>
+          <p>Six months into a payments rewrite. Half the legs are read-replicas and shadow writes. The straight arrow lied to the planning doc in January. The trail tells the truth in May.</p>
+        </article>
+        <article>
+          <h3>The composer rewriting the second act</h3>
+          <p>An opera at the third draft. Four legs were across — translating one motif into the woodwinds. Two were back. One was a thousand feet of climb in a single morning.</p>
+        </article>
+        <article>
+          <h3>The carpenter re-roofing alone</h3>
+          <p>Twelve weekends, one farmhouse, no help. The crickets and the chimney flashing are across legs, slow and sideways. The first dry storm is the summit.</p>
+        </article>
+        <article>
+          <h3>The founder after a pivot</h3>
+          <p>The original arrow is gone. The trail is new and the bench is wider than the deck implied. Each leg is a customer call. The shape is starting to look like up.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="hold" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · winter 2026</p>
+        <h2>One email when Switchback opens.</h2>
+        <p class="hold-lede">A climb, a trail of legs, a profile that tells the truth. No streak. No arrow. No share card. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@somewhere.high" />
+          <button class="btn btn-primary" type="submit">Cut a leg</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first trails open. You can leave anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Switchback</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · a trail for the long climb</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#trail">Trail</a>
+      <a href="#hold">Hold</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
