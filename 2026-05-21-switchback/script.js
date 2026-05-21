@@ -65,9 +65,40 @@ const STATE_LABEL = {
 
 const STATE_ORDER = ['scouted', 'walking', 'set', 'redrawn'];
 
-// state held in memory for this session
-let legs = SEED.map(l => ({ ...l }));
-let project = 'An unnamed ridge · east Sangres · day 4 of about 5';
+const STORAGE_KEY = 'switchback.v1';
+const DEFAULT_PROJECT = 'An unnamed ridge · east Sangres · day 4 of about 5';
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || !Array.isArray(parsed.legs)) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ legs, project }));
+  } catch {
+    // quota or private mode — fail quietly, the session still works
+  }
+}
+
+function clearState() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch {
+    // ignore
+  }
+}
+
+const _saved = loadState();
+let legs = _saved ? _saved.legs.map(l => ({ ...l })) : SEED.map(l => ({ ...l }));
+let project = _saved && typeof _saved.project === 'string' ? _saved.project : DEFAULT_PROJECT;
 let activeFilter = 'all';
 
 // ---------- formatting ----------
@@ -254,6 +285,7 @@ function cycleState(n) {
   if (!leg) return;
   const i = STATE_ORDER.indexOf(leg.state);
   leg.state = STATE_ORDER[(i + 1) % STATE_ORDER.length];
+  saveState();
   renderAll();
 }
 
@@ -261,6 +293,7 @@ function removeLeg(n) {
   legs = legs.filter(l => l.n !== n);
   // renumber
   legs.forEach((l, i) => { l.n = i + 1; });
+  saveState();
   renderAll();
 }
 
@@ -274,6 +307,7 @@ function addLeg({ aspect, gain, name, state }) {
     name: name || 'Unnamed leg',
     note: '',
   });
+  saveState();
   renderAll();
 }
 
@@ -287,8 +321,9 @@ function setFilter(f) {
 
 function resetToSeed() {
   legs = SEED.map(l => ({ ...l }));
-  project = 'An unnamed ridge · east Sangres · day 4 of about 5';
+  project = DEFAULT_PROJECT;
   activeFilter = 'all';
+  clearState();
   document.querySelectorAll('#filters button').forEach(b => {
     b.classList.toggle('is-active', b.dataset.filter === 'all');
   });
@@ -342,6 +377,7 @@ function wire() {
     const v = proj.textContent.trim();
     project = v || project;
     proj.textContent = project;
+    saveState();
   });
   proj.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
