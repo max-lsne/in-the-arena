@@ -100,6 +100,9 @@ const _saved = loadState();
 let legs = _saved ? _saved.legs.map(l => ({ ...l })) : SEED.map(l => ({ ...l }));
 let project = _saved && typeof _saved.project === 'string' ? _saved.project : DEFAULT_PROJECT;
 let activeFilter = 'all';
+let selectedN = legs.length ? legs[0].n : null;
+
+const FILTER_BY_KEY = { '0': 'all', '1': 'scouted', '2': 'walking', '3': 'set', '4': 'redrawn' };
 
 // ---------- formatting ----------
 
@@ -246,7 +249,7 @@ function renderLegs() {
   }
 
   host.innerHTML = filtered.map(l => `
-    <li class="leg ${l.state === 'walking' ? 'is-current' : ''} ${l.state === 'redrawn' ? 'redrawn' : ''}" data-n="${l.n}">
+    <li class="leg ${l.state === 'walking' ? 'is-current' : ''} ${l.state === 'redrawn' ? 'redrawn' : ''} ${l.n === selectedN ? 'is-selected' : ''}" data-n="${l.n}">
       <span class="leg-num">${String(l.n).padStart(2, '0')}</span>
       <span class="leg-aspect ${l.aspect}">
         <span class="glyph" aria-hidden="true">${ASPECT_GLYPH[l.aspect]}</span>
@@ -323,6 +326,7 @@ function resetToSeed() {
   legs = SEED.map(l => ({ ...l }));
   project = DEFAULT_PROJECT;
   activeFilter = 'all';
+  selectedN = legs.length ? legs[0].n : null;
   clearState();
   document.querySelectorAll('#filters button').forEach(b => {
     b.classList.toggle('is-active', b.dataset.filter === 'all');
@@ -330,11 +334,65 @@ function resetToSeed() {
   renderAll();
 }
 
+function visibleLegs() {
+  return legs.filter(l => activeFilter === 'all' || l.state === activeFilter);
+}
+
+function selectByOffset(delta) {
+  const v = visibleLegs();
+  if (v.length === 0) return;
+  const idx = v.findIndex(l => l.n === selectedN);
+  const next = idx === -1
+    ? (delta > 0 ? 0 : v.length - 1)
+    : Math.max(0, Math.min(v.length - 1, idx + delta));
+  selectedN = v[next].n;
+  renderLegs();
+  scrollSelectedIntoView();
+}
+
+function scrollSelectedIntoView() {
+  const el = document.querySelector(`.leg[data-n="${selectedN}"]`);
+  if (el && el.scrollIntoView) el.scrollIntoView({ block: 'nearest' });
+}
+
+function nudgeGain(delta) {
+  const leg = legs.find(l => l.n === selectedN);
+  if (!leg) return;
+  leg.gain = Math.round((leg.gain + delta) / 10) * 10;
+  saveState();
+  renderAll();
+}
+
+function removeSelected() {
+  if (selectedN == null) return;
+  const v = visibleLegs();
+  const idx = v.findIndex(l => l.n === selectedN);
+  removeLeg(selectedN);
+  const v2 = visibleLegs();
+  if (v2.length === 0) {
+    selectedN = null;
+  } else {
+    selectedN = v2[Math.min(idx, v2.length - 1)].n;
+  }
+  renderLegs();
+}
+
+function cycleSelectedState() {
+  if (selectedN == null) return;
+  cycleState(selectedN);
+}
+
 // ---------- wiring ----------
 
 function wire() {
-  // cycle state on click
-  document.getElementById('legs').addEventListener('click', (e) => {
+  // cycle state on click; also select the row on any click within it
+  const legsHost = document.getElementById('legs');
+  legsHost.addEventListener('click', (e) => {
+    const row = e.target.closest('.leg');
+    if (row) {
+      selectedN = Number(row.dataset.n);
+      renderLegs();
+    }
     const t = e.target.closest('[data-action="cycle-state"]');
     if (!t) return;
     cycleState(Number(t.dataset.n));
@@ -402,6 +460,56 @@ function wire() {
       hold.reset();
     });
   }
+
+  // keyboard shortcuts — skip when typing in an input/contenteditable
+  document.addEventListener('keydown', (e) => {
+    const t = e.target;
+    const inField = t && (
+      t.tagName === 'INPUT' ||
+      t.tagName === 'TEXTAREA' ||
+      t.tagName === 'SELECT' ||
+      (t.isContentEditable === true)
+    );
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+    const k = e.key;
+
+    // N focuses the add-name field even from inside form-adjacent context
+    if (!inField && (k === 'n' || k === 'N')) {
+      e.preventDefault();
+      const n = document.getElementById('add-name');
+      if (n) n.focus();
+      return;
+    }
+
+    if (inField) return;
+
+    if (k === 'j' || k === 'J' || k === 'ArrowDown') {
+      e.preventDefault();
+      selectByOffset(1);
+    } else if (k === 'k' || k === 'K' || k === 'ArrowUp') {
+      e.preventDefault();
+      selectByOffset(-1);
+    } else if (k === 'Enter') {
+      e.preventDefault();
+      cycleSelectedState();
+    } else if (k === 'Delete' || k === 'Backspace') {
+      e.preventDefault();
+      removeSelected();
+    } else if (k === '[') {
+      e.preventDefault();
+      nudgeGain(-50);
+    } else if (k === ']') {
+      e.preventDefault();
+      nudgeGain(+50);
+    } else if (k === 'r' || k === 'R') {
+      e.preventDefault();
+      resetToSeed();
+    } else if (FILTER_BY_KEY[k] !== undefined) {
+      e.preventDefault();
+      setFilter(FILTER_BY_KEY[k]);
+    }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {

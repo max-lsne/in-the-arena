@@ -345,6 +345,11 @@ main, header, footer { position: relative; z-index: 1; }
 }
 .leg:hover { background: var(--bone-cool); border-color: var(--line); }
 .leg.is-current { background: var(--bone-cool); border-color: var(--pine-soft); box-shadow: inset 2px 0 0 var(--alpenglow); }
+.leg.is-selected {
+  border-color: var(--pine);
+  box-shadow: inset 3px 0 0 var(--pine), 0 1px 0 rgba(24,27,30,0.04);
+  background: var(--bone-cool);
+}
 .leg-num {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11.5px; color: var(--granite); letter-spacing: 0.06em;
