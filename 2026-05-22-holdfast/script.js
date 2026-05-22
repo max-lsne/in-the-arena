@@ -107,6 +107,8 @@ let project = _saved && typeof _saved.project === 'string' ? _saved.project : DE
 let activeFilter = 'all';
 let selectedN = grips.length ? grips[0].n : null;
 
+const FILTER_BY_KEY = { '0': 'all', '1': 'drift', '2': 'hold', '3': 'anchor', '4': 'loosed' };
+
 // ---------- formatting ----------
 
 function fmtDays(n) {
@@ -322,6 +324,54 @@ function setFilter(f) {
   renderGrips();
 }
 
+function visibleGrips() {
+  return grips.filter(g => activeFilter === 'all' || g.state === activeFilter);
+}
+
+function selectByOffset(delta) {
+  const v = visibleGrips();
+  if (v.length === 0) return;
+  const idx = v.findIndex(g => g.n === selectedN);
+  const next = idx === -1
+    ? (delta > 0 ? 0 : v.length - 1)
+    : Math.max(0, Math.min(v.length - 1, idx + delta));
+  selectedN = v[next].n;
+  renderGrips();
+  scrollSelectedIntoView();
+}
+
+function scrollSelectedIntoView() {
+  const el = document.querySelector(`.grip[data-n="${selectedN}"]`);
+  if (el && el.scrollIntoView) el.scrollIntoView({ block: 'nearest' });
+}
+
+function nudgeDays(delta) {
+  const grip = grips.find(g => g.n === selectedN);
+  if (!grip) return;
+  grip.days = Math.max(0, (grip.days || 0) + delta);
+  saveState();
+  renderAll();
+}
+
+function removeSelected() {
+  if (selectedN == null) return;
+  const v = visibleGrips();
+  const idx = v.findIndex(g => g.n === selectedN);
+  removeGrip(selectedN);
+  const v2 = visibleGrips();
+  if (v2.length === 0) {
+    selectedN = null;
+  } else {
+    selectedN = v2[Math.min(idx, v2.length - 1)].n;
+  }
+  renderGrips();
+}
+
+function cycleSelectedState() {
+  if (selectedN == null) return;
+  cycleState(selectedN);
+}
+
 function resetToSeed() {
   grips = SEED.map(g => ({ ...g }));
   project = DEFAULT_PROJECT;
@@ -407,6 +457,55 @@ function wire() {
       hold.reset();
     });
   }
+
+  // keyboard shortcuts — skip when typing in an input/contenteditable
+  document.addEventListener('keydown', (e) => {
+    const t = e.target;
+    const inField = t && (
+      t.tagName === 'INPUT' ||
+      t.tagName === 'TEXTAREA' ||
+      t.tagName === 'SELECT' ||
+      (t.isContentEditable === true)
+    );
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+    const k = e.key;
+
+    if (!inField && (k === 'n' || k === 'N')) {
+      e.preventDefault();
+      const n = document.getElementById('add-name');
+      if (n) n.focus();
+      return;
+    }
+
+    if (inField) return;
+
+    if (k === 'j' || k === 'J' || k === 'ArrowDown') {
+      e.preventDefault();
+      selectByOffset(1);
+    } else if (k === 'k' || k === 'K' || k === 'ArrowUp') {
+      e.preventDefault();
+      selectByOffset(-1);
+    } else if (k === 'Enter') {
+      e.preventDefault();
+      cycleSelectedState();
+    } else if (k === 'Delete' || k === 'Backspace') {
+      e.preventDefault();
+      removeSelected();
+    } else if (k === '[') {
+      e.preventDefault();
+      nudgeDays(-1);
+    } else if (k === ']') {
+      e.preventDefault();
+      nudgeDays(+1);
+    } else if (k === 'r' || k === 'R') {
+      e.preventDefault();
+      resetToSeed();
+    } else if (FILTER_BY_KEY[k] !== undefined) {
+      e.preventDefault();
+      setFilter(FILTER_BY_KEY[k]);
+    }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
