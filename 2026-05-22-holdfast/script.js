@@ -70,8 +70,40 @@ const TIDE_COLOR = {
   'tide-out': '#1d4a45',
 };
 
-let grips = SEED.map(g => ({ ...g }));
-let project = 'A small kelp bed · spring 2026 · the slow tides';
+const STORAGE_KEY = 'holdfast.v1';
+const DEFAULT_PROJECT = 'A small kelp bed · spring 2026 · the slow tides';
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || !Array.isArray(parsed.grips)) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ grips, project }));
+  } catch {
+    // quota or private mode — fail quietly, the session still works
+  }
+}
+
+function clearState() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch {
+    // ignore
+  }
+}
+
+const _saved = loadState();
+let grips = _saved ? _saved.grips.map(g => ({ ...g })) : SEED.map(g => ({ ...g }));
+let project = _saved && typeof _saved.project === 'string' ? _saved.project : DEFAULT_PROJECT;
 let activeFilter = 'all';
 let selectedN = grips.length ? grips[0].n : null;
 
@@ -257,12 +289,14 @@ function cycleState(n) {
   if (!grip) return;
   const i = STATE_ORDER.indexOf(grip.state);
   grip.state = STATE_ORDER[(i + 1) % STATE_ORDER.length];
+  saveState();
   renderAll();
 }
 
 function removeGrip(n) {
   grips = grips.filter(g => g.n !== n);
   grips.forEach((g, i) => { g.n = i + 1; });
+  saveState();
   renderAll();
 }
 
@@ -276,6 +310,7 @@ function addGrip({ tide, days, name, state }) {
     name: name || 'Unnamed grip',
     note: '',
   });
+  saveState();
   renderAll();
 }
 
@@ -289,9 +324,10 @@ function setFilter(f) {
 
 function resetToSeed() {
   grips = SEED.map(g => ({ ...g }));
-  project = 'A small kelp bed · spring 2026 · the slow tides';
+  project = DEFAULT_PROJECT;
   activeFilter = 'all';
   selectedN = grips.length ? grips[0].n : null;
+  clearState();
   document.querySelectorAll('#filters button').forEach(b => {
     b.classList.toggle('is-active', b.dataset.filter === 'all');
   });
@@ -348,6 +384,7 @@ function wire() {
     const v = proj.textContent.trim();
     project = v || project;
     proj.textContent = project;
+    saveState();
   });
   proj.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
