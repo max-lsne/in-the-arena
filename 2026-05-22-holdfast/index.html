@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Holdfast — the small grip that keeps the wave from carrying you off</title>
+  <meta name="description" content="Holdfast is a small page for the few daily practices that grip the rock. Not habits in the gamified sense — just the grip that keeps the tide from carrying you off. No streaks. No notifications. The grip is the work." />
+  <meta name="color-scheme" content="light" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <!-- the rock -->
+          <path d="M4 26 Q10 22 16 23 Q22 24 28 22 L28 30 L4 30 Z"
+                fill="currentColor" opacity="0.18" />
+          <!-- the holdfast: a starburst of small stalks -->
+          <g stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none">
+            <path d="M16 23 L13 19" />
+            <path d="M16 23 L16 17" />
+            <path d="M16 23 L19 19" />
+            <path d="M16 23 L11 21" />
+            <path d="M16 23 L21 21" />
+          </g>
+          <!-- the kelp blade rising -->
+          <path d="M16 17 Q17 12 15 8 Q13 5 16 2"
+                stroke="currentColor" stroke-width="2.2" fill="none"
+                stroke-linecap="round" />
+        </svg>
+      </span>
+      <span>Holdfast</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#bed">Your bed</a>
+      <a href="#who">Who keeps a grip</a>
+      <a href="#hold" class="nav-cta">Cut a grip</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">A small grip against the tide</p>
+        <h1>
+          The grip is<br />
+          <em>the work.</em>
+        </h1>
+        <p class="lede">
+          Kelp does not have roots. It has a holdfast — a small,
+          patient grip on the bedrock. The grip does not feed the
+          kelp. It only keeps the wave from carrying it away.
+          Holdfast is a small page for the few practices that do
+          that for you. The ones that hold when the day fills up
+          with everything else.
+        </p>
+        <div class="hero-cta">
+          <a href="#bed" class="btn btn-primary">See a bed</a>
+          <a href="#hold" class="btn btn-ghost">Cut a grip</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One grip at a time. No streak. No badge. No notification.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-bed">
+          <svg viewBox="0 0 400 320" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="seaSky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#a9c7c3" stop-opacity="0.22" />
+                <stop offset="60%" stop-color="#7eaaa6" stop-opacity="0.12" />
+                <stop offset="100%" stop-color="#386963" stop-opacity="0" />
+              </linearGradient>
+              <linearGradient id="seaRock" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#4a5560" stop-opacity="0.18" />
+                <stop offset="100%" stop-color="#4a5560" stop-opacity="0.34" />
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="400" height="320" fill="url(#seaSky)" />
+
+            <!-- the tide line: a soft horizontal wave near the top -->
+            <path d="M0 52 Q60 44 120 52 T240 52 T360 50 T400 52"
+                  stroke="#7eaaa6" stroke-width="1.2" fill="none" opacity="0.7" />
+            <path d="M0 64 Q60 56 120 64 T240 64 T360 62 T400 64"
+                  stroke="#7eaaa6" stroke-width="0.9" fill="none" opacity="0.4" />
+
+            <!-- the bedrock floor -->
+            <path d="M0 240 Q40 232 80 238 Q140 246 200 234 Q260 222 320 238 Q360 246 400 232 L400 320 L0 320 Z"
+                  fill="url(#seaRock)" />
+            <path d="M0 240 Q40 232 80 238 Q140 246 200 234 Q260 222 320 238 Q360 246 400 232"
+                  stroke="#4a5560" stroke-width="1.2" fill="none" opacity="0.5" />
+
+            <!-- the holdfasts and kelp blades -->
+            <!-- kelp 1: long and curving, deep set -->
+            <g class="hero-kelp hero-kelp-1">
+              <g class="hero-kelp-grip">
+                <path d="M68 238 L60 232" stroke="#1d4a45" stroke-width="1.4" fill="none" stroke-linecap="round" />
+                <path d="M68 238 L66 230" stroke="#1d4a45" stroke-width="1.4" fill="none" stroke-linecap="round" />
+                <path d="M68 238 L72 230" stroke="#1d4a45" stroke-width="1.4" fill="none" stroke-linecap="round" />
+                <path d="M68 238 L78 232" stroke="#1d4a45" stroke-width="1.4" fill="none" stroke-linecap="round" />
+                <path d="M68 238 L82 236" stroke="#1d4a45" stroke-width="1.4" fill="none" stroke-linecap="round" />
+              </g>
+              <path class="hero-blade"
+                    d="M68 230 Q60 200 70 168 Q80 134 64 100 Q52 76 70 56"
+                    stroke="#1d4a45" stroke-width="2.4" fill="none"
+                    stroke-linecap="round" />
+            </g>
+
+            <!-- kelp 2: medium, mid-curve -->
+            <g class="hero-kelp hero-kelp-2">
+              <g class="hero-kelp-grip">
+                <path d="M168 234 L160 228" stroke="#1d4a45" stroke-width="1.4" fill="none" stroke-linecap="round" />
+                <path d="M168 234 L168 226" stroke="#1d4a45" stroke-width="1.4" fill="none" stroke-linecap="round" />
+                <path d="M168 234 L176 228" stroke="#1d4a45" stroke-width="1.4" fill="none" stroke-linecap="round" />
+                <path d="M168 234 L156 232" stroke="#1d4a45" stroke-width="1.4" fill="none" stroke-linecap="round" />
+                <path d="M168 234 L180 232" stroke="#1d4a45" stroke-width="1.4" fill="none" stroke-linecap="round" />
+              </g>
+              <path class="hero-blade"
+                    d="M168 226 Q176 196 162 168 Q150 142 170 116 Q186 96 174 70"
+                    stroke="#1d4a45" stroke-width="2.4" fill="none"
+                    stroke-linecap="round" />
+            </g>
+
+            <!-- kelp 3: short and just set -->
+            <g class="hero-kelp hero-kelp-3">
+              <g class="hero-kelp-grip">
+                <path d="M256 232 L252 226" stroke="#386963" stroke-width="1.3" fill="none" stroke-linecap="round" />
+                <path d="M256 232 L256 224" stroke="#386963" stroke-width="1.3" fill="none" stroke-linecap="round" />
+                <path d="M256 232 L262 226" stroke="#386963" stroke-width="1.3" fill="none" stroke-linecap="round" />
+                <path d="M256 232 L246 230" stroke="#386963" stroke-width="1.3" fill="none" stroke-linecap="round" />
+                <path d="M256 232 L266 230" stroke="#386963" stroke-width="1.3" fill="none" stroke-linecap="round" />
+              </g>
+              <path class="hero-blade"
+                    d="M256 224 Q262 200 250 174 Q244 154 256 134"
+                    stroke="#386963" stroke-width="2.2" fill="none"
+                    stroke-linecap="round" />
+            </g>
+
+            <!-- kelp 4: long, on the right, the steady one -->
+            <g class="hero-kelp hero-kelp-4">
+              <g class="hero-kelp-grip">
+                <path d="M332 238 L324 232" stroke="#1d4a45" stroke-width="1.4" fill="none" stroke-linecap="round" />
+                <path d="M332 238 L332 230" stroke="#1d4a45" stroke-width="1.4" fill="none" stroke-linecap="round" />
+                <path d="M332 238 L340 232" stroke="#1d4a45" stroke-width="1.4" fill="none" stroke-linecap="round" />
+                <path d="M332 238 L318 236" stroke="#1d4a45" stroke-width="1.4" fill="none" stroke-linecap="round" />
+                <path d="M332 238 L346 236" stroke="#1d4a45" stroke-width="1.4" fill="none" stroke-linecap="round" />
+              </g>
+              <path class="hero-blade"
+                    d="M332 230 Q322 200 336 170 Q346 142 330 110 Q318 88 336 64"
+                    stroke="#1d4a45" stroke-width="2.4" fill="none"
+                    stroke-linecap="round" />
+            </g>
+
+            <!-- a drifting frond, loosed -->
+            <path class="hero-loose"
+                  d="M120 120 Q140 108 160 116 Q180 124 200 110"
+                  stroke="#c89557" stroke-width="2" fill="none"
+                  stroke-linecap="round" opacity="0.65" />
+          </svg>
+        </div>
+        <span class="hero-tick hero-tick-1">tide line</span>
+        <span class="hero-tick hero-tick-2">water column</span>
+        <span class="hero-tick hero-tick-3">bedrock</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>Habits<br /><em>are for arrows.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            Most habit apps want a streak. The streak is an arrow:
+            a long unbroken line going up. The arrow does not know
+            about the week the parent was sick, the month after
+            the move, the morning the kettle was empty and you
+            wrote the page anyway with a glass of water. The
+            streak punishes you for the day you almost did not
+            hold. The streak is the wrong shape.
+          </p>
+          <p>
+            A holdfast is the right shape. It does not grow up.
+            It does not record a streak. It only grips the rock
+            when the wave comes. Some of yours have gripped for
+            years and you barely remember starting. Some are new
+            and slip half the time. Some you have loosed and it
+            was the right thing. The bed is the practice.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Name a grip</h3>
+          <p>One small thing you mean to do most days. Small enough that you could do it on the worst day. Not a goal. A grip.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Pick a tide</h3>
+          <p>Tide-in for the morning grip. Slack for the midday one. Tide-out for the grip that holds the night.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Mark it when it grips</h3>
+          <p>One tap. No log entry. No mood. If it didn't grip today, it didn't. The bed is honest. So are you.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Loose what slips</h3>
+          <p>If a grip cannot hold, take it off the rock. The bed reads truer when the loosed grips are loosed on purpose.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="bed" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A bed, mid-tide</h2>
+        <p>A small kelp bed of twelve grips — a fictional one, kept by no one in particular through the slow spring of 2026. Some have held for months. Some are new. One was loosed in March, on purpose. Mark a grip, loose one, cut a new one — the bed redraws in your browser. Nothing leaves.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">Bed</p>
+            <p class="chart-project" id="chart-project" title="Click to rename">A small kelp bed · spring 2026 · the slow tides</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Days held across the grips in this bed">
+          <p class="profile-axis-label top">deep set</p>
+          <p class="profile-axis-label bot">surface</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the grips">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="drift" role="tab">Drift</button>
+          <button type="button" data-filter="hold" role="tab">Hold</button>
+          <button type="button" data-filter="anchor" role="tab">Anchor</button>
+          <button type="button" data-filter="loosed" role="tab">Loosed</button>
+        </div>
+
+        <ul class="legs" id="grips">
+          <!-- grips inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-tide" aria-label="Tide of the grip">
+              <option value="tide-in">Tide-in</option>
+              <option value="slack">Slack</option>
+              <option value="tide-out">Tide-out</option>
+            </select>
+            <input id="add-days" type="number" step="1" min="0" value="0" aria-label="Days the grip has held" />
+            <input id="add-name" type="text" placeholder="Name the grip — small enough for the worst day" maxlength="90" />
+            <select id="add-state" aria-label="State of the grip">
+              <option value="drift">Drift</option>
+              <option value="hold">Hold</option>
+              <option value="anchor">Anchor</option>
+              <option value="loosed">Loosed</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Cut the grip</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original bed</a>
+        </div>
+      </div>
+
+      <div class="legend">
+        <h3>The three tides</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-tide-in"></span><div><strong>Tide-in.</strong> The morning grip. The first thing, before the day fills up.</div></li>
+          <li><span class="legend-swatch swatch-slack"></span><div><strong>Slack.</strong> The midday grip. A small grip when the water sits still and the work is hardest.</div></li>
+          <li><span class="legend-swatch swatch-tide-out"></span><div><strong>Tide-out.</strong> The evening grip. The one that holds through the night and into tomorrow.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who keeps a grip</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The night nurse, two years in</h3>
+          <p>Three tide-out grips and one tide-in. The tide-in is a cup of hot water before the curtain goes up. The streak app stopped working in week six of the rotation. The bed has held for ninety weeks.</p>
+        </article>
+        <article>
+          <h3>The novelist on the third book</h3>
+          <p>One slack grip: four hundred words before the post arrives. Some days the four hundred are bad and stay bad. The grip is not for good words. The grip is for sitting down.</p>
+        </article>
+        <article>
+          <h3>The father of two under five</h3>
+          <p>Loosed seven grips in a year. Kept three. The kept ones are: the kettle, the lane, the candle. The loosed ones were the right shape for a different season.</p>
+        </article>
+        <article>
+          <h3>The dancer after the injury</h3>
+          <p>Tide-in is twenty minutes on the floor — not the studio floor, the kitchen floor. Tide-out is the same twenty minutes. The middle of the day belongs to the physio. The bed reads like a tide chart.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="hold" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · winter 2026</p>
+        <h2>One email when Holdfast opens.</h2>
+        <p class="hold-lede">A bed, a few grips, a page that reads as honest as the morning. No streak. No badge. No share card. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@somewhere.tidal" />
+          <button class="btn btn-primary" type="submit">Cut a grip</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first beds open. You can leave anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Holdfast</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · a small grip against the tide</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#bed">Bed</a>
+      <a href="#hold">Hold</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
