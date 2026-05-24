@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keystone — the one stone that holds the arch up</title>
+  <meta name="description" content="Keystone is a small page for the one task a week is built around. Not a task list. One stone, named first, set last, with a few voussoirs leaning against it." />
+  <meta name="theme-color" content="#faf6ec" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#1f3a5f" media="(prefers-color-scheme: dark)" />
+  <meta name="color-scheme" content="light" />
+  <meta property="og:title" content="Keystone — the one stone is the week" />
+  <meta property="og:description" content="A small page for the one task a week is built around. No backlog. No board. No share card. Just the keystone." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23faf6ec'/%3E%3Cpath d='M4 28 L4 18 Q4 8 16 8 Q28 8 28 18 L28 28 Z' fill='%231f3a5f' opacity='0.18'/%3E%3Cpath d='M5.5 18 L11 12.6 M26.5 18 L21 12.6' stroke='%231f3a5f' stroke-width='0.9' fill='none' opacity='0.5'/%3E%3Cpath d='M12.5 8.6 L19.5 8.6 L21 12.6 L11 12.6 Z' fill='%23c89a3d' stroke='%23a37c2b' stroke-width='0.6'/%3E%3Ccircle cx='16' cy='4' r='1.4' fill='%231f3a5f' opacity='0.7'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <!-- the arch silhouette -->
+          <path d="M4 28 L4 18 Q4 8 16 8 Q28 8 28 18 L28 28 Z"
+                fill="currentColor" opacity="0.14" />
+          <!-- the keystone, set at the crown -->
+          <path d="M12.5 8.6 L19.5 8.6 L21 12.6 L11 12.6 Z"
+                fill="currentColor" opacity="0.92" />
+          <!-- the mortar lines on either side -->
+          <path d="M5.5 18 L11 12.6 M26.5 18 L21 12.6"
+                stroke="currentColor" stroke-width="0.9"
+                fill="none" opacity="0.4" />
+        </svg>
+      </span>
+      <span>Keystone</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#arch">Your arch</a>
+      <a href="#who">Who sets a keystone</a>
+      <a href="#set" class="nav-cta">Set a stone</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">A small page for the one stone</p>
+        <h1>
+          The keystone is<br />
+          <em>the week.</em>
+        </h1>
+        <p class="lede">
+          An arch is not held up by the bottom stones. It is held
+          up by the keystone — the wedge at the top, set last,
+          that locks the curve into place. Most weeks have one
+          stone like that. Keystone is a page that asks for it,
+          and lets the rest of the work be what it is.
+        </p>
+        <div class="hero-cta">
+          <a href="#arch" class="btn btn-primary">See an arch</a>
+          <a href="#set" class="btn btn-ghost">Set a stone</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One stone at a time. No backlog. No board. No badge.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-arch">
+          <svg viewBox="0 0 420 320" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="archSky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#e7d9be" stop-opacity="0.25" />
+                <stop offset="60%" stop-color="#d4b890" stop-opacity="0.10" />
+                <stop offset="100%" stop-color="#8a7e6e" stop-opacity="0" />
+              </linearGradient>
+              <linearGradient id="archStone" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#d4b890" stop-opacity="0.7" />
+                <stop offset="100%" stop-color="#8a7e6e" stop-opacity="0.85" />
+              </linearGradient>
+              <linearGradient id="archKey" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#d8b35a" stop-opacity="0.95" />
+                <stop offset="100%" stop-color="#c89a3d" stop-opacity="1" />
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="420" height="320" fill="url(#archSky)" />
+
+            <!-- the ground line -->
+            <path d="M0 274 L420 274" stroke="#8a7e6e"
+                  stroke-width="1" fill="none" opacity="0.5" />
+
+            <!-- the arch: nine stones around a semicircle -->
+            <!-- springer left -->
+            <path d="M40 274 L40 232 L78 232 L72 274 Z"
+                  fill="url(#archStone)"
+                  stroke="#5e564a" stroke-width="0.7" />
+            <!-- voussoir 2 -->
+            <path d="M78 232 L40 232 L52 190 L92 196 Z"
+                  fill="url(#archStone)"
+                  stroke="#5e564a" stroke-width="0.7" />
+            <!-- voussoir 3 -->
+            <path d="M92 196 L52 190 L78 154 L114 168 Z"
+                  fill="url(#archStone)"
+                  stroke="#5e564a" stroke-width="0.7" />
+            <!-- voussoir 4 (left upper) -->
+            <path d="M114 168 L78 154 L120 124 L146 144 Z"
+                  fill="url(#archStone)"
+                  stroke="#5e564a" stroke-width="0.7" />
+            <!-- voussoir left of keystone -->
+            <path d="M146 144 L120 124 L172 108 L188 132 Z"
+                  fill="url(#archStone)"
+                  stroke="#5e564a" stroke-width="0.7" />
+            <!-- THE KEYSTONE -->
+            <path d="M188 132 L172 108 L248 108 L232 132 Z"
+                  fill="url(#archKey)"
+                  stroke="#7a5a1f" stroke-width="0.9" />
+            <!-- voussoir right of keystone -->
+            <path d="M232 132 L248 108 L300 124 L274 144 Z"
+                  fill="url(#archStone)"
+                  stroke="#5e564a" stroke-width="0.7" />
+            <!-- voussoir right upper -->
+            <path d="M274 144 L300 124 L342 154 L306 168 Z"
+                  fill="url(#archStone)"
+                  stroke="#5e564a" stroke-width="0.7" />
+            <!-- voussoir right mid -->
+            <path d="M306 168 L342 154 L368 190 L328 196 Z"
+                  fill="url(#archStone)"
+                  stroke="#5e564a" stroke-width="0.7" />
+            <!-- springer right -->
+            <path d="M328 196 L368 190 L380 232 L342 232 Z"
+                  fill="url(#archStone)"
+                  stroke="#5e564a" stroke-width="0.7" />
+            <!-- right base -->
+            <path d="M342 232 L380 232 L380 274 L348 274 Z"
+                  fill="url(#archStone)"
+                  stroke="#5e564a" stroke-width="0.7" />
+
+            <!-- the plumbline through the keystone -->
+            <line x1="210" y1="80" x2="210" y2="280"
+                  stroke="#1f3a5f" stroke-width="0.7"
+                  stroke-dasharray="2 4" opacity="0.5" />
+            <circle cx="210" cy="80" r="2.4" fill="#1f3a5f" opacity="0.7" />
+          </svg>
+        </div>
+        <span class="hero-tick hero-tick-1">the keystone</span>
+        <span class="hero-tick hero-tick-2">voussoirs</span>
+        <span class="hero-tick hero-tick-3">springers</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>Task lists<br /><em>are not arches.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            A list is a heap. Forty things, all the same shape,
+            all asking the same way. At the end of the week the
+            ones you did look like the ones you didn't. The list
+            does not know which one was the keystone. It does not
+            even know there was one. Most weeks there is one.
+          </p>
+          <p>
+            An arch is a shape. The keystone goes in last but is
+            named first — the whole arch is built to receive it.
+            The voussoirs lean against it. The springers begin
+            the curve. When the keystone sets, the arch stands,
+            and the rest of the stones are honest about what they
+            were doing the whole time.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Name the keystone</h3>
+          <p>One task this week. The one that, if it lands, makes the week the week. Name it before you name anything else.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Cut the voussoirs</h3>
+          <p>The supporting stones. A few — five, maybe seven. Each one leans against the keystone or against another voussoir.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Set them as they hold</h3>
+          <p>One tap. Cut becomes Set when a stone is in place. Set becomes Placed when the mortar is dry. The arch redraws.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Remove what does not fit</h3>
+          <p>If a stone cannot hold the curve, pull it. The arch reads truer when the removed stones are removed on purpose.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="arch" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">An arch, mid-week</h2>
+        <p>A small arch of nine stones for an imaginary week in the late spring of 2026 — a thirty-minute talk to the team about the year so far, and the voussoirs that lean against it. Set a stone, remove one, cut a new one — the arch redraws in your browser. Nothing leaves.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">Arch</p>
+            <p class="chart-project" id="chart-project" title="Click to rename">The May talk · week of the 18th · late spring 2026</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="The arch of stones, left springer to right springer">
+          <p class="profile-axis-label top">crown</p>
+          <p class="profile-axis-label bot">ground</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the stones">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="cut" role="tab">Cut</button>
+          <button type="button" data-filter="set" role="tab">Set</button>
+          <button type="button" data-filter="placed" role="tab">Placed</button>
+          <button type="button" data-filter="removed" role="tab">Removed</button>
+        </div>
+
+        <ul class="legs" id="stones">
+          <!-- stones inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-position" aria-label="Position of the stone">
+              <option value="springer">Springer</option>
+              <option value="voussoir">Voussoir</option>
+              <option value="keystone">Keystone</option>
+            </select>
+            <input id="add-day" type="text" maxlength="3" placeholder="day" value="mon" aria-label="Day of the week" />
+            <input id="add-name" type="text" placeholder="Name the stone — what it does for the arch" maxlength="90" />
+            <select id="add-state" aria-label="State of the stone">
+              <option value="cut">Cut</option>
+              <option value="set">Set</option>
+              <option value="placed">Placed</option>
+              <option value="removed">Removed</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Cut the stone</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original arch</a>
+        </div>
+
+        <p class="kbd-help">
+          <strong>Keys:</strong>
+          <kbd>J</kbd>/<kbd>K</kbd> move ·
+          <kbd>Enter</kbd> change state ·
+          <kbd>Del</kbd> remove ·
+          <kbd>N</kbd> add ·
+          <kbd>0</kbd>&ndash;<kbd>4</kbd> filter ·
+          <kbd>[</kbd>/<kbd>]</kbd> shift day ·
+          <kbd>R</kbd> reset.
+        </p>
+      </div>
+
+      <div class="legend">
+        <h3>The three positions</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-keystone"></span><div><strong>Keystone.</strong> The one stone the week is built around. Only one. Set last.</div></li>
+          <li><span class="legend-swatch swatch-voussoir"></span><div><strong>Voussoir.</strong> A supporting stone. Leans against the keystone or against another voussoir.</div></li>
+          <li><span class="legend-swatch swatch-springer"></span><div><strong>Springer.</strong> A stone at the foot of the arch. Small. The thing that lets the week start standing.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who sets a keystone</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The engineering lead in a quiet quarter</h3>
+          <p>One keystone a week, every week of the quarter. Five quarters in. The keystones are not the biggest tickets — they are the ones the team will read in the changelog and feel the room shift on a Tuesday.</p>
+        </article>
+        <article>
+          <h3>The thesis writer in year four</h3>
+          <p>The keystone is a page or a paragraph. Some weeks it is a sentence. The voussoirs are reading and pacing the hallway. The springer is opening the file at the same time of day.</p>
+        </article>
+        <article>
+          <h3>The founder before the raise</h3>
+          <p>Six weeks of the same keystone: a story that fits in a single breath. The voussoirs were everything else — the model, the deck, the back-channel — and they all leaned against the breath.</p>
+        </article>
+        <article>
+          <h3>The teacher in the last month of term</h3>
+          <p>The keystone is the one lesson the class will remember in July. The voussoirs are the four lessons that prepare it. The arch closes the week before the long break.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="set" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · summer 2026</p>
+        <h2>One email when Keystone opens.</h2>
+        <p class="hold-lede">An arch, a few stones, a page that reads as honest as a Monday. No backlog. No board. No share card. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@somewhere.built" />
+          <button class="btn btn-primary" type="submit">Set the stone</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first arches open. You can leave anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Keystone</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · the one stone that holds the arch up</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#arch">Arch</a>
+      <a href="#set">Set</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
