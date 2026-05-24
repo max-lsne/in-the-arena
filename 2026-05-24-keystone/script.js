@@ -99,6 +99,8 @@ let project = _saved && typeof _saved.project === 'string' ? _saved.project : DE
 let activeFilter = 'all';
 let selectedN = stones.length ? stones[0].n : null;
 
+const FILTER_BY_KEY = { '0': 'all', '1': 'cut', '2': 'set', '3': 'placed', '4': 'removed' };
+
 // ---------- formatting ----------
 
 function normalizeDay(d) {
@@ -348,6 +350,60 @@ function setFilter(f) {
   renderStones();
 }
 
+function visibleStones() {
+  return stones.filter(s => activeFilter === 'all' || s.state === activeFilter);
+}
+
+function selectByOffset(delta) {
+  const v = visibleStones();
+  if (v.length === 0) return;
+  const idx = v.findIndex(s => s.n === selectedN);
+  const next = idx === -1
+    ? (delta > 0 ? 0 : v.length - 1)
+    : Math.max(0, Math.min(v.length - 1, idx + delta));
+  selectedN = v[next].n;
+  renderStones();
+  scrollSelectedIntoView();
+}
+
+function scrollSelectedIntoView() {
+  const el = document.querySelector(`.stone[data-n="${selectedN}"]`);
+  if (el && el.scrollIntoView) el.scrollIntoView({ block: 'nearest' });
+}
+
+function shiftDay(delta) {
+  const stone = stones.find(s => s.n === selectedN);
+  if (!stone) return;
+  const i = dayIndex(stone.day);
+  const next = Math.max(0, Math.min(DAY_ORDER.length - 1, i + delta));
+  stone.day = DAY_ORDER[next];
+  stones.sort((a, b) => dayIndex(a.day) - dayIndex(b.day));
+  stones.forEach((s, j) => { s.n = j + 1; });
+  // selected stone keeps its identity by name match isn't reliable; track by reference instead
+  selectedN = stones.indexOf(stone) + 1;
+  saveState();
+  renderAll();
+}
+
+function removeSelected() {
+  if (selectedN == null) return;
+  const v = visibleStones();
+  const idx = v.findIndex(s => s.n === selectedN);
+  removeStone(selectedN);
+  const v2 = visibleStones();
+  if (v2.length === 0) {
+    selectedN = null;
+  } else {
+    selectedN = v2[Math.min(idx, v2.length - 1)].n;
+  }
+  renderStones();
+}
+
+function cycleSelectedState() {
+  if (selectedN == null) return;
+  cycleState(selectedN);
+}
+
 // ---------- wiring ----------
 
 function wire() {
@@ -423,6 +479,55 @@ function wire() {
       hold.reset();
     });
   }
+
+  // keyboard shortcuts — skip when typing in an input/contenteditable
+  document.addEventListener('keydown', (e) => {
+    const t = e.target;
+    const inField = t && (
+      t.tagName === 'INPUT' ||
+      t.tagName === 'TEXTAREA' ||
+      t.tagName === 'SELECT' ||
+      (t.isContentEditable === true)
+    );
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+    const k = e.key;
+
+    if (!inField && (k === 'n' || k === 'N')) {
+      e.preventDefault();
+      const n = document.getElementById('add-name');
+      if (n) n.focus();
+      return;
+    }
+
+    if (inField) return;
+
+    if (k === 'j' || k === 'J' || k === 'ArrowDown') {
+      e.preventDefault();
+      selectByOffset(1);
+    } else if (k === 'k' || k === 'K' || k === 'ArrowUp') {
+      e.preventDefault();
+      selectByOffset(-1);
+    } else if (k === 'Enter') {
+      e.preventDefault();
+      cycleSelectedState();
+    } else if (k === 'Delete' || k === 'Backspace') {
+      e.preventDefault();
+      removeSelected();
+    } else if (k === '[') {
+      e.preventDefault();
+      shiftDay(-1);
+    } else if (k === ']') {
+      e.preventDefault();
+      shiftDay(+1);
+    } else if (k === 'r' || k === 'R') {
+      e.preventDefault();
+      resetToSeed();
+    } else if (FILTER_BY_KEY[k] !== undefined) {
+      e.preventDefault();
+      setFilter(FILTER_BY_KEY[k]);
+    }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
