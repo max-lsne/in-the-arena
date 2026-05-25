@@ -62,10 +62,40 @@ const POS_COLOR = {
 
 const DAY_ORDER = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
+const STORAGE_KEY = 'ridgeline.v1';
 const DEFAULT_PROJECT = 'The June launch · last week of May 2026';
 
-let crossings = SEED.map(c => ({ ...c }));
-let project = DEFAULT_PROJECT;
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || !Array.isArray(parsed.crossings)) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ crossings, project }));
+  } catch {
+    // quota or private mode — fail quietly, the session still works
+  }
+}
+
+function clearState() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch {
+    // ignore
+  }
+}
+
+const _saved = loadState();
+let crossings = _saved ? _saved.crossings.map(c => ({ ...c })) : SEED.map(c => ({ ...c }));
+let project = _saved && typeof _saved.project === 'string' ? _saved.project : DEFAULT_PROJECT;
 let activeFilter = 'all';
 
 // ---------- formatting ----------
@@ -263,12 +293,14 @@ function cycleState(n) {
   if (!c) return;
   const i = STATE_ORDER.indexOf(c.state);
   c.state = STATE_ORDER[(i + 1) % STATE_ORDER.length];
+  saveState();
   renderAll();
 }
 
 function removeCrossing(n) {
   crossings = crossings.filter(c => c.n !== n);
   crossings.forEach((c, i) => { c.n = i + 1; });
+  saveState();
   renderAll();
 }
 
@@ -288,6 +320,18 @@ function addCrossing({ position, day, name, state }) {
   });
   crossings.sort((a, b) => dayIndex(a.day) - dayIndex(b.day));
   crossings.forEach((c, i) => { c.n = i + 1; });
+  saveState();
+  renderAll();
+}
+
+function resetToSeed() {
+  crossings = SEED.map(c => ({ ...c }));
+  project = DEFAULT_PROJECT;
+  activeFilter = 'all';
+  clearState();
+  document.querySelectorAll('#filters button').forEach(b => {
+    b.classList.toggle('is-active', b.dataset.filter === 'all');
+  });
   renderAll();
 }
 
@@ -343,6 +387,7 @@ function wire() {
     const v = proj.textContent.trim();
     project = v || project;
     proj.textContent = project;
+    saveState();
   });
   proj.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
@@ -350,6 +395,14 @@ function wire() {
       proj.blur();
     }
   });
+
+  const resetLink = document.getElementById('reset-demo');
+  if (resetLink) {
+    resetLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      resetToSeed();
+    });
+  }
 
   const hold = document.getElementById('hold-form');
   if (hold) {
