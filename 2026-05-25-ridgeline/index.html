@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ridgeline — the line where the project tips</title>
+  <meta name="description" content="Ridgeline is a small page for the week's ridge — the one summit a project tips over, and the saddles and approaches that lead to it. Not a backlog. A line with a shape." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <!-- the ridgeline silhouette -->
+          <path d="M2 24 L8 18 L12 21 L17 12 L22 17 L26 14 L30 19 L30 26 L2 26 Z"
+                fill="currentColor" opacity="0.18" />
+          <!-- the ridge as a line -->
+          <path d="M2 24 L8 18 L12 21 L17 12 L22 17 L26 14 L30 19"
+                stroke="currentColor" stroke-width="1.2"
+                fill="none" />
+          <!-- the summit, marked -->
+          <circle cx="17" cy="12" r="1.6" fill="currentColor" />
+          <!-- the sky tick -->
+          <line x1="17" y1="6" x2="17" y2="10" stroke="currentColor"
+                stroke-width="0.8" stroke-dasharray="1 2" opacity="0.6" />
+        </svg>
+      </span>
+      <span>Ridgeline</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#ridge">Your ridge</a>
+      <a href="#who">Who walks a ridge</a>
+      <a href="#cross" class="nav-cta">Cross a point</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">A small page for the week's ridge</p>
+        <h1>
+          The ridge is<br />
+          <em>where it tips.</em>
+        </h1>
+        <p class="lede">
+          A backlog is a flat list and a roadmap is a line on a
+          map. Neither one knows where the ridge is. Ridgeline asks
+          for the one summit the week is built around, the saddles
+          that give it shape, and the approaches that bring you
+          near enough to see it for what it is.
+        </p>
+        <div class="hero-cta">
+          <a href="#ridge" class="btn btn-primary">See a ridge</a>
+          <a href="#cross" class="btn btn-ghost">Cross a point</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One ridge a week. No backlog. No board. No badge.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-ridge">
+          <svg viewBox="0 0 420 320" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="ridgeSky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#e7dfe9" stop-opacity="0.55" />
+                <stop offset="55%" stop-color="#d6cfd8" stop-opacity="0.20" />
+                <stop offset="100%" stop-color="#b6b3bc" stop-opacity="0" />
+              </linearGradient>
+              <linearGradient id="ridgeFar" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#8c8a98" stop-opacity="0.55" />
+                <stop offset="100%" stop-color="#6f6e7c" stop-opacity="0.65" />
+              </linearGradient>
+              <linearGradient id="ridgeNear" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#525a68" stop-opacity="0.85" />
+                <stop offset="100%" stop-color="#3c4451" stop-opacity="1" />
+              </linearGradient>
+              <linearGradient id="ridgeGlow" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#d99a72" stop-opacity="0.9" />
+                <stop offset="100%" stop-color="#c97a4a" stop-opacity="1" />
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="420" height="320" fill="url(#ridgeSky)" />
+
+            <!-- distant range -->
+            <path d="M0 220
+                     L30 196 L62 208 L90 184 L130 200 L170 178
+                     L210 192 L246 170 L288 188 L322 174 L360 192
+                     L398 178 L420 196 L420 280 L0 280 Z"
+                  fill="url(#ridgeFar)" />
+
+            <!-- near ridge with the summit at the apex -->
+            <path d="M0 268
+                     L34 248 L66 256 L98 230 L128 244
+                     L162 216 L194 226 L226 174
+                     L256 198 L290 188 L322 212
+                     L358 198 L390 218 L420 208
+                     L420 308 L0 308 Z"
+                  fill="url(#ridgeNear)" />
+
+            <!-- the summit, glowing -->
+            <circle cx="226" cy="174" r="6.5" fill="url(#ridgeGlow)"
+                    stroke="#7a3f1f" stroke-width="0.9" />
+            <line x1="226" y1="120" x2="226" y2="170" stroke="#c97a4a"
+                  stroke-width="0.8" stroke-dasharray="2 4" opacity="0.7" />
+
+            <!-- saddle markers (two small circles in the dips on either side) -->
+            <circle cx="162" cy="216" r="3.2" fill="#bcbac4"
+                    stroke="#3c4451" stroke-width="0.7" />
+            <circle cx="290" cy="188" r="3.2" fill="#bcbac4"
+                    stroke="#3c4451" stroke-width="0.7" />
+
+            <!-- approach mark (small triangle) -->
+            <path d="M98 230 L102 222 L94 222 Z"
+                  fill="#8aa07a" stroke="#4f6b3f" stroke-width="0.5" />
+
+            <!-- ground line -->
+            <line x1="0" y1="284" x2="420" y2="284"
+                  stroke="rgba(30,34,40,0.18)" stroke-width="0.6" />
+          </svg>
+        </div>
+        <span class="hero-tick hero-tick-1">the summit</span>
+        <span class="hero-tick hero-tick-2">a saddle</span>
+        <span class="hero-tick hero-tick-3">an approach</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>Lists are flat.<br /><em>Ridges have a shape.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            A backlog is a heap. Forty items in a column, all
+            asking the same way. At the end of the week the ones
+            you finished look like the ones you didn't. The list
+            does not know which one was the summit. It does not
+            even know there was one.
+          </p>
+          <p>
+            A ridge is a shape. The summit is the one decision the
+            project tips over — once crossed, the work drops down
+            one valley and not the other. The saddles are the
+            smaller calls that give the ridge its line. The
+            approaches are the climbs that bring you near enough
+            to see the summit for what it is. The week reads true
+            when the ridge is named first.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Name the summit</h3>
+          <p>One decision this week. The one that, once made, sends the project down one valley and not the other. Name it first.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Sketch the saddles</h3>
+          <p>The smaller passes. A few — five, maybe seven. Each one a call you can take either way, and each one giving the ridge its line.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Walk the approaches</h3>
+          <p>The climbs. The work that brings you near enough to a summit to see it for what it really is. Sight before you cross.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Cross, skirt, or return</h3>
+          <p>Some crossings you make. Some you go around — honest if you meant it. Some you walk back over later. The ridge knows.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="ridge" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A ridge, mid-week</h2>
+        <p>A small ridge of nine crossings for an imaginary launch week in late May 2026 — shipping to ten people the week before the rest of the world sees it, and the saddles and approaches that lean toward that one call. Sight a crossing, cross it, skirt it — the ridge redraws in your browser. Nothing leaves.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">Ridge</p>
+            <p class="chart-project" id="chart-project" title="Click to rename">The June launch · last week of May 2026</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="The ridge profile, west to east">
+          <p class="profile-axis-label top">crest</p>
+          <p class="profile-axis-label bot">valley</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the crossings">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="sighted" role="tab">Sighted</button>
+          <button type="button" data-filter="crossed" role="tab">Crossed</button>
+          <button type="button" data-filter="skirted" role="tab">Skirted</button>
+          <button type="button" data-filter="returned" role="tab">Returned</button>
+        </div>
+
+        <ul class="legs" id="crossings">
+          <!-- crossings inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-position" aria-label="Position on the ridge">
+              <option value="approach">Approach</option>
+              <option value="saddle">Saddle</option>
+              <option value="summit">Summit</option>
+            </select>
+            <input id="add-day" type="text" maxlength="3" placeholder="day" value="mon" aria-label="Day of the week" />
+            <input id="add-name" type="text" placeholder="Name the crossing — what tips on the other side" maxlength="90" />
+            <select id="add-state" aria-label="State of the crossing">
+              <option value="sighted">Sighted</option>
+              <option value="crossed">Crossed</option>
+              <option value="skirted">Skirted</option>
+              <option value="returned">Returned</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Sight the crossing</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="legend">
+        <h3>The three points on a ridge</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-summit"></span><div><strong>Summit.</strong> The one decision the week is built around. Only one. Crossed last. From here the project tips one way and not the other.</div></li>
+          <li><span class="legend-swatch swatch-saddle"></span><div><strong>Saddle.</strong> A low pass between summits. A smaller call. Approachable from either side; the ridge gets its shape from these.</div></li>
+          <li><span class="legend-swatch swatch-approach"></span><div><strong>Approach.</strong> The climb that gets you near enough to a summit to see it for what it is. Sight before you cross.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who walks a ridge</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The product lead before a launch</h3>
+          <p>The summit is shipping to ten people the week before the rest. The saddles are the price page, the changelog format, the screenshot for the card. Once the summit is crossed the saddles read different. They were always the saddles.</p>
+        </article>
+        <article>
+          <h3>The clinician choosing a protocol</h3>
+          <p>The summit is the one switch in the morning routine. The approaches are the three weeks of reading and the notebook in the white coat. The saddles are the small things the team will change anyway; the summit is the call only this clinician can make.</p>
+        </article>
+        <article>
+          <h3>The graduate student in the last fall</h3>
+          <p>The summit is the defense date. The saddles are the chapter order and which paper goes in the appendix. The approaches are the long mornings of writing and the longer afternoons of rereading. The ridge runs straight through October.</p>
+        </article>
+        <article>
+          <h3>The small-shop founder before a price change</h3>
+          <p>The summit is the email to forty regulars. The saddles are the wording, the date, the freebie. The approaches are the spreadsheet and the late kitchen conversations. After the summit the shop reads different to itself.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="cross" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · summer 2026</p>
+        <h2>One email when Ridgeline opens.</h2>
+        <p class="hold-lede">A ridge, a summit, a few saddles, and a page that reads as honest as the morning the call is made. No newsletter, no roadmap, no share card. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@somewhere.high" />
+          <button class="btn btn-primary" type="submit">Cross the point</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first ridges open. You can leave anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Ridgeline</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · the line where the project tips</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#ridge">Ridge</a>
+      <a href="#cross">Cross</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
