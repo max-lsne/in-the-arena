@@ -97,6 +97,9 @@ const _saved = loadState();
 let crossings = _saved ? _saved.crossings.map(c => ({ ...c })) : SEED.map(c => ({ ...c }));
 let project = _saved && typeof _saved.project === 'string' ? _saved.project : DEFAULT_PROJECT;
 let activeFilter = 'all';
+let selectedN = crossings.length ? crossings[0].n : null;
+
+const FILTER_BY_KEY = { '0': 'all', '1': 'sighted', '2': 'crossed', '3': 'skirted', '4': 'returned' };
 
 // ---------- formatting ----------
 
@@ -254,7 +257,7 @@ function renderCrossings() {
   }
 
   host.innerHTML = filtered.map(c => `
-    <li class="crossing ${c.position === 'summit' ? 'is-summit' : ''} ${c.state === 'crossed' ? 'is-current' : ''} ${c.state === 'skirted' ? 'skirted' : ''}" data-n="${c.n}">
+    <li class="crossing ${c.position === 'summit' ? 'is-summit' : ''} ${c.state === 'crossed' ? 'is-current' : ''} ${c.state === 'skirted' ? 'skirted' : ''} ${c.n === selectedN ? 'is-selected' : ''}" data-n="${c.n}">
       <span class="crossing-num">${String(c.n).padStart(2, '0')}</span>
       <span class="crossing-pos ${c.position}">
         <span class="glyph" aria-hidden="true">${POS_GLYPH[c.position]}</span>
@@ -328,6 +331,7 @@ function resetToSeed() {
   crossings = SEED.map(c => ({ ...c }));
   project = DEFAULT_PROJECT;
   activeFilter = 'all';
+  selectedN = crossings.length ? crossings[0].n : null;
   clearState();
   document.querySelectorAll('#filters button').forEach(b => {
     b.classList.toggle('is-active', b.dataset.filter === 'all');
@@ -343,11 +347,69 @@ function setFilter(f) {
   renderCrossings();
 }
 
+function visibleCrossings() {
+  return crossings.filter(c => activeFilter === 'all' || c.state === activeFilter);
+}
+
+function selectByOffset(delta) {
+  const v = visibleCrossings();
+  if (v.length === 0) return;
+  const idx = v.findIndex(c => c.n === selectedN);
+  const next = idx === -1
+    ? (delta > 0 ? 0 : v.length - 1)
+    : Math.max(0, Math.min(v.length - 1, idx + delta));
+  selectedN = v[next].n;
+  renderCrossings();
+  scrollSelectedIntoView();
+}
+
+function scrollSelectedIntoView() {
+  const el = document.querySelector(`.crossing[data-n="${selectedN}"]`);
+  if (el && el.scrollIntoView) el.scrollIntoView({ block: 'nearest' });
+}
+
+function shiftDay(delta) {
+  const c = crossings.find(c => c.n === selectedN);
+  if (!c) return;
+  const i = dayIndex(c.day);
+  const next = Math.max(0, Math.min(DAY_ORDER.length - 1, i + delta));
+  c.day = DAY_ORDER[next];
+  crossings.sort((a, b) => dayIndex(a.day) - dayIndex(b.day));
+  crossings.forEach((x, j) => { x.n = j + 1; });
+  selectedN = crossings.indexOf(c) + 1;
+  saveState();
+  renderAll();
+}
+
+function removeSelected() {
+  if (selectedN == null) return;
+  const v = visibleCrossings();
+  const idx = v.findIndex(c => c.n === selectedN);
+  removeCrossing(selectedN);
+  const v2 = visibleCrossings();
+  if (v2.length === 0) {
+    selectedN = null;
+  } else {
+    selectedN = v2[Math.min(idx, v2.length - 1)].n;
+  }
+  renderCrossings();
+}
+
+function cycleSelectedState() {
+  if (selectedN == null) return;
+  cycleState(selectedN);
+}
+
 // ---------- wiring ----------
 
 function wire() {
   const host = document.getElementById('crossings');
   host.addEventListener('click', (e) => {
+    const row = e.target.closest('.crossing');
+    if (row) {
+      selectedN = Number(row.dataset.n);
+      renderCrossings();
+    }
     const t = e.target.closest('[data-action="cycle-state"]');
     if (!t) return;
     cycleState(Number(t.dataset.n));
@@ -413,6 +475,55 @@ function wire() {
       hold.reset();
     });
   }
+
+  // keyboard shortcuts — skip when typing in an input/contenteditable
+  document.addEventListener('keydown', (e) => {
+    const t = e.target;
+    const inField = t && (
+      t.tagName === 'INPUT' ||
+      t.tagName === 'TEXTAREA' ||
+      t.tagName === 'SELECT' ||
+      (t.isContentEditable === true)
+    );
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+    const k = e.key;
+
+    if (!inField && (k === 'n' || k === 'N')) {
+      e.preventDefault();
+      const n = document.getElementById('add-name');
+      if (n) n.focus();
+      return;
+    }
+
+    if (inField) return;
+
+    if (k === 'j' || k === 'J' || k === 'ArrowDown') {
+      e.preventDefault();
+      selectByOffset(1);
+    } else if (k === 'k' || k === 'K' || k === 'ArrowUp') {
+      e.preventDefault();
+      selectByOffset(-1);
+    } else if (k === 'Enter') {
+      e.preventDefault();
+      cycleSelectedState();
+    } else if (k === 'Delete' || k === 'Backspace') {
+      e.preventDefault();
+      removeSelected();
+    } else if (k === '[') {
+      e.preventDefault();
+      shiftDay(-1);
+    } else if (k === ']') {
+      e.preventDefault();
+      shiftDay(+1);
+    } else if (k === 'r' || k === 'R') {
+      e.preventDefault();
+      resetToSeed();
+    } else if (FILTER_BY_KEY[k] !== undefined) {
+      e.preventDefault();
+      setFilter(FILTER_BY_KEY[k]);
+    }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
