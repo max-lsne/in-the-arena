@@ -404,6 +404,57 @@ function visibleSightings() {
   return sightings.filter(s => activeFilter === 'all' || s.state === activeFilter);
 }
 
+const FILTER_BY_KEY = { '0': 'all', '1': 'sighted', '2': 'closing', '3': 'landed', '4': 'passed' };
+
+function selectByOffset(delta) {
+  const v = visibleSightings();
+  if (v.length === 0) return;
+  const idx = v.findIndex(s => s.n === selectedN);
+  const next = idx === -1
+    ? (delta > 0 ? 0 : v.length - 1)
+    : Math.max(0, Math.min(v.length - 1, idx + delta));
+  selectedN = v[next].n;
+  renderSightings();
+  scrollSelectedIntoView();
+}
+
+function scrollSelectedIntoView() {
+  const el = document.querySelector(`.sighting[data-n="${selectedN}"]`);
+  if (el && el.scrollIntoView) el.scrollIntoView({ block: 'nearest' });
+}
+
+function shiftDay(delta) {
+  const s = sightings.find(s => s.n === selectedN);
+  if (!s) return;
+  const i = dayIndex(s.day);
+  const next = Math.max(0, Math.min(DAY_ORDER.length - 1, i + delta));
+  s.day = DAY_ORDER[next];
+  sightings.sort((a, b) => dayIndex(a.day) - dayIndex(b.day));
+  sightings.forEach((x, j) => { x.n = j + 1; });
+  selectedN = sightings.indexOf(s) + 1;
+  saveState();
+  renderAll();
+}
+
+function removeSelected() {
+  if (selectedN == null) return;
+  const v = visibleSightings();
+  const idx = v.findIndex(s => s.n === selectedN);
+  removeSighting(selectedN);
+  const v2 = visibleSightings();
+  if (v2.length === 0) {
+    selectedN = null;
+  } else {
+    selectedN = v2[Math.min(idx, v2.length - 1)].n;
+  }
+  renderSightings();
+}
+
+function cycleSelectedState() {
+  if (selectedN == null) return;
+  cycleState(selectedN);
+}
+
 // ---------- wiring ----------
 
 function wire() {
@@ -478,6 +529,55 @@ function wire() {
       hold.reset();
     });
   }
+
+  // keyboard shortcuts — skip when typing in an input/contenteditable
+  document.addEventListener('keydown', (e) => {
+    const t = e.target;
+    const inField = t && (
+      t.tagName === 'INPUT' ||
+      t.tagName === 'TEXTAREA' ||
+      t.tagName === 'SELECT' ||
+      (t.isContentEditable === true)
+    );
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+    const k = e.key;
+
+    if (!inField && (k === 'n' || k === 'N')) {
+      e.preventDefault();
+      const n = document.getElementById('add-name');
+      if (n) n.focus();
+      return;
+    }
+
+    if (inField) return;
+
+    if (k === 'j' || k === 'J' || k === 'ArrowDown') {
+      e.preventDefault();
+      selectByOffset(1);
+    } else if (k === 'k' || k === 'K' || k === 'ArrowUp') {
+      e.preventDefault();
+      selectByOffset(-1);
+    } else if (k === 'Enter') {
+      e.preventDefault();
+      cycleSelectedState();
+    } else if (k === 'Delete' || k === 'Backspace') {
+      e.preventDefault();
+      removeSelected();
+    } else if (k === '[') {
+      e.preventDefault();
+      shiftDay(-1);
+    } else if (k === ']') {
+      e.preventDefault();
+      shiftDay(+1);
+    } else if (k === 'r' || k === 'R') {
+      e.preventDefault();
+      resetToSeed();
+    } else if (FILTER_BY_KEY[k] !== undefined) {
+      e.preventDefault();
+      setFilter(FILTER_BY_KEY[k]);
+    }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
