@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Headland — where the land looks ahead</title>
+  <meta name="description" content="Headland is a small page for what is coming in over the horizon of a project — the squalls, the sails, the flotsam. Not a backlog. Not a calendar. A view from the point." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <!-- the headland: a wedge of land jutting into water -->
+          <path d="M2 18 L14 18 L20 22 L28 22 L28 28 L2 28 Z"
+                fill="currentColor" opacity="0.18" />
+          <path d="M2 18 L14 18 L20 22 L28 22"
+                stroke="currentColor" stroke-width="1.2"
+                fill="none" />
+          <!-- the horizon -->
+          <line x1="2" y1="14" x2="30" y2="14" stroke="currentColor"
+                stroke-width="0.7" opacity="0.5" />
+          <!-- a sail on the horizon -->
+          <path d="M22 14 L22 9 L26 14 Z" fill="currentColor" />
+          <!-- a sighting eye at the headland point -->
+          <circle cx="20" cy="22" r="1.6" fill="currentColor" opacity="0.85" />
+        </svg>
+      </span>
+      <span>Headland</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#horizon">Your horizon</a>
+      <a href="#who">Who stands at a point</a>
+      <a href="#sight" class="nav-cta">Sight something</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">A small page for the horizon</p>
+        <h1>
+          The land<br />
+          <em>looks ahead.</em>
+        </h1>
+        <p class="lede">
+          A backlog tells you what you have not done. A calendar
+          tells you what you have agreed to. Headland is a page for
+          the third thing — the storm two days out, the boat
+          making for harbor, the small drift the tide is bringing
+          in whether or not you wanted it.
+        </p>
+        <div class="hero-cta">
+          <a href="#horizon" class="btn btn-primary">See a horizon</a>
+          <a href="#sight" class="btn btn-ghost">Sight something</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One horizon a week. No backlog. No board. No share card.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-sea">
+          <svg viewBox="0 0 420 320" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="seaSky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#f0e9dd" stop-opacity="0.95" />
+                <stop offset="60%" stop-color="#e3d9c5" stop-opacity="0.55" />
+                <stop offset="100%" stop-color="#cdbf9e" stop-opacity="0" />
+              </linearGradient>
+              <linearGradient id="seaWater" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#7d96a3" stop-opacity="0.9" />
+                <stop offset="100%" stop-color="#445663" stop-opacity="1" />
+              </linearGradient>
+              <linearGradient id="seaLand" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#4f5848" stop-opacity="1" />
+                <stop offset="100%" stop-color="#33392c" stop-opacity="1" />
+              </linearGradient>
+              <radialGradient id="seaSun" cx="0.78" cy="0.18" r="0.32">
+                <stop offset="0%" stop-color="#f6d39c" stop-opacity="0.95" />
+                <stop offset="60%" stop-color="#e8b074" stop-opacity="0.35" />
+                <stop offset="100%" stop-color="#e8b074" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+
+            <!-- sky -->
+            <rect x="0" y="0" width="420" height="220" fill="url(#seaSky)" />
+            <!-- a low sun -->
+            <rect x="0" y="0" width="420" height="220" fill="url(#seaSun)" />
+
+            <!-- a thin distant land in the back -->
+            <path d="M0 188 L60 184 L110 186 L170 182 L240 188 L320 182 L420 190 L420 200 L0 200 Z"
+                  fill="#8a8478" opacity="0.45" />
+
+            <!-- water -->
+            <rect x="0" y="196" width="420" height="124" fill="url(#seaWater)" />
+
+            <!-- horizon line -->
+            <line x1="0" y1="196" x2="420" y2="196"
+                  stroke="rgba(30,34,40,0.35)" stroke-width="0.6" />
+
+            <!-- a small squall column off to the left -->
+            <g class="cloud-drift">
+              <ellipse cx="78" cy="148" rx="44" ry="12" fill="#5e6b6e" opacity="0.85" />
+              <ellipse cx="78" cy="138" rx="34" ry="9"  fill="#79858a" opacity="0.7" />
+              <line x1="62"  y1="158" x2="58"  y2="194" stroke="#5e6b6e" stroke-width="0.8" opacity="0.6" />
+              <line x1="74"  y1="160" x2="70"  y2="194" stroke="#5e6b6e" stroke-width="0.8" opacity="0.55" />
+              <line x1="86"  y1="160" x2="83"  y2="194" stroke="#5e6b6e" stroke-width="0.8" opacity="0.6" />
+              <line x1="98"  y1="158" x2="95"  y2="194" stroke="#5e6b6e" stroke-width="0.8" opacity="0.5" />
+            </g>
+
+            <!-- a sail near the middle of the horizon -->
+            <g>
+              <path d="M232 196 L232 168 L250 196 Z" fill="#fbf6e9" stroke="#5a5145" stroke-width="0.6" />
+              <line x1="232" y1="168" x2="232" y2="200" stroke="#5a5145" stroke-width="0.6" />
+              <line x1="226" y1="200" x2="256" y2="200" stroke="#5a5145" stroke-width="0.7" />
+            </g>
+
+            <!-- a piece of flotsam — a small dark mark on the water -->
+            <g>
+              <ellipse cx="324" cy="218" rx="5" ry="1.6" fill="#3a3833" opacity="0.85" />
+              <line x1="320" y1="217" x2="328" y2="217" stroke="#1e2228" stroke-width="0.4" opacity="0.7" />
+            </g>
+
+            <!-- the headland: a wedge of land in the foreground -->
+            <path d="M0 230 L100 232 L160 252 L210 268 L240 288 L240 320 L0 320 Z"
+                  fill="url(#seaLand)" />
+            <!-- a thin path along the headland top -->
+            <path d="M10 246 L96 246 L150 260 L200 274 L226 290"
+                  stroke="#cdbf9e" stroke-width="0.7" stroke-dasharray="2 4" fill="none" opacity="0.45" />
+            <!-- a small figure at the point -->
+            <circle cx="226" cy="284" r="2.2" fill="#cdbf9e" />
+            <line x1="226" y1="286" x2="226" y2="294" stroke="#cdbf9e" stroke-width="0.8" />
+
+            <!-- soft wave lines -->
+            <line x1="0"   y1="244" x2="100" y2="244" stroke="rgba(250,246,236,0.18)" stroke-width="0.5" />
+            <line x1="120" y1="252" x2="200" y2="252" stroke="rgba(250,246,236,0.16)" stroke-width="0.5" />
+            <line x1="260" y1="244" x2="380" y2="244" stroke="rgba(250,246,236,0.18)" stroke-width="0.5" />
+            <line x1="290" y1="262" x2="410" y2="262" stroke="rgba(250,246,236,0.14)" stroke-width="0.5" />
+          </svg>
+        </div>
+        <span class="hero-tick hero-tick-1">a squall</span>
+        <span class="hero-tick hero-tick-2">a sail</span>
+        <span class="hero-tick hero-tick-3">a piece of flotsam</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>Lists look back.<br /><em>Horizons look out.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            A backlog is a list of things you owe yourself. A
+            calendar is a list of things you owe other people.
+            Both look behind. Neither one tells you about the
+            weather coming from the open water, or the boat that
+            is still a smudge on the line, or the small thing the
+            tide is bringing in whether you would have chosen it
+            or not.
+          </p>
+          <p>
+            A headland is the part of the coast that exists to do
+            that work. Headland the page asks the same of a
+            project: stand at the point, look out, name what is
+            coming. Three kinds of arrival. Four states of being
+            seen. A page that reads true the morning the squall
+            actually lands.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Walk to the point</h3>
+          <p>Once a week. Stand somewhere with a wide view of the project — not the desk, not the inbox. The point is a place, not a meeting.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Sight what is out there</h3>
+          <p>Squalls, sails, flotsam. Three to ten things in total. The smallest count that still makes the horizon read true.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Mark what is closing</h3>
+          <p>A sighting can move closer. Sighted, closing, landed, passed. The four states are a small honesty about what the week is really doing.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Let most things pass</h3>
+          <p>Most things pass. Storms slide south, boats make for the next harbor, flotsam drifts back out. A headland that knows this is calmer than a backlog that does not.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="horizon" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A horizon, mid-week</h2>
+        <p>A small horizon of ten sightings for an imaginary first week of June 2026 at a small design studio on a quiet coast. The sails lean toward a Friday visit from a long-quiet client; the squalls and flotsam lean around it. Sight a thing, mark it closing, let it land or pass — the horizon redraws in your browser. Nothing leaves.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">Horizon</p>
+            <p class="chart-project" id="chart-project" title="Click to rename">The first week of June · a small coast studio</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="The horizon, viewed from the point">
+          <p class="profile-axis-label top">far</p>
+          <p class="profile-axis-label bot">shore</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the sightings">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="sighted" role="tab">Sighted</button>
+          <button type="button" data-filter="closing" role="tab">Closing</button>
+          <button type="button" data-filter="landed" role="tab">Landed</button>
+          <button type="button" data-filter="passed" role="tab">Passed</button>
+        </div>
+
+        <ul class="legs" id="sightings">
+          <!-- sightings inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-kind" aria-label="Kind of sighting">
+              <option value="squall">Squall</option>
+              <option value="sail">Sail</option>
+              <option value="flotsam">Flotsam</option>
+            </select>
+            <input id="add-day" type="text" maxlength="3" placeholder="day" value="mon" aria-label="Day of the week" />
+            <input id="add-name" type="text" placeholder="Name the sighting — what is on the horizon" maxlength="90" />
+            <select id="add-state" aria-label="State of the sighting">
+              <option value="sighted">Sighted</option>
+              <option value="closing">Closing</option>
+              <option value="landed">Landed</option>
+              <option value="passed">Passed</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Sight it</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original horizon</a>
+        </div>
+
+        <p class="kbd-help">
+          <strong>Keys:</strong>
+          <kbd>J</kbd>/<kbd>K</kbd> move ·
+          <kbd>Enter</kbd> change state ·
+          <kbd>Del</kbd> remove ·
+          <kbd>N</kbd> add ·
+          <kbd>0</kbd>&ndash;<kbd>4</kbd> filter ·
+          <kbd>[</kbd>/<kbd>]</kbd> shift day ·
+          <kbd>R</kbd> reset.
+        </p>
+      </div>
+
+      <div class="legend">
+        <h3>The three things on a horizon</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-squall"></span><div><strong>Squall.</strong> Weather you can see arriving. You did not call for it. Worth naming early, even when small — most squalls pass, and the ones that do not are kinder when sighted.</div></li>
+          <li><span class="legend-swatch swatch-sail"></span><div><strong>Sail.</strong> A boat making for harbor. Something with intent — a visit, a launch, a return. It wants to land. The week often turns on which sail makes it in.</div></li>
+          <li><span class="legend-swatch swatch-flotsam"></span><div><strong>Flotsam.</strong> Small drift on the tide. Not storms, not boats. The unsolicited small things. Sometimes useful, mostly noise. Worth counting so you can stop counting.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who stands at a point</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The studio principal before a quiet month</h3>
+          <p>The sails are the two clients who said they would come back in June. The squalls are the holidays that thin the week and the invoice that has been late twice. The flotsam is the steady small drift of cold emails. The point is the corner office at the back of the studio.</p>
+        </article>
+        <article>
+          <h3>The clinic director before a season change</h3>
+          <p>The squalls are the flu curves rising and the room three repair. The sails are the two new hires coming in on the Monday after Labor Day. The flotsam is the daily drift of vendor mail. The point is the chart room window over the parking lot.</p>
+        </article>
+        <article>
+          <h3>The graduate student in the final fall</h3>
+          <p>The sails are the defense date and the journal decision. The squalls are the funding letter and the family wedding in the same week. The flotsam is the steady drift of conference invitations. The point is the bench by the river behind the lab.</p>
+        </article>
+        <article>
+          <h3>The bakery owner before a long holiday week</h3>
+          <p>The squalls are the heat in the oven shed and the supplier truck that runs Tuesdays. The sails are the two big custom orders and the Saturday market. The flotsam is the inbox of strangers asking for the recipe. The point is the bench by the back door at five.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="sight" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · summer 2026</p>
+        <h2>One email when Headland opens.</h2>
+        <p class="hold-lede">A point, a horizon, and a page that reads as honest as the morning the squall actually lands. No newsletter, no roadmap, no share card. Leave your address and we will write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@thewideopen.sea" />
+          <button class="btn btn-primary" type="submit">Sight it</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first horizons open. You can leave anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Headland</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · where the land looks ahead</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#horizon">Horizon</a>
+      <a href="#sight">Sight</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
