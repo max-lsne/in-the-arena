@@ -101,6 +101,7 @@ const _saved = loadState();
 let finds = _saved ? _saved.finds.map(s => ({ ...s })) : SEED.map(s => ({ ...s }));
 let project = _saved && typeof _saved.project === 'string' ? _saved.project : DEFAULT_PROJECT;
 let activeFilter = 'all';
+let selectedN = finds.length ? finds[0].n : null;
 
 // ---------- formatting ----------
 
@@ -291,7 +292,9 @@ function classFor(s) {
   c.push('find');
   if (s.state === 'kept')                              c.push('is-kept');
   if (s.kind === 'stranding' && s.state === 'noticed') c.push('is-stranding-noticed');
+  if (s.state === 'picked')                            c.push('is-current');
   if (s.state === 'returned')                          c.push('returned');
+  if (s.n === selectedN)                               c.push('is-selected');
   return c.join(' ');
 }
 
@@ -376,6 +379,7 @@ function resetToSeed() {
   finds = SEED.map(s => ({ ...s }));
   project = DEFAULT_PROJECT;
   activeFilter = 'all';
+  selectedN = finds.length ? finds[0].n : null;
   clearState();
   document.querySelectorAll('#filters button').forEach(b => {
     b.classList.toggle('is-active', b.dataset.filter === 'all');
@@ -391,11 +395,71 @@ function setFilter(f) {
   renderFinds();
 }
 
+function visibleFinds() {
+  return finds.filter(s => activeFilter === 'all' || s.state === activeFilter);
+}
+
+const FILTER_BY_KEY = { '0': 'all', '1': 'noticed', '2': 'picked', '3': 'kept', '4': 'returned' };
+
+function selectByOffset(delta) {
+  const v = visibleFinds();
+  if (v.length === 0) return;
+  const idx = v.findIndex(s => s.n === selectedN);
+  const next = idx === -1
+    ? (delta > 0 ? 0 : v.length - 1)
+    : Math.max(0, Math.min(v.length - 1, idx + delta));
+  selectedN = v[next].n;
+  renderFinds();
+  scrollSelectedIntoView();
+}
+
+function scrollSelectedIntoView() {
+  const el = document.querySelector(`.find[data-n="${selectedN}"]`);
+  if (el && el.scrollIntoView) el.scrollIntoView({ block: 'nearest' });
+}
+
+function shiftDay(delta) {
+  const s = finds.find(s => s.n === selectedN);
+  if (!s) return;
+  const i = dayIndex(s.day);
+  const next = Math.max(0, Math.min(DAY_ORDER.length - 1, i + delta));
+  s.day = DAY_ORDER[next];
+  finds.sort((a, b) => dayIndex(a.day) - dayIndex(b.day));
+  finds.forEach((x, j) => { x.n = j + 1; });
+  selectedN = finds.indexOf(s) + 1;
+  saveState();
+  renderAll();
+}
+
+function removeSelected() {
+  if (selectedN == null) return;
+  const v = visibleFinds();
+  const idx = v.findIndex(s => s.n === selectedN);
+  removeFind(selectedN);
+  const v2 = visibleFinds();
+  if (v2.length === 0) {
+    selectedN = null;
+  } else {
+    selectedN = v2[Math.min(idx, v2.length - 1)].n;
+  }
+  renderFinds();
+}
+
+function cycleSelectedState() {
+  if (selectedN == null) return;
+  cycleState(selectedN);
+}
+
 // ---------- wiring ----------
 
 function wire() {
   const host = document.getElementById('finds');
   host.addEventListener('click', (e) => {
+    const row = e.target.closest('.find');
+    if (row) {
+      selectedN = Number(row.dataset.n);
+      renderFinds();
+    }
     const t = e.target.closest('[data-action="cycle-state"]');
     if (!t) return;
     cycleState(Number(t.dataset.n));
@@ -460,6 +524,55 @@ function wire() {
       hold.reset();
     });
   }
+
+  // keyboard shortcuts — skip when typing in an input/contenteditable
+  document.addEventListener('keydown', (e) => {
+    const t = e.target;
+    const inField = t && (
+      t.tagName === 'INPUT' ||
+      t.tagName === 'TEXTAREA' ||
+      t.tagName === 'SELECT' ||
+      (t.isContentEditable === true)
+    );
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+    const k = e.key;
+
+    if (!inField && (k === 'n' || k === 'N')) {
+      e.preventDefault();
+      const n = document.getElementById('add-name');
+      if (n) n.focus();
+      return;
+    }
+
+    if (inField) return;
+
+    if (k === 'j' || k === 'J' || k === 'ArrowDown') {
+      e.preventDefault();
+      selectByOffset(1);
+    } else if (k === 'k' || k === 'K' || k === 'ArrowUp') {
+      e.preventDefault();
+      selectByOffset(-1);
+    } else if (k === 'Enter') {
+      e.preventDefault();
+      cycleSelectedState();
+    } else if (k === 'Delete' || k === 'Backspace') {
+      e.preventDefault();
+      removeSelected();
+    } else if (k === '[') {
+      e.preventDefault();
+      shiftDay(-1);
+    } else if (k === ']') {
+      e.preventDefault();
+      shiftDay(+1);
+    } else if (k === 'r' || k === 'R') {
+      e.preventDefault();
+      resetToSeed();
+    } else if (FILTER_BY_KEY[k] !== undefined) {
+      e.preventDefault();
+      setFilter(FILTER_BY_KEY[k]);
+    }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
