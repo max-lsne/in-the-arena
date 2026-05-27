@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lowtide — the shore tells the truth</title>
+  <meta name="description" content="Lowtide is a small page for what a week of work actually surfaced — the finds worth picking up, the threads stranded high and dry, the small bright shells worth keeping anyway. A weekly walk on the strand, not a retrospective." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <!-- the high water line, dotted -->
+          <line x1="2" y1="11" x2="30" y2="11"
+                stroke="currentColor" stroke-width="0.6"
+                stroke-dasharray="2 2" opacity="0.55" />
+          <!-- the present water, pulled back to the right -->
+          <path d="M22 22 Q26 21 30 22 L30 28 L22 28 Z"
+                fill="currentColor" opacity="0.32" />
+          <!-- the exposed shore, the bulk of the picture -->
+          <path d="M2 18 Q10 17 16 18 Q20 19 22 22 L22 28 L2 28 Z"
+                fill="currentColor" opacity="0.16" />
+          <!-- a small tide pool -->
+          <ellipse cx="10" cy="22" rx="3" ry="1.1"
+                   fill="currentColor" opacity="0.45" />
+          <!-- a shell -->
+          <path d="M16 23 q1.4 -1.4 2.8 0 q-0.4 0.6 -1.4 0.6 q-1 0 -1.4 -0.6 Z"
+                fill="currentColor" opacity="0.85" />
+        </svg>
+      </span>
+      <span>Lowtide</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#strand">The strand</a>
+      <a href="#who">Who walks the shore</a>
+      <a href="#hold" class="nav-cta">Walk it</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">A small page for the strand line</p>
+        <h1>
+          The shore<br />
+          <em>tells the truth.</em>
+        </h1>
+        <p class="lede">
+          A retrospective asks what went well and what did not. It
+          is a meeting with a chair at the head of the table.
+          Lowtide is a page for the other thing — the walk
+          you take alone on a Friday afternoon when the water
+          pulls back and you see what the week actually left on
+          the shore.
+        </p>
+        <div class="hero-cta">
+          <a href="#strand" class="btn btn-primary">See a strand</a>
+          <a href="#hold" class="btn btn-ghost">Walk it</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One walk a week. No retro. No score. No graph going up and to the right.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-shore">
+          <svg viewBox="0 0 420 320" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="shoreSky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#eee4d0" stop-opacity="0.95" />
+                <stop offset="55%" stop-color="#e0d5bc" stop-opacity="0.6" />
+                <stop offset="100%" stop-color="#cdc0a3" stop-opacity="0" />
+              </linearGradient>
+              <linearGradient id="shoreWater" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#7d99a4" stop-opacity="0.9" />
+                <stop offset="100%" stop-color="#46606c" stop-opacity="1" />
+              </linearGradient>
+              <linearGradient id="shoreFlat" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#c8b896" stop-opacity="1" />
+                <stop offset="100%" stop-color="#9d8a66" stop-opacity="1" />
+              </linearGradient>
+              <linearGradient id="shorePool" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#a8c0c4" stop-opacity="0.85" />
+                <stop offset="100%" stop-color="#6f8a8e" stop-opacity="0.95" />
+              </linearGradient>
+            </defs>
+
+            <!-- sky -->
+            <rect x="0" y="0" width="420" height="160" fill="url(#shoreSky)" />
+
+            <!-- a thin distant land in the back -->
+            <path d="M0 152 L80 148 L160 152 L260 146 L340 150 L420 148 L420 158 L0 158 Z"
+                  fill="#8a8478" opacity="0.4" />
+
+            <!-- water, pulled back to the right -->
+            <path d="M280 158 Q330 162 380 158 L420 162 L420 320 L296 320 Q286 240 280 158 Z"
+                  fill="url(#shoreWater)" />
+
+            <!-- the exposed flat -->
+            <path d="M0 158 L280 158 Q286 240 296 320 L0 320 Z"
+                  fill="url(#shoreFlat)" />
+
+            <!-- horizon line -->
+            <line x1="0" y1="158" x2="420" y2="158"
+                  stroke="rgba(30,34,40,0.32)" stroke-width="0.6" />
+
+            <!-- a thin high-water dashed line near the top of the flat -->
+            <path d="M4 178 Q120 174 240 180 Q260 182 280 178"
+                  stroke="rgba(30,34,40,0.45)" stroke-width="0.6"
+                  stroke-dasharray="2 4" fill="none" />
+
+            <!-- a wrack line of seaweed and small debris -->
+            <g class="wrack-line">
+              <ellipse cx="40"  cy="200" rx="9"  ry="1.2" fill="#4f6b3f" opacity="0.7" />
+              <ellipse cx="62"  cy="202" rx="6"  ry="1.0" fill="#4f6b3f" opacity="0.55" />
+              <ellipse cx="86"  cy="201" rx="11" ry="1.3" fill="#5a4a2a" opacity="0.6" />
+              <ellipse cx="118" cy="203" rx="7"  ry="1.0" fill="#4f6b3f" opacity="0.6" />
+              <ellipse cx="150" cy="201" rx="9"  ry="1.2" fill="#5a4a2a" opacity="0.55" />
+              <ellipse cx="184" cy="203" rx="12" ry="1.4" fill="#4f6b3f" opacity="0.7" />
+              <ellipse cx="220" cy="202" rx="6"  ry="1.1" fill="#5a4a2a" opacity="0.55" />
+              <ellipse cx="250" cy="203" rx="9"  ry="1.2" fill="#4f6b3f" opacity="0.6" />
+            </g>
+
+            <!-- two tide pools -->
+            <ellipse cx="92"  cy="244" rx="26" ry="6"  fill="url(#shorePool)" opacity="0.9" />
+            <ellipse cx="92"  cy="244" rx="26" ry="6"  fill="none" stroke="rgba(30,34,40,0.18)" stroke-width="0.5" />
+            <ellipse cx="178" cy="266" rx="36" ry="7.5" fill="url(#shorePool)" opacity="0.85" />
+            <ellipse cx="178" cy="266" rx="36" ry="7.5" fill="none" stroke="rgba(30,34,40,0.18)" stroke-width="0.5" />
+
+            <!-- a few shells scattered -->
+            <g>
+              <!-- a clam half -->
+              <path d="M52 268 q5 -5 10 0 q-1.4 2 -5 2 q-3.6 0 -5 -2 Z"
+                    fill="#f1e3c8" stroke="#7a5e3a" stroke-width="0.4" />
+              <line x1="53" y1="266" x2="61" y2="266" stroke="#7a5e3a" stroke-width="0.3" opacity="0.5" />
+              <line x1="54" y1="265" x2="60" y2="265" stroke="#7a5e3a" stroke-width="0.3" opacity="0.4" />
+              <!-- a small periwinkle -->
+              <circle cx="146" cy="288" r="3.4" fill="#6b5a3d" />
+              <circle cx="146.6" cy="287.2" r="1.4" fill="#3e3320" opacity="0.7" />
+              <!-- a mussel -->
+              <path d="M230 280 q4 -5 8 0 l-1 8 q-3 1 -6 0 Z"
+                    fill="#3a4b5e" stroke="#1f2933" stroke-width="0.4" />
+              <!-- a tiny scallop -->
+              <path d="M278 248 q4 -4 8 0 l-1 5 l-2 -2 l-1 2 l-2 -2 l-2 0 Z"
+                    fill="#e9b87c" stroke="#7a4a2a" stroke-width="0.4" />
+            </g>
+
+            <!-- a stranded piece of wood -->
+            <g>
+              <ellipse cx="338" cy="276" rx="14" ry="2.4" fill="#5a4a2a" />
+              <line x1="324" y1="276" x2="352" y2="276" stroke="#3a2e1c" stroke-width="0.4" opacity="0.6" />
+            </g>
+
+            <!-- a small figure with a basket, mid-flat -->
+            <g>
+              <circle cx="200" cy="226" r="2.4" fill="#3a3833" />
+              <line x1="200" y1="228" x2="200" y2="238" stroke="#3a3833" stroke-width="0.9" />
+              <line x1="200" y1="232" x2="195" y2="236" stroke="#3a3833" stroke-width="0.7" />
+              <line x1="200" y1="232" x2="205" y2="234" stroke="#3a3833" stroke-width="0.7" />
+              <line x1="200" y1="238" x2="197" y2="244" stroke="#3a3833" stroke-width="0.9" />
+              <line x1="200" y1="238" x2="203" y2="244" stroke="#3a3833" stroke-width="0.9" />
+              <!-- the basket -->
+              <path d="M204 234 l4 0 l-0.6 4 l-2.8 0 Z"
+                    fill="#a8853d" stroke="#5a4a2a" stroke-width="0.4" />
+            </g>
+
+            <!-- a couple of gulls on the wet flat -->
+            <path d="M120 222 q3 -2 6 0 m0 0 q3 -2 6 0"
+                  stroke="#3a3833" stroke-width="0.7" fill="none" opacity="0.7" />
+            <path d="M260 232 q3 -2 6 0 m0 0 q3 -2 6 0"
+                  stroke="#3a3833" stroke-width="0.7" fill="none" opacity="0.55" />
+
+            <!-- soft wave lines on the receded water -->
+            <line x1="296" y1="180" x2="410" y2="180" stroke="rgba(250,246,236,0.20)" stroke-width="0.5" />
+            <line x1="306" y1="196" x2="416" y2="196" stroke="rgba(250,246,236,0.18)" stroke-width="0.5" />
+            <line x1="316" y1="214" x2="418" y2="214" stroke="rgba(250,246,236,0.16)" stroke-width="0.5" />
+          </svg>
+        </div>
+        <span class="hero-tick hero-tick-1">a find</span>
+        <span class="hero-tick hero-tick-2">a stranding</span>
+        <span class="hero-tick hero-tick-3">a shell</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>Retros look at the meeting.<br /><em>Lowtide looks at the shore.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            A retro is a meeting where six people sit in a circle
+            and answer the same three questions. It produces a
+            document no one reads on Monday. It is not a bad
+            thing. It is just not the same thing as the walk you
+            took alone on Friday afternoon, when the office had
+            gone quiet, and you noticed three things you would
+            never have written on a sticky note.
+          </p>
+          <p>
+            Lowtide is for that walk. The week is a tide; on
+            Friday it pulls back; the shore tells the truth.
+            Three kinds of finds. Four states of keeping. A page
+            that reads as honest as the strand line itself, and
+            no honester than that.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Wait for the water to pull back</h3>
+          <p>Once a week, late on a quiet afternoon. Not Monday. Not in a meeting. The walk only works when the room has gone empty enough that the small things start to show.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Walk the strand</h3>
+          <p>Three to ten things. Finds, strandings, shells. The smallest count that still reads honest. If you cannot see ten, do not invent ten.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Pick up only what you'll carry</h3>
+          <p>A find can be noticed, picked up, kept, or returned. Most things get returned. The basket is small on purpose; what stays in it is the work for the week ahead.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Let the tide come back in</h3>
+          <p>By Monday the shore is under water again. The page does not have to outlast the walk. The point was the walk; the page is just where you set the shells down.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="strand" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A strand, on a Friday</h2>
+        <p>A small strand of ten finds for an imaginary last week of May 2026 at a bookbinder's bench in a coast town. The keepers lean toward two threads worth pulling into next week; the strandings and shells lean around them. Pick a thing up, keep it or return it, rename the shore — the strand redraws in your browser. Nothing leaves.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">Shore</p>
+            <p class="chart-project" id="chart-project" title="Click to rename">The last week of May · a bookbinder's bench in a coast town</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="The strand, walked from high water to low">
+          <p class="profile-axis-label top">high water</p>
+          <p class="profile-axis-label bot">low water</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the finds">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="noticed" role="tab">Noticed</button>
+          <button type="button" data-filter="picked" role="tab">Picked up</button>
+          <button type="button" data-filter="kept" role="tab">Kept</button>
+          <button type="button" data-filter="returned" role="tab">Returned</button>
+        </div>
+
+        <ul class="legs" id="finds">
+          <!-- finds inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-kind" aria-label="Kind of find">
+              <option value="find">Find</option>
+              <option value="stranding">Stranding</option>
+              <option value="shell">Shell</option>
+            </select>
+            <input id="add-day" type="text" maxlength="3" placeholder="day" value="fri" aria-label="Day of the week" />
+            <input id="add-name" type="text" placeholder="Name the find — what the week left on the shore" maxlength="90" />
+            <select id="add-state" aria-label="State of the find">
+              <option value="noticed">Noticed</option>
+              <option value="picked">Picked up</option>
+              <option value="kept">Kept</option>
+              <option value="returned">Returned</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Set it down</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original strand</a>
+        </div>
+      </div>
+
+      <div class="legend">
+        <h3>The three things a tide leaves</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-find"></span><div><strong>Find.</strong> Something useful uncovered. A note in a margin, a question half-answered, a thread you had lost. Worth picking up. Most of the value of the walk is in this column.</div></li>
+          <li><span class="legend-swatch swatch-stranding"></span><div><strong>Stranding.</strong> Something the week left high and dry. A thread you had hoped would come in further. Worth deciding: drag it back to the water, or leave it for the gulls.</div></li>
+          <li><span class="legend-swatch swatch-shell"></span><div><strong>Shell.</strong> Small and bright and not useful. A pleasant exchange, an unexpected sentence, a kindness that has nowhere to go. Worth keeping anyway.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who walks the shore</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The bookbinder on a Friday in May</h3>
+          <p>The finds are two margin notes in a 1908 ledger that suggest the previous binder used a thread the supplier no longer lists. The strandings are the catalogue copy that has been on the bench three weeks. The shells are the postcards from a customer in Halifax. The shore is the bench by the window at four.</p>
+        </article>
+        <article>
+          <h3>The clinic director at the end of a long week</h3>
+          <p>The finds are two patient notes that point to the same supply problem from different ends. The strandings are the hire that was supposed to start Monday. The shells are the thank-you card from the family in room six. The shore is the bench by the side door after the last patient leaves.</p>
+        </article>
+        <article>
+          <h3>The teacher on a Friday in late spring</h3>
+          <p>The finds are three short essays better than the prompt asked for. The strandings are the unit on long division that the slow class never reached. The shells are the small drawing one student left on the desk. The shore is the empty classroom after the buses have gone.</p>
+        </article>
+        <article>
+          <h3>The freelance editor at the end of a project</h3>
+          <p>The finds are two paragraphs the writer should keep when everything else is cut. The strandings are the chapter neither of you finished arguing about. The shells are the line the writer asked you to keep just for herself. The shore is the kitchen table after the manuscript has gone back.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="hold" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · autumn 2026</p>
+        <h2>One email when Lowtide opens.</h2>
+        <p class="hold-lede">A page for the walk, not the meeting. No newsletter, no roadmap, no share card. Leave your address and we will write once, on a Friday afternoon when the water has pulled back.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@thequietshore.bay" />
+          <button class="btn btn-primary" type="submit">Set it down</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first shores open. You can leave anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Lowtide</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · the shore tells the truth</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#strand">Strand</a>
+      <a href="#hold">Walk</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
