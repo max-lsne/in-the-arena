@@ -342,6 +342,11 @@ main, header, footer { position: relative; z-index: 1; }
 }
 .stool:hover { background: var(--paper-cool); border-color: var(--line); }
 .stool.is-current { background: var(--paper-cool); border-color: var(--moss-soft); box-shadow: inset 2px 0 0 var(--hawthorn); }
+.stool.is-selected {
+  border-color: var(--moss);
+  box-shadow: inset 3px 0 0 var(--moss), 0 1px 0 rgba(31, 29, 20, 0.04);
+  background: var(--paper-cool);
+}
 .stool-num {
   font-family: 'JetBrains Mono', monospace;
   font-size: 11.5px; color: var(--stone); letter-spacing: 0.06em;
@@ -412,6 +417,22 @@ main, header, footer { position: relative; z-index: 1; }
   border-bottom: 1px dashed var(--line);
 }
 .reset-link:hover { color: var(--hawthorn); border-bottom-color: var(--hawthorn); }
+
+.kbd-help {
+  margin: 18px 0 0;
+  font-family: 'JetBrains Mono', monospace; font-size: 11.5px;
+  color: var(--stone); line-height: 1.8;
+}
+.kbd-help strong { color: var(--ink-soft); font-weight: 600; margin-right: 6px; }
+kbd {
+  display: inline-block;
+  padding: 1px 6px; border-radius: 4px;
+  background: var(--paper-cool);
+  border: 1px solid var(--line);
+  font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+  color: var(--ink-soft);
+  margin: 0 1px;
+}
 
 /* legend */
 .legend {
