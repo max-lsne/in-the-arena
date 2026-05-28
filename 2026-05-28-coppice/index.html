@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coppice — the deliberate cut that lets a thing come back stronger</title>
+  <meta name="description" content="Coppice is a small page for the few things in a life that grow back better for being cut. Not a planner. Not a streak. The cut is the practice." />
+  <meta name="theme-color" content="#faf6ea" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#2e3f1f" media="(prefers-color-scheme: dark)" />
+  <meta name="color-scheme" content="light" />
+  <meta property="og:title" content="Coppice — the cut is the practice" />
+  <meta property="og:description" content="A small page for the few things in a life that grow back better for being cut. No streak. No badge. The cut is the work." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23faf6ea'/%3E%3Cellipse cx='16' cy='26' rx='9' ry='2.4' fill='%235b4528' opacity='0.32'/%3E%3Cpath d='M8 26 Q8 22 16 22 Q24 22 24 26' fill='%238a6c3e' stroke='%235b4528' stroke-width='1.2'/%3E%3Cellipse cx='16' cy='22' rx='6' ry='1.2' fill='none' stroke='%235b4528' stroke-width='1' opacity='0.55'/%3E%3Cellipse cx='16' cy='22' rx='3' ry='0.7' fill='none' stroke='%235b4528' stroke-width='1' opacity='0.75'/%3E%3Cpath d='M12 22 Q10 14 13 6' stroke='%234a6432' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3Cpath d='M16 22 Q17 12 15 3' stroke='%234a6432' stroke-width='2.2' fill='none' stroke-linecap='round'/%3E%3Cpath d='M20 22 Q22 14 19 5' stroke='%234a6432' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='27' cy='5' r='2' fill='%23a64a2e'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <!-- the stool: a low cut stump -->
+          <ellipse cx="16" cy="26" rx="9" ry="2.4" fill="currentColor" opacity="0.18" />
+          <path d="M8 26 Q8 22 16 22 Q24 22 24 26" fill="none" stroke="currentColor" stroke-width="1.4" />
+          <!-- the rings of the cut -->
+          <ellipse cx="16" cy="22" rx="6" ry="1.2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.5" />
+          <ellipse cx="16" cy="22" rx="3.2" ry="0.7" fill="none" stroke="currentColor" stroke-width="1" opacity="0.7" />
+          <!-- the new shoots rising from the stool -->
+          <path d="M12 22 Q10 14 13 6" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" />
+          <path d="M16 22 Q17 12 15 3" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" />
+          <path d="M20 22 Q22 14 19 5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" />
+        </svg>
+      </span>
+      <span>Coppice</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#wood">Your wood</a>
+      <a href="#who">Who keeps a wood</a>
+      <a href="#cut" class="nav-cta">Cut a stool</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">A small wood, well kept</p>
+        <h1>
+          The cut is<br />
+          <em>the practice.</em>
+        </h1>
+        <p class="lede">
+          A coppice is a managed woodland where trees are cut to
+          the stool and left to regrow. The cut is not loss. The
+          cut is the practice. A coppiced ash can outlive an uncut
+          one by a thousand years. Coppice is a small page for the
+          few things in a life that grow back better for being cut.
+        </p>
+        <div class="hero-cta">
+          <a href="#wood" class="btn btn-primary">See a wood</a>
+          <a href="#cut" class="btn btn-ghost">Cut a stool</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One stool at a time. No streak. No badge. No notification.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-wood">
+          <svg viewBox="0 0 400 320" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="copSky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#dbe2c8" stop-opacity="0.55" />
+                <stop offset="55%" stop-color="#c2cda3" stop-opacity="0.28" />
+                <stop offset="100%" stop-color="#7d8a52" stop-opacity="0" />
+              </linearGradient>
+              <linearGradient id="copGround" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#3f3324" stop-opacity="0.18" />
+                <stop offset="100%" stop-color="#3f3324" stop-opacity="0.36" />
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="400" height="320" fill="url(#copSky)" />
+
+            <!-- the canopy line: a soft horizontal silhouette near the top -->
+            <path d="M0 58 Q40 42 80 50 Q120 58 160 44 Q200 32 240 46 Q280 58 320 42 Q360 30 400 44"
+                  stroke="#7d8a52" stroke-width="1.2" fill="none" opacity="0.6" />
+            <path d="M0 72 Q40 60 80 66 Q120 72 160 60 Q200 50 240 62 Q280 72 320 58 Q360 50 400 60"
+                  stroke="#7d8a52" stroke-width="0.9" fill="none" opacity="0.35" />
+
+            <!-- the ground -->
+            <path d="M0 248 Q40 240 80 246 Q140 254 200 242 Q260 230 320 246 Q360 254 400 240 L400 320 L0 320 Z"
+                  fill="url(#copGround)" />
+            <path d="M0 248 Q40 240 80 246 Q140 254 200 242 Q260 230 320 246 Q360 254 400 240"
+                  stroke="#3f3324" stroke-width="1.2" fill="none" opacity="0.45" />
+
+            <!-- a young coppiced stool (left): low stump with a green flush of shoots -->
+            <g class="hero-stool hero-stool-1">
+              <ellipse cx="70" cy="246" rx="14" ry="3.4" fill="#3f3324" opacity="0.32" />
+              <path d="M58 246 Q58 240 70 240 Q82 240 82 246" fill="#5b4528" />
+              <ellipse cx="70" cy="240" rx="9" ry="1.8" fill="#8a6c3e" />
+              <ellipse cx="70" cy="240" rx="5.5" ry="1.2" fill="none" stroke="#3f3324" stroke-width="0.8" opacity="0.5" />
+              <path d="M62 240 Q58 220 62 200" stroke="#5e7a3a" stroke-width="2" fill="none" stroke-linecap="round" />
+              <path d="M66 240 Q63 218 68 194" stroke="#5e7a3a" stroke-width="2.2" fill="none" stroke-linecap="round" />
+              <path d="M70 240 Q72 214 68 186" stroke="#5e7a3a" stroke-width="2.4" fill="none" stroke-linecap="round" />
+              <path d="M74 240 Q77 218 73 196" stroke="#5e7a3a" stroke-width="2.2" fill="none" stroke-linecap="round" />
+              <path d="M78 240 Q82 220 78 202" stroke="#5e7a3a" stroke-width="2" fill="none" stroke-linecap="round" />
+            </g>
+
+            <!-- a pole stage (mid-left): a few years on -->
+            <g class="hero-stool hero-stool-2">
+              <ellipse cx="160" cy="244" rx="13" ry="3" fill="#3f3324" opacity="0.3" />
+              <path d="M150 244 Q150 240 160 240 Q170 240 170 244" fill="#5b4528" />
+              <ellipse cx="160" cy="240" rx="7" ry="1.4" fill="#8a6c3e" />
+              <path d="M153 240 Q150 200 152 152" stroke="#4a6432" stroke-width="2.4" fill="none" stroke-linecap="round" />
+              <path d="M158 240 Q156 196 158 138" stroke="#4a6432" stroke-width="2.8" fill="none" stroke-linecap="round" />
+              <path d="M163 240 Q166 198 162 142" stroke="#4a6432" stroke-width="2.6" fill="none" stroke-linecap="round" />
+              <path d="M168 240 Q170 204 168 156" stroke="#4a6432" stroke-width="2.4" fill="none" stroke-linecap="round" />
+            </g>
+
+            <!-- a standard tree (center): tall, untouched, the canopy keeper -->
+            <g class="hero-stool hero-stool-3">
+              <ellipse cx="240" cy="246" rx="9" ry="2.4" fill="#3f3324" opacity="0.32" />
+              <path d="M236 246 Q236 200 240 100 Q244 50 240 30" stroke="#3f3324" stroke-width="6" fill="none" stroke-linecap="round" />
+              <!-- canopy ovals -->
+              <ellipse cx="232" cy="78" rx="22" ry="18" fill="#5e7a3a" opacity="0.55" />
+              <ellipse cx="252" cy="62" rx="22" ry="18" fill="#5e7a3a" opacity="0.6" />
+              <ellipse cx="244" cy="42" rx="18" ry="14" fill="#7a9344" opacity="0.55" />
+              <ellipse cx="240" cy="84" rx="16" ry="12" fill="#7a9344" opacity="0.5" />
+            </g>
+
+            <!-- a drift: a tree named but not yet cut, on the right -->
+            <g class="hero-stool hero-stool-4">
+              <ellipse cx="330" cy="246" rx="8" ry="2" fill="#3f3324" opacity="0.28" />
+              <path d="M327 246 Q326 210 330 160 Q334 116 330 86" stroke="#5b4528" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-dasharray="6 5" opacity="0.7" />
+              <ellipse cx="330" cy="90" rx="14" ry="11" fill="none" stroke="#7d8a52" stroke-width="1.4" stroke-dasharray="4 3" opacity="0.55" />
+            </g>
+
+            <!-- a few low hazel sticks lying on the ground -->
+            <g opacity="0.5">
+              <path d="M96 256 L142 254" stroke="#5b4528" stroke-width="1.4" stroke-linecap="round" />
+              <path d="M104 262 L150 260" stroke="#5b4528" stroke-width="1.2" stroke-linecap="round" />
+              <path d="M194 258 L240 256" stroke="#5b4528" stroke-width="1.4" stroke-linecap="round" />
+              <path d="M280 260 L322 258" stroke="#5b4528" stroke-width="1.2" stroke-linecap="round" />
+            </g>
+
+            <!-- a hawthorn at the edge: small berries -->
+            <circle cx="362" cy="234" r="2.4" fill="#a64a2e" opacity="0.7" />
+            <circle cx="370" cy="232" r="1.8" fill="#a64a2e" opacity="0.6" />
+            <circle cx="356" cy="238" r="1.6" fill="#a64a2e" opacity="0.55" />
+          </svg>
+        </div>
+        <span class="hero-tick hero-tick-1">canopy</span>
+        <span class="hero-tick hero-tick-2">shoot</span>
+        <span class="hero-tick hero-tick-3">stool</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>Planners<br /><em>are for forests.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            Most planners want a line going up. They draw a forest:
+            every practice taller than the last, every quarter
+            adding rings. The line punishes the year you cut the
+            project on purpose. The line does not believe in fallow.
+            The line is the wrong shape.
+          </p>
+          <p>
+            A coppice is the right shape. The line goes down on
+            purpose, then up, then down again, on a slow turn. The
+            old practices in a coppiced life are not the unbroken
+            ones — they are the ones that have been cut and grown
+            back, cut and grown back, for years. The cut is what
+            keeps them young. The cut is the work.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Name a stool</h3>
+          <p>One thing — a practice, a project, a slow attachment — you mean to keep on a long cycle. Not a goal. A stool.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Pick a stand</h3>
+          <p>Inner for the practices you cut in yourself. Working for the projects. Edge for the slow attachments at the edge of your life.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Cut when the cycle says</h3>
+          <p>Set it back to a stool on purpose. A year, three years, seven. The cut is named. The regrowth is named. Both are the work.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Leave a standard</h3>
+          <p>Some trees the coppicer never cuts. The standards are the canopy, the seed, the proof. Not everything is for cutting.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="wood" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A wood, mid-spring</h2>
+        <p>A small wood of twelve stools — a fictional one, kept by no one in particular through a slow turn of the spring of 2026. Some are standards left to grow. Some are shooting after a winter cut. Some are still drifting, named but not yet cut. Cut a stool, leave a standard, name a new one — the wood redraws in your browser. Nothing leaves.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">Wood</p>
+            <p class="chart-project" id="chart-project" title="Click to rename">A small hazel wood · spring 2026 · the slow turn</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Years of growth across the stools in this wood">
+          <p class="profile-axis-label top">canopy</p>
+          <p class="profile-axis-label bot">stool</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the stools">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="drift" role="tab">Drift</button>
+          <button type="button" data-filter="shoot" role="tab">Shoot</button>
+          <button type="button" data-filter="pole" role="tab">Pole</button>
+          <button type="button" data-filter="standard" role="tab">Standard</button>
+        </div>
+
+        <ul class="legs" id="stools">
+          <!-- stools inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-stand" aria-label="Stand of the stool">
+              <option value="inner">Inner</option>
+              <option value="working">Working</option>
+              <option value="edge">Edge</option>
+            </select>
+            <input id="add-years" type="number" step="1" min="0" value="0" aria-label="Years since the last cut" />
+            <input id="add-name" type="text" placeholder="Name the stool — something worth a long cycle" maxlength="90" />
+            <select id="add-state" aria-label="State of the stool">
+              <option value="drift">Drift</option>
+              <option value="shoot">Shoot</option>
+              <option value="pole">Pole</option>
+              <option value="standard">Standard</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Cut the stool</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original wood</a>
+        </div>
+
+        <p class="kbd-help">
+          <strong>Keys:</strong>
+          <kbd>J</kbd>/<kbd>K</kbd> move &middot;
+          <kbd>Enter</kbd> change state &middot;
+          <kbd>Del</kbd> remove &middot;
+          <kbd>N</kbd> add &middot;
+          <kbd>0</kbd>&ndash;<kbd>4</kbd> filter &middot;
+          <kbd>[</kbd>/<kbd>]</kbd> nudge years &middot;
+          <kbd>R</kbd> reset.
+        </p>
+      </div>
+
+      <div class="legend">
+        <h3>The three stands</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-inner"></span><div><strong>Inner.</strong> What you cut back in yourself: the morning page, the evening walk, the practice you fell so it could come back greener.</div></li>
+          <li><span class="legend-swatch swatch-working"></span><div><strong>Working.</strong> Projects you cut back on purpose: the side book set down for a year, the newsletter rested in winter.</div></li>
+          <li><span class="legend-swatch swatch-edge"></span><div><strong>Edge.</strong> Slow attachments at the edge of your life: the Tuesday call, the letter habit, the long Sunday with one person.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who keeps a wood</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The novelist between the third and fourth book</h3>
+          <p>Cuts the manuscript every January. Lets it lie under leaves until June. The novel that took seven years was cut six times. The novel that took two years has never been cut. The seven-year one will outlast her.</p>
+        </article>
+        <article>
+          <h3>The therapist with a Tuesday call of fifteen years</h3>
+          <p>Two standards in the edge stand — one Tuesday call, one Sunday meal. Three shoots, all running. Cut the Friday newsletter in 2022 and let it stand fallow. Started it again in late 2025 — greener than before.</p>
+        </article>
+        <article>
+          <h3>The founder on her second company</h3>
+          <p>The first company was cut to the stool on purpose, the week the second began. The first is still there, still her, still regrowing. The pole on the third year is straight enough now to lean on.</p>
+        </article>
+        <article>
+          <h3>The painter who used to paint every day</h3>
+          <p>Cut the daily paintings in 2024. The shoots in 2025 were unrecognisably better. The cut was the practice — the practice she had not known she was avoiding by painting every day.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="cut" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · autumn 2026</p>
+        <h2>One email when Coppice opens.</h2>
+        <p class="hold-lede">A wood, a few stools, a page that reads as honest as a damp morning in the hazel. No streak. No badge. No share card. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@somewhere.green" />
+          <button class="btn btn-primary" type="submit">Cut a stool</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first woods open. You can leave anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Coppice</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · the deliberate cut as practice</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#wood">Wood</a>
+      <a href="#cut">Cut</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
