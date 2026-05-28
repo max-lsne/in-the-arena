@@ -71,10 +71,40 @@ const STAND_COLOR = {
   edge:    '#4a6432',
 };
 
+const STORAGE_KEY = 'coppice.v1';
 const DEFAULT_PROJECT = 'A small hazel wood · spring 2026 · the slow turn';
 
-let stools = SEED.map(s => ({ ...s }));
-let project = DEFAULT_PROJECT;
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || !Array.isArray(parsed.stools)) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ stools, project }));
+  } catch {
+    // quota or private mode — fail quietly, the session still works
+  }
+}
+
+function clearState() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch {
+    // ignore
+  }
+}
+
+const _saved = loadState();
+let stools = _saved ? _saved.stools.map(s => ({ ...s })) : SEED.map(s => ({ ...s }));
+let project = _saved && typeof _saved.project === 'string' ? _saved.project : DEFAULT_PROJECT;
 let activeFilter = 'all';
 
 // ---------- formatting ----------
@@ -261,12 +291,14 @@ function cycleState(n) {
   if (!stool) return;
   const i = STATE_ORDER.indexOf(stool.state);
   stool.state = STATE_ORDER[(i + 1) % STATE_ORDER.length];
+  saveState();
   renderAll();
 }
 
 function removeStool(n) {
   stools = stools.filter(s => s.n !== n);
   stools.forEach((s, i) => { s.n = i + 1; });
+  saveState();
   renderAll();
 }
 
@@ -279,6 +311,18 @@ function addStool({ stand, years, name, state }) {
     state: state || 'drift',
     name: name || 'Unnamed stool',
     note: '',
+  });
+  saveState();
+  renderAll();
+}
+
+function resetToSeed() {
+  stools = SEED.map(s => ({ ...s }));
+  project = DEFAULT_PROJECT;
+  activeFilter = 'all';
+  clearState();
+  document.querySelectorAll('#filters button').forEach(b => {
+    b.classList.toggle('is-active', b.dataset.filter === 'all');
   });
   renderAll();
 }
@@ -329,6 +373,7 @@ if (projectEl) {
     const v = projectEl.textContent.trim();
     project = v || DEFAULT_PROJECT;
     projectEl.removeAttribute('contenteditable');
+    saveState();
     renderProject();
   });
   projectEl.addEventListener('keydown', (e) => {
@@ -349,6 +394,16 @@ if (form) {
     addStool({ stand, years, name, state });
     form.reset();
     document.getElementById('add-name').focus();
+  });
+}
+
+const resetLink = document.getElementById('reset-demo');
+if (resetLink) {
+  resetLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (confirm('Reset the wood to the original twelve stools? Any changes you have made will be lost.')) {
+      resetToSeed();
+    }
   });
 }
 
