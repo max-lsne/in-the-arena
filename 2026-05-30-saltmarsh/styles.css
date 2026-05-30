@@ -154,6 +154,24 @@ main, header, footer { position: relative; z-index: 1; }
 .hero-marsh svg {
   display: block; width: 100%; height: 100%;
 }
+.hero-tuft {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: marsh-sway 7s ease-in-out infinite;
+  will-change: transform;
+}
+.hero-tuft-a { animation-duration: 6.4s; animation-delay: -0.4s; }
+.hero-tuft-b { animation-duration: 7.2s; animation-delay: -1.8s; }
+.hero-tuft-c { animation-duration: 8.1s; animation-delay: -0.9s; }
+.hero-tuft-d { animation-duration: 6.8s; animation-delay: -2.6s; }
+.hero-tuft-e { animation-duration: 7.6s; animation-delay: -1.3s; }
+@keyframes marsh-sway {
+  0%, 100% { transform: rotate(-1.2deg); }
+  50%      { transform: rotate( 1.4deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-tuft { animation: none; }
+}
 .hero-tick {
   position: absolute; right: 14px;
   font-family: 'JetBrains Mono', monospace;
