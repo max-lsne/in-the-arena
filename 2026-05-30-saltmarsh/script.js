@@ -105,6 +105,9 @@ const _saved = loadState();
 let deposits = _saved ? _saved.deposits.map(d => ({ ...d })) : SEED.map(d => ({ ...d }));
 let project = _saved && typeof _saved.project === 'string' ? _saved.project : DEFAULT_PROJECT;
 let activeFilter = 'all';
+let selectedN = deposits.length ? deposits[0].n : null;
+
+const FILTER_BY_KEY = { '0': 'all', '1': 'drift', '2': 'catch', '3': 'hold', '4': 'layer' };
 
 // ---------- formatting ----------
 
@@ -251,7 +254,7 @@ function renderDeposits() {
   }
 
   host.innerHTML = filtered.map(d => `
-    <li class="deposit ${d.state === 'catch' ? 'is-current' : ''}" data-n="${d.n}">
+    <li class="deposit ${d.state === 'catch' ? 'is-current' : ''} ${d.n === selectedN ? 'is-selected' : ''}" data-n="${d.n}">
       <span class="deposit-num">${String(d.n).padStart(2, '0')}</span>
       <span class="deposit-zone ${d.zone}">
         <span class="glyph" aria-hidden="true">${ZONE_GLYPH[d.zone]}</span>
@@ -294,6 +297,13 @@ function cycleState(n) {
   renderAll();
 }
 
+function removeDeposit(n) {
+  deposits = deposits.filter(d => d.n !== n);
+  deposits.forEach((d, i) => { d.n = i + 1; });
+  saveState();
+  renderAll();
+}
+
 function addDeposit({ zone, years, name, state }) {
   const n = deposits.length + 1;
   deposits.push({
@@ -324,7 +334,56 @@ function setFilter(f) {
   document.querySelectorAll('#filters button').forEach(b => {
     b.classList.toggle('is-active', b.dataset.filter === f);
   });
+  // keep selection valid for the new filter
+  const v = visibleDeposits();
+  if (v.length && !v.find(d => d.n === selectedN)) selectedN = v[0].n;
   renderDeposits();
+}
+
+function visibleDeposits() {
+  return deposits.filter(d => activeFilter === 'all' || d.state === activeFilter);
+}
+
+function selectByOffset(delta) {
+  const v = visibleDeposits();
+  if (v.length === 0) return;
+  const idx = v.findIndex(d => d.n === selectedN);
+  const next = idx === -1
+    ? (delta > 0 ? 0 : v.length - 1)
+    : Math.max(0, Math.min(v.length - 1, idx + delta));
+  selectedN = v[next].n;
+  renderDeposits();
+  scrollSelectedIntoView();
+}
+
+function scrollSelectedIntoView() {
+  const el = document.querySelector(`.deposit[data-n="${selectedN}"]`);
+  if (el && el.scrollIntoView) el.scrollIntoView({ block: 'nearest' });
+}
+
+function nudgeYears(delta) {
+  const deposit = deposits.find(d => d.n === selectedN);
+  if (!deposit) return;
+  deposit.years = Math.max(0, (deposit.years || 0) + delta);
+  saveState();
+  renderAll();
+}
+
+function removeSelected() {
+  if (selectedN == null) return;
+  const v = visibleDeposits();
+  const idx = v.findIndex(d => d.n === selectedN);
+  removeDeposit(selectedN);
+  const v2 = visibleDeposits();
+  selectedN = v2.length === 0
+    ? null
+    : v2[Math.min(idx, v2.length - 1)].n;
+  renderDeposits();
+}
+
+function cycleSelectedState() {
+  if (selectedN == null) return;
+  cycleState(selectedN);
 }
 
 // ---------- wiring ----------
@@ -332,13 +391,76 @@ function setFilter(f) {
 document.addEventListener('click', (e) => {
   const cycle = e.target.closest('[data-action="cycle-state"]');
   if (cycle) {
-    cycleState(Number(cycle.dataset.n));
+    selectedN = Number(cycle.dataset.n);
+    cycleState(selectedN);
     return;
   }
   const filterBtn = e.target.closest('#filters button');
   if (filterBtn) {
     setFilter(filterBtn.dataset.filter);
     return;
+  }
+  const depositRow = e.target.closest('.deposit');
+  if (depositRow) {
+    selectedN = Number(depositRow.dataset.n);
+    renderDeposits();
+  }
+});
+
+function isTypingInField(target) {
+  if (!target) return false;
+  if (target.isContentEditable) return true;
+  const tag = (target.tagName || '').toLowerCase();
+  return tag === 'input' || tag === 'textarea' || tag === 'select';
+}
+
+document.addEventListener('keydown', (e) => {
+  if (isTypingInField(e.target)) return;
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+  switch (e.key) {
+    case 'j':
+    case 'J':
+    case 'ArrowDown':
+      e.preventDefault(); selectByOffset(1); break;
+    case 'k':
+    case 'K':
+    case 'ArrowUp':
+      e.preventDefault(); selectByOffset(-1); break;
+    case 'Enter':
+      e.preventDefault(); cycleSelectedState(); break;
+    case 'Delete':
+    case 'Backspace':
+      e.preventDefault(); removeSelected(); break;
+    case 'n':
+    case 'N': {
+      e.preventDefault();
+      const nameField = document.getElementById('add-name');
+      if (nameField) nameField.focus();
+      break;
+    }
+    case '[':
+      e.preventDefault(); nudgeYears(-1); break;
+    case ']':
+      e.preventDefault(); nudgeYears(1); break;
+    case 'r':
+    case 'R':
+      e.preventDefault();
+      if (confirm('Reset the marsh to the original twelve deposits?')) resetToSeed();
+      break;
+    default:
+      if (FILTER_BY_KEY[e.key] !== undefined) {
+        e.preventDefault();
+        setFilter(FILTER_BY_KEY[e.key]);
+      }
+  }
+});
+
+document.addEventListener('dblclick', (e) => {
+  const deposit = e.target.closest('.deposit');
+  if (deposit) {
+    const n = Number(deposit.dataset.n);
+    if (confirm('Remove this deposit from the marsh?')) removeDeposit(n);
   }
 });
 
