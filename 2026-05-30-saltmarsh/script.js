@@ -70,10 +70,40 @@ const ZONE_COLOR = {
   wrack:   '#b56a3c',
 };
 
+const STORAGE_KEY = 'saltmarsh.v1';
 const DEFAULT_PROJECT = 'A small north-coast marsh · spring 2026 · the slow turn';
 
-let deposits = SEED.map(d => ({ ...d }));
-let project = DEFAULT_PROJECT;
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || !Array.isArray(parsed.deposits)) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ deposits, project }));
+  } catch {
+    // quota or private mode — fail quietly, the session still works
+  }
+}
+
+function clearState() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch {
+    // ignore
+  }
+}
+
+const _saved = loadState();
+let deposits = _saved ? _saved.deposits.map(d => ({ ...d })) : SEED.map(d => ({ ...d }));
+let project = _saved && typeof _saved.project === 'string' ? _saved.project : DEFAULT_PROJECT;
 let activeFilter = 'all';
 
 // ---------- formatting ----------
@@ -260,6 +290,7 @@ function cycleState(n) {
   if (!deposit) return;
   const i = STATE_ORDER.indexOf(deposit.state);
   deposit.state = STATE_ORDER[(i + 1) % STATE_ORDER.length];
+  saveState();
   renderAll();
 }
 
@@ -272,6 +303,18 @@ function addDeposit({ zone, years, name, state }) {
     state: state || 'drift',
     name: name || 'Unnamed deposit',
     note: '',
+  });
+  saveState();
+  renderAll();
+}
+
+function resetToSeed() {
+  deposits = SEED.map(d => ({ ...d }));
+  project = DEFAULT_PROJECT;
+  activeFilter = 'all';
+  clearState();
+  document.querySelectorAll('#filters button').forEach(b => {
+    b.classList.toggle('is-active', b.dataset.filter === 'all');
   });
   renderAll();
 }
@@ -314,6 +357,7 @@ if (projectEl) {
     const v = projectEl.textContent.trim();
     project = v || DEFAULT_PROJECT;
     projectEl.removeAttribute('contenteditable');
+    saveState();
     renderProject();
   });
   projectEl.addEventListener('keydown', (e) => {
@@ -334,6 +378,16 @@ if (form) {
     addDeposit({ zone, years, name, state });
     form.reset();
     document.getElementById('add-name').focus();
+  });
+}
+
+const resetLink = document.getElementById('reset-demo');
+if (resetLink) {
+  resetLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (confirm('Reset the marsh to the original twelve deposits? Any changes you have made will be lost.')) {
+      resetToSeed();
+    }
   });
 }
 
