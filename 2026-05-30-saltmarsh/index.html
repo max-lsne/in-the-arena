@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saltmarsh — a slow ledger of the things that settle between the tides</title>
+  <meta name="description" content="Saltmarsh is a small page for the few things in a life that work like a coastal marsh: caught at the edge, held quietly, layered for a long time." />
+  <link rel="icon" href="data:," />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <!-- the tide line -->
+          <path d="M2 22 Q8 20 14 22 Q20 24 26 22 Q30 21 30 22" stroke="currentColor" stroke-width="1.4" fill="none" />
+          <path d="M2 26 Q8 24 14 26 Q20 28 26 26 Q30 25 30 26" stroke="currentColor" stroke-width="1" fill="none" opacity="0.55" />
+          <!-- the sward: three tufts of cordgrass -->
+          <path d="M9 22 L8 12" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" />
+          <path d="M11 22 L11 9" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" />
+          <path d="M13 22 L14 13" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" />
+          <path d="M19 22 L18 14" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" />
+          <path d="M21 22 L21 10" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" />
+          <path d="M23 22 L24 12" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" />
+          <!-- a glasswort berry -->
+          <circle cx="28" cy="20" r="1.6" fill="currentColor" opacity="0.7" />
+        </svg>
+      </span>
+      <span>Saltmarsh</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#marsh">Your marsh</a>
+      <a href="#who">Who keeps a marsh</a>
+      <a href="#tide" class="nav-cta">Catch a deposit</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">A slow marsh, well kept</p>
+        <h1>
+          The tide is<br />
+          <em>the work.</em>
+        </h1>
+        <p class="lede">
+          A saltmarsh is the strip of coast that is neither sea nor
+          land — flooded twice a day and yet, on the slow turn of
+          decades, the most patient land on the planet. It holds
+          carbon. It dulls the storm. It catches what the sea no
+          longer wants and, in a hundred years, turns it into ground.
+          Saltmarsh is a small page for the few things in a life that
+          work the same way.
+        </p>
+        <div class="hero-cta">
+          <a href="#marsh" class="btn btn-primary">See a marsh</a>
+          <a href="#tide" class="btn btn-ghost">Catch a deposit</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One deposit at a time. No streak. No badge. No notification.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-marsh">
+          <svg viewBox="0 0 400 320" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="smSky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#d8dfd4" stop-opacity="0.55" />
+                <stop offset="55%" stop-color="#bcc6b3" stop-opacity="0.28" />
+                <stop offset="100%" stop-color="#6b8b9e" stop-opacity="0" />
+              </linearGradient>
+              <linearGradient id="smWater" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#7a96a4" stop-opacity="0.55" />
+                <stop offset="100%" stop-color="#5a7384" stop-opacity="0.75" />
+              </linearGradient>
+              <linearGradient id="smMud" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#5a4828" stop-opacity="0.22" />
+                <stop offset="100%" stop-color="#3f3324" stop-opacity="0.42" />
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="400" height="320" fill="url(#smSky)" />
+
+            <!-- distant horizon line -->
+            <path d="M0 96 Q100 92 200 95 Q300 98 400 94" stroke="#6b8b9e" stroke-width="0.9" fill="none" opacity="0.5" />
+
+            <!-- water channel cutting through the marsh -->
+            <path d="M0 232 Q60 228 120 234 Q180 240 240 230 Q300 220 360 232 Q400 240 400 232 L400 260 Q360 252 300 256 Q240 264 180 260 Q120 256 60 262 Q20 264 0 260 Z"
+                  fill="url(#smWater)" opacity="0.6" />
+
+            <!-- the high marsh ground -->
+            <path d="M0 232 Q60 228 120 234 Q180 240 240 230 Q300 220 360 232 Q400 240 400 232 L400 110 Q360 116 300 112 Q240 108 180 116 Q120 122 60 116 Q20 112 0 116 Z"
+                  fill="url(#smMud)" />
+            <path d="M0 232 Q60 228 120 234 Q180 240 240 230 Q300 220 360 232 Q400 240 400 232"
+                  stroke="#3f3324" stroke-width="1.1" fill="none" opacity="0.4" />
+
+            <!-- a wrack line — driftweed at the high tide mark -->
+            <path d="M30 130 L52 128 M70 134 L92 132 M110 128 L132 130 M148 134 L172 130 M188 128 L208 132 M226 134 L248 130 M268 128 L292 132 M308 134 L332 130 M348 128 L372 132"
+                  stroke="#5a4828" stroke-width="1.1" stroke-linecap="round" opacity="0.55" />
+
+            <!-- spartina tufts across the sward -->
+            <g class="hero-tuft hero-tuft-a">
+              <path d="M50 232 L46 200" stroke="#5d7c3a" stroke-width="1.4" stroke-linecap="round" />
+              <path d="M52 232 L52 192" stroke="#5d7c3a" stroke-width="1.6" stroke-linecap="round" />
+              <path d="M55 232 L58 196" stroke="#5d7c3a" stroke-width="1.4" stroke-linecap="round" />
+            </g>
+            <g class="hero-tuft hero-tuft-b">
+              <path d="M118 232 L114 198" stroke="#5d7c3a" stroke-width="1.5" stroke-linecap="round" />
+              <path d="M121 232 L121 188" stroke="#5d7c3a" stroke-width="1.7" stroke-linecap="round" />
+              <path d="M124 232 L128 196" stroke="#5d7c3a" stroke-width="1.5" stroke-linecap="round" />
+            </g>
+            <g class="hero-tuft hero-tuft-c">
+              <path d="M196 232 L192 196" stroke="#5d7c3a" stroke-width="1.5" stroke-linecap="round" />
+              <path d="M200 232 L200 182" stroke="#5d7c3a" stroke-width="1.8" stroke-linecap="round" />
+              <path d="M204 232 L208 194" stroke="#5d7c3a" stroke-width="1.5" stroke-linecap="round" />
+            </g>
+            <g class="hero-tuft hero-tuft-d">
+              <path d="M276 232 L272 198" stroke="#5d7c3a" stroke-width="1.4" stroke-linecap="round" />
+              <path d="M279 232 L279 190" stroke="#5d7c3a" stroke-width="1.6" stroke-linecap="round" />
+              <path d="M282 232 L286 196" stroke="#5d7c3a" stroke-width="1.4" stroke-linecap="round" />
+            </g>
+            <g class="hero-tuft hero-tuft-e">
+              <path d="M338 232 L334 200" stroke="#5d7c3a" stroke-width="1.4" stroke-linecap="round" />
+              <path d="M342 232 L342 194" stroke="#5d7c3a" stroke-width="1.5" stroke-linecap="round" />
+              <path d="M345 232 L348 198" stroke="#5d7c3a" stroke-width="1.3" stroke-linecap="round" />
+            </g>
+
+            <!-- a salt pan — a still circle of dried salt mid-marsh -->
+            <ellipse cx="246" cy="170" rx="22" ry="8" fill="#e7e0ce" opacity="0.62" />
+            <ellipse cx="246" cy="170" rx="14" ry="5" fill="none" stroke="#3f3324" stroke-width="0.8" opacity="0.35" />
+
+            <!-- glasswort cushions on the lower marsh -->
+            <circle cx="76" cy="216" r="3.2" fill="#b56a3c" opacity="0.55" />
+            <circle cx="82" cy="220" r="2.4" fill="#b56a3c" opacity="0.45" />
+            <circle cx="156" cy="218" r="3" fill="#b56a3c" opacity="0.5" />
+            <circle cx="312" cy="216" r="3.4" fill="#b56a3c" opacity="0.55" />
+            <circle cx="318" cy="220" r="2.2" fill="#b56a3c" opacity="0.4" />
+
+            <!-- a small foreground tussock leaning out over the channel -->
+            <g>
+              <path d="M210 246 L208 232" stroke="#7a8f4a" stroke-width="1.3" stroke-linecap="round" />
+              <path d="M213 246 L214 230" stroke="#7a8f4a" stroke-width="1.4" stroke-linecap="round" />
+              <path d="M216 246 L220 234" stroke="#7a8f4a" stroke-width="1.3" stroke-linecap="round" />
+            </g>
+
+            <!-- a single curlew, far off -->
+            <path d="M324 94 Q328 90 332 94 Q336 90 340 94" stroke="#3f3324" stroke-width="1" fill="none" opacity="0.55" />
+          </svg>
+        </div>
+        <span class="hero-tick hero-tick-1">wrack</span>
+        <span class="hero-tick hero-tick-2">sward</span>
+        <span class="hero-tick hero-tick-3">channel</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>Ledgers<br /><em>are for cliffs.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            Most ledgers want a line going up. They draw a cliff:
+            every quarter taller than the last, every year a sharper
+            edge. The cliff is a beautiful shape until the storm
+            arrives — and then the cliff is the first to fall.
+          </p>
+          <p>
+            A saltmarsh adds a millimetre a year. A third of an inch
+            in a decade. A foot in a century, a few feet in a lifetime.
+            It is the slowest shape on the coast, and the most
+            patient — and when the storm comes it dulls the storm.
+            The marsh keeps. The tide is what makes it keep. The tide
+            is the work.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Name a deposit</h3>
+          <p>One thing — a practice, a project, a slow attachment — you mean to let the tide work on. Not a goal. A deposit.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Pick a zone</h3>
+          <p>Pan for the still inner deposits. Channel for the working flow. Wrack for what arrives at the edge from elsewhere.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Let it catch</h3>
+          <p>A deposit starts adrift. Then it catches at the wrack line. Then it roots in the sward. Then, year by year, it layers in the mud.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Don't drain the marsh</h3>
+          <p>Saltmarsh dies when it is drained for tidier ground. Keep the tide. The slow flood is what makes the deposit hold.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="marsh" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A marsh, mid-spring</h2>
+        <p>A small marsh of twelve deposits — a fictional one, kept by no one in particular through a slow turn of the spring of 2026. Some are drifting, named but not yet caught. Some are at the wrack line after a winter storm. Some are rooted. Some are layered down years deep. Catch a deposit, settle one deeper, name a new one — the marsh redraws in your browser. Nothing leaves.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">Marsh</p>
+            <p class="chart-project" id="chart-project" title="Click to rename">A small north-coast marsh · spring 2026 · the slow turn</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Years of layering across the deposits in this marsh">
+          <p class="profile-axis-label top">layer</p>
+          <p class="profile-axis-label bot">drift</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the deposits">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="drift" role="tab">Drift</button>
+          <button type="button" data-filter="catch" role="tab">Catch</button>
+          <button type="button" data-filter="hold" role="tab">Hold</button>
+          <button type="button" data-filter="layer" role="tab">Layer</button>
+        </div>
+
+        <ul class="legs" id="deposits">
+          <!-- deposits inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-zone" aria-label="Zone of the deposit">
+              <option value="pan">Pan</option>
+              <option value="channel">Channel</option>
+              <option value="wrack">Wrack</option>
+            </select>
+            <input id="add-years" type="number" step="1" min="0" value="0" aria-label="Years since the deposit was first caught" />
+            <input id="add-name" type="text" placeholder="Name the deposit — something worth a long slow holding" maxlength="90" />
+            <select id="add-state" aria-label="State of the deposit">
+              <option value="drift">Drift</option>
+              <option value="catch">Catch</option>
+              <option value="hold">Hold</option>
+              <option value="layer">Layer</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Catch the deposit</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="legend">
+        <h3>The three zones</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-pan"></span><div><strong>Pan.</strong> The still inner deposits of the self: the morning silence, the cold-water swim, the practice that does not leave the marsh.</div></li>
+          <li><span class="legend-swatch swatch-channel"></span><div><strong>Channel.</strong> The working flow: the projects you let the tide work on, the slow newsletters, the open notebooks of a craft.</div></li>
+          <li><span class="legend-swatch swatch-wrack"></span><div><strong>Wrack.</strong> What arrives at the edge from elsewhere: the Tuesday call, the long walk with a parent, the letter to a person far away.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who keeps a marsh</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The biographer in the fourteenth year of one book</h3>
+          <p>Three layered deposits in the pan stand — a morning silence, a long bath, a Sunday with no screen. The biography itself sits in the channel: drift one year, catch the next, hold most years, layered at last. The mud is the shape of fourteen winters.</p>
+        </article>
+        <article>
+          <h3>The cardiologist with a Tuesday tea of twelve years</h3>
+          <p>Two standards in the wrack zone — a Tuesday tea, a Sunday call with a brother. Four channel deposits, all running. Cut the Friday cycling group in 2023 to a drift for a year, then a catch, then a hold. The pan is quiet on purpose.</p>
+        </article>
+        <article>
+          <h3>The founder who let her first company become ground</h3>
+          <p>The first company is a layer now, eight years deep, the second is a hold in the channel. The wrack line was full of letters from the first one for years. The marsh kept them.</p>
+        </article>
+        <article>
+          <h3>The painter on the long quiet practice</h3>
+          <p>Cut the daily paintings in 2024 — let them drift. The shoot was a catch in 2025, slow and clumsy. The hold has come this spring. The layer is two decades off. She will not be hurried by the marsh.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="tide" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · autumn 2026</p>
+        <h2>One email when Saltmarsh opens.</h2>
+        <p class="hold-lede">A marsh, a few deposits, a page that reads as honest as a damp morning at low water. No streak. No badge. No share card. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@somewhere.salt" />
+          <button class="btn btn-primary" type="submit">Catch a deposit</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first marshes open. You can leave anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Saltmarsh</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · the slow tide as practice</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#marsh">Marsh</a>
+      <a href="#tide">Catch</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
