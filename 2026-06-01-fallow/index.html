@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fallow — a small page for the work you have set down on purpose</title>
+  <meta name="description" content="Fallow is a small page for the things in a working life you have deliberately set down, so the soil can recover and the work come back better." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <!-- a low horizon -->
+          <path d="M2 22 Q8 21 14 22 Q20 23 26 22 Q30 21 30 22" stroke="currentColor" stroke-width="1.3" fill="none" />
+          <!-- furrow lines, drawn lightly, on a rested field -->
+          <path d="M3 26 Q10 25 16 26 Q22 27 29 26" stroke="currentColor" stroke-width="0.9" fill="none" opacity="0.55" />
+          <!-- a single hedgerow on the right -->
+          <path d="M25 22 L25 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+          <circle cx="25" cy="10" r="2.4" fill="currentColor" opacity="0.6" />
+          <circle cx="22" cy="13" r="1.6" fill="currentColor" opacity="0.5" />
+          <circle cx="28" cy="13" r="1.8" fill="currentColor" opacity="0.55" />
+          <!-- a sun, low and patient -->
+          <circle cx="7" cy="12" r="2.6" fill="currentColor" opacity="0.7" />
+        </svg>
+      </span>
+      <span>Fallow</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#fields">Your fallow</a>
+      <a href="#who">Who keeps a fallow</a>
+      <a href="#rest" class="nav-cta">Set a field down</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">A slow field, well rested</p>
+        <h1>
+          The rest is<br />
+          <em>the work.</em>
+        </h1>
+        <p class="lede">
+          A fallow is a field deliberately left unsown for a season —
+          a year, sometimes two, sometimes seven — so the soil can
+          recover from being worked. The Romans rotated thirds. The
+          medieval English rotated halves. The longest-kept fields in
+          the world have always been the ones that were also,
+          regularly, the longest-rested. Fallow is a small page for
+          the work that wants the same.
+        </p>
+        <div class="hero-cta">
+          <a href="#fields" class="btn btn-primary">See a fallow</a>
+          <a href="#rest" class="btn btn-ghost">Set a field down</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One field at a time. No streak. No badge. No notification.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-field">
+          <svg viewBox="0 0 400 320" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="fwSky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#efe7d2" stop-opacity="0.7" />
+                <stop offset="60%" stop-color="#e5d9b3" stop-opacity="0.35" />
+                <stop offset="100%" stop-color="#c9b58a" stop-opacity="0" />
+              </linearGradient>
+              <linearGradient id="fwField" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#b8a06a" stop-opacity="0.42" />
+                <stop offset="100%" stop-color="#86714a" stop-opacity="0.65" />
+              </linearGradient>
+              <linearGradient id="fwHedge" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#6b7d4f" stop-opacity="0.7" />
+                <stop offset="100%" stop-color="#4a5a35" stop-opacity="0.85" />
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="400" height="320" fill="url(#fwSky)" />
+
+            <!-- distant ridge -->
+            <path d="M0 116 Q100 110 200 114 Q300 118 400 112" stroke="#86714a" stroke-width="0.9" fill="none" opacity="0.5" />
+
+            <!-- the fallow field — the great rested rectangle -->
+            <path d="M0 200 Q60 198 120 202 Q180 206 240 200 Q300 194 360 202 Q400 206 400 200 L400 132 Q360 138 300 134 Q240 130 180 138 Q120 144 60 138 Q20 134 0 138 Z"
+                  fill="url(#fwField)" />
+
+            <!-- soft furrow lines remembered in the rested ground -->
+            <path d="M10 158 Q80 155 160 160 Q240 165 320 158 Q380 154 398 158" stroke="#86714a" stroke-width="0.8" fill="none" opacity="0.32" />
+            <path d="M10 172 Q80 169 160 174 Q240 179 320 172 Q380 168 398 172" stroke="#86714a" stroke-width="0.8" fill="none" opacity="0.3" />
+            <path d="M10 186 Q80 183 160 188 Q240 193 320 186 Q380 182 398 186" stroke="#86714a" stroke-width="0.8" fill="none" opacity="0.28" />
+
+            <!-- a near-foreground field, lower, with cover crop returning -->
+            <path d="M0 232 Q60 228 120 234 Q180 240 240 230 Q300 220 360 232 Q400 240 400 232 L400 260 Q360 252 300 256 Q240 264 180 260 Q120 256 60 262 Q20 264 0 260 Z"
+                  fill="#8a9a5b" opacity="0.5" />
+
+            <!-- hedgerow — three trees on the right of the rested field -->
+            <g class="hero-hedge hero-hedge-a">
+              <path d="M76 200 L76 158" stroke="#6b7d4f" stroke-width="1.4" stroke-linecap="round" />
+              <ellipse cx="76" cy="152" rx="9" ry="11" fill="url(#fwHedge)" />
+            </g>
+            <g class="hero-hedge hero-hedge-b">
+              <path d="M198 200 L198 148" stroke="#6b7d4f" stroke-width="1.6" stroke-linecap="round" />
+              <ellipse cx="198" cy="140" rx="12" ry="14" fill="url(#fwHedge)" />
+              <circle cx="208" cy="146" r="1.8" fill="#b56a3c" opacity="0.7" />
+              <circle cx="190" cy="150" r="1.4" fill="#b56a3c" opacity="0.6" />
+            </g>
+            <g class="hero-hedge hero-hedge-c">
+              <path d="M322 200 L322 156" stroke="#6b7d4f" stroke-width="1.4" stroke-linecap="round" />
+              <ellipse cx="322" cy="150" rx="10" ry="12" fill="url(#fwHedge)" />
+              <circle cx="330" cy="156" r="1.6" fill="#b56a3c" opacity="0.6" />
+            </g>
+
+            <!-- a soft drift of poppies through the unploughed field -->
+            <circle cx="44" cy="178" r="1.8" fill="#b34a3a" opacity="0.55" />
+            <circle cx="58" cy="184" r="1.4" fill="#b34a3a" opacity="0.5" />
+            <circle cx="132" cy="176" r="1.6" fill="#b34a3a" opacity="0.55" />
+            <circle cx="266" cy="180" r="2.0" fill="#b34a3a" opacity="0.6" />
+            <circle cx="280" cy="186" r="1.5" fill="#b34a3a" opacity="0.5" />
+            <circle cx="356" cy="178" r="1.4" fill="#b34a3a" opacity="0.5" />
+
+            <!-- a low sun, patient -->
+            <circle cx="54" cy="98" r="14" fill="#e3c373" opacity="0.55" />
+            <circle cx="54" cy="98" r="9" fill="#e3c373" opacity="0.8" />
+
+            <!-- a single skylark, far off -->
+            <path d="M268 86 Q272 82 276 86 Q280 82 284 86" stroke="#86714a" stroke-width="1" fill="none" opacity="0.55" />
+          </svg>
+        </div>
+        <span class="hero-tick hero-tick-1">hedgerow</span>
+        <span class="hero-tick hero-tick-2">fallow</span>
+        <span class="hero-tick hero-tick-3">cover</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>Planners<br /><em>are for harvests.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            Most planners want every field worked every season — every
+            project shipping, every newsletter weekly, every notebook
+            open. A planner is a beautiful instrument until the soil
+            wears out — and then the planner is the last to notice.
+          </p>
+          <p>
+            A fallow is a quiet field on purpose. It is the slowest
+            shape in the working year, and the most patient — and
+            when the next sowing comes, the soil is deeper for the
+            rest. The hedges grew in. The skylarks came back. The rest
+            kept the field. The rest is the work.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Name a field</h3>
+          <p>One thing — a project, a habit, a public presence — you mean to set down for a season. Not a quit. A fallow.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Pick a land</h3>
+          <p>Field for the central work. Margin for the smaller things at the edges. Hedgerow for the boundary practices you keep year-round.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Let it rest</h3>
+          <p>A field begins standing. Then it's set down at the cut. Then it rests deeper. Then — sometimes — it becomes sward, long-fallow, a stable quiet of its own.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Don't plough back early</h3>
+          <p>A field ploughed back in the panic of the second month is no field rested. Keep the hedge. The slow restoring is what makes the next sowing worth it.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="fields" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A fallow, mid-spring</h2>
+        <p>A small fallow of twelve fields — a fictional one, kept by no one in particular through a slow turn of the spring of 2026. Some are still standing, named but not yet set down. Some were cut over the winter and are bare. Some have rested years. Some are long-sward. Set a field down, settle one deeper, name a new one — the fallow redraws in your browser. Nothing leaves.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">Fallow</p>
+            <p class="chart-project" id="chart-project" title="Click to rename">A small inland fallow · spring 2026 · the slow rest</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Years rested across the fields in this fallow">
+          <p class="profile-axis-label top">sward</p>
+          <p class="profile-axis-label bot">standing</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the fields">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="standing" role="tab">Standing</button>
+          <button type="button" data-filter="set" role="tab">Set down</button>
+          <button type="button" data-filter="resting" role="tab">Resting</button>
+          <button type="button" data-filter="sward" role="tab">Sward</button>
+        </div>
+
+        <ul class="legs" id="fields-list">
+          <!-- fields inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-land" aria-label="Land of the field">
+              <option value="field">Field</option>
+              <option value="margin">Margin</option>
+              <option value="hedgerow">Hedgerow</option>
+            </select>
+            <input id="add-years" type="number" step="1" min="0" value="0" aria-label="Years since the field was set down" />
+            <input id="add-name" type="text" placeholder="Name the field — something worth a long slow rest" maxlength="90" />
+            <select id="add-state" aria-label="State of the field">
+              <option value="standing">Standing</option>
+              <option value="set">Set down</option>
+              <option value="resting">Resting</option>
+              <option value="sward">Sward</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Set the field down</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original fallow</a>
+        </div>
+      </div>
+
+      <div class="legend">
+        <h3>The three lands</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-field"></span><div><strong>Field.</strong> The central work you have set down: a book between drafts, a company in the year after sale, a research line waiting on its slow data.</div></li>
+          <li><span class="legend-swatch swatch-margin"></span><div><strong>Margin.</strong> The smaller things at the edges, set down on purpose: a newsletter rested for a winter, a photo feed left to grow over, a conference circuit you stopped traveling for.</div></li>
+          <li><span class="legend-swatch swatch-hedgerow"></span><div><strong>Hedgerow.</strong> The boundary practices you keep year-round to mark what's resting: a Sunday with no work, a quarterly check-in, the long walk where the field is in sight but you do not enter it.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who keeps a fallow</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The novelist between the second and third book</h3>
+          <p>The second book is set down a year, the third is standing in the field. The Sunday with no screens is a hedgerow eleven years tall. The newsletter is a margin sward, gone over to grass since 2021. She is not behind. She is rotating.</p>
+        </article>
+        <article>
+          <h3>The founder a year after the sale</h3>
+          <p>The company is a field, set down at exit. A consulting line is standing. Wednesday afternoons in the garden have rested four years now. The advisory calls he cut in 2023 have gone sward. The hedge has thickened around the field.</p>
+        </article>
+        <article>
+          <h3>The researcher between two long datasets</h3>
+          <p>One paper is in the field, resting two years on slow data. The Twitter feed is a margin gone sward — three years since the last post. The teaching is standing. The quarterly call with a co-author is a hedgerow she keeps in every weather.</p>
+        </article>
+        <article>
+          <h3>The painter on the long quiet practice</h3>
+          <p>The Instagram feed is set down — bare since January. The big oils are resting four years. The small daily watercolours are standing, the only field she works. The sward in the margin is what makes the field bear.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="rest" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · autumn 2026</p>
+        <h2>One email when Fallow opens.</h2>
+        <p class="hold-lede">A fallow, a few fields, a page that reads as honest as a hedgerow at the end of June. No streak. No badge. No share card. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@somewhere.field" />
+          <button class="btn btn-primary" type="submit">Set a field down</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first fallows open. You can leave anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Fallow</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · the slow rest as practice</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#fields">Fallow</a>
+      <a href="#rest">Rest</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
