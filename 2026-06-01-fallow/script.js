@@ -343,6 +343,48 @@ function visibleFields() {
   return fields.filter(d => activeFilter === 'all' || d.state === activeFilter);
 }
 
+function selectByOffset(delta) {
+  const v = visibleFields();
+  if (v.length === 0) return;
+  const idx = v.findIndex(d => d.n === selectedN);
+  const next = idx === -1
+    ? (delta > 0 ? 0 : v.length - 1)
+    : Math.max(0, Math.min(v.length - 1, idx + delta));
+  selectedN = v[next].n;
+  renderFields();
+  scrollSelectedIntoView();
+}
+
+function scrollSelectedIntoView() {
+  const el = document.querySelector(`.field[data-n="${selectedN}"]`);
+  if (el && el.scrollIntoView) el.scrollIntoView({ block: 'nearest' });
+}
+
+function nudgeYears(delta) {
+  const field = fields.find(d => d.n === selectedN);
+  if (!field) return;
+  field.years = Math.max(0, (field.years || 0) + delta);
+  saveState();
+  renderAll();
+}
+
+function removeSelected() {
+  if (selectedN == null) return;
+  const v = visibleFields();
+  const idx = v.findIndex(d => d.n === selectedN);
+  removeField(selectedN);
+  const v2 = visibleFields();
+  selectedN = v2.length === 0
+    ? null
+    : v2[Math.min(idx, v2.length - 1)].n;
+  renderFields();
+}
+
+function cycleSelectedState() {
+  if (selectedN == null) return;
+  cycleState(selectedN);
+}
+
 // ---------- wiring ----------
 
 document.addEventListener('click', (e) => {
@@ -361,6 +403,55 @@ document.addEventListener('click', (e) => {
   if (row) {
     selectedN = Number(row.dataset.n);
     renderFields();
+  }
+});
+
+function isTypingInField(target) {
+  if (!target) return false;
+  if (target.isContentEditable) return true;
+  const tag = (target.tagName || '').toLowerCase();
+  return tag === 'input' || tag === 'textarea' || tag === 'select';
+}
+
+document.addEventListener('keydown', (e) => {
+  if (isTypingInField(e.target)) return;
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+  switch (e.key) {
+    case 'j':
+    case 'J':
+    case 'ArrowDown':
+      e.preventDefault(); selectByOffset(1); break;
+    case 'k':
+    case 'K':
+    case 'ArrowUp':
+      e.preventDefault(); selectByOffset(-1); break;
+    case 'Enter':
+      e.preventDefault(); cycleSelectedState(); break;
+    case 'Delete':
+    case 'Backspace':
+      e.preventDefault(); removeSelected(); break;
+    case 'n':
+    case 'N': {
+      e.preventDefault();
+      const nameField = document.getElementById('add-name');
+      if (nameField) nameField.focus();
+      break;
+    }
+    case '[':
+      e.preventDefault(); nudgeYears(-1); break;
+    case ']':
+      e.preventDefault(); nudgeYears(1); break;
+    case 'r':
+    case 'R':
+      e.preventDefault();
+      if (confirm('Reset the fallow to the original twelve fields?')) resetToSeed();
+      break;
+    default:
+      if (FILTER_BY_KEY[e.key] !== undefined) {
+        e.preventDefault();
+        setFilter(FILTER_BY_KEY[e.key]);
+      }
   }
 });
 
