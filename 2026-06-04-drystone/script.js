@@ -105,6 +105,9 @@ const _saved = loadState();
 let stones = _saved ? _saved.stones.map(d => ({ ...d })) : SEED.map(d => ({ ...d }));
 let project = _saved && typeof _saved.project === 'string' ? _saved.project : DEFAULT_PROJECT;
 let activeFilter = 'all';
+let selectedN = stones.length ? stones[0].n : null;
+
+const FILTER_BY_KEY = { '0': 'all', '1': 'found', '2': 'set', '3': 'settled', '4': 'lichened' };
 
 // ---------- formatting ----------
 
@@ -252,7 +255,7 @@ function renderStones() {
   }
 
   host.innerHTML = filtered.map(d => `
-    <li class="stone ${d.state === 'set' ? 'is-current' : ''}" data-n="${d.n}">
+    <li class="stone ${d.state === 'set' ? 'is-current' : ''} ${d.n === selectedN ? 'is-selected' : ''}" data-n="${d.n}">
       <span class="stone-num">${String(d.n).padStart(2, '0')}</span>
       <span class="stone-course stone-course-${d.course}">
         <span class="glyph" aria-hidden="true">${COURSE_GLYPH[d.course]}</span>
@@ -332,7 +335,55 @@ function setFilter(f) {
   document.querySelectorAll('#filters button').forEach(b => {
     b.classList.toggle('is-active', b.dataset.filter === f);
   });
+  const v = visibleStones();
+  if (v.length && !v.find(d => d.n === selectedN)) selectedN = v[0].n;
   renderStones();
+}
+
+function visibleStones() {
+  return stones.filter(d => activeFilter === 'all' || d.state === activeFilter);
+}
+
+function selectByOffset(delta) {
+  const v = visibleStones();
+  if (v.length === 0) return;
+  const idx = v.findIndex(d => d.n === selectedN);
+  const next = idx === -1
+    ? (delta > 0 ? 0 : v.length - 1)
+    : Math.max(0, Math.min(v.length - 1, idx + delta));
+  selectedN = v[next].n;
+  renderStones();
+  scrollSelectedIntoView();
+}
+
+function scrollSelectedIntoView() {
+  const el = document.querySelector(`.stone[data-n="${selectedN}"]`);
+  if (el && el.scrollIntoView) el.scrollIntoView({ block: 'nearest' });
+}
+
+function nudgeYears(delta) {
+  const stone = stones.find(d => d.n === selectedN);
+  if (!stone) return;
+  stone.years = Math.max(0, (stone.years || 0) + delta);
+  saveState();
+  renderAll();
+}
+
+function removeSelected() {
+  if (selectedN == null) return;
+  const v = visibleStones();
+  const idx = v.findIndex(d => d.n === selectedN);
+  removeStone(selectedN);
+  const v2 = visibleStones();
+  selectedN = v2.length === 0
+    ? null
+    : v2[Math.min(idx, v2.length - 1)].n;
+  renderStones();
+}
+
+function cycleSelectedState() {
+  if (selectedN == null) return;
+  cycleState(selectedN);
 }
 
 // ---------- wiring ----------
@@ -340,13 +391,68 @@ function setFilter(f) {
 document.addEventListener('click', (e) => {
   const cycle = e.target.closest('[data-action="cycle-state"]');
   if (cycle) {
-    cycleState(Number(cycle.dataset.n));
+    selectedN = Number(cycle.dataset.n);
+    cycleState(selectedN);
     return;
   }
   const filterBtn = e.target.closest('#filters button');
   if (filterBtn) {
     setFilter(filterBtn.dataset.filter);
     return;
+  }
+  const row = e.target.closest('.stone');
+  if (row) {
+    selectedN = Number(row.dataset.n);
+    renderStones();
+  }
+});
+
+function isTypingInField(target) {
+  if (!target) return false;
+  if (target.isContentEditable) return true;
+  const tag = (target.tagName || '').toLowerCase();
+  return tag === 'input' || tag === 'textarea' || tag === 'select';
+}
+
+document.addEventListener('keydown', (e) => {
+  if (isTypingInField(e.target)) return;
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+  switch (e.key) {
+    case 'j':
+    case 'J':
+    case 'ArrowDown':
+      e.preventDefault(); selectByOffset(1); break;
+    case 'k':
+    case 'K':
+    case 'ArrowUp':
+      e.preventDefault(); selectByOffset(-1); break;
+    case 'Enter':
+      e.preventDefault(); cycleSelectedState(); break;
+    case 'Delete':
+    case 'Backspace':
+      e.preventDefault(); removeSelected(); break;
+    case 'n':
+    case 'N': {
+      e.preventDefault();
+      const nameField = document.getElementById('add-name');
+      if (nameField) nameField.focus();
+      break;
+    }
+    case '[':
+      e.preventDefault(); nudgeYears(-1); break;
+    case ']':
+      e.preventDefault(); nudgeYears(1); break;
+    case 'r':
+    case 'R':
+      e.preventDefault();
+      if (confirm('Reset the wall to the original twelve stones?')) resetToSeed();
+      break;
+    default:
+      if (FILTER_BY_KEY[e.key] !== undefined) {
+        e.preventDefault();
+        setFilter(FILTER_BY_KEY[e.key]);
+      }
   }
 });
 
