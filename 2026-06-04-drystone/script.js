@@ -70,10 +70,40 @@ const COURSE_COLOR = {
   coping:     '#6b7d4f',
 };
 
+const STORAGE_KEY = 'drystone.v1';
 const DEFAULT_PROJECT = 'A small upland wall · summer 2026 · the slow fit';
 
-let stones = SEED.map(d => ({ ...d }));
-let project = DEFAULT_PROJECT;
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || !Array.isArray(parsed.stones)) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ stones, project }));
+  } catch {
+    // quota or private mode — fail quietly, the session still works
+  }
+}
+
+function clearState() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch {
+    // ignore
+  }
+}
+
+const _saved = loadState();
+let stones = _saved ? _saved.stones.map(d => ({ ...d })) : SEED.map(d => ({ ...d }));
+let project = _saved && typeof _saved.project === 'string' ? _saved.project : DEFAULT_PROJECT;
 let activeFilter = 'all';
 
 // ---------- formatting ----------
@@ -261,12 +291,14 @@ function cycleState(n) {
   if (!stone) return;
   const i = STATE_ORDER.indexOf(stone.state);
   stone.state = STATE_ORDER[(i + 1) % STATE_ORDER.length];
+  saveState();
   renderAll();
 }
 
 function removeStone(n) {
   stones = stones.filter(d => d.n !== n);
   stones.forEach((d, i) => { d.n = i + 1; });
+  saveState();
   renderAll();
 }
 
@@ -280,6 +312,7 @@ function addStone({ course, years, name, state }) {
     name: name || 'Unnamed stone',
     note: '',
   });
+  saveState();
   renderAll();
 }
 
@@ -287,6 +320,7 @@ function resetToSeed() {
   stones = SEED.map(d => ({ ...d }));
   project = DEFAULT_PROJECT;
   activeFilter = 'all';
+  clearState();
   document.querySelectorAll('#filters button').forEach(b => {
     b.classList.toggle('is-active', b.dataset.filter === 'all');
   });
@@ -339,6 +373,7 @@ if (projectEl) {
     const v = projectEl.textContent.trim();
     project = v || DEFAULT_PROJECT;
     projectEl.removeAttribute('contenteditable');
+    saveState();
     renderProject();
   });
   projectEl.addEventListener('keydown', (e) => {
@@ -366,7 +401,7 @@ const resetLink = document.getElementById('reset-demo');
 if (resetLink) {
   resetLink.addEventListener('click', (e) => {
     e.preventDefault();
-    if (confirm('Reset the wall to the original twelve stones?')) {
+    if (confirm('Reset the wall to the original twelve stones? Any changes you have made will be lost.')) {
       resetToSeed();
     }
   });
