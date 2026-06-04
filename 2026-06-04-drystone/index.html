@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drystone — a small page for the practices that hold by careful fit</title>
+  <meta name="description" content="Drystone is a small page for the few practices in a working life that hold together without mortar — by careful fit alone, course on course, weathered into place." />
+  <meta name="theme-color" content="#ebe4d2" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#4a5a35" media="(prefers-color-scheme: dark)" />
+  <meta name="color-scheme" content="light" />
+  <meta property="og:title" content="Drystone — built without mortar, by careful fit" />
+  <meta property="og:description" content="A small page for the practices that hold together without mortar — by careful fit alone, course on course, weathered into place. No streak. No badge. The fit is the work." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ebe4d2'/%3E%3Cpath d='M3 24 L3 20 L11 20 L11 24 Z' fill='%236e6b62' opacity='0.7'/%3E%3Cpath d='M11 24 L11 19 L20 19 L20 24 Z' fill='%2346443e' opacity='0.85'/%3E%3Cpath d='M20 24 L20 21 L29 21 L29 24 Z' fill='%236e6b62' opacity='0.7'/%3E%3Cpath d='M3 20 L3 16 L8 16 L8 20 Z' fill='%2346443e' opacity='0.75'/%3E%3Cpath d='M8 20 L8 15 L15 15 L15 20 Z' fill='%236e6b62' opacity='0.7'/%3E%3Cpath d='M15 20 L15 16 L22 16 L22 19 Z' fill='%2346443e' opacity='0.85'/%3E%3Cpath d='M22 19 L22 15 L29 15 L29 21 Z' fill='%236e6b62' opacity='0.7'/%3E%3Cpath d='M3 16 L3 12 L6 12 L6 16 Z' fill='%2346443e' opacity='0.9'/%3E%3Cpath d='M6 16 L6 11 L9 11 L9 16 Z' fill='%236e6b62' opacity='0.85'/%3E%3Cpath d='M9 15 L9 12 L13 12 L13 15 Z' fill='%2346443e' opacity='0.9'/%3E%3Cpath d='M13 15 L13 11 L17 11 L17 15 Z' fill='%236e6b62' opacity='0.8'/%3E%3Cpath d='M17 16 L17 11 L21 11 L21 16 Z' fill='%2346443e' opacity='0.9'/%3E%3Cpath d='M21 15 L21 12 L25 12 L25 15 Z' fill='%236e6b62' opacity='0.85'/%3E%3Cpath d='M25 15 L25 11 L29 11 L29 15 Z' fill='%2346443e' opacity='0.9'/%3E%3Ccircle cx='13' cy='18' r='1.4' fill='%23c4ca8b' opacity='0.9'/%3E%3Ccircle cx='22' cy='17' r='1' fill='%23c4ca8b' opacity='0.8'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <!-- a low drystone wall -->
+          <path d="M2 24 L30 24" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.5" />
+          <!-- bottom course: three wide foundation stones -->
+          <path d="M3 24 L3 20 L11 20 L11 24 Z" fill="currentColor" opacity="0.55" />
+          <path d="M11 24 L11 19 L20 19 L20 24 Z" fill="currentColor" opacity="0.7" />
+          <path d="M20 24 L20 21 L29 21 L29 24 Z" fill="currentColor" opacity="0.5" />
+          <!-- middle course: four fitted stones -->
+          <path d="M3 20 L3 16 L8 16 L8 20 Z" fill="currentColor" opacity="0.65" />
+          <path d="M8 20 L8 15 L15 15 L15 20 Z" fill="currentColor" opacity="0.5" />
+          <path d="M15 20 L15 16 L22 16 L22 19 Z" fill="currentColor" opacity="0.7" />
+          <path d="M22 19 L22 15 L29 15 L29 21 Z" fill="currentColor" opacity="0.55" />
+          <!-- coping: vertical capstones -->
+          <path d="M3 16 L3 12 L6 12 L6 16 Z" fill="currentColor" opacity="0.8" />
+          <path d="M6 16 L6 11 L9 11 L9 16 Z" fill="currentColor" opacity="0.7" />
+          <path d="M9 15 L9 12 L13 12 L13 15 Z" fill="currentColor" opacity="0.75" />
+          <path d="M13 15 L13 11 L17 11 L17 15 Z" fill="currentColor" opacity="0.65" />
+          <path d="M17 16 L17 11 L21 11 L21 16 Z" fill="currentColor" opacity="0.8" />
+          <path d="M21 15 L21 12 L25 12 L25 15 Z" fill="currentColor" opacity="0.7" />
+          <path d="M25 15 L25 11 L29 11 L29 15 Z" fill="currentColor" opacity="0.75" />
+          <!-- a tuft of lichen -->
+          <circle cx="13" cy="18" r="1.2" fill="#c4ca8b" opacity="0.9" />
+          <circle cx="22" cy="17" r="0.9" fill="#c4ca8b" opacity="0.75" />
+        </svg>
+      </span>
+      <span>Drystone</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#stones">Your wall</a>
+      <a href="#who">Who keeps a wall</a>
+      <a href="#hold" class="nav-cta">Place a stone</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">A slow wall, well fitted</p>
+        <h1>
+          Built without mortar,<br />
+          <em>by careful fit.</em>
+        </h1>
+        <p class="lede">
+          A drystone wall holds because every stone is in conversation with
+          three others — never forced, always fitted. The Yorkshire wall
+          stands four hundred years. The Burren walls stand eight
+          centuries. The walls that last are not the ones bound by glue,
+          but the ones whose fit was patient. Drystone is a small page for
+          the practices that hold the same way.
+        </p>
+        <div class="hero-cta">
+          <a href="#stones" class="btn btn-primary">See a wall</a>
+          <a href="#hold" class="btn btn-ghost">Place a stone</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One stone at a time. No streak. No badge. No notification.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-wall">
+          <svg viewBox="0 0 400 320" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="dsSky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#e9e1c6" stop-opacity="0.75" />
+                <stop offset="60%" stop-color="#d6c993" stop-opacity="0.3" />
+                <stop offset="100%" stop-color="#b8a06a" stop-opacity="0" />
+              </linearGradient>
+              <linearGradient id="dsStone" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#a8a496" stop-opacity="0.95" />
+                <stop offset="100%" stop-color="#6e6b62" stop-opacity="0.95" />
+              </linearGradient>
+              <linearGradient id="dsStoneDark" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#8a877e" stop-opacity="0.95" />
+                <stop offset="100%" stop-color="#4d4b44" stop-opacity="0.95" />
+              </linearGradient>
+              <linearGradient id="dsGrass" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#8a9a5b" stop-opacity="0.55" />
+                <stop offset="100%" stop-color="#6b7d4f" stop-opacity="0.4" />
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="400" height="320" fill="url(#dsSky)" />
+
+            <!-- distant moor / ridge -->
+            <path d="M0 132 Q80 124 160 130 Q240 136 320 126 Q380 120 400 124 L400 168 L0 168 Z"
+                  fill="#9aa07a" opacity="0.35" />
+            <path d="M0 156 Q90 150 180 154 Q260 158 340 150 Q380 146 400 150 L400 184 L0 184 Z"
+                  fill="#8a9263" opacity="0.4" />
+
+            <!-- foreground grass at the foot of the wall -->
+            <path d="M0 274 Q60 268 120 272 Q180 276 240 270 Q300 264 360 272 Q400 276 400 270 L400 320 L0 320 Z"
+                  fill="url(#dsGrass)" />
+
+            <!-- THE WALL — three courses + coping, irregularly fitted. -->
+            <!-- bottom course (foundation), wide rough stones -->
+            <g class="hero-course hero-course-base">
+              <path d="M0 250 L42 250 L48 232 L0 234 Z" fill="url(#dsStone)" />
+              <path d="M48 232 L42 250 L94 250 L100 230 L52 226 Z" fill="url(#dsStoneDark)" />
+              <path d="M100 230 L94 250 L154 250 L158 234 L106 224 Z" fill="url(#dsStone)" />
+              <path d="M158 234 L154 250 L216 250 L222 228 L162 222 Z" fill="url(#dsStoneDark)" />
+              <path d="M222 228 L216 250 L274 250 L280 234 L226 224 Z" fill="url(#dsStone)" />
+              <path d="M280 234 L274 250 L330 250 L336 226 L284 222 Z" fill="url(#dsStoneDark)" />
+              <path d="M336 226 L330 250 L400 250 L400 230 L340 220 Z" fill="url(#dsStone)" />
+              <!-- a wedge of lichen on a foundation stone -->
+              <ellipse cx="124" cy="236" rx="9" ry="3.5" fill="#c4ca8b" opacity="0.55" />
+              <ellipse cx="260" cy="235" rx="6" ry="2.4" fill="#c4ca8b" opacity="0.45" />
+            </g>
+
+            <!-- middle course, fitted in -->
+            <g class="hero-course hero-course-mid">
+              <path d="M0 218 L36 218 L40 200 L0 204 Z" fill="url(#dsStoneDark)" />
+              <path d="M40 200 L36 218 L88 218 L92 198 L44 196 Z" fill="url(#dsStone)" />
+              <path d="M92 198 L88 218 L138 218 L142 202 L96 196 Z" fill="url(#dsStoneDark)" />
+              <path d="M142 202 L138 218 L198 218 L204 196 L146 192 Z" fill="url(#dsStone)" />
+              <path d="M204 196 L198 218 L256 218 L260 200 L208 194 Z" fill="url(#dsStoneDark)" />
+              <path d="M260 200 L256 218 L308 218 L312 198 L264 194 Z" fill="url(#dsStone)" />
+              <path d="M312 198 L308 218 L360 218 L364 202 L316 196 Z" fill="url(#dsStoneDark)" />
+              <path d="M364 202 L360 218 L400 218 L400 200 L368 198 Z" fill="url(#dsStone)" />
+              <ellipse cx="68" cy="206" rx="6" ry="2.4" fill="#c4ca8b" opacity="0.55" />
+              <ellipse cx="222" cy="207" rx="8" ry="3" fill="#c4ca8b" opacity="0.5" />
+            </g>
+
+            <!-- top course (smaller, more carefully fitted) -->
+            <g class="hero-course hero-course-top">
+              <path d="M0 188 L30 188 L34 172 L0 176 Z" fill="url(#dsStone)" />
+              <path d="M34 172 L30 188 L72 188 L76 170 L38 168 Z" fill="url(#dsStoneDark)" />
+              <path d="M76 170 L72 188 L122 188 L126 172 L80 166 Z" fill="url(#dsStone)" />
+              <path d="M126 172 L122 188 L172 188 L176 168 L130 166 Z" fill="url(#dsStoneDark)" />
+              <path d="M176 168 L172 188 L222 188 L226 172 L180 164 Z" fill="url(#dsStone)" />
+              <path d="M226 172 L222 188 L272 188 L276 170 L230 166 Z" fill="url(#dsStoneDark)" />
+              <path d="M276 170 L272 188 L322 188 L326 172 L280 166 Z" fill="url(#dsStone)" />
+              <path d="M326 172 L322 188 L372 188 L376 170 L330 168 Z" fill="url(#dsStoneDark)" />
+              <path d="M376 170 L372 188 L400 188 L400 172 L380 168 Z" fill="url(#dsStone)" />
+              <ellipse cx="172" cy="176" rx="5" ry="2" fill="#c4ca8b" opacity="0.45" />
+            </g>
+
+            <!-- coping (capstones), set vertically on the top -->
+            <g class="hero-course hero-coping">
+              <path d="M2 168 L2 142 L14 142 L14 168 Z" fill="url(#dsStoneDark)" />
+              <path d="M14 168 L14 140 L26 140 L26 168 Z" fill="url(#dsStone)" />
+              <path d="M26 168 L26 144 L36 144 L36 168 Z" fill="url(#dsStoneDark)" />
+              <path d="M36 168 L36 140 L48 140 L48 168 Z" fill="url(#dsStone)" />
+              <path d="M48 168 L48 142 L60 142 L60 168 Z" fill="url(#dsStoneDark)" />
+              <path d="M60 168 L60 138 L72 138 L72 168 Z" fill="url(#dsStone)" />
+              <path d="M72 168 L72 142 L82 142 L82 168 Z" fill="url(#dsStoneDark)" />
+              <path d="M82 168 L82 140 L94 140 L94 168 Z" fill="url(#dsStone)" />
+              <path d="M94 168 L94 142 L106 142 L106 168 Z" fill="url(#dsStoneDark)" />
+              <path d="M106 168 L106 138 L118 138 L118 168 Z" fill="url(#dsStone)" />
+              <path d="M118 168 L118 142 L130 142 L130 168 Z" fill="url(#dsStoneDark)" />
+              <path d="M130 168 L130 140 L142 140 L142 168 Z" fill="url(#dsStone)" />
+              <path d="M142 168 L142 142 L154 142 L154 168 Z" fill="url(#dsStoneDark)" />
+              <path d="M154 168 L154 138 L166 138 L166 168 Z" fill="url(#dsStone)" />
+              <path d="M166 168 L166 142 L178 142 L178 168 Z" fill="url(#dsStoneDark)" />
+              <path d="M178 168 L178 140 L190 140 L190 168 Z" fill="url(#dsStone)" />
+              <path d="M190 168 L190 142 L202 142 L202 168 Z" fill="url(#dsStoneDark)" />
+              <path d="M202 168 L202 138 L214 138 L214 168 Z" fill="url(#dsStone)" />
+              <path d="M214 168 L214 142 L226 142 L226 168 Z" fill="url(#dsStoneDark)" />
+              <path d="M226 168 L226 140 L238 140 L238 168 Z" fill="url(#dsStone)" />
+              <path d="M238 168 L238 142 L250 142 L250 168 Z" fill="url(#dsStoneDark)" />
+              <path d="M250 168 L250 138 L262 138 L262 168 Z" fill="url(#dsStone)" />
+              <path d="M262 168 L262 142 L274 142 L274 168 Z" fill="url(#dsStoneDark)" />
+              <path d="M274 168 L274 140 L286 140 L286 168 Z" fill="url(#dsStone)" />
+              <path d="M286 168 L286 142 L298 142 L298 168 Z" fill="url(#dsStoneDark)" />
+              <path d="M298 168 L298 138 L310 138 L310 168 Z" fill="url(#dsStone)" />
+              <path d="M310 168 L310 142 L322 142 L322 168 Z" fill="url(#dsStoneDark)" />
+              <path d="M322 168 L322 140 L334 140 L334 168 Z" fill="url(#dsStone)" />
+              <path d="M334 168 L334 142 L346 142 L346 168 Z" fill="url(#dsStoneDark)" />
+              <path d="M346 168 L346 138 L358 138 L358 168 Z" fill="url(#dsStone)" />
+              <path d="M358 168 L358 142 L370 142 L370 168 Z" fill="url(#dsStoneDark)" />
+              <path d="M370 168 L370 140 L382 140 L382 168 Z" fill="url(#dsStone)" />
+              <path d="M382 168 L382 142 L398 142 L398 168 Z" fill="url(#dsStoneDark)" />
+              <!-- a stripe of lichen across two coping stones -->
+              <ellipse cx="118" cy="152" rx="6" ry="2.6" fill="#c4ca8b" opacity="0.55" />
+              <ellipse cx="260" cy="155" rx="5" ry="2" fill="#c4ca8b" opacity="0.5" />
+            </g>
+
+            <!-- a low sun, patient -->
+            <circle cx="62" cy="92" r="14" fill="#e3c373" opacity="0.55" />
+            <circle cx="62" cy="92" r="9" fill="#e3c373" opacity="0.8" />
+
+            <!-- a single sheep, far off -->
+            <ellipse cx="312" cy="262" rx="6" ry="3.6" fill="#efe7d2" opacity="0.85" />
+            <circle cx="318" cy="260" r="2" fill="#efe7d2" opacity="0.9" />
+          </svg>
+        </div>
+        <span class="hero-tick hero-tick-1">coping</span>
+        <span class="hero-tick hero-tick-2">wall</span>
+        <span class="hero-tick hero-tick-3">foundation</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>Plans<br /><em>are mortared.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            Most planning is mortared — every commitment locked in,
+            scheduled, name-tagged, joined with glue. A mortared plan is
+            tidy until the ground moves; and then the whole thing cracks
+            in a line, because nothing could give and nothing could
+            settle.
+          </p>
+          <p>
+            A drystone is built by fit, not glue. Each stone earns its
+            place by sitting truly against the three it touches. The
+            wall stands not because it is forced together, but because
+            each piece has found its hold. The ground moves; the wall
+            shrugs and stays. The fit is the work.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Find a stone</h3>
+          <p>One practice — a habit, a ritual, a commitment — that you mean to fit into the working life. Not yet placed. Found in the field, weighed in the hand.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Pick a course</h3>
+          <p>Foundation for the wide base stones. Wall for the middle running courses. Coping for the topmost stones that lock the wall down for weather.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Set it true</h3>
+          <p>A stone begins found, then set, then settled after a season, then lichened — held long enough for moss to grow. The longer it sits, the more the wall is the wall.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Don't force the fit</h3>
+          <p>A forced stone falls in the first frost. If a practice will not seat against the three it touches, set it down and find another. The fit is the practice. The fit is what holds.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="stones" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A wall, mid-summer</h2>
+        <p>A small wall of twelve stones — a fictional one, kept by no one in particular through a slow turn of the summer of 2026. Some are still found, weighed but not yet placed. Some were set this spring and are fresh-fitted. Some have settled a season or three. Some are long-lichened. Place a stone, weather one deeper, find a new one — the wall redraws in your browser. Nothing leaves.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">Wall</p>
+            <p class="chart-project" id="chart-project">A small upland wall · summer 2026 · the slow fit</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Years held across the stones in this wall">
+          <p class="profile-axis-label top">lichened</p>
+          <p class="profile-axis-label bot">found</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the stones">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="found" role="tab">Found</button>
+          <button type="button" data-filter="set" role="tab">Set</button>
+          <button type="button" data-filter="settled" role="tab">Settled</button>
+          <button type="button" data-filter="lichened" role="tab">Lichened</button>
+        </div>
+
+        <ul class="legs" id="stones-list">
+          <!-- stones inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-course" aria-label="Course of the stone">
+              <option value="foundation">Foundation</option>
+              <option value="wall">Wall</option>
+              <option value="coping">Coping</option>
+            </select>
+            <input id="add-years" type="number" step="1" min="0" value="0" aria-label="Years the stone has been held" />
+            <input id="add-name" type="text" placeholder="Name the stone — a practice worth a careful fit" maxlength="90" />
+            <select id="add-state" aria-label="State of the stone">
+              <option value="found">Found</option>
+              <option value="set">Set</option>
+              <option value="settled">Settled</option>
+              <option value="lichened">Lichened</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Place the stone</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original wall</a>
+        </div>
+
+        <p class="kbd-help">
+          <strong>Keys:</strong>
+          <kbd>J</kbd>/<kbd>K</kbd> move &middot;
+          <kbd>Enter</kbd> change state &middot;
+          <kbd>Del</kbd> remove &middot;
+          <kbd>N</kbd> add &middot;
+          <kbd>0</kbd>&ndash;<kbd>4</kbd> filter &middot;
+          <kbd>[</kbd>/<kbd>]</kbd> nudge years &middot;
+          <kbd>R</kbd> reset.
+        </p>
+      </div>
+
+      <div class="legend">
+        <h3>The three courses</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-foundation"></span><div><strong>Foundation.</strong> The wide stones at the base — the practices that hold up everything else: the morning hour, the Sunday with no work, the weekly review that does not get skipped.</div></li>
+          <li><span class="legend-swatch swatch-wall"></span><div><strong>Wall.</strong> The middle running courses — the steady commitments that fit between the base and the top: the Friday close-of-week, the monthly mentoring call, the seasonal cull of inboxes.</div></li>
+          <li><span class="legend-swatch swatch-coping"></span><div><strong>Coping.</strong> The topmost stones that lock the wall down for weather — the rituals that finish a day, a quarter, a year: the broom at the end of work, the long walk after a hard week, the December retreat.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who keeps a wall</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The runner, nine winters in at six</h3>
+          <p>The 6am run is a foundation stone lichened across nine winters. The Wednesday yoga is a wall stone, settled three years. The post-marathon week of rest is a coping — placed once a year, locked tight at the top. The wall stands because the stones underneath have not moved.</p>
+        </article>
+        <article>
+          <h3>The therapist between two long cases</h3>
+          <p>The Sunday with no screens has settled three seasons. The Tuesday supervision call is a wall stone, six years held. The December week off without email is the coping — placed in 2019, lichened thick enough that nothing crosses it now. The fit was patient.</p>
+        </article>
+        <article>
+          <h3>The carpenter at the end of every day</h3>
+          <p>The end-of-day broom is foundation — twenty-two years against the same workshop floor, lichened so deep the broom knows the corners by heart. The Saturday tool-sharpening is set this winter, still finding its seat. The yearly attic clear-out is coping, autumn after autumn.</p>
+        </article>
+        <article>
+          <h3>The novelist on the slow second book</h3>
+          <p>The 200-words-before-coffee is set this year — placed at the equinox, still bedding in. The Thursday long walk is settled four. The annual fortnight where the manuscript stays closed is coping, the topmost stone that lets the rest of the wall breathe. No glue. Just fit.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="hold" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · autumn 2026</p>
+        <h2>One email when Drystone opens.</h2>
+        <p class="hold-lede">A wall, a few stones, a page that reads as plain as a course of fitted stone at the end of a long summer. No streak. No badge. No share card. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@somewhere.field" />
+          <button class="btn btn-primary" type="submit">Place a stone</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first walls open. You can leave anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Drystone</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · the careful fit as practice</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#stones">Wall</a>
+      <a href="#hold">Place</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
