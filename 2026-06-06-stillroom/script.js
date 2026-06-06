@@ -33,9 +33,41 @@ const SEED_JARS = [
 ];
 
 const STORAGE_KEY = 'stillroom.jars.v1';
+const PROJECT_KEY = 'stillroom.project.v1';
 
-let jars = SEED_JARS.map((j, i) => ({ ...j, id: i + 1 }));
-let nextId = jars.length + 1;
+function loadJars() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return SEED_JARS.map((j, i) => ({ ...j, id: i + 1 }));
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed) || parsed.length === 0) {
+      return SEED_JARS.map((j, i) => ({ ...j, id: i + 1 }));
+    }
+    return parsed.map((j, i) => ({ ...j, id: j.id || i + 1 }));
+  } catch {
+    return SEED_JARS.map((j, i) => ({ ...j, id: i + 1 }));
+  }
+}
+
+function saveJars() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(jars)); } catch {}
+}
+
+function loadProject() {
+  try {
+    return localStorage.getItem(PROJECT_KEY)
+      || 'A small upland stillroom · autumn 2026 · the slow keep';
+  } catch {
+    return 'A small upland stillroom · autumn 2026 · the slow keep';
+  }
+}
+
+function saveProject(name) {
+  try { localStorage.setItem(PROJECT_KEY, name); } catch {}
+}
+
+let jars = loadJars();
+let nextId = (jars.reduce((m, j) => Math.max(m, j.id || 0), 0)) + 1;
 let filter = 'all';
 let focused = null;
 
@@ -127,6 +159,7 @@ function render() {
   renderTotals();
   renderProfile();
   renderList();
+  saveJars();
 }
 
 // ---------- Helpers ----------
@@ -179,9 +212,15 @@ function removeJar(id) {
 }
 
 function resetJars() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch {}
+  try { localStorage.removeItem(PROJECT_KEY); } catch {}
   jars = SEED_JARS.map((j, i) => ({ ...j, id: i + 1 }));
   nextId = jars.length + 1;
   filter = 'all';
+  const project = $('#chart-project');
+  if (project) {
+    project.textContent = 'A small upland stillroom · autumn 2026 · the slow keep';
+  }
   document.querySelectorAll('#filters button').forEach(b => {
     b.classList.toggle('is-active', b.dataset.filter === 'all');
   });
@@ -191,6 +230,18 @@ function resetJars() {
 // ---------- Wire up ----------
 
 document.addEventListener('DOMContentLoaded', () => {
+  const project = $('#chart-project');
+  if (project) {
+    project.textContent = loadProject();
+    project.setAttribute('contenteditable', 'true');
+    project.setAttribute('spellcheck', 'false');
+    project.title = 'Click to rename the stillroom';
+    project.addEventListener('blur', () => saveProject(project.textContent.trim()));
+    project.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); project.blur(); }
+    });
+  }
+
   render();
 
   document.querySelectorAll('#filters button').forEach(btn => {
