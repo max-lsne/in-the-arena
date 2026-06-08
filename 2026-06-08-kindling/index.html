@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kindling — a small page for the small starters you keep</title>
+  <meta name="description" content="Kindling is a small page for the small dry starters you keep against the cold mornings — one-sentence drafts, five-minute warm-ups, opened files. Tinder, twigs, splits, logs. The pile is the practice." />
+  <meta name="theme-color" content="#f1e8d0" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#2a241e" media="(prefers-color-scheme: dark)" />
+  <meta name="color-scheme" content="light" />
+  <meta property="og:title" content="Kindling — the small starters, kept dry for the cold morning" />
+  <meta property="og:description" content="A small page for the small dry starters you keep against the cold mornings. Tinder, twigs, splits, logs. The pile is patience put into small dry sticks." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23f1e8d0'/%3E%3Cpath d='M2 27 L30 27' stroke='%237a5c3a' stroke-width='0.8' opacity='0.5'/%3E%3Cpath d='M6 26 L20 16' stroke='%233a3327' stroke-width='2.4' stroke-linecap='round' opacity='0.85'/%3E%3Cpath d='M10 26 L26 14' stroke='%23a05a1e' stroke-width='2.2' stroke-linecap='round' opacity='0.9'/%3E%3Cpath d='M14 26 L24 18' stroke='%237a6a44' stroke-width='1.8' stroke-linecap='round' opacity='0.85'/%3E%3Cpath d='M18 26 L28 22' stroke='%23c98a4b' stroke-width='1.4' stroke-linecap='round' opacity='0.85'/%3E%3Ccircle cx='11' cy='10' r='1.6' fill='%23b85c25' opacity='0.85'/%3E%3Ccircle cx='8' cy='8' r='0.8' fill='%23d18046' opacity='0.7'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <!-- a small pile of kindling -->
+          <path d="M2 27 L30 27" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.5" />
+          <path d="M6 26 L20 16" stroke="currentColor" stroke-width="2.2" opacity="0.7" stroke-linecap="round" />
+          <path d="M10 26 L26 14" stroke="currentColor" stroke-width="2.0" opacity="0.85" stroke-linecap="round" />
+          <path d="M14 26 L24 18" stroke="currentColor" stroke-width="1.8" opacity="0.65" stroke-linecap="round" />
+          <path d="M18 26 L28 22" stroke="currentColor" stroke-width="1.4" opacity="0.55" stroke-linecap="round" />
+          <circle cx="11" cy="10" r="1.4" fill="currentColor" opacity="0.6" />
+          <circle cx="8" cy="8" r="0.8" fill="currentColor" opacity="0.5" />
+        </svg>
+      </span>
+      <span>Kindling</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#pile">The pile</a>
+      <a href="#who">Who keeps one</a>
+      <a href="#hold" class="nav-cta">Lay a stick</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">A dry pile, kept on purpose</p>
+        <h1>
+          The small starters,<br />
+          <em>kept dry for the cold morning.</em>
+        </h1>
+        <p class="lede">
+          A kindling pile is what the morning of a working life needs more
+          than any other tool. Not the big log. Not the bellows. The
+          single dry stick small enough to catch when nothing else will.
+          Kindling is a small page for the practice of keeping one — a
+          one-sentence draft, a five-minute warm-up, an opened file —
+          ready in arm's reach for the morning that comes cold.
+        </p>
+        <div class="hero-cta">
+          <a href="#pile" class="btn btn-primary">See the pile</a>
+          <a href="#hold" class="btn btn-ghost">Lay a stick</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One small dry stick. No streak. No badge. No fire-alarm.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg class="hero-pile" viewBox="0 0 400 320" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="kSky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#efe5cf" stop-opacity="0.85" />
+              <stop offset="100%" stop-color="#d6c79a" stop-opacity="0.2" />
+            </linearGradient>
+            <linearGradient id="kBark" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#c5b890" />
+              <stop offset="100%" stop-color="#7a6a44" />
+            </linearGradient>
+            <linearGradient id="kBarkDark" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#8a7048" />
+              <stop offset="100%" stop-color="#3a3327" />
+            </linearGradient>
+            <linearGradient id="kEmber" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#d18046" stop-opacity="0.85" />
+              <stop offset="100%" stop-color="#b85c25" stop-opacity="0.9" />
+            </linearGradient>
+            <radialGradient id="kSpark" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0%" stop-color="#ffb066" stop-opacity="0.9" />
+              <stop offset="60%" stop-color="#d18046" stop-opacity="0.4" />
+              <stop offset="100%" stop-color="#b85c25" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+
+          <rect x="0" y="0" width="400" height="320" fill="url(#kSky)" />
+          <rect x="0" y="0" width="400" height="320" fill="#e8dcb8" opacity="0.25" />
+
+          <!-- back wall hint: a hearth's stone line -->
+          <path d="M0 260 L400 260" stroke="#7a5c3a" stroke-width="0.6" opacity="0.4" />
+          <path d="M0 275 L400 275" stroke="#7a5c3a" stroke-width="0.4" opacity="0.25" />
+
+          <!-- LOGS (bottom layer) -->
+          <g>
+            <ellipse cx="78" cy="262" rx="62" ry="11" fill="url(#kBarkDark)" />
+            <ellipse cx="78" cy="258" rx="62" ry="7" fill="#5a4a30" opacity="0.9" />
+            <ellipse cx="16" cy="258" rx="7" ry="6" fill="#3a3327" />
+            <ellipse cx="16" cy="258" rx="3" ry="2.5" fill="#7a6a44" />
+
+            <ellipse cx="220" cy="262" rx="58" ry="10" fill="url(#kBarkDark)" />
+            <ellipse cx="220" cy="258" rx="58" ry="6" fill="#5a4a30" opacity="0.9" />
+            <ellipse cx="278" cy="258" rx="6" ry="5" fill="#3a3327" />
+            <ellipse cx="278" cy="258" rx="2.6" ry="2.2" fill="#7a6a44" />
+
+            <ellipse cx="335" cy="266" rx="50" ry="9" fill="url(#kBarkDark)" />
+            <ellipse cx="335" cy="263" rx="50" ry="5.5" fill="#5a4a30" opacity="0.9" />
+          </g>
+
+          <!-- SPLITS (next layer) -->
+          <g transform="translate(0,-2)">
+            <rect x="48" y="234" width="120" height="14" rx="2" fill="url(#kBark)" />
+            <rect x="48" y="234" width="120" height="3" fill="#3a3327" opacity="0.6" />
+            <rect x="62" y="238" width="2" height="10" fill="#3a3327" opacity="0.5" />
+            <rect x="86" y="238" width="2" height="10" fill="#3a3327" opacity="0.5" />
+            <rect x="118" y="238" width="2" height="10" fill="#3a3327" opacity="0.5" />
+
+            <rect x="180" y="232" width="100" height="13" rx="2" fill="url(#kBark)" />
+            <rect x="180" y="232" width="100" height="3" fill="#3a3327" opacity="0.6" />
+            <rect x="196" y="236" width="2" height="9" fill="#3a3327" opacity="0.5" />
+            <rect x="232" y="236" width="2" height="9" fill="#3a3327" opacity="0.5" />
+
+            <rect x="288" y="238" width="86" height="11" rx="2" fill="url(#kBark)" />
+            <rect x="288" y="238" width="86" height="2.5" fill="#3a3327" opacity="0.6" />
+          </g>
+
+          <!-- TWIGS (next layer) — crossing diagonally -->
+          <g stroke-linecap="round">
+            <line x1="60" y1="222" x2="180" y2="210" stroke="#8a7048" stroke-width="6" />
+            <line x1="60" y1="222" x2="180" y2="210" stroke="#3a3327" stroke-width="1.2" opacity="0.7" />
+
+            <line x1="90" y1="208" x2="220" y2="232" stroke="#a08658" stroke-width="5" />
+            <line x1="90" y1="208" x2="220" y2="232" stroke="#3a3327" stroke-width="1" opacity="0.6" />
+
+            <line x1="160" y1="206" x2="300" y2="222" stroke="#8a7048" stroke-width="5.5" />
+            <line x1="160" y1="206" x2="300" y2="222" stroke="#3a3327" stroke-width="1.1" opacity="0.65" />
+
+            <line x1="200" y1="222" x2="340" y2="208" stroke="#a08658" stroke-width="4.5" />
+            <line x1="200" y1="222" x2="340" y2="208" stroke="#3a3327" stroke-width="0.9" opacity="0.6" />
+
+            <line x1="48" y1="200" x2="138" y2="220" stroke="#7a6a44" stroke-width="4" />
+            <line x1="270" y1="216" x2="368" y2="232" stroke="#7a6a44" stroke-width="4" />
+          </g>
+
+          <!-- TINDER (top layer) — bits of bark, leaves, the smallest stuff -->
+          <g>
+            <path d="M120 190 q12 -8 26 -3 q-6 8 -18 9 q-6 0 -8 -6 z" fill="#d18046" opacity="0.85" />
+            <path d="M120 190 q12 -8 26 -3" fill="none" stroke="#3a3327" stroke-width="0.5" opacity="0.7" />
+
+            <path d="M196 184 q14 -10 30 -2 q-8 9 -22 9 q-6 0 -8 -7 z" fill="#c98a4b" opacity="0.9" />
+            <path d="M196 184 q14 -10 30 -2" fill="none" stroke="#3a3327" stroke-width="0.5" opacity="0.7" />
+
+            <path d="M84 198 q8 -6 18 -2 q-4 6 -12 6 q-4 0 -6 -4 z" fill="#d18046" opacity="0.75" />
+
+            <ellipse cx="156" cy="196" rx="6" ry="2" fill="#c5b890" opacity="0.75" />
+            <ellipse cx="236" cy="196" rx="6" ry="2" fill="#c5b890" opacity="0.75" />
+            <ellipse cx="276" cy="194" rx="5" ry="1.8" fill="#c5b890" opacity="0.7" />
+            <ellipse cx="306" cy="198" rx="6" ry="2" fill="#c5b890" opacity="0.7" />
+
+            <!-- a single small spark/ember above the pile -->
+            <circle class="hero-spark-halo" cx="170" cy="158" r="20" fill="url(#kSpark)" />
+            <circle class="hero-spark-core" cx="170" cy="158" r="3" fill="#ffd092" opacity="0.95" />
+            <circle cx="168" cy="156" r="1.2" fill="#ffffff" opacity="0.7" />
+
+            <!-- a few drift-motes catching the slow draft over the pile -->
+            <circle class="hero-mote hero-mote-1" cx="220" cy="140" r="1.4" fill="#d18046" opacity="0.65" />
+            <circle class="hero-mote hero-mote-2" cx="140" cy="124" r="1.1" fill="#c98a4b" opacity="0.55" />
+            <circle class="hero-mote hero-mote-3" cx="262" cy="118" r="0.9" fill="#b85c25" opacity="0.5" />
+          </g>
+
+          <!-- a single dried-leaf curl high up -->
+          <path d="M52 60 q14 18 8 38 q-6 -2 -12 -10 q-4 -10 4 -28 z" fill="#a05a1e" opacity="0.55" />
+          <path d="M52 60 q14 18 8 38" fill="none" stroke="#3a3327" stroke-width="0.4" opacity="0.5" />
+
+          <!-- title plates -->
+        </svg>
+        <span class="hero-tick hero-tick-1">tinder</span>
+        <span class="hero-tick hero-tick-2">ready</span>
+        <span class="hero-tick hero-tick-3">gathered</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>Most mornings<br /><em>are spent looking for a match.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            Most productivity asks what the big thing is. The big thing
+            is rarely the hard thing. The hard thing is the first thing.
+            At six in the dark, in the cold, nothing wants to catch.
+            Whether or not a working day begins is not decided by your
+            discipline; it is decided by what is within arm's reach when
+            you sit down. Big logs do not catch from a match.
+          </p>
+          <p>
+            A kindling pile is a small dry thing you put aside on the
+            warm afternoons of last week, against the cold morning of
+            this one. A one-sentence draft kept at the bottom of the
+            notebook. A five-minute version of the work, already begun.
+            The file closed at a place that opens easily again. The
+            pile is patience put into small dry sticks.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Cut a small stick</h3>
+          <p>One smallest possible start — a single sentence, a five-minute version, a file opened where the work already is. Small enough to catch when nothing else will. The smaller the stick, the more days it works for.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Choose a pile</h3>
+          <p>Tinder for the smallest stuff. Twigs for the small first acts. Splits for the half-built pieces. Logs for the substantial work. The pile is sorted by what it takes to catch.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Let it dry</h3>
+          <p>A stick fresh-cut still has the wet of the day. A week or two on the pile and it loses the wet of haste. Bone-dry sticks take a spark at a breath. The dryness is the practice.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Use the smallest one first</h3>
+          <p>The cold morning is not the morning to chop a cord. It is the morning for the tinder you kept dry. Reach for the smallest dry thing first; let the small fire take the next one up. The pile catches itself.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="pile" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A pile, late spring</h2>
+        <p>A small pile of twelve sticks — a fictional one, kept by no one in particular through a slow turn of the spring of 2026. Some are newly gathered, still wet with the morning they were cut. Some have been on the pile for months and are bone-dry. One or two were given to the work years ago and remain on the pile only as a record. Add a stick, age one a week, give one to the fire — the pile redraws in your browser. Nothing leaves.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">Pile</p>
+            <p class="chart-project" id="chart-project">A small kindling pile · spring 2026 · the dry keep</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Weeks on the pile across the sticks in this kindling">
+          <p class="profile-axis-label top">long-dry</p>
+          <p class="profile-axis-label bot">just cut</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the sticks">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="gathered" role="tab">Gathered</button>
+          <button type="button" data-filter="drying" role="tab">Drying</button>
+          <button type="button" data-filter="ready" role="tab">Ready</button>
+          <button type="button" data-filter="spent" role="tab">Spent</button>
+        </div>
+
+        <ul class="legs" id="sticks-list">
+          <!-- sticks inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-pile" aria-label="Pile of the stick">
+              <option value="tinder">Tinder</option>
+              <option value="twigs">Twigs</option>
+              <option value="splits">Splits</option>
+              <option value="logs">Logs</option>
+            </select>
+            <input id="add-weeks" type="number" step="1" min="0" value="0" aria-label="Weeks the stick has been on the pile" />
+            <input id="add-name" type="text" placeholder="Name the stick — a smallest possible start" maxlength="90" />
+            <select id="add-state" aria-label="State of the stick">
+              <option value="gathered">Gathered</option>
+              <option value="drying">Drying</option>
+              <option value="ready">Ready</option>
+              <option value="spent">Spent</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Lay it on</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original pile</a>
+        </div>
+
+        <p class="kbd-help">
+          <strong>Keys:</strong>
+          <kbd>J</kbd>/<kbd>K</kbd> move &middot;
+          <kbd>Enter</kbd> advance state &middot;
+          <kbd>Del</kbd> give to the fire &middot;
+          <kbd>N</kbd> add &middot;
+          <kbd>0</kbd>&ndash;<kbd>4</kbd> filter &middot;
+          <kbd>[</kbd>/<kbd>]</kbd> nudge weeks &middot;
+          <kbd>R</kbd> reset.
+        </p>
+      </div>
+
+      <div class="legend">
+        <h3>The four piles</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-tinder"></span><div><strong>Tinder.</strong> The smallest possible start — a single sentence already in the notebook, a single push-up, the laptop opened the night before at the work. Catches at a breath. The pile under everything else.</div></li>
+          <li><span class="legend-swatch swatch-twigs"></span><div><strong>Twigs.</strong> Small first acts — a five-minute draft, a rough outline, the walk to the desk. Will not warm the room alone; carries the spark to the splits.</div></li>
+          <li><span class="legend-swatch swatch-splits"></span><div><strong>Splits.</strong> Half-built work waiting to be picked up — drafts under their last line, sketches with one corner finished, the file open at the place you left it on a good day.</div></li>
+          <li><span class="legend-swatch swatch-logs"></span><div><strong>Logs.</strong> The substantial work that catches once the small fires are going — the long projects, the deep hours. Needs the rest of the pile already in flame.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who keeps a kindling pile</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The novelist at the door of a cold morning</h3>
+          <p>A one-sentence draft laid every Sunday night, on a card pinned to the desk. Eleven years now, five hundred and seventy-two cards. The cold Monday is not a morning for drafting; it is a morning for the card that was already drafted on Sunday. The morning catches from the card.</p>
+        </article>
+        <article>
+          <h3>The runner who keeps the first eighty steps</h3>
+          <p>The shoes laid by the door the night before. The first eighty steps practised so often they are a single piece of kindling, dry and ready. The hard run begins after step eighty-one. The first eighty are the match.</p>
+        </article>
+        <article>
+          <h3>The composer at the piano in the dark</h3>
+          <p>A single scale laid on the keyboard each Sunday, untimed, before the first piece of any week. A tiny dry thing that has nothing to do with the music. It is the spark the music catches from. The scale is not the work; the scale is the kindling.</p>
+        </article>
+        <article>
+          <h3>The researcher at the start of an afternoon</h3>
+          <p>The next paragraph already marked in the manuscript before lunch. The terminal already at the file. The browser already at the tab. Three tiny dry sticks placed so the afternoon does not have to find a match. The afternoon catches.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="hold" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · winter 2026</p>
+        <h2>One email when the pile opens.</h2>
+        <p class="hold-lede">A small page, a small pile, a way to keep dry the small starters of your work. No streak. No badge. No share card. No fire-alarm at three in the afternoon to tell you you have not stoked anything today. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@somewhere.field" />
+          <button class="btn btn-primary" type="submit">Lay it on</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first piles are dry. You can leave anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Kindling</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · the dry keep as practice</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#pile">Pile</a>
+      <a href="#hold">Lay a stick</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
