@@ -34,10 +34,39 @@ const SEED_LOADS = [
   { name: 'The novel begun in 2014, now on its second draft',            boat: 'barge',      state: 'fast',   leagues: 312 },
 ];
 
+const STORAGE_KEY = 'towpath.loads.v1';
+const PROJECT_KEY = 'towpath.project.v1';
 const DEFAULT_PROJECT = 'A small haul · spring 2026 · the slow rope';
 
-let loads = SEED_LOADS.map((s, i) => ({ ...s, id: i + 1 }));
-let nextId = loads.length + 1;
+function loadLoads() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return SEED_LOADS.map((s, i) => ({ ...s, id: i + 1 }));
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed) || parsed.length === 0) {
+      return SEED_LOADS.map((s, i) => ({ ...s, id: i + 1 }));
+    }
+    return parsed.map((s, i) => ({ ...s, id: s.id || i + 1 }));
+  } catch {
+    return SEED_LOADS.map((s, i) => ({ ...s, id: i + 1 }));
+  }
+}
+
+function saveLoads() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(loads)); } catch {}
+}
+
+function loadProject() {
+  try { return localStorage.getItem(PROJECT_KEY) || DEFAULT_PROJECT; }
+  catch { return DEFAULT_PROJECT; }
+}
+
+function saveProject(name) {
+  try { localStorage.setItem(PROJECT_KEY, name); } catch {}
+}
+
+let loads = loadLoads();
+let nextId = (loads.reduce((m, s) => Math.max(m, s.id || 0), 0)) + 1;
 let filter = 'all';
 let focused = null;
 
@@ -128,6 +157,7 @@ function render() {
   renderTotals();
   renderProfile();
   renderList();
+  saveLoads();
 }
 
 // ---------- Helpers ----------
@@ -182,6 +212,8 @@ function removeLoad(id) {
 }
 
 function resetLoads() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch {}
+  try { localStorage.removeItem(PROJECT_KEY); } catch {}
   loads = SEED_LOADS.map((s, i) => ({ ...s, id: i + 1 }));
   nextId = loads.length + 1;
   filter = 'all';
@@ -196,6 +228,18 @@ function resetLoads() {
 // ---------- Wire up ----------
 
 document.addEventListener('DOMContentLoaded', () => {
+  const project = $('#chart-project');
+  if (project) {
+    project.textContent = loadProject();
+    project.setAttribute('contenteditable', 'true');
+    project.setAttribute('spellcheck', 'false');
+    project.title = 'Click to rename the haul';
+    project.addEventListener('blur', () => saveProject(project.textContent.trim()));
+    project.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); project.blur(); }
+    });
+  }
+
   render();
 
   document.querySelectorAll('#filters button').forEach(btn => {
