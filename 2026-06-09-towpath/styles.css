@@ -529,6 +529,26 @@ main {
 }
 .reset-link:hover { color: var(--copper); border-bottom-color: var(--copper); }
 
+/* keyboard help */
+.kbd-help {
+  margin: 14px 0 0;
+  font-size: 13px;
+  color: var(--moss-dark);
+  line-height: 1.8;
+}
+.kbd-help strong { color: var(--ink); font-weight: 600; margin-right: 4px; }
+kbd {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 1px 6px;
+  background: var(--limestone);
+  border: 1px solid var(--rule);
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+
 /* legend */
 .legend {
   margin-top: 32px;
