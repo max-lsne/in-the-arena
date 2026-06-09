@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Towpath — a small page for the slow steady haul</title>
+  <meta name="description" content="Towpath is a small page for the slow steady haul. A horse at three miles an hour pulling forty tons of coal. Skiff, wherry, narrowboat, barge. The rope only has to stay taut." />
+  <link rel="icon" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ede4d2'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <!-- a small towpath: stone line, water below, a rope rising -->
+          <path d="M2 18 L30 18" stroke="currentColor" stroke-width="1.4" opacity="0.85" stroke-linecap="round" />
+          <path d="M2 22 L30 22" stroke="currentColor" stroke-width="0.6" opacity="0.45" stroke-linecap="round" />
+          <path d="M2 26 L30 26" stroke="currentColor" stroke-width="0.5" opacity="0.3" stroke-linecap="round" />
+          <path d="M8 18 L22 11" stroke="currentColor" stroke-width="0.9" opacity="0.85" stroke-linecap="round" />
+          <circle cx="22" cy="11" r="1.6" fill="currentColor" opacity="0.85" />
+          <circle cx="8" cy="18" r="1.2" fill="currentColor" opacity="0.9" />
+        </svg>
+      </span>
+      <span>Towpath</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#haul">The haul</a>
+      <a href="#who">Who walks one</a>
+      <a href="#hold" class="nav-cta">Tie on</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">A rope kept taut on purpose</p>
+        <h1>
+          Forty tons of coal,<br />
+          <em>at three miles an hour.</em>
+        </h1>
+        <p class="lede">
+          A towpath is the worn ribbon of stone beside the canal. A horse
+          walks it at three miles an hour. A rope runs from its collar
+          down to the bow of a narrowboat carrying forty tons of coal.
+          The horse is not strong enough to lift the boat. But the rope
+          is taut, and the boat moves, and at the end of the day it is
+          twelve miles further along than it was at dawn. That is the
+          whole thing.
+        </p>
+        <div class="hero-cta">
+          <a href="#haul" class="btn btn-primary">See the haul</a>
+          <a href="#hold" class="btn btn-ghost">Tie on a rope</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One slow rope. No sprint. No streak. No headwind to chase.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg class="hero-canal" viewBox="0 0 400 320" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="tSky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#efe5cf" stop-opacity="0.9" />
+              <stop offset="100%" stop-color="#dccfa8" stop-opacity="0.2" />
+            </linearGradient>
+            <linearGradient id="tWater" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#6f9082" />
+              <stop offset="100%" stop-color="#3a564b" />
+            </linearGradient>
+            <linearGradient id="tBank" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#d4c4a0" />
+              <stop offset="100%" stop-color="#a8916a" />
+            </linearGradient>
+            <linearGradient id="tBarge" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7a5a38" />
+              <stop offset="100%" stop-color="#4a3a28" />
+            </linearGradient>
+            <linearGradient id="tHorse" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#6a4a30" />
+              <stop offset="100%" stop-color="#3a2a18" />
+            </linearGradient>
+            <radialGradient id="tGlint" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0%" stop-color="#e8b870" stop-opacity="0.85" />
+              <stop offset="70%" stop-color="#c08648" stop-opacity="0.3" />
+              <stop offset="100%" stop-color="#c08648" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+
+          <rect x="0" y="0" width="400" height="320" fill="url(#tSky)" />
+          <rect x="0" y="0" width="400" height="320" fill="#e8dcb8" opacity="0.2" />
+
+          <!-- far bank with a hint of a hedgerow -->
+          <rect x="0" y="120" width="400" height="14" fill="#a8b09a" opacity="0.6" />
+          <path d="M0 124 q40 -8 80 -2 q40 6 80 -2 q40 -6 80 0 q40 6 80 -4 q40 -6 80 4" fill="none" stroke="#6a7855" stroke-width="2.4" opacity="0.55" />
+          <path d="M0 122 q60 -10 120 -4 q60 6 120 -6 q60 -8 160 2" fill="none" stroke="#4d5840" stroke-width="1.2" opacity="0.45" />
+
+          <!-- bridge arch in the distance -->
+          <path d="M310 134 q12 -20 30 0 L340 152 L310 152 Z" fill="#b8a880" opacity="0.7" />
+          <path d="M310 134 q12 -20 30 0" fill="none" stroke="#7a6848" stroke-width="0.6" opacity="0.6" />
+          <rect x="306" y="152" width="38" height="2.5" fill="#7a6848" opacity="0.6" />
+
+          <!-- canal water, broad band across -->
+          <rect x="0" y="134" width="400" height="86" fill="url(#tWater)" />
+
+          <!-- water ripples and the small reflection trail behind the boat -->
+          <path d="M0 150 L400 150" stroke="#a8c0b2" stroke-width="0.6" opacity="0.35" />
+          <path d="M0 162 L400 162" stroke="#a8c0b2" stroke-width="0.5" opacity="0.25" />
+          <path d="M0 178 L400 178" stroke="#a8c0b2" stroke-width="0.4" opacity="0.2" />
+          <path d="M0 196 L400 196" stroke="#a8c0b2" stroke-width="0.35" opacity="0.18" />
+
+          <!-- ripples around the bow of the boat -->
+          <path d="M70 184 q14 -4 28 0" fill="none" stroke="#cbdcd2" stroke-width="0.7" opacity="0.65" />
+          <path d="M80 192 q12 -3 24 0" fill="none" stroke="#cbdcd2" stroke-width="0.6" opacity="0.5" />
+          <path d="M90 198 q10 -2 20 0" fill="none" stroke="#cbdcd2" stroke-width="0.5" opacity="0.4" />
+
+          <!-- a single warm glint on the water -->
+          <circle class="hero-glint" cx="260" cy="184" r="22" fill="url(#tGlint)" />
+          <ellipse cx="260" cy="184" rx="6" ry="1.2" fill="#e8b870" opacity="0.85" />
+
+          <!-- narrowboat -->
+          <g>
+            <!-- hull -->
+            <path d="M88 184 L210 184 Q222 184 222 192 L222 206 Q222 214 210 214 L92 214 Q80 214 80 206 L80 192 Q80 184 92 184 Z" fill="url(#tBarge)" />
+            <!-- waterline accent -->
+            <path d="M86 208 L222 208" stroke="#2a1a08" stroke-width="0.6" opacity="0.5" />
+            <!-- gunwale -->
+            <rect x="80" y="182" width="142" height="3" fill="#a07848" opacity="0.85" />
+            <!-- cabin -->
+            <rect x="138" y="166" width="74" height="20" rx="2" fill="#3a2a18" />
+            <rect x="138" y="166" width="74" height="3" fill="#7a5a38" opacity="0.6" />
+            <rect x="146" y="172" width="10" height="9" fill="#c08648" opacity="0.85" />
+            <rect x="162" y="172" width="10" height="9" fill="#c08648" opacity="0.85" />
+            <rect x="178" y="172" width="10" height="9" fill="#c08648" opacity="0.85" />
+            <rect x="194" y="172" width="10" height="9" fill="#c08648" opacity="0.85" />
+            <!-- chimney -->
+            <rect x="200" y="156" width="4" height="12" fill="#3a2a18" />
+            <ellipse cx="202" cy="156" rx="3.2" ry="1.4" fill="#5a4a30" />
+            <!-- smoke -->
+            <ellipse class="hero-smoke hero-smoke-1" cx="202" cy="148" rx="4" ry="3" fill="#c5b890" opacity="0.55" />
+            <ellipse class="hero-smoke hero-smoke-2" cx="206" cy="138" rx="6" ry="4" fill="#c5b890" opacity="0.4" />
+            <ellipse class="hero-smoke hero-smoke-3" cx="210" cy="126" rx="9" ry="5" fill="#c5b890" opacity="0.28" />
+            <!-- name plate -->
+            <rect x="98" y="194" width="36" height="8" rx="1" fill="#7a5a38" opacity="0.8" />
+            <!-- tiller -->
+            <path d="M222 196 L246 188" stroke="#4a3a28" stroke-width="2" stroke-linecap="round" />
+          </g>
+
+          <!-- the towpath stone bank (near side) -->
+          <rect x="0" y="218" width="400" height="102" fill="url(#tBank)" />
+          <!-- stone joins -->
+          <path d="M0 218 L400 218" stroke="#6a5a3a" stroke-width="0.8" opacity="0.6" />
+          <path d="M0 232 L400 232" stroke="#7a6848" stroke-width="0.4" opacity="0.4" />
+          <path d="M0 250 L400 250" stroke="#7a6848" stroke-width="0.4" opacity="0.3" />
+          <!-- small tufts of moss between stones -->
+          <ellipse cx="34" cy="232" rx="5" ry="1.6" fill="#6a7855" opacity="0.65" />
+          <ellipse cx="124" cy="240" rx="4" ry="1.4" fill="#6a7855" opacity="0.6" />
+          <ellipse cx="220" cy="248" rx="6" ry="1.8" fill="#6a7855" opacity="0.55" />
+          <ellipse cx="318" cy="236" rx="4.5" ry="1.5" fill="#6a7855" opacity="0.6" />
+
+          <!-- horse on the towpath -->
+          <g transform="translate(290,232)">
+            <!-- body -->
+            <path d="M0 0 L42 0 Q48 0 50 -4 L52 -12 Q48 -18 38 -18 L8 -18 Q2 -18 -2 -12 L-2 -4 Q-2 0 0 0 Z" fill="url(#tHorse)" />
+            <!-- neck and head -->
+            <path d="M44 -16 Q56 -22 60 -30 Q62 -34 58 -36 Q52 -38 46 -32 Q42 -26 42 -18 Z" fill="url(#tHorse)" />
+            <!-- ear -->
+            <path d="M56 -34 L58 -38 L60 -34 Z" fill="#2a1a08" />
+            <!-- mane -->
+            <path d="M44 -16 Q48 -22 50 -26 Q46 -24 42 -20 Z" fill="#2a1a08" opacity="0.85" />
+            <!-- legs -->
+            <rect x="2" y="0" width="3" height="16" fill="#3a2a18" />
+            <rect x="14" y="0" width="3" height="16" fill="#3a2a18" />
+            <rect x="34" y="0" width="3" height="16" fill="#3a2a18" />
+            <rect x="44" y="0" width="3" height="16" fill="#3a2a18" />
+            <!-- tail -->
+            <path d="M-2 -6 q-6 4 -8 12 q-2 4 2 4 q4 -8 6 -16 z" fill="#2a1a08" opacity="0.9" />
+            <!-- collar -->
+            <path d="M52 -22 Q58 -24 60 -28" fill="none" stroke="#c4a878" stroke-width="1.4" />
+          </g>
+
+          <!-- the tow rope -->
+          <path class="hero-rope" d="M222 184 C 260 180, 300 200, 348 218" fill="none" stroke="#c4a878" stroke-width="1.6" opacity="0.95" />
+          <path d="M222 184 C 260 180, 300 200, 348 218" fill="none" stroke="#7a5a38" stroke-width="0.4" opacity="0.6" stroke-dasharray="2 2" />
+
+          <!-- a single tuft of reeds in the near foreground -->
+          <g transform="translate(20,236)">
+            <line x1="0" y1="0" x2="-2" y2="-22" stroke="#6a7855" stroke-width="1.2" />
+            <line x1="3" y1="0" x2="2" y2="-26" stroke="#6a7855" stroke-width="1.2" />
+            <line x1="6" y1="0" x2="6" y2="-20" stroke="#6a7855" stroke-width="1.2" />
+            <line x1="9" y1="0" x2="11" y2="-24" stroke="#6a7855" stroke-width="1.2" />
+            <ellipse cx="-2" cy="-22" rx="1.2" ry="2.4" fill="#7a5a38" />
+            <ellipse cx="2" cy="-26" rx="1.2" ry="2.6" fill="#7a5a38" />
+            <ellipse cx="11" cy="-24" rx="1.2" ry="2.4" fill="#7a5a38" />
+          </g>
+
+          <!-- a milestone on the path -->
+          <rect x="160" y="246" width="6" height="10" rx="1" fill="#c5b890" />
+          <rect x="160" y="246" width="6" height="2" fill="#7a6848" opacity="0.6" />
+        </svg>
+        <span class="hero-tick hero-tick-1">three mph</span>
+        <span class="hero-tick hero-tick-2">in tow</span>
+        <span class="hero-tick hero-tick-3">forty tons</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>Most days the rope<br /><em>is slack by the afternoon.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            Most productivity asks what the top speed is. The top speed
+            is rarely the bottleneck. The bottleneck is the long
+            stretch of canal between the wharfs, where nothing
+            interesting happens and the wind is not at your back. A
+            sprint over a single mile loses, every time, to a horse
+            kept walking the whole twelve. The barge does not care
+            which day it was hauled. The barge only cares that the rope
+            stayed taut.
+          </p>
+          <p>
+            A towpath is a low pace held for a long time. Three miles
+            an hour, six hours a day, six days a week. Nothing
+            heroic. The horse is not stronger than yesterday. The boat
+            is not lighter. The wharf is not closer than it was at
+            dawn — except that it is twelve miles closer, and twelve
+            miles is the day's haul.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Tie on a small rope</h3>
+          <p>Pick one piece of work and tie a line to it. The smallest sustainable pull — a paragraph a day, an evening's hour, the next chapter — not the biggest you can manage on a good day. The rope only works if it stays taut on the bad ones too.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Pick the boat</h3>
+          <p>Skiff for the small light work. Wherry for the small working work. Narrowboat for the long-haul of a year or two. Barge for the decade-long thing. The boat decides the pace; the pace is always the same three miles an hour.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Walk the path</h3>
+          <p>Cast off, in tow, steady haul, made fast. Most of the work happens in the steady haul, where there is nothing to report. No story, no headwind, no breakthrough. Just the rope taut and the path under the horse's feet.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Tie up at the next pound</h3>
+          <p>Every day's haul ends at a bollard. Twelve miles closer than dawn. Tie up. Rest the horse. Tomorrow the rope goes back on. The barge does not have to know whether you are heroic; it only has to keep moving at three miles an hour.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="haul" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A haul, late spring</h2>
+        <p>A small haul of twelve loads — a fictional one, kept by no one in particular along a slow turn of the spring of 2026. Some are just cast off, the lines still loose. Some have been under tow for years and have found the rhythm. One or two were made fast long ago and remain on the haul only as a record of the wharfs already reached. Add a load, walk a league, tie one up — the haul redraws in your browser. Nothing leaves.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">Haul</p>
+            <p class="chart-project" id="chart-project">A small haul · spring 2026 · the slow rope</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Leagues hauled across the loads on this towpath">
+          <p class="profile-axis-label top">long-haul</p>
+          <p class="profile-axis-label bot">just cast off</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the loads">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="cast" role="tab">Cast off</button>
+          <button type="button" data-filter="tow" role="tab">In tow</button>
+          <button type="button" data-filter="steady" role="tab">Steady haul</button>
+          <button type="button" data-filter="fast" role="tab">Made fast</button>
+        </div>
+
+        <ul class="legs" id="loads-list">
+          <!-- loads inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-boat" aria-label="Boat of the load">
+              <option value="skiff">Skiff</option>
+              <option value="wherry">Wherry</option>
+              <option value="narrowboat">Narrowboat</option>
+              <option value="barge">Barge</option>
+            </select>
+            <input id="add-leagues" type="number" step="1" min="0" value="0" aria-label="Leagues the load has been under tow" />
+            <input id="add-name" type="text" placeholder="Name the load — a slow steady haul" maxlength="90" />
+            <select id="add-state" aria-label="State of the load">
+              <option value="cast">Cast off</option>
+              <option value="tow">In tow</option>
+              <option value="steady">Steady haul</option>
+              <option value="fast">Made fast</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Tie it on</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original haul</a>
+        </div>
+      </div>
+
+      <div class="legend">
+        <h3>The four boats</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-skiff"></span><div><strong>Skiff.</strong> Small light work that sits high in the water — a daily note, a single push-up, the short letter. Easy to pull. Easy to forget you are pulling.</div></li>
+          <li><span class="legend-swatch swatch-wherry"></span><div><strong>Wherry.</strong> Small working work — a chapter to be drafted, a garden corner to be cleared, an instrument practised a half hour at a time. Moves at three miles an hour without fuss.</div></li>
+          <li><span class="legend-swatch swatch-narrowboat"></span><div><strong>Narrowboat.</strong> The year-or-two haul — a novel, a thesis, a slow recovery, a course finished evening by evening. Will not move without the rope.</div></li>
+          <li><span class="legend-swatch swatch-barge"></span><div><strong>Barge.</strong> The heaviest, slowest, longest hauls — the decade-long works, the rebuilt house, the second career. The pace is the same three miles an hour. The barge does not know it is a barge.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who walks a towpath</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The translator at the long Russian novel</h3>
+          <p>Eight hundred and ninety pages of the original on the desk. A page a day, six days a week, on a corner of the kitchen table after the children are in bed. Three years and four months by the rough count. The page does not care which evening it is hauled. The page only cares that it is hauled today.</p>
+        </article>
+        <article>
+          <h3>The carpenter restoring the old workshop</h3>
+          <p>An hour before breakfast, every day since the autumn. A floorboard sanded. A length of beading mitred. The pile of off-cuts has grown a foot taller every month. By next spring the room will be a workshop again. No single morning has done much; every morning has done the same small thing.</p>
+        </article>
+        <article>
+          <h3>The runner training for the spring marathon</h3>
+          <p>The plan is on a sheet of paper pinned beside the back door. Five miles on Tuesday. Seven on Thursday. Long-slow on Saturday. The fast days are not faster than last year. The slow days are slower than last year. By April the marathon is twenty-eight weeks closer than it was in October.</p>
+        </article>
+        <article>
+          <h3>The researcher building the corpus</h3>
+          <p>One transcription a day, since the second winter of the grant. The corpus is at four thousand, two hundred and sixteen entries. The work has no breakthrough, no chapter, no flash. There is only the day's transcription, added quietly to the end of the file. The corpus is the rope's record.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="hold" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · winter 2026</p>
+        <h2>One email when the rope is laid.</h2>
+        <p class="hold-lede">A small page, a small horse, a small canal. A way to keep a rope taut for as long as it has to be. No streak. No badge. No share card. No headwind alarm at three in the afternoon to tell you you have not hauled enough today. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@somewhere.field" />
+          <button class="btn btn-primary" type="submit">Tie on</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first ropes are laid. You can cast off anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Towpath</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · the slow rope as practice</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#haul">Haul</a>
+      <a href="#hold">Tie on</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
