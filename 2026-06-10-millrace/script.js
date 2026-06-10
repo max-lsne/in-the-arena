@@ -34,10 +34,39 @@ const SEED_CHANNELS = [
   { name: 'The fifteen-year symphony, head still half empty',    cut: 'penstock', state: 'tail',   paddles: 312 },
 ];
 
+const STORAGE_KEY = 'millrace.channels.v1';
+const PROJECT_KEY = 'millrace.project.v1';
 const DEFAULT_PROJECT = 'A small race · spring 2026 · the narrow cut';
 
-let channels = SEED_CHANNELS.map((s, i) => ({ ...s, id: i + 1 }));
-let nextId = channels.length + 1;
+function loadChannels() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return SEED_CHANNELS.map((s, i) => ({ ...s, id: i + 1 }));
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed) || parsed.length === 0) {
+      return SEED_CHANNELS.map((s, i) => ({ ...s, id: i + 1 }));
+    }
+    return parsed.map((s, i) => ({ ...s, id: s.id || i + 1 }));
+  } catch {
+    return SEED_CHANNELS.map((s, i) => ({ ...s, id: i + 1 }));
+  }
+}
+
+function saveChannels() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(channels)); } catch {}
+}
+
+function loadProject() {
+  try { return localStorage.getItem(PROJECT_KEY) || DEFAULT_PROJECT; }
+  catch { return DEFAULT_PROJECT; }
+}
+
+function saveProject(name) {
+  try { localStorage.setItem(PROJECT_KEY, name); } catch {}
+}
+
+let channels = loadChannels();
+let nextId = (channels.reduce((m, s) => Math.max(m, s.id || 0), 0)) + 1;
 let filter = 'all';
 let focused = null;
 
@@ -127,6 +156,7 @@ function render() {
   renderTotals();
   renderProfile();
   renderList();
+  saveChannels();
 }
 
 // ---------- Helpers ----------
@@ -181,6 +211,8 @@ function removeChannel(id) {
 }
 
 function resetChannels() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch {}
+  try { localStorage.removeItem(PROJECT_KEY); } catch {}
   channels = SEED_CHANNELS.map((s, i) => ({ ...s, id: i + 1 }));
   nextId = channels.length + 1;
   filter = 'all';
@@ -197,10 +229,11 @@ function resetChannels() {
 document.addEventListener('DOMContentLoaded', () => {
   const project = $('#chart-project');
   if (project) {
-    project.textContent = DEFAULT_PROJECT;
+    project.textContent = loadProject();
     project.setAttribute('contenteditable', 'true');
     project.setAttribute('spellcheck', 'false');
     project.title = 'Click to rename the race';
+    project.addEventListener('blur', () => saveProject(project.textContent.trim()));
     project.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') { e.preventDefault(); project.blur(); }
     });
