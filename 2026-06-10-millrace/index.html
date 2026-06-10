@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Millrace — a small page for the channel that powers the work</title>
+  <meta name="description" content="A millrace is the channeled length of water that brings the stream to the mill wheel. Not the river, not the wheel — the channel between them. Spring, head, race, tailrace." />
+  <meta name="theme-color" content="#ede4d2" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#2e2820" media="(prefers-color-scheme: dark)" />
+  <meta name="color-scheme" content="light" />
+  <meta property="og:title" content="Millrace — the narrow cut that powers the wheel" />
+  <meta property="og:description" content="A small page for the channel that powers the work. A millrace is half a mile of dressed stone and a patient slope. Trickle, leat, race, penstock. Cut once and kept clear." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ede4d2'/%3E%3Crect x='0' y='12' width='28' height='4' fill='%235d8174'/%3E%3Crect x='0' y='16' width='28' height='3' fill='%233a564b' opacity='0.6'/%3E%3Cpath d='M0 13 L28 13' stroke='%23cbdcd2' stroke-width='0.4' opacity='0.7'/%3E%3Crect x='22' y='8' width='10' height='18' fill='%236a5838'/%3E%3Cpath d='M21 9 L27 5 L33 9 Z' fill='%237a5838'/%3E%3Ccircle cx='22' cy='18' r='6' fill='%234a3a28'/%3E%3Ccircle cx='22' cy='18' r='6' fill='none' stroke='%232a1a08' stroke-width='0.4'/%3E%3Cpath d='M22 12 L22 24 M16 18 L28 18 M17.8 13.8 L26.2 22.2 M26.2 13.8 L17.8 22.2' stroke='%235a4030' stroke-width='0.5'/%3E%3Ccircle cx='22' cy='18' r='1' fill='%232a1a08'/%3E%3Cpath d='M22 10 L22 12' stroke='%23cbdcd2' stroke-width='1'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <path d="M2 12 L30 12" stroke="currentColor" stroke-width="1.2" opacity="0.85" stroke-linecap="round" />
+          <path d="M2 16 L30 16" stroke="currentColor" stroke-width="1.4" opacity="0.95" stroke-linecap="round" />
+          <path d="M2 20 L30 20" stroke="currentColor" stroke-width="0.7" opacity="0.5" stroke-linecap="round" />
+          <circle cx="24" cy="16" r="5" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.9" />
+          <path d="M24 11 L24 21 M19 16 L29 16 M20.5 12.5 L27.5 19.5 M27.5 12.5 L20.5 19.5" stroke="currentColor" stroke-width="0.6" opacity="0.7" />
+        </svg>
+      </span>
+      <span>Millrace</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#race">The race</a>
+      <a href="#who">Who cuts one</a>
+      <a href="#hold" class="nav-cta">Open the sluice</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">A channel cut on purpose</p>
+        <h1>
+          A river is wide.<br />
+          <em>A millrace is narrow.</em>
+        </h1>
+        <p class="lede">
+          A millrace is the channeled length of water that brings the
+          stream to the mill wheel. It is not the river. It is not the
+          wheel. It is the small straight cut between them, half a mile
+          of dressed stone and patient slope. The river runs anywhere.
+          The water in the race is already chosen — gathered above the
+          mill, dropped one inch in twenty, delivered exactly to the
+          paddle. That is the whole thing.
+        </p>
+        <div class="hero-cta">
+          <a href="#race" class="btn btn-primary">See the race</a>
+          <a href="#hold" class="btn btn-ghost">Open the sluice</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One narrow channel. No flood. No drought. No turbine.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg class="hero-mill" viewBox="0 0 400 320" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="mSky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#e8e2cf" stop-opacity="0.9" />
+              <stop offset="100%" stop-color="#d4cba6" stop-opacity="0.2" />
+            </linearGradient>
+            <linearGradient id="mWater" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7a9a8c" />
+              <stop offset="100%" stop-color="#3e5a4e" />
+            </linearGradient>
+            <linearGradient id="mRace" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#9eb8a8" />
+              <stop offset="100%" stop-color="#4e6a5a" />
+            </linearGradient>
+            <linearGradient id="mStone" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#c5b890" />
+              <stop offset="100%" stop-color="#8a7a52" />
+            </linearGradient>
+            <linearGradient id="mMill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#a8967a" />
+              <stop offset="100%" stop-color="#6a5838" />
+            </linearGradient>
+            <linearGradient id="mWheel" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7a5a38" />
+              <stop offset="100%" stop-color="#4a3a28" />
+            </linearGradient>
+            <radialGradient id="mGlint" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0%" stop-color="#e8b870" stop-opacity="0.85" />
+              <stop offset="70%" stop-color="#c08648" stop-opacity="0.3" />
+              <stop offset="100%" stop-color="#c08648" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+
+          <rect x="0" y="0" width="400" height="320" fill="url(#mSky)" />
+          <rect x="0" y="0" width="400" height="320" fill="#e8dcb8" opacity="0.18" />
+
+          <!-- far hill -->
+          <path d="M0 120 q60 -22 120 -10 q60 12 140 -6 q60 -12 140 4 L400 140 L0 140 Z" fill="#a8b09a" opacity="0.55" />
+          <path d="M0 124 q80 -16 160 -6 q80 8 240 -10" fill="none" stroke="#6a7855" stroke-width="1.4" opacity="0.45" />
+
+          <!-- the spring: a small pond at top-left -->
+          <ellipse cx="50" cy="142" rx="42" ry="10" fill="url(#mWater)" opacity="0.9" />
+          <ellipse cx="50" cy="142" rx="42" ry="10" fill="none" stroke="#3a564b" stroke-width="0.5" opacity="0.6" />
+          <ellipse cx="50" cy="138" rx="30" ry="2" fill="#cbdcd2" opacity="0.5" />
+
+          <!-- the millrace: a long straight channel sloping gently right -->
+          <path d="M90 142 L300 196 L300 208 L90 154 Z" fill="url(#mRace)" />
+          <!-- stone walls of the race -->
+          <path d="M90 142 L300 196" stroke="#8a7a52" stroke-width="2" opacity="0.85" />
+          <path d="M90 154 L300 208" stroke="#6a5838" stroke-width="1.4" opacity="0.7" />
+          <!-- gentle ripples in the race showing the flow direction -->
+          <path d="M120 156 L130 159" stroke="#cbdcd2" stroke-width="0.8" opacity="0.65" />
+          <path d="M150 164 L160 167" stroke="#cbdcd2" stroke-width="0.8" opacity="0.6" />
+          <path d="M180 172 L190 175" stroke="#cbdcd2" stroke-width="0.8" opacity="0.55" />
+          <path d="M210 180 L220 183" stroke="#cbdcd2" stroke-width="0.8" opacity="0.5" />
+          <path d="M240 188 L250 191" stroke="#cbdcd2" stroke-width="0.8" opacity="0.45" />
+          <path d="M270 196 L280 199" stroke="#cbdcd2" stroke-width="0.8" opacity="0.4" />
+
+          <!-- a glint where the sun catches the race -->
+          <circle class="hero-glint" cx="200" cy="180" r="20" fill="url(#mGlint)" />
+
+          <!-- the head: a small pool just above the wheel -->
+          <rect x="290" y="190" width="34" height="34" rx="2" fill="url(#mWater)" />
+          <path d="M290 198 L324 198" stroke="#cbdcd2" stroke-width="0.5" opacity="0.4" />
+          <path d="M290 210 L324 210" stroke="#cbdcd2" stroke-width="0.5" opacity="0.3" />
+
+          <!-- the sluice gate at the head -->
+          <rect x="316" y="184" width="3" height="20" fill="#5a4030" />
+          <rect x="313" y="180" width="9" height="4" fill="#7a5a38" />
+
+          <!-- the mill building -->
+          <rect x="316" y="160" width="68" height="80" fill="url(#mMill)" />
+          <rect x="316" y="160" width="68" height="6" fill="#5a4030" opacity="0.6" />
+          <!-- roof -->
+          <path d="M314 162 L350 132 L386 162 Z" fill="#7a5838" />
+          <path d="M350 132 L350 162" stroke="#5a4030" stroke-width="0.6" opacity="0.6" />
+          <!-- chimney -->
+          <rect x="362" y="138" width="6" height="22" fill="#5a4030" />
+          <ellipse cx="365" cy="138" rx="4" ry="1.6" fill="#7a5838" />
+          <!-- smoke -->
+          <ellipse class="hero-smoke hero-smoke-1" cx="365" cy="128" rx="4" ry="3" fill="#c5b890" opacity="0.55" />
+          <ellipse class="hero-smoke hero-smoke-2" cx="370" cy="116" rx="6" ry="4" fill="#c5b890" opacity="0.4" />
+          <ellipse class="hero-smoke hero-smoke-3" cx="376" cy="102" rx="9" ry="5" fill="#c5b890" opacity="0.28" />
+          <!-- windows on the mill -->
+          <rect x="326" y="178" width="10" height="14" fill="#3a2a18" />
+          <rect x="326" y="178" width="10" height="3" fill="#6a4a30" opacity="0.8" />
+          <rect x="346" y="178" width="10" height="14" fill="#3a2a18" />
+          <rect x="346" y="178" width="10" height="3" fill="#6a4a30" opacity="0.8" />
+          <rect x="366" y="178" width="10" height="14" fill="#3a2a18" />
+          <rect x="366" y="178" width="10" height="3" fill="#6a4a30" opacity="0.8" />
+          <!-- door -->
+          <rect x="346" y="216" width="12" height="24" fill="#3a2a18" />
+
+          <!-- the wheel: an overshot waterwheel against the side of the mill -->
+          <g transform="translate(312,228)">
+            <circle r="28" fill="url(#mWheel)" />
+            <circle r="28" fill="none" stroke="#2a1a08" stroke-width="1" opacity="0.7" />
+            <circle r="22" fill="none" stroke="#5a4030" stroke-width="0.8" opacity="0.7" />
+            <circle r="2.6" fill="#2a1a08" />
+            <!-- paddles -->
+            <g class="hero-wheel">
+              <rect x="-2.4" y="-28" width="4.8" height="12" rx="0.6" fill="#3a2a18" />
+              <g transform="rotate(45)"><rect x="-2.4" y="-28" width="4.8" height="12" rx="0.6" fill="#3a2a18" /></g>
+              <g transform="rotate(90)"><rect x="-2.4" y="-28" width="4.8" height="12" rx="0.6" fill="#3a2a18" /></g>
+              <g transform="rotate(135)"><rect x="-2.4" y="-28" width="4.8" height="12" rx="0.6" fill="#3a2a18" /></g>
+              <g transform="rotate(180)"><rect x="-2.4" y="-28" width="4.8" height="12" rx="0.6" fill="#3a2a18" /></g>
+              <g transform="rotate(225)"><rect x="-2.4" y="-28" width="4.8" height="12" rx="0.6" fill="#3a2a18" /></g>
+              <g transform="rotate(270)"><rect x="-2.4" y="-28" width="4.8" height="12" rx="0.6" fill="#3a2a18" /></g>
+              <g transform="rotate(315)"><rect x="-2.4" y="-28" width="4.8" height="12" rx="0.6" fill="#3a2a18" /></g>
+              <!-- spokes -->
+              <rect x="-0.4" y="-26" width="0.8" height="52" fill="#5a4030" />
+              <rect x="-26" y="-0.4" width="52" height="0.8" fill="#5a4030" />
+              <g transform="rotate(45)"><rect x="-0.4" y="-26" width="0.8" height="52" fill="#5a4030" /></g>
+              <g transform="rotate(-45)"><rect x="-0.4" y="-26" width="0.8" height="52" fill="#5a4030" /></g>
+            </g>
+            <!-- water falling on the top of the wheel from the sluice -->
+            <path d="M0 -32 L0 -28" stroke="#cbdcd2" stroke-width="2" opacity="0.7" />
+            <path d="M-2 -30 L-2 -26" stroke="#cbdcd2" stroke-width="1" opacity="0.5" />
+            <path d="M2 -30 L2 -26" stroke="#cbdcd2" stroke-width="1" opacity="0.5" />
+          </g>
+
+          <!-- the tailrace: water leaving the wheel back to the river -->
+          <path d="M286 252 L286 268 L380 280 L380 264 Z" fill="url(#mWater)" />
+          <path d="M286 252 L380 264" stroke="#3a564b" stroke-width="0.6" opacity="0.5" />
+          <path d="M286 268 L380 280" stroke="#3a564b" stroke-width="0.6" opacity="0.5" />
+          <!-- froth at the foot of the wheel -->
+          <ellipse cx="294" cy="258" rx="10" ry="2.4" fill="#e8e2cf" opacity="0.7" />
+          <ellipse cx="306" cy="262" rx="8" ry="1.8" fill="#e8e2cf" opacity="0.55" />
+          <ellipse cx="318" cy="266" rx="6" ry="1.4" fill="#e8e2cf" opacity="0.4" />
+
+          <!-- bank between race and ground -->
+          <path d="M0 154 L90 154 L300 208 L400 220 L400 320 L0 320 Z" fill="url(#mStone)" opacity="0.7" />
+          <!-- a small line of reeds at the spring's edge -->
+          <g transform="translate(74,150)">
+            <line x1="0" y1="0" x2="-2" y2="-16" stroke="#6a7855" stroke-width="1" />
+            <line x1="3" y1="0" x2="2" y2="-20" stroke="#6a7855" stroke-width="1" />
+            <line x1="6" y1="0" x2="6" y2="-14" stroke="#6a7855" stroke-width="1" />
+            <ellipse cx="-2" cy="-16" rx="1" ry="2" fill="#7a5a38" />
+            <ellipse cx="2" cy="-20" rx="1" ry="2.2" fill="#7a5a38" />
+          </g>
+
+          <!-- a small stone fingerpost at the head of the race -->
+          <rect x="92" y="148" width="2.6" height="14" fill="#7a6848" />
+          <rect x="90" y="146" width="6.6" height="3" fill="#c5b890" />
+        </svg>
+        <span class="hero-tick hero-tick-1">one inch in twenty</span>
+        <span class="hero-tick hero-tick-2">paddle by paddle</span>
+        <span class="hero-tick hero-tick-3">the race runs full</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>The river runs anywhere<br /><em>and turns no wheel.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            Most days the water is in the river. The river is wide and
+            quick and goes wherever the country slopes. It powers
+            nothing. It only goes. There is plenty of water and none
+            of it is doing anything. A field of attention with no
+            channel cut through it.
+          </p>
+          <p>
+            A millrace is a small straight cut. Half a mile of dressed
+            stone with a patient slope. It takes very little water out
+            of the river — a thread, no more — and that thread, on its
+            own, turns the wheel. The work is not in finding more
+            water. The work is in cutting the channel and keeping it
+            clear.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Find the spring</h3>
+          <p>The spring is the wide unfocused water of the day — what you have before you have chosen. Time, attention, any patience left over from yesterday. The spring does not know what it is for. That is the spring's job: to be plenty, to be unsorted.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Cut the race</h3>
+          <p>The race is the small straight channel. A piece of work, named and ready, with a stone wall on each side. Half a mile is plenty. The race is the part you cut once and then keep clear — not the part you rebuild each morning.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Open the sluice</h3>
+          <p>The sluice is the gate at the head. You raise it and the water in the head falls onto the wheel, paddle by paddle. The wheel begins to turn. Nothing dramatic. The race is full, and the work is being done at the speed of the slope.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Let the tailrace go</h3>
+          <p>The water that has turned the wheel goes back to the river. The day's work, done, flows out under the mill and disappears downstream. Tomorrow the spring will be there again, and the race, and the wheel, and the same patient inch of slope.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="race" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A race, mid-spring</h2>
+        <p>A small race of twelve channels — a fictional one, cut by no one in particular along a slow turn of the spring of 2026. Some are still at the spring, the water unsorted. Some are full and running, turning a wheel that nobody has stopped in months. One or two have been let go and now run only for the sound. Add a channel, walk a paddle, close the sluice — the race redraws in your browser. Nothing leaves.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">Race</p>
+            <p class="chart-project" id="chart-project">A small race · spring 2026 · the narrow cut</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Paddles turned across the channels of this race">
+          <p class="profile-axis-label top">long-running</p>
+          <p class="profile-axis-label bot">at the spring</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the channels">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="spring" role="tab">At the spring</button>
+          <button type="button" data-filter="head" role="tab">In the head</button>
+          <button type="button" data-filter="race" role="tab">Running the race</button>
+          <button type="button" data-filter="tail" role="tab">Tailrace</button>
+        </div>
+
+        <ul class="legs" id="channels-list">
+          <!-- channels inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-cut" aria-label="Cut of the channel">
+              <option value="trickle">Trickle</option>
+              <option value="leat">Leat</option>
+              <option value="race">Race</option>
+              <option value="penstock">Penstock</option>
+            </select>
+            <input id="add-paddles" type="number" step="1" min="0" value="0" aria-label="Paddles the channel has turned" />
+            <input id="add-name" type="text" placeholder="Name the channel — a small narrow cut" maxlength="90" />
+            <select id="add-state" aria-label="State of the channel">
+              <option value="spring">At the spring</option>
+              <option value="head">In the head</option>
+              <option value="race">Running the race</option>
+              <option value="tail">Tailrace</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Cut the channel</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original race</a>
+        </div>
+
+        <p class="kbd-help">
+          <strong>Keys:</strong>
+          <kbd>J</kbd>/<kbd>K</kbd> move &middot;
+          <kbd>Enter</kbd> advance state &middot;
+          <kbd>Del</kbd> close sluice &middot;
+          <kbd>N</kbd> add &middot;
+          <kbd>0</kbd>&ndash;<kbd>4</kbd> filter &middot;
+          <kbd>[</kbd>/<kbd>]</kbd> nudge paddles &middot;
+          <kbd>R</kbd> reset.
+        </p>
+      </div>
+
+      <div class="legend">
+        <h3>The four cuts</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-trickle"></span><div><strong>Trickle.</strong> The smallest cut — a finger's width of water, enough for a quern. The daily note, the half-hour walk, the small letter. Easy to dig. Easy to forget you dug it.</div></li>
+          <li><span class="legend-swatch swatch-leat"></span><div><strong>Leat.</strong> A short upland channel of bare stone — a chapter to be drafted, an instrument practised, a garden corner cleared. Runs straight and quiet without fuss.</div></li>
+          <li><span class="legend-swatch swatch-race"></span><div><strong>Race.</strong> The full dressed-stone millrace — a year-long work, a novel, a slow recovery, a course finished evening by evening. Cut once and kept clear.</div></li>
+          <li><span class="legend-swatch swatch-penstock"></span><div><strong>Penstock.</strong> The high-pressure pipe down the mountain — the heaviest, slowest, longest cuts. The decade-long works. The pressure is the same patient inch of slope, multiplied by many miles.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who cuts a millrace</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The mathematician at the long proof</h3>
+          <p>Four hundred pages of scratch in a buckram notebook, six years in. An hour before dawn, before the coffee, before the post. One lemma a fortnight. The spring is wide; the race is half a mile and runs straight; the wheel turns. By the autumn the proof will have a draft.</p>
+        </article>
+        <article>
+          <h3>The luthier in the back of the shop</h3>
+          <p>One belly carved a month. One back. Two months of varnish coats laid down in single thin strokes after closing. The river is wide — orders, repairs, the till. The race is the small straight cut for the new instruments. The wheel does not care which day.</p>
+        </article>
+        <article>
+          <h3>The doctor reading evening papers</h3>
+          <p>Forty minutes after the children are asleep. One paper a night, summarised in two sentences on an index card. The pile of cards has grown a finger's width thicker each month. No single evening has done much. Every evening has done the same small thing.</p>
+        </article>
+        <article>
+          <h3>The composer at the long quartet</h3>
+          <p>Sixteen bars a week, drafted in pencil at the kitchen table. The spring is wide — teaching, students, the weekly broadcast. The race is sixteen bars. The penstock at the back of it all is the symphony, fifteen years out, the head not yet half full.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="hold" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · autumn 2026</p>
+        <h2>One email when the sluice is open.</h2>
+        <p class="hold-lede">A small page, a small race, a small wheel. A way to cut a narrow channel and keep it clear for as long as it needs to run. No streak. No badge. No spillway alarm to tell you the river is high somewhere. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@somewhere.field" />
+          <button class="btn btn-primary" type="submit">Open the sluice</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first races are cut. You can close the sluice anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Millrace</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · the narrow cut as practice</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#race">Race</a>
+      <a href="#hold">Open the sluice</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
