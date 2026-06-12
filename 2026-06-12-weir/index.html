@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weir — a small page for the stone that lifts the water two feet</title>
+  <meta name="description" content="A weir is the lowest possible dam — a long shallow stone laid across a stream that lifts the water just enough to spill clean. Below the sill, at the crest, spilling, drawn off." />
+  <meta name="theme-color" content="#ece2cb" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#2c281d" media="(prefers-color-scheme: dark)" />
+  <meta name="color-scheme" content="light" />
+  <meta property="og:title" content="Weir — the long shallow stone that lifts the water two feet" />
+  <meta property="og:description" content="A small page for the barrier that lifts the water. A weir is a long shallow stone laid flat across a stream. Notch, sill, crest, compound. Lay it once, keep the level." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23ece2cb'/%3E%3Crect x='0' y='12' width='32' height='3' fill='%23547f74'/%3E%3Cpath d='M0 13 L32 13' stroke='%23cbdcd2' stroke-width='0.4' opacity='0.7'/%3E%3Crect x='0' y='15' width='32' height='4' fill='%238a7a52'/%3E%3Crect x='0' y='15' width='32' height='1' fill='%23d4c5a0'/%3E%3Cpath d='M0 19 L2 24 L30 24 L32 19 Z' fill='%2391afa0' opacity='0.85'/%3E%3Cpath d='M4 19 L4 23 M9 19 L9 23 M14 19 L14 23 M18 19 L18 23 M23 19 L23 23 M28 19 L28 23' stroke='%23cbdcd2' stroke-width='0.5' opacity='0.7'/%3E%3Crect x='0' y='24' width='32' height='8' fill='%233a564b'/%3E%3Cpath d='M14 15 L16 17 L18 15 Z' fill='%233a564b'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <path d="M2 12 L30 12" stroke="currentColor" stroke-width="0.7" opacity="0.45" stroke-linecap="round" />
+          <path d="M2 14 L30 14" stroke="currentColor" stroke-width="1" opacity="0.7" stroke-linecap="round" />
+          <rect x="2" y="14" width="28" height="3" fill="currentColor" opacity="0.85" />
+          <path d="M2 17 L4 22 L28 22 L30 17 Z" fill="currentColor" opacity="0.55" />
+          <path d="M4 22 L6 26 M10 22 L12 26 M16 22 L18 26 M22 22 L24 26" stroke="currentColor" stroke-width="0.6" opacity="0.7" />
+        </svg>
+      </span>
+      <span>Weir</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#weir">The weir</a>
+      <a href="#who">Who lays one</a>
+      <a href="#hold" class="nav-cta">Lift the water</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">A stone laid on purpose</p>
+        <h1>
+          A river is too low.<br />
+          <em>A weir lifts it two feet.</em>
+        </h1>
+        <p class="lede">
+          A weir is the lowest possible dam — a course of dressed stone
+          laid flat across a stream so that the water, gently held,
+          rises behind it and spills cleanly over the crest. It does
+          not stop the river. It only lifts the water a couple of feet,
+          so that some of it can be drawn off to the level — patient,
+          steady, exactly enough to do the slow work without the rest
+          of the river noticing.
+        </p>
+        <div class="hero-cta">
+          <a href="#weir" class="btn btn-primary">See the weir</a>
+          <a href="#hold" class="btn btn-ghost">Lift the water</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One long stone. No flood. No drought. No fish ladder alarm.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg class="hero-weir" viewBox="0 0 400 320" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="wSky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#e6dfc8" stop-opacity="0.9" />
+              <stop offset="100%" stop-color="#d2c8a4" stop-opacity="0.2" />
+            </linearGradient>
+            <linearGradient id="wPool" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7a9a8c" />
+              <stop offset="100%" stop-color="#3a564b" />
+            </linearGradient>
+            <linearGradient id="wSpill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#a4c0b2" />
+              <stop offset="100%" stop-color="#6a8a7c" />
+            </linearGradient>
+            <linearGradient id="wStone" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#c5b890" />
+              <stop offset="100%" stop-color="#8a7a52" />
+            </linearGradient>
+            <linearGradient id="wApron" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#6a6e6a" />
+              <stop offset="100%" stop-color="#3a3e38" />
+            </linearGradient>
+            <radialGradient id="wGlint" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0%" stop-color="#e8b870" stop-opacity="0.7" />
+              <stop offset="70%" stop-color="#c08648" stop-opacity="0.25" />
+              <stop offset="100%" stop-color="#c08648" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+
+          <rect x="0" y="0" width="400" height="320" fill="url(#wSky)" />
+          <rect x="0" y="0" width="400" height="320" fill="#e8dcb8" opacity="0.18" />
+
+          <!-- far hill -->
+          <path d="M0 110 q60 -20 130 -8 q60 12 140 -8 q60 -10 130 4 L400 130 L0 130 Z" fill="#a8b09a" opacity="0.55" />
+          <path d="M0 114 q80 -14 160 -4 q80 8 240 -10" fill="none" stroke="#6a7855" stroke-width="1.4" opacity="0.45" />
+
+          <!-- the pool above the weir (left side, broader) -->
+          <path d="M0 130 L0 196 L200 196 L200 130 Z" fill="url(#wPool)" />
+          <!-- gentle level lines in the held pool -->
+          <path d="M10 142 L196 142" stroke="#cbdcd2" stroke-width="0.45" opacity="0.55" />
+          <path d="M10 152 L196 152" stroke="#cbdcd2" stroke-width="0.45" opacity="0.45" />
+          <path d="M10 162 L196 162" stroke="#cbdcd2" stroke-width="0.45" opacity="0.4" />
+          <path d="M10 174 L196 174" stroke="#cbdcd2" stroke-width="0.4" opacity="0.35" />
+          <!-- a glint on the pool -->
+          <ellipse class="hero-glint" cx="100" cy="148" rx="36" ry="6" fill="url(#wGlint)" />
+          <!-- a couple of reflections of reeds -->
+          <line x1="22" y1="140" x2="22" y2="160" stroke="#7a8868" stroke-width="0.5" opacity="0.5" />
+          <line x1="26" y1="140" x2="26" y2="158" stroke="#7a8868" stroke-width="0.5" opacity="0.4" />
+
+          <!-- the weir itself: a long dressed stone across the middle -->
+          <rect x="190" y="134" width="34" height="56" fill="url(#wStone)" />
+          <rect x="190" y="134" width="34" height="6" fill="#d4c5a0" />
+          <rect x="190" y="134" width="34" height="2" fill="#e2d4b0" />
+          <!-- coursing of the stone -->
+          <line x1="190" y1="146" x2="224" y2="146" stroke="#7a6848" stroke-width="0.5" opacity="0.6" />
+          <line x1="190" y1="158" x2="224" y2="158" stroke="#7a6848" stroke-width="0.5" opacity="0.6" />
+          <line x1="190" y1="170" x2="224" y2="170" stroke="#7a6848" stroke-width="0.5" opacity="0.6" />
+          <line x1="190" y1="182" x2="224" y2="182" stroke="#7a6848" stroke-width="0.5" opacity="0.6" />
+          <line x1="200" y1="134" x2="200" y2="190" stroke="#7a6848" stroke-width="0.4" opacity="0.5" />
+          <line x1="212" y1="146" x2="212" y2="190" stroke="#7a6848" stroke-width="0.4" opacity="0.5" />
+
+          <!-- the small notch in the crest -->
+          <path d="M204 134 L207 138 L210 134 Z" fill="#3a564b" />
+
+          <!-- water spilling over the crest in a thin sheet -->
+          <path d="M190 134 L224 134 L226 196 L188 196 Z" fill="url(#wSpill)" opacity="0.55" />
+          <!-- streaks in the spill -->
+          <line x1="195" y1="138" x2="194" y2="194" stroke="#cbdcd2" stroke-width="0.6" opacity="0.7" />
+          <line x1="202" y1="138" x2="201" y2="194" stroke="#cbdcd2" stroke-width="0.6" opacity="0.5" />
+          <line x1="209" y1="138" x2="209" y2="194" stroke="#cbdcd2" stroke-width="0.6" opacity="0.7" />
+          <line x1="216" y1="138" x2="217" y2="194" stroke="#cbdcd2" stroke-width="0.6" opacity="0.55" />
+          <line x1="222" y1="138" x2="223" y2="194" stroke="#cbdcd2" stroke-width="0.6" opacity="0.7" />
+
+          <!-- the apron downstream: stone paving where the water lands -->
+          <path d="M188 196 L226 196 L400 220 L400 260 L188 240 Z" fill="url(#wApron)" />
+          <line x1="200" y1="200" x2="380" y2="232" stroke="#252a26" stroke-width="0.5" opacity="0.5" />
+          <line x1="220" y1="208" x2="380" y2="244" stroke="#252a26" stroke-width="0.5" opacity="0.4" />
+          <!-- froth at the foot of the weir -->
+          <ellipse cx="200" cy="198" rx="14" ry="3" fill="#e8e2cf" opacity="0.7" />
+          <ellipse cx="216" cy="200" rx="10" ry="2.4" fill="#e8e2cf" opacity="0.55" />
+          <ellipse cx="232" cy="204" rx="7" ry="1.6" fill="#e8e2cf" opacity="0.4" />
+
+          <!-- downstream: lower river -->
+          <path d="M188 240 L400 260 L400 320 L160 320 Z" fill="url(#wPool)" opacity="0.92" />
+          <path d="M200 250 L380 268" stroke="#cbdcd2" stroke-width="0.4" opacity="0.4" />
+          <path d="M210 264 L380 280" stroke="#cbdcd2" stroke-width="0.4" opacity="0.35" />
+          <path d="M220 280 L380 294" stroke="#cbdcd2" stroke-width="0.4" opacity="0.3" />
+
+          <!-- bank between pool and ground -->
+          <path d="M0 196 L0 320 L160 320 L188 240 L188 196 Z" fill="url(#wStone)" opacity="0.7" />
+
+          <!-- a small gauge post on the upstream side -->
+          <rect x="178" y="148" width="2.6" height="40" fill="#7a6848" />
+          <rect x="176" y="148" width="6.6" height="2.4" fill="#c5b890" />
+          <line x1="178" y1="158" x2="182" y2="158" stroke="#3a2a18" stroke-width="0.4" />
+          <line x1="178" y1="168" x2="182" y2="168" stroke="#3a2a18" stroke-width="0.4" />
+          <line x1="178" y1="178" x2="182" y2="178" stroke="#3a2a18" stroke-width="0.4" />
+
+          <!-- a small line of reeds at the pool's near bank -->
+          <g transform="translate(38,196)">
+            <line x1="0" y1="0" x2="-2" y2="-16" stroke="#6a7855" stroke-width="1" />
+            <line x1="3" y1="0" x2="2" y2="-20" stroke="#6a7855" stroke-width="1" />
+            <line x1="6" y1="0" x2="6" y2="-14" stroke="#6a7855" stroke-width="1" />
+            <ellipse cx="-2" cy="-16" rx="1" ry="2" fill="#7a5a38" />
+            <ellipse cx="2" cy="-20" rx="1" ry="2.2" fill="#7a5a38" />
+          </g>
+
+          <!-- a willow leaning over the apron -->
+          <path d="M240 198 q-2 -38 16 -52" fill="none" stroke="#5a4030" stroke-width="2" />
+          <g stroke="#7e8c5a" stroke-width="0.7" opacity="0.85" fill="none">
+            <path d="M254 150 q4 18 -6 38" />
+            <path d="M258 148 q6 18 0 40" />
+            <path d="M262 146 q8 20 4 42" />
+            <path d="M266 146 q10 22 8 44" />
+          </g>
+        </svg>
+        <span class="hero-tick hero-tick-1">two feet held</span>
+        <span class="hero-tick hero-tick-2">a thin clean sheet</span>
+        <span class="hero-tick hero-tick-3">the rest goes on</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>The river is too low<br /><em>to draw clean.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            Most days the work is a river running shallow at its own
+            pace, going wherever the country slopes, never quite at
+            the level. You dip a cup in and you get half a cup and
+            two pebbles. You build a wheel and it spins twice a week
+            and stops. The problem is not the water. The problem is
+            that the river has no level.
+          </p>
+          <p>
+            A weir is a long shallow stone. It does not stop the
+            river. It just lifts the water two feet behind it, and
+            holds it there, and lets the rest of the river spill
+            cleanly over the top in a thin even sheet. You can dip
+            a cup. You can turn a wheel. You can leave it for a week
+            and come back to the same level. The work is in laying
+            the stone, once, and in keeping the crest level.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Find the stream</h3>
+          <p>The stream is the wide unfocused water of the day — what you have before you have lifted any of it. Whatever the country slopes toward. It does not know what it is for. That is the stream's job: to keep going.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Lay the stone</h3>
+          <p>The stone is a small straight course laid across the stream, just two feet tall, level and dressed. You lay it once. It is not the river, not the cup, not the wheel — it is the long shallow thing that holds the water at the level long enough to be useful.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Let the water rise</h3>
+          <p>Behind the stone, the water rises. It does not flood. It is held to the level of the crest, and once it reaches the crest, the rest spills cleanly over and goes downstream as it always did. The pool is full. The weir is quiet.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Draw what you need</h3>
+          <p>From the side of the pool, behind the weir, you draw off a steady measured thread — to a wheel, a field, a cup, a working day. The river goes on past the stone. The held water comes off level. Tomorrow the pool is still full to the crest.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="weir" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A weir, mid-spring</h2>
+        <p>A small weir of twelve holds — a fictional one, laid by no one in particular along a slow turn of the spring of 2026. Some are still filling behind the stone, water below the sill. Some are at the crest, lipping over in a thin clean sheet. One or two have been drawn off and the pool is filling again. Add a hold, lift the water, draw one off — the weir redraws in your browser. Nothing leaves.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">Weir</p>
+            <p class="chart-project" id="chart-project">A small weir · spring 2026 · two feet held</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Spills counted across the holds of this weir">
+          <p class="profile-axis-label top">most spilled</p>
+          <p class="profile-axis-label bot">still filling</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the holds">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="below" role="tab">Below the sill</button>
+          <button type="button" data-filter="crest" role="tab">At the crest</button>
+          <button type="button" data-filter="spill" role="tab">Spilling</button>
+          <button type="button" data-filter="drawn" role="tab">Drawn off</button>
+        </div>
+
+        <ul class="legs" id="holds-list">
+          <!-- holds inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-cut" aria-label="Cut of the weir">
+              <option value="notch">Notch</option>
+              <option value="sill">Sill</option>
+              <option value="crest">Crest</option>
+              <option value="compound">Compound</option>
+            </select>
+            <input id="add-spills" type="number" step="1" min="0" value="0" aria-label="Spills the hold has counted" />
+            <input id="add-name" type="text" placeholder="Name the hold — a long shallow thing" maxlength="90" />
+            <select id="add-state" aria-label="State of the hold">
+              <option value="below">Below the sill</option>
+              <option value="crest">At the crest</option>
+              <option value="spill">Spilling</option>
+              <option value="drawn">Drawn off</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Lay the stone</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original weir</a>
+        </div>
+
+        <p class="kbd-help">
+          <strong>Keys:</strong>
+          <kbd>J</kbd>/<kbd>K</kbd> move &middot;
+          <kbd>Enter</kbd> advance state &middot;
+          <kbd>Del</kbd> draw off &middot;
+          <kbd>N</kbd> add &middot;
+          <kbd>0</kbd>&ndash;<kbd>4</kbd> filter &middot;
+          <kbd>[</kbd>/<kbd>]</kbd> nudge spills &middot;
+          <kbd>R</kbd> reset.
+        </p>
+      </div>
+
+      <div class="legend">
+        <h3>The four cuts</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-notch"></span><div><strong>Notch.</strong> A V-cut in the crest, finger-width, for the lowest flow — the daily entry, the half-page note, the warm-up scale. Always there. Always trickling.</div></li>
+          <li><span class="legend-swatch swatch-sill"></span><div><strong>Sill.</strong> A flat broad cut, thumb-deep — the weekly practice, the Saturday workshop, the chapter under second revision. Spills steady most weeks.</div></li>
+          <li><span class="legend-swatch swatch-crest"></span><div><strong>Crest.</strong> The full dressed length of the weir, a season patient and quiet — the long course taken evening by evening, the book in second draft, the slow recovery.</div></li>
+          <li><span class="legend-swatch swatch-compound"></span><div><strong>Compound.</strong> A stepped weir of two or three falls down the hillside — a decade work, a rebuilt practice. Built one course a year.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who lays a weir</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The historian at the slow chapter</h3>
+          <p>Two paragraphs an evening in a quarto notebook, four years in. The river is wide — teaching, the supervisor, the long winter. The pool is the chapter, brimming each Sunday, drawn off into the next month's draft. The wheel turns one paragraph a day.</p>
+        </article>
+        <article>
+          <h3>The cellist at the warm-up</h3>
+          <p>A single open-string scale, forty seconds, every morning since 2019. Notch in the crest, thinnest cut. Has never been drawn off, has never quite stopped spilling, holds the level so the rest of the practice can come off clean.</p>
+        </article>
+        <article>
+          <h3>The gardener at the long bed</h3>
+          <p>A bed turned slowly across four years, one square yard at a time. Compound weir, three steps down the hill: the bed nearest the house planted in vegetables, the middle in cut flowers, the upper still bare stone, holding the year's water.</p>
+        </article>
+        <article>
+          <h3>The runner training for the long race</h3>
+          <p>A single-mile addition each fortnight, layered across an eight-month build. The river is the city's traffic and weather. The pool is the held base mileage. The compound steps lead, eventually, to a clean spill at mile twenty-six.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="hold" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · autumn 2026</p>
+        <h2>One email when the first stone is laid.</h2>
+        <p class="hold-lede">A small page, a small weir, a small steady spill. A way to lay one long shallow stone and let it hold the water at the level for as long as the work needs to run. No streak. No badge. No alarm when the pool is full. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@somewhere.field" />
+          <button class="btn btn-primary" type="submit">Lift the water</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first weirs are laid. You can let the water down anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Weir</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · the long shallow stone as practice</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#weir">Weir</a>
+      <a href="#hold">Lift the water</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
