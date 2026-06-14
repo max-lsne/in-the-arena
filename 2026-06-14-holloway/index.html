@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Holloway — a small page for the lane worn deep by patient feet</title>
+  <meta name="description" content="A holloway is a sunken way — a lane cut down into the chalk by centuries of feet. Trace, hollow, sunken, cathedral. Walk the line enough times that the ground remembers it." />
+  <link rel="icon" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23e4d8b8'/%3E%3Cpath d='M14 4 L14 28 L18 28 L18 4 Z' fill='%238a6a3a'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <path d="M4 6 L4 26" stroke="currentColor" stroke-width="0.8" opacity="0.55" stroke-linecap="round" />
+          <path d="M28 6 L28 26" stroke="currentColor" stroke-width="0.8" opacity="0.55" stroke-linecap="round" />
+          <path d="M4 6 Q16 2 28 6" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.7" />
+          <path d="M10 12 L10 26" stroke="currentColor" stroke-width="0.6" opacity="0.45" />
+          <path d="M22 12 L22 26" stroke="currentColor" stroke-width="0.6" opacity="0.45" />
+          <path d="M14 18 L14 26 L18 26 L18 18" fill="currentColor" opacity="0.85" />
+          <path d="M14 18 Q16 16 18 18" fill="currentColor" opacity="0.65" />
+        </svg>
+      </span>
+      <span>Holloway</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#lane">The lane</a>
+      <a href="#who">Who walks one</a>
+      <a href="#hold" class="nav-cta">Wear the line</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">A line walked into the ground</p>
+        <h1>
+          A field has no path.<br />
+          <em>A holloway is the path you walked.</em>
+        </h1>
+        <p class="lede">
+          A holloway is a sunken way — a lane cut down into the soft
+          sandstone or chalk of the countryside by the slow, repeated
+          passage of feet, hooves, and cartwheels over centuries. No one
+          decides to dig a holloway. It is not a road that was built.
+          It is a road that was <em>walked</em> — and walked, and
+          walked, until the ground gave way underfoot and the path
+          settled quietly into the hillside, head-deep, with the
+          hedges meeting in a green vault overhead.
+        </p>
+        <div class="hero-cta">
+          <a href="#lane" class="btn btn-primary">See the lane</a>
+          <a href="#hold" class="btn btn-ghost">Wear the line</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One line, walked enough. No map. No signpost. No new route every morning.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg class="hero-lane" viewBox="0 0 400 320" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="hSky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#e8dec0" stop-opacity="0.95" />
+              <stop offset="100%" stop-color="#d2c498" stop-opacity="0.18" />
+            </linearGradient>
+            <linearGradient id="hCanopy" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#3a4a28" />
+              <stop offset="100%" stop-color="#5a6e3a" />
+            </linearGradient>
+            <linearGradient id="hBank" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7a8a4e" />
+              <stop offset="100%" stop-color="#54401e" />
+            </linearGradient>
+            <linearGradient id="hFloor" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#b8a070" />
+              <stop offset="100%" stop-color="#6a4e2c" />
+            </linearGradient>
+            <linearGradient id="hRoot" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7a5a32" />
+              <stop offset="100%" stop-color="#3a2810" />
+            </linearGradient>
+            <radialGradient id="hShaft" cx="0.5" cy="0.2" r="0.7">
+              <stop offset="0%" stop-color="#f4e2a8" stop-opacity="0.7" />
+              <stop offset="60%" stop-color="#e0c478" stop-opacity="0.2" />
+              <stop offset="100%" stop-color="#c08648" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+
+          <rect x="0" y="0" width="400" height="320" fill="url(#hSky)" />
+
+          <!-- the green canopy meeting overhead -->
+          <path d="M0 0 L0 88 Q70 70 130 96 Q200 124 270 92 Q340 64 400 90 L400 0 Z" fill="url(#hCanopy)" opacity="0.88" />
+          <!-- canopy leaf-cluster suggestions -->
+          <ellipse cx="60" cy="86" rx="30" ry="14" fill="#54683a" opacity="0.7" />
+          <ellipse cx="120" cy="100" rx="34" ry="12" fill="#3e5028" opacity="0.7" />
+          <ellipse cx="190" cy="118" rx="32" ry="11" fill="#54683a" opacity="0.55" />
+          <ellipse cx="260" cy="98" rx="34" ry="13" fill="#3e5028" opacity="0.7" />
+          <ellipse cx="330" cy="88" rx="32" ry="12" fill="#54683a" opacity="0.7" />
+
+          <!-- a shaft of low light reaching into the lane -->
+          <ellipse class="hero-shaft" cx="200" cy="180" rx="120" ry="120" fill="url(#hShaft)" />
+
+          <!-- left bank, rising from the lane floor -->
+          <path d="M0 130 L0 320 L160 320 Q180 260 188 200 Q190 170 174 144 Q140 122 80 124 Q40 126 0 130 Z" fill="url(#hBank)" />
+          <!-- right bank, mirrored -->
+          <path d="M400 130 L400 320 L240 320 Q220 260 212 200 Q210 170 226 144 Q260 122 320 124 Q360 126 400 130 Z" fill="url(#hBank)" />
+
+          <!-- exposed roots in the banks -->
+          <g stroke="url(#hRoot)" stroke-width="1.6" fill="none" opacity="0.8">
+            <path d="M40 190 q14 -8 28 -2 q12 6 22 0" />
+            <path d="M60 230 q18 -10 34 -2 q14 8 26 0" />
+            <path d="M30 260 q20 -8 36 0" />
+            <path d="M340 200 q-14 -8 -30 -2 q-14 8 -26 0" />
+            <path d="M360 234 q-18 -10 -34 -2 q-12 6 -22 -2" />
+            <path d="M372 264 q-22 -8 -38 0" />
+          </g>
+
+          <!-- ferns sprouting from the banks -->
+          <g stroke="#6a8a3a" stroke-width="0.8" fill="none" opacity="0.85">
+            <path d="M44 250 q-2 -10 2 -18 M44 250 q-4 -8 -2 -16 M44 250 q4 -10 -2 -20" />
+            <path d="M78 280 q-3 -12 3 -22 M78 280 q-6 -10 -2 -20 M78 280 q5 -12 -3 -22" />
+            <path d="M118 308 q-3 -14 4 -24 M118 308 q-6 -12 -2 -22" />
+            <path d="M356 252 q2 -10 -2 -18 M356 252 q4 -8 2 -16 M356 252 q-4 -10 2 -20" />
+            <path d="M322 282 q3 -12 -3 -22 M322 282 q6 -10 2 -20" />
+            <path d="M282 308 q3 -14 -4 -24 M282 308 q6 -12 2 -22" />
+          </g>
+
+          <!-- the lane floor, sunken between the banks -->
+          <path d="M170 200 Q175 230 165 270 L240 270 Q230 230 230 200 Z" fill="url(#hFloor)" />
+          <!-- darker shadow at the deepest point -->
+          <path d="M174 220 Q177 248 170 268 L235 268 Q229 248 226 220 Z" fill="#54401e" opacity="0.45" />
+          <!-- cart-rut grooves -->
+          <path d="M186 200 Q184 234 178 268" stroke="#3e2c10" stroke-width="1.6" opacity="0.55" fill="none" />
+          <path d="M218 200 Q220 234 222 268" stroke="#3e2c10" stroke-width="1.6" opacity="0.55" fill="none" />
+          <!-- a soft heel-print on the lane -->
+          <ellipse cx="200" cy="246" rx="5" ry="2.2" fill="#3e2c10" opacity="0.55" />
+          <ellipse cx="204" cy="252" rx="4" ry="1.8" fill="#3e2c10" opacity="0.45" />
+
+          <!-- foreground edge of the lane -->
+          <path d="M0 270 L160 270 Q175 290 170 320 L0 320 Z" fill="#54401e" opacity="0.7" />
+          <path d="M400 270 L240 270 Q225 290 232 320 L400 320 Z" fill="#54401e" opacity="0.7" />
+
+          <!-- a hedgerow detail on the left bank top -->
+          <g fill="#3a4a28" opacity="0.85">
+            <ellipse cx="50" cy="118" rx="16" ry="9" />
+            <ellipse cx="80" cy="116" rx="18" ry="10" />
+            <ellipse cx="118" cy="120" rx="14" ry="8" />
+            <ellipse cx="146" cy="124" rx="14" ry="8" />
+          </g>
+          <!-- right bank top hedgerow -->
+          <g fill="#3a4a28" opacity="0.85">
+            <ellipse cx="350" cy="118" rx="16" ry="9" />
+            <ellipse cx="320" cy="116" rx="18" ry="10" />
+            <ellipse cx="282" cy="120" rx="14" ry="8" />
+            <ellipse cx="254" cy="124" rx="14" ry="8" />
+          </g>
+
+          <!-- a milestone post leaning in the right bank -->
+          <rect x="280" y="232" width="3" height="20" fill="#c8b890" transform="rotate(-8 282 242)" />
+          <rect x="278" y="232" width="7" height="3" fill="#e0d4a8" transform="rotate(-8 282 242)" />
+        </svg>
+        <span class="hero-tick hero-tick-1">head-deep</span>
+        <span class="hero-tick hero-tick-2">a green vault</span>
+        <span class="hero-tick hero-tick-3">walked in by feet</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>The field has no path<br /><em>to set the foot in.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            Most days the work is a field — wide and open, no path through
+            it, every morning a fresh decision about where to set the
+            foot. You cross the same field four hundred times and you
+            never quite walk the same line twice. You arrive at the gate
+            from a slightly different angle each evening. Nothing about
+            the field remembers you.
+          </p>
+          <p>
+            A holloway is the other thing. It is a line you have walked
+            enough times that the ground itself remembers. Once it is
+            worn in, you do not choose anymore. You step into the lane
+            and it carries you where it has always carried you, between
+            banks that the centuries have made. The work is in setting
+            the foot in the same place — patiently, day after day —
+            until the ground gives way and meets you halfway.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Pick the line</h3>
+          <p>The line is the line you mean to walk every day for a long time. Not all your lines. One. From the porch step to the cup of tea on the desk. From the practice-room door to the cello. The line you are going to set the foot in patiently.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Walk it once</h3>
+          <p>Today, walk the line. Not perfectly. Not for long. Set the foot in it, take it from end to end, and stop. The grass barely dims. There is no lane yet. There is only the first pressing of the soil. The first pass.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Walk it again tomorrow</h3>
+          <p>And again the day after. The grass thins. The soil compacts. A trace shows from a way off. After a year of small daily passes, the line is ankle-deep. After ten, it is knee-deep. After a hundred, the hedges have arched in over it.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Step into the lane</h3>
+          <p>One morning the lane has banks. You step into it and you no longer think about which way to bear; the lane carries you where it carries you. You walk along the line you wore in. You arrive at the gate from exactly the angle you have always arrived from. The work is held.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="lane" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A parish, mid-June</h2>
+        <p>A small holloway of twelve lanes — a fictional parish in the middle of June 2026, the brambles full out, the canopy closed in for the summer. Some lanes are at the trace, just visible from across a field. Some are head-deep, cool in August, hedges meeting overhead. One is being given back to the brambles. Add a lane, walk it, deepen it — the parish redraws in your browser. Nothing leaves.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">Holloway</p>
+            <p class="chart-project" id="chart-project">A small parish · June 2026 · twelve worn lines</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Passes counted along the lanes of this parish">
+          <p class="profile-axis-label top">most walked</p>
+          <p class="profile-axis-label bot">first trace</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the lanes">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="untrodden" role="tab">Untrodden today</button>
+          <button type="button" data-filter="walked" role="tab">Walked</button>
+          <button type="button" data-filter="deepening" role="tab">Worn deeper</button>
+          <button type="button" data-filter="closed" role="tab">Closed in</button>
+        </div>
+
+        <ul class="legs" id="lanes-list">
+          <!-- lanes inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-cut" aria-label="Cut of the lane">
+              <option value="trace">Trace</option>
+              <option value="hollow">Hollow</option>
+              <option value="sunken">Sunken</option>
+              <option value="cathedral">Cathedral</option>
+            </select>
+            <input id="add-passes" type="number" step="1" min="0" value="0" aria-label="Passes the lane has counted" />
+            <input id="add-name" type="text" placeholder="Name the lane — a line walked patiently" maxlength="90" />
+            <select id="add-state" aria-label="State of the lane">
+              <option value="untrodden">Untrodden today</option>
+              <option value="walked">Walked</option>
+              <option value="deepening">Worn deeper</option>
+              <option value="closed">Closed in</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Set the foot in</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original parish</a>
+        </div>
+      </div>
+
+      <div class="legend">
+        <h3>The four cuts</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-trace"></span><div><strong>Trace.</strong> A faint dimming of the grass along a line a foot wide — the daily entry, the half-page note, the walk to the gate at first light. Always there. Never sunk an inch.</div></li>
+          <li><span class="legend-swatch swatch-hollow"></span><div><strong>Hollow.</strong> An ankle-deep groove with a rounded floor — the weekly errand, the Saturday lesson, the chapter under second revision. Has begun to gather its own banks.</div></li>
+          <li><span class="legend-swatch swatch-sunken"></span><div><strong>Sunken.</strong> A lane knee- to shoulder-deep, banked with fern and root — the long course taken evening by evening, the book in second draft, the practice carried twenty years.</div></li>
+          <li><span class="legend-swatch swatch-cathedral"></span><div><strong>Cathedral.</strong> Head-deep and over, the hedgerows meeting in a vault above — a parish road, a generational work, walked without remembering who began.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who walks a holloway</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The translator at the morning desk</h3>
+          <p>Two pages a morning of the slow Italian, four years in. The field is teaching, the supervisor, the long winter. The lane is the desk between window and door, walked every morning at seven by the same slippers, ankle-deep now in the floorboards.</p>
+        </article>
+        <article>
+          <h3>The cellist at the warm-up</h3>
+          <p>A single open-string scale, forty seconds, every morning since 2019. Trace cut at first, ankle-deep by year three, knee-deep now. Has never been let go. The lane carries the rest of the practice in behind it.</p>
+        </article>
+        <article>
+          <h3>The gardener at the long bed</h3>
+          <p>The path between the cold frame and the kitchen door, walked four times a day for thirty years. Cathedral cut, hedges meeting in a vault of espaliered pear above. The wheelbarrow leaves its own narrower groove in the centre.</p>
+        </article>
+        <article>
+          <h3>The runner training for the long race</h3>
+          <p>The five-mile loop out the back gate, around the down, and home by the cricket field. Run four mornings a week for eight years. Sunken cut. The verges remember the bottom of the trainer.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="hold" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · autumn 2026</p>
+        <h2>One email when the first lane is worn in.</h2>
+        <p class="hold-lede">A small page, a small parish, a small steady wearing of the soil. A way to walk one line patiently and let the ground itself remember it for you. No streak. No badge. No alarm when you miss a day. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@somewhere.field" />
+          <button class="btn btn-primary" type="submit">Wear the line</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first holloways are worn in. You can stop walking anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Holloway</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · the lane worn deep as practice</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#lane">Lane</a>
+      <a href="#hold">Wear the line</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
