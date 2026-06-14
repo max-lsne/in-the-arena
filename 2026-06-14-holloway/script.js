@@ -34,8 +34,39 @@ const SEED_LANES = [
   { name: 'The lane from the chapel to the bell-pull, walked Sunday',        cut: 'sunken',    state: 'deepening', passes: 3120 },
 ];
 
-let lanes = SEED_LANES.map((s, i) => ({ ...s, id: i + 1 }));
-let nextId = lanes.length + 1;
+const STORAGE_KEY = 'holloway.lanes.v1';
+const PROJECT_KEY = 'holloway.project.v1';
+const DEFAULT_PROJECT = 'A small parish · June 2026 · twelve worn lines';
+
+function loadLanes() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return SEED_LANES.map((s, i) => ({ ...s, id: i + 1 }));
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed) || parsed.length === 0) {
+      return SEED_LANES.map((s, i) => ({ ...s, id: i + 1 }));
+    }
+    return parsed.map((s, i) => ({ ...s, id: s.id || i + 1 }));
+  } catch {
+    return SEED_LANES.map((s, i) => ({ ...s, id: i + 1 }));
+  }
+}
+
+function saveLanes() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(lanes)); } catch {}
+}
+
+function loadProject() {
+  try { return localStorage.getItem(PROJECT_KEY) || DEFAULT_PROJECT; }
+  catch { return DEFAULT_PROJECT; }
+}
+
+function saveProject(name) {
+  try { localStorage.setItem(PROJECT_KEY, name); } catch {}
+}
+
+let lanes = loadLanes();
+let nextId = (lanes.reduce((m, s) => Math.max(m, s.id || 0), 0)) + 1;
 let filter = 'all';
 let focused = null;
 
@@ -125,6 +156,7 @@ function render() {
   renderTotals();
   renderProfile();
   renderList();
+  saveLanes();
 }
 
 // ---------- Helpers ----------
@@ -179,9 +211,13 @@ function removeLane(id) {
 }
 
 function resetLanes() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch {}
+  try { localStorage.removeItem(PROJECT_KEY); } catch {}
   lanes = SEED_LANES.map((s, i) => ({ ...s, id: i + 1 }));
   nextId = lanes.length + 1;
   filter = 'all';
+  const project = $('#chart-project');
+  if (project) project.textContent = DEFAULT_PROJECT;
   document.querySelectorAll('#filters button').forEach(b => {
     b.classList.toggle('is-active', b.dataset.filter === 'all');
   });
@@ -191,6 +227,18 @@ function resetLanes() {
 // ---------- Wire up ----------
 
 document.addEventListener('DOMContentLoaded', () => {
+  const project = $('#chart-project');
+  if (project) {
+    project.textContent = loadProject();
+    project.setAttribute('contenteditable', 'true');
+    project.setAttribute('spellcheck', 'false');
+    project.title = 'Click to rename the parish';
+    project.addEventListener('blur', () => saveProject(project.textContent.trim()));
+    project.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); project.blur(); }
+    });
+  }
+
   render();
 
   document.querySelectorAll('#filters button').forEach(btn => {
