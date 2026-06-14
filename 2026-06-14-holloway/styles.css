@@ -226,6 +226,34 @@ main {
   border: 1px solid var(--rule);
 }
 .hero-lane { width: 100%; height: 100%; display: block; }
+.hero-canopy {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: holloway-sway 10s ease-in-out infinite;
+  will-change: transform;
+}
+.hero-canopy-a { animation-duration:  9.4s; animation-delay: -0.4s; }
+.hero-canopy-b { animation-duration: 10.6s; animation-delay: -1.8s; }
+.hero-canopy-c { animation-duration: 11.2s; animation-delay: -3.1s; }
+.hero-canopy-d { animation-duration:  9.8s; animation-delay: -0.9s; }
+.hero-canopy-e { animation-duration: 10.2s; animation-delay: -2.4s; }
+.hero-shaft {
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+  animation: holloway-shaft 18s ease-in-out infinite;
+  will-change: transform;
+}
+@keyframes holloway-sway {
+  0%, 100% { transform: rotate(-0.6deg); }
+  50%      { transform: rotate( 0.8deg); }
+}
+@keyframes holloway-shaft {
+  0%, 100% { transform: translateX(-6px); opacity: 0.92; }
+  50%      { transform: translateX( 6px); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-canopy, .hero-shaft { animation: none; }
+}
 .hero-tick {
   position: absolute;
   font-family: 'JetBrains Mono', monospace;
