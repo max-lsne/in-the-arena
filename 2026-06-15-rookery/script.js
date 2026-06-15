@@ -34,8 +34,39 @@ const SEED_NESTS = [
   { name: 'The lone twig in the lightning-struck oak, blew down in February',   perch: 'twig',    state: 'empty',    seasons: 1   },
 ];
 
-let nests = SEED_NESTS.map((s, i) => ({ ...s, id: i + 1 }));
-let nextId = nests.length + 1;
+const STORAGE_KEY = 'rookery.nests.v1';
+const PROJECT_KEY = 'rookery.project.v1';
+const DEFAULT_PROJECT = 'A small parish · June 2026 · twelve returning nests';
+
+function loadNests() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return SEED_NESTS.map((s, i) => ({ ...s, id: i + 1 }));
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed) || parsed.length === 0) {
+      return SEED_NESTS.map((s, i) => ({ ...s, id: i + 1 }));
+    }
+    return parsed.map((s, i) => ({ ...s, id: s.id || i + 1 }));
+  } catch {
+    return SEED_NESTS.map((s, i) => ({ ...s, id: i + 1 }));
+  }
+}
+
+function saveNests() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(nests)); } catch {}
+}
+
+function loadProject() {
+  try { return localStorage.getItem(PROJECT_KEY) || DEFAULT_PROJECT; }
+  catch { return DEFAULT_PROJECT; }
+}
+
+function saveProject(name) {
+  try { localStorage.setItem(PROJECT_KEY, name); } catch {}
+}
+
+let nests = loadNests();
+let nextId = (nests.reduce((m, s) => Math.max(m, s.id || 0), 0)) + 1;
 let filter = 'all';
 let focused = null;
 
@@ -125,6 +156,7 @@ function render() {
   renderTotals();
   renderProfile();
   renderList();
+  saveNests();
 }
 
 // ---------- Helpers ----------
@@ -177,9 +209,13 @@ function removeNest(id) {
 }
 
 function resetNests() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch {}
+  try { localStorage.removeItem(PROJECT_KEY); } catch {}
   nests = SEED_NESTS.map((s, i) => ({ ...s, id: i + 1 }));
   nextId = nests.length + 1;
   filter = 'all';
+  const project = $('#chart-project');
+  if (project) project.textContent = DEFAULT_PROJECT;
   document.querySelectorAll('#filters button').forEach(b => {
     b.classList.toggle('is-active', b.dataset.filter === 'all');
   });
@@ -189,6 +225,18 @@ function resetNests() {
 // ---------- Wire up ----------
 
 document.addEventListener('DOMContentLoaded', () => {
+  const project = $('#chart-project');
+  if (project) {
+    project.textContent = loadProject();
+    project.setAttribute('contenteditable', 'true');
+    project.setAttribute('spellcheck', 'false');
+    project.title = 'Click to rename the parish rookery';
+    project.addEventListener('blur', () => saveProject(project.textContent.trim()));
+    project.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); project.blur(); }
+    });
+  }
+
   render();
 
   document.querySelectorAll('#filters button').forEach(btn => {

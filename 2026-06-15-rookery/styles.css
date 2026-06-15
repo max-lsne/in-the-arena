@@ -335,6 +335,7 @@ main {
   padding: 2px 4px;
   border-radius: 3px;
 }
+.chart-project:focus { background: rgba(208, 148, 100, 0.08); }
 .chart-meta-totals {
   display: flex;
   gap: 16px;
