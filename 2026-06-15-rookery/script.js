@@ -270,4 +270,87 @@ document.addEventListener('DOMContentLoaded', () => {
     const foot = $('#hold-foot');
     foot.textContent = 'Twig wedged. We will write once, when the first cups are patched. Keep coming back.';
   });
+
+  wireKeyboard();
 });
+
+// ---------- Keyboard ----------
+
+function isTypingInForm() {
+  const t = document.activeElement;
+  if (!t) return false;
+  const tag = t.tagName;
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return true;
+  if (t.isContentEditable) return true;
+  return false;
+}
+
+function sortedShown() {
+  return visibleNests().slice().sort((a, b) => {
+    const d = STATES[a.state].order - STATES[b.state].order;
+    if (d !== 0) return d;
+    return b.seasons - a.seasons;
+  });
+}
+
+function focusedIndexInShown(shown) {
+  if (focused == null) return -1;
+  return shown.findIndex(s => s.id === focused);
+}
+
+function moveFocus(delta) {
+  const shown = sortedShown();
+  if (shown.length === 0) { focused = null; render(); return; }
+  let i = focusedIndexInShown(shown);
+  if (i === -1) {
+    focused = delta > 0 ? shown[0].id : shown[shown.length - 1].id;
+  } else {
+    i = (i + delta + shown.length) % shown.length;
+    focused = shown[i].id;
+  }
+  render();
+  const el = document.querySelector(`.leg[data-id="${focused}"]`);
+  if (el && el.scrollIntoView) el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+}
+
+function setFilter(f) {
+  filter = f;
+  document.querySelectorAll('#filters button').forEach(b => {
+    b.classList.toggle('is-active', b.dataset.filter === f);
+  });
+  render();
+}
+
+function nudgeSeasons(delta) {
+  if (focused == null) return;
+  const s = nests.find(x => x.id === focused);
+  if (!s) return;
+  s.seasons = Math.max(0, s.seasons + delta);
+  render();
+}
+
+function wireKeyboard() {
+  document.addEventListener('keydown', (e) => {
+    if (isTypingInForm()) return;
+    const k = e.key;
+    if (k === 'j' || k === 'J' || k === 'ArrowDown') { e.preventDefault(); moveFocus(1); return; }
+    if (k === 'k' || k === 'K' || k === 'ArrowUp')   { e.preventDefault(); moveFocus(-1); return; }
+    if (k === 'Enter') {
+      if (focused != null) { e.preventDefault(); advanceNest(focused); }
+      return;
+    }
+    if (k === 'Delete' || k === 'Backspace') {
+      if (focused != null) { e.preventDefault(); removeNest(focused); focused = null; }
+      return;
+    }
+    if (k === 'n' || k === 'N') { e.preventDefault(); const el = $('#add-name'); if (el) el.focus(); return; }
+    if (k === '0') { e.preventDefault(); setFilter('all');      return; }
+    if (k === '1') { e.preventDefault(); setFilter('roosting'); return; }
+    if (k === '2') { e.preventDefault(); setFilter('calling');  return; }
+    if (k === '3') { e.preventDefault(); setFilter('mending');  return; }
+    if (k === '4') { e.preventDefault(); setFilter('empty');    return; }
+    if (k === '[') { e.preventDefault(); nudgeSeasons(-1); return; }
+    if (k === ']') { e.preventDefault(); nudgeSeasons(1);  return; }
+    if (k === 'r' || k === 'R') { e.preventDefault(); resetNests(); return; }
+  });
+}
