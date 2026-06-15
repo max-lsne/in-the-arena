@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rookery — a small page for the colony that comes back to the same elms</title>
+  <meta name="description" content="A rookery is a colony of rooks that returns to the same high forks of the same elms year on year. Twig, cup, bough, rookery — the parish landmark made of returning birds." />
+  <meta name="theme-color" content="#cdbfa0" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#1c2228" media="(prefers-color-scheme: dark)" />
+  <meta name="color-scheme" content="light" />
+  <meta property="og:title" content="Rookery — the colony that comes back to the same elms" />
+  <meta property="og:description" content="A small page for the parliament of rooks that returns to the same high forks year after year. Twig, cup, bough, rookery — work patched in by patient birds." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23cdbfa0'/%3E%3Cpath d='M0 22 Q8 16 16 18 Q24 16 32 22 L32 32 L0 32 Z' fill='%23435060' opacity='0.5'/%3E%3Cpath d='M14 4 L14 26 M18 4 L18 26' stroke='%234a3a26' stroke-width='1.2'/%3E%3Cpath d='M12 22 L20 22 M11 18 L21 18 M13 14 L19 14 M14 10 L18 10' stroke='%234a3a26' stroke-width='0.7'/%3E%3Cellipse cx='16' cy='8' rx='4' ry='2' fill='%231a1410'/%3E%3Cellipse cx='10' cy='12' rx='3' ry='1.6' fill='%231a1410'/%3E%3Cellipse cx='22' cy='12' rx='3' ry='1.6' fill='%231a1410'/%3E%3Cpath d='M4 6 q2 -1 4 0 q-2 1 -4 0 M24 4 q3 -1 5 0 q-2 1 -5 0' stroke='%231a1410' stroke-width='0.6' fill='none'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <path d="M16 4 L16 28" stroke="currentColor" stroke-width="1" opacity="0.8" />
+          <path d="M16 9 L10 7 M16 9 L22 7" stroke="currentColor" stroke-width="0.7" opacity="0.55" />
+          <path d="M16 14 L8 13 M16 14 L24 13" stroke="currentColor" stroke-width="0.7" opacity="0.55" />
+          <path d="M16 19 L9 19 M16 19 L23 19" stroke="currentColor" stroke-width="0.7" opacity="0.55" />
+          <ellipse cx="16" cy="6" rx="3.4" ry="1.6" fill="currentColor" opacity="0.9" />
+          <ellipse cx="10" cy="10" rx="2.4" ry="1.2" fill="currentColor" opacity="0.85" />
+          <ellipse cx="22" cy="10" rx="2.4" ry="1.2" fill="currentColor" opacity="0.85" />
+          <path d="M3 4 q2 -1 4 0" stroke="currentColor" stroke-width="0.6" fill="none" opacity="0.7" />
+          <path d="M25 3 q2 -1 4 0" stroke="currentColor" stroke-width="0.6" fill="none" opacity="0.7" />
+        </svg>
+      </span>
+      <span>Rookery</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#colony">The colony</a>
+      <a href="#who">Who comes back</a>
+      <a href="#hold" class="nav-cta">Patch the cup</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">A parish landmark made of returning birds</p>
+        <h1>
+          One bird forgets the way.<br />
+          <em>A rookery is what comes back.</em>
+        </h1>
+        <p class="lede">
+          A rookery is a colony of rooks — a dozen pairs, sometimes
+          three hundred — built in the high forks of the same beeches
+          or elms, year on year, generation on generation. In March
+          they patch the old cup with new twigs. In April they raise
+          a clutch. By August the trees stand quiet. Next spring the
+          same birds, or their daughters, come back to the same fork
+          in the same elm. The pile grows another inch deeper.
+        </p>
+        <div class="hero-cta">
+          <a href="#colony" class="btn btn-primary">See the colony</a>
+          <a href="#hold" class="btn btn-ghost">Patch the cup</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          The same fork, patched another March. No new tree every year.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg class="hero-elms" viewBox="0 0 400 320" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="rDusk" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#d8c8a4" stop-opacity="0.95" />
+              <stop offset="55%" stop-color="#c0aa7a" stop-opacity="0.7" />
+              <stop offset="100%" stop-color="#8a7858" stop-opacity="0.25" />
+            </linearGradient>
+            <linearGradient id="rCanopy" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#4a5638" />
+              <stop offset="100%" stop-color="#2c3622" />
+            </linearGradient>
+            <linearGradient id="rBark" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#3a2a18" />
+              <stop offset="50%" stop-color="#5a4226" />
+              <stop offset="100%" stop-color="#2a1c10" />
+            </linearGradient>
+            <linearGradient id="rGround" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7a6b48" />
+              <stop offset="100%" stop-color="#4a3e26" />
+            </linearGradient>
+            <radialGradient id="rSun" cx="0.78" cy="0.22" r="0.5">
+              <stop offset="0%" stop-color="#f0c878" stop-opacity="0.8" />
+              <stop offset="60%" stop-color="#d8a058" stop-opacity="0.15" />
+              <stop offset="100%" stop-color="#a86838" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+
+          <rect x="0" y="0" width="400" height="320" fill="url(#rDusk)" />
+          <ellipse cx="312" cy="68" rx="120" ry="80" fill="url(#rSun)" />
+
+          <path d="M0 178 Q40 168 80 174 Q120 180 160 170 Q200 162 240 172 Q280 180 320 168 Q360 158 400 168 L400 200 L0 200 Z" fill="#7a8060" opacity="0.55" />
+
+          <rect x="0" y="200" width="400" height="120" fill="url(#rGround)" />
+
+          <path d="M76 60 L70 200 L86 200 L82 60 Z" fill="url(#rBark)" />
+          <g stroke="#3a2a18" stroke-width="1.6" fill="none" opacity="0.92">
+            <path d="M80 80 Q60 64 44 56" />
+            <path d="M80 78 Q98 60 116 50" />
+            <path d="M80 110 Q60 100 44 96" />
+            <path d="M80 108 Q102 96 122 90" />
+            <path d="M80 140 Q66 134 52 132" />
+            <path d="M80 138 Q98 130 116 126" />
+          </g>
+          <ellipse cx="80" cy="58" rx="46" ry="22" fill="url(#rCanopy)" opacity="0.85" />
+          <ellipse cx="62" cy="64" rx="22" ry="12" fill="#3e4a2a" opacity="0.7" />
+          <ellipse cx="100" cy="60" rx="24" ry="13" fill="#3e4a2a" opacity="0.7" />
+
+          <path d="M196 40 L188 200 L208 200 L204 40 Z" fill="url(#rBark)" />
+          <g stroke="#3a2a18" stroke-width="1.8" fill="none" opacity="0.95">
+            <path d="M200 60 Q176 46 156 36" />
+            <path d="M200 60 Q224 46 244 38" />
+            <path d="M200 96 Q172 86 152 84" />
+            <path d="M200 94 Q228 84 248 82" />
+            <path d="M200 132 Q176 124 156 124" />
+            <path d="M200 130 Q224 122 244 124" />
+            <path d="M200 168 Q182 162 168 162" />
+            <path d="M200 166 Q220 160 234 162" />
+          </g>
+          <ellipse cx="200" cy="38" rx="58" ry="26" fill="url(#rCanopy)" opacity="0.9" />
+          <ellipse cx="174" cy="46" rx="26" ry="14" fill="#3e4a2a" opacity="0.78" />
+          <ellipse cx="228" cy="42" rx="28" ry="15" fill="#3e4a2a" opacity="0.78" />
+
+          <path d="M324 70 L318 200 L334 200 L330 70 Z" fill="url(#rBark)" />
+          <g stroke="#3a2a18" stroke-width="1.6" fill="none" opacity="0.92">
+            <path d="M326 90 Q306 76 288 68" />
+            <path d="M326 88 Q346 70 366 62" />
+            <path d="M326 120 Q306 110 290 108" />
+            <path d="M326 118 Q348 108 368 104" />
+            <path d="M326 148 Q310 144 296 140" />
+            <path d="M326 146 Q344 140 360 136" />
+          </g>
+          <ellipse cx="326" cy="68" rx="44" ry="22" fill="url(#rCanopy)" opacity="0.85" />
+          <ellipse cx="308" cy="74" rx="22" ry="12" fill="#3e4a2a" opacity="0.7" />
+          <ellipse cx="346" cy="70" rx="22" ry="12" fill="#3e4a2a" opacity="0.7" />
+
+          <g fill="#3a2810" opacity="0.95">
+            <ellipse cx="60" cy="58" rx="6" ry="3.4" />
+            <ellipse cx="98" cy="56" rx="6" ry="3.4" />
+            <ellipse cx="80" cy="46" rx="6.5" ry="3.6" />
+            <ellipse cx="172" cy="42" rx="7" ry="3.8" />
+            <ellipse cx="200" cy="32" rx="8" ry="4" />
+            <ellipse cx="228" cy="40" rx="7" ry="3.8" />
+            <ellipse cx="158" cy="54" rx="5.5" ry="3" />
+            <ellipse cx="244" cy="50" rx="5.5" ry="3" />
+            <ellipse cx="190" cy="58" rx="5.5" ry="3.2" />
+            <ellipse cx="214" cy="56" rx="5.5" ry="3.2" />
+            <ellipse cx="308" cy="66" rx="5.5" ry="3.2" />
+            <ellipse cx="344" cy="64" rx="5.5" ry="3.2" />
+            <ellipse cx="326" cy="56" rx="6.5" ry="3.6" />
+          </g>
+
+          <g stroke="#1a1208" stroke-width="0.5" opacity="0.7">
+            <path d="M194 30 L206 30 M196 32 L204 32" />
+            <path d="M166 40 L178 40 M168 42 L176 42" />
+            <path d="M222 38 L234 38" />
+            <path d="M74 44 L86 44 M76 46 L84 46" />
+            <path d="M320 54 L332 54" />
+          </g>
+
+          <g class="rook-flock" fill="#1a1410">
+            <path class="rook rook-1" d="M148 76 q3 -3 6 0 q-3 -1 -6 0 z" />
+            <path class="rook rook-2" d="M158 92 q3 -3 6 0 q-3 -1 -6 0 z" />
+            <path class="rook rook-3" d="M250 88 q3 -3 6 0 q-3 -1 -6 0 z" />
+            <path class="rook rook-4" d="M262 104 q3 -3 6 0 q-3 -1 -6 0 z" />
+            <path class="rook rook-5" d="M122 108 q3 -3 6 0 q-3 -1 -6 0 z" />
+            <path class="rook rook-6" d="M278 120 q3 -3 6 0 q-3 -1 -6 0 z" />
+          </g>
+          <g fill="#1a1410">
+            <ellipse cx="244" cy="86" rx="4" ry="2.4" />
+            <ellipse cx="247" cy="84" rx="1.6" ry="1.2" />
+            <path d="M240 86 L237 84 M248 87 L251 86" stroke="#1a1410" stroke-width="0.6" fill="none" />
+          </g>
+
+          <g fill="#1a1410">
+            <ellipse cx="196" cy="28" rx="3.4" ry="2" />
+            <ellipse cx="204" cy="30" rx="3.4" ry="2" />
+          </g>
+
+          <path d="M210 246 L230 252 M214 250 L226 253" stroke="#3a2a18" stroke-width="0.8" />
+          <path d="M88 268 L106 272" stroke="#3a2a18" stroke-width="0.8" />
+
+          <g stroke="#5a6840" stroke-width="0.6" fill="none" opacity="0.7">
+            <path d="M40 240 q-2 -6 0 -10 M42 240 q1 -6 0 -10" />
+            <path d="M140 250 q-2 -6 0 -10 M142 250 q1 -6 0 -10" />
+            <path d="M280 256 q-2 -6 0 -10 M282 256 q1 -6 0 -10" />
+            <path d="M360 248 q-2 -6 0 -10 M362 248 q1 -6 0 -10" />
+          </g>
+        </svg>
+        <span class="hero-tick hero-tick-1">three hundred nests</span>
+        <span class="hero-tick hero-tick-2">the cathedral elm</span>
+        <span class="hero-tick hero-tick-3">since 1842</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>One bird alone forgets<br /><em>the way back to the tree.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            Most days the work is a single bird in a wide sky, trying
+            to remember which elm is the right elm and which fork is
+            the right fork, and arriving at a different one every
+            evening, or no fork at all, or one already taken by a
+            stranger. Each morning's flight is a fresh question. The
+            sky has no memory.
+          </p>
+          <p>
+            A rookery is the other thing. A rookery is what keeps
+            coming back. Each year the same bird returns to the same
+            fork in the same elm and patches last year's cup with new
+            twigs from the wood below. The pile grows another inch
+            deeper. The colony grows another nest broader. A century
+            of returning has made a parish landmark out of birds you
+            can't tell apart.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Pick the fork</h3>
+          <p>The fork is the one fork in the one elm you mean to come back to every year. Not all your trees. One. The corner of the desk where the half-page note is started. The same chair at the same hour. The fork you are going to patch year on year, patient and unhurried.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Wedge the first twig</h3>
+          <p>Today, wedge the first twig. Not a nest. Not a cup. One twig. A line of the morning entry, a single open-string scale, the empty notebook with one entry on the first page. The wind could still take it. That is fine. There is no nest yet.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Come back next March</h3>
+          <p>And the March after. Each year, patch the cup with new twigs from the wood below. The first patch is a finished cup — one season, one pair. The fifth patch is several nests in the bough. The fiftieth is a colony, a parish landmark, audible at first light from half a mile.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Roost in the rookery</h3>
+          <p>One spring the rookery has banks of nests and a parliament of returning birds. You come back to the same fork. The cup remembers you. The work is held by something larger than your one season. The colony walks the year for you.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="colony" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A parish rookery, mid-June</h2>
+        <p>A small rookery of twelve nests — a fictional parish in the middle of June 2026, the fledglings just on the wing, the high cups deep with last March's patching. Some are a single twig from a young pair. Some are cathedral cups in the oldest elms, patched two centuries. One has been left for the season. Wedge a twig, patch a cup, abandon a nest — the parish rookery redraws in your browser. Nothing leaves.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">Rookery</p>
+            <p class="chart-project" id="chart-project">A small parish · June 2026 · twelve returning nests</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Seasons counted across the nests of this parish">
+          <p class="profile-axis-label top">most patched</p>
+          <p class="profile-axis-label bot">first twig</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the nests">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="roosting" role="tab">Roosting</button>
+          <button type="button" data-filter="calling" role="tab">Calling</button>
+          <button type="button" data-filter="mending" role="tab">Mending</button>
+          <button type="button" data-filter="empty" role="tab">Empty</button>
+        </div>
+
+        <ul class="legs" id="nests-list">
+          <!-- nests inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-perch" aria-label="Perch of the nest">
+              <option value="twig">Twig</option>
+              <option value="cup">Cup</option>
+              <option value="bough">Bough</option>
+              <option value="rookery">Rookery</option>
+            </select>
+            <input id="add-seasons" type="number" step="1" min="0" value="0" aria-label="Seasons the nest has been patched" />
+            <input id="add-name" type="text" placeholder="Name the nest — a fork patched patiently" maxlength="90" />
+            <select id="add-state" aria-label="State of the nest">
+              <option value="roosting">Roosting</option>
+              <option value="calling">Calling</option>
+              <option value="mending">Mending</option>
+              <option value="empty">Empty</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Wedge the twig</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original rookery</a>
+        </div>
+
+        <p class="kbd-help">
+          <strong>Keys:</strong>
+          <kbd>J</kbd>/<kbd>K</kbd> move &middot;
+          <kbd>Enter</kbd> advance state &middot;
+          <kbd>Del</kbd> empty &middot;
+          <kbd>N</kbd> add &middot;
+          <kbd>0</kbd>&ndash;<kbd>4</kbd> filter &middot;
+          <kbd>[</kbd>/<kbd>]</kbd> nudge seasons &middot;
+          <kbd>R</kbd> reset.
+        </p>
+      </div>
+
+      <div class="legend">
+        <h3>The four perches</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-twig"></span><div><strong>Twig.</strong> A single twig wedged in the fork — the first half-page, the empty notebook with one entry, the line of code that is the only line of code. Could blow down in a wind.</div></li>
+          <li><span class="legend-swatch swatch-cup"></span><div><strong>Cup.</strong> A finished nest, one season's work — the first complete draft, the first finished chapter, the first piece of practice carried end to end. Holds a clutch.</div></li>
+          <li><span class="legend-swatch swatch-bough"></span><div><strong>Bough.</strong> Several nests in one tree — a body of work, a small archive, a corpus the same hands have built up patiently over a few years. Visibly inhabited.</div></li>
+          <li><span class="legend-swatch swatch-rookery"></span><div><strong>Rookery.</strong> The full colony, twenty trees, three hundred nests — a lifework, a tradition, a school of practice, a parish landmark visible from a mile off.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who comes back to the same elm</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The poet at the morning notebook</h3>
+          <p>Two lines of the morning entry every March for twenty-eight years. Twig at first, cup by year three, bough by year ten. Three notebooks in the bough now. The fork remembers her.</p>
+        </article>
+        <article>
+          <h3>The cellist at the open-string scale</h3>
+          <p>A single open-string scale, forty seconds, every dawn since 2019. The first cup is complete. A second is being patched on the bough above. The sentry calls from a low branch most mornings.</p>
+        </article>
+        <article>
+          <h3>The gardener at the long bed</h3>
+          <p>Forty seasons of the same long bed of perennials. Cathedral elm, twelve nests, three hundred clutches raised. Patching the cup with new twigs each March. The parish walks past and looks up.</p>
+        </article>
+        <article>
+          <h3>The translator at the same desk</h3>
+          <p>Two pages of the slow Italian every morning since 2012. A bough now, three cups, the topmost patched fourteen years running. Sounds at first light. The wood below provides the twigs.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="hold" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · autumn 2026</p>
+        <h2>One email when the first cup is patched.</h2>
+        <p class="hold-lede">A small page, a small parish rookery, a small steady patching of the cup with new twigs every March. A way to come back to the same fork year on year and let the colony keep its own memory. No streak. No badge. No alarm when you miss a March. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@somewhere.parish" />
+          <button class="btn btn-primary" type="submit">Patch the cup</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first cups are patched. You can stop coming back anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Rookery</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · the colony that keeps coming back</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#colony">Colony</a>
+      <a href="#hold">Patch the cup</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
