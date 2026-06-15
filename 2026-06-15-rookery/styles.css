@@ -226,6 +226,27 @@ main {
   border: 1px solid var(--rule);
 }
 .hero-elms { width: 100%; height: 100%; display: block; }
+.rook-flock .rook {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+.rook-1 { animation: rookery-glide 14s ease-in-out infinite; }
+.rook-2 { animation: rookery-glide 16s ease-in-out infinite; animation-delay: -2s; }
+.rook-3 { animation: rookery-glide 13s ease-in-out infinite; animation-delay: -5s; }
+.rook-4 { animation: rookery-glide 15s ease-in-out infinite; animation-delay: -8s; }
+.rook-5 { animation: rookery-glide 17s ease-in-out infinite; animation-delay: -11s; }
+.rook-6 { animation: rookery-glide 12s ease-in-out infinite; animation-delay: -4s; }
+@keyframes rookery-glide {
+  0%   { transform: translate(0px,  0px); }
+  25%  { transform: translate(8px, -4px); }
+  50%  { transform: translate(0px, -8px); }
+  75%  { transform: translate(-8px, -4px); }
+  100% { transform: translate(0px,  0px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rook-flock .rook { animation: none; }
+}
 .hero-tick {
   position: absolute;
   font-family: 'JetBrains Mono', monospace;
