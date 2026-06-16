@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tarn — a small page for the high water that holds through the dry summer</title>
+  <meta name="description" content="A tarn is a small mountain lake the glacier left ten thousand years ago. Drop, pool, tarn, cirque — the high water the hill keeps for itself." />
+  <meta name="theme-color" content="#b8c2c8" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#1a2028" media="(prefers-color-scheme: dark)" />
+  <meta name="color-scheme" content="light" />
+  <meta property="og:title" content="Tarn — the high water that holds through the dry summer" />
+  <meta property="og:description" content="A small page for the mountain lakes the glacier left ten thousand years ago. Drop, pool, tarn, cirque — what a hill keeps for itself when no one is asking." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23b8c2c8'/%3E%3Cpath d='M0 14 L8 8 L14 12 L20 6 L26 10 L32 14 L32 18 L0 18 Z' fill='%235a626a'/%3E%3Cpath d='M4 11 L8 9 L12 10 L18 8 L22 9 L26 10' fill='none' stroke='%23e8eff0' stroke-width='0.6' opacity='0.7'/%3E%3Cellipse cx='16' cy='22' rx='12' ry='4' fill='%233a546a'/%3E%3Cellipse cx='16' cy='22' rx='12' ry='4' fill='none' stroke='%23243648' stroke-width='0.6' opacity='0.6'/%3E%3Cpath d='M7 21 Q11 20 15 21 M17 23 Q21 22 25 23' stroke='%23a0c0d0' stroke-width='0.5' fill='none' opacity='0.75'/%3E%3Cpath d='M5 25 q3 -10 6 -14 q-2 12 -4 16 z' fill='%237a8a5a' opacity='0.9'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <path d="M2 22 L10 14 L14 18 L20 10 L26 16 L30 22 Z" fill="currentColor" opacity="0.7" />
+          <ellipse cx="16" cy="24" rx="11" ry="3.4" fill="currentColor" opacity="0.85" />
+          <path d="M5 24 L27 24" stroke="currentColor" stroke-width="0.5" opacity="0.4" />
+        </svg>
+      </span>
+      <span>Tarn</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#cirque">The cirque</a>
+      <a href="#who">Who walks up</a>
+      <a href="#hold" class="nav-cta">Map the tarn</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">High water the hill keeps for itself</p>
+        <h1>
+          The becks run dry in August.<br />
+          <em>A tarn is what holds.</em>
+        </h1>
+        <p class="lede">
+          A tarn is a small mountain lake left in a hollow the glacier
+          scoured out ten thousand years ago, cupped in scree and
+          sedge above the treeline, fed by snowmelt and a slow seep
+          through the moss. In a dry August the lower pools may go.
+          The high tarns stay. By September the water is dark enough
+          to lose a stone in. The hill keeps it through the winter
+          and gives it back to the beck next May.
+        </p>
+        <div class="hero-cta">
+          <a href="#cirque" class="btn btn-primary">See the cirque</a>
+          <a href="#hold" class="btn btn-ghost">Map the tarn</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One high pool. Twelve summers on the parish map. Still there in August.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg class="hero-cirque" viewBox="0 0 400 320" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="tSky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#c0cad0" stop-opacity="0.95" />
+              <stop offset="55%" stop-color="#a8b6be" stop-opacity="0.7" />
+              <stop offset="100%" stop-color="#88989e" stop-opacity="0.4" />
+            </linearGradient>
+            <linearGradient id="tRidge" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#5a626a" />
+              <stop offset="100%" stop-color="#3a4248" />
+            </linearGradient>
+            <linearGradient id="tScree" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7a7068" />
+              <stop offset="100%" stop-color="#4a4238" />
+            </linearGradient>
+            <linearGradient id="tWater" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#5878a0" />
+              <stop offset="50%" stop-color="#3a546a" />
+              <stop offset="100%" stop-color="#243648" />
+            </linearGradient>
+            <linearGradient id="tSedge" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7a8a5a" />
+              <stop offset="100%" stop-color="#4a5a3a" />
+            </linearGradient>
+          </defs>
+
+          <rect x="0" y="0" width="400" height="320" fill="url(#tSky)" />
+
+          <path d="M0 80 L40 60 L90 50 L130 36 L180 28 L230 38 L280 46 L330 56 L370 70 L400 86 L400 140 L0 140 Z" fill="url(#tRidge)" opacity="0.95" />
+
+          <g fill="#e8eff0" opacity="0.85">
+            <path d="M150 32 L175 28 L200 30 L225 34 L210 38 L180 36 L160 38 Z" />
+            <path d="M270 46 L300 50 L320 56 L290 56 L275 52 Z" />
+          </g>
+
+          <path d="M0 140 L80 116 L150 110 L220 108 L290 116 L360 132 L400 144 L400 220 L0 220 Z" fill="url(#tScree)" opacity="0.92" />
+
+          <g stroke="#3a3228" stroke-width="0.5" opacity="0.55" fill="none">
+            <path d="M30 154 L46 168 M62 162 L78 178 M104 156 L120 170 M158 154 L178 168 M210 152 L228 168 M268 158 L288 174 M324 162 L342 178 M360 170 L378 184" />
+            <circle cx="50" cy="160" r="2" fill="#3a3228" />
+            <circle cx="92" cy="170" r="1.6" fill="#3a3228" />
+            <circle cx="146" cy="158" r="2" fill="#3a3228" />
+            <circle cx="200" cy="164" r="1.6" fill="#3a3228" />
+            <circle cx="254" cy="170" r="2" fill="#3a3228" />
+            <circle cx="308" cy="174" r="1.6" fill="#3a3228" />
+            <circle cx="356" cy="180" r="2" fill="#3a3228" />
+          </g>
+
+          <ellipse cx="200" cy="232" rx="148" ry="42" fill="url(#tWater)" />
+          <ellipse cx="200" cy="232" rx="148" ry="42" fill="none" stroke="#1a2632" stroke-width="0.8" opacity="0.6" />
+
+          <g stroke="#a0c0d0" stroke-width="0.8" fill="none" opacity="0.6">
+            <path d="M88 220 q40 -3 80 0" />
+            <path d="M210 218 q40 -2 80 1" />
+            <path d="M70 244 q50 3 100 0" />
+            <path d="M230 250 q40 2 80 -1" />
+            <path d="M120 258 q40 2 80 -1" />
+          </g>
+
+          <path d="M310 248 q14 14 28 32 L344 296 L336 296 Q318 270 304 252 Z" fill="url(#tWater)" opacity="0.7" />
+
+          <g fill="url(#tSedge)" opacity="0.92">
+            <path d="M40 230 q6 -22 12 -28 q-2 24 -8 30 z" />
+            <path d="M58 232 q4 -16 10 -22 q-2 18 -6 24 z" />
+            <path d="M76 234 q4 -18 10 -22 q-2 18 -6 24 z" />
+            <path d="M324 236 q4 -16 10 -20 q-2 18 -6 22 z" />
+            <path d="M340 238 q4 -16 10 -20 q-2 18 -6 22 z" />
+            <path d="M356 240 q4 -14 8 -18 q-2 14 -4 20 z" />
+          </g>
+
+          <g stroke="#4a5a3a" stroke-width="0.5" fill="none" opacity="0.7">
+            <path d="M44 240 q-2 -8 0 -14 M46 240 q1 -8 0 -14" />
+            <path d="M62 240 q-2 -8 0 -14 M64 240 q1 -8 0 -14" />
+            <path d="M328 246 q-2 -8 0 -14 M330 246 q1 -8 0 -14" />
+            <path d="M348 248 q-2 -8 0 -14 M350 248 q1 -8 0 -14" />
+          </g>
+
+          <g fill="#0a0e14" opacity="0.88">
+            <ellipse cx="232" cy="226" rx="5" ry="2" />
+            <path d="M229 224 q1.5 -2 3 -2 q-0.8 1 0 1.8 z" fill="#0a0e14" />
+            <ellipse cx="246" cy="228" rx="4" ry="1.6" />
+            <path d="M244 227 q1 -1.6 2.4 -1.6 q-0.6 0.8 0 1.4 z" fill="#0a0e14" />
+          </g>
+          <g stroke="#a0c0d0" stroke-width="0.4" fill="none" opacity="0.5">
+            <ellipse cx="234" cy="230" rx="9" ry="2.4" />
+            <ellipse cx="248" cy="232" rx="8" ry="2" />
+          </g>
+
+          <g fill="#3a546a" opacity="0.7">
+            <ellipse cx="118" cy="226" rx="2" ry="0.8" />
+            <ellipse cx="160" cy="234" rx="2" ry="0.8" />
+            <ellipse cx="276" cy="240" rx="2" ry="0.8" />
+          </g>
+
+          <g fill="none" stroke="#2a3640" stroke-width="0.4" opacity="0.4">
+            <path d="M115 224 q3 -2 6 0" />
+            <path d="M157 232 q3 -2 6 0" />
+            <path d="M273 238 q3 -2 6 0" />
+          </g>
+        </svg>
+        <span class="hero-tick hero-tick-1">since the 1872 survey</span>
+        <span class="hero-tick hero-tick-2">84 ft in the middle</span>
+        <span class="hero-tick hero-tick-3">still there in August</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>Most of the year's water<br /><em>has gone by Tuesday.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            Most of the year's water comes and goes. The becks rise
+            after rain and are stone-dry in two days. The puddles in
+            the lane last a morning. The cattle trough wants topping
+            up each week. Even the deeper pools in the wood lose a
+            foot a fortnight in a dry July, and by the second week
+            of August half of them are mud cracked into hexagons.
+          </p>
+          <p>
+            A tarn is the other thing. A tarn is what holds. The
+            snow falls on the fell in November and melts into the
+            bowl in May, and is still there in August when every
+            roadside ditch is bone-dry stone. A tarn is what a hill
+            keeps for itself when no one is asking, and gives back
+            to the beck the next May, and the May after that, and
+            the May after that.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Find the bowl</h3>
+          <p>The bowl is the hollow the glacier left ten thousand years ago — high enough that nothing taller than juniper will hold, low enough to catch the runoff from the ridge above. The corner of the desk that gets the morning light. The same chair, the same hour. The hollow that catches the meltwater for you.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Catch the first drop</h3>
+          <p>Today, catch the first drop. Not a tarn. Not a pool. One drop from the snowfield above. A line of the morning entry, a single open-string scale, the half-page note that is the only note. The sun will evaporate it by noon. That is fine. There is no tarn yet.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Hold it through the dry summer</h3>
+          <p>And the dry summer after. The first August is the test — the lower pools go, the becks dry, and the question is whether the bowl is deep enough to hold. The first hold is a pool. The fifth is a small tarn. The fifteenth is a year-round tarn the parish maps with a name on it.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Become a cirque</h3>
+          <p>One year the bowl has a string of tarns at three heights with a beck running out under the col, and the next fell can see it from the ridge. The work is held by a landscape, not a season. The water is a watershed. The hill keeps it for you whether you walk up or not.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="cirque" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A fellside parish, mid-June</h2>
+        <p>A small cirque and its outliers — twelve tarns and pools mapped across a fictional fellside parish in the middle of June 2026, the snowmelt still feeding the upper bowl, the mergansers on the cathedral tarn at the head of the cirque. Some are a single drop off the rock above. Some are year-round tarns surveyed for a century and a half. One is the lost tarn in the dry valley that has not been there since 2019. Catch a drop, deepen a pool, lose a tarn — the parish redraws in your browser.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">Cirque</p>
+            <p class="chart-project" id="chart-project">A fellside parish · June 2026 · twelve mapped tarns</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Summers each tarn has been on the parish map">
+          <p class="profile-axis-label top">deepest in the cirque</p>
+          <p class="profile-axis-label bot">first drop</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the tarns">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="glassed" role="tab">Glassed</button>
+          <button type="button" data-filter="riffled" role="tab">Riffled</button>
+          <button type="button" data-filter="spawning" role="tab">Spawning</button>
+          <button type="button" data-filter="frozen" role="tab">Frozen</button>
+        </div>
+
+        <ul class="legs" id="tarns-list">
+          <!-- tarns inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-level" aria-label="Level of the tarn">
+              <option value="drop">Drop</option>
+              <option value="pool">Pool</option>
+              <option value="tarn">Tarn</option>
+              <option value="cirque">Cirque</option>
+            </select>
+            <input id="add-summers" type="number" step="1" min="0" value="0" aria-label="Summers it has been on the parish map" />
+            <input id="add-name" type="text" placeholder="Name the tarn — the bowl that keeps holding" maxlength="90" />
+            <select id="add-state" aria-label="State of the water">
+              <option value="glassed">Glassed</option>
+              <option value="riffled">Riffled</option>
+              <option value="spawning">Spawning</option>
+              <option value="frozen">Frozen</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Catch the drop</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original cirque</a>
+        </div>
+
+        <p class="kbd-help">
+          <strong>Keys:</strong>
+          <kbd>J</kbd>/<kbd>K</kbd> move &middot;
+          <kbd>Enter</kbd> advance state &middot;
+          <kbd>Del</kbd> lose &middot;
+          <kbd>N</kbd> add &middot;
+          <kbd>0</kbd>&ndash;<kbd>4</kbd> filter &middot;
+          <kbd>[</kbd>/<kbd>]</kbd> nudge summers &middot;
+          <kbd>R</kbd> reset.
+        </p>
+      </div>
+
+      <div class="legend">
+        <h3>The four levels</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-drop"></span><div><strong>Drop.</strong> A single drop off the rock above — the first half-page, the empty notebook with one entry, the line of code that is the only line. Could evaporate by noon.</div></li>
+          <li><span class="legend-swatch swatch-pool"></span><div><strong>Pool.</strong> A small gathered pool, days deep, summer-fragile — the first complete draft, the first ten weeks of practice carried unbroken. Real, but the next dry August might lose it.</div></li>
+          <li><span class="legend-swatch swatch-tarn"></span><div><strong>Tarn.</strong> A proper mountain lake, year-round, twenty feet deep in the middle — a body of work patient hands have built up over years. Will not blow away in a single bad season.</div></li>
+          <li><span class="legend-swatch swatch-cirque"></span><div><strong>Cirque.</strong> The full glacial bowl with three tarns and a string of feeder pools and the beck running out under the col — a lifework, a landscape, a watershed visible from the next fell.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who walks up to the same bowl</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The cartographer at the parish map</h3>
+          <p>Forty years of the same parish map, redrawn each February in the back of the schoolhouse. The cathedral tarn at the head of the cirque has been on every edition since 1986. The young walker's drop in the upper bowl went on the 2026 edition this March.</p>
+        </article>
+        <article>
+          <h3>The fell-walker at the morning tarn</h3>
+          <p>Twenty-eight summers of the same walk to the same tarn — up the long ridge before breakfast, back by the col before the rain. The tarn is the same colour in July and in January. The walker is not the same. The tarn does not mind.</p>
+        </article>
+        <article>
+          <h3>The shepherd at the high water</h3>
+          <p>Forty summers of watering ewes at the upper pool below the cliff. The pool went dry once in 1976 and never quite the same since. The high tarn never has. The ewes know the way. The shepherd lets them go ahead.</p>
+        </article>
+        <article>
+          <h3>The translator at the same desk</h3>
+          <p>Two pages of the slow Italian every morning since 2012. A tarn now in the corner of the desk, fifteen summers deep, year-round, dark enough to lose a stone in. Will not blow away in a dry August. The hill keeps it.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="hold" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · autumn 2026</p>
+        <h2>One email when the first pool holds through August.</h2>
+        <p class="hold-lede">A small page, a small fellside parish, a small steady walk up to the same bowl every morning. A way to find your tarn and let the hill keep it for you. No streak. No badge. No alarm when you miss a summer. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@somefell.parish" />
+          <button class="btn btn-primary" type="submit">Map the tarn</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first pool has held through August. You can stop walking up anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Tarn</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · the high water the hill keeps</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#cirque">Cirque</a>
+      <a href="#hold">Map the tarn</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
