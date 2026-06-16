@@ -34,10 +34,39 @@ const SEED_TARNS = [
   { name: 'The lost tarn in the dry valley — gone since the August of 2019',        level: 'drop',   state: 'frozen',   summers: 1   },
 ];
 
+const STORAGE_KEY = 'tarn.tarns.v1';
+const PROJECT_KEY = 'tarn.project.v1';
 const DEFAULT_PROJECT = 'A fellside parish · June 2026 · twelve mapped tarns';
 
-let nextId = 1;
-let tarns = SEED_TARNS.map((s) => ({ ...s, id: nextId++ }));
+function loadTarns() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return SEED_TARNS.map((s, i) => ({ ...s, id: i + 1 }));
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed) || parsed.length === 0) {
+      return SEED_TARNS.map((s, i) => ({ ...s, id: i + 1 }));
+    }
+    return parsed.map((s, i) => ({ ...s, id: s.id || i + 1 }));
+  } catch {
+    return SEED_TARNS.map((s, i) => ({ ...s, id: i + 1 }));
+  }
+}
+
+function saveTarns() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(tarns)); } catch {}
+}
+
+function loadProject() {
+  try { return localStorage.getItem(PROJECT_KEY) || DEFAULT_PROJECT; }
+  catch { return DEFAULT_PROJECT; }
+}
+
+function saveProject(name) {
+  try { localStorage.setItem(PROJECT_KEY, name); } catch {}
+}
+
+let tarns = loadTarns();
+let nextId = (tarns.reduce((m, s) => Math.max(m, s.id || 0), 0)) + 1;
 let filter = 'all';
 let focused = null;
 
@@ -127,6 +156,7 @@ function render() {
   renderTotals();
   renderProfile();
   renderList();
+  saveTarns();
 }
 
 // ---------- Helpers ----------
@@ -177,14 +207,30 @@ function removeTarn(id) {
   render();
 }
 
+function resetTarns() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch {}
+  try { localStorage.removeItem(PROJECT_KEY); } catch {}
+  tarns = SEED_TARNS.map((s, i) => ({ ...s, id: i + 1 }));
+  nextId = tarns.length + 1;
+  filter = 'all';
+  const project = $('#chart-project');
+  if (project) project.textContent = DEFAULT_PROJECT;
+  document.querySelectorAll('#filters button').forEach(b => {
+    b.classList.toggle('is-active', b.dataset.filter === 'all');
+  });
+  render();
+}
+
 // ---------- Wire up ----------
 
 document.addEventListener('DOMContentLoaded', () => {
   const project = $('#chart-project');
   if (project) {
+    project.textContent = loadProject();
     project.setAttribute('contenteditable', 'true');
     project.setAttribute('spellcheck', 'false');
     project.title = 'Click to rename the fellside parish';
+    project.addEventListener('blur', () => saveProject(project.textContent.trim()));
     project.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') { e.preventDefault(); project.blur(); }
     });
@@ -211,6 +257,11 @@ document.addEventListener('DOMContentLoaded', () => {
     addTarn({ level, summers, name, state });
     $('#add-name').value = '';
     $('#add-summers').value = '0';
+  });
+
+  $('#reset-demo').addEventListener('click', (e) => {
+    e.preventDefault();
+    resetTarns();
   });
 
   $('#hold-form').addEventListener('submit', (e) => {

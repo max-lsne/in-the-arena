@@ -508,6 +508,12 @@ main {
 }
 .add-form input:focus,
 .add-form select:focus { border-color: var(--water); }
+.reset-link {
+  font: 12px/1 'JetBrains Mono', monospace;
+  color: var(--moss);
+  letter-spacing: 0.04em;
+  align-self: flex-end;
+}
 
 .legend {
   margin-top: 30px;
