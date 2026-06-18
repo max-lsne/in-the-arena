@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Withy — a small page for the slow work you grow a year and weave for a lifetime</title>
+  <meta name="description" content="A withy is a willow rod the moor throws up in a year, cut in the dead of winter, soaked for weeks until it bends without cracking, and woven into a basket that carries for a generation. Rod, bolt, basket, holt — the work you cannot hurry." />
+  <meta name="theme-color" content="#d9d2c2" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#33291f" media="(prefers-color-scheme: dark)" />
+  <meta name="color-scheme" content="light" />
+  <meta property="og:title" content="Withy — the work you grow a year and weave for a lifetime" />
+  <meta property="og:description" content="A small page for the slow willow work — cut in deep winter, soaked supple in the pit, and woven into a basket that carries a hundredweight for a generation. Rod, bolt, basket, holt — what you cannot hurry." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23d9d2c2'/%3E%3Cellipse cx='16' cy='27' rx='12' ry='3' fill='%235a4a30' opacity='0.5'/%3E%3Cpath d='M11 27 L8 6 M14 27 L12 4 M16 27 L16 3 M18 27 L20 4 M21 27 L24 6' stroke='%236f8b3f' stroke-width='1.4' fill='none' stroke-linecap='round'/%3E%3Cpath d='M12.5 27 L11 5 M19.5 27 L21 5' stroke='%23c9aa6a' stroke-width='1.2' fill='none' stroke-linecap='round'/%3E%3Cpath d='M9 18 q7 -2 14 0' stroke='%237a4326' stroke-width='2.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <path d="M16 30 L16 6" stroke="currentColor" stroke-width="1.4" opacity="0.85" />
+          <path d="M16 14 L9 5 M16 12 L12 4 M16 12 L20 4 M16 14 L23 5 M16 18 L11 9 M16 18 L21 9" stroke="currentColor" stroke-width="1" fill="none" opacity="0.7" />
+          <path d="M9 24 q7 -3 14 0" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.85" />
+          <path d="M9 24 l0 3 M23 24 l0 3" stroke="currentColor" stroke-width="1.2" opacity="0.6" />
+        </svg>
+      </span>
+      <span>Withy</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#bed">The withy-bed</a>
+      <a href="#who">Who cuts the same bed</a>
+      <a href="#soak" class="nav-cta">Sink a bolt</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">What the moor throws up, given a year and a soak</p>
+        <h1>
+          You cannot weave a green rod.<br />
+          <em>A withy has to be given its winter.</em>
+        </h1>
+        <p class="lede">
+          A withy is a willow rod the wet moor throws up in a single
+          year, straight as a wand off a pollarded stool. You cut it
+          in the dead of winter, when the sap is down and the leaf is
+          gone, tie it into bolts, and sink them in the soak-pit for
+          three weeks of tea-brown water until the rod bends round
+          your wrist without a crack in it. Only then will it weave.
+          A basket made of green, hurried withy splits at the first
+          bend. One made of seasoned rod carries a hundredweight of
+          apples for forty years.
+        </p>
+        <div class="hero-cta">
+          <a href="#bed" class="btn btn-primary">See the withy-bed</a>
+          <a href="#soak" class="btn btn-ghost">Sink a bolt</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One osier holt. Eighty winters cut. A basket off it still carries.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg class="hero-bed" viewBox="0 0 400 320" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="wSky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#e6ddca" stop-opacity="0.95" />
+              <stop offset="60%" stop-color="#d6cdb6" stop-opacity="0.7" />
+              <stop offset="100%" stop-color="#c4baa0" stop-opacity="0.4" />
+            </linearGradient>
+            <linearGradient id="wMoor" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#a89a72" />
+              <stop offset="100%" stop-color="#857a54" />
+            </linearGradient>
+            <linearGradient id="wSoak" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#5a4a30" />
+              <stop offset="100%" stop-color="#382c1a" />
+            </linearGradient>
+            <linearGradient id="wStool" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7a5238" />
+              <stop offset="100%" stop-color="#4e3320" />
+            </linearGradient>
+          </defs>
+
+          <rect x="0" y="0" width="400" height="320" fill="url(#wSky)" />
+
+          <!-- low misty treeline across the flat moor -->
+          <path d="M0 118 q40 -8 80 -4 q40 4 80 -2 q40 -6 80 0 q40 6 80 -3 q20 -2 80 2 L400 150 L0 150 Z" fill="#b7ac86" opacity="0.55" />
+          <path d="M0 126 q60 -5 120 -1 q60 4 140 -3 q60 -3 140 2 L400 160 L0 160 Z" fill="#a89c74" opacity="0.5" />
+
+          <!-- the flat wet moor ground -->
+          <path d="M0 150 L400 150 L400 320 L0 320 Z" fill="url(#wMoor)" opacity="0.92" />
+
+          <!-- a rhyne (drainage ditch) catching the pale sky -->
+          <path d="M0 196 q120 10 200 4 q120 -8 200 6 L400 210 q-120 8 -200 2 q-120 -6 -200 4 Z" fill="#cabf9c" opacity="0.6" />
+
+          <!-- the row of pollard stools throwing up fans of straight rods -->
+          <g stroke="#6f8b3f" stroke-width="1" fill="none" opacity="0.82" stroke-linecap="round">
+            <!-- stool 1 -->
+            <path d="M70 168 L52 96 M70 168 L60 92 M70 168 L70 90 M70 168 L80 93 M70 168 L88 98 M70 168 L46 104 M70 168 L94 106" />
+            <!-- stool 2 -->
+            <path d="M150 172 L132 104 M150 172 L142 98 M150 172 L150 94 M150 172 L160 99 M150 172 L170 106 M150 172 L126 110 M150 172 L176 112" />
+            <!-- stool 3 -->
+            <path d="M236 170 L218 100 M236 170 L228 96 M236 170 L236 92 M236 170 L246 97 M236 170 L256 104 M236 170 L212 108 M236 170 L262 110" />
+            <!-- stool 4 -->
+            <path d="M318 174 L300 108 M318 174 L310 102 M318 174 L318 98 M318 174 L328 103 M318 174 L338 110 M318 174 L294 114 M318 174 L344 116" />
+          </g>
+
+          <!-- the stools themselves -->
+          <g fill="url(#wStool)">
+            <ellipse cx="70" cy="170" rx="12" ry="5" />
+            <ellipse cx="150" cy="174" rx="12" ry="5" />
+            <ellipse cx="236" cy="172" rx="12" ry="5" />
+            <ellipse cx="318" cy="176" rx="12" ry="5" />
+          </g>
+
+          <!-- the soak-pit in the foreground -->
+          <ellipse cx="150" cy="270" rx="130" ry="34" fill="url(#wSoak)" />
+          <ellipse cx="150" cy="270" rx="130" ry="34" fill="none" stroke="#241a0e" stroke-width="0.8" opacity="0.6" />
+          <g stroke="#b7ac86" stroke-width="0.6" fill="none" opacity="0.4">
+            <path d="M60 262 q40 -3 80 0" />
+            <path d="M120 278 q50 3 100 0" />
+            <path d="M90 286 q40 2 80 -1" />
+          </g>
+
+          <!-- a bolt of cut rods, tied, leaning out of the soak -->
+          <g stroke="#c9aa6a" stroke-width="1.3" stroke-linecap="round" opacity="0.95">
+            <path d="M196 272 L250 168" />
+            <path d="M200 272 L256 168" />
+            <path d="M204 273 L262 169" />
+            <path d="M208 273 L268 170" />
+            <path d="M212 274 L274 172" />
+            <path d="M216 274 L280 173" />
+          </g>
+          <!-- the bond tying the bolt -->
+          <path d="M218 232 q16 -6 30 -10" stroke="#7a4326" stroke-width="3" fill="none" opacity="0.9" stroke-linecap="round" />
+
+          <!-- a half-woven basket base in the near corner -->
+          <g transform="translate(330 280)">
+            <ellipse cx="0" cy="0" rx="42" ry="16" fill="#a9683a" opacity="0.9" />
+            <ellipse cx="0" cy="-4" rx="42" ry="16" fill="none" stroke="#7a4326" stroke-width="1.1" opacity="0.85" />
+            <g stroke="#7a4326" stroke-width="0.8" fill="none" opacity="0.7">
+              <path d="M-38 -2 L38 -2 M-34 -7 L34 -7 M-30 3 L30 3" />
+              <path d="M-30 -10 L-26 8 M-18 -12 L-16 9 M-6 -13 L-5 10 M6 -13 L6 10 M18 -12 L16 9 M30 -10 L26 8" />
+            </g>
+          </g>
+        </svg>
+        <span class="hero-tick hero-tick-1">cut, deep winter</span>
+        <span class="hero-tick hero-tick-2">three weeks in the soak</span>
+        <span class="hero-tick hero-tick-3">eighty winters cut</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>Most of what you make<br /><em>cracks at the first bend.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            Most work is green and forced. It is cut in the morning
+            and woven in the afternoon, with the sap still up in it
+            and no soak behind it, and it splits the first time you
+            ask it to take a real bend. The quick basket, the rushed
+            draft, the habit kept for nine loud days — green rod, all
+            of it, and the moor takes it back by Tuesday.
+          </p>
+          <p>
+            A withy is the other thing. A withy is given its year on
+            the wet moor, its cut in the dead of winter when the sap
+            is down, its three weeks under the tea-brown water of the
+            soak. By the time it goes on the bench it bends round your
+            wrist without a sound, and the weave holds a hundredweight
+            for forty years. You cannot hurry a withy. That is the
+            whole of the thing. You give it the winter and the soak,
+            and then it will weave.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Cut in the dead of winter</h3>
+          <p>Cut when the sap is down and the leaf long gone — December to March, the moor white with rime. A rod cut in the green of summer is full of water and will never season true. The corner of the year that nobody wants. The cold hour at the same desk. Cut then, and let the cold do half the work.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Tie the bolt, sink the soak</h3>
+          <p>Bind the rods into a bolt, sort them to length, and sink them in the soak-pit. Three weeks under the dark water and not a day less. There is nothing to watch and nothing to hurry. The rod is taking the water it needs to bend. A page reread, a scale walked slow, the draft left in the drawer to settle.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Weave when it bends without cracking</h3>
+          <p>Take a rod from the soak and bend it round your wrist. If it cracks it wants another week; if it bends silent it is ready. Now, and only now, weave. The randing and the slewing and the upsett — the work that was impossible in the green is easy in the seasoned. The hands know. The rod knows.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>The holt throws new rods next winter</h3>
+          <p>Cut a willow to the stool and it does not die — it throws a fan of new rods the next spring, straighter than the last, and goes on doing it for eighty winters. The work is held by a standing holt, not a single basket. You cut, and it gives back, and you cut again, and the bed your grandfather planted is still throwing rods.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="bed" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A withy-bed on the Levels, deep winter</h2>
+        <p>One withy-bed and its season's cut — twelve rods, bolts, baskets and the holt itself, mapped across a fictional withy-grower's moor on the Somerset Levels in the middle of January 2026, the rhynes brim-full, the bolts sunk in the soak, the basket-maker at the bench by the copper. Some are a single green rod cut this midwinter. Some are baskets rewoven every close season for half a century. One is the cracked creel that went to the bonfire. Cut a rod, sink a bolt, lose a basket to the rot — the bed redraws in your browser.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">Withy-bed</p>
+            <p class="chart-project" id="chart-project">A withy-bed on the Levels · winter 2026 · twelve cut</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Winters each withy has been cut or stood in the holt">
+          <p class="profile-axis-label top">the standing holt</p>
+          <p class="profile-axis-label bot">first green rod</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the withies">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="green" role="tab">Green</button>
+          <button type="button" data-filter="soaking" role="tab">Soaking</button>
+          <button type="button" data-filter="weaving" role="tab">Weaving</button>
+          <button type="button" data-filter="seasoned" role="tab">Seasoned</button>
+        </div>
+
+        <ul class="legs" id="withies-list">
+          <!-- withies inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-level" aria-label="Level of the withy">
+              <option value="rod">Rod</option>
+              <option value="bolt">Bolt</option>
+              <option value="basket">Basket</option>
+              <option value="holt">Holt</option>
+            </select>
+            <input id="add-winters" type="number" step="1" min="0" value="0" aria-label="Winters it has been cut or stood" />
+            <input id="add-name" type="text" placeholder="Name the withy — the rod that bends without cracking" maxlength="90" />
+            <select id="add-state" aria-label="Condition of the withy">
+              <option value="green">Green</option>
+              <option value="soaking">Soaking</option>
+              <option value="weaving">Weaving</option>
+              <option value="seasoned">Seasoned</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Cut the rod</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original withy-bed</a>
+        </div>
+
+        <p class="kbd-help">
+          <strong>Keys:</strong>
+          <kbd>J</kbd>/<kbd>K</kbd> move &middot;
+          <kbd>Enter</kbd> advance condition &middot;
+          <kbd>Del</kbd> crack &middot;
+          <kbd>N</kbd> cut &middot;
+          <kbd>0</kbd>&ndash;<kbd>4</kbd> filter &middot;
+          <kbd>[</kbd>/<kbd>]</kbd> nudge winters &middot;
+          <kbd>R</kbd> reset.
+        </p>
+      </div>
+
+      <div class="legend">
+        <h3>The four levels</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-rod"></span><div><strong>Rod.</strong> A single year's willow rod, just cut, the sap still in it — the first half-page, the empty notebook with one line, the morning you began. Green; it will crack if you force the bend today.</div></li>
+          <li><span class="legend-swatch swatch-bolt"></span><div><strong>Bolt.</strong> A tied bundle, sorted to length, weeks in the soak — the first real gathering of work, supple now and ready to go in. Real, but not yet woven into anything that holds.</div></li>
+          <li><span class="legend-swatch swatch-basket"></span><div><strong>Basket.</strong> A finished weave — a creel, a hurdle, an eel-trap that holds. A body of work woven tight enough to carry a hundredweight, by hands that gave every rod its soak.</div></li>
+          <li><span class="legend-swatch swatch-holt"></span><div><strong>Holt.</strong> The osier holt itself, the standing ground that throws new rods every winter for a lifetime. A lifework, a craft, a watershed — the bed your grandfather planted and you still cut.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who cuts the same bed</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The basket-maker at the same bench</h3>
+          <p>Fifty winters at the same bench on the Levels, the copper steaming, the brake by the door. The market creel woven every autumn since 1976 to the same pattern her mother used. The young hand's first green rod went in the loft to season this January. It is not ready. It will be.</p>
+        </article>
+        <article>
+          <h3>The hurdle-maker in the wet coppice</h3>
+          <p>Forty winters laying the same brown-withy holt below the rhyne. A sheep hurdle takes sixty rods and a long afternoon and stands in the field for fifteen years. He cuts to the stool, and the stool throws more, and he has never once had to plant.</p>
+        </article>
+        <article>
+          <h3>The eel-fisher mending the putcher</h3>
+          <p>The withy putcher rewoven every close season since 1979, sunk in the same reach of the river each spring. The water rots a basket in a few years; the mending never stops. The trap is never finished and never the same trap, and the eels come back to it anyway.</p>
+        </article>
+        <article>
+          <h3>The translator at the same desk</h3>
+          <p>Two pages of the slow Italian every winter morning since 2012. A holt now in the corner of the desk, fifteen winters cut, throwing straighter rods each year. Nothing woven from it cracks at the bend any more. The hands gave it the soak. The bed keeps giving back.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="soak" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · winter 2026</p>
+        <h2>One email when the first bolt has held a winter in the soak.</h2>
+        <p class="hold-lede">A small page, a small wet moor, a small steady walk down to the soak-pit on a cold morning to feel whether the rod will bend. A way to grow your withy and give it the winter it needs. No streak. No badge. No alarm when you miss a cutting season. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@somelevels.moor" />
+          <button class="btn btn-primary" type="submit">Sink a bolt</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first bolt has taken the soak and bends without cracking. You can stop cutting anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Withy</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · the work you grow a year and weave for a lifetime</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#bed">The bed</a>
+      <a href="#soak">Sink a bolt</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
