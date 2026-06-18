@@ -35,8 +35,39 @@ const SEED_WITHIES = [
   { name: 'The cracked creel that went to the bonfire last Candlemas',                   level: 'rod',    state: 'green',    winters: 1  },
 ];
 
-let withies = SEED_WITHIES.map((s, i) => ({ ...s, id: i + 1 }));
-let nextId = withies.length + 1;
+const STORAGE_KEY = 'withy.withies.v1';
+const PROJECT_KEY = 'withy.project.v1';
+const DEFAULT_PROJECT = 'A withy-bed on the Levels · winter 2026 · twelve cut';
+
+function loadWithies() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return SEED_WITHIES.map((s, i) => ({ ...s, id: i + 1 }));
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed) || parsed.length === 0) {
+      return SEED_WITHIES.map((s, i) => ({ ...s, id: i + 1 }));
+    }
+    return parsed.map((s, i) => ({ ...s, id: s.id || i + 1 }));
+  } catch {
+    return SEED_WITHIES.map((s, i) => ({ ...s, id: i + 1 }));
+  }
+}
+
+function saveWithies() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(withies)); } catch {}
+}
+
+function loadProject() {
+  try { return localStorage.getItem(PROJECT_KEY) || DEFAULT_PROJECT; }
+  catch { return DEFAULT_PROJECT; }
+}
+
+function saveProject(name) {
+  try { localStorage.setItem(PROJECT_KEY, name); } catch {}
+}
+
+let withies = loadWithies();
+let nextId = (withies.reduce((m, s) => Math.max(m, s.id || 0), 0)) + 1;
 let filter = 'all';
 let focused = null;
 
@@ -126,6 +157,7 @@ function render() {
   renderTotals();
   renderProfile();
   renderList();
+  saveWithies();
 }
 
 // ---------- Helpers ----------
@@ -177,9 +209,13 @@ function removeWithy(id) {
 }
 
 function resetWithies() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch {}
+  try { localStorage.removeItem(PROJECT_KEY); } catch {}
   withies = SEED_WITHIES.map((s, i) => ({ ...s, id: i + 1 }));
   nextId = withies.length + 1;
   filter = 'all';
+  const project = $('#chart-project');
+  if (project) project.textContent = DEFAULT_PROJECT;
   document.querySelectorAll('#filters button').forEach(b => {
     b.classList.toggle('is-active', b.dataset.filter === 'all');
   });
@@ -189,6 +225,18 @@ function resetWithies() {
 // ---------- Wire up ----------
 
 document.addEventListener('DOMContentLoaded', () => {
+  const project = $('#chart-project');
+  if (project) {
+    project.textContent = loadProject();
+    project.setAttribute('contenteditable', 'true');
+    project.setAttribute('spellcheck', 'false');
+    project.title = 'Click to rename the withy-bed';
+    project.addEventListener('blur', () => saveProject(project.textContent.trim()));
+    project.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); project.blur(); }
+    });
+  }
+
   render();
 
   document.querySelectorAll('#filters button').forEach(btn => {
