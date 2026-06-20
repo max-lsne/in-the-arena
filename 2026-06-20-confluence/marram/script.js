@@ -269,4 +269,87 @@ document.addEventListener('DOMContentLoaded', () => {
     const foot = $('#hold-foot');
     foot.textContent = 'Tuft planted. We will write once, when the first one has stood a winter gale and its runners have taken hold. You cannot hurry it.';
   });
+
+  wireKeyboard();
 });
+
+// ---------- Keyboard ----------
+
+function isTypingInForm() {
+  const t = document.activeElement;
+  if (!t) return false;
+  const tag = t.tagName;
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return true;
+  if (t.isContentEditable) return true;
+  return false;
+}
+
+function sortedShown() {
+  return visiblePlantings().slice().sort((a, b) => {
+    const d = STATES[a.state].order - STATES[b.state].order;
+    if (d !== 0) return d;
+    return b.gales - a.gales;
+  });
+}
+
+function focusedIndexInShown(shown) {
+  if (focused == null) return -1;
+  return shown.findIndex(s => s.id === focused);
+}
+
+function moveFocus(delta) {
+  const shown = sortedShown();
+  if (shown.length === 0) { focused = null; render(); return; }
+  let i = focusedIndexInShown(shown);
+  if (i === -1) {
+    focused = delta > 0 ? shown[0].id : shown[shown.length - 1].id;
+  } else {
+    i = (i + delta + shown.length) % shown.length;
+    focused = shown[i].id;
+  }
+  render();
+  const el = document.querySelector(`.leg[data-id="${focused}"]`);
+  if (el && el.scrollIntoView) el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+}
+
+function setFilter(f) {
+  filter = f;
+  document.querySelectorAll('#filters button').forEach(b => {
+    b.classList.toggle('is-active', b.dataset.filter === f);
+  });
+  render();
+}
+
+function nudgeGales(delta) {
+  if (focused == null) return;
+  const s = plantings.find(x => x.id === focused);
+  if (!s) return;
+  s.gales = Math.max(0, s.gales + delta);
+  render();
+}
+
+function wireKeyboard() {
+  document.addEventListener('keydown', (e) => {
+    if (isTypingInForm()) return;
+    const k = e.key;
+    if (k === 'j' || k === 'J' || k === 'ArrowDown') { e.preventDefault(); moveFocus(1); return; }
+    if (k === 'k' || k === 'K' || k === 'ArrowUp')   { e.preventDefault(); moveFocus(-1); return; }
+    if (k === 'Enter') {
+      if (focused != null) { e.preventDefault(); advancePlanting(focused); }
+      return;
+    }
+    if (k === 'Delete' || k === 'Backspace') {
+      if (focused != null) { e.preventDefault(); removePlanting(focused); focused = null; }
+      return;
+    }
+    if (k === 'n' || k === 'N') { e.preventDefault(); const el = $('#add-name'); if (el) el.focus(); return; }
+    if (k === '0') { e.preventDefault(); setFilter('all');      return; }
+    if (k === '1') { e.preventDefault(); setFilter('loose');    return; }
+    if (k === '2') { e.preventDefault(); setFilter('rooting');  return; }
+    if (k === '3') { e.preventDefault(); setFilter('knitting'); return; }
+    if (k === '4') { e.preventDefault(); setFilter('bound');    return; }
+    if (k === '[') { e.preventDefault(); nudgeGales(-1); return; }
+    if (k === ']') { e.preventDefault(); nudgeGales(1);  return; }
+    if (k === 'r' || k === 'R') { e.preventDefault(); resetPlantings(); return; }
+  });
+}
