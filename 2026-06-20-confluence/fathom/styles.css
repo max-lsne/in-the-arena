@@ -688,3 +688,20 @@ main {
 .foot-right { display: flex; gap: 18px; }
 .foot-right a { color: var(--reach); }
 .foot-right a:hover { color: var(--sea); }
+
+/* --- The drift of the sounding-line --- */
+/* The lead-line sways a hair on the swell, the way a paid-out line
+   never hangs quite still. Held to a degree or two, anchored at the
+   gunwale, and stilled entirely for anyone who prefers reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .sounding-line {
+    transform-box: fill-box;
+    transform-origin: 0% 0%;
+    animation: line-drift 9s ease-in-out infinite;
+  }
+}
+@keyframes line-drift {
+  0%   { transform: rotate(0deg); }
+  50%  { transform: rotate(0.9deg); }
+  100% { transform: rotate(0deg); }
+}
