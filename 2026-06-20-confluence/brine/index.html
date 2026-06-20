@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brine — a small page for keeping what you don't act on green</title>
+  <meta name="description" content="Not every idea should be eaten the day it is cut. You put the raw thing down in salt, weight it under a stone in the cool dark, and forget it; you go down to turn it and skim the bloom; and one winter it has soured slow into something cured that keeps for years. Raw, crock, cellar, larder — a note cellar for the ideas better preserved than acted on fresh." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <path d="M9 12 q7 -3 14 0 L22 27 q-6 2 -12 0 Z" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.85" />
+          <path d="M9 17 q7 -2 14 0" stroke="currentColor" stroke-width="1" fill="none" opacity="0.6" />
+          <ellipse cx="16" cy="12" rx="7" ry="2.2" stroke="currentColor" stroke-width="1" fill="none" opacity="0.8" />
+          <ellipse cx="16" cy="10" rx="4" ry="1.5" stroke="currentColor" stroke-width="1.1" fill="none" opacity="0.75" />
+          <path d="M13 10 L13 6 q3 -1.6 6 0 L19 10" stroke="currentColor" stroke-width="1" fill="none" opacity="0.7" />
+        </svg>
+      </span>
+      <span>Brine</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#cellar">The cellar</a>
+      <a href="#who">Who keeps one for real</a>
+      <a href="#hold" class="nav-cta">Put one down</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">What you don't eat fresh, given salt and a cool dark</p>
+        <h1>
+          Not every idea should be eaten the day it is cut.<br />
+          <em>Some you put down in salt.</em>
+        </h1>
+        <p class="lede">
+          A raw notion is green and sharp and asks to be acted on the
+          hour you have it. Most should not be. You lay it down instead
+          in a stoneware crock, pack it in coarse salt, weight it under
+          a clean stone on a plate, and carry it to the cool dark of the
+          cellar. There it draws its own water, the brine comes up
+          cloudy over the top, and you leave it. Now and then you go
+          down to turn it and skim the bloom. Months on — a winter, two
+          winters — the green has soured slow into something cured that
+          keeps for years, and is better than anything you could have
+          made of it fresh.
+        </p>
+        <div class="hero-cta">
+          <a href="#cellar" class="btn btn-primary">See the cellar</a>
+          <a href="#hold" class="btn btn-ghost">Put one down</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One cool cellar. A dozen crocks down. One sour mother fed five years.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg class="hero-bed" viewBox="0 0 400 320" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="bAir" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#e7dcc6" stop-opacity="0.95" />
+              <stop offset="60%" stop-color="#d4c8ad" stop-opacity="0.6" />
+              <stop offset="100%" stop-color="#bdb094" stop-opacity="0.35" />
+            </linearGradient>
+            <linearGradient id="bDark" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#3a2f22" />
+              <stop offset="100%" stop-color="#241b11" />
+            </linearGradient>
+            <linearGradient id="bCrock" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#a06a44" />
+              <stop offset="100%" stop-color="#6a4128" />
+            </linearGradient>
+            <linearGradient id="bBrine" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#9aa585" stop-opacity="0.95" />
+              <stop offset="100%" stop-color="#76835f" stop-opacity="0.9" />
+            </linearGradient>
+            <radialGradient id="bLamp" cx="0.5" cy="0.18" r="0.7">
+              <stop offset="0%" stop-color="#f0d9a6" stop-opacity="0.55" />
+              <stop offset="100%" stop-color="#f0d9a6" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+
+          <rect x="0" y="0" width="400" height="320" fill="url(#bDark)" />
+          <!-- a dim cone of cellar lamplight from above -->
+          <rect x="0" y="0" width="400" height="320" fill="url(#bLamp)" />
+
+          <!-- the cool back wall of the cellar, faintly lit -->
+          <rect x="0" y="0" width="400" height="210" fill="url(#bAir)" opacity="0.18" />
+          <!-- mortared stone courses on the back wall -->
+          <g stroke="#5a4a36" stroke-width="0.7" fill="none" opacity="0.35">
+            <path d="M0 52 L400 52 M0 92 L400 92 M0 132 L400 132" />
+            <path d="M70 12 L70 52 M170 12 L170 52 M280 12 L280 52" />
+            <path d="M40 52 L40 92 M150 52 L150 92 M250 52 L250 92 M340 52 L340 92" />
+            <path d="M90 92 L90 132 M210 92 L210 132 M310 92 L310 132" />
+          </g>
+
+          <!-- the dark stone shelf the crocks stand on -->
+          <rect x="0" y="206" width="400" height="14" fill="#4a3a28" />
+          <rect x="0" y="206" width="400" height="3" fill="#6a5640" opacity="0.7" />
+          <ellipse cx="200" cy="208" rx="200" ry="6" fill="#000" opacity="0.18" />
+
+          <!-- a hanging bunch of dill and bay, drying in the cool -->
+          <g stroke="#6f8b52" stroke-width="1" fill="none" opacity="0.8" stroke-linecap="round">
+            <path d="M44 8 L44 64" />
+            <path d="M44 28 L34 22 M44 28 L54 22 M44 40 L32 36 M44 40 L56 36 M44 52 L34 50 M44 52 L54 50 M44 62 L36 64 M44 62 L52 64" />
+          </g>
+          <path d="M40 8 q4 -4 8 0" stroke="#8a6a44" stroke-width="1.4" fill="none" opacity="0.8" />
+
+          <!-- row of sealed crocks along the back of the shelf -->
+          <g>
+            <!-- crock A -->
+            <path d="M96 150 q22 -7 44 0 L136 206 q-18 4 -36 0 Z" fill="url(#bCrock)" />
+            <ellipse cx="118" cy="150" rx="22" ry="6" fill="#7a4f30" />
+            <ellipse cx="118" cy="148" rx="22" ry="6" fill="#3a2517" opacity="0.5" />
+            <path d="M100 170 q18 -4 36 0" stroke="#4a2e1b" stroke-width="0.8" fill="none" opacity="0.5" />
+            <!-- crock B (taller) -->
+            <path d="M152 138 q20 -7 40 0 L186 206 q-16 4 -32 0 Z" fill="url(#bCrock)" />
+            <ellipse cx="172" cy="138" rx="20" ry="5.5" fill="#7a4f30" />
+            <ellipse cx="172" cy="136" rx="20" ry="5.5" fill="#3a2517" opacity="0.5" />
+            <!-- crock C -->
+            <path d="M300 152 q24 -7 48 0 L342 206 q-20 4 -40 0 Z" fill="url(#bCrock)" />
+            <ellipse cx="324" cy="152" rx="24" ry="6.5" fill="#7a4f30" />
+            <ellipse cx="324" cy="150" rx="24" ry="6.5" fill="#3a2517" opacity="0.5" />
+            <path d="M305 174 q19 -4 38 0" stroke="#4a2e1b" stroke-width="0.8" fill="none" opacity="0.5" />
+          </g>
+
+          <!-- the open working crock in the foreground, brine up over a weighted stone -->
+          <g transform="translate(208 196)">
+            <!-- the crock body, open -->
+            <path d="M-46 -54 q46 -12 92 0 L36 70 q-36 8 -72 0 Z" fill="url(#bCrock)" />
+            <ellipse cx="0" cy="-54" rx="46" ry="13" fill="#3a2517" />
+            <ellipse cx="0" cy="-54" rx="46" ry="13" fill="none" stroke="#7a4f30" stroke-width="1.4" opacity="0.9" />
+            <!-- the cloudy working brine, up over the produce -->
+            <ellipse cx="0" cy="-50" rx="42" ry="11" fill="url(#bBrine)" />
+            <!-- the brine line, marked on the rim -->
+            <ellipse cx="0" cy="-50" rx="42" ry="11" fill="none" stroke="#cdd6b8" stroke-width="0.8" opacity="0.7" />
+            <!-- a pale bloom skimmed across the top -->
+            <g fill="#e6e7cf" opacity="0.55">
+              <ellipse cx="-14" cy="-51" rx="7" ry="2" />
+              <ellipse cx="10" cy="-49" rx="9" ry="2.4" />
+              <ellipse cx="22" cy="-52" rx="4" ry="1.4" />
+            </g>
+            <!-- the weighting plate and the round river-stone holding it under -->
+            <ellipse cx="0" cy="-52" rx="26" ry="7" fill="#cabf9c" opacity="0.35" />
+            <ellipse cx="0" cy="-56" rx="16" ry="6" fill="#97917e" />
+            <ellipse cx="0" cy="-59" rx="16" ry="6" fill="#aaa48f" />
+            <ellipse cx="-4" cy="-61" rx="6" ry="2" fill="#c2bda9" opacity="0.7" />
+            <!-- produce showing dim under the brine -->
+            <g fill="#7e8c6f" opacity="0.5">
+              <ellipse cx="-22" cy="-46" rx="6" ry="3" />
+              <ellipse cx="20" cy="-44" rx="7" ry="3.2" />
+            </g>
+            <!-- a sprig of dill laid on the brine -->
+            <g stroke="#8aa663" stroke-width="0.8" fill="none" opacity="0.8" stroke-linecap="round">
+              <path d="M-30 -50 q14 -6 30 -3 M-22 -52 l-4 -5 M-12 -52 l-3 -5 M-2 -51 l-2 -5" />
+            </g>
+          </g>
+
+          <!-- the skimmer / long wooden spoon resting against the open crock -->
+          <g stroke="#8a6a44" stroke-width="3" stroke-linecap="round" opacity="0.92">
+            <path d="M262 150 L300 60" />
+          </g>
+          <ellipse cx="260" cy="154" rx="9" ry="4" fill="#9c7a4e" opacity="0.92" transform="rotate(-22 260 154)" />
+          <g stroke="#6f5436" stroke-width="0.6" fill="none" opacity="0.6">
+            <path d="M254 152 q6 2 12 0" transform="rotate(-22 260 154)" />
+          </g>
+        </svg>
+        <span class="hero-tick hero-tick-1">cut and salted</span>
+        <span class="hero-tick hero-tick-2">weighted, brine up</span>
+        <span class="hero-tick hero-tick-3">five winters cured</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>Most ideas eaten green<br /><em>go off by Friday.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            A new idea is loud and ripe and wants out the door before
+            lunch. So you act on it raw — you start the company on
+            Tuesday's enthusiasm, you send the cold draft the night you
+            wrote it, you build the whole thing on the first version of
+            the thought. And it spoils. Acted on green, most ideas turn
+            in a few days: the heat goes out of them, the obvious flaw
+            you couldn't see in the freshness surfaces, and what looked
+            like a feast on Monday is something you'd rather not have
+            served by Friday.
+          </p>
+          <p>
+            Brine is the other thing. You take the raw notion and you
+            put it down — in salt, under a weight, in the cool dark
+            where you cannot fuss at it. It draws its own water. The
+            brine comes up. You go down once in a while to turn it and
+            skim the bloom, and otherwise you leave it well alone. The
+            good sour comes slowly, on its own time, and what keeps is
+            keeper than anything you'd have rushed. You cannot hurry a
+            cure. You put it down, you turn it, and one winter it is
+            ready to take down.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Cut it and pack it in salt</h3>
+          <p>Take the raw idea while it is green and lay it straight down — write the one line, name the crock, pack it in coarse salt and close it. No plan, no acting on it today. The salt is what stops it rotting while it keeps. Put it down the hour you have it, and then take your hands off.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Weight it down in the cool dark</h3>
+          <p>Set a clean stone on a plate over it so it stays under, carry it to the coolest, darkest corner, and let it draw its own water until the brine comes up over the top. Nothing to watch and nothing to hurry. Out of the light and out of reach is exactly where it needs to be.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Go down to turn it and skim the bloom</h3>
+          <p>Every so often you go down to the cellar, lift the stone, turn the crock, and skim the white bloom off the brine. That is the whole of the tending — a few minutes, a season apart. Each turn is a count. The working change is slow and underneath, and your job is only to keep it clean.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Take it down when it has cured</h3>
+          <p>One winter you go down, taste it, and it is ready — soured through, cured, keeping. Now you take it off the shelf and act, and it is better than fresh could ever have been. The mother you keep feeding gives bread for years; the crock you cured once feeds you long after the green idea would have spoiled.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="cellar" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A keeper's cellar, mid-June</h2>
+        <p>One cool cellar and everything down in it — twelve crocks, from a notion salted this week to a vintage laid down the year a child was born, mapped across a fictional keeper's note cellar in the middle of June 2026, the brine cloudy on the working crocks and the cured ones shelved in the dark. Some are still green, just cut and only barely under the salt. Some have soured slow for years and keep for years more. One is the bad idea that went off and was thrown out. Put one down, go turn it, take one down cured, throw one out — the cellar redraws in your browser.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">The cellar</p>
+            <p class="chart-project" id="chart-project">A keeper's cellar · June 2026 · twelve down</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Turns each crock has been gone down to and turned in the cellar">
+          <p class="profile-axis-label top">cured, kept for years</p>
+          <p class="profile-axis-label bot">just put down</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the crocks">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="fresh" role="tab">Fresh</button>
+          <button type="button" data-filter="salting" role="tab">Salting</button>
+          <button type="button" data-filter="souring" role="tab">Souring</button>
+          <button type="button" data-filter="cured" role="tab">Cured</button>
+        </div>
+
+        <ul class="legs" id="crocks-list">
+          <!-- crocks inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-level" aria-label="Level of the crock">
+              <option value="raw">Raw</option>
+              <option value="crock">Crock</option>
+              <option value="cellar">Cellar</option>
+              <option value="larder">Larder</option>
+            </select>
+            <input id="add-turns" type="number" step="1" min="0" value="0" aria-label="Turns it has been gone down to" />
+            <input id="add-name" type="text" placeholder="Name the crock — the raw idea you'd rather put down than act on green" maxlength="90" />
+            <select id="add-state" aria-label="Condition of the crock">
+              <option value="fresh">Fresh</option>
+              <option value="salting">Salting</option>
+              <option value="souring">Souring</option>
+              <option value="cured">Cured</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Put it down</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original cellar</a>
+        </div>
+      </div>
+
+      <div class="legend">
+        <h3>The four levels</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-raw"></span><div><strong>Raw.</strong> Just cut, green, still on the board — only just put aside. The notion scribbled this week, the empty crock with one line on the lid. Not yet under the salt; act on it now and it spoils.</div></li>
+          <li><span class="legend-swatch swatch-crock"></span><div><strong>Crock.</strong> Down in the salt under a weight, drawing its own water, the brine just clouding up. The idea you've committed to keeping rather than doing. Real, under at last, but nowhere near ready.</div></li>
+          <li><span class="legend-swatch swatch-cellar"></span><div><strong>Cellar.</strong> Kept in the cool dark and turned over a season, the good sour coming on. A draft, a plan, a project working its slow change while you leave it be and go down only to skim.</div></li>
+          <li><span class="legend-swatch swatch-larder"></span><div><strong>Larder.</strong> Cured, shelved, keeps for years — ready to take down when wanted. A sourdough mother fed a decade, a vintage laid down at a birth. The deep idea that only got better for the waiting.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who keeps one for real</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The baker with the old mother</h3>
+          <p>A sourdough starter kept and fed in the same crock since 2016 — flour and water, a turn every day, the bloom skimmed, the sour grown deep and reliable. She has never bought yeast. The bread tastes of ten years of the same cool kitchen. A thing you keep alive by going down to it, not by finishing it.</p>
+        </article>
+        <article>
+          <h3>The novelist's drawer of cold drafts</h3>
+          <p>Two winters ago he put a chapter down and walked away from it on purpose. He goes back twice a year to read it cold and turn a page. It is souring well now — the false notes have surfaced and been skimmed, and the bones that held are harder than the day he wrote them. He will take it down when it is cured.</p>
+        </article>
+        <article>
+          <h3>The luthier seasoning tonewood</h3>
+          <p>Spruce and maple stacked in the cool loft, stickered to let the air through, laid down years before a single instrument is cut from it. Green wood sings flat and warps; wood that has kept a decade rings true. He marks each billet with the year and forgets it. The slow dark does the work no kiln can hurry.</p>
+        </article>
+        <article>
+          <h3>The winemaker laying down a vintage</h3>
+          <p>A cask put down the cold spring her daughter was born, bottled and cellared and not to be touched for eighteen years. She goes down to the racks to turn and check and otherwise leaves it to the dark. The idea and the child cure together. Some things are only worth having because you waited.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="hold" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · summer 2026</p>
+        <h2>One email when the first crock has soured a season and kept.</h2>
+        <p class="hold-lede">A small page, a small cool cellar, a small walk down on a quiet evening to lift the stone, turn a crock, and skim the bloom off the brine. A way to put down the raw ideas you'd rather keep than rush, and let the slow sour do what acting fresh never could. No streak. No badge. No alarm when you miss a turn. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@coolcellar.keep" />
+          <button class="btn btn-primary" type="submit">Put one down</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first crock has soured a season in the cool dark and is ready to take down. You can stop keeping anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Brine</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · keeping what you don't act on green</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#cellar">The cellar</a>
+      <a href="#hold">Put one down</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
