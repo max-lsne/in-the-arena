@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marram — a small page for binding what drifts, one tuft at a time</title>
+  <meta name="description" content="Marram is the blue-green dune grass that holds a shifting hill of sand together. You cannot hold a dune by standing on it; you plant marram a tuft at a time, it sends runners deep, and over seasons it knits loose sand into ground that holds. Seed, tuft, sward, dune — the few small practices you want to actually keep against the wind." />
+  <meta name="theme-color" content="#e3d6b6" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#2f3b34" media="(prefers-color-scheme: dark)" />
+  <meta name="color-scheme" content="light" />
+  <meta property="og:title" content="Marram — binding what drifts, one tuft at a time" />
+  <meta property="og:description" content="A small page for the slow dune work — one tuft pushed into bare blowing sand, runners sent a yard down, the loose face knitted over seasons into ground that holds against the gale. Seed, tuft, sward, dune — what you cannot hurry." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23e3d6b6'/%3E%3Cpath d='M0 22 q9 -4 18 0 q8 3 14 -1 L32 32 L0 32 Z' fill='%23cdbd96'/%3E%3Cpath d='M5 24 q11 -3 22 0' stroke='%239c8c64' stroke-width='1' fill='none' opacity='0.7'/%3E%3Cpath d='M16 24 L13 7 M16 24 L16 5 M16 24 L19 7 M13 24 L9 11 M19 24 L23 11' stroke='%235f7d63' stroke-width='1.4' fill='none' stroke-linecap='round'/%3E%3Cpath d='M16 5 q6 -3 11 -1 M13 11 q-5 -2 -9 0' stroke='%237e9a7a' stroke-width='1' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <path d="M5 25 q11 -3 22 0" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.85" />
+          <path d="M16 25 L13 6 M16 25 L16 4 M16 25 L19 6 M13 25 L9 9 M19 25 L23 9 M14.5 25 L12 7 M17.5 25 L20 7" stroke="currentColor" stroke-width="1" fill="none" opacity="0.78" stroke-linecap="round" />
+          <path d="M16 25 L16 30 M13 25 q-4 4 -7 4 M19 25 q4 4 7 4" stroke="currentColor" stroke-width="0.9" fill="none" opacity="0.5" stroke-linecap="round" />
+        </svg>
+      </span>
+      <span>Marram</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#dune">The dune</a>
+      <a href="#who">Who holds the same slope</a>
+      <a href="#hold" class="nav-cta">Plant a tuft</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">What holds the hill, given runners and a few hard seasons</p>
+        <h1>
+          You cannot hold a dune by standing on it.<br />
+          <em>You plant marram, a tuft at a time.</em>
+        </h1>
+        <p class="lede">
+          Marram is the blue-green grass that lives where nothing else
+          will — on bare, blowing sand, in salt wind, with the ground
+          moving under it. You push in one tuft and it looks like
+          nothing, a few blades bent flat by the gale. But under the
+          surface it is running: sending pale rhizomes a yard out and a
+          yard down, throwing new shoots up through the very sand that
+          tries to bury it. Tuft finds tuft, the runners cross, and a
+          season on, the loose face has knitted into a mat that holds
+          its shape in a winter storm — and shelters everything you
+          plant in the slack behind it.
+        </p>
+        <div class="hero-cta">
+          <a href="#dune" class="btn btn-primary">See the dune</a>
+          <a href="#hold" class="btn btn-ghost">Plant a tuft</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One bare slope. Forty winters of gales. The dune behind it still holds.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg class="hero-bed" viewBox="0 0 400 320" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="mHaze" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#dce4e4" stop-opacity="0.95" />
+              <stop offset="55%" stop-color="#cdd7d6" stop-opacity="0.7" />
+              <stop offset="100%" stop-color="#bcc6c2" stop-opacity="0.35" />
+            </linearGradient>
+            <linearGradient id="mSea" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#9fb2ad" />
+              <stop offset="100%" stop-color="#869c96" />
+            </linearGradient>
+            <linearGradient id="mSand" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#e3d6b6" />
+              <stop offset="100%" stop-color="#cdbd96" />
+            </linearGradient>
+            <linearGradient id="mSlack" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#b8a87f" />
+              <stop offset="100%" stop-color="#9c8c64" />
+            </linearGradient>
+          </defs>
+
+          <rect x="0" y="0" width="400" height="320" fill="url(#mHaze)" />
+
+          <!-- the sea-haze: a pale band of water under the low sky -->
+          <path d="M0 96 L400 96 L400 132 L0 132 Z" fill="url(#mSea)" opacity="0.55" />
+          <g stroke="#dce4e4" stroke-width="0.8" fill="none" opacity="0.5">
+            <path d="M0 112 q60 -3 120 0 q60 3 140 0 q60 -3 140 0" />
+            <path d="M0 122 q80 3 160 0 q80 -3 160 0" />
+          </g>
+
+          <!-- the long blown sweep of the dune face -->
+          <path d="M0 132 q70 -6 140 6 q90 16 160 -2 q60 -14 100 4 L400 320 L0 320 Z" fill="url(#mSand)" opacity="0.95" />
+          <!-- the low slack of damp sand behind the foredune -->
+          <path d="M0 250 q120 -22 220 -8 q100 14 180 -4 L400 320 L0 320 Z" fill="url(#mSlack)" opacity="0.5" />
+
+          <!-- wind-combed ripples scoured across the bare sand -->
+          <g stroke="#bda979" stroke-width="0.7" fill="none" opacity="0.45">
+            <path d="M30 176 q60 -6 120 2 q60 6 120 -2" />
+            <path d="M50 198 q70 -5 140 3 q60 5 120 -3" />
+            <path d="M40 220 q80 -4 160 4 q50 4 110 -3" />
+          </g>
+
+          <!-- a blowout: a bare gouged hollow the wind has scoured open -->
+          <path d="M250 150 q24 -8 48 4 q14 18 -8 30 q-30 8 -46 -8 q-8 -16 6 -26 Z" fill="#d8c89f" opacity="0.85" />
+          <path d="M252 154 q22 -6 44 4 q12 16 -8 26 q-26 6 -40 -8 q-6 -12 4 -22 Z" fill="none" stroke="#bda979" stroke-width="0.7" opacity="0.6" />
+
+          <!-- the sand-fence: a line of chestnut paling catching drift -->
+          <g stroke="#8a6a44" stroke-width="2" stroke-linecap="round" opacity="0.9">
+            <path d="M40 244 L38 214 M58 248 L57 218 M76 250 L75 220 M94 251 L94 221 M112 250 L113 220 M130 249 L131 219 M148 247 L150 217" />
+          </g>
+          <path d="M36 226 q60 -4 116 -8" stroke="#6f5436" stroke-width="1.4" fill="none" opacity="0.8" />
+          <path d="M36 236 q60 -4 116 -8" stroke="#6f5436" stroke-width="1.4" fill="none" opacity="0.7" />
+          <!-- the drift the fence has caught, banked on its windward side -->
+          <path d="M30 244 q60 -10 120 -16 L150 252 q-60 6 -120 8 Z" fill="#e3d6b6" opacity="0.55" />
+
+          <!-- bound marram: a knitted mat of tufts holding the high face -->
+          <g stroke="#5f7d63" stroke-width="1" fill="none" opacity="0.85" stroke-linecap="round">
+            <path d="M60 168 L54 138 M60 168 L60 134 M60 168 L67 139 M60 168 L50 144 M60 168 L70 145" />
+            <path d="M104 176 L98 146 M104 176 L104 142 M104 176 L111 147 M104 176 L94 152 M104 176 L114 153" />
+            <path d="M150 172 L144 142 M150 172 L150 138 M150 172 L157 143 M150 172 L140 148 M150 172 L160 149" />
+            <path d="M196 180 L190 150 M196 180 L196 146 M196 180 L203 151 M196 180 L186 156 M196 180 L206 157" />
+          </g>
+          <!-- the bent, wind-streamed tips, all combed one way -->
+          <g stroke="#7e9a7a" stroke-width="0.8" fill="none" opacity="0.7" stroke-linecap="round">
+            <path d="M60 134 q8 -4 16 -2 M104 142 q8 -4 16 -2 M150 138 q8 -4 16 -2 M196 146 q8 -4 16 -2" />
+          </g>
+
+          <!-- a single new tuft, just planted low on the bare foredune -->
+          <g stroke="#7e9a7a" stroke-width="1" fill="none" opacity="0.9" stroke-linecap="round">
+            <path d="M320 276 L317 256 M320 276 L322 254 M320 276 L327 258 M320 276 L313 260" />
+            <path d="M322 254 q6 -3 12 -1" />
+          </g>
+          <ellipse cx="320" cy="278" rx="9" ry="3" fill="#b8a87f" opacity="0.6" />
+
+          <!-- the marram's hidden running rhizomes, pale under the surface -->
+          <g stroke="#cabf95" stroke-width="1.1" fill="none" opacity="0.55" stroke-linecap="round">
+            <path d="M60 168 q24 22 52 16 q30 -6 44 12" />
+            <path d="M150 172 q26 18 50 14" />
+            <path d="M104 176 q-30 14 -52 36" />
+          </g>
+        </svg>
+        <span class="hero-tick hero-tick-1">one tuft, pushed in</span>
+        <span class="hero-tick hero-tick-2">runners, a yard down</span>
+        <span class="hero-tick hero-tick-3">forty winters held</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>Most of what you mean to keep<br /><em>blows away by Thursday.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            A new intention is loose sand. You scatter it on a Monday
+            full of resolve — the dawn walk, the cold page, the call
+            home on Sundays — and it lies there bright and bare on the
+            surface, holding nothing, gripping nothing. Then the first
+            ordinary wind comes through: a bad night, a busy week, a
+            day that goes wrong by nine. And the sand moves. By Thursday
+            there is no sign you were ever there. You did not lack the
+            will. You lacked the roots.
+          </p>
+          <p>
+            Marram is the other way. You do not try to hold the whole
+            hill at once. You plant one tuft, low and sheltered, and you
+            leave it alone to do the slow work no one sees — sending
+            runners down through the loose sand, taking hold, then
+            reaching sideways to find the next tuft and knit to it.
+            Season by season the mat closes. It stops needing you. And
+            once a stretch is bound, it holds against the gale on its
+            own, and shelters whatever you plant in the calm behind it.
+            You cannot hurry a dune into holding. You can only keep
+            planting tufts, and let the runners do the rest.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Plant one tuft, low and sheltered</h3>
+          <p>Not the whole slope. One intention, set where the wind is least — the smallest version, in the calmest corner of the day. Pushed in, nothing showing yet. A tuft planted in shelter takes; a flag planted on the crest blows out by morning. Begin small and begin low.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Leave it to send its runners</h3>
+          <p>The work that holds happens underground, where you cannot watch it. The blades up top do almost nothing; the pale rhizome runs a yard out and a yard down, gripping sand a grain at a time. There is nothing to perform here and nothing to post. Just come back, and let it root.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Let the tufts knit to each other</h3>
+          <p>One tuft holds a handful of sand; a dozen tufts that have run together hold a slope. The mat closes when the runners cross — when the morning page leans on the early night that leans on the walk. Plant near what already holds. A practice with neighbours binds; a practice alone is still loose.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>The bound dune shelters what comes after</h3>
+          <p>A dune that has stood forty winters does not need replanting — it throws its own shoots, takes its own drift, and breaks the wind for everything in the slack behind it. The first hard thing you bound is now the shelter under which the next thing takes easily. You held the sand once; now the sand holds you.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="dune" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A stretch of dune coast, mid-June</h2>
+        <p>One warren of blowing sand and what is holding it — twelve plantings, from a single seed pushed in this spring to a whole dune system the warden's grandfather planted, mapped across a fictional stretch of links and foredune on the Gwendra Warren coast in the middle of June 2026, the mar-grass silvering in the onshore wind. Some are loose sand still moving. Some have stood half a century of winter gales. One is a blowout where a good sward was lost to a single storm. Plant a tuft, count a gale stood, lose one to the wind — the slope redraws in your browser.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">The dune</p>
+            <p class="chart-project" id="chart-project">Gwendra Warren · June 2026 · twelve planted</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Winter gales each planting has stood against the wind">
+          <p class="profile-axis-label top">the bound dune</p>
+          <p class="profile-axis-label bot">loose, just planted</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the plantings">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="loose" role="tab">Loose</button>
+          <button type="button" data-filter="rooting" role="tab">Rooting</button>
+          <button type="button" data-filter="knitting" role="tab">Knitting</button>
+          <button type="button" data-filter="bound" role="tab">Bound</button>
+        </div>
+
+        <ul class="legs" id="plantings-list">
+          <!-- plantings inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-level" aria-label="Level of the planting">
+              <option value="seed">Seed</option>
+              <option value="tuft">Tuft</option>
+              <option value="sward">Sward</option>
+              <option value="dune">Dune</option>
+            </select>
+            <input id="add-gales" type="number" step="1" min="0" value="0" aria-label="Winter gales it has stood" />
+            <input id="add-name" type="text" placeholder="Name the planting — the small thing you mean to hold against the wind" maxlength="90" />
+            <select id="add-state" aria-label="Condition of the planting">
+              <option value="loose">Loose</option>
+              <option value="rooting">Rooting</option>
+              <option value="knitting">Knitting</option>
+              <option value="bound">Bound</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Plant the tuft</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original dune</a>
+        </div>
+
+        <p class="kbd-help">
+          <strong>Keys:</strong>
+          <kbd>J</kbd>/<kbd>K</kbd> move &middot;
+          <kbd>Enter</kbd> advance condition &middot;
+          <kbd>Del</kbd> blow out &middot;
+          <kbd>N</kbd> plant &middot;
+          <kbd>0</kbd>&ndash;<kbd>4</kbd> filter &middot;
+          <kbd>[</kbd>/<kbd>]</kbd> nudge gales &middot;
+          <kbd>R</kbd> reset.
+        </p>
+      </div>
+
+      <div class="legend">
+        <h3>The four levels</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-seed"></span><div><strong>Seed.</strong> A single intention just pushed into the sand, nothing showing yet — the first dark morning, the resolution said out loud once. Loose; the next ordinary wind could take it, and often does.</div></li>
+          <li><span class="legend-swatch swatch-tuft"></span><div><strong>Tuft.</strong> A small clump that has taken, a few blades up and a runner gone down. The practice you have actually done a handful of times. Real now, holding a little sand, but still on its own.</div></li>
+          <li><span class="legend-swatch swatch-sward"></span><div><strong>Sward.</strong> A continuous mat of grass binding a whole stretch of slope. A habit knitted to its neighbours, holding its shape through weather. The thing you no longer have to decide to do.</div></li>
+          <li><span class="legend-swatch swatch-dune"></span><div><strong>Dune.</strong> A whole stabilised dune system that now shelters what is planted behind it. A way of living, years deep, that holds against the gale and makes the next hard thing easy.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who holds the same slope</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The coastal warden on the warren</h3>
+          <p>Thirty winters planting marram into the same blowing foredune above the town. A tuft at a time, in the lee of the chestnut paling, ten thousand of them by hand. The blowout by the third groyne opened in one March storm and took four years to heal. He plants in November and waits. The dune is taller than him now.</p>
+        </article>
+        <article>
+          <h3>The man keeping one morning ritual</h3>
+          <p>Eighteen months sober and one thing held: the kettle, the chair, ten quiet minutes before the house wakes. Not the whole new life at once — one tuft, low and sheltered, planted every single morning whether he wanted it or not. It has rooted. On the bad days now, it is the bad days that lean on it.</p>
+        </article>
+        <article>
+          <h3>The writer with her dawn page</h3>
+          <p>One handwritten page before the light, every day since a wet January four years back. It blew away a hundred times before it took. Now it is a sward — knitted to the early night and the walk, holding its shape through deadlines and flu and travel. She does not decide to do it any more. It is simply ground she stands on.</p>
+        </article>
+        <article>
+          <h3>The town holding back the sea</h3>
+          <p>A whole coast's worth of marram, planted across four generations to keep the dune between the houses and the winter tides. Nobody alive planted the first tufts. The crest that breaks the gale was a bare sandhill in their great-grandparents' photographs. They tend it because it shelters them, and it shelters them because someone tended it.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="hold" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · summer 2026</p>
+        <h2>One email when the first tuft has stood a winter and held.</h2>
+        <p class="hold-lede">A small page, a small bare slope, a small walk out in the onshore wind to push one tuft into the loose sand and leave it to root. A way to plant the few practices you want to keep, and let the runners do the slow work no streak ever could. No streak. No badge. No alarm when the wind takes one. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@gwendrawarren.coast" />
+          <button class="btn btn-primary" type="submit">Plant a tuft</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first tuft has stood a winter gale and its runners have taken hold. You can stop planting anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Marram</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · binding what drifts, one tuft at a time</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#dune">The dune</a>
+      <a href="#hold">Plant a tuft</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

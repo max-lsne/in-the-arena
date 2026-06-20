@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fathom — a small page for the few texts you mean to understand to the bottom</title>
+  <meta name="description" content="A fathom is a unit of water depth; a sailor takes the depth with a tallow-footed lead-line, knot by knot — a sounding — and reads the bottom from what sticks to the tallow. A library is not how many books your eyes have passed over; it is how deep you have gone into a few. Surface, shallows, reach, deep — the texts you mean to sound to the bottom." />
+  <meta name="theme-color" content="#e7e0cd" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#15323b" media="(prefers-color-scheme: dark)" />
+  <meta name="color-scheme" content="light" />
+  <meta property="og:title" content="Fathom — understanding by depth, not by count" />
+  <meta property="og:description" content="A small page for the few texts you mean to understand to the bottom — dropped a real line into, sounded season after season, until you know not just what they say but what they are made of at the bottom. Surface, shallows, reach, deep." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23e7e0cd'/%3E%3Crect y='6' width='32' height='26' fill='%232f5560' opacity='0.18'/%3E%3Cpath d='M16 4 L16 26' stroke='%23b07d2b' stroke-width='1.6' fill='none'/%3E%3Cpath d='M11 11 l-1.5 0.4 M12 18 l-1.5 0.4 M13 24 l-1.5 0.4' stroke='%23b23a2e' stroke-width='2.2' stroke-linecap='round'/%3E%3Cpath d='M13.5 26 L18.5 26 L17 30 L15 30 Z' fill='%235c636a'/%3E%3Cellipse cx='16' cy='30' rx='4' ry='1.2' fill='%23e8dcb6'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <path d="M6 7 q10 -3 20 0" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.8" />
+          <path d="M16 7 L16 27" stroke="currentColor" stroke-width="1.3" opacity="0.85" />
+          <path d="M11 12 L21 12 M12 17 L20 17 M13 22 L19 22" stroke="currentColor" stroke-width="1" opacity="0.6" stroke-linecap="round" />
+          <path d="M13 27 L19 27 L17.5 30.5 L14.5 30.5 Z" fill="currentColor" opacity="0.85" />
+          <ellipse cx="16" cy="30.5" rx="3" ry="0.9" fill="currentColor" opacity="0.4" />
+        </svg>
+      </span>
+      <span>Fathom</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#chart">The chart</a>
+      <a href="#who">Who sounds the same few</a>
+      <a href="#hold" class="nav-cta">Drop a line</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">What the lead brings up, given a slow line and a still hand</p>
+        <h1>
+          You cannot know a sea by its surface.<br />
+          <em>You take a sounding, knot by knot.</em>
+        </h1>
+        <p class="lede">
+          A fathom is six feet of still water, and the only way to know
+          how deep you stand is to drop a line for it. The old way was a
+          lead weight on a marked rope, its foot hollowed and packed with
+          tallow, paid out hand over hand until it touched — a sounding.
+          You read the depth off the knots, and you read the ground off
+          the tallow: shell, sand, soft mud, clean rock, whatever the
+          bottom pressed up into the grease. A library is the same. It is
+          not the count of spines your eye has crossed. It is the few
+          texts you have dropped a real line into, again and again, until
+          you know what the bottom is made of.
+        </p>
+        <div class="hero-cta">
+          <a href="#chart" class="btn btn-primary">See the chart</a>
+          <a href="#hold" class="btn btn-ghost">Drop a line</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One battered book. Fifteen years of soundings. The line still pays out.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg class="hero-bed" viewBox="0 0 400 320" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="fSky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#e8eef0" stop-opacity="0.95" />
+              <stop offset="100%" stop-color="#d6e0e2" stop-opacity="0.6" />
+            </linearGradient>
+            <linearGradient id="fWater" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#a8c4c8" />
+              <stop offset="38%" stop-color="#5f8a93" />
+              <stop offset="72%" stop-color="#2f5560" />
+              <stop offset="100%" stop-color="#15323b" />
+            </linearGradient>
+            <linearGradient id="fLead" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#9aa0a6" />
+              <stop offset="100%" stop-color="#4c5258" />
+            </linearGradient>
+            <linearGradient id="fHull" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7a5236" />
+              <stop offset="100%" stop-color="#4a311e" />
+            </linearGradient>
+          </defs>
+
+          <!-- the low pale sky over a flat sea -->
+          <rect x="0" y="0" width="400" height="74" fill="url(#fSky)" />
+
+          <!-- the water, banded from pale shallows to dark abyss -->
+          <rect x="0" y="74" width="400" height="246" fill="url(#fWater)" />
+
+          <!-- the waterline, with a few low foam-flecks -->
+          <path d="M0 74 q60 -4 120 0 q60 4 140 0 q60 -4 140 0 L400 74 Z" fill="#cfe0e2" opacity="0.5" />
+          <g stroke="#e8eef0" stroke-width="0.8" fill="none" opacity="0.55">
+            <path d="M24 86 q14 -3 28 0 M150 90 q16 -3 30 0 M300 84 q14 -3 26 0" />
+          </g>
+
+          <!-- faint horizontal depth-bands, the layers of the water -->
+          <g stroke="#0d2730" stroke-width="0.5" fill="none" opacity="0.18">
+            <path d="M0 132 L400 132" />
+            <path d="M0 190 L400 190" />
+            <path d="M0 248 L400 248" />
+          </g>
+
+          <!-- a charted bottom contour, faint, rising to the right -->
+          <path d="M0 296 q90 -10 170 -2 q100 12 230 -28" stroke="#7fb0a6" stroke-width="0.9" fill="none" opacity="0.4" stroke-dasharray="2 4" />
+
+          <!-- the boat's hull and waterline at top-left -->
+          <g>
+            <path d="M40 60 q44 4 92 0 q-6 18 -30 20 q-30 2 -56 -2 q-8 -8 -6 -18 Z" fill="url(#fHull)" />
+            <path d="M40 60 q44 4 92 0" stroke="#2f1d10" stroke-width="1" fill="none" opacity="0.6" />
+            <!-- a few planking lines on the hull -->
+            <path d="M48 66 q40 4 78 1 M52 72 q34 3 66 0" stroke="#2f1d10" stroke-width="0.6" fill="none" opacity="0.45" />
+            <!-- the gunwale where the line is paid out -->
+            <circle cx="118" cy="60" r="2.4" fill="#caa46a" />
+          </g>
+
+          <!-- the lead-line dropping through the water to the deep -->
+          <g class="sounding-line">
+          <path d="M118 60 L132 286" stroke="#caa46a" stroke-width="1.4" fill="none" opacity="0.92" />
+
+          <!-- knots / depth-marks along the line -->
+          <g stroke="#b23a2e" stroke-width="2.2" stroke-linecap="round" opacity="0.92">
+            <path d="M120 100 l-5 1" />
+            <path d="M122 140 l-5 1" />
+            <path d="M124 180 l-5 1" />
+            <path d="M126 220 l-5 1" />
+            <path d="M129 256 l-5 1" />
+          </g>
+          <!-- a leather mark and a knotted toggle, the old fathom-marks -->
+          <g fill="#caa46a" opacity="0.95">
+            <circle cx="123" cy="160" r="2.6" />
+            <circle cx="127" cy="238" r="2.6" />
+          </g>
+
+          <!-- the lead itself, near the bottom -->
+          <g>
+            <path d="M126 286 q6 -2 12 0 l-2 18 q-4 3 -8 0 Z" fill="url(#fLead)" />
+            <path d="M126 286 q6 -2 12 0" stroke="#3a4046" stroke-width="0.8" fill="none" opacity="0.7" />
+            <!-- tallow packed in the hollow foot, picking up the bottom -->
+            <ellipse cx="132" cy="305" rx="6" ry="2.6" fill="#e8dcb6" opacity="0.95" />
+            <g fill="#9c8a5a" opacity="0.8">
+              <circle cx="130" cy="305" r="0.9" />
+              <circle cx="133" cy="306" r="0.8" />
+              <circle cx="135" cy="304.5" r="0.7" />
+            </g>
+          </g>
+          </g>
+
+          <!-- the bottom: soft mud the lead has just touched -->
+          <path d="M0 310 q80 -8 160 -2 q120 12 240 -6 L400 320 L0 320 Z" fill="#1a3038" opacity="0.85" />
+          <path d="M0 310 q80 -8 160 -2 q120 12 240 -6" stroke="#0a1c22" stroke-width="0.8" fill="none" opacity="0.5" />
+          <!-- a little puff of stirred sediment where the lead landed -->
+          <ellipse cx="132" cy="307" rx="14" ry="4" fill="#2c4750" opacity="0.5" />
+        </svg>
+        <span class="hero-tick hero-tick-1">surface, read once</span>
+        <span class="hero-tick hero-tick-2">line paid out</span>
+        <span class="hero-tick hero-tick-3">tallow on the foot</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>You have read a thousand books<br /><em>and gone to the bottom of none.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            The count is a lie that flatters. Fifty-two books a year, a
+            shelf that fills, a number that goes up — and not one of them
+            has changed the way you think, because you skated the surface
+            of every one and dropped a line into none. You finished them;
+            you did not sound them. Ask what the bottom was made of and
+            you have nothing on the tallow. The eye crossed the page and
+            the page closed over behind it without a mark.
+          </p>
+          <p>
+            Depth is the other measure. A handful of texts — a proof, a
+            poem in translation, one psalm, one battered manual — that you
+            drop a line into season after season, until you know not just
+            what they say but what they are made of at the bottom. Each
+            return is another sounding; each sounding brings up a little
+            more of the ground. You cannot hurry it, and you cannot do it
+            to fifty things at once. You choose a few, and you go down.
+            That is the whole of the thing.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Choose the few you mean to sound</h3>
+          <p>Not the shelf, not the list, not the fifty you ought to have read. The three or four texts you mean to understand to the bottom — the proof, the poem, the score, the one book you keep coming back to. Depth is bought with attention, and attention is the one thing you cannot spread thin.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Drop the line and pay it out slow</h3>
+          <p>Read it once for the surface, and that is only the first knot. Then go back down. Pay the line out hand over hand — reread, slow, the same passage twice — and let it touch bottom. There is nothing to rush and nothing to post. The depth is taken at the speed the line falls.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Read what sticks to the tallow</h3>
+          <p>The sounding is not just how deep but what the bottom is made of. Each return brings something up in the grease — a line you had skated, an argument you had missed, the shape under the shape. Note it in the margin. The tallow is the point. The number of soundings only tells you how often you went down for it.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Return on the same line, for years</h3>
+          <p>A text sounded to the bottom is not finished — it is held, anchored, returned to on a line you have already marked. The proof reread for fifteen years gives up something new at the twentieth sounding. You do not move on. You stay over the same few, and you keep dropping the lead.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="chart" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A reader's soundings, mid-June</h2>
+        <p>One reader's working set and how deep each has been sounded — twelve texts, from a paper skated once this spring to a proof reread for fifteen years and finally fathomed, mapped across a fictional reader's chart-table in the middle of June 2026, the lamp low, the margins crowded. Some are surface still, drifted over once and set down. Some have been sounded to the bottom and have changed how the reader thinks. One was let drift away unread. Drop a line, take a sounding, let one go — the chart redraws in your browser.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">The chart</p>
+            <p class="chart-project" id="chart-project">A reader's soundings · June 2026 · twelve texts</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Soundings taken into each text">
+          <p class="profile-axis-label top">sounded deep</p>
+          <p class="profile-axis-label bot">surface, once</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the texts">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="adrift" role="tab">Adrift</button>
+          <button type="button" data-filter="sounding" role="tab">Sounding</button>
+          <button type="button" data-filter="holding" role="tab">Holding</button>
+          <button type="button" data-filter="fathomed" role="tab">Fathomed</button>
+        </div>
+
+        <ul class="legs" id="texts-list">
+          <!-- texts inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-level" aria-label="Depth reached in the text">
+              <option value="surface">Surface</option>
+              <option value="shallows">Shallows</option>
+              <option value="reach">Reach</option>
+              <option value="deep">Deep</option>
+            </select>
+            <input id="add-soundings" type="number" step="1" min="0" value="0" aria-label="Soundings taken" />
+            <input id="add-name" type="text" placeholder="Name the text — the one you mean to sound to the bottom" maxlength="90" />
+            <select id="add-state" aria-label="Condition of the text">
+              <option value="adrift">Adrift</option>
+              <option value="sounding">Sounding</option>
+              <option value="holding">Holding</option>
+              <option value="fathomed">Fathomed</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Drop the line</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original chart</a>
+        </div>
+
+        <p class="kbd-help">
+          <strong>Keys:</strong>
+          <kbd>J</kbd>/<kbd>K</kbd> move &middot;
+          <kbd>Enter</kbd> advance condition &middot;
+          <kbd>Del</kbd> let drift &middot;
+          <kbd>N</kbd> drop a line &middot;
+          <kbd>0</kbd>&ndash;<kbd>4</kbd> filter &middot;
+          <kbd>[</kbd>/<kbd>]</kbd> nudge soundings &middot;
+          <kbd>R</kbd> reset.
+        </p>
+      </div>
+
+      <div class="legend">
+        <h3>The four levels</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-surface"></span><div><strong>Surface.</strong> Read once, skated over, only the top of it known — the article finished on the train, the book you can say you have read. The line touched the meniscus and went no further. Nothing on the tallow yet.</div></li>
+          <li><span class="legend-swatch swatch-shallows"></span><div><strong>Shallows.</strong> Reread, the shape and lie of it known. You have been down a few times and can chart the run of it — where it shelves, where it deepens. Real acquaintance now, but not yet the bottom.</div></li>
+          <li><span class="legend-swatch swatch-reach"></span><div><strong>Reach.</strong> Worked through and argued with, notes crowding the margin. You have paid out real line — taken it apart, fought it, carried it around for weeks. Deep water, and the lead is finding ground.</div></li>
+          <li><span class="legend-swatch swatch-deep"></span><div><strong>Deep.</strong> Lived with for years, sounded to the bottom, it has changed how you think. You know what the lead brings up before it surfaces. A text gone all the way down — the few that become part of how you see.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who sounds the same few</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The grad student and one proof</h3>
+          <p>Three years over the same nine pages — a theorem she first copied out not understanding a line of it. She rereads it every few months, and each time another step opens that was opaque before. It is Reach now, going on Deep. She no longer reads it for the result. She reads it for the turn in the middle where the whole thing decides to be true.</p>
+        </article>
+        <article>
+          <h3>The translator inside one poem</h3>
+          <p>Ten years living in a single poem in a language not her own, forty drafts of the same eighteen lines, none of them finished and none of them the same. She has sounded it to the bottom and the bottom keeps shifting. The English will never be right. That is not the point. The point is what the tallow brings up each spring she goes down again.</p>
+        </article>
+        <article>
+          <h3>The monk with one psalm</h3>
+          <p>The same psalm said at first light every morning for thirty years — fewer than two hundred words he has spoken some eleven thousand times. He is not learning it; he learned it decades ago. He is sounding it. The words have not changed. What the line brings up has changed entirely, and so, slowly, has he.</p>
+        </article>
+        <article>
+          <h3>The engineer and one battered manual</h3>
+          <p>One textbook, spine taped twice, carried through four jobs and twenty years. He does not read the new editions. He reads the same dog-eared chapters until the worked examples are worn soft, and the field still surprises him out of those forty pages. The shelf behind him is for showing visitors. This one is for thinking.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="hold" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · summer 2026</p>
+        <h2>One email when the first line has touched the bottom.</h2>
+        <p class="hold-lede">A small page, a small chart-table, a small steady paying-out of the line into the few texts you mean to understand to the bottom. A way to track the depth you reach and the soundings you take, and never once a count of books read. No streak. No badge. No leaderboard of spines. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@soundings.deep" />
+          <button class="btn btn-primary" type="submit">Drop a line</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first line has paid all the way out and the tallow has come up with the bottom on it. You can stop sounding anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Fathom</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · understanding by depth, not by count</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#chart">The chart</a>
+      <a href="#hold">Drop a line</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
