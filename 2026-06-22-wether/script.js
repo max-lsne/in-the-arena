@@ -34,8 +34,41 @@ const SEED_FLOCK = [
   { name: 'The gimmer that went over the wall in the last gale and never came back', level: 'gimmer', state: 'strange', seasons: 1 },
 ];
 
-let flock = SEED_FLOCK.map((s, i) => ({ ...s, id: i + 1 }));
-let nextId = flock.length + 1;
+const STORAGE_KEY = 'wether.flock.v1';
+const PROJECT_KEY = 'wether.project.v1';
+const DEFAULT_PROJECT = 'A hefted flock on the fell · back-end 2026 · twelve head';
+
+function seedFlock() {
+  return SEED_FLOCK.map((s, i) => ({ ...s, id: i + 1 }));
+}
+
+function loadFlock() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return seedFlock();
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed) || parsed.length === 0) return seedFlock();
+    return parsed.map((s, i) => ({ ...s, id: s.id || i + 1 }));
+  } catch {
+    return seedFlock();
+  }
+}
+
+function saveFlock() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(flock)); } catch {}
+}
+
+function loadProject() {
+  try { return localStorage.getItem(PROJECT_KEY) || DEFAULT_PROJECT; }
+  catch { return DEFAULT_PROJECT; }
+}
+
+function saveProject(name) {
+  try { localStorage.setItem(PROJECT_KEY, name); } catch {}
+}
+
+let flock = loadFlock();
+let nextId = (flock.reduce((m, s) => Math.max(m, s.id || 0), 0)) + 1;
 let filter = 'all';
 let focused = null;
 
@@ -125,6 +158,7 @@ function render() {
   renderTotals();
   renderProfile();
   renderList();
+  saveFlock();
 }
 
 // ---------- Helpers ----------
@@ -174,9 +208,35 @@ function removeSheep(id) {
   render();
 }
 
+function resetFlock() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch {}
+  try { localStorage.removeItem(PROJECT_KEY); } catch {}
+  flock = seedFlock();
+  nextId = flock.length + 1;
+  filter = 'all';
+  const project = $('#chart-project');
+  if (project) project.textContent = DEFAULT_PROJECT;
+  document.querySelectorAll('#filters button').forEach(b => {
+    b.classList.toggle('is-active', b.dataset.filter === 'all');
+  });
+  render();
+}
+
 // ---------- Wire up ----------
 
 document.addEventListener('DOMContentLoaded', () => {
+  const project = $('#chart-project');
+  if (project) {
+    project.textContent = loadProject();
+    project.setAttribute('contenteditable', 'true');
+    project.setAttribute('spellcheck', 'false');
+    project.title = 'Click to rename the flock';
+    project.addEventListener('blur', () => saveProject(project.textContent.trim()));
+    project.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); project.blur(); }
+    });
+  }
+
   render();
 
   document.querySelectorAll('#filters button').forEach(btn => {
@@ -198,6 +258,11 @@ document.addEventListener('DOMContentLoaded', () => {
     addSheep({ level, seasons, name, state });
     $('#add-name').value = '';
     $('#add-seasons').value = '0';
+  });
+
+  $('#reset-demo').addEventListener('click', (e) => {
+    e.preventDefault();
+    resetFlock();
   });
 
   $('#hold-form').addEventListener('submit', (e) => {
