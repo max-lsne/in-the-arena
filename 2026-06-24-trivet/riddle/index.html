@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Riddle — a small page for shaking the heap down to what holds</title>
+  <meta name="description" content="You cannot keep every clod. You shovel the heap onto the riddle and shake; the fine stuff falls through and is let go without guilt, and you keep only what won't pass — the stones, the roots, the clods that matter. Heap, riddled, caught, kept — a sieve for the many small asks shaken down to the deliberate few that actually hold." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <ellipse cx="16" cy="16" rx="11" ry="5" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.85" />
+          <ellipse cx="16" cy="14" rx="11" ry="5" stroke="currentColor" stroke-width="1.1" fill="none" opacity="0.8" />
+          <path d="M7 14.6 L25 14.6 M9 12.2 L23 12.2 M9 17 L23 17" stroke="currentColor" stroke-width="0.7" fill="none" opacity="0.55" />
+          <path d="M11 13 L11 18.4 M16 12 L16 18.8 M21 13 L21 18.4" stroke="currentColor" stroke-width="0.7" fill="none" opacity="0.55" />
+          <path d="M14 9 q2 -1.4 4 0" stroke="currentColor" stroke-width="1" fill="none" opacity="0.7" />
+          <path d="M13 22 l1.4 4 M19 22 l-1.4 4" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.5" stroke-linecap="round" />
+        </svg>
+      </span>
+      <span>Riddle</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#sieve">The riddle</a>
+      <a href="#who">Who sorts for real</a>
+      <a href="#shake" class="nav-cta">Shake the heap</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">What won't fall through, shaken out of the heap</p>
+        <h1>
+          You cannot keep every clod.<br />
+          <em>Shake the heap and keep what holds.</em>
+        </h1>
+        <p class="lede">
+          The heap on the barrow is everything at once — fine soil and
+          grit and roots and stones, the dozen small asks and the half
+          ideas all tipped in together. You shovel it onto the riddle
+          and you shake. The fine stuff finds the mesh and falls
+          through in a haze, gone to the bed below, and you let it go
+          without a second look. What rides up to the top is the few
+          that wouldn't pass — the stone the spade keeps turning up, the
+          knot of root worth saving, the clod too good to lose. You
+          knock those off into the keep-pile, and the work that
+          mattered is suddenly small enough to hold.
+        </p>
+        <div class="hero-cta">
+          <a href="#sieve" class="btn btn-primary">See the riddle</a>
+          <a href="#shake" class="btn btn-ghost">Shake the heap</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One riddle. A dozen in the heap. Three that wouldn't fall through.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg class="hero-bed" viewBox="0 0 400 320" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="rSky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#e6e0cd" stop-opacity="0.95" />
+              <stop offset="60%" stop-color="#d6cfb6" stop-opacity="0.6" />
+              <stop offset="100%" stop-color="#c2bb9d" stop-opacity="0.35" />
+            </linearGradient>
+            <linearGradient id="rGround" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7c7456" />
+              <stop offset="100%" stop-color="#5a5440" />
+            </linearGradient>
+            <linearGradient id="rIron" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#5c6755" />
+              <stop offset="100%" stop-color="#3a4436" />
+            </linearGradient>
+            <linearGradient id="rLoam" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7d5a3c" />
+              <stop offset="100%" stop-color="#5a3f28" />
+            </linearGradient>
+            <radialGradient id="rSun" cx="0.72" cy="0.16" r="0.7">
+              <stop offset="0%" stop-color="#e7c372" stop-opacity="0.5" />
+              <stop offset="100%" stop-color="#e7c372" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+
+          <rect x="0" y="0" width="400" height="320" fill="url(#rSky)" />
+          <!-- low afternoon sun over the plot -->
+          <rect x="0" y="0" width="400" height="320" fill="url(#rSun)" />
+
+          <!-- the turned bed of the garden behind -->
+          <rect x="0" y="214" width="400" height="106" fill="url(#rGround)" />
+          <g stroke="#4a4632" stroke-width="0.8" fill="none" opacity="0.4">
+            <path d="M0 232 q200 -10 400 0 M0 252 q200 -8 400 0 M0 274 q200 -8 400 0 M0 298 q200 -6 400 0" />
+          </g>
+          <ellipse cx="200" cy="216" rx="200" ry="6" fill="#000" opacity="0.12" />
+
+          <!-- the sieved fine bed below the riddle, soft and pale -->
+          <ellipse cx="150" cy="250" rx="78" ry="20" fill="#8a7e5c" opacity="0.7" />
+          <ellipse cx="150" cy="246" rx="64" ry="15" fill="#9a8e68" opacity="0.6" />
+
+          <!-- the keep-pile to the side: stones, roots, clods caught back -->
+          <g>
+            <ellipse cx="318" cy="262" rx="46" ry="14" fill="#000" opacity="0.12" />
+            <ellipse cx="306" cy="256" rx="13" ry="9" fill="#8d8576" />
+            <ellipse cx="304" cy="252" rx="13" ry="9" fill="#a39b89" />
+            <ellipse cx="328" cy="260" rx="10" ry="7" fill="#7f7768" />
+            <ellipse cx="326" cy="257" rx="10" ry="7" fill="#968d7c" />
+            <ellipse cx="340" cy="254" rx="7" ry="5" fill="#6d4f33" />
+            <!-- a saved knot of root over the stones -->
+            <g stroke="#6a4a2c" stroke-width="1.4" fill="none" opacity="0.85" stroke-linecap="round">
+              <path d="M298 250 q12 -8 24 -2 M312 246 q4 -7 -2 -12 M318 248 q8 -4 11 -10" />
+            </g>
+          </g>
+
+          <!-- the long legs of the riddle stand -->
+          <g stroke="#4a4030" stroke-width="3.4" stroke-linecap="round" opacity="0.9">
+            <path d="M96 132 L84 214" />
+            <path d="M214 130 L228 214" />
+          </g>
+
+          <!-- the fine soil falling through the mesh as a haze -->
+          <g fill="#9a8a64" opacity="0.4">
+            <rect x="112" y="150" width="1.6" height="74" />
+            <rect x="124" y="150" width="1.4" height="78" />
+            <rect x="136" y="150" width="1.7" height="70" />
+            <rect x="150" y="150" width="1.4" height="80" />
+            <rect x="164" y="150" width="1.6" height="74" />
+            <rect x="178" y="150" width="1.4" height="78" />
+            <rect x="190" y="150" width="1.5" height="68" />
+          </g>
+          <g fill="#84764f" opacity="0.55">
+            <circle cx="118" cy="196" r="1.3" />
+            <circle cx="132" cy="210" r="1.1" />
+            <circle cx="146" cy="186" r="1.4" />
+            <circle cx="158" cy="214" r="1.2" />
+            <circle cx="172" cy="198" r="1.3" />
+            <circle cx="184" cy="206" r="1.1" />
+          </g>
+
+          <!-- the riddle itself: a round iron-rimmed sieve, tilted, mid-shake -->
+          <g transform="translate(150 132) rotate(-7)">
+            <!-- the cast shadow of the mesh on the bed -->
+            <ellipse cx="0" cy="14" rx="74" ry="20" fill="#000" opacity="0.14" />
+            <!-- the rim, blued iron -->
+            <ellipse cx="0" cy="0" rx="74" ry="22" fill="url(#rIron)" />
+            <ellipse cx="0" cy="-4" rx="74" ry="22" fill="#6b7763" />
+            <ellipse cx="0" cy="-4" rx="74" ry="22" fill="none" stroke="#2e3729" stroke-width="2.2" />
+            <!-- the bed of the mesh, the soil sitting in it -->
+            <ellipse cx="0" cy="-4" rx="66" ry="18" fill="#5f5640" opacity="0.92" />
+            <!-- the woven mesh, fine cross-wires -->
+            <g stroke="#2e3729" stroke-width="0.6" fill="none" opacity="0.6">
+              <path d="M-58 -10 q58 8 116 0 M-62 -4 q62 9 124 0 M-58 2 q58 8 116 0" />
+              <path d="M-44 -16 q4 16 0 30 M-22 -18 q3 18 0 34 M0 -19 q2 19 0 36 M22 -18 q-3 18 0 34 M44 -16 q-4 16 0 30" />
+            </g>
+            <!-- the heap still riding on top: stones and a root that won't pass -->
+            <g>
+              <ellipse cx="-22" cy="-10" rx="11" ry="7" fill="#8d8576" />
+              <ellipse cx="-23" cy="-13" rx="11" ry="7" fill="#a39b89" />
+              <ellipse cx="14" cy="-8" rx="9" ry="6" fill="#7f7768" />
+              <ellipse cx="13" cy="-11" rx="9" ry="6" fill="#968d7c" />
+              <ellipse cx="34" cy="-6" rx="6" ry="4" fill="#6d4f33" />
+              <path d="M-6 -10 q10 -7 22 -3" stroke="#6a4a2c" stroke-width="1.5" fill="none" opacity="0.85" stroke-linecap="round" />
+              <path d="M-2 -12 q-4 -7 -10 -9" stroke="#6a4a2c" stroke-width="1.3" fill="none" opacity="0.8" stroke-linecap="round" />
+              <!-- a scatter of remaining loose clods waiting to be shaken -->
+              <g fill="#6f5236" opacity="0.7">
+                <circle cx="-40" cy="-9" r="2.4" />
+                <circle cx="2" cy="-15" r="2" />
+                <circle cx="46" cy="-10" r="1.8" />
+              </g>
+            </g>
+          </g>
+
+          <!-- the spade leaning against the stand, blade in the turned bed -->
+          <g>
+            <path d="M250 84 L268 196" stroke="#7a5a38" stroke-width="4" stroke-linecap="round" opacity="0.92" />
+            <path d="M246 84 q4 -7 8 0" stroke="#6a4a2c" stroke-width="3" fill="none" opacity="0.9" />
+            <path d="M260 196 q8 4 16 0 L274 218 q-7 4 -14 0 Z" fill="#79827a" opacity="0.92" />
+            <path d="M260 196 q8 4 16 0" stroke="#3a4436" stroke-width="1" fill="none" opacity="0.7" />
+          </g>
+        </svg>
+        <span class="hero-tick hero-tick-1">shovelled on</span>
+        <span class="hero-tick hero-tick-2">fine falls through</span>
+        <span class="hero-tick hero-tick-3">the few that hold</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>Keep the whole heap<br /><em>and you carry mud.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            The heap grows on its own. Every day another spadeful goes
+            on — the favour you said yes to, the idea you couldn't bear
+            to drop, the meeting that might matter, the someday-project
+            you can't quite bury. Nothing here is bad. It is all just
+            soil and grit tipped together, and because you can't tell
+            by looking which clods will hold, you keep the lot. So you
+            try to carry the whole barrow at once, and what you carry is
+            mostly fine stuff that should have gone to the bed, mud that
+            slows the spade and hides the few things worth the saving.
+          </p>
+          <p>
+            The riddle is the other way. You don't sort the heap by
+            staring at it; you put it on the mesh and you shake, and the
+            sieve does the deciding for you. The fine falls through and
+            is let go — no guilt, no eulogy, it was always going to the
+            bed. What won't pass rides to the top, and that is your
+            answer: the deliberate few, knocked off into the keep-pile,
+            clean of all the loose stuff that was never going to hold.
+            You cannot keep every clod. You shake, and you keep what
+            won't fall through.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Tip the whole heap on the mesh</h3>
+          <p>Shovel everything onto the riddle at once — every ask, idea and half-commitment, the good with the grit, no pre-sorting. You can't tell what holds by looking, so don't try. Name the heap, get it all up on the wires, and let the sieve be the thing that decides instead of you.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Shake it and let the fine fall through</h3>
+          <p>Work the riddle side to side and let gravity do the triage. The fine soil finds the mesh and drops away in a haze to the bed below — the small stuff that was never going to hold. Each shake is a count. You let it go without a second look; it was always headed there.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>See what rides up and won't pass</h3>
+          <p>Keep shaking and the few that matter climb to the top — the stones, the roots, the clods too big for the mesh. These are the deliberate ones, the things that wouldn't fall through however hard you shook. The heap is suddenly readable: not a hundred maybes, just the handful that held.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Knock the kept few into the pile</h3>
+          <p>Tip the caught few off the mesh into the keep-pile, clean of all the loose stuff. That small, deliberate heap is what you actually carry — the two meetings that hold, the one idea worth building, the root saved for replanting. Riddled clean, the work that mattered fits the barrow.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="sieve" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A gardener's riddle, mid-June</h2>
+        <p>One riddle over the barrow and everything tipped onto it — twelve in the heap, from a loose pile straight off the spade to a stone long since knocked into the keep-pile, mapped across a fictional plot in the middle of June 2026, the fine soil falling through and the few that hold riding up on the mesh. Some are still loose, only just shovelled on. Some have been shaken till nothing more would pass. One is the clod that broke and fell through after all. Shovel one on, shake the riddle, knock the kept few off, sift one out — the heap redraws in your browser.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">The riddle</p>
+            <p class="chart-project" id="chart-project">A gardener's riddle · June 2026 · twelve in the heap</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Shakes each thing in the heap has been given on the riddle">
+          <p class="profile-axis-label top">kept, won't fall through</p>
+          <p class="profile-axis-label bot">loose, straight off the spade</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the heap">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="loose" role="tab">Loose</button>
+          <button type="button" data-filter="shaking" role="tab">Shaking</button>
+          <button type="button" data-filter="holding" role="tab">Holding</button>
+          <button type="button" data-filter="cleared" role="tab">Cleared</button>
+        </div>
+
+        <ul class="legs" id="clods-list">
+          <!-- clods inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-level" aria-label="How far it has come through the riddle">
+              <option value="heap">Heap</option>
+              <option value="riddled">Riddled</option>
+              <option value="caught">Caught</option>
+              <option value="kept">Kept</option>
+            </select>
+            <input id="add-turns" type="number" step="1" min="0" value="0" aria-label="Shakes it has been given" />
+            <input id="add-name" type="text" placeholder="Name the clod — the small ask or idea you'd rather shake down than carry whole" maxlength="90" />
+            <select id="add-state" aria-label="Condition on the riddle">
+              <option value="loose">Loose</option>
+              <option value="shaking">Shaking</option>
+              <option value="holding">Holding</option>
+              <option value="cleared">Cleared</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Shovel it on</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original heap</a>
+        </div>
+      </div>
+
+      <div class="legend">
+        <h3>The four stages</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-heap"></span><div><strong>Heap.</strong> Straight off the spade, loose on the barrow, not yet on the mesh. The dozen maybes tipped in together, fine and coarse all at once. You can't tell what holds by looking; it has to be shaken first.</div></li>
+          <li><span class="legend-swatch swatch-riddled"></span><div><strong>Riddled.</strong> Up on the wires and being worked, the fine soil starting to fall through. The ask you've begun to shake down rather than swallow whole. In the sieve at last, but nowhere near sorted.</div></li>
+          <li><span class="legend-swatch swatch-caught"></span><div><strong>Caught.</strong> Shaken a good while, riding up on top, plainly too big for the mesh. A commitment that has proven it won't pass — the loose stuff around it gone to the bed, the thing itself standing clear.</div></li>
+          <li><span class="legend-swatch swatch-kept"></span><div><strong>Kept.</strong> Knocked off into the keep-pile, the deliberate few you carry. The stone for the rockery, the root saved to replant, the one project that held. Riddled clean and worth the barrow.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who sorts for real</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The gardener clearing a new bed</h3>
+          <p>Spadeful by spadeful she throws the turned earth onto the riddle propped over the barrow and shakes. The fine tilth drops through to dress the bed; the flints and bindweed root ride up to be flung in the bucket. She never picks stones by hand any more. The mesh does the sorting, and her hands only carry what the heap could not let through.</p>
+        </article>
+        <article>
+          <h3>The mason screening sand for mortar</h3>
+          <p>Coarse pit-sand goes on the riddle and the clean grade falls through to the board; the pebbles and clay lumps stay on top and go back to the heap. He has a frame for every grade, and he trusts the wire, not his eye. A mix is only as good as what you let fall through and what you had the sense to keep out.</p>
+        </article>
+        <article>
+          <h3>The grower saving seed from the threshed</h3>
+          <p>The threshed heads go over the sieve and she works it in the wind — the chaff and dust sift away on the draught, the heavy true grain rides and is kept back for next year's drills. Everything light enough to lose, she lets the riddle lose. What stays on the mesh is the only part worth carrying to the store.</p>
+        </article>
+        <article>
+          <h3>The lead with too many maybes</h3>
+          <p>Every quarter the asks pile up — calls, ideas, favours, someday-projects, all tipped on the same barrow. He stopped grading them one by one. Now he shakes the whole heap against one plain question — will this still hold in a month? — and lets the rest fall through. Three things ride up. Those three he keeps, and the barrow is light.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="shake" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · summer 2026</p>
+        <h2>One email when the first heap has been shaken down to the few that hold.</h2>
+        <p class="hold-lede">A small page, a small riddle over a barrow, a small honest shake on a quiet evening to let the fine fall through and see what rides up. A way to take the many small asks and ideas and shake them down to the deliberate few — and let the rest go to the bed without guilt. No streak. No badge. No alarm when the heap grows. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@barrow.plot" />
+          <button class="btn btn-primary" type="submit">Shake the heap</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first heap has been riddled down to the few that wouldn't fall through. You can stop sorting anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Riddle</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · shaking the heap down to what holds</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#sieve">The riddle</a>
+      <a href="#shake">Shake the heap</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
