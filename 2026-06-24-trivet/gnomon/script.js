@@ -35,7 +35,38 @@ const SEED_MARKS = [
   { name: 'The midnight scroll that was let drift and dropped off the dial at Whitsun',level: 'loose', state: 'adrift',  turns: 2   },
 ];
 
-let marks = SEED_MARKS.map((s, i) => ({ ...s, id: i + 1 }));
+const STORAGE_KEY = 'gnomon.marks.v1';
+const PROJECT_KEY = 'gnomon.project.v1';
+const DEFAULT_PROJECT = 'A keeper\'s dial · June 2026 · twelve marks';
+
+function loadMarks() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return SEED_MARKS.map((s, i) => ({ ...s, id: i + 1 }));
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed) || parsed.length === 0) {
+      return SEED_MARKS.map((s, i) => ({ ...s, id: i + 1 }));
+    }
+    return parsed.map((s, i) => ({ ...s, id: s.id || i + 1 }));
+  } catch {
+    return SEED_MARKS.map((s, i) => ({ ...s, id: i + 1 }));
+  }
+}
+
+function saveMarks() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(marks)); } catch {}
+}
+
+function loadProject() {
+  try { return localStorage.getItem(PROJECT_KEY) || DEFAULT_PROJECT; }
+  catch { return DEFAULT_PROJECT; }
+}
+
+function saveProject(name) {
+  try { localStorage.setItem(PROJECT_KEY, name); } catch {}
+}
+
+let marks = loadMarks();
 let nextId = (marks.reduce((m, s) => Math.max(m, s.id || 0), 0)) + 1;
 let filter = 'all';
 let focused = null;
@@ -126,6 +157,7 @@ function render() {
   renderTotals();
   renderProfile();
   renderList();
+  saveMarks();
 }
 
 // ---------- Helpers ----------
@@ -176,9 +208,13 @@ function removeMark(id) {
 }
 
 function resetMarks() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch {}
+  try { localStorage.removeItem(PROJECT_KEY); } catch {}
   marks = SEED_MARKS.map((s, i) => ({ ...s, id: i + 1 }));
   nextId = marks.length + 1;
   filter = 'all';
+  const project = $('#chart-project');
+  if (project) project.textContent = DEFAULT_PROJECT;
   document.querySelectorAll('#filters button').forEach(b => {
     b.classList.toggle('is-active', b.dataset.filter === 'all');
   });
@@ -188,6 +224,18 @@ function resetMarks() {
 // ---------- Wire up ----------
 
 document.addEventListener('DOMContentLoaded', () => {
+  const project = $('#chart-project');
+  if (project) {
+    project.textContent = loadProject();
+    project.setAttribute('contenteditable', 'true');
+    project.setAttribute('spellcheck', 'false');
+    project.title = 'Click to rename the dial';
+    project.addEventListener('blur', () => saveProject(project.textContent.trim()));
+    project.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); project.blur(); }
+    });
+  }
+
   render();
 
   document.querySelectorAll('#filters button').forEach(btn => {
