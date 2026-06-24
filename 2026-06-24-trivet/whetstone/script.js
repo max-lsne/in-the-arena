@@ -35,7 +35,38 @@ const SEED_BLADES = [
   { name: 'The axe ground bright last spring and dull again by autumn',              level: 'blunt',    state: 'dull',    turns: 2   },
 ];
 
-let blades = SEED_BLADES.map((s, i) => ({ ...s, id: i + 1 }));
+const STORAGE_KEY = 'whetstone.blades.v1';
+const PROJECT_KEY = 'whetstone.project.v1';
+const DEFAULT_PROJECT = 'A maker\'s rack · June 2026 · twelve edges';
+
+function loadBlades() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return SEED_BLADES.map((s, i) => ({ ...s, id: i + 1 }));
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed) || parsed.length === 0) {
+      return SEED_BLADES.map((s, i) => ({ ...s, id: i + 1 }));
+    }
+    return parsed.map((s, i) => ({ ...s, id: s.id || i + 1 }));
+  } catch {
+    return SEED_BLADES.map((s, i) => ({ ...s, id: i + 1 }));
+  }
+}
+
+function saveBlades() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(blades)); } catch {}
+}
+
+function loadProject() {
+  try { return localStorage.getItem(PROJECT_KEY) || DEFAULT_PROJECT; }
+  catch { return DEFAULT_PROJECT; }
+}
+
+function saveProject(name) {
+  try { localStorage.setItem(PROJECT_KEY, name); } catch {}
+}
+
+let blades = loadBlades();
 let nextId = (blades.reduce((m, s) => Math.max(m, s.id || 0), 0)) + 1;
 let filter = 'all';
 let focused = null;
@@ -126,6 +157,7 @@ function render() {
   renderTotals();
   renderProfile();
   renderList();
+  saveBlades();
 }
 
 // ---------- Helpers ----------
@@ -176,9 +208,13 @@ function removeBlade(id) {
 }
 
 function resetBlades() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch {}
+  try { localStorage.removeItem(PROJECT_KEY); } catch {}
   blades = SEED_BLADES.map((s, i) => ({ ...s, id: i + 1 }));
   nextId = blades.length + 1;
   filter = 'all';
+  const project = $('#chart-project');
+  if (project) project.textContent = DEFAULT_PROJECT;
   document.querySelectorAll('#filters button').forEach(b => {
     b.classList.toggle('is-active', b.dataset.filter === 'all');
   });
@@ -188,6 +224,18 @@ function resetBlades() {
 // ---------- Wire up ----------
 
 document.addEventListener('DOMContentLoaded', () => {
+  const project = $('#chart-project');
+  if (project) {
+    project.textContent = loadProject();
+    project.setAttribute('contenteditable', 'true');
+    project.setAttribute('spellcheck', 'false');
+    project.title = 'Click to rename the rack';
+    project.addEventListener('blur', () => saveProject(project.textContent.trim()));
+    project.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); project.blur(); }
+    });
+  }
+
   render();
 
   document.querySelectorAll('#filters button').forEach(btn => {
