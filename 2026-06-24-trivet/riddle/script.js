@@ -35,7 +35,38 @@ const SEED_CLODS = [
   { name: 'The clod that looked solid but broke and fell through at last',         level: 'heap',    state: 'loose',   turns: 1  },
 ];
 
-let clods = SEED_CLODS.map((s, i) => ({ ...s, id: i + 1 }));
+const STORAGE_KEY = 'riddle.clods.v1';
+const PROJECT_KEY = 'riddle.project.v1';
+const DEFAULT_PROJECT = 'A gardener\'s riddle · June 2026 · twelve in the heap';
+
+function loadClods() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return SEED_CLODS.map((s, i) => ({ ...s, id: i + 1 }));
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed) || parsed.length === 0) {
+      return SEED_CLODS.map((s, i) => ({ ...s, id: i + 1 }));
+    }
+    return parsed.map((s, i) => ({ ...s, id: s.id || i + 1 }));
+  } catch {
+    return SEED_CLODS.map((s, i) => ({ ...s, id: i + 1 }));
+  }
+}
+
+function saveClods() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(clods)); } catch {}
+}
+
+function loadProject() {
+  try { return localStorage.getItem(PROJECT_KEY) || DEFAULT_PROJECT; }
+  catch { return DEFAULT_PROJECT; }
+}
+
+function saveProject(name) {
+  try { localStorage.setItem(PROJECT_KEY, name); } catch {}
+}
+
+let clods = loadClods();
 let nextId = (clods.reduce((m, s) => Math.max(m, s.id || 0), 0)) + 1;
 let filter = 'all';
 let focused = null;
@@ -126,6 +157,7 @@ function render() {
   renderTotals();
   renderProfile();
   renderList();
+  saveClods();
 }
 
 // ---------- Helpers ----------
@@ -176,9 +208,13 @@ function removeClod(id) {
 }
 
 function resetClods() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch {}
+  try { localStorage.removeItem(PROJECT_KEY); } catch {}
   clods = SEED_CLODS.map((s, i) => ({ ...s, id: i + 1 }));
   nextId = clods.length + 1;
   filter = 'all';
+  const project = $('#chart-project');
+  if (project) project.textContent = DEFAULT_PROJECT;
   document.querySelectorAll('#filters button').forEach(b => {
     b.classList.toggle('is-active', b.dataset.filter === 'all');
   });
@@ -188,6 +224,18 @@ function resetClods() {
 // ---------- Wire up ----------
 
 document.addEventListener('DOMContentLoaded', () => {
+  const project = $('#chart-project');
+  if (project) {
+    project.textContent = loadProject();
+    project.setAttribute('contenteditable', 'true');
+    project.setAttribute('spellcheck', 'false');
+    project.title = 'Click to rename the riddle';
+    project.addEventListener('blur', () => saveProject(project.textContent.trim()));
+    project.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); project.blur(); }
+    });
+  }
+
   render();
 
   document.querySelectorAll('#filters button').forEach(btn => {
