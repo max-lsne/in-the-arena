@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Whetstone — a small page for keeping the few tools you use keen</title>
+  <meta name="description" content="A blade left in a drawer goes dull from neglect; you keep an edge with a few strokes on the stone, often — not a hoard of tools ground once a year. A drawer of dull blades cuts nothing; one tool kept keen cuts all day. Blunt, ground, honed, stropped — a maker's rack for the few skills you actually use, kept sharp by small frequent practice instead of accumulated and left to rust." />
+  <meta name="theme-color" content="#e7e8e6" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#14181d" media="(prefers-color-scheme: dark)" />
+  <meta name="color-scheme" content="light" />
+  <meta property="og:title" content="Whetstone — keeping the few tools you use keen" />
+  <meta property="og:description" content="A drawer of dull blades cuts nothing; one tool kept keen cuts all day. A small page for the few skills you actually use — kept sharp by a few strokes on the stone, often, instead of hoarded and left to rust. Blunt, ground, honed, stropped." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23e7e8e6'/%3E%3Crect x='4' y='19' width='24' height='6' rx='2' transform='rotate(-8 16 22)' fill='%2397917e'/%3E%3Crect x='4' y='19' width='24' height='2' rx='1' transform='rotate(-8 16 22)' fill='%23c2c6c4'/%3E%3Cpath d='M6 15 L25 10 L25 13 L7 17 Z' transform='rotate(-8 16 13)' fill='%23566372'/%3E%3Cpath d='M6 15 L25 10 L25 11 L6 16 Z' transform='rotate(-8 16 13)' fill='%23aeb6bd'/%3E%3Ccircle cx='23' cy='11' r='1.5' fill='%23d99a4a'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <rect x="5" y="18" width="22" height="6" rx="2" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.85" />
+          <path d="M7 18 q9 -1.4 18 0" stroke="currentColor" stroke-width="1" fill="none" opacity="0.55" />
+          <path d="M8 15 L26 9 L26 11 L9 16 Z" stroke="currentColor" stroke-width="1.1" fill="none" opacity="0.8" />
+          <path d="M8 15 L5 14.4 L5 12.6 L9 13 Z" stroke="currentColor" stroke-width="1" fill="none" opacity="0.75" />
+          <path d="M22 8 l1.6 -2" stroke="currentColor" stroke-width="1" fill="none" opacity="0.6" />
+          <path d="M24 9.6 l2 -1.2" stroke="currentColor" stroke-width="1" fill="none" opacity="0.6" />
+        </svg>
+      </span>
+      <span>Whetstone</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#rack">The rack</a>
+      <a href="#who">Who keeps an edge</a>
+      <a href="#hone" class="nav-cta">Take the stone</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">What you use often, given a stone and a few strokes</p>
+        <h1>
+          A drawer of dull blades cuts nothing.<br />
+          <em>One tool kept keen cuts all day.</em>
+        </h1>
+        <p class="lede">
+          An edge is not a thing you own; it is a thing you keep. Buy
+          ten knives and grind them once and you have ten dull knives by
+          spring — steel rolls and rusts the moment you set it down and
+          walk away. The maker who cuts all day owns few tools and loves
+          them. Before the work, a wet stone, a little oil, the blade
+          laid flat and drawn over the grit a dozen unhurried strokes,
+          and the wire wiped off on the strop. It takes a minute. It is
+          not a chore you save for once a year; it is the small thing
+          you do often, so the edge is simply always there when the work
+          arrives.
+        </p>
+        <div class="hero-cta">
+          <a href="#rack" class="btn btn-primary">See the rack</a>
+          <a href="#hone" class="btn btn-ghost">Take the stone</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One bench stone. A handful of edges kept. One chisel honed every morning for years.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg class="hero-bed" viewBox="0 0 400 320" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="wAir" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#dfe2e0" stop-opacity="0.95" />
+              <stop offset="60%" stop-color="#cdd2d1" stop-opacity="0.6" />
+              <stop offset="100%" stop-color="#b3bbbb" stop-opacity="0.35" />
+            </linearGradient>
+            <linearGradient id="wDark" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#2c333a" />
+              <stop offset="100%" stop-color="#171c21" />
+            </linearGradient>
+            <linearGradient id="wStone" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#6c7884" />
+              <stop offset="100%" stop-color="#454f59" />
+            </linearGradient>
+            <linearGradient id="wBlade" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#aeb6bd" stop-opacity="0.95" />
+              <stop offset="55%" stop-color="#d6dbdf" stop-opacity="0.98" />
+              <stop offset="100%" stop-color="#8c969f" stop-opacity="0.9" />
+            </linearGradient>
+            <radialGradient id="wLamp" cx="0.5" cy="0.16" r="0.72">
+              <stop offset="0%" stop-color="#f1e4c2" stop-opacity="0.5" />
+              <stop offset="100%" stop-color="#f1e4c2" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+
+          <rect x="0" y="0" width="400" height="320" fill="url(#wDark)" />
+          <!-- a low cone of work-lamp light from above the bench -->
+          <rect x="0" y="0" width="400" height="320" fill="url(#wLamp)" />
+
+          <!-- the cool wall behind the bench, faintly lit -->
+          <rect x="0" y="0" width="400" height="200" fill="url(#wAir)" opacity="0.16" />
+          <!-- the line of the bench, the dark working surface -->
+          <rect x="0" y="200" width="400" height="120" fill="#39414a" />
+          <rect x="0" y="200" width="400" height="3" fill="#5b6772" opacity="0.7" />
+          <ellipse cx="200" cy="202" rx="200" ry="6" fill="#000" opacity="0.20" />
+
+          <!-- a leather strop hanging on the wall, ready for the wire edge -->
+          <g>
+            <path d="M48 14 L48 132" stroke="#6e5a3f" stroke-width="9" stroke-linecap="round" opacity="0.92" />
+            <path d="M48 14 L48 132" stroke="#8a7350" stroke-width="3" stroke-linecap="round" opacity="0.7" />
+            <circle cx="48" cy="12" r="3" fill="#9aa3ab" />
+            <path d="M44 130 q4 5 8 0" stroke="#5a4a34" stroke-width="2" fill="none" opacity="0.8" />
+          </g>
+
+          <!-- a couple of finished blades resting at the back of the bench -->
+          <g opacity="0.85">
+            <path d="M286 176 L356 168 L356 172 L288 180 Z" fill="#9aa3ab" />
+            <path d="M286 176 L280 175 L280 181 L288 180 Z" fill="#6e5a3f" />
+            <path d="M300 188 L360 182 L360 185 L302 191 Z" fill="#8c969f" />
+            <path d="M300 188 L295 187.4 L295 192 L302 191 Z" fill="#6e5a3f" />
+          </g>
+
+          <!-- the bench stone in its cradle, oil sheen across the face -->
+          <g transform="translate(200 246)">
+            <!-- the wooden cradle the stone sits in -->
+            <path d="M-118 18 L118 18 L108 34 L-108 34 Z" fill="#6e5a3f" />
+            <path d="M-118 18 L118 18 L116 22 L-116 22 Z" fill="#5a4a34" opacity="0.7" />
+            <!-- the stone body -->
+            <path d="M-112 -12 L112 -12 L118 18 L-118 18 Z" fill="url(#wStone)" />
+            <!-- the dished face, worn hollow from years of strokes -->
+            <path d="M-112 -12 L112 -12 L108 0 L-108 0 Z" fill="#7d8893" />
+            <path d="M-104 -10 q104 6 208 0" stroke="#3c454e" stroke-width="0.8" fill="none" opacity="0.4" transform="translate(-104 0)" />
+            <!-- the oil sheen, a pale slick caught by the lamp -->
+            <ellipse cx="-6" cy="-7" rx="74" ry="5.5" fill="#cfd6da" opacity="0.45" />
+            <ellipse cx="22" cy="-6" rx="30" ry="3" fill="#eef1f2" opacity="0.4" />
+            <!-- swarf — the dark metal-and-oil slurry worked up by honing -->
+            <g fill="#22262b" opacity="0.55">
+              <ellipse cx="-52" cy="-4" rx="12" ry="2.4" />
+              <ellipse cx="40" cy="-3" rx="9" ry="2" />
+              <ellipse cx="-18" cy="-2" rx="14" ry="2.2" />
+            </g>
+          </g>
+
+          <!-- the blade laid across the stone mid-stroke, drawn flat over the grit -->
+          <g transform="translate(200 233) rotate(-8)">
+            <!-- the bevel face of the blade -->
+            <path d="M-96 0 L70 -7 L96 0 L70 7 Z" fill="url(#wBlade)" />
+            <!-- the keen edge catching a line of light -->
+            <path d="M-96 0 L96 0" stroke="#f3f6f7" stroke-width="1.1" opacity="0.85" />
+            <!-- a glint that travels the kept edge, the light of a true sharpening -->
+            <rect class="edge-glint" x="-7" y="-1.5" width="14" height="3" rx="1.5" fill="#ffffff" opacity="0.92" />
+            <!-- the secondary bevel, the part on the stone -->
+            <path d="M70 -7 L96 0 L70 7 Z" fill="#bcc4ca" opacity="0.9" />
+            <!-- the wooden handle / tang -->
+            <path d="M-96 0 L-150 -6 q-8 6 0 12 L-96 0 Z" fill="#7a6243" />
+            <path d="M-150 -6 q-8 6 0 12" stroke="#5a4a34" stroke-width="1.4" fill="none" opacity="0.8" />
+            <!-- a couple of darker rivets in the handle -->
+            <circle cx="-120" cy="-1" r="2" fill="#4a3c28" />
+            <circle cx="-134" cy="-1" r="2" fill="#4a3c28" />
+          </g>
+
+          <!-- a struck spark — a single warm fleck where steel meets grit -->
+          <g opacity="0.9">
+            <circle cx="118" cy="232" r="1.8" fill="#e8a23c" />
+            <path d="M118 232 l6 -3 M118 232 l5 4 M118 232 l-4 -4" stroke="#e8a23c" stroke-width="0.7" opacity="0.7" />
+          </g>
+
+          <!-- a little oil bottle standing by the cradle -->
+          <g transform="translate(330 232)">
+            <path d="M-7 14 L7 14 L6 -6 L-6 -6 Z" fill="#3f4a57" opacity="0.92" />
+            <rect x="-3" y="-13" width="6" height="7" rx="1" fill="#566372" />
+            <ellipse cx="0" cy="6" rx="6" ry="2" fill="#7d8893" opacity="0.5" />
+          </g>
+        </svg>
+        <span class="hero-tick hero-tick-1">oiled and dished</span>
+        <span class="hero-tick hero-tick-2">drawn flat, mid-stroke</span>
+        <span class="hero-tick hero-tick-3">stropped to a razor</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>Tools bought by the dozen<br /><em>rust by the dozen.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            The anxious answer to needing an edge is to buy another
+            blade. A fuller drawer feels like more capability, so you
+            hoard — the third paring knife, the language app you'll
+            start Monday, the instrument propped in the corner, the
+            framework you bookmarked. You grind them all bright on the
+            day they arrive and then you set them down. Steel does not
+            wait. Left untouched it rolls, it pits, it rusts; the skill
+            you used once and shelved is just as gone. Open the drawer a
+            year on and you have a dozen dull things and nothing that
+            cuts.
+          </p>
+          <p>
+            The stone is the other answer. You keep few tools and you
+            keep them keen — not by grinding hard once, but by a few
+            strokes, often, before the work. A wet stone, a little oil,
+            the blade drawn flat a dozen passes, the wire wiped on the
+            strop. A minute, most days. The edge never has time to go
+            off, because it is never left long enough to. You cannot
+            stockpile sharpness; you can only keep it. Take the few you
+            actually use to the stone, and they cut all day.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Keep few, and name them</h3>
+          <p>Don't hoard. Pick the few tools and skills you actually reach for — the knife, the language, the one instrument — and put them on the rack where you can see them. A blade you can name and find is a blade you will keep. The dozen you bought to feel ready are the dozen that rust. Choose the keen few over the anxious many.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Wet the stone and take a stroke</h3>
+          <p>Before the work, not after, lay the stone in its cradle, wet it with a little oil, and draw the blade flat over the grit. A dozen unhurried passes, each side, the bevel kept true. It takes a minute. The point is not to grind deep — it is to take the small roll off before it becomes a dull edge. Often beats hard.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Come back and do it again</h3>
+          <p>An edge is a streak, not a purchase. The chisel honed every morning before the bench never goes blunt; the one ground once in March is dull by June. Each return is a stroke counted. You are not finishing anything — you are keeping it. Small, frequent, boring, and the reason the tool is always ready when you pick it up.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Strop it true and cut</h3>
+          <p>A few licks on the leather to wipe the wire edge clean and align the steel, and the blade goes from sharp to keen — the edge that parts a hair, that the wood doesn't fight. That is the kept tool: not the newest, not the most, but the few you took to the stone so often that sharpness is simply where they live. Now cut all day.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="rack" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A maker's rack, mid-June</h2>
+        <p>One bench, one stone, and everything kept on the rack above it — twelve edges, from a blade just off the grinder and still raw to a chisel honed every morning for years, mapped across a fictional maker's rack in the middle of June 2026, the oil bright on the stone and the cared-for edges catching the lamp. Some are blunt, bought and never yet touched to the stone. Some are stropped to a razor and kept that way by a stroke a day. One is the half-learned thing gone to rust in its case under the bed. Take one to the stone, strop it true, let one rust, pull one off the rack — the rack redraws in your browser.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">The rack</p>
+            <p class="chart-project" id="chart-project">A maker's rack · June 2026 · twelve edges</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Strokes each edge has had on the stone">
+          <p class="profile-axis-label top">kept razor, honed daily</p>
+          <p class="profile-axis-label bot">dull, never on the stone</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the edges">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="dull" role="tab">Dull</button>
+          <button type="button" data-filter="setting" role="tab">Setting</button>
+          <button type="button" data-filter="keening" role="tab">Keening</button>
+          <button type="button" data-filter="cutting" role="tab">Cutting</button>
+        </div>
+
+        <ul class="legs" id="blades-list">
+          <!-- blades inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-level" aria-label="Maturity of the edge">
+              <option value="blunt">Blunt</option>
+              <option value="ground">Ground</option>
+              <option value="honed">Honed</option>
+              <option value="stropped">Stropped</option>
+            </select>
+            <input id="add-turns" type="number" step="1" min="0" value="0" aria-label="Strokes it has had on the stone" />
+            <input id="add-name" type="text" placeholder="Name the edge — the few tools or skills you actually use and want kept keen" maxlength="90" />
+            <select id="add-state" aria-label="Condition of the edge">
+              <option value="dull">Dull</option>
+              <option value="setting">Setting</option>
+              <option value="keening">Keening</option>
+              <option value="cutting">Cutting</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Put it on the rack</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original rack</a>
+        </div>
+
+        <p class="kbd-help">
+          <strong>Keys:</strong>
+          <kbd>J</kbd>/<kbd>K</kbd> move &middot;
+          <kbd>Enter</kbd> advance condition &middot;
+          <kbd>Del</kbd> let it rust &middot;
+          <kbd>N</kbd> new edge &middot;
+          <kbd>0</kbd>&ndash;<kbd>4</kbd> filter &middot;
+          <kbd>[</kbd>/<kbd>]</kbd> nudge strokes &middot;
+          <kbd>R</kbd> reset.
+        </p>
+      </div>
+
+      <div class="legend">
+        <h3>The four edges</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-blunt"></span><div><strong>Blunt.</strong> Bought, owned, and never yet touched to the stone — the new knife in its box, the app installed and unopened, the skill you mean to start. Capability on paper, dull in the hand. Pick it up today and it will not cut.</div></li>
+          <li><span class="legend-swatch swatch-ground"></span><div><strong>Ground.</strong> Taken to the stone a first few times, the rough edge knocked off, the bevel set. The thing you've begun to keep rather than just to own. A real start — but a new edge, still soft, that will roll the moment you neglect it.</div></li>
+          <li><span class="legend-swatch swatch-honed"></span><div><strong>Honed.</strong> Worked on the stone over weeks until it bites true — the skill you practise a little most days, coming good and reliable. It cuts cleanly now and it holds, because you keep coming back to the grit before it has a chance to dull.</div></li>
+          <li><span class="legend-swatch swatch-stropped"></span><div><strong>Stropped.</strong> Kept razor by a stroke a day for years — the edge that parts a hair, that the work never fights. A chisel honed every morning, a craft kept keen a decade. The deep tool that is sharp not because you ground it hard, but because you never let it dull.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who keeps an edge</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The chef before service</h3>
+          <p>Three knives, not thirty. Every morning before the first ticket she wets the stone, draws each blade flat a dozen strokes, wipes the wire on the steel, and that is the whole ritual — five minutes, every day, for fifteen years. The edges part a tomato by their own weight. She has never owned a knife block of dull strangers. Few tools, kept keen.</p>
+        </article>
+        <article>
+          <h3>The speaker keeping a second language</h3>
+          <p>Ten minutes a day, most days, for a decade — never a heroic weekend, never an app streak chased and dropped. A page read aloud, a call with an old friend, the radio while the coffee brews. The grammar he learned once would have rusted in a year; the small daily stroke keeps it keen, and the words are simply there when he reaches for them.</p>
+        </article>
+        <article>
+          <h3>The joiner and the worn bench chisel</h3>
+          <p>One chisel, bought in 1998, the blade now short from forty years of honing. He touches it to the stone before every mortise, never after — a few passes, a strop on the leather strap nailed to the bench, and back to the oak. The seasoned wood that turned a lesser edge doesn't fight his. The tool is old because he kept it, not because he spared it.</p>
+        </article>
+        <article>
+          <h3>The guitar gone to rust under the bed</h3>
+          <p>Bought in a flush of resolve, played hard for a fortnight, then propped in its case and forgotten. The strings are dead, the calluses long gone, the three chords learned and lost. Not a bad instrument — a neglected one. It was never the buying that would make him a player; it was the ten quiet minutes a day he never came back to give it.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="hone" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · summer 2026</p>
+        <h2>One email when the first edge has been kept keen a season.</h2>
+        <p class="hold-lede">A small page, a small bench stone, a small minute before the work to wet the grit and draw the blade flat a dozen strokes. A way to keep the few tools and skills you actually use keen by small frequent practice, instead of hoarding many and letting them rust. No streak. No badge. No alarm when you skip a day. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@keenedge.shop" />
+          <button class="btn btn-primary" type="submit">Take the stone</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first edge has been kept keen a season by a stroke a day and holds true. You can put down the stone anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Whetstone</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · keeping the few tools you use keen</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#rack">The rack</a>
+      <a href="#hone">Take the stone</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
