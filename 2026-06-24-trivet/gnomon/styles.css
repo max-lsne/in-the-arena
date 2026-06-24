@@ -241,6 +241,21 @@ main {
 .hero-tick-2 { top: 14px; right: 14px; }
 .hero-tick-3 { bottom: 14px; left: 14px; }
 
+/* the shadow drifts slow about the foot of the style, the way a real one
+   creeps round through a day while the gnomon itself never moves. Held
+   still for anyone who has asked for less motion. */
+.dial-shadow {
+  transform-origin: 200px 216px;
+  animation: dial-shadow 24s ease-in-out infinite alternate;
+}
+@keyframes dial-shadow {
+  from { transform: rotate(-7deg); }
+  to   { transform: rotate(11deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dial-shadow { animation: none; }
+}
+
 /* --- Problem --- */
 .problem {
   padding: 64px 0;

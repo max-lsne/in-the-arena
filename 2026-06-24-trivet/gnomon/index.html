@@ -158,9 +158,12 @@
             <text x="300" y="208">VI</text>
           </g>
 
-          <!-- the cast shadow of the style, falling hard across the face to the mark -->
-          <path d="M200 216 L116 192 L122 196 L200 220 Z" fill="#4a4f52" opacity="0.55" />
-          <path d="M200 216 L118 193" stroke="#3a4044" stroke-width="2.4" opacity="0.6" stroke-linecap="round" />
+          <!-- the cast shadow of the style, falling hard across the face to the mark;
+               it drifts slow about the foot as the day's sun travels over the fixed gnomon -->
+          <g class="dial-shadow">
+            <path d="M200 216 L116 192 L122 196 L200 220 Z" fill="#4a4f52" opacity="0.55" />
+            <path d="M200 216 L118 193" stroke="#3a4044" stroke-width="2.4" opacity="0.6" stroke-linecap="round" />
+          </g>
 
           <!-- the gnomon: the angled bronze style itself, the one fixed thing -->
           <path d="M200 216 L256 96 L266 104 L208 220 Z" fill="url(#gBronze)" />
