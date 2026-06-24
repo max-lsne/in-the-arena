@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gnomon — a small page for siting the one fixed thing your day reads off</title>
+  <meta name="description" content="A wall of clocks tells no hour. The day reads true off one still thing — the shadow-caster that never moves while the sun travels the whole arc over it. Site one fixed point, the early desk or the noon walk or the evening shutdown, and let everything else take its bearing from it instead of scattering structure across a dozen wobbling routines. Loose, sited, trued, fixed — the single anchor your whole day orients to." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <path d="M4 24 q12 -3 24 0" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.85" />
+          <path d="M16 24 L23 9" stroke="currentColor" stroke-width="1.6" fill="none" opacity="0.9" />
+          <path d="M16 24 L26 21" stroke="currentColor" stroke-width="1.1" fill="none" opacity="0.55" />
+          <g stroke="currentColor" stroke-width="0.9" opacity="0.6">
+            <path d="M16 24 L8 16" />
+            <path d="M16 24 L11 11" />
+            <path d="M16 24 L16 9" />
+          </g>
+          <circle cx="16" cy="24" r="1.4" fill="currentColor" />
+        </svg>
+      </span>
+      <span>Gnomon</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#dial">The dial</a>
+      <a href="#who">Who keeps one fixed</a>
+      <a href="#set" class="nav-cta">Set the gnomon</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">Site one still thing and read the day off it</p>
+        <h1>
+          A wall of clocks tells no hour.<br />
+          <em>The day reads true off one still thing.</em>
+        </h1>
+        <p class="lede">
+          A sundial has no moving parts. The whole travelling day — the
+          long shadow of morning, the short hard mark of noon, the slant
+          gold of evening — is read off one thing that never moves: the
+          gnomon, the fixed style set true to the pole, throwing its edge
+          across the cut hour-lines. The sun does all the going. The
+          gnomon does all the telling. You do not build the day out of a
+          dozen wobbling routines and hope they keep step; you set one
+          fixed point, true and unmoving, and let everything else take
+          its bearing from where its shadow falls.
+        </p>
+        <div class="hero-cta">
+          <a href="#dial" class="btn btn-primary">See the dial</a>
+          <a href="#set" class="btn btn-ghost">Set the gnomon</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One fixed style. A dozen marks read off it. One held true for years.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg class="hero-bed" viewBox="0 0 400 320" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#f3ecda" />
+              <stop offset="55%" stop-color="#ecdfbe" />
+              <stop offset="100%" stop-color="#dcc999" />
+            </linearGradient>
+            <linearGradient id="gStone" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#ece3cc" />
+              <stop offset="100%" stop-color="#cdbf9c" />
+            </linearGradient>
+            <linearGradient id="gBronze" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#b48f43" />
+              <stop offset="50%" stop-color="#8a6a2f" />
+              <stop offset="100%" stop-color="#5f4a1c" />
+            </linearGradient>
+            <radialGradient id="gSun" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0%" stop-color="#f7ecc4" stop-opacity="0.95" />
+              <stop offset="55%" stop-color="#f0d98f" stop-opacity="0.7" />
+              <stop offset="100%" stop-color="#f0d98f" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient id="gGlow" cx="0.78" cy="0.26" r="0.6">
+              <stop offset="0%" stop-color="#f7e9bf" stop-opacity="0.5" />
+              <stop offset="100%" stop-color="#f7e9bf" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+
+          <!-- the bleached sky, low warm sun -->
+          <rect x="0" y="0" width="400" height="320" fill="url(#gSky)" />
+          <rect x="0" y="0" width="400" height="320" fill="url(#gGlow)" />
+
+          <!-- the low evening sun, off to the right -->
+          <circle cx="318" cy="78" r="46" fill="url(#gSun)" />
+          <circle cx="318" cy="78" r="15" fill="#f6ecc6" opacity="0.92" />
+
+          <!-- a far weathered wall, the churchyard edge -->
+          <rect x="0" y="150" width="400" height="40" fill="#d8cba6" opacity="0.5" />
+          <g stroke="#b9a87e" stroke-width="0.7" fill="none" opacity="0.4">
+            <path d="M0 168 L400 168" />
+            <path d="M48 150 L48 168 M120 150 L120 168 M196 150 L196 168 M272 150 L272 168 M344 150 L344 168" />
+            <path d="M84 168 L84 190 M160 168 L160 190 M236 168 L236 190 M312 168 L312 190" />
+          </g>
+
+          <!-- the stone pedestal the dial stands on -->
+          <rect x="168" y="232" width="64" height="84" fill="#c2b48d" />
+          <rect x="168" y="232" width="64" height="84" fill="url(#gStone)" opacity="0.5" />
+          <rect x="160" y="226" width="80" height="12" fill="#b6a87f" />
+          <rect x="160" y="226" width="80" height="3" fill="#d8cba6" opacity="0.8" />
+          <!-- weathered tooling on the plinth -->
+          <g stroke="#9a8c64" stroke-width="0.6" fill="none" opacity="0.45">
+            <path d="M176 252 L224 252 M176 276 L224 276 M176 300 L224 300" />
+          </g>
+
+          <!-- the round stone dial face, set on top, seen near flat -->
+          <ellipse cx="200" cy="222" rx="118" ry="40" fill="#b6a87f" />
+          <ellipse cx="200" cy="216" rx="118" ry="40" fill="url(#gStone)" />
+          <ellipse cx="200" cy="216" rx="118" ry="40" fill="none" stroke="#9a8c64" stroke-width="1.4" opacity="0.7" />
+          <ellipse cx="200" cy="216" rx="100" ry="33" fill="none" stroke="#9a8c64" stroke-width="0.8" opacity="0.5" />
+
+          <!-- the cut hour-lines radiating from the foot of the style -->
+          <g stroke="#7a6c46" stroke-width="1" opacity="0.65" stroke-linecap="round">
+            <path d="M200 216 L96 206" />
+            <path d="M200 216 L112 188" />
+            <path d="M200 216 L142 178" />
+            <path d="M200 216 L182 174" />
+            <path d="M200 216 L222 174" />
+            <path d="M200 216 L262 180" />
+            <path d="M200 216 L292 192" />
+            <path d="M200 216 L302 210" />
+          </g>
+
+          <!-- weathered roman numerals scattered round the rim -->
+          <g fill="#6f6244" font-family="'JetBrains Mono', monospace" font-size="9" opacity="0.8" text-anchor="middle">
+            <text x="100" y="210">VI</text>
+            <text x="120" y="188">VIII</text>
+            <text x="160" y="176">X</text>
+            <text x="200" y="170">XII</text>
+            <text x="244" y="176">II</text>
+            <text x="282" y="188">IV</text>
+            <text x="300" y="208">VI</text>
+          </g>
+
+          <!-- the cast shadow of the style, falling hard across the face to the mark -->
+          <path d="M200 216 L116 192 L122 196 L200 220 Z" fill="#4a4f52" opacity="0.55" />
+          <path d="M200 216 L118 193" stroke="#3a4044" stroke-width="2.4" opacity="0.6" stroke-linecap="round" />
+
+          <!-- the gnomon: the angled bronze style itself, the one fixed thing -->
+          <path d="M200 216 L256 96 L266 104 L208 220 Z" fill="url(#gBronze)" />
+          <path d="M200 216 L256 96" stroke="#5f4a1c" stroke-width="1.2" fill="none" opacity="0.8" />
+          <path d="M256 96 L266 104" stroke="#caa75a" stroke-width="1.4" fill="none" opacity="0.85" />
+          <!-- the brass highlight running the leading edge of the style -->
+          <path d="M203 214 L256 99" stroke="#dcbe72" stroke-width="1" fill="none" opacity="0.7" />
+          <!-- the bronze foot pinning it to the dial -->
+          <ellipse cx="201" cy="217" rx="8" ry="3" fill="#6b5220" />
+          <ellipse cx="201" cy="216" rx="5" ry="2" fill="#a8842f" opacity="0.9" />
+
+          <!-- a verdigris bloom where the bronze meets the stone -->
+          <g fill="#5f8a78" opacity="0.4">
+            <ellipse cx="196" cy="219" rx="6" ry="2" />
+            <ellipse cx="210" cy="222" rx="4" ry="1.6" />
+          </g>
+
+          <!-- the noon meridian, the deep-cut line down the middle of the face -->
+          <path d="M200 216 L200 178" stroke="#5a4d30" stroke-width="1.2" opacity="0.55" />
+          <circle cx="200" cy="178" r="1.6" fill="#5a4d30" opacity="0.6" />
+        </svg>
+        <span class="hero-tick hero-tick-1">the fixed style</span>
+        <span class="hero-tick hero-tick-2">the sun travels</span>
+        <span class="hero-tick hero-tick-3">read off the shadow</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>A dozen wobbling routines<br /><em>keep no time at all.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            The anxious answer to a shapeless day is more structure: a
+            new alarm, a fresh app, a colour-coded grid, a habit for every
+            hour. So you hang a wall of clocks and set them all going at
+            once. But each one drifts a little, and a wall of clocks that
+            disagree tells you nothing — you spend the day correcting
+            them instead of working, and the first morning you are tired
+            the whole apparatus falls down together. Structure scattered
+            across many small wobbling routines is not structure. It is a
+            dozen more things to keep wound.
+          </p>
+          <p>
+            The gnomon is the other thing. You site one fixed point — the
+            early desk, the noon walk, the evening shutdown — and you set
+            it true and leave it unmoving. You do not maintain it by
+            fretting; you maintain it by keeping it where it is. Then the
+            rest of the day need not be timed at all. It takes its bearing
+            off the one still thing: things land before the fixed point or
+            after it, in its shadow or out of it. One anchor, set true,
+            reads the whole travelling day — and on your worst morning it
+            is still standing exactly where you left it.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Choose the one fixed point</h3>
+          <p>Pick a single thing the whole day can orient to — the 6am desk, the noon walk, the hard line of the evening shutdown. Not a dozen; one. Name it, write the one line, and resist the urge to site three more beside it. A dial has one style. The power is in there being only one.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Set it true and leave it</h3>
+          <p>Fix it to a real hour and a real place and do not move it to suit the day. The gnomon's whole worth is that it never shifts — set it to the pole, mortar its foot, and let the sun do all the travelling. A point you re-site every morning casts no readable shadow. Set it once, true, and stop adjusting.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Hold it true, day on day</h3>
+          <p>Each day you keep the fixed point where it stands is a day held. That is the whole of the tending — not a streak to defend, just the still thing staying still. Some days you only touch it; that counts. The shadow lengthens into something you can read by because the style underneath it has not moved.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Read the day off its shadow</h3>
+          <p>Once the point is fixed and held, stop timing everything else. Let tasks fall before it or after it, in its shadow or in the light. The walk sites the afternoon; the shutdown closes the books. You read the travelling day off one unmoving mark, and the dozen small routines you were winding quietly become unnecessary.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="dial" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A keeper's dial, mid-June</h2>
+        <p>One dial and every mark read off it — twelve anchor points, from one set true only last week to one held fixed for years, mapped across a fictional keeper's day in the middle of June 2026, the long shadow falling hard across the cut hour-lines. Some are still loose, only just chosen and apt to drift. Some have been held true so long the whole day hangs on them. One is the routine that was let go — dropped off the dial. Set one, hold it true, true one up, drop one loose — the dial redraws in your browser.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">The dial</p>
+            <p class="chart-project" id="chart-project">A keeper's dial · June 2026 · twelve marks</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Days each fixed point has been held true on the dial">
+          <p class="profile-axis-label top">a fixture, held for years</p>
+          <p class="profile-axis-label bot">newly set, still adrift</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the marks">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="adrift" role="tab">Adrift</button>
+          <button type="button" data-filter="setting" role="tab">Setting</button>
+          <button type="button" data-filter="holding" role="tab">Holding</button>
+          <button type="button" data-filter="true" role="tab">True</button>
+        </div>
+
+        <ul class="legs" id="marks-list">
+          <!-- marks inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-level" aria-label="How well-established the fixed point is">
+              <option value="loose">Loose</option>
+              <option value="sited">Sited</option>
+              <option value="trued">Trued</option>
+              <option value="fixed">Fixed</option>
+            </select>
+            <input id="add-turns" type="number" step="1" min="0" value="0" aria-label="Days it has been held true" />
+            <input id="add-name" type="text" placeholder="Name the fixed point — the one thing your whole day should read off" maxlength="90" />
+            <select id="add-state" aria-label="Current condition of the point">
+              <option value="adrift">Adrift</option>
+              <option value="setting">Setting</option>
+              <option value="holding">Holding</option>
+              <option value="true">True</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Set the gnomon</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original dial</a>
+        </div>
+      </div>
+
+      <div class="legend">
+        <h3>The four marks</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-loose"></span><div><strong>Loose.</strong> Just chosen, not yet set to anything — the point you mean to anchor the day to but haven't pinned down. A line written on the lid. It will drift off the dial the first busy morning unless you site it.</div></li>
+          <li><span class="legend-swatch swatch-sited"></span><div><strong>Sited.</strong> Set to a real hour and a real place, the foot found, the style standing. Committed to, beginning to cast a shadow you can read — but newly set, and not yet proven against a hard day.</div></li>
+          <li><span class="legend-swatch swatch-trued"></span><div><strong>Trued.</strong> Held over a season and squared to the pole, the shadow falling clean on the hour-lines now. A point you have kept long enough that the day has started, on its own, to orient to it.</div></li>
+          <li><span class="legend-swatch swatch-fixed"></span><div><strong>Fixed.</strong> Mortared in, held true for years, the unmoving thing the whole day reads off. The early desk kept a decade, the noon walk that never fails. So set you no longer think to question it.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who keeps one fixed</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The writer with the dawn desk</h3>
+          <p>Up before the house, at the same desk by the same window, the same two hours every single morning since 2017. Nothing else in her day is fixed; everything else bends around it. The work gets done not because she is disciplined the rest of the day but because that one mark never moves, and the day reads itself off it.</p>
+        </article>
+        <article>
+          <h3>The surgeon's noon walk</h3>
+          <p>Whatever the morning's list held, at noon he is out of the building and walking the same loop for twenty minutes. It is the meridian line of his day — the hard mark that cuts morning from afternoon. Colleagues set their own bearings by it. The walk sites everything that hangs after it.</p>
+        </article>
+        <article>
+          <h3>The maker's evening shutdown</h3>
+          <p>At six the bench is swept, the tools go back on their shadow-board, the lamp goes off, and the shop is shut — the same ritual, the same time, every working day. The shutdown is the fixed point. It tells him the day is read, the shadow off the dial, and what is not done waits for the sun to come round again.</p>
+        </article>
+        <article>
+          <h3>The keeper of the old churchyard dial</h3>
+          <p>The meridian line cut in the stone was trued to the pole three hundred years ago and has not moved since. He oils the bronze style once a year and clears the moss from the hour-lines, and otherwise leaves it dead still. The whole village has read noon off that one fixed edge for ten generations.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="set" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · summer 2026</p>
+        <h2>One email when the first point has held true a season and become a fixture.</h2>
+        <p class="hold-lede">A small page, a single dial, a single fixed style set true to the pole and left unmoving while the sun does all the travelling. A way to site one anchor your whole day reads off, instead of scattering structure across a dozen routines that keep no time at all. No streak. No badge. No alarm when a day slips. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@truenorth.dial" />
+          <button class="btn btn-primary" type="submit">Set the gnomon</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the first point has held true a season and become a fixture the day reads off. You can stop holding anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Gnomon</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · siting the one fixed thing your day reads off</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#dial">The dial</a>
+      <a href="#set">Set the gnomon</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
