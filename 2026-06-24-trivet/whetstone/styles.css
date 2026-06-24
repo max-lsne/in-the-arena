@@ -241,6 +241,23 @@ main {
 .hero-tick-2 { top: 14px; right: 14px; }
 .hero-tick-3 { bottom: 14px; left: 14px; }
 
+/* a glint that runs the length of the kept edge — the light of a true
+   sharpening travelling the steel. Stilled for anyone who'd rather it held. */
+.edge-glint {
+  animation: edge-glint 4.2s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+@keyframes edge-glint {
+  0%   { transform: translateX(-92px); opacity: 0; }
+  14%  { opacity: 0.92; }
+  52%  { opacity: 0.92; }
+  90%  { opacity: 0; }
+  100% { transform: translateX(92px); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .edge-glint { animation: none; opacity: 0; }
+}
+
 /* --- Problem --- */
 .problem {
   padding: 64px 0;
