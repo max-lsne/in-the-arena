@@ -154,9 +154,86 @@ function renderList() {
   });
 }
 
+// How low the weight sits, by how it is stowed. Loose weight rides high
+// and raises her centre of gravity; lashed and righting weight is struck
+// down low and brings the mast back to the sky.
+const LOWNESS = { loose: -1, stowed: 0.35, lashed: 1, righting: 1.6 };
+// How heavy each kind is — the denser the ballast, the more it tells.
+const HEFT = { shingle: 1, stone: 2, iron: 3, keel: 4 };
+
+// Work out how tender or stiff she lies: weight carried high makes her
+// roll away and come back slowly; weight low rights her under the gust.
+function computeTrim() {
+  let low = 0, high = 0;
+  manifest.forEach(w => {
+    const heft = HEFT[w.level] || 1;
+    const lowness = LOWNESS[w.state] ?? 0;
+    if (lowness >= 0) low += heft * lowness;
+    else high += heft * -lowness;
+  });
+  const total = low + high;
+  // ratio of righting weight to the whole — 1 is all low, 0 is all high
+  const ratio = total === 0 ? 0 : low / total;
+  // heel she takes under one standard gust: stiff boats barely move,
+  // tender ones lie right down
+  const heel = Math.round((4 + (1 - ratio) * 30) * 10) / 10;
+  let verdict, note, tone;
+  if (manifest.length === 0) {
+    verdict = 'No ballast aboard'; tone = 'bad';
+    note = 'Nothing low to right her. The first gust lays her flat.';
+  } else if (heel <= 11) {
+    verdict = 'Stiff and sure'; tone = 'good';
+    note = 'The weight is low and lashed. She shrugs off the gust and stands back up.';
+  } else if (heel <= 19) {
+    verdict = 'Steady'; tone = 'ok';
+    note = 'Enough low weight to right her, though a harder squall would tell.';
+  } else if (heel <= 27) {
+    verdict = 'Tender'; tone = 'warn';
+    note = 'Too much carried high. She rolls away and is slow to come back.';
+  } else {
+    verdict = 'On her beam ends'; tone = 'bad';
+    note = 'The weight is up on deck and loose. One real gust and she goes over.';
+  }
+  return { heel, ratio, verdict, note, tone };
+}
+
+const TRIM_TONES = {
+  good: '#4f6f57',
+  ok:   '#3f5b66',
+  warn: '#9a5e3c',
+  bad:  '#b1462f',
+};
+
+function renderTrim() {
+  const el = $('#trim');
+  if (!el) return;
+  const t = computeTrim();
+  const color = TRIM_TONES[t.tone];
+  const fill = Math.round(t.ratio * 100);
+  el.innerHTML = `
+    <div class="trim-gauge" aria-hidden="true">
+      <svg viewBox="0 0 92 64" preserveAspectRatio="xMidYMid meet">
+        <line x1="6" y1="46" x2="86" y2="46" stroke="#3c5a61" stroke-width="1.4" opacity="0.45" />
+        <g class="trim-mast" style="transform: rotate(${(-t.heel).toFixed(1)}deg)">
+          <path d="M34 52 L58 52 L54 60 Q46 63 38 60 Z" fill="#6d5230" />
+          <path d="M44 60 L48 60 L47 66 Q46 66.4 45 66 Z" fill="#4a3a22" />
+          <line x1="46" y1="52" x2="46" y2="14" stroke="#4a3a22" stroke-width="2.4" stroke-linecap="round" />
+          <circle cx="46" cy="14" r="2" fill="${color}" />
+        </g>
+      </svg>
+    </div>
+    <div class="trim-read">
+      <p class="trim-verdict">${t.verdict}<span class="trim-heel">heels ${t.heel}&deg; in a gust</span></p>
+      <p class="trim-note">${t.note}</p>
+      <div class="trim-bar"><div class="trim-bar-fill" style="width:${fill}%;background:${color}"></div></div>
+    </div>
+  `;
+}
+
 function render() {
   renderTotals();
   renderProfile();
+  renderTrim();
   renderList();
   saveManifest();
 }
