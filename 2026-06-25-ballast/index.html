@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ballast — what keeps you upright is the weight no one ever sees</title>
+  <meta name="description" content="Ballast is dead weight stowed low in a hull — pig-iron, stone, water — that earns nothing on a calm day and is the only reason the ship is still upright when the squall lays her over. A small page about carrying your steadying weight low, lashing it down in fair weather, and letting the best of it become the keel." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <path d="M5 12 L27 12 L24 22 Q16 27 8 22 Z" fill="currentColor" opacity="0.92" />
+          <path d="M14 22 L18 22 L17.4 28 Q16 28.6 14.6 28 Z" fill="currentColor" />
+          <ellipse cx="16" cy="28.6" rx="3" ry="1.5" fill="currentColor" opacity="0.55" />
+          <path d="M5 12 L27 12" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" opacity="0.6" />
+          <path d="M16 6 L16 12 M16 6 L22 9" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" fill="none" opacity="0.7" />
+        </svg>
+      </span>
+      <span>Ballast</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#hold">The manifest</a>
+      <a href="#who">Who runs the same water</a>
+      <a href="#keel" class="nav-cta">Stow low</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">What a hull takes its stability from</p>
+        <h1>
+          The cargo everyone admires rides on deck.<br />
+          <em>What keeps you upright sits in the dark.</em>
+        </h1>
+        <p class="lede">
+          Ballast is dead weight — pig-iron, stone, water — stowed
+          low in a hull where no passenger ever sees it and no one
+          ever thinks to thank it. It earns nothing on a calm day. It
+          is the single reason the ship is still on her feet when the
+          squall lays her on her beam ends. The cargo people admire
+          rides high on the deck and makes her tender; the weight that
+          actually saves her sits in the bilge, in the dark, at the
+          very bottom of the boat. You cannot take ballast aboard in a
+          gale. Carry it low, lash it down in fair weather, and let
+          the best of it become the keel.
+        </p>
+        <div class="hero-cta">
+          <a href="#hold" class="btn btn-primary">See the manifest</a>
+          <a href="#keel" class="btn btn-ghost">Stow low</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One hull. The weight kept low. The boat that rights herself.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg class="hero-bed" viewBox="0 0 400 320" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="bSky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#dfe5e3" stop-opacity="0.95" />
+              <stop offset="60%" stop-color="#cdd6d6" stop-opacity="0.7" />
+              <stop offset="100%" stop-color="#bcc7c8" stop-opacity="0.4" />
+            </linearGradient>
+            <linearGradient id="bSea" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#4f6f74" />
+              <stop offset="100%" stop-color="#2c4750" />
+            </linearGradient>
+            <linearGradient id="bHull" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#8a6a3f" />
+              <stop offset="100%" stop-color="#5d4628" />
+            </linearGradient>
+          </defs>
+
+          <rect x="0" y="0" width="400" height="320" fill="url(#bSky)" />
+
+          <!-- a far squall coming up to weather -->
+          <path d="M0 40 q60 -14 120 6 q70 22 130 2 q60 -18 150 6 L400 0 L0 0 Z" fill="#b3bec0" opacity="0.5" />
+          <path d="M250 24 l-6 22 M270 30 l-5 20 M290 26 l-6 22" stroke="#9aa7a9" stroke-width="1.4" stroke-linecap="round" opacity="0.5" />
+
+          <!-- the sea, heeled to the horizon line -->
+          <g transform="rotate(-9 200 220)">
+            <rect x="-120" y="196" width="640" height="240" fill="url(#bSea)" />
+            <!-- the waterline and a couple of swells -->
+            <path d="M-120 196 q60 -8 120 0 q60 8 120 0 q60 -8 120 0 q60 8 120 0 q60 -8 120 0" stroke="#cdd6d6" stroke-width="2" fill="none" opacity="0.5" />
+            <path d="M-120 214 q70 -6 140 2 q70 8 140 -2 q70 -6 140 2 q70 8 140 -2" stroke="#3c5a61" stroke-width="2.4" fill="none" opacity="0.6" />
+          </g>
+
+          <!-- the hull, heeled by the wind, cut away to show the weight -->
+          <g transform="rotate(-9 200 220)">
+            <!-- topsides and deck cargo riding high -->
+            <path d="M120 150 L280 150 L268 196 Q200 214 132 196 Z" fill="url(#bHull)" />
+            <path d="M120 150 L280 150" stroke="#caa86a" stroke-width="1.4" opacity="0.7" />
+            <!-- deck cargo: tall, glamorous, tender -->
+            <rect x="150" y="126" width="26" height="24" rx="2" fill="#b9462f" opacity="0.9" />
+            <rect x="184" y="118" width="22" height="32" rx="2" fill="#c98a3a" opacity="0.9" />
+            <rect x="214" y="130" width="24" height="20" rx="2" fill="#9a5e3c" opacity="0.9" />
+            <!-- a mast, raked by the heel -->
+            <path d="M200 150 L196 56" stroke="#5d4628" stroke-width="3" stroke-linecap="round" />
+
+            <!-- the bilge, and the ballast struck down low -->
+            <path d="M150 188 Q200 206 250 188 L246 196 Q200 212 154 196 Z" fill="#3a2e1c" opacity="0.85" />
+            <!-- pig-iron / stone, stowed at the very bottom -->
+            <g>
+              <rect x="172" y="190" width="14" height="7" rx="1.4" fill="#6d7679" />
+              <rect x="188" y="191" width="14" height="7" rx="1.4" fill="#7a6a52" />
+              <rect x="204" y="190" width="14" height="7" rx="1.4" fill="#6d7679" />
+              <rect x="180" y="184" width="13" height="6" rx="1.4" fill="#7a6a52" />
+              <rect x="196" y="184" width="13" height="6" rx="1.4" fill="#6d7679" />
+            </g>
+
+            <!-- the deep keel, lead at its foot, the ballast that became the boat -->
+            <path d="M188 196 L212 196 L208 232 Q200 238 192 232 Z" fill="#4a3a22" />
+            <path d="M190 224 Q200 244 210 224 L208 232 Q200 240 192 232 Z" fill="#9a8045" />
+            <ellipse cx="200" cy="234" rx="11" ry="4" fill="#b08a3e" opacity="0.9" />
+          </g>
+
+          <!-- the righting arrow: low weight pulling her back upright -->
+          <path d="M236 250 q26 -18 14 -54" stroke="#b08a3e" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="3 4" opacity="0.8" />
+          <path d="M250 196 l-2 -8 l6 4 Z" fill="#b08a3e" opacity="0.8" />
+        </svg>
+        <span class="hero-tick hero-tick-1">weight carried low</span>
+        <span class="hero-tick hero-tick-2">deck cargo rides high</span>
+        <span class="hero-tick hero-tick-3">she rights herself</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>A tender ship<br /><em>capsizes proudly.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            Weight up high feels like progress. The deck cargo is the
+            part you can show people — stacked tall, lashed where it
+            catches the light, every ton of it admired on the way out
+            of harbour. And every ton of it makes her tender: quick to
+            roll, slow to come back, a little nearer to going over
+            each time she does. A ship is not steadied by how much she
+            carries. She is steadied by how low.
+          </p>
+          <p>
+            Ballast is the opposite thing. It is the pig-iron in the
+            bilge no one will ever see, the boring weight struck down
+            into the dark at the bottom of the boat. It does nothing
+            on a flat calm and everything on the worst night of the
+            crossing, when the squall lays her over and it is the low
+            weight — not the brave cargo on deck — that drags the mast
+            back up to the sky. You cannot stow it once the weather is
+            on you. The work is done in harbour, in fair weather,
+            while there is still time to put the weight where it saves
+            you. Carry your ballast low. Lash it down early.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Stow the weight low</h3>
+          <p>A hull is made stiff not by carrying more but by carrying it lower. The same ton up on deck makes her tender; struck down into the bilge it makes her sure. Put your steadying things — the savings, the sleep, the boring tests — at the very bottom, out of sight, where they do the most good and ask for the least credit.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Lash it down in fair weather</h3>
+          <p>Loose ballast is worse than none: in a knockdown it runs to leeward and capsizes the boat it was meant to save. And you cannot stow ballast in a gale — the work is harbour work, done while the glass is steady. Secure the dull fundamentals now, chocked and lashed, so they hold the night she goes right over.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Carry no more than you need</h3>
+          <p>Ballast is not hoarding. Too much and she is stiff to the point of cruelty, snapping back so hard she shakes her own rig out of her. The craft is the right weight, low — enough to right her, not so much that she fights every sea. Land what you do not need; keep only what keeps you upright.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Let the best of it become the keel</h3>
+          <p>The finest ballast stops being cargo and becomes the boat — lead cast into the keel, part of the hull, never to shift again. The habits you hold long enough stop being effort and become who you are: the thing that rights you without a thought, in weather you never saw coming.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="hold" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">One hull's ballast, stowed for the crossing</h2>
+        <p>One small wooden trading ketch and everything she is carrying — twelve entries on a fictional manifest, somewhere in the Western Approaches in the back-end of 2026, the glass falling, a gale forecast by the middle watch. Some of it is fresh shingle shovelled in loose this morning and apt to run to leeward. Some is pig-iron struck down years ago that has righted her through every blow since. One entry is ballast a previous owner landed to go faster, and never put back. Weather a gale, settle a weight lower, heave overboard what you do not need — the manifest redraws in your browser.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">Ship's manifest</p>
+            <p class="chart-project" id="chart-project">A ketch in the Western Approaches · back-end 2026 · twelve entries</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Gales each weight has weathered">
+          <p class="profile-axis-label top">righted her for years</p>
+          <p class="profile-axis-label bot">shipped this morning</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the manifest">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="loose" role="tab">Loose</button>
+          <button type="button" data-filter="stowed" role="tab">Stowed</button>
+          <button type="button" data-filter="lashed" role="tab">Lashed</button>
+          <button type="button" data-filter="righting" role="tab">Righting</button>
+        </div>
+
+        <ul class="legs" id="manifest-list">
+          <!-- weights inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-level" aria-label="Kind of weight">
+              <option value="shingle">Shingle</option>
+              <option value="stone">Stone</option>
+              <option value="iron">Iron</option>
+              <option value="keel">Keel</option>
+            </select>
+            <input id="add-gales" type="number" step="1" min="0" value="0" aria-label="Gales it has weathered" />
+            <input id="add-name" type="text" placeholder="Name the weight — the dull thing low in the bilge that rights you" maxlength="96" />
+            <select id="add-state" aria-label="How it is stowed">
+              <option value="loose">Loose</option>
+              <option value="stowed">Stowed</option>
+              <option value="lashed">Lashed</option>
+              <option value="righting">Righting</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Strike it down below</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Restow the seeded manifest</a>
+        </div>
+      </div>
+
+      <div class="legend">
+        <h3>The four kinds of weight</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-shingle"></span><div><strong>Shingle.</strong> Loose beach gravel shovelled in for trim — cheap, quick, and treacherous. It steadies her in a flat calm and runs to leeward the moment she heels. The new thing, not yet stowed; it would capsize you if the weather came tonight.</div></li>
+          <li><span class="legend-swatch swatch-stone"></span><div><strong>Stone.</strong> Rough rubble stowed and chocked under the sole. Heavier, steadier, properly down low — but still movable, still something you could shift or land. The fundamental that is holding, though it has not yet become permanent.</div></li>
+          <li><span class="legend-swatch swatch-iron"></span><div><strong>Iron.</strong> Cast pig-iron struck down into the bilge and lashed. Dense, deliberate, deep — the boring weight that has earned its place and quietly rights her in every blow. The settled discipline; the thing the boat is actually steadied by.</div></li>
+          <li><span class="legend-swatch swatch-keel"></span><div><strong>Keel.</strong> Lead run into the keel when she was laid down — ballast that stopped being cargo and became the boat. It never shifts, never has to be thought about, and always brings the mast back to the sky. The lifework; what rights you without a thought.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who runs the same water</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The delivery skipper who stows low</h3>
+          <p>Forty crossings of the same grey sea, and the first thing she does on a strange boat is go below and find the ballast. Not the electronics, not the sail wardrobe — the weight, and how low it sits. She has been laid flat once by a boat that was tender and lovely, and she has never trusted a pretty deck since. Stow low, lash early, sleep through the gale.</p>
+        </article>
+        <article>
+          <h3>The new owner who landed his ballast</h3>
+          <p>He read that she'd go a half-knot faster with less weight, so he landed two tons of pig-iron on the quay one fair afternoon and felt the boat come alive under him. She was quicker all summer. Then the autumn gale found him on a lee shore with nothing low to bring her back, and he learned what the iron had been doing all those calm days he resented it.</p>
+        </article>
+        <article>
+          <h3>The engineer who keeps the dull runbook</h3>
+          <p>Nobody has read the runbook in a year. It is not clever and it wins no praise in the review; it is just the boring weight he keeps stowed low and current while the glass is steady. Then the pager goes at three in the morning, the whole deck is awash, and the one calm thing on the boat is the page that tells him exactly which valve to shut. Ballast does nothing until the only thing that matters is that it is there.</p>
+        </article>
+        <article>
+          <h3>The founder who kept her savings low</h3>
+          <p>Everyone told her to put every ton on deck — raise more, spend more, ride higher. She kept a year of runway struck down in the bilge instead, unglamorous and earning nothing, and took a little ribbing for it. When the market squall came and tenderer boats went over all around her, she was the one still on her feet, because the weight that mattered was low and lashed before the weather.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="keel" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · back-end 2026</p>
+        <h2>One email when the weight is low and she rights herself.</h2>
+        <p class="hold-lede">A small page, a small hull, and the dull heavy work of striking the right weight down into the dark before the weather comes. A way to carry your ballast low and lash it in fair weather. No streak. No badge. No alarm when you miss a day. Leave your address and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@lowinthebilge.co" />
+          <button class="btn btn-primary" type="submit">Stow low</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One email when the weight is low, lashed in fair weather, and the boat rights herself in the worst of it. You can land it anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Ballast</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · what keeps you upright is the weight no one sees</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#hold">The manifest</a>
+      <a href="#keel">Stow low</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
