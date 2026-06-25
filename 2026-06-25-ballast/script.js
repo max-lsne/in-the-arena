@@ -34,12 +34,41 @@ const SEED_MANIFEST = [
   { name: 'The ballast a previous owner landed to go faster, and never replaced', level: 'stone', state: 'loose',    gales: 3  },
 ];
 
+const STORAGE_KEY = 'ballast.manifest.v1';
+const PROJECT_KEY = 'ballast.project.v1';
+const DEFAULT_PROJECT = 'A ketch in the Western Approaches · back-end 2026 · twelve entries';
+
 function seedManifest() {
   return SEED_MANIFEST.map((w, i) => ({ ...w, id: i + 1 }));
 }
 
-let manifest = seedManifest();
-let nextId = manifest.length + 1;
+function loadManifest() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return seedManifest();
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed) || parsed.length === 0) return seedManifest();
+    return parsed.map((w, i) => ({ ...w, id: w.id || i + 1 }));
+  } catch {
+    return seedManifest();
+  }
+}
+
+function saveManifest() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(manifest)); } catch {}
+}
+
+function loadProject() {
+  try { return localStorage.getItem(PROJECT_KEY) || DEFAULT_PROJECT; }
+  catch { return DEFAULT_PROJECT; }
+}
+
+function saveProject(name) {
+  try { localStorage.setItem(PROJECT_KEY, name); } catch {}
+}
+
+let manifest = loadManifest();
+let nextId = (manifest.reduce((m, w) => Math.max(m, w.id || 0), 0)) + 1;
 let filter = 'all';
 let focused = null;
 
@@ -129,6 +158,7 @@ function render() {
   renderTotals();
   renderProfile();
   renderList();
+  saveManifest();
 }
 
 // ---------- Helpers ----------
@@ -179,9 +209,13 @@ function removeWeight(id) {
 }
 
 function resetManifest() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch {}
+  try { localStorage.removeItem(PROJECT_KEY); } catch {}
   manifest = seedManifest();
   nextId = manifest.length + 1;
   filter = 'all';
+  const project = $('#chart-project');
+  if (project) project.textContent = DEFAULT_PROJECT;
   document.querySelectorAll('#filters button').forEach(b => {
     b.classList.toggle('is-active', b.dataset.filter === 'all');
   });
@@ -191,6 +225,18 @@ function resetManifest() {
 // ---------- Wire up ----------
 
 document.addEventListener('DOMContentLoaded', () => {
+  const project = $('#chart-project');
+  if (project) {
+    project.textContent = loadProject();
+    project.setAttribute('contenteditable', 'true');
+    project.setAttribute('spellcheck', 'false');
+    project.title = 'Click to rename the manifest';
+    project.addEventListener('blur', () => saveProject(project.textContent.trim()));
+    project.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); project.blur(); }
+    });
+  }
+
   render();
 
   document.querySelectorAll('#filters button').forEach(btn => {
