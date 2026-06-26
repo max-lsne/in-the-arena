@@ -154,9 +154,89 @@ function renderList() {
   });
 }
 
+// How flat the growth lies, by what the wood is doing. Leggy growth
+// reaches up off the wire toward the bush; tied, pruned and set wood is
+// laid in level along the wires where it fruits.
+const FLATNESS = { leggy: -1, tied: 0.35, pruned: 1, set: 1.6 };
+// How much vigour each stage carries — the bigger the limb, the more its
+// untrained growth tells against the shape of the wall.
+const VIGOUR = { whip: 1, cordon: 2, tier: 3, frame: 4 };
+
+// Work out how true the wall lies, or how far it has gone back to thicket:
+// growth left leggy lifts off the wire and shades its own fruit; growth
+// trained low and set lies flat and fruits on the spur.
+function computeFettle() {
+  let flat = 0, rank = 0;
+  wall.forEach(w => {
+    const vigour = VIGOUR[w.level] || 1;
+    const flatness = FLATNESS[w.state] ?? 0;
+    if (flatness >= 0) flat += vigour * flatness;
+    else rank += vigour * -flatness;
+  });
+  const total = flat + rank;
+  // ratio of trained-flat growth to the whole — 1 is all laid in, 0 all bolting
+  const ratio = total === 0 ? 0 : flat / total;
+  // how far the limbs lift off the wire under a season's growth: trained
+  // walls barely move, neglected ones reach for the sky
+  const rise = Math.round((4 + (1 - ratio) * 30) * 10) / 10;
+  let verdict, note, tone;
+  if (wall.length === 0) {
+    verdict = 'Bare wall'; tone = 'bad';
+    note = 'Nothing trained in. A whip planted now is years from fruit.';
+  } else if (rise <= 11) {
+    verdict = 'True to the wall'; tone = 'good';
+    note = 'Laid in flat and set. The wall fruits on its spurs and holds its own shape.';
+  } else if (rise <= 19) {
+    verdict = 'Holding form'; tone = 'ok';
+    note = 'Trained enough to keep its shape, though a season untended would tell.';
+  } else if (rise <= 27) {
+    verdict = 'Going leggy'; tone = 'warn';
+    note = 'Too much reaching growth left uncut. It bolts off the wire and shades its fruit.';
+  } else {
+    verdict = 'Reverted to bush'; tone = 'bad';
+    note = 'Untied and unpruned. The wall has gone back to thicket and forgotten the wire.';
+  }
+  return { rise, ratio, verdict, note, tone };
+}
+
+const FETTLE_TONES = {
+  good: '#5b7146',
+  ok:   '#7e8c5a',
+  warn: '#c79a3e',
+  bad:  '#9a3b2b',
+};
+
+function renderFettle() {
+  const el = $('#fettle');
+  if (!el) return;
+  const f = computeFettle();
+  const color = FETTLE_TONES[f.tone];
+  const fill = Math.round(f.ratio * 100);
+  el.innerHTML = `
+    <div class="fettle-gauge" aria-hidden="true">
+      <svg viewBox="0 0 92 64" preserveAspectRatio="xMidYMid meet">
+        <line x1="6" y1="46" x2="86" y2="46" stroke="#cfc6ad" stroke-width="1.2" opacity="0.7" />
+        <line x1="24" y1="60" x2="24" y2="46" stroke="#5a4225" stroke-width="2.6" stroke-linecap="round" />
+        <g class="fettle-limb" style="transform: rotate(${(-f.rise).toFixed(1)}deg)">
+          <path d="M24 46 H80" stroke="#6b5436" stroke-width="2.8" stroke-linecap="round" fill="none" />
+          <circle cx="50" cy="46" r="2" fill="${color}" opacity="0.6" />
+          <circle cx="64" cy="46" r="2" fill="${color}" opacity="0.6" />
+          <circle cx="80" cy="46" r="3.2" fill="${color}" />
+        </g>
+      </svg>
+    </div>
+    <div class="fettle-read">
+      <p class="fettle-verdict">${f.verdict}<span class="fettle-rise">lifts ${f.rise}&deg; off the wire</span></p>
+      <p class="fettle-note">${f.note}</p>
+      <div class="fettle-bar"><div class="fettle-bar-fill" style="width:${fill}%;background:${color}"></div></div>
+    </div>
+  `;
+}
+
 function render() {
   renderTotals();
   renderProfile();
+  renderFettle();
   renderList();
   saveWall();
 }

@@ -62,7 +62,10 @@ for the wood.
 - `script.js` — twelve limbs on one fictional garden's board in the
   back-end of 2026: the old pear fruiting on its spurs, the maiden whip cut
   this spring, the water-shoot that bolted and was never stopped, the
-  espalier a previous gardener let grow out into a bush.
+  espalier a previous gardener let grow out into a bush. A live fettle gauge
+  reads the whole wall — a limb that lies flat along the wire when the
+  growth is trained and set, and lifts up toward the bush the more you leave
+  leggy and uncut.
 
 ## Running it
 

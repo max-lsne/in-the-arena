@@ -384,6 +384,58 @@ main {
 .profile-bar.level-tier   { background: var(--leaf); }
 .profile-bar.level-frame  { background: var(--gold); }
 
+.fettle {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: var(--wash);
+}
+.fettle-gauge {
+  flex: 0 0 auto;
+  width: 92px;
+  height: 64px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #b9694e 0%, #a6573f 64%, #8d4d37 100%);
+  border: 1px solid var(--rule);
+}
+.fettle-gauge svg { width: 100%; height: 100%; display: block; }
+.fettle-limb { transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); transform-origin: 24px 46px; }
+.fettle-read { flex: 1 1 auto; min-width: 0; }
+.fettle-verdict {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 18px;
+  color: var(--ink);
+  margin: 0 0 2px;
+}
+.fettle-verdict .fettle-rise {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--brick);
+  margin-left: 8px;
+}
+.fettle-note {
+  font-size: 13px;
+  color: var(--shadow);
+  margin: 0;
+}
+.fettle-bar {
+  margin-top: 8px;
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(60, 79, 46, 0.14);
+  overflow: hidden;
+}
+.fettle-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s ease;
+}
+
 .filters {
   display: flex;
   gap: 8px;
