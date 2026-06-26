@@ -34,12 +34,41 @@ const SEED_WALL = [
   { name: 'The first cordon ever planted here, now part of the wall itself',    level: 'frame',  state: 'set',    seasons: 11 },
 ];
 
+const STORAGE_KEY = 'espalier.wall.v1';
+const PROJECT_KEY = 'espalier.project.v1';
+const DEFAULT_PROJECT = 'A south wall in the back-end of 2026 · twelve limbs';
+
 function seedWall() {
   return SEED_WALL.map((w, i) => ({ ...w, id: i + 1 }));
 }
 
-let wall = seedWall();
-let nextId = wall.length + 1;
+function loadWall() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return seedWall();
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed) || parsed.length === 0) return seedWall();
+    return parsed.map((w, i) => ({ ...w, id: w.id || i + 1 }));
+  } catch {
+    return seedWall();
+  }
+}
+
+function saveWall() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(wall)); } catch {}
+}
+
+function loadProject() {
+  try { return localStorage.getItem(PROJECT_KEY) || DEFAULT_PROJECT; }
+  catch { return DEFAULT_PROJECT; }
+}
+
+function saveProject(name) {
+  try { localStorage.setItem(PROJECT_KEY, name); } catch {}
+}
+
+let wall = loadWall();
+let nextId = (wall.reduce((m, w) => Math.max(m, w.id || 0), 0)) + 1;
 let filter = 'all';
 let focused = null;
 
@@ -129,6 +158,7 @@ function render() {
   renderTotals();
   renderProfile();
   renderList();
+  saveWall();
 }
 
 // ---------- Helpers ----------
@@ -179,9 +209,13 @@ function removeLimb(id) {
 }
 
 function resetWall() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch {}
+  try { localStorage.removeItem(PROJECT_KEY); } catch {}
   wall = seedWall();
   nextId = wall.length + 1;
   filter = 'all';
+  const project = $('#chart-project');
+  if (project) project.textContent = DEFAULT_PROJECT;
   document.querySelectorAll('#filters button').forEach(b => {
     b.classList.toggle('is-active', b.dataset.filter === 'all');
   });
@@ -191,6 +225,18 @@ function resetWall() {
 // ---------- Wire up ----------
 
 document.addEventListener('DOMContentLoaded', () => {
+  const project = $('#chart-project');
+  if (project) {
+    project.textContent = loadProject();
+    project.setAttribute('contenteditable', 'true');
+    project.setAttribute('spellcheck', 'false');
+    project.title = 'Click to rename the wall';
+    project.addEventListener('blur', () => saveProject(project.textContent.trim()));
+    project.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); project.blur(); }
+    });
+  }
+
   render();
 
   document.querySelectorAll('#filters button').forEach(btn => {
