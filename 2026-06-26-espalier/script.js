@@ -270,4 +270,87 @@ document.addEventListener('DOMContentLoaded', () => {
     const foot = $('#hold-foot');
     foot.textContent = 'Tied in. We will write once, when the wood has set into the bend, the string is off, and the tree fruits flat against the wall on its own.';
   });
+
+  wireKeyboard();
 });
+
+// ---------- Keyboard ----------
+
+function isTypingInForm() {
+  const t = document.activeElement;
+  if (!t) return false;
+  const tag = t.tagName;
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return true;
+  if (t.isContentEditable) return true;
+  return false;
+}
+
+function sortedShown() {
+  return visibleWall().slice().sort((a, b) => {
+    const d = STATES[b.state].order - STATES[a.state].order;
+    if (d !== 0) return d;
+    return b.seasons - a.seasons;
+  });
+}
+
+function focusedIndexInShown(shown) {
+  if (focused == null) return -1;
+  return shown.findIndex(w => w.id === focused);
+}
+
+function moveFocus(delta) {
+  const shown = sortedShown();
+  if (shown.length === 0) { focused = null; render(); return; }
+  let i = focusedIndexInShown(shown);
+  if (i === -1) {
+    focused = delta > 0 ? shown[0].id : shown[shown.length - 1].id;
+  } else {
+    i = (i + delta + shown.length) % shown.length;
+    focused = shown[i].id;
+  }
+  render();
+  const el = document.querySelector(`.leg[data-id="${focused}"]`);
+  if (el && el.scrollIntoView) el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+}
+
+function setFilter(f) {
+  filter = f;
+  document.querySelectorAll('#filters button').forEach(b => {
+    b.classList.toggle('is-active', b.dataset.filter === f);
+  });
+  render();
+}
+
+function nudgeSeasons(delta) {
+  if (focused == null) return;
+  const w = wall.find(x => x.id === focused);
+  if (!w) return;
+  w.seasons = Math.max(0, w.seasons + delta);
+  render();
+}
+
+function wireKeyboard() {
+  document.addEventListener('keydown', (e) => {
+    if (isTypingInForm()) return;
+    const k = e.key;
+    if (k === 'j' || k === 'J' || k === 'ArrowDown') { e.preventDefault(); moveFocus(1); return; }
+    if (k === 'k' || k === 'K' || k === 'ArrowUp')   { e.preventDefault(); moveFocus(-1); return; }
+    if (k === 'Enter') {
+      if (focused != null) { e.preventDefault(); advanceLimb(focused); }
+      return;
+    }
+    if (k === 'Delete' || k === 'Backspace') {
+      if (focused != null) { e.preventDefault(); removeLimb(focused); focused = null; }
+      return;
+    }
+    if (k === 'n' || k === 'N') { e.preventDefault(); const el = $('#add-name'); if (el) el.focus(); return; }
+    if (k === '0') { e.preventDefault(); setFilter('all');    return; }
+    if (k === '1') { e.preventDefault(); setFilter('leggy');  return; }
+    if (k === '2') { e.preventDefault(); setFilter('tied');   return; }
+    if (k === '3') { e.preventDefault(); setFilter('pruned'); return; }
+    if (k === '4') { e.preventDefault(); setFilter('set');    return; }
+    if (k === '[') { e.preventDefault(); nudgeSeasons(-1); return; }
+    if (k === ']') { e.preventDefault(); nudgeSeasons(1);  return; }
+    if (k === 'r' || k === 'R') { e.preventDefault(); resetWall(); return; }
+  });
+}
