@@ -420,6 +420,7 @@ main {
 }
 .state-btn:hover { transform: translateY(-1px); }
 .state-btn.on { background: var(--shade); color: var(--cream); border-color: var(--shade); }
+.state-btn svg { width: 15px; height: 15px; display: block; }
 .tending-go {
   width: 26px; height: 26px;
   border-radius: 7px;

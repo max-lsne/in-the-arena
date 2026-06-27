@@ -72,6 +72,19 @@
   }
   function svg(inner) { return '<svg viewBox="0 0 16 16" aria-hidden="true">' + inner + '</svg>'; }
 
+  function depthGlyph(di) {
+    // the same little valley on every button, with the marker sitting deeper
+    // in the fold as the depth increases — Slope and Spring no longer collide
+    var valley = '<path d="M2 4 C6 4 7 12 8 12 C9 12 10 4 14 4" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.5" stroke-linecap="round"/>';
+    var marks = [
+      '<circle cx="3.4" cy="4.8" r="1.6" fill="currentColor"/>',                                   // rim, up on the lip
+      '<circle cx="5.2" cy="8" r="1.6" fill="currentColor"/>',                                      // slope, partway down
+      '<circle cx="8" cy="11.4" r="1.6" fill="currentColor"/>',                                     // floor, on the bottom
+      '<circle cx="8" cy="11.4" r="1.4" fill="currentColor"/><circle cx="8" cy="11.4" r="3" fill="none" stroke="currentColor" stroke-width="0.9" opacity="0.7"/>' // spring, the source ringed
+    ];
+    return svg(valley + marks[di]);
+  }
+
   // --- model helpers ---
   function id() { return 'c' + Math.random().toString(36).slice(2, 9); }
 
@@ -219,8 +232,9 @@
       var b = document.createElement('button');
       b.className = 'state-btn' + (di === t.depth ? ' on' : '');
       b.type = 'button';
-      b.textContent = d.label.charAt(0);
+      b.innerHTML = depthGlyph(di);
       b.title = 'Move to ' + d.label;
+      b.setAttribute('aria-label', 'Move to ' + d.label);
       b.addEventListener('click', function (e) { e.stopPropagation(); selected = i; setDepth(i, di); });
       states.appendChild(b);
     });
