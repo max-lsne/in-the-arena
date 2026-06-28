@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Heddle — you cannot lift the whole warp and still weave; the heddle raises the chosen few</title>
+  <meta name="description" content="A heddle is the small frame that lifts the chosen few warp threads and opens the shed, so the shuttle can pass and the cloth can build. A small page about raising only the ends you mean to cross now, working them to a true selvage, and letting the rest hang slack off the beam until their turn." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23232f3e'/%3E%3Cpath d='M7 4 V28 M12 4 V28 M16 4 V28 M20 4 V28 M25 4 V28' stroke='%23efe9db' stroke-width='1.1' stroke-linecap='round' opacity='0.55'/%3E%3Cpath d='M5 14 H27' stroke='%23c39a3c' stroke-width='2.4' stroke-linecap='round'/%3E%3Cpath d='M12 14 V8 M16 14 V8 M20 14 V8' stroke='%233f5168' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='25' cy='21' r='2' fill='%23a8432f'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#ece7da" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#131720" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Heddle — you cannot lift the whole warp and still weave" />
+  <meta property="og:description" content="The small frame that lifts the chosen few warp threads and opens the shed, so the shuttle can pass and the cloth can build. A small page about raising only the ends you mean to cross now, and letting the rest hang slack until their turn." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <path d="M8 4 V28 M13 4 V28 M16 4 V28 M19 4 V28 M24 4 V28" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" opacity="0.5" />
+          <path d="M5 15 H27" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+          <path d="M13 15 V9 M16 15 V9 M19 15 V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+        </svg>
+      </span>
+      <span>Heddle</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#hollow">The shed</a>
+      <a href="#who">Who keeps one</a>
+      <a href="#bring" class="nav-cta">Raise an end</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">What a heddle does to a warp</p>
+        <h1>
+          You cannot lift the whole warp.<br />
+          <em>The heddle raises the chosen few.</em>
+        </h1>
+        <p class="lede">
+          A heddle is the small frame that lifts a chosen handful of warp
+          threads and opens the shed — the clean triangular gap the shuttle
+          flies through. Raise everything at once and there is no gap, no
+          pass, no cloth: a taut wall of thread and nothing woven. So the
+          heddle lifts only the few you mean to cross now, the shed opens,
+          the pick goes through, the reed beats it home — and the rest of
+          the warp hangs slack off the beam, perfectly safe, waiting its
+          turn. The web does not build because you held up every thread. It
+          builds because a few were raised, crossed, and beaten true.
+        </p>
+        <div class="hero-cta">
+          <a href="#hollow" class="btn btn-primary">See the shed</a>
+          <a href="#bring" class="btn btn-ghost">Raise an end</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One shed. A few ends raised. The rest slack off the beam.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg class="hero-bed" viewBox="0 0 400 320" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="cSky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#efe9db" stop-opacity="0.95" />
+              <stop offset="60%" stop-color="#e6e0d0" stop-opacity="0.7" />
+              <stop offset="100%" stop-color="#d8d2c0" stop-opacity="0.35" />
+            </linearGradient>
+            <linearGradient id="cHill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#4f6178" />
+              <stop offset="100%" stop-color="#354659" />
+            </linearGradient>
+            <linearGradient id="cShade" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#3f5168" />
+              <stop offset="100%" stop-color="#232f3e" />
+            </linearGradient>
+          </defs>
+
+          <rect x="0" y="0" width="400" height="320" fill="url(#cSky)" />
+
+          <!-- the shimmer along the warp, reads as the thread catching light -->
+          <g class="hero-wind" stroke="#cdc7b4" stroke-width="1.1" fill="none" opacity="0.5" stroke-linecap="round">
+            <path d="M-10 24 C 90 18 150 18 210 24 C 280 30 330 26 412 20" />
+            <path d="M-10 40 C 100 34 160 34 220 40 C 290 46 340 42 412 36" />
+            <path d="M-10 56 C 110 50 170 50 230 56 C 300 62 348 58 412 52" />
+          </g>
+
+          <!-- the whole warp: parallel vertical threads stretched down the loom -->
+          <g stroke="#3f5168" stroke-width="1.4" opacity="0.5" stroke-linecap="round">
+            <path d="M70 70 V250" />
+            <path d="M95 70 V250" />
+            <path d="M120 70 V250" />
+            <path d="M145 70 V250" />
+            <path d="M170 70 V250" />
+            <path d="M195 70 V250" />
+            <path d="M220 70 V250" />
+            <path d="M245 70 V250" />
+            <path d="M270 70 V250" />
+          </g>
+
+          <!-- the back beam the warp comes off, and the cloth beam below -->
+          <rect x="44" y="62" width="312" height="8" rx="4" fill="#6a5436" opacity="0.85" />
+
+          <!-- the heddle frame, lifting a chosen few warp ends to open a shed -->
+          <rect x="120" y="116" width="160" height="9" rx="4.5" fill="#c39a3c" />
+          <g stroke="#c39a3c" stroke-width="2.4" stroke-linecap="round">
+            <path d="M145 120 V125" />
+            <path d="M195 120 V125" />
+            <path d="M245 120 V125" />
+          </g>
+          <!-- the lifted ends, pulled up by the heddle into a clean triangular shed -->
+          <g stroke="#3f5168" stroke-width="2" fill="none" stroke-linecap="round">
+            <path d="M145 70 L160 130 L145 196" />
+            <path d="M195 70 L195 130 L195 196" />
+            <path d="M245 70 L230 130 L245 196" />
+          </g>
+          <!-- the open shed: the clear triangular gap the shuttle flies through -->
+          <path d="M120 196 L195 132 L270 196 Z" fill="#3f5168" opacity="0.08" />
+          <path d="M120 196 L195 132 L270 196" fill="none" stroke="#4f7470" stroke-width="1" stroke-dasharray="3 4" opacity="0.6" />
+
+          <!-- the shuttle passing through the shed, carrying the weft -->
+          <g class="hero-gorse">
+            <ellipse cx="170" cy="178" rx="16" ry="6" fill="#c39a3c" opacity="0.95" />
+            <ellipse cx="170" cy="178" rx="16" ry="6" fill="none" stroke="#8a6a1f" stroke-width="1" opacity="0.5" />
+            <circle cx="170" cy="178" r="2" fill="#232f3e" />
+            <path d="M154 178 L130 178" stroke="#4f7470" stroke-width="1.4" stroke-linecap="round" opacity="0.8" />
+          </g>
+
+          <!-- the woven web building below, with a straight true selvage edge -->
+          <g opacity="0.92">
+            <rect x="70" y="200" width="200" height="50" rx="2" fill="#354659" opacity="0.3" />
+            <g stroke="#4f7470" stroke-width="1.6" stroke-linecap="round" opacity="0.85">
+              <path d="M70 208 H270" />
+              <path d="M70 216 H270" />
+              <path d="M70 224 H270" />
+              <path d="M70 232 H270" />
+              <path d="M70 240 H270" />
+            </g>
+            <!-- the selvage: the cloth's straight, even left edge -->
+            <path d="M70 200 V250" stroke="#c39a3c" stroke-width="2.2" stroke-linecap="round" />
+            <path d="M270 200 V250" stroke="#c39a3c" stroke-width="2.2" stroke-linecap="round" />
+          </g>
+
+          <!-- a few ends off to the side, hanging slack and tangled, not yet raised -->
+          <g stroke="#a8432f" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.85">
+            <path d="M300 72 C 304 110 296 140 302 178 C 306 206 298 226 304 250" />
+            <path d="M320 72 C 314 108 324 138 318 176 C 312 208 322 228 316 250" />
+            <path d="M340 72 C 344 112 334 142 342 180 C 348 210 338 230 344 250" />
+          </g>
+        </svg>
+        <span class="hero-tick hero-tick-1">whole warp, none crossed</span>
+        <span class="hero-tick hero-tick-2">a few raised, shed open</span>
+        <span class="hero-tick hero-tick-3">beaten to a true selvage</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>Every thread up,<br /><em>and nothing woven.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            The mistake is always the same: you try to lift the whole warp
+            at once. Every message, every half-promise, every someday-project
+            gets pulled taut and held up together, the full width of the
+            beam standing in the air at the same moment — and there is no
+            shed. No gap, no pass, nowhere for the shuttle to go. You hold
+            forty threads aloft and weave none of them, and your arms ache,
+            and the cloth on the beam does not grow by a single pick.
+          </p>
+          <p>
+            A heddle is the opposite discipline, on purpose. It lifts a few
+            ends and leaves the rest. You raise only the handful you mean to
+            cross now, the shed opens clean, the shuttle flies through, the
+            reed beats the weft home — and the threads you did not raise hang
+            slack off the beam, untouched and unharmed, waiting their turn.
+            It feels like doing less. It is doing less, of more threads at
+            once, and far more of the few you actually raised. Raise the
+            chosen few. Pass the pick. Beat it home. Let the rest hang.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Raise only the ends you mean to cross</h3>
+          <p>A shed is small by nature, and that is its whole virtue. You lift a thread off the beam and up through the heddle — but only a few, because only a few can be raised and still leave a clean gap to pass. When the shed is full, the next thread is not raised; it hangs slack off the beam, perfectly safe, until an end already up is beaten in and crossed. The cap is the point, not a flaw.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Throw the pick and beat it home</h3>
+          <p>A thread raised is in the shed, but not yet woven. Raised only means lifted into the gap — held by the heddle, not yet crossed by the weft. So you throw the shuttle through, draw the pick even, and beat it home tight with the reed. The crossing is the whole work of the loom. An end left raised but never beaten just hangs in the open shed and slowly frays.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Let the rest hang slack off the beam</h3>
+          <p>The threads you did not raise are not your work this hour. They wait on the beam, untensioned and unharmed, and the shuttle passes clean over the top of them without ever touching one. You do not have to lift them. You do not have to cross them now. You let them hang — and the clean open shed, the only thing that lets the shuttle through at all, is what letting them hang buys you.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="hollow" class="hollow">
+      <div class="hollow-head">
+        <h2 class="section-title">The shed</h2>
+        <p class="hollow-intro">
+          One fictional warp, partway through its cloth. A few ends have
+          been raised off the beam and up through the heddle; one has been
+          crossed and beaten into the web for good, the cloth the rest build
+          toward; one was raised and never beaten and is quietly fraying in
+          the open shed; one is still hanging slack off the beam, not yet
+          threaded at all. The <em>selvage line</em> reads the whole web at
+          once — it runs straight and even when a few ends are raised and
+          beaten, and puckers and waves as too many are raised at once, or
+          left slack and untensioned.
+        </p>
+      </div>
+
+      <div class="board" id="board">
+        <div class="board-bar">
+          <div class="board-name">
+            <span class="board-dot" aria-hidden="true"></span>
+            <span id="web-name" class="web-name" tabindex="0" role="textbox" aria-label="Web name, click to rename">Madder runner</span>
+          </div>
+          <div class="board-meta">
+            <span id="floor-count" class="floor-count">0 / 6 in the shed</span>
+          </div>
+        </div>
+
+        <div class="gauge" aria-hidden="true">
+          <div class="gauge-label">
+            <span>the selvage line</span>
+            <span id="gauge-read" class="gauge-read">true</span>
+          </div>
+          <svg class="gauge-svg" viewBox="0 0 600 64" preserveAspectRatio="none">
+            <path id="gauge-path" d="M0 32 H600" fill="none" stroke="#4f7470" stroke-width="2.4" stroke-linecap="round" />
+          </svg>
+        </div>
+
+        <ul class="tendings" id="tendings"></ul>
+
+        <form class="add" id="add-form" autocomplete="off">
+          <input
+            class="add-input"
+            id="add-input"
+            type="text"
+            maxlength="80"
+            placeholder="Thread another end…"
+            aria-label="Thread a new end into the shed"
+          />
+          <button class="btn btn-primary add-btn" type="submit">Thread end</button>
+        </form>
+        <p class="board-hint" id="board-hint">
+          Click an end to work it on a step. <kbd>N</kbd> new ·
+          <kbd>J</kbd>/<kbd>K</kbd> move · <kbd>0</kbd>–<kbd>3</kbd> set ·
+          <kbd>[</kbd> <kbd>]</kbd> pick/loosen · <kbd>R</kbd> cut.
+        </p>
+      </div>
+
+      <div class="legends">
+        <div class="legend">
+          <h3>How far through the loom</h3>
+          <ul class="legend-list" id="legend-depth">
+            <li><span class="chip chip-slack">Slack</span><span>A warp end hanging loose off the beam, untensioned, not yet drawn through. New, and not yet placed.</span></li>
+            <li><span class="chip chip-threaded">Threaded</span><span>Drawn through its heddle eye and the reed, set in its place on the loom. Placed, not yet lifted.</span></li>
+            <li><span class="chip chip-raised">Raised</span><span>Lifted by the heddle into the open shed, up in the gap and ready for the pick. In hand.</span></li>
+            <li><span class="chip chip-crossed">Crossed</span><span>The weft passed and beaten, woven into the web for good. The thread that became cloth — the one that matters most.</span></li>
+          </ul>
+        </div>
+        <div class="legend">
+          <h3>What the work is doing</h3>
+          <ul class="legend-list" id="legend-weather">
+            <li><span class="chip chip-loose">Loose</span><span>Slack and untensioned, frays and tangles in the hand. Wants taking up before it knots.</span></li>
+            <li><span class="chip chip-drawn">Drawn</span><span>Tensioned and drawn even across the warp. Coming right under the hand.</span></li>
+            <li><span class="chip chip-picked">Picked</span><span>The pick thrown through clean and lying true. Going well, the cloth growing.</span></li>
+            <li><span class="chip chip-beaten">Beaten</span><span>Beaten home tight into the web with the reed. Set; needs nothing now — it simply holds.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who keeps a loom</h2>
+      <div class="who-grid">
+        <article class="who-card">
+          <h3>The maker with forty tabs</h3>
+          <p>Everything is open, nothing is finished, and the whole warp stands up in the air at once. A heddle is the refusal: six ends raised in the shed, the other thirty-four left to hang slack off the beam, and for the first time the shuttle has a clean gap to fly through and something gets woven.</p>
+        </article>
+        <article class="who-card">
+          <h3>The one who says yes too fast</h3>
+          <p>Every ask gets pulled taut and lifted, half-promised, the beam crowded full and no shed left to pass. The loom gives a hard count: this many raised, no more. What does not fit is not raised — and saying so is the kindest thing for the few ends already in the shed.</p>
+        </article>
+        <article class="who-card">
+          <h3>The carer of a few people</h3>
+          <p>You cannot raise the whole warp, and trying weaves nothing. A handful of ends, drawn through and lifted, the pick thrown and beaten home each week, crossed into the cloth — and the rest of the warp, real as it is, left to hang slack on the beam without dragging the web out of true.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="bring" class="cta">
+      <div class="cta-inner">
+        <p class="eyebrow">Raise an end</p>
+        <h2>You cannot lift the whole warp.<br /><em>You can raise the chosen few.</em></h2>
+        <p class="cta-lede">
+          So stop holding every thread up in the air at once. Raise the few
+          you mean to cross now, throw the shuttle through the open shed,
+          beat the pick home tight — and let the rest of the warp hang slack
+          off the beam until its turn. The clean open shed is the only thing
+          that ever lets the cloth build. Raise the chosen few. Pass the
+          pick. Beat it home. Let the rest hang.
+        </p>
+        <a href="#hollow" class="btn btn-primary btn-lg">Go to the loom</a>
+        <p class="cta-foot">No sign-up. No warp to dress. It all lives in your browser.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="20" height="20">
+            <path d="M8 4 V28 M16 4 V28 M24 4 V28" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" opacity="0.5" />
+            <path d="M5 15 H27" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+          </svg>
+        </span>
+        <span>Heddle</span>
+      </div>
+      <p class="footer-note">
+        A heddle is the small frame that lifts the chosen few warp threads
+        and opens the shed, so the shuttle can pass and the cloth can build.
+        One of a series of small pages about keeping less and keeping it
+        well.
+      </p>
+      <p class="footer-meta">2026-06-28 · raise the few, cross them, beat them home</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
