@@ -47,7 +47,7 @@
     ]
   };
 
-  var state = clone(SEED);
+  var state = load();
   var selected = 0;
   var seq = 0;
 
@@ -91,6 +91,31 @@
 
   // --- model helpers ---
   function id() { return 't' + Math.random().toString(36).slice(2, 9); }
+
+  function load() {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return clone(SEED);
+      var parsed = JSON.parse(raw);
+      if (!parsed || !Array.isArray(parsed.tendings)) return clone(SEED);
+      parsed.tendings = parsed.tendings.slice(0, CAP).map(function (t) {
+        return {
+          id: t.id || id(),
+          title: String(t.title || '').slice(0, 80),
+          depth: clampInt(t.depth, 0, 3),
+          weather: clampInt(t.weather, 0, 3)
+        };
+      });
+      if (typeof parsed.name !== 'string' || !parsed.name) parsed.name = SEED.name;
+      return parsed;
+    } catch (e) {
+      return clone(SEED);
+    }
+  }
+
+  function save() {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
 
   function clone(o) { return JSON.parse(JSON.stringify(o)); }
   function clampInt(n, lo, hi) { n = parseInt(n, 10); if (isNaN(n)) return lo; return Math.max(lo, Math.min(hi, n)); }
@@ -171,6 +196,7 @@
       : 'Mark out another joint…';
 
     paintGauge();
+    save();
   }
 
   function row(t, i) {
@@ -317,6 +343,7 @@
     var v = $name.textContent.trim().slice(0, 40);
     state.name = v || SEED.name;
     $name.textContent = state.name;
+    save();
   });
 
   // --- add form ---
@@ -326,6 +353,15 @@
     if (!v) return;
     add(v);
     $input.value = '';
+  });
+
+  // --- reset, double-click the joint count ---
+  $count.addEventListener('dblclick', function () {
+    if (window.confirm('Clear the frame back to the example build?')) {
+      state = clone(SEED);
+      selected = 0;
+      render();
+    }
   });
 
   render();
