@@ -357,6 +357,39 @@
     $input.value = '';
   });
 
+  // --- keyboard: the loom is keyboard-first ---
+  document.addEventListener('keydown', function (e) {
+    var tag = (e.target.tagName || '').toLowerCase();
+    var typing = tag === 'input' || tag === 'textarea' || e.target.isContentEditable;
+    if (typing) return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+    var n = state.tendings.length;
+    switch (e.key) {
+      case 'n': case 'N':
+        e.preventDefault(); $input.focus(); break;
+      case 'j': case 'J': case 'ArrowDown':
+        if (n) { selected = (selected + 1) % n; render(); scrollToSel(); } e.preventDefault(); break;
+      case 'k': case 'K': case 'ArrowUp':
+        if (n) { selected = (selected - 1 + n) % n; render(); scrollToSel(); } e.preventDefault(); break;
+      case ']':
+        if (n) bumpWeather(selected, +1); e.preventDefault(); break;
+      case '[':
+        if (n) bumpWeather(selected, -1); e.preventDefault(); break;
+      case 'Enter':
+        if (n) bumpWeather(selected, +1); e.preventDefault(); break;
+      case '0': case '1': case '2': case '3':
+        if (n) setDepth(selected, parseInt(e.key, 10)); e.preventDefault(); break;
+      case 'r': case 'R': case 'Delete': case 'Backspace':
+        if (n) letGoOver(selected); e.preventDefault(); break;
+    }
+  });
+
+  function scrollToSel() {
+    var li = $tendings.querySelector('.sel');
+    if (li && li.scrollIntoView) li.scrollIntoView({ block: 'nearest' });
+  }
+
   // --- reset, double-click the count ---
   $count.addEventListener('dblclick', function () {
     if (window.confirm('Clear the warp back to the example web?')) {
@@ -365,6 +398,26 @@
       render();
     }
   });
+
+  // gentle living ripple on the selvage line when the edge is drawing in
+  var prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduce) {
+    setInterval(function () {
+      // nudge the phase so a puckering edge breathes; a true selvage stays flat
+      var wind = windLevel();
+      if (wind < 0.13) return;
+      seq = (seq + 1) % 1000;
+      var W = 600, mid = 32, steps = 60;
+      var amp = wind * 16, freq = 2 + wind * 5, ph = seq * 0.35;
+      var d = 'M0 ' + mid;
+      for (var i = 1; i <= steps; i++) {
+        var x = (W / steps) * i, t = i / steps;
+        var y = mid + Math.sin(t * Math.PI * freq + ph) * amp * Math.sin(t * Math.PI);
+        d += ' L' + x.toFixed(1) + ' ' + y.toFixed(1);
+      }
+      $gaugePath.setAttribute('d', d);
+    }, 1400);
+  }
 
   render();
 })();
