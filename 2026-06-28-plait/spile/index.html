@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spile — broach every cask at once and the lot turns; tend a few, drawn slow, and they keep for years</title>
+  <meta name="description" content="Spile is the soft peg eased into a cask to let it breathe before you draw. A small page about broaching only the few works you can actually draw down — spiled, drawn slow, racked off bright — and letting the rest stay bunged and sound rather than open to the air and souring." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <ellipse cx="16" cy="16" rx="9" ry="12" fill="none" stroke="currentColor" stroke-width="2.2" />
+          <path d="M7 11 H25 M7 21 H25" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.6" />
+          <path d="M16 4 V1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+        </svg>
+      </span>
+      <span>Spile</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#hollow">The stillage</a>
+      <a href="#who">Who keeps one</a>
+      <a href="#bring" class="nav-cta">Lay one down</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">What a soft peg does for a cask</p>
+        <h1>
+          Broach every cask at once and the lot turns.<br />
+          <em>Tend a few, drawn slow, and they keep for years.</em>
+        </h1>
+        <p class="lede">
+          A spile is the little soft peg you ease into the shive of a
+          cask — not to open it wide, but to let it breathe a hair before
+          you tap it and draw. Broach the whole cellar at once, knock
+          every bung out and let the air at all of it, and by the weekend
+          the lot is fretting, working over, turning to vinegar together.
+          A spile is the patient opposite: you start a few, draw them a
+          glass at a time, drop them bright and rack them off clear into
+          the keeping cask. The cellar is not measured by how many casks
+          you broach. It is measured by how many you bring down sound.
+          Lay down what you can tend. Let the rest stay bunged.
+        </p>
+        <div class="hero-cta">
+          <a href="#hollow" class="btn btn-primary">See the stillage</a>
+          <a href="#bring" class="btn btn-ghost">Lay one down</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One stillage. A few casks drawn slow. The rest kept bunged.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg class="hero-bed" viewBox="0 0 400 320" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="cAir" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#efe6d2" stop-opacity="0.95" />
+              <stop offset="60%" stop-color="#e4d9c2" stop-opacity="0.7" />
+              <stop offset="100%" stop-color="#d8cbb0" stop-opacity="0.35" />
+            </linearGradient>
+            <linearGradient id="cOak" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#a87a3a" />
+              <stop offset="100%" stop-color="#6f4c23" />
+            </linearGradient>
+            <linearGradient id="cTurned" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#9b4128" />
+              <stop offset="100%" stop-color="#6e2c1a" />
+            </linearGradient>
+          </defs>
+
+          <rect x="0" y="0" width="400" height="320" fill="url(#cAir)" />
+
+          <!-- the cellar mist / rising bubbles, drifting in the still air -->
+          <g class="hero-wind" stroke="#c8bb9e" stroke-width="1.1" fill="none" opacity="0.5" stroke-linecap="round">
+            <path d="M-10 30 C 90 18 150 18 210 30 C 280 44 330 38 412 26" />
+            <path d="M-10 50 C 100 38 160 38 220 50 C 290 62 340 56 412 44" />
+            <path d="M-10 70 C 110 60 170 60 230 70 C 300 82 348 76 412 64" />
+          </g>
+
+          <!-- the soft cellar arch behind, vaulted brick -->
+          <path d="M40 200 C 40 120 360 120 360 200 L 360 210 L 40 210 Z" fill="#3c2b18" opacity="0.16" />
+          <path d="M40 200 C 40 120 360 120 360 200" fill="none" stroke="#3c2b18" stroke-width="1.4" opacity="0.25" />
+
+          <!-- the wooden stillage / rack the sound casks lie on -->
+          <rect x="60" y="246" width="250" height="10" rx="2" fill="url(#cOak)" opacity="0.9" />
+          <rect x="72" y="256" width="9" height="30" fill="#5a3f20" opacity="0.85" />
+          <rect x="290" y="256" width="9" height="30" fill="#5a3f20" opacity="0.85" />
+          <rect x="180" y="256" width="9" height="30" fill="#5a3f20" opacity="0.8" />
+
+          <!-- cask one, lying on its side, bunged and sound -->
+          <g>
+            <ellipse cx="108" cy="222" rx="20" ry="26" fill="url(#cOak)" />
+            <path d="M88 210 H128 M86 222 H130 M88 234 H128" stroke="#c79a36" stroke-width="1.6" stroke-linecap="round" opacity="0.85" />
+            <ellipse cx="108" cy="222" rx="20" ry="26" fill="none" stroke="#5a3f20" stroke-width="1.4" />
+          </g>
+
+          <!-- cask two, spiled: a soft peg in the top breathing a bubble or two -->
+          <g>
+            <ellipse cx="184" cy="220" rx="21" ry="27" fill="url(#cOak)" />
+            <path d="M163 208 H205 M161 220 H207 M163 232 H205" stroke="#c79a36" stroke-width="1.6" stroke-linecap="round" opacity="0.85" />
+            <ellipse cx="184" cy="220" rx="21" ry="27" fill="none" stroke="#5a3f20" stroke-width="1.4" />
+            <!-- the spile peg in the top -->
+            <path d="M184 196 V186" stroke="#3c2b18" stroke-width="2.4" stroke-linecap="round" />
+            <circle cx="184" cy="184" r="2.2" fill="#6f8154" />
+            <circle cx="180" cy="176" r="2" fill="#6f8154" opacity="0.6" />
+            <circle cx="188" cy="170" r="1.5" fill="#6f8154" opacity="0.4" />
+          </g>
+
+          <!-- cask three, drawing: a tap drawing a glass below -->
+          <g>
+            <ellipse cx="262" cy="222" rx="21" ry="27" fill="url(#cOak)" />
+            <path d="M241 210 H283 M239 222 H285 M241 234 H283" stroke="#c79a36" stroke-width="1.6" stroke-linecap="round" opacity="0.85" />
+            <ellipse cx="262" cy="222" rx="21" ry="27" fill="none" stroke="#5a3f20" stroke-width="1.4" />
+            <!-- the tap and the drip into a glass -->
+            <path d="M283 226 H292 V232" stroke="#3c2b18" stroke-width="2.2" fill="none" stroke-linecap="round" />
+            <path d="M292 238 V250" stroke="#c79a36" stroke-width="1.6" stroke-linecap="round" opacity="0.8" />
+            <path d="M286 258 H298 L296 274 H288 Z" fill="#c79a36" opacity="0.4" stroke="#9a6b2f" stroke-width="1" />
+          </g>
+
+          <!-- off to the side: two casks broached all at once, froth blowing over (the wrong way) -->
+          <g opacity="0.95">
+            <ellipse cx="340" cy="250" rx="15" ry="20" fill="url(#cTurned)" />
+            <path d="M325 240 H355 M324 250 H356 M325 260 H355" stroke="#caa86f" stroke-width="1.3" stroke-linecap="round" opacity="0.6" />
+            <ellipse cx="340" cy="250" rx="15" ry="20" fill="none" stroke="#5a2818" stroke-width="1.2" />
+            <!-- bung out, froth blowing over -->
+            <path d="M340 231 V224" stroke="#5a2818" stroke-width="1.6" stroke-linecap="round" />
+            <circle cx="340" cy="221" r="2.4" fill="#caa86f" opacity="0.7" />
+            <circle cx="346" cy="215" r="2" fill="#caa86f" opacity="0.55" />
+            <circle cx="334" cy="213" r="1.8" fill="#caa86f" opacity="0.45" />
+            <circle cx="350" cy="208" r="1.5" fill="#caa86f" opacity="0.4" />
+          </g>
+          <g opacity="0.9">
+            <ellipse cx="372" cy="262" rx="12" ry="16" fill="url(#cTurned)" />
+            <path d="M360 254 H384 M360 262 H384 M360 270 H384" stroke="#caa86f" stroke-width="1.1" stroke-linecap="round" opacity="0.55" />
+            <ellipse cx="372" cy="262" rx="12" ry="16" fill="none" stroke="#5a2818" stroke-width="1.1" />
+            <circle cx="372" cy="245" r="2" fill="#caa86f" opacity="0.55" />
+            <circle cx="377" cy="239" r="1.6" fill="#caa86f" opacity="0.4" />
+          </g>
+        </svg>
+        <span class="hero-tick hero-tick-1">all broached, all turning</span>
+        <span class="hero-tick hero-tick-2">a few spiled, breathing slow</span>
+        <span class="hero-tick hero-tick-3">racked off bright &amp; sound</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>Every bung out,<br /><em>and nothing kept sound.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            The mistake is always the same: you treat the cellar like a
+            tap-room on a feast day — knock every bung out, broach the
+            whole stock at once, and let the air in everywhere. Every
+            project, every half-started idea, every someday-cask stands
+            open to the air together, and not one of them is being drawn
+            down with any care. You work forty things at once, badly. The
+            whole cellar goes hazy and fretting, because nothing that is
+            broached and left ever gets the slow, patient drawing that
+            brings it down bright.
+          </p>
+          <p>
+            A spile is the opposite habit, on purpose. It is a peg, not a
+            mallet — a soft thing eased in to let a cask breathe just
+            enough, so you can start a few, draw them slow, drop them
+            bright and rack them off clear. You broach only what you can
+            keep an eye on, you draw a glass at a time, and you let the
+            rest of the stock stay bunged and sound rather than open and
+            souring. It feels like doing less. It is doing less, of fewer
+            casks at once, and far more for the few you have actually
+            laid down to draw. Lay down what you can tend. Draw it slow.
+            Let the rest stay bunged.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Lay down only what the stillage holds</h3>
+          <p>A stillage holds only so many casks, and that is its whole virtue. You lay a cask on the rack and start to work it — but only a few, because the rack holds only a few. When the stillage is full, the next cask does not come down; it stays bunged in the back of the cellar, or it waits for another year. The cap is the point, not a flaw.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Ease a spile in and draw it slow</h3>
+          <p>A cask laid down is sound, but not yet started. Bunged only means stoppered and sound — kept by the wood, not yet worked by you. So you ease a soft spile into the shive, let it breathe, tap it and draw a glass at a time. The drawing is the whole work of the cellar. A cask broached but left undrawn just frets, goes hazy, and slowly works over to vinegar.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Let the rest stay bunged and sound</h3>
+          <p>The stock you did not broach is not souring. It sits bunged, stoppered and sound, keeping clear for years in the cool of the cellar without ever taking a breath of air it does not need. You do not have to broach it now. You do not have to draw it all at once. You let it keep — and the soundness of the few you are drawing, which is the only thing that ever comes down bright, is what leaving the rest bunged buys you.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="hollow" class="hollow">
+      <div class="hollow-head">
+        <h2 class="section-title">The stillage</h2>
+        <p class="hollow-intro">
+          One fictional cellar, partway through a year. A few casks have
+          been laid down on the stillage and started; one has been dropped
+          bright and racked off into the keeping cask, the sound one the
+          rest are worked toward; one was broached and never drawn and is
+          quietly fretting over; one is still bunged in the back, not yet
+          started at all. The <em>cellar line</em> reads the whole cellar
+          at once — it lies level and clear when a few casks are drawn
+          slow, and rolls, frets and turns as the air gets in: too many
+          broached at once, or too many left to sour.
+        </p>
+      </div>
+
+      <div class="board" id="board">
+        <div class="board-bar">
+          <div class="board-name">
+            <span class="board-dot" aria-hidden="true"></span>
+            <span id="cellar-name" class="cellar-name" tabindex="0" role="textbox" aria-label="Cellar name, click to rename">Crabtree cellar</span>
+          </div>
+          <div class="board-meta">
+            <span id="floor-count" class="floor-count">0 / 6 on the stillage</span>
+          </div>
+        </div>
+
+        <div class="gauge" aria-hidden="true">
+          <div class="gauge-label">
+            <span>the cellar line</span>
+            <span id="gauge-read" class="gauge-read">clear &amp; level</span>
+          </div>
+          <svg class="gauge-svg" viewBox="0 0 600 64" preserveAspectRatio="none">
+            <path id="gauge-path" d="M0 32 H600" fill="none" stroke="#6f8154" stroke-width="2.4" stroke-linecap="round" />
+          </svg>
+        </div>
+
+        <ul class="tendings" id="tendings"></ul>
+
+        <form class="add" id="add-form" autocomplete="off">
+          <input
+            class="add-input"
+            id="add-input"
+            type="text"
+            maxlength="80"
+            placeholder="Lay down another cask…"
+            aria-label="Lay a new cask on the stillage"
+          />
+          <button class="btn btn-primary add-btn" type="submit">Lay cask</button>
+        </form>
+        <p class="board-hint" id="board-hint">
+          Click a cask to draw it on a stage. N new · J/K move · 0–3 set · [ ] work/settle · R pour away.
+        </p>
+      </div>
+
+      <div class="legends">
+        <div class="legend">
+          <h3>How far it is drawn down</h3>
+          <ul class="legend-list" id="legend-depth">
+            <li><span class="chip chip-bunged">Bunged</span><span>Stoppered and sound, not yet started. New, sealed, and waiting in the back of the cellar.</span></li>
+            <li><span class="chip chip-spiled">Spiled</span><span>A soft spile eased into the shive, letting it breathe a hair before the tap. Begun.</span></li>
+            <li><span class="chip chip-drawing">Drawing</span><span>The tap driven, drawing a glass at a time, slow. In use, and being worked down properly.</span></li>
+            <li><span class="chip chip-racked">Racked</span><span>Dropped bright and racked off clear into the keeping cask. The one cured and kept — the one that matters most.</span></li>
+          </ul>
+        </div>
+        <div class="legend">
+          <h3>What the cask is doing</h3>
+          <ul class="legend-list" id="legend-weather">
+            <li><span class="chip chip-flat">Flat</span><span>Unconditioned and lifeless, or fretting if neglected. Wants tending before it goes off.</span></li>
+            <li><span class="chip chip-working">Working</span><span>Lively, fermenting, working hard. The active stage, full of life and needing a watch.</span></li>
+            <li><span class="chip chip-clearing">Clearing</span><span>Dropping bright, the lees falling out of it. Coming good, settling toward sound.</span></li>
+            <li><span class="chip chip-sound">Sound</span><span>Clear and sound, keeps for years. Needs nothing now — it simply holds.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who keeps a cellar</h2>
+      <div class="who-grid">
+        <article class="who-card">
+          <h3>The maker with forty tabs</h3>
+          <p>Everything is broached, nothing is racked, and the whole cellar is fretting. A spile is the refusal: six casks on the stillage, the other thirty-four left bunged and sound, and for the first time something gets drawn slow enough to come down bright.</p>
+        </article>
+        <article class="who-card">
+          <h3>The one who says yes too fast</h3>
+          <p>Every ask gets a bung knocked out and stands open to the air, half-started, none of it being drawn with care. The stillage gives a hard floor: this many, no more. What does not fit stays bunged — and saying so is the kindest thing for the few already on the rack.</p>
+        </article>
+        <article class="who-card">
+          <h3>The keeper of a few works</h3>
+          <p>You cannot draw every cask at once, and trying sours them all. A handful laid on the stillage, spiled, drawn a glass at a time, racked off bright — and the rest of the stock, real as it is, allowed to keep bunged and sound in the cool until its year comes round.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="bring" class="cta">
+      <div class="cta-inner">
+        <p class="eyebrow">Lay one down</p>
+        <h2>You cannot draw the whole cellar.<br /><em>You can keep a few casks sound.</em></h2>
+        <p class="cta-lede">
+          So stop broaching forty casks at once and letting the lot turn.
+          Lay the few you can tend on the stillage, ease a spile in, draw
+          them slow, drop them bright and rack them off clear — and let
+          the rest of the stock stay bunged and sound until its time. The
+          slow drawing is the only thing that ever brings a cask down
+          bright. Lay down what you can tend. Let the rest stay bunged.
+        </p>
+        <a href="#hollow" class="btn btn-primary btn-lg">Go down to the stillage</a>
+        <p class="cta-foot">No sign-up. No cellar to dig. It all lives in your browser.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="20" height="20">
+            <ellipse cx="16" cy="16" rx="9" ry="12" fill="none" stroke="currentColor" stroke-width="2.2" />
+            <path d="M16 4 V1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+          </svg>
+        </span>
+        <span>Spile</span>
+      </div>
+      <p class="footer-note">
+        A spile is the soft peg eased into a cask to let it breathe before
+        you draw — start a few, draw them slow, rack them off bright, and
+        keep the rest bunged and sound. One of a series of small pages
+        about keeping less and keeping it well.
+      </p>
+      <p class="footer-meta">2026-06-28 · lay down what you can tend, let the rest stay bunged</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
