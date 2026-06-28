@@ -397,5 +397,25 @@
     }
   });
 
+  // gentle living lean on the rack line when the frame is out of true
+  var prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduce) {
+    setInterval(function () {
+      // nudge the phase so a racking line breathes; a true line stays flat
+      var wind = windLevel();
+      if (wind < 0.13) return;
+      seq = (seq + 1) % 1000;
+      var W = 600, mid = 32, steps = 60;
+      var amp = wind * 16, freq = 2 + wind * 5, ph = seq * 0.35;
+      var d = 'M0 ' + mid;
+      for (var i = 1; i <= steps; i++) {
+        var x = (W / steps) * i, t = i / steps;
+        var y = mid + Math.sin(t * Math.PI * freq + ph) * amp * Math.sin(t * Math.PI);
+        d += ' L' + x.toFixed(1) + ' ' + y.toFixed(1);
+      }
+      $gaugePath.setAttribute('d', d);
+    }, 1400);
+  }
+
   render();
 })();
