@@ -191,6 +191,13 @@
           <div id="floor-count" class="board-count" title="Double-click to reset to the example flock">0 / 6 hefted</div>
         </div>
 
+        <div class="drift" title="The whole heft at a glance — a line that lies steady when the flock holds and scatters as it drifts">
+          <svg class="drift-svg" viewBox="0 0 600 64" preserveAspectRatio="none" aria-hidden="true">
+            <path id="gauge-path" d="M0 32 L600 32" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <div id="gauge-read" class="drift-read">steady</div>
+        </div>
+
         <form id="add-form" class="add-form" autocomplete="off">
           <input id="add-input" class="add-input" type="text" maxlength="80" placeholder="Walk something onto the fell…" aria-label="Add a hefting" />
           <button class="add-btn" type="submit" aria-label="Add to the fell">Bring on</button>

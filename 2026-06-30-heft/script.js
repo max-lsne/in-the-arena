@@ -32,6 +32,11 @@
     { key: 'fettle',   label: 'Fettle',   chip: 'chip-fettle' }
   ];
 
+  // how much a thing wants to drift, by condition and by depth — a lean
+  // stray pulls hard off the ground; a hefted thing in fettle barely moves
+  var COND_DRIFT  = [1.0, 0.55, 0.25, 0.05];
+  var DEPTH_DRIFT = [1.0, 0.6, 0.3, 0.1];
+
   // a fictional fell partway through a season — variety, not a full flock
   var SEED = {
     name: 'Cawdale Fell',
@@ -55,6 +60,8 @@
   var $name = document.getElementById('fell-name');
   var $hint = document.getElementById('board-hint');
   var $addBtn = $form.querySelector('.add-btn');
+  var $gaugePath = document.getElementById('gauge-path');
+  var $gaugeRead = document.getElementById('gauge-read');
 
   // --- icons ---
   function svg(inner) { return '<svg viewBox="0 0 16 16" aria-hidden="true">' + inner + '</svg>'; }
@@ -112,6 +119,65 @@
     try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {}
   }
 
+  // --- the drift line ---
+  function driftLevel() {
+    var hs = state.heftings;
+    if (!hs.length) return 0;
+    var sum = 0;
+    for (var i = 0; i < hs.length; i++) {
+      sum += COND_DRIFT[hs[i].cond] * DEPTH_DRIFT[hs[i].depth];
+    }
+    var avg = sum / hs.length;
+    // a fell carries a few in good heart; past that, the overstock pulls
+    // the whole flock looser
+    var overstock = Math.max(0, hs.length - 4) / (CAP - 4) * 0.28;
+    return clamp(avg + overstock, 0, 1);
+  }
+
+  function gaugePath(drift, phase) {
+    var W = 600, mid = 32, steps = 64;
+    var amp = drift * 17;
+    var freq = 2 + drift * 5;
+    var d = 'M0 ' + mid;
+    for (var i = 1; i <= steps; i++) {
+      var x = (W / steps) * i;
+      var t = i / steps;
+      // taper the scatter to nothing at both pinned ends; a second, slower
+      // wave lets a high-drift line look ragged rather than tidy
+      var env = Math.sin(t * Math.PI);
+      var y = mid + env * amp * (
+        Math.sin(t * Math.PI * freq + phase) * 0.8 +
+        Math.sin(t * Math.PI * (freq * 1.9) + phase * 1.3) * 0.2
+      );
+      d += ' L' + x.toFixed(1) + ' ' + y.toFixed(1);
+    }
+    return d;
+  }
+
+  function lerp(a, b, t) { return Math.round(a + (b - a) * t); }
+  function driftColor(drift) {
+    // hefted-green #6f8a6a → loose-heather #9c6a86
+    var a = [0x6f, 0x8a, 0x6a], b = [0x9c, 0x6a, 0x86];
+    return 'rgb(' + lerp(a[0], b[0], drift) + ',' + lerp(a[1], b[1], drift) + ',' + lerp(a[2], b[2], drift) + ')';
+  }
+
+  function driftRead(drift) {
+    if (drift < 0.001) return 'steady — empty fell';
+    if (drift < 0.13) return 'hefted — the flock holds';
+    if (drift < 0.32) return 'settled';
+    if (drift < 0.55) return 'a few starting to drift';
+    if (drift < 0.78) return 'scattering off the ground';
+    return 'loose on the open fell';
+  }
+
+  function paintGauge() {
+    var drift = driftLevel();
+    $gaugePath.setAttribute('d', gaugePath(drift, 0));
+    $gaugePath.setAttribute('stroke', driftColor(drift));
+    $gaugeRead.textContent = driftRead(drift);
+    $gaugeRead.style.color = driftColor(drift);
+  }
+
   // --- render ---
   function render() {
     if (selected >= state.heftings.length) selected = state.heftings.length - 1;
@@ -133,6 +199,7 @@
       ? 'The fell is full — something has to go off the hill'
       : 'Walk something onto the fell…';
 
+    paintGauge();
     save();
   }
 
@@ -334,6 +401,19 @@
   function scrollToSel() {
     var li = $heftings.querySelector('.sel');
     if (li && li.scrollIntoView) li.scrollIntoView({ block: 'nearest' });
+  }
+
+  // a living drift on the line when the flock is loose: a settled heft lies
+  // flat and still, a drifting one keeps moving. Held still for reduced-motion.
+  var prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduce) {
+    var phase = 0;
+    setInterval(function () {
+      var drift = driftLevel();
+      if (drift < 0.13) return; // a held flock does not wander
+      phase = (phase + 0.32) % (Math.PI * 200);
+      $gaugePath.setAttribute('d', gaugePath(drift, phase));
+    }, 1300);
   }
 
   render();
