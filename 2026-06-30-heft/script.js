@@ -15,6 +15,7 @@
 (function () {
   'use strict';
 
+  var STORE_KEY = 'heft.v1';
   var CAP = 6;
 
   var DEPTHS = [
@@ -43,7 +44,7 @@
     ]
   };
 
-  var state = clone(SEED);
+  var state = load();
   var selected = 0;
 
   // --- elements ---
@@ -84,6 +85,32 @@
   function id() { return 'h' + Math.random().toString(36).slice(2, 9); }
   function clone(o) { return JSON.parse(JSON.stringify(o)); }
   function clamp(n, lo, hi) { return Math.max(lo, Math.min(hi, n)); }
+  function clampInt(n, lo, hi) { n = parseInt(n, 10); if (isNaN(n)) return lo; return Math.max(lo, Math.min(hi, n)); }
+
+  function load() {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return clone(SEED);
+      var parsed = JSON.parse(raw);
+      if (!parsed || !Array.isArray(parsed.heftings)) return clone(SEED);
+      parsed.heftings = parsed.heftings.slice(0, CAP).map(function (h) {
+        return {
+          id: h.id || id(),
+          title: String(h.title || '').slice(0, 80),
+          depth: clampInt(h.depth, 0, 3),
+          cond: clampInt(h.cond, 0, 3)
+        };
+      });
+      if (typeof parsed.name !== 'string' || !parsed.name) parsed.name = SEED.name;
+      return parsed;
+    } catch (e) {
+      return clone(SEED);
+    }
+  }
+
+  function save() {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
 
   // --- render ---
   function render() {
@@ -105,6 +132,8 @@
     $input.placeholder = full
       ? 'The fell is full — something has to go off the hill'
       : 'Walk something onto the fell…';
+
+    save();
   }
 
   function row(h, i) {
@@ -251,6 +280,16 @@
     var v = $name.textContent.trim().slice(0, 40);
     state.name = v || SEED.name;
     $name.textContent = state.name;
+    save();
+  });
+
+  // --- reset: double-click the count to clear the fell back to the example ---
+  $count.addEventListener('dblclick', function () {
+    if (window.confirm('Clear the fell back to the example flock?')) {
+      state = clone(SEED);
+      selected = 0;
+      render();
+    }
   });
 
   // --- add form ---
