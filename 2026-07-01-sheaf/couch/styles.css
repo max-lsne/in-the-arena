@@ -357,6 +357,29 @@ h2 {
 }
 .board-count.full { color: var(--accent-ink); background: var(--heat-hot); border-color: var(--heat-hot); }
 
+/* the heat line — the whole floor, read as one line */
+.heat {
+  position: relative;
+  margin-bottom: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(180deg, var(--bg), var(--panel-2));
+  padding: 8px 14px 6px;
+  overflow: hidden;
+}
+.heat-svg { display: block; width: 100%; height: 46px; }
+#gauge-path { transition: stroke 0.5s ease; }
+.heat-read {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: right;
+  margin-top: 1px;
+  color: var(--muted);
+  transition: color 0.5s ease;
+}
+
 .add-form { display: flex; gap: 10px; margin-bottom: 18px; }
 .add-input {
   flex: 1;

@@ -56,6 +56,14 @@
   var $name = document.getElementById('floor-name');
   var $hint = document.getElementById('board-hint');
   var $addBtn = $form.querySelector('.add-btn');
+  var $gaugePath = document.getElementById('gauge-path');
+  var $heatRead = document.getElementById('heat-read');
+
+  // how much heat a couch throws, by condition and by stage. Working grain
+  // heaped and couched is the danger; grain spread thin on the floor or dried
+  // off to the kiln barely heats at all.
+  var COND_HEAT  = [0.1, 0.6, 1.0, 0.4];
+  var STAGE_HEAT = [0.3, 1.0, 0.5, 0.05];
 
   // --- icons ---
   function svg(inner) { return '<svg viewBox="0 0 16 16" aria-hidden="true">' + inner + '</svg>'; }
@@ -112,6 +120,65 @@
     try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {}
   }
 
+  // --- the heat line ---
+  function heatLevel() {
+    var cs = state.couches;
+    if (!cs.length) return 0;
+    var sum = 0;
+    for (var i = 0; i < cs.length; i++) {
+      sum += COND_HEAT[cs[i].cond] * STAGE_HEAT[cs[i].stage];
+    }
+    var avg = sum / cs.length;
+    // a floor works a few in good heart; past that, the unturned heaps crowd
+    // and the whole floor runs hotter
+    var overstock = Math.max(0, cs.length - 4) / (CAP - 4) * 0.26;
+    return clamp(avg + overstock, 0, 1);
+  }
+
+  function gaugePath(heat, phase) {
+    var W = 600, mid = 32, steps = 64;
+    var amp = heat * 17;
+    var freq = 2 + heat * 5;
+    var d = 'M0 ' + mid;
+    for (var i = 1; i <= steps; i++) {
+      var x = (W / steps) * i;
+      var t = i / steps;
+      // pin both ends flat and let a second, faster wave make a hot floor look
+      // ragged and roiling rather than a tidy sine
+      var env = Math.sin(t * Math.PI);
+      var y = mid + env * amp * (
+        Math.sin(t * Math.PI * freq + phase) * 0.8 +
+        Math.sin(t * Math.PI * (freq * 1.9) + phase * 1.3) * 0.2
+      );
+      d += ' L' + x.toFixed(1) + ' ' + y.toFixed(1);
+    }
+    return d;
+  }
+
+  function lerp(a, b, t) { return Math.round(a + (b - a) * t); }
+  function heatColor(heat) {
+    // cool-sweet green #7f9a6a → matting red #b5563f
+    var a = [0x7f, 0x9a, 0x6a], b = [0xb5, 0x56, 0x3f];
+    return 'rgb(' + lerp(a[0], b[0], heat) + ',' + lerp(a[1], b[1], heat) + ',' + lerp(a[2], b[2], heat) + ')';
+  }
+
+  function heatRead(heat) {
+    if (heat < 0.001) return 'cool — the floor is empty';
+    if (heat < 0.13) return 'cool — the floor is sweet';
+    if (heat < 0.32) return 'warming gently';
+    if (heat < 0.55) return 'working — keep turning';
+    if (heat < 0.78) return 'heating — turn them now';
+    return 'matting — the floor is too full';
+  }
+
+  function paintGauge() {
+    var heat = heatLevel();
+    $gaugePath.setAttribute('d', gaugePath(heat, 0));
+    $gaugePath.setAttribute('stroke', heatColor(heat));
+    $heatRead.textContent = heatRead(heat);
+    $heatRead.style.color = heatColor(heat);
+  }
+
   // --- render ---
   function render() {
     if (selected >= state.couches.length) selected = state.couches.length - 1;
@@ -133,6 +200,7 @@
       ? 'The floor is full — take a couch off to the kiln first'
       : 'Steep something onto the floor…';
 
+    paintGauge();
     save();
   }
 
@@ -334,6 +402,19 @@
   function scrollToSel() {
     var li = $couches.querySelector('.sel');
     if (li && li.scrollIntoView) li.scrollIntoView({ block: 'nearest' });
+  }
+
+  // a living roil on the line when the floor is hot: a cool, turned floor lies
+  // flat and still; a heating one keeps moving. Held still for reduced-motion.
+  var prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduce) {
+    var phase = 0;
+    setInterval(function () {
+      var heat = heatLevel();
+      if (heat < 0.13) return; // a cool floor does not stir
+      phase = (phase + 0.34) % (Math.PI * 200);
+      $gaugePath.setAttribute('d', gaugePath(heat, phase));
+    }, 1300);
   }
 
   render();

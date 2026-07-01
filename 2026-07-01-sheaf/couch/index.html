@@ -190,7 +190,14 @@
             <span class="board-floor">The floor at</span>
             <span id="floor-name" class="floor-name" contenteditable="true" spellcheck="false" title="Rename your maltings">Snape Floor</span>
           </div>
-          <div id="floor-count" class="board-count" title="How full the floor is">0 / 6 on the floor</div>
+          <div id="floor-count" class="board-count" title="Double-click to reset to the example run">0 / 6 on the floor</div>
+        </div>
+
+        <div class="heat" title="The whole floor at a glance — a line that lies cool when the couches are turned and rises as unturned grain heats and mats">
+          <svg class="heat-svg" viewBox="0 0 600 64" preserveAspectRatio="none" aria-hidden="true">
+            <path id="gauge-path" d="M0 32 L600 32" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <div id="heat-read" class="heat-read">cool</div>
         </div>
 
         <form id="add-form" class="add-form" autocomplete="off">
