@@ -55,6 +55,14 @@
   var $name = document.getElementById('line-name');
   var $hint = document.getElementById('board-hint');
   var $addBtn = $form.querySelector('.add-btn');
+  var $gaugePath = document.getElementById('gauge-path');
+  var $gapRead = document.getElementById('gap-read');
+
+  // how much of a gap a stem leaves in the line, by condition and by stage. A
+  // whippy stem left standing is a hole; one laid and bound and knitting into
+  // its neighbours closes the line and leaves none.
+  var COND_GAP  = [1.0, 0.6, 0.3, 0.05];
+  var STAGE_GAP = [1.0, 0.7, 0.3, 0.1];
 
   // --- icons ---
   function svg(inner) { return '<svg viewBox="0 0 16 16" aria-hidden="true">' + inner + '</svg>'; }
@@ -111,6 +119,65 @@
     try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {}
   }
 
+  // --- the gap line ---
+  function gapLevel() {
+    var ss = state.stems;
+    if (!ss.length) return 0;
+    var sum = 0;
+    for (var i = 0; i < ss.length; i++) {
+      sum += COND_GAP[ss[i].cond] * STAGE_GAP[ss[i].stage];
+    }
+    var avg = sum / ss.length;
+    // a layer binds a few properly; take on more of the boundary than that and
+    // the far end is left standing and the whole line runs gappier
+    var overstock = Math.max(0, ss.length - 4) / (CAP - 4) * 0.26;
+    return clamp(avg + overstock, 0, 1);
+  }
+
+  function gaugePath(gap, phase) {
+    var W = 600, mid = 32, steps = 64;
+    var amp = gap * 17;
+    var freq = 2 + gap * 5;
+    var d = 'M0 ' + mid;
+    for (var i = 1; i <= steps; i++) {
+      var x = (W / steps) * i;
+      var t = i / steps;
+      // pin both ends and let a second, faster wave make a gappy line look torn
+      // and broken rather than a tidy sine
+      var env = Math.sin(t * Math.PI);
+      var y = mid + env * amp * (
+        Math.sin(t * Math.PI * freq + phase) * 0.8 +
+        Math.sin(t * Math.PI * (freq * 1.9) + phase * 1.3) * 0.2
+      );
+      d += ' L' + x.toFixed(1) + ' ' + y.toFixed(1);
+    }
+    return d;
+  }
+
+  function lerp(a, b, t) { return Math.round(a + (b - a) * t); }
+  function gapColor(gap) {
+    // laid-solid green #5f8a5a → open-gap brown #a8683f
+    var a = [0x5f, 0x8a, 0x5a], b = [0xa8, 0x68, 0x3f];
+    return 'rgb(' + lerp(a[0], b[0], gap) + ',' + lerp(a[1], b[1], gap) + ',' + lerp(a[2], b[2], gap) + ')';
+  }
+
+  function gapRead(gap) {
+    if (gap < 0.001) return 'nothing laid yet';
+    if (gap < 0.13) return 'solid — stockproof';
+    if (gap < 0.32) return 'sound — a thin place or two';
+    if (gap < 0.55) return 'gapping — stems left standing';
+    if (gap < 0.78) return 'a gap opening in the line';
+    return 'a gap a bullock could take';
+  }
+
+  function paintGauge() {
+    var gap = gapLevel();
+    $gaugePath.setAttribute('d', gaugePath(gap, 0));
+    $gaugePath.setAttribute('stroke', gapColor(gap));
+    $gapRead.textContent = gapRead(gap);
+    $gapRead.style.color = gapColor(gap);
+  }
+
   // --- render ---
   function render() {
     if (selected >= state.stems.length) selected = state.stems.length - 1;
@@ -132,6 +199,7 @@
       ? 'The line is full — bind one in before you set another'
       : 'Bring a stem into the line…';
 
+    paintGauge();
     save();
   }
 
@@ -333,6 +401,19 @@
   function scrollToSel() {
     var li = $stems.querySelector('.sel');
     if (li && li.scrollIntoView) li.scrollIntoView({ block: 'nearest' });
+  }
+
+  // a living stir on the line when it gaps: a laid, bound hedge lies solid and
+  // still; a gappy one keeps moving. Held still for reduced-motion.
+  var prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduce) {
+    var phase = 0;
+    setInterval(function () {
+      var gap = gapLevel();
+      if (gap < 0.13) return; // a solid line does not stir
+      phase = (phase + 0.34) % (Math.PI * 200);
+      $gaugePath.setAttribute('d', gaugePath(gap, phase));
+    }, 1300);
   }
 
   render();
