@@ -16,6 +16,7 @@
 (function () {
   'use strict';
 
+  var STORE_KEY = 'couch.v1';
   var CAP = 6;
 
   var STAGES = [
@@ -44,7 +45,7 @@
     ]
   };
 
-  var state = clone(SEED);
+  var state = load();
   var selected = 0;
 
   // --- elements ---
@@ -84,6 +85,32 @@
   function id() { return 'c' + Math.random().toString(36).slice(2, 9); }
   function clone(o) { return JSON.parse(JSON.stringify(o)); }
   function clamp(n, lo, hi) { return Math.max(lo, Math.min(hi, n)); }
+  function clampInt(n, lo, hi) { n = parseInt(n, 10); if (isNaN(n)) return lo; return Math.max(lo, Math.min(hi, n)); }
+
+  function load() {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return clone(SEED);
+      var parsed = JSON.parse(raw);
+      if (!parsed || !Array.isArray(parsed.couches)) return clone(SEED);
+      parsed.couches = parsed.couches.slice(0, CAP).map(function (c) {
+        return {
+          id: c.id || id(),
+          title: String(c.title || '').slice(0, 80),
+          stage: clampInt(c.stage, 0, 3),
+          cond: clampInt(c.cond, 0, 3)
+        };
+      });
+      if (typeof parsed.name !== 'string' || !parsed.name) parsed.name = SEED.name;
+      return parsed;
+    } catch (e) {
+      return clone(SEED);
+    }
+  }
+
+  function save() {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
 
   // --- render ---
   function render() {
@@ -105,6 +132,8 @@
     $input.placeholder = full
       ? 'The floor is full — take a couch off to the kiln first'
       : 'Steep something onto the floor…';
+
+    save();
   }
 
   function row(c, i) {
@@ -251,6 +280,16 @@
     var v = $name.textContent.trim().slice(0, 40);
     state.name = v || SEED.name;
     $name.textContent = state.name;
+    save();
+  });
+
+  // --- reset: double-click the count to clear the floor back to the example ---
+  $count.addEventListener('dblclick', function () {
+    if (window.confirm('Clear the floor back to the example run?')) {
+      state = clone(SEED);
+      selected = 0;
+      render();
+    }
   });
 
   // --- add form ---
