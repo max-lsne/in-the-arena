@@ -57,6 +57,14 @@
   var $name = document.getElementById('yard-name');
   var $hint = document.getElementById('board-hint');
   var $addBtn = $form.querySelector('.add-btn');
+  var $gaugePath = document.getElementById('gauge-path');
+  var $boilRead = document.getElementById('boil-read');
+
+  // how hard a tub boils, by condition and by stage. A tub slaking is the
+  // violent middle; a matured, fatted batch barely stirs the line, and raw
+  // stone not at all.
+  var COND_BOIL  = [0.05, 1.0, 0.45, 0.12];
+  var STAGE_BOIL = [0.1, 0.5, 1.0, 0.1];
 
   // --- icons ---
   function svg(inner) { return '<svg viewBox="0 0 16 16" aria-hidden="true">' + inner + '</svg>'; }
@@ -115,6 +123,65 @@
     try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {}
   }
 
+  // --- the boiling line ---
+  function boilLevel() {
+    var ts = state.tubs;
+    if (!ts.length) return 0;
+    var sum = 0;
+    for (var i = 0; i < ts.length; i++) {
+      sum += COND_BOIL[ts[i].cond] * STAGE_BOIL[ts[i].stage];
+    }
+    var avg = sum / ts.length;
+    // a yard minded in good order fats slow; past a tended few the far tubs
+    // boil over unwatched and the whole yard runs hotter
+    var overrun = Math.max(0, ts.length - 3) / (CAP - 3) * 0.3;
+    return clamp(avg + overrun, 0, 1);
+  }
+
+  function gaugePath(boil, phase) {
+    var W = 600, mid = 32, steps = 64;
+    var amp = boil * 18;
+    var freq = 2 + boil * 5;
+    var d = 'M0 ' + mid;
+    for (var i = 1; i <= steps; i++) {
+      var x = (W / steps) * i;
+      var t = i / steps;
+      // both ends pinned level; a second faster wave makes a yard on the boil
+      // read ragged and spitting rather than a tidy sine
+      var env = Math.sin(t * Math.PI);
+      var y = mid - env * amp * (
+        Math.sin(t * Math.PI * freq + phase) * 0.76 +
+        Math.sin(t * Math.PI * (freq * 2.1) + phase * 1.4) * 0.24
+      );
+      d += ' L' + x.toFixed(1) + ' ' + y.toFixed(1);
+    }
+    return d;
+  }
+
+  function lerp(a, b, t) { return Math.round(a + (b - a) * t); }
+  function boilColor(boil) {
+    // cool matured putty #4d8090 → hot flash-off orange #d98a3f
+    var a = [0x4d, 0x80, 0x90], b = [0xd9, 0x8a, 0x3f];
+    return 'rgb(' + lerp(a[0], b[0], boil) + ',' + lerp(a[1], b[1], boil) + ',' + lerp(a[2], b[2], boil) + ')';
+  }
+
+  function boilRead(boil) {
+    if (boil < 0.001) return 'cold — the yard is empty';
+    if (boil < 0.12) return 'cold — nothing slaking';
+    if (boil < 0.32) return 'fatting slow in the tub';
+    if (boil < 0.55) return 'slaking — knock them up';
+    if (boil < 0.78) return 'boiling hard — stand over it';
+    return 'flashing off — knock one up now';
+  }
+
+  function paintGauge() {
+    var boil = boilLevel();
+    $gaugePath.setAttribute('d', gaugePath(boil, 0));
+    $gaugePath.setAttribute('stroke', boilColor(boil));
+    $boilRead.textContent = boilRead(boil);
+    $boilRead.style.color = boilColor(boil);
+  }
+
   // --- render ---
   function render() {
     if (selected >= state.tubs.length) selected = state.tubs.length - 1;
@@ -137,6 +204,7 @@
       : 'Set a batch in the tub…';
 
     save();
+    paintGauge();
   }
 
   function row(s, i) {
@@ -337,6 +405,24 @@
   function scrollToSel() {
     var li = $tubs.querySelector('.sel');
     if (li && li.scrollIntoView) li.scrollIntoView({ block: 'nearest' });
+  }
+
+  // a living roil on the boiling line when the yard runs hot: a cool, well-minded
+  // yard lies level and still; a yard on the boil keeps moving. Driven off the
+  // frame clock and throttled to a slow spit; held still for reduced-motion.
+  var prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduce) {
+    var phase = 0, last = 0;
+    var tick = function (ts) {
+      requestAnimationFrame(tick);
+      var boil = boilLevel();
+      if (boil < 0.12) return;          // a cold yard does not stir
+      if (ts - last < 90) return;       // throttle to a slow, spitting roil
+      last = ts;
+      phase = (phase + 0.3) % (Math.PI * 200);
+      $gaugePath.setAttribute('d', gaugePath(boil, phase));
+    };
+    requestAnimationFrame(tick);
   }
 
   render();
