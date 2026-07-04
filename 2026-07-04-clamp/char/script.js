@@ -55,6 +55,14 @@
   var $name = document.getElementById('hearth-name');
   var $hint = document.getElementById('board-hint');
   var $addBtn = $form.querySelector('.add-btn');
+  var $gaugePath = document.getElementById('gauge-path');
+  var $reekRead = document.getElementById('reek-read');
+
+  // how much reek a clamp throws, by condition and by stage. A clamp firing
+  // through throws the hot white plume; a good blue reek is the working middle.
+  // A drawn, cooled clamp barely stirs the line.
+  var COND_REEK  = [0.05, 0.3, 0.55, 1.0];
+  var STAGE_REEK = [0.15, 0.9, 1.0, 0.05];
 
   // --- icons ---
   function svg(inner) { return '<svg viewBox="0 0 16 16" aria-hidden="true">' + inner + '</svg>'; }
@@ -113,6 +121,65 @@
     try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {}
   }
 
+  // --- the reek line ---
+  function reekLevel() {
+    var cs = state.clamps;
+    if (!cs.length) return 0;
+    var sum = 0;
+    for (var i = 0; i < cs.length; i++) {
+      sum += COND_REEK[cs[i].cond] * STAGE_REEK[cs[i].stage];
+    }
+    var avg = sum / cs.length;
+    // a hearth walked in good order runs slow; past a tended few the far heaps
+    // find air unwatched and the whole hearth runs hotter
+    var overrun = Math.max(0, cs.length - 3) / (CAP - 3) * 0.28;
+    return clamp(avg + overrun, 0, 1);
+  }
+
+  function gaugePath(reek, phase) {
+    var W = 600, mid = 32, steps = 64;
+    var amp = reek * 18;
+    var freq = 2 + reek * 5;
+    var d = 'M0 ' + mid;
+    for (var i = 1; i <= steps; i++) {
+      var x = (W / steps) * i;
+      var t = i / steps;
+      // both ends pinned flat; a second faster wave makes a firing hearth read
+      // ragged and roiling rather than a tidy sine
+      var env = Math.sin(t * Math.PI);
+      var y = mid - env * amp * (
+        Math.sin(t * Math.PI * freq + phase) * 0.78 +
+        Math.sin(t * Math.PI * (freq * 1.9) + phase * 1.3) * 0.22
+      );
+      d += ' L' + x.toFixed(1) + ' ' + y.toFixed(1);
+    }
+    return d;
+  }
+
+  function lerp(a, b, t) { return Math.round(a + (b - a) * t); }
+  function reekColor(reek) {
+    // slow blue reek #7b8794 → hot white-orange plume #d9683a
+    var a = [0x7b, 0x87, 0x94], b = [0xd9, 0x68, 0x3a];
+    return 'rgb(' + lerp(a[0], b[0], reek) + ',' + lerp(a[1], b[1], reek) + ',' + lerp(a[2], b[2], reek) + ')';
+  }
+
+  function reekRead(reek) {
+    if (reek < 0.001) return 'cold — the hearth is empty';
+    if (reek < 0.12) return 'cold — nothing charring yet';
+    if (reek < 0.32) return 'a slow blue reek';
+    if (reek < 0.55) return 'charring — keep them starved';
+    if (reek < 0.78) return 'reeking hard — dust the leaks';
+    return 'firing through — draw one now';
+  }
+
+  function paintGauge() {
+    var reek = reekLevel();
+    $gaugePath.setAttribute('d', gaugePath(reek, 0));
+    $gaugePath.setAttribute('stroke', reekColor(reek));
+    $reekRead.textContent = reekRead(reek);
+    $reekRead.style.color = reekColor(reek);
+  }
+
   // --- render ---
   function render() {
     if (selected >= state.clamps.length) selected = state.clamps.length - 1;
@@ -135,6 +202,7 @@
       : 'Raise a clamp on the hearth…';
 
     save();
+    paintGauge();
   }
 
   function row(s, i) {
@@ -335,6 +403,20 @@
   function scrollToSel() {
     var li = $clamps.querySelector('.sel');
     if (li && li.scrollIntoView) li.scrollIntoView({ block: 'nearest' });
+  }
+
+  // a living roil on the reek line when the hearth runs hot: a slow, well-walked
+  // hearth lies flat and calm; a firing one keeps moving. Held still for
+  // reduced-motion.
+  var prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduce) {
+    var phase = 0;
+    setInterval(function () {
+      var reek = reekLevel();
+      if (reek < 0.12) return; // a cold hearth does not stir
+      phase = (phase + 0.36) % (Math.PI * 200);
+      $gaugePath.setAttribute('d', gaugePath(reek, phase));
+    }, 1200);
   }
 
   render();
