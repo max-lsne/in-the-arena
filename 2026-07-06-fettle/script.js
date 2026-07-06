@@ -402,5 +402,19 @@
     if (li && li.scrollIntoView) li.scrollIntoView({ block: 'nearest' });
   }
 
+  // a struck note keeps ringing while the bench is rough: a sound bench rings
+  // out clean and settles still, a rough one buzzes on and on. Held still for
+  // reduced-motion.
+  var prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduce) {
+    var phase = 0;
+    setInterval(function () {
+      var rough = roughLevel();
+      if (rough < 0.13) return; // a sound casting rings out and settles
+      phase = (phase + 0.34) % (Math.PI * 200);
+      $ringPath.setAttribute('d', ringPath(rough, phase));
+    }, 1200);
+  }
+
   render();
 })();
