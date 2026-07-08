@@ -57,6 +57,14 @@
   var $name = document.getElementById('bench-name');
   var $hint = document.getElementById('board-hint');
   var $addBtn = $form.querySelector('.add-btn');
+  var $gaugePath = document.getElementById('gauge-path');
+  var $glossRead = document.getElementById('gloss-read');
+
+  // how near a bowl is to blooming, by condition and by stage. A bowl run warm
+  // and loose is the danger; a bowl set to a snap barely troubles the line, and
+  // solid raw chocolate not at all.
+  var COND_GLOSS  = [0.28, 1.0, 0.4, 0.1];
+  var STAGE_GLOSS = [0.14, 1.0, 0.42, 0.1];
 
   // --- icons ---
   function svg(inner) { return '<svg viewBox="0 0 16 16" aria-hidden="true">' + inner + '</svg>'; }
@@ -114,6 +122,65 @@
     try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {}
   }
 
+  // --- the gloss line ---
+  function glossLevel() {
+    var xs = state.bowls;
+    if (!xs.length) return 0;
+    var sum = 0;
+    for (var i = 0; i < xs.length; i++) {
+      sum += COND_GLOSS[xs[i].cond] * STAGE_GLOSS[xs[i].stage];
+    }
+    var avg = sum / xs.length;
+    // a bench held in good order sets satin; past a tended few the far bowls
+    // drift out of the window unwatched and the whole bench reads nearer bloom
+    var overrun = Math.max(0, xs.length - 3) / (CAP - 3) * 0.3;
+    return clamp(avg + overrun, 0, 1);
+  }
+
+  function gaugePath(bloom, phase) {
+    var W = 600, mid = 32, steps = 64;
+    var amp = bloom * 18;
+    var freq = 2 + bloom * 5;
+    var d = 'M0 ' + mid;
+    for (var i = 1; i <= steps; i++) {
+      var x = (W / steps) * i;
+      var t = i / steps;
+      // both ends pinned level; a second faster wave makes a bench near bloom
+      // read ragged and streaky rather than a satin line
+      var env = Math.sin(t * Math.PI);
+      var y = mid - env * amp * (
+        Math.sin(t * Math.PI * freq + phase) * 0.76 +
+        Math.sin(t * Math.PI * (freq * 2.1) + phase * 1.4) * 0.24
+      );
+      d += ' L' + x.toFixed(1) + ' ' + y.toFixed(1);
+    }
+    return d;
+  }
+
+  function lerp(a, b, t) { return Math.round(a + (b - a) * t); }
+  function glossColor(bloom) {
+    // a deep satin mahogany #8a5028 → a pale grey bloom #b3a794
+    var a = [0x8a, 0x50, 0x28], b = [0xb3, 0xa7, 0x94];
+    return 'rgb(' + lerp(a[0], b[0], bloom) + ',' + lerp(a[1], b[1], bloom) + ',' + lerp(a[2], b[2], bloom) + ')';
+  }
+
+  function glossRead(bloom) {
+    if (bloom < 0.001) return 'satin — the bench is empty';
+    if (bloom < 0.12) return 'satin — nothing tempering';
+    if (bloom < 0.32) return 'setting slow — a good gloss';
+    if (bloom < 0.55) return 'warm — hold the window';
+    if (bloom < 0.78) return 'drifting loose — it will bloom';
+    return 'blooming — you are running it hot';
+  }
+
+  function paintGauge() {
+    var bloom = glossLevel();
+    $gaugePath.setAttribute('d', gaugePath(bloom, 0));
+    $gaugePath.setAttribute('stroke', glossColor(bloom));
+    $glossRead.textContent = glossRead(bloom);
+    $glossRead.style.color = glossColor(bloom);
+  }
+
   // --- render ---
   function render() {
     if (selected >= state.bowls.length) selected = state.bowls.length - 1;
@@ -136,6 +203,7 @@
       : 'Set a bowl to temper…';
 
     save();
+    paintGauge();
   }
 
   function row(s, i) {
@@ -336,6 +404,25 @@
   function scrollToSel() {
     var li = $bowls.querySelector('.sel');
     if (li && li.scrollIntoView) li.scrollIntoView({ block: 'nearest' });
+  }
+
+  // a living streak on the gloss line when the bench nears bloom: a satin,
+  // well-held bench lies level and still; a bench run warm keeps shivering.
+  // Driven off the frame clock and throttled to a slow crawl; held still for
+  // reduced-motion.
+  var prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduce) {
+    var phase = 0, last = 0;
+    var tick = function (ts) {
+      requestAnimationFrame(tick);
+      var bloom = glossLevel();
+      if (bloom < 0.12) return;         // a satin bench does not stir
+      if (ts - last < 95) return;       // throttle to a slow, streaking crawl
+      last = ts;
+      phase = (phase + 0.28) % (Math.PI * 200);
+      $gaugePath.setAttribute('d', gaugePath(bloom, phase));
+    };
+    requestAnimationFrame(tick);
   }
 
   render();
