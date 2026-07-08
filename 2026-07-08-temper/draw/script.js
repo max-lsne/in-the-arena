@@ -57,6 +57,14 @@
   var $name = document.getElementById('forge-name');
   var $hint = document.getElementById('board-hint');
   var $addBtn = $form.querySelector('.add-btn');
+  var $gaugePath = document.getElementById('gauge-path');
+  var $heatRead = document.getElementById('heat-read');
+
+  // how hot the line runs, by colour and by stage. A colour on the run is the
+  // hot middle; a blade let down tough barely stirs the line, and cold hard
+  // steel not at all.
+  var COND_HEAT  = [0.05, 1.0, 0.42, 0.12];
+  var STAGE_HEAT = [0.1, 0.16, 1.0, 0.12];
 
   // --- icons ---
   function svg(inner) { return '<svg viewBox="0 0 16 16" aria-hidden="true">' + inner + '</svg>'; }
@@ -115,6 +123,65 @@
     try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {}
   }
 
+  // --- the colour line ---
+  function heatLevel() {
+    var xs = state.irons;
+    if (!xs.length) return 0;
+    var sum = 0;
+    for (var i = 0; i < xs.length; i++) {
+      sum += COND_HEAT[xs[i].cond] * STAGE_HEAT[xs[i].stage];
+    }
+    var avg = sum / xs.length;
+    // a forge watched in good order draws slow; past a tended few the far irons
+    // run past blue unseen and the whole forge reads hotter
+    var overrun = Math.max(0, xs.length - 3) / (CAP - 3) * 0.3;
+    return clamp(avg + overrun, 0, 1);
+  }
+
+  function gaugePath(heat, phase) {
+    var W = 600, mid = 32, steps = 64;
+    var amp = heat * 18;
+    var freq = 2 + heat * 5;
+    var d = 'M0 ' + mid;
+    for (var i = 1; i <= steps; i++) {
+      var x = (W / steps) * i;
+      var t = i / steps;
+      // both ends pinned level; a second faster wave makes a forge on the run
+      // read ragged and racing rather than a tidy sine
+      var env = Math.sin(t * Math.PI);
+      var y = mid - env * amp * (
+        Math.sin(t * Math.PI * freq + phase) * 0.76 +
+        Math.sin(t * Math.PI * (freq * 2.1) + phase * 1.4) * 0.24
+      );
+      d += ' L' + x.toFixed(1) + ' ' + y.toFixed(1);
+    }
+    return d;
+  }
+
+  function lerp(a, b, t) { return Math.round(a + (b - a) * t); }
+  function heatColor(heat) {
+    // a settled spring blue #3f6f9c → a hot flare orange #d9772f
+    var a = [0x3f, 0x6f, 0x9c], b = [0xd9, 0x77, 0x2f];
+    return 'rgb(' + lerp(a[0], b[0], heat) + ',' + lerp(a[1], b[1], heat) + ',' + lerp(a[2], b[2], heat) + ')';
+  }
+
+  function heatRead(heat) {
+    if (heat < 0.001) return 'cold — the forge is empty';
+    if (heat < 0.12) return 'cold — nothing on the heat';
+    if (heat < 0.32) return 'drawing slow — colours just up';
+    if (heat < 0.55) return 'running — watch the colour';
+    if (heat < 0.78) return 'running hot — pull one now';
+    return 'past blue — you are drawing them out';
+  }
+
+  function paintGauge() {
+    var heat = heatLevel();
+    $gaugePath.setAttribute('d', gaugePath(heat, 0));
+    $gaugePath.setAttribute('stroke', heatColor(heat));
+    $heatRead.textContent = heatRead(heat);
+    $heatRead.style.color = heatColor(heat);
+  }
+
   // --- render ---
   function render() {
     if (selected >= state.irons.length) selected = state.irons.length - 1;
@@ -137,6 +204,7 @@
       : 'Set an iron in the fire…';
 
     save();
+    paintGauge();
   }
 
   function row(s, i) {
@@ -337,6 +405,24 @@
   function scrollToSel() {
     var li = $irons.querySelector('.sel');
     if (li && li.scrollIntoView) li.scrollIntoView({ block: 'nearest' });
+  }
+
+  // a living race on the colour line when the forge runs hot: a cool, well-watched
+  // forge draws even and still; a forge on the run keeps moving. Driven off the
+  // frame clock and throttled to a quick flicker; held still for reduced-motion.
+  var prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduce) {
+    var phase = 0, last = 0;
+    var tick = function (ts) {
+      requestAnimationFrame(tick);
+      var heat = heatLevel();
+      if (heat < 0.12) return;          // a cold forge does not stir
+      if (ts - last < 80) return;       // throttle to a quick, running flicker
+      last = ts;
+      phase = (phase + 0.34) % (Math.PI * 200);
+      $gaugePath.setAttribute('d', gaugePath(heat, phase));
+    };
+    requestAnimationFrame(tick);
   }
 
   render();
