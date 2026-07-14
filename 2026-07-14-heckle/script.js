@@ -164,6 +164,7 @@
     }
 
     save();
+    updateSheen();
   }
 
   // toggle the focus ring without rebuilding the list (keeps clicks alive)
@@ -316,6 +317,148 @@
     render();
   }
 
+  // ---- the sheen: the whole bench held to the light as one line ----
+  // Lies satin and bright when the work is drawing well and few stricks are
+  // worked at once; blooms dull and grey, the way tow does, as the bench fills
+  // with ruffled, tangled stricks all balking on the pins at once.
+  const sheenCanvas = document.getElementById("sheen");
+  const sheenCaption = document.getElementById("sheen-caption");
+  const sheenCtx = sheenCanvas && sheenCanvas.getContext ? sheenCanvas.getContext("2d") : null;
+  const reduceMotion =
+    window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  let sheenScore = 0.62; // 0 dull/grey .. 1 satin/bright
+  let sheenShown = 0.62; // eased value actually drawn
+  let sheenRaf = null;
+
+  function computeSheen() {
+    const n = stricks.length;
+    if (!n) return 0.62;
+    let quality = 0;
+    let rough = 0;
+    stricks.forEach((s) => {
+      const ci = CONDITIONS.findIndex((c) => c.key === s.cond);
+      quality += (s.grade / (GRADES.length - 1) + ci / (CONDITIONS.length - 1)) / 2;
+      if (s.cond === "tangled" || s.grade === 0) rough++;
+    });
+    quality /= n;
+    const load = n / BENCH_LIMIT;
+    const roughFrac = rough / n;
+    const v = 0.12 + 0.9 * quality - 0.4 * Math.max(0, load - 0.4) - 0.28 * roughFrac;
+    return Math.max(0, Math.min(1, v));
+  }
+
+  function captionFor(v) {
+    if (!stricks.length) return "The bench is clear — the line lies still.";
+    if (v >= 0.72) return "The bench is drawing satin — the line lies bright.";
+    if (v >= 0.5) return "The bench is drawing well.";
+    if (v >= 0.3) return "The sheen is dulling — too much is left ruffled.";
+    return "The line has bloomed grey — the bench is choked with tow.";
+  }
+
+  function mix(a, b, t) {
+    return Math.round(a + (b - a) * t);
+  }
+
+  // dull steel-grey (v=0) toward flaxen gold (v=1)
+  function sheenStroke(v, alpha) {
+    const r = mix(122, 216, v);
+    const g = mix(126, 172, v);
+    const b = mix(118, 74, v);
+    return "rgba(" + r + "," + g + "," + b + "," + alpha + ")";
+  }
+
+  function sizeSheen() {
+    if (!sheenCtx) return;
+    const dpr = window.devicePixelRatio || 1;
+    const w = sheenCanvas.clientWidth || 600;
+    const h = sheenCanvas.clientHeight || 66;
+    sheenCanvas.width = Math.max(1, Math.round(w * dpr));
+    sheenCanvas.height = Math.max(1, Math.round(h * dpr));
+    sheenCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function drawSheen(time, v) {
+    if (!sheenCtx) return;
+    const w = sheenCanvas.clientWidth || 600;
+    const h = sheenCanvas.clientHeight || 66;
+    const mid = h / 2;
+    sheenCtx.clearRect(0, 0, w, h);
+
+    const t = reduceMotion ? 0 : time / 1000;
+    const ragged = 1 - v; // dull work rides higher, rougher ripples
+    const baseAmp = 3 + ragged * 5;
+    const noiseAmp = ragged * 9;
+
+    // main line
+    sheenCtx.beginPath();
+    for (let x = 0; x <= w; x += 2) {
+      const p = x / w;
+      const base = Math.sin(p * 7 + t * 1.1) * baseAmp;
+      const noise =
+        (Math.sin(x * 0.13 + t * 2.3) + Math.sin(x * 0.061 - t * 1.7)) * 0.5 * noiseAmp;
+      const y = mid + base + noise;
+      if (x === 0) sheenCtx.moveTo(x, y);
+      else sheenCtx.lineTo(x, y);
+    }
+    sheenCtx.lineWidth = 2;
+    sheenCtx.strokeStyle = sheenStroke(v, 0.95);
+    sheenCtx.shadowColor = sheenStroke(v, 0.6);
+    sheenCtx.shadowBlur = v > 0.55 && !reduceMotion ? 8 * v : 0;
+    sheenCtx.stroke();
+    sheenCtx.shadowBlur = 0;
+
+    // a travelling satin highlight, only when the line is drawing bright
+    if (v > 0.5) {
+      const cx = reduceMotion ? w * 0.5 : ((t * 90) % (w + 200)) - 100;
+      const grad = sheenCtx.createLinearGradient(cx - 90, 0, cx + 90, 0);
+      grad.addColorStop(0, sheenStroke(v, 0));
+      grad.addColorStop(0.5, "rgba(240,210,120," + (0.5 * (v - 0.5) * 2) + ")");
+      grad.addColorStop(1, sheenStroke(v, 0));
+      sheenCtx.beginPath();
+      for (let x = Math.max(0, cx - 90); x <= Math.min(w, cx + 90); x += 2) {
+        const p = x / w;
+        const base = Math.sin(p * 7 + t * 1.1) * baseAmp;
+        const y = mid + base;
+        if (x === Math.max(0, cx - 90)) sheenCtx.moveTo(x, y);
+        else sheenCtx.lineTo(x, y);
+      }
+      sheenCtx.lineWidth = 3;
+      sheenCtx.strokeStyle = grad;
+      sheenCtx.stroke();
+    }
+  }
+
+  function updateSheen() {
+    sheenScore = computeSheen();
+    if (sheenCaption) sheenCaption.textContent = captionFor(sheenScore);
+    if (reduceMotion) {
+      sheenShown = sheenScore;
+      drawSheen(0, sheenShown);
+    }
+  }
+
+  function sheenFrame(time) {
+    sheenShown += (sheenScore - sheenShown) * 0.06;
+    drawSheen(time, sheenShown);
+    sheenRaf = window.requestAnimationFrame(sheenFrame);
+  }
+
+  function startSheen() {
+    if (!sheenCtx) return;
+    sizeSheen();
+    updateSheen();
+    if (reduceMotion) {
+      drawSheen(0, sheenShown);
+    } else if (sheenRaf === null) {
+      sheenRaf = window.requestAnimationFrame(sheenFrame);
+    }
+    window.addEventListener("resize", function () {
+      sizeSheen();
+      if (reduceMotion) drawSheen(0, sheenShown);
+    });
+  }
+
   // ---- keyboard: draw the bench without leaving the home row ----
   function focusedStrick() {
     return stricks.find((s) => s.id === focusedId) || null;
@@ -426,4 +569,5 @@
   }
   nameInput.value = benchName;
   render();
+  startSheen();
 })();
