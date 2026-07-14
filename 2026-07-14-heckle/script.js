@@ -5,6 +5,7 @@
   "use strict";
 
   const BENCH_LIMIT = 7;
+  const STORAGE_KEY = "heckle.bench.v1";
 
   // Draw — how fine the strick has been combed (index 0..3).
   const GRADES = ["Ruffled", "Coarse", "Fine", "Line"];
@@ -58,6 +59,78 @@
     stricks = SEED.map(makeStrick);
   }
 
+  // ---- persistence: everything stays in this browser, nowhere else ----
+  function storageOk() {
+    try {
+      const k = "__heckle_probe__";
+      window.localStorage.setItem(k, "1");
+      window.localStorage.removeItem(k);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  const canStore = storageOk();
+
+  function save() {
+    if (!canStore) return;
+    try {
+      window.localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          v: 1,
+          benchName: benchName,
+          seq: seq,
+          heapCursor: heapCursor,
+          stricks: stricks,
+        })
+      );
+    } catch (e) {
+      /* quota or serialisation trouble — the bench just won't persist */
+    }
+  }
+
+  function load() {
+    if (!canStore) return false;
+    let raw;
+    try {
+      raw = window.localStorage.getItem(STORAGE_KEY);
+    } catch (e) {
+      return false;
+    }
+    if (!raw) return false;
+    let data;
+    try {
+      data = JSON.parse(raw);
+    } catch (e) {
+      return false;
+    }
+    if (!data || !Array.isArray(data.stricks)) return false;
+
+    const condKeys = CONDITIONS.map((c) => c.key);
+    const clean = [];
+    data.stricks.forEach((s) => {
+      if (!s || typeof s.name !== "string") return;
+      const grade = Math.max(0, Math.min(GRADES.length - 1, s.grade | 0));
+      const cond = condKeys.indexOf(s.cond) >= 0 ? s.cond : "tangled";
+      clean.push({
+        id: typeof s.id === "string" ? s.id : "s" + seq++,
+        name: s.name.slice(0, 48) || "Unnamed strick",
+        grade: grade,
+        cond: cond,
+      });
+    });
+
+    stricks = clean;
+    if (typeof data.benchName === "string" && data.benchName.trim()) {
+      benchName = data.benchName.trim().slice(0, 40);
+    }
+    if (Number.isFinite(data.seq)) seq = Math.max(seq, data.seq | 0);
+    if (Number.isFinite(data.heapCursor)) heapCursor = data.heapCursor | 0;
+    return true;
+  }
+
   // ---- DOM refs ----
   const listEl = document.getElementById("strick-list");
   const countEl = document.getElementById("bench-count");
@@ -82,6 +155,8 @@
     emptyEl.hidden = n !== 0;
     fullEl.hidden = n < BENCH_LIMIT;
     addBtn.disabled = n >= BENCH_LIMIT;
+
+    save();
   }
 
   function renderStrick(s) {
@@ -101,6 +176,7 @@
     name.addEventListener("change", () => {
       s.name = name.value.trim() || "Unnamed strick";
       name.value = s.name;
+      save();
     });
     head.appendChild(name);
 
@@ -204,6 +280,13 @@
   }
 
   function resetBench() {
+    if (canStore) {
+      try {
+        window.localStorage.removeItem(STORAGE_KEY);
+      } catch (e) {
+        /* nothing to do */
+      }
+    }
     seq = 1;
     heapCursor = 0;
     benchName = "The heckle-bench";
@@ -218,9 +301,13 @@
   nameInput.addEventListener("change", () => {
     benchName = nameInput.value.trim() || "The heckle-bench";
     nameInput.value = benchName;
+    save();
   });
 
   // ---- init ----
-  seedBench();
+  if (!load()) {
+    seedBench();
+  }
+  nameInput.value = benchName;
   render();
 })();
