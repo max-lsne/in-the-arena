@@ -45,6 +45,8 @@
   let seq = 1;
   let benchName = "The heckle-bench";
   let heapCursor = 0;
+  let focusedId = null;
+  let lastFocusIndex = 0;
 
   function makeStrick(spec) {
     return {
@@ -156,13 +158,32 @@
     fullEl.hidden = n < BENCH_LIMIT;
     addBtn.disabled = n >= BENCH_LIMIT;
 
+    // keep the keyboard focus pointing at a strick that still exists
+    if (focusedId && !stricks.some((s) => s.id === focusedId)) {
+      focusedId = n ? stricks[Math.min(lastFocusIndex, n - 1)].id : null;
+    }
+
     save();
+  }
+
+  // toggle the focus ring without rebuilding the list (keeps clicks alive)
+  function markFocus() {
+    const nodes = listEl.querySelectorAll(".strick");
+    nodes.forEach((node) =>
+      node.classList.toggle("is-focused", node.dataset.id === focusedId)
+    );
   }
 
   function renderStrick(s) {
     const card = document.createElement("article");
-    card.className = "strick";
+    card.className = "strick" + (s.id === focusedId ? " is-focused" : "");
     card.dataset.id = s.id;
+    card.addEventListener("mousedown", () => {
+      if (focusedId !== s.id) {
+        focusedId = s.id;
+        markFocus();
+      }
+    });
 
     // head: name + condition tag
     const head = document.createElement("div");
@@ -294,6 +315,101 @@
     seedBench();
     render();
   }
+
+  // ---- keyboard: draw the bench without leaving the home row ----
+  function focusedStrick() {
+    return stricks.find((s) => s.id === focusedId) || null;
+  }
+
+  function moveFocus(delta) {
+    if (!stricks.length) return;
+    let idx = stricks.findIndex((s) => s.id === focusedId);
+    if (idx < 0) idx = delta > 0 ? -1 : stricks.length;
+    idx = Math.max(0, Math.min(stricks.length - 1, idx + delta));
+    focusedId = stricks[idx].id;
+    lastFocusIndex = idx;
+    markFocus();
+    const node = listEl.querySelector('.strick[data-id="' + focusedId + '"]');
+    if (node) node.scrollIntoView({ block: "nearest" });
+  }
+
+  function drawFiner(s) {
+    if (!s) return;
+    if (s.grade < GRADES.length - 1) s.grade++;
+    if (s.cond === "tangled") s.cond = "drawing";
+    render();
+  }
+
+  function drawBack(s) {
+    if (!s) return;
+    if (s.grade > 0) s.grade--;
+    render();
+  }
+
+  function takeOff(s) {
+    if (!s) return;
+    lastFocusIndex = stricks.findIndex((x) => x.id === s.id);
+    stricks = stricks.filter((x) => x.id !== s.id);
+    render();
+  }
+
+  function isTyping(el) {
+    if (!el) return false;
+    const t = el.tagName;
+    return t === "INPUT" || t === "TEXTAREA" || el.isContentEditable;
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (isTyping(e.target)) return;
+
+    const key = e.key;
+    const s = focusedStrick();
+
+    switch (key) {
+      case "j":
+      case "J":
+      case "ArrowDown":
+        moveFocus(1);
+        break;
+      case "k":
+      case "K":
+      case "ArrowUp":
+        moveFocus(-1);
+        break;
+      case "Enter":
+      case "]":
+        if (s) drawFiner(s);
+        break;
+      case "[":
+        if (s) drawBack(s);
+        break;
+      case "0":
+      case "1":
+      case "2":
+      case "3":
+        if (s) {
+          s.cond = CONDITIONS[+key].key;
+          render();
+        }
+        break;
+      case "Delete":
+      case "Backspace":
+        if (s) takeOff(s);
+        break;
+      case "n":
+      case "N":
+        addStrick();
+        break;
+      case "r":
+      case "R":
+        resetBench();
+        break;
+      default:
+        return;
+    }
+    e.preventDefault();
+  });
 
   // ---- wiring ----
   addBtn.addEventListener("click", addStrick);
