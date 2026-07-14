@@ -141,6 +141,7 @@
   const addBtn = document.getElementById("add-strick");
   const resetBtn = document.getElementById("reset-bench");
   const nameInput = document.getElementById("bench-name");
+  const statusEl = document.getElementById("bench-status");
 
   // ---- rendering ----
   function render() {
@@ -165,6 +166,11 @@
 
     save();
     updateSheen();
+
+    if (statusEl) {
+      statusEl.textContent =
+        n + " of " + BENCH_LIMIT + " on the bench. " + captionFor(sheenScore);
+    }
   }
 
   // toggle the focus ring without rebuilding the list (keeps clicks alive)
@@ -239,8 +245,11 @@
     CONDITIONS.forEach((c) => {
       const b = document.createElement("button");
       b.type = "button";
-      b.className = "cond-btn" + (c.key === s.cond ? " active" : "");
+      const on = c.key === s.cond;
+      b.className = "cond-btn" + (on ? " active" : "");
       b.textContent = c.label;
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+      b.setAttribute("aria-label", c.label + " — " + s.name);
       b.addEventListener("click", () => {
         s.cond = c.key;
         render();
