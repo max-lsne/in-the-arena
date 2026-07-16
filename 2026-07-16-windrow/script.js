@@ -60,6 +60,80 @@
     rows = SEED.map(makeRow);
   }
 
+  // ---- persistence: the field is kept in the browser, nowhere else ----
+  const STORAGE_KEY = "windrow.field.v1";
+
+  const storageOk = (function () {
+    try {
+      const k = "__windrow_probe__";
+      window.localStorage.setItem(k, "1");
+      window.localStorage.removeItem(k);
+      return true;
+    } catch (e) {
+      return false; // private mode, disabled storage, etc. — stay in memory
+    }
+  })();
+
+  function save() {
+    if (!storageOk) return;
+    try {
+      window.localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          rows: rows,
+          seq: seq,
+          fieldName: fieldName,
+          cropCursor: cropCursor,
+        })
+      );
+    } catch (e) {
+      /* quota or serialization trouble — leave the field standing in memory */
+    }
+  }
+
+  function load() {
+    if (!storageOk) return false;
+    let raw;
+    try {
+      raw = window.localStorage.getItem(STORAGE_KEY);
+    } catch (e) {
+      return false;
+    }
+    if (!raw) return false;
+    let data;
+    try {
+      data = JSON.parse(raw);
+    } catch (e) {
+      return false;
+    }
+    if (!data || !Array.isArray(data.rows)) return false;
+
+    const condKeys = CONDITIONS.map((c) => c.key);
+    rows = data.rows
+      .filter((r) => r && typeof r.name === "string")
+      .map((r) => ({
+        id: typeof r.id === "string" ? r.id : "r" + seq++,
+        name: r.name.slice(0, 48) || "Unnamed row",
+        grade: Math.max(0, Math.min(GRADES.length - 1, r.grade | 0)),
+        cond: condKeys.indexOf(r.cond) >= 0 ? r.cond : "green",
+      }))
+      .slice(0, FIELD_LIMIT);
+
+    if (typeof data.seq === "number" && data.seq > 0) seq = data.seq;
+    // never let seq collide with a restored id
+    rows.forEach((r) => {
+      const num = parseInt(String(r.id).replace(/^r/, ""), 10);
+      if (!isNaN(num) && num >= seq) seq = num + 1;
+    });
+    if (typeof data.cropCursor === "number" && data.cropCursor >= 0) {
+      cropCursor = data.cropCursor;
+    }
+    if (typeof data.fieldName === "string" && data.fieldName.trim()) {
+      fieldName = data.fieldName;
+    }
+    return true;
+  }
+
   // ---- DOM refs ----
   const listEl = document.getElementById("row-list");
   const countEl = document.getElementById("field-count");
@@ -97,6 +171,8 @@
       statusEl.textContent =
         n + " of " + FIELD_LIMIT + " in the field. " + captionFor(hazeScore);
     }
+
+    save();
   }
 
   // toggle the focus ring without rebuilding the list (keeps clicks alive)
@@ -487,10 +563,11 @@
   nameInput.addEventListener("change", () => {
     fieldName = nameInput.value.trim() || "The home meadow";
     nameInput.value = fieldName;
+    save();
   });
 
   // ---- init ----
-  seedField();
+  if (!load()) seedField();
   nameInput.value = fieldName;
   render();
   startHaze();
