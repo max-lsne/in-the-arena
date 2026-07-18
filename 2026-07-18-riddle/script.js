@@ -77,6 +77,79 @@
     pieces = SEED.map(makePiece);
   }
 
+  // ---- persistence: the screen is kept in the browser, nowhere else ----
+  const STORAGE_KEY = "riddle.screen.v1";
+
+  const storageOk = (function () {
+    try {
+      const k = "__riddle_probe__";
+      window.localStorage.setItem(k, "1");
+      window.localStorage.removeItem(k);
+      return true;
+    } catch (e) {
+      return false; // private mode, disabled storage, etc. — stay in memory
+    }
+  })();
+
+  function save() {
+    if (!storageOk) return;
+    try {
+      window.localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          pieces: pieces,
+          seq: seq,
+          riddleName: riddleName,
+          tipCursor: tipCursor,
+        })
+      );
+    } catch (e) {
+      /* quota or serialization trouble — leave the heap on the screen in memory */
+    }
+  }
+
+  function load() {
+    if (!storageOk) return false;
+    let raw;
+    try {
+      raw = window.localStorage.getItem(STORAGE_KEY);
+    } catch (e) {
+      return false;
+    }
+    if (!raw) return false;
+    let data;
+    try {
+      data = JSON.parse(raw);
+    } catch (e) {
+      return false;
+    }
+    if (!data || !Array.isArray(data.pieces)) return false;
+
+    pieces = data.pieces
+      .filter((p) => p && typeof p.name === "string")
+      .map((p) => ({
+        id: typeof p.id === "string" ? p.id : "p" + seq++,
+        name: p.name.slice(0, 40) || "Unnamed",
+        size: clampSize(p.size),
+        sorted: !!p.sorted,
+      }))
+      .slice(0, SCREEN_LIMIT);
+
+    if (typeof data.seq === "number" && data.seq > 0) seq = data.seq;
+    // never let seq collide with a restored id
+    pieces.forEach((p) => {
+      const num = parseInt(String(p.id).replace(/^p/, ""), 10);
+      if (!isNaN(num) && num >= seq) seq = num + 1;
+    });
+    if (typeof data.tipCursor === "number" && data.tipCursor >= 0) {
+      tipCursor = data.tipCursor;
+    }
+    if (typeof data.riddleName === "string" && data.riddleName.trim()) {
+      riddleName = data.riddleName;
+    }
+    return true;
+  }
+
   // ---- DOM refs ----
   const hopperList = document.getElementById("hopper-list");
   const hopperEmpty = document.getElementById("hopper-empty");
@@ -119,6 +192,8 @@
     }
 
     justDropped = new Set(); // consumed by this render
+
+    save();
   }
 
   function renderBand(band) {
@@ -414,10 +489,11 @@
   nameInput.addEventListener("change", () => {
     riddleName = nameInput.value.trim() || "Monday's tip";
     nameInput.value = riddleName;
+    save();
   });
 
   // ---- init ----
-  seedScreen();
+  if (!load()) seedScreen();
   nameInput.value = riddleName;
   render();
   startDust();

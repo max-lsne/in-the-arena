@@ -70,9 +70,10 @@ You do not have to count the hopper to know there is unsorted work on the screen
 Hero, the two places a piece can land, the ladder, three steps, and then the
 screen itself: a hopper you tip pieces into, a graded stack of bands, and a shake
 that sends the heap down into them. Add pieces, gauge each by size, shake, tip a
-band back to riddle it again. No account, no cloud, no build step. Nothing is
-saved and nothing is sent; the screen resets when you reload. Open `index.html`
-in a browser; that is the whole of it.
+band back to riddle it again. No account, no cloud, no build step. What you tip
+in and how it grades out is kept in your browser and nowhere else — the screen is
+still there, sorted as you left it, when you come back. Nothing is sent anywhere.
+Open `index.html` in a browser; that is the whole of it.
 
 *Part of an ongoing series of small, single-file pages, each built around one
 old working word and the discipline hidden inside it.*
