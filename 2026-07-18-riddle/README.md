@@ -70,7 +70,10 @@ You do not have to count the hopper to know there is unsorted work on the screen
 Hero, the two places a piece can land, the ladder, three steps, and then the
 screen itself: a hopper you tip pieces into, a graded stack of bands, and a shake
 that sends the heap down into them. Add pieces, gauge each by size, shake, tip a
-band back to riddle it again. No account, no cloud, no build step. What you tip
+band back to riddle it again. The whole screen is keyboard-workable —
+<kbd>J</kbd>/<kbd>K</kbd> to move, <kbd>[</kbd>/<kbd>]</kbd> to grade a piece
+finer or coarser, <kbd>0</kbd>–<kbd>4</kbd> to set its size, <kbd>S</kbd> to
+shake, and <kbd>T</kbd> to tip it all back up. No account, no cloud, no build step. What you tip
 in and how it grades out is kept in your browser and nowhere else — the screen is
 still there, sorted as you left it, when you come back. Nothing is sent anywhere.
 Open `index.html` in a browser; that is the whole of it.

@@ -58,6 +58,8 @@
   let riddleName = "Monday's tip";
   let tipCursor = 0;
   let justDropped = new Set(); // ids that just fell into a band — for the drop animation
+  let focusedId = null;
+  let lastFocusIndex = 0;
 
   function makePiece(spec) {
     return {
@@ -183,6 +185,12 @@
     shakeBtn.disabled = inHopper.length === 0;
     tipAllBtn.disabled = pieces.every((p) => !p.sorted);
 
+    // keep the keyboard focus pointing at a piece that still exists
+    const order = orderedIds();
+    if (focusedId && order.indexOf(focusedId) < 0) {
+      focusedId = order.length ? order[Math.min(lastFocusIndex, order.length - 1)] : null;
+    }
+
     updateDust();
 
     if (statusEl) {
@@ -253,8 +261,17 @@
   function renderPiece(p) {
     const size = SIZES[p.size];
     const el = document.createElement("span");
-    el.className = "piece" + (justDropped.has(p.id) ? " just-dropped" : "");
+    el.className =
+      "piece" +
+      (justDropped.has(p.id) ? " just-dropped" : "") +
+      (p.id === focusedId ? " is-focused" : "");
     el.dataset.id = p.id;
+    el.addEventListener("mousedown", () => {
+      if (focusedId !== p.id) {
+        focusedId = p.id;
+        markFocus();
+      }
+    });
 
     const sw = document.createElement("span");
     sw.className = "piece-swatch " + size.sw;
@@ -343,6 +360,118 @@
     seedScreen();
     render();
   }
+
+  // ---- keyboard: work the screen without leaving the home row ----
+  // Visual order: the hopper first, then the stack from the coarse mesh down to
+  // the pan — the same order the eye reads down the page.
+  function orderedIds() {
+    const ids = [];
+    pieces.forEach((p) => {
+      if (!p.sorted) ids.push(p.id);
+    });
+    BANDS.forEach((b) => {
+      pieces.forEach((p) => {
+        if (p.sorted && p.size === b.size) ids.push(p.id);
+      });
+    });
+    return ids;
+  }
+
+  function markFocus() {
+    const nodes = document.querySelectorAll("#hopper-list .piece, #stack .piece");
+    nodes.forEach((n) =>
+      n.classList.toggle("is-focused", n.dataset.id === focusedId)
+    );
+  }
+
+  function focusedPiece() {
+    return pieces.find((p) => p.id === focusedId) || null;
+  }
+
+  function moveFocus(delta) {
+    const order = orderedIds();
+    if (!order.length) return;
+    let idx = order.indexOf(focusedId);
+    if (idx < 0) idx = delta > 0 ? -1 : order.length;
+    idx = Math.max(0, Math.min(order.length - 1, idx + delta));
+    focusedId = order[idx];
+    lastFocusIndex = idx;
+    markFocus();
+    const node = document.querySelector('.piece[data-id="' + focusedId + '"]');
+    if (node) node.scrollIntoView({ block: "nearest" });
+  }
+
+  function removeFocused() {
+    const p = focusedPiece();
+    if (!p) return;
+    lastFocusIndex = orderedIds().indexOf(p.id);
+    pieces = pieces.filter((x) => x.id !== p.id);
+    render();
+  }
+
+  function isTyping(el) {
+    if (!el) return false;
+    const t = el.tagName;
+    return t === "INPUT" || t === "TEXTAREA" || el.isContentEditable;
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (isTyping(e.target)) return;
+
+    const key = e.key;
+    const p = focusedPiece();
+
+    switch (key) {
+      case "j":
+      case "J":
+      case "ArrowDown":
+        moveFocus(1);
+        break;
+      case "k":
+      case "K":
+      case "ArrowUp":
+        moveFocus(-1);
+        break;
+      case "]":
+        if (p) setSize(p, p.size + 1);
+        break;
+      case "[":
+        if (p) setSize(p, p.size - 1);
+        break;
+      case "0":
+      case "1":
+      case "2":
+      case "3":
+      case "4":
+        if (p) setSize(p, +key);
+        break;
+      case "Enter":
+      case "s":
+      case "S":
+        shake();
+        break;
+      case "n":
+      case "N":
+        addPiece();
+        break;
+      case "t":
+      case "T":
+        tipAll();
+        break;
+      case "Delete":
+      case "Backspace":
+        removeFocused();
+        break;
+      case "r":
+      case "R":
+        resetScreen();
+        break;
+      default:
+        return;
+    }
+    e.preventDefault();
+  });
 
   // ---- the dust: raised by shaking, hanging until the heap settles ----
   // Lies clear when the heap is graded and down; hangs thick and grey while

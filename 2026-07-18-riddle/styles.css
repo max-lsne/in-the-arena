@@ -539,6 +539,29 @@ section { scroll-margin-top: 2rem; }
 
 .screen-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
 
+.screen-keys {
+  max-width: var(--maxw);
+  margin: 0 auto 1.1rem;
+  padding: 0 1.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--ink-faint);
+  text-align: center;
+  line-height: 2.1;
+}
+.screen-keys kbd {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 0.1rem 0.4rem;
+  margin: 0 0.05rem;
+  border: 1px solid var(--line);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  background: var(--card);
+  color: var(--ink-soft);
+}
+@media (max-width: 560px) { .screen-keys { display: none; } }
+
 /* body: hopper above, graded stack below */
 .riddle-body {
   max-width: var(--maxw);
