@@ -46,6 +46,8 @@
   let stockName = "Shelf run";
   let drawCursor = 0;
   let justAdded = new Set(); // ids that just came off the saw — for the animation
+  let focusedId = null; // the piece the keyboard is working on
+  let lastFocusIndex = 0;
 
   function makePiece(spec) {
     return {
@@ -219,6 +221,14 @@
 
     overEl.hidden = !t.over;
 
+    // keep the keyboard focus pointing at a piece that still exists
+    if (focusedId && !pieces.some((p) => p.id === focusedId)) {
+      focusedId = pieces.length
+        ? pieces[Math.min(lastFocusIndex, pieces.length - 1)].id
+        : null;
+      markFocus();
+    }
+
     updateSawdust(t);
     justAdded = new Set();
 
@@ -231,7 +241,11 @@
 
     pieces.forEach((p) => {
       const seg = document.createElement("div");
-      seg.className = "seg seg-piece" + (justAdded.has(p.id) ? " just-added" : "");
+      seg.className =
+        "seg seg-piece" +
+        (justAdded.has(p.id) ? " just-added" : "") +
+        (p.id === focusedId ? " is-focused" : "");
+      seg.dataset.id = p.id;
       seg.style.flexGrow = String(p.len);
       seg.style.flexBasis = "0";
       seg.title = p.name + " — " + mm(p.len);
@@ -282,8 +296,14 @@
 
   function renderCut(p) {
     const el = document.createElement("div");
-    el.className = "cut";
+    el.className = "cut" + (p.id === focusedId ? " is-focused" : "");
     el.dataset.id = p.id;
+    el.addEventListener("mousedown", () => {
+      if (focusedId !== p.id) {
+        focusedId = p.id;
+        markFocus();
+      }
+    });
 
     const sw = document.createElement("span");
     sw.className = "cut-swatch";
@@ -374,6 +394,90 @@
     seedBench();
     render();
   }
+
+  // ---- keyboard: work the bench without leaving the home row ----
+  // Order is simply the cut list, top to bottom — the way the eye reads it.
+  function markFocus() {
+    document.querySelectorAll("#cut-list .cut").forEach((n) =>
+      n.classList.toggle("is-focused", n.dataset.id === focusedId)
+    );
+    document.querySelectorAll("#plank .seg-piece").forEach((n) =>
+      n.classList.toggle("is-focused", n.dataset.id === focusedId)
+    );
+  }
+
+  function focusedPiece() {
+    return pieces.find((p) => p.id === focusedId) || null;
+  }
+
+  function moveFocus(delta) {
+    if (!pieces.length) return;
+    let idx = pieces.findIndex((p) => p.id === focusedId);
+    if (idx < 0) idx = delta > 0 ? -1 : pieces.length;
+    idx = Math.max(0, Math.min(pieces.length - 1, idx + delta));
+    focusedId = pieces[idx].id;
+    lastFocusIndex = idx;
+    markFocus();
+    const node = document.querySelector('#cut-list .cut[data-id="' + focusedId + '"]');
+    if (node) node.scrollIntoView({ block: "nearest" });
+  }
+
+  function removeFocused() {
+    const p = focusedPiece();
+    if (!p) return;
+    lastFocusIndex = pieces.findIndex((x) => x.id === p.id);
+    pieces = pieces.filter((x) => x.id !== p.id);
+    render();
+  }
+
+  function isTyping(el) {
+    if (!el) return false;
+    const t = el.tagName;
+    return t === "INPUT" || t === "TEXTAREA" || el.isContentEditable;
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (isTyping(e.target)) return;
+
+    const p = focusedPiece();
+    switch (e.key) {
+      case "j":
+      case "J":
+      case "ArrowDown":
+        moveFocus(1);
+        break;
+      case "k":
+      case "K":
+      case "ArrowUp":
+        moveFocus(-1);
+        break;
+      case "]":
+      case "+":
+      case "=":
+        if (p) setLen(p, p.len + LEN_STEP);
+        break;
+      case "[":
+      case "-":
+        if (p) setLen(p, p.len - LEN_STEP);
+        break;
+      case "n":
+      case "N":
+        addCut();
+        break;
+      case "Delete":
+      case "Backspace":
+        removeFocused();
+        break;
+      case "r":
+      case "R":
+        resetBench();
+        break;
+      default:
+        return;
+    }
+    e.preventDefault();
+  });
 
   // ---- the sawdust: raised by every cut, warm tan, gone grey-red on an overrun ----
   const canvas = document.getElementById("sawdust");

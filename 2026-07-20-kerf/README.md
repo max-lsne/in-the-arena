@@ -73,8 +73,11 @@ read the numbers to know the run is in trouble — the air over the bench tells 
 Hero, the two things a cut leaves, the ladder of blades, three steps, and then
 the bench itself: a board with a stock length and a kerf, a cut list you lay out
 on it, and a reading that sums the pieces *with* a kerf per cut. Set the stock,
-add pieces, size each one, and read the offcut. No account, no cloud, no build
-step. The board you lay out — its length, its kerf, and every piece on it — is
+add pieces, size each one, and read the offcut. The whole bench is
+keyboard-workable — <kbd>J</kbd>/<kbd>K</kbd> to move down the list,
+<kbd>[</kbd>/<kbd>]</kbd> to shorten or lengthen a piece, <kbd>N</kbd> to add,
+<kbd>Del</kbd> to take one off, and <kbd>R</kbd> to reset. No account, no cloud,
+no build step. The board you lay out — its length, its kerf, and every piece on it — is
 kept in your browser and nowhere else, so the bench is still there, laid out as
 you left it, when you come back. Nothing is sent anywhere. Open `index.html` in a
 browser; that is the whole of it.
