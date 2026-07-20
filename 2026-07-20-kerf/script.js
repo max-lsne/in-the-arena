@@ -180,6 +180,7 @@
   const kerfUp = document.getElementById("kerf-up");
   const kerfVal = document.getElementById("kerf-val");
   const nameInput = document.getElementById("stock-name");
+  const statusEl = document.getElementById("bench-status");
 
   function mm(n) {
     return n.toLocaleString("en-US") + " mm";
@@ -230,9 +231,27 @@
     }
 
     updateSawdust(t);
+    announce(t);
     justAdded = new Set();
 
     save();
+  }
+
+  // spoken summary for screen readers — the reading, said plainly
+  function announce(t) {
+    if (!statusEl) return;
+    const cuts = t.cuts + (t.cuts === 1 ? " cut" : " cuts");
+    if (!pieces.length) {
+      statusEl.textContent =
+        stockName + ": empty board, " + mm(stock) + " of stock, nothing cut.";
+      return;
+    }
+    const head =
+      stockName + ": " + mm(t.used) + " spent of " + mm(stock) +
+      " across " + cuts + " (kerf " + mm(kerf) + "). ";
+    statusEl.textContent = t.over
+      ? head + "Over the end of the board by " + mm(-t.offcut) + " — the last piece won't come off."
+      : head + mm(t.offcut) + " of offcut left.";
   }
 
   function renderPlank(t) {
