@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kerf — you cannot cut a board into pieces that add up to the whole board; the blade eats a little of every cut</title>
+  <meta name="description" content="A kerf is the ribbon of material a saw turns to dust with every pass. Cut a board into pieces and the pieces never sum to the board — each cut spends a kerf you cannot get back. A small page about laying out a cut list against a fixed stock, and paying the kerf up front so the last piece still comes off." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <rect x="4" y="13" width="15" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="2" />
+          <path d="M19 13 l3 -1 v8 l-3 -1 z" fill="currentColor" />
+          <path d="M23 16 h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="1.4 3" />
+        </svg>
+      </span>
+      <span>Kerf</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">What a cut leaves</a>
+      <a href="#ladder">The blades</a>
+      <a href="#who">Who keeps one</a>
+      <a href="#bench" class="nav-cta">Lay out a board</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">The cut costs — plan the kerf in</p>
+        <h1>
+          You cannot cut a board into pieces<br />
+          that add up to the whole board.
+        </h1>
+        <p class="lede">
+          A <strong>kerf</strong> is the ribbon of wood a saw turns to sawdust
+          with every pass — the width of the blade's own bite. Cut a stick into
+          five pieces and the five pieces never sum back to the stick: five cuts
+          have eaten five kerfs, gone for good. That is the whole discipline of a
+          cut list. <em>Pay the kerf up front</em>, or measure the pieces to the
+          last millimetre and watch the final one come up short.
+        </p>
+        <div class="hero-cta">
+          <a href="#bench" class="btn btn-primary">Lay out a board</a>
+          <a href="#how" class="btn btn-ghost">See what a cut leaves</a>
+        </div>
+        <p class="hero-note">
+          No account, no cloud, no build step. Everything stays in your browser.
+        </p>
+      </div>
+
+      <div class="hero-card" aria-hidden="true">
+        <div class="kerf-demo">
+          <div class="kerf-demo-head">
+            <span class="kerf-demo-name">One board, four pieces</span>
+            <span class="tag tag-ok">Fits</span>
+          </div>
+          <div class="kerf-demo-plank">
+            <span class="demo-seg demo-piece" style="flex-grow: 60"><i>Shelf</i>600</span>
+            <span class="demo-seg demo-kerf"></span>
+            <span class="demo-seg demo-piece" style="flex-grow: 60"><i>Shelf</i>600</span>
+            <span class="demo-seg demo-kerf"></span>
+            <span class="demo-seg demo-piece" style="flex-grow: 90"><i>Upright</i>900</span>
+            <span class="demo-seg demo-kerf"></span>
+            <span class="demo-seg demo-piece demo-piece-sm" style="flex-grow: 18"><i>Cleat</i>180</span>
+            <span class="demo-seg demo-kerf"></span>
+            <span class="demo-seg demo-offcut" style="flex-grow: 11">offcut</span>
+          </div>
+          <p class="kerf-demo-foot">
+            2280&nbsp;mm of stock, four cuts at 3&nbsp;mm — 2292&nbsp;mm spent of
+            2400. The offcut holds at 108&nbsp;mm because the kerf was counted.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="how" id="how">
+      <div class="section-head">
+        <p class="eyebrow">Two things come off every cut</p>
+        <h2>A piece you keep, and a kerf you spend.</h2>
+        <p class="section-sub">
+          The saw does not divide the board for free. Each pass yields two
+          things at once — one you carry to the bench, one that falls to the
+          floor as dust — and the second is the one every beginner forgets.
+        </p>
+      </div>
+
+      <div class="how-grid">
+        <div class="how-card">
+          <h3><span class="how-mark how-mark-piece" aria-hidden="true"></span>The piece — what you keep</h3>
+          <p>
+            The length you meant to make, sawn clean off the stock. This is the
+            part you measured, the part on the cut list, the part that ends up in
+            the work. It is also the only part a hopeful count adds up — which is
+            exactly why the count runs out early.
+          </p>
+        </div>
+        <div class="how-card">
+          <h3><span class="how-mark how-mark-kerf" aria-hidden="true"></span>The kerf — what you spend</h3>
+          <p>
+            The blade's own width, turned to sawdust and gone. It is not waste
+            you were careless with; it is the fixed toll of making a cut at all.
+            Count it once per cut and the board comes out honest. Ignore it, and
+            the toll comes due at the far end, on the piece you had no slack for.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="ladder" id="ladder">
+      <div class="section-head">
+        <p class="eyebrow">The kerf is a choice, not a constant</p>
+        <h2>A finer blade spends less — and cuts slower.</h2>
+        <p class="section-sub">
+          Kerf is set by the tool. A ripping blade tears a wide road through the
+          wood and wastes it fast; a fine-tooth blade leaves a hair of a line but
+          crawls. Which overhead you pay is something you get to pick — as long as
+          you pick before you lay out the cuts, not after.
+        </p>
+      </div>
+
+      <ol class="ladder-list">
+        <li><span class="rung-dot rung-rip"></span><b>Rip blade — ~4&nbsp;mm.</b> A wide, fast kerf for tearing down the length of a board. Cheap on time, dear on material; ten cuts and you have lost a whole piece to dust.</li>
+        <li><span class="rung-dot rung-cross"></span><b>Crosscut — ~3&nbsp;mm.</b> The everyday kerf. Wide enough to clear, narrow enough to plan around. Most cut lists are reckoned at this width.</li>
+        <li><span class="rung-dot rung-fine"></span><b>Fine-tooth — ~2&nbsp;mm.</b> A slower blade that leaves a cleaner line and spends less stock. Worth it when the board is short and every millimetre is spoken for.</li>
+        <li><span class="rung-dot rung-hand"></span><b>Hand saw — ~1&nbsp;mm.</b> A thin, patient kerf. You pay in effort what you save in wood; good for one careful cut, punishing for forty.</li>
+        <li><span class="rung-dot rung-laser"></span><b>Near-zero — a hair.</b> The kerf you wish you had, and never quite do. Even a laser leaves a scorch; there is no cut that costs nothing.</li>
+      </ol>
+      <p class="ladder-note">
+        Width here stands for whatever overhead your own cuts carry — the setup,
+        the switch, the fee, the sawdust. Pick the blade that fits the board.
+        There is no blade with <em>no</em> kerf.
+      </p>
+    </section>
+
+    <section class="steps">
+      <div class="section-head">
+        <p class="eyebrow">The whole of the method</p>
+        <h2>Set the stock. Lay out the pieces. Read the offcut.</h2>
+      </div>
+      <ol class="steps-grid">
+        <li class="step">
+          <span class="step-num">1</span>
+          <h3>Set your stock and your blade</h3>
+          <p>Start from what you actually have — one board of a fixed length — and the kerf your saw will cut. The board does not grow to fit the plan; the plan has to fit the board.</p>
+        </li>
+        <li class="step">
+          <span class="step-num">2</span>
+          <h3>Lay out the pieces you need</h3>
+          <p>Name each length and set it down on the stock in order. As you add pieces the bench sums them <i>with</i> a kerf between each — so what you see is the real reach of the cut, not the hopeful one.</p>
+        </li>
+        <li class="step">
+          <span class="step-num">3</span>
+          <h3>Read the offcut — and mind the kerf</h3>
+          <p>What is left over is the offcut, and it is the truth. While it holds, the board is enough. The moment it goes red you have laid out more than the stock will give, and the last piece will not come off.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="bench-sec" id="bench">
+      <div class="section-head">
+        <p class="eyebrow">The bench</p>
+        <h2>Lay a cut list out on one board.</h2>
+        <p class="section-sub">
+          Seeded with a small run to start. Add pieces, set each length, and
+          watch the plank fill — pieces in wood, a thin band of sawdust for every
+          kerf, and the offcut at the tail. Push past the end of the board and the
+          reading turns.
+        </p>
+      </div>
+
+      <figure class="sawdust-wrap">
+        <canvas id="sawdust" class="sawdust" aria-hidden="true"></canvas>
+        <figcaption id="sawdust-caption" class="sawdust-caption">The bench is clear — no cuts made, no sawdust.</figcaption>
+      </figure>
+
+      <div class="bench-bar">
+        <label class="stock-name-field">
+          <span class="stock-name-label">Board</span>
+          <input id="stock-name" class="stock-name-input" type="text" value="Shelf run" maxlength="40" aria-label="Board name" />
+        </label>
+        <div class="bench-dials">
+          <div class="dial">
+            <span class="dial-label">Stock</span>
+            <div class="dial-set">
+              <button id="stock-down" class="dial-btn" type="button" aria-label="Shorten the stock">−</button>
+              <span id="stock-val" class="dial-val">2400 mm</span>
+              <button id="stock-up" class="dial-btn" type="button" aria-label="Lengthen the stock">+</button>
+            </div>
+          </div>
+          <div class="dial">
+            <span class="dial-label">Kerf</span>
+            <div class="dial-set">
+              <button id="kerf-down" class="dial-btn" type="button" aria-label="Narrow the kerf">−</button>
+              <span id="kerf-val" class="dial-val">3 mm</span>
+              <button id="kerf-up" class="dial-btn" type="button" aria-label="Widen the kerf">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="bench-actions">
+          <button id="add-cut" class="btn btn-primary btn-sm" type="button">Add a piece</button>
+        </div>
+      </div>
+
+      <div class="reading" id="bench-reading">
+        <span class="reading-fig" id="reading-used">0</span>
+        <span class="reading-unit">of 2400&nbsp;mm spent</span>
+        <span class="reading-sep">·</span>
+        <span class="reading-cuts" id="reading-cuts">0 cuts</span>
+        <span class="reading-sep">·</span>
+        <span class="reading-offcut" id="reading-offcut">2400&nbsp;mm offcut</span>
+      </div>
+
+      <div class="plank-wrap">
+        <div class="plank" id="plank" role="img" aria-label="The board, drawn to scale with each piece, kerf, and the offcut"></div>
+        <div class="plank-scale">
+          <span>0</span>
+          <span id="plank-end">2400 mm</span>
+        </div>
+      </div>
+
+      <div class="cut-list" id="cut-list"></div>
+
+      <p id="bench-over" class="bench-over" hidden>
+        The cut list runs past the end of the board. Take a piece off, shorten
+        one, or start from a longer stock — no amount of careful measuring makes
+        a board longer than it is, and the kerf will not forgive the overrun.
+      </p>
+    </section>
+
+    <section class="who" id="who">
+      <div class="section-head">
+        <p class="eyebrow">Who keeps one</p>
+        <h2>For anyone dividing a fixed thing into named pieces.</h2>
+      </div>
+      <div class="who-grid">
+        <div class="who-card">
+          <h3>The maker</h3>
+          <p>A cut list that adds up on paper still comes up short on the saw. Reckon every board with a kerf per cut, and you buy the right length the first time instead of one board too few.</p>
+        </div>
+        <div class="who-card">
+          <h3>The planner</h3>
+          <p>A day is a board and every task is a piece — but the switch between them is a kerf. Block a day to the minute with no kerf between the blocks and the last one never happens. Leave the sawdust in.</p>
+        </div>
+        <div class="who-card">
+          <h3>The budgeter</h3>
+          <p>Split a fixed sum into line items and each transfer takes its fee off the top. The stock is the balance, the fee is the kerf; plan the pieces to the whole and the last one bounces.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-word">
+      <span class="footer-word-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="20" height="20">
+          <rect x="4" y="13" width="15" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.9" />
+          <path d="M19 13 l3 -1 v8 l-3 -1 z" fill="currentColor" />
+          <path d="M23 16 h5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-dasharray="1.4 3" />
+        </svg>
+      </span>
+      <span><b>Kerf</b> — <i>the slot a saw cuts, and the width of material it removes in cutting; the stock a blade turns to dust on every pass, which a cut list must be reckoned against or fall short.</i></span>
+    </div>
+    <p class="footer-series">
+      Part of an ongoing series of small, single-file pages, each built around one
+      old working word and the discipline hidden inside it.
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
