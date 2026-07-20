@@ -64,6 +64,86 @@
     pieces = SEED.map(makePiece);
   }
 
+  // ---- persistence: the bench is kept in the browser, nowhere else ----
+  const STORAGE_KEY = "kerf.bench.v1";
+
+  const storageOk = (function () {
+    try {
+      const k = "__kerf_probe__";
+      window.localStorage.setItem(k, "1");
+      window.localStorage.removeItem(k);
+      return true;
+    } catch (e) {
+      return false; // private mode, disabled storage, etc. — stay in memory
+    }
+  })();
+
+  function save() {
+    if (!storageOk) return;
+    try {
+      window.localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          pieces: pieces,
+          seq: seq,
+          stock: stock,
+          kerf: kerf,
+          stockName: stockName,
+          drawCursor: drawCursor,
+        })
+      );
+    } catch (e) {
+      /* quota or serialization trouble — leave the bench in memory */
+    }
+  }
+
+  function load() {
+    if (!storageOk) return false;
+    let raw;
+    try {
+      raw = window.localStorage.getItem(STORAGE_KEY);
+    } catch (e) {
+      return false;
+    }
+    if (!raw) return false;
+    let data;
+    try {
+      data = JSON.parse(raw);
+    } catch (e) {
+      return false;
+    }
+    if (!data || !Array.isArray(data.pieces)) return false;
+
+    pieces = data.pieces
+      .filter((p) => p && typeof p.name === "string")
+      .map((p) => ({
+        id: typeof p.id === "string" ? p.id : "c" + seq++,
+        name: p.name.slice(0, 40) || "Piece",
+        len: clampLen(p.len),
+      }))
+      .slice(0, MAX_PIECES);
+
+    if (typeof data.seq === "number" && data.seq > 0) seq = data.seq;
+    // never let seq collide with a restored id
+    pieces.forEach((p) => {
+      const num = parseInt(String(p.id).replace(/^c/, ""), 10);
+      if (!isNaN(num) && num >= seq) seq = num + 1;
+    });
+    if (typeof data.stock === "number") {
+      stock = Math.max(STOCK_MIN, Math.min(STOCK_MAX, Math.round(data.stock / STOCK_STEP) * STOCK_STEP));
+    }
+    if (typeof data.kerf === "number") {
+      kerf = Math.max(KERF_MIN, Math.min(KERF_MAX, Math.round(data.kerf)));
+    }
+    if (typeof data.drawCursor === "number" && data.drawCursor >= 0) {
+      drawCursor = data.drawCursor;
+    }
+    if (typeof data.stockName === "string" && data.stockName.trim()) {
+      stockName = data.stockName;
+    }
+    return true;
+  }
+
   // ---- the honest sum: pieces plus one kerf per cut ----
   function tally() {
     const piecesTotal = pieces.reduce((s, p) => s + p.len, 0);
@@ -90,6 +170,7 @@
   const readingOffcut = document.getElementById("reading-offcut");
   const overEl = document.getElementById("bench-over");
   const addBtn = document.getElementById("add-cut");
+  const resetBtn = document.getElementById("reset-bench");
   const stockDown = document.getElementById("stock-down");
   const stockUp = document.getElementById("stock-up");
   const stockVal = document.getElementById("stock-val");
@@ -140,6 +221,8 @@
 
     updateSawdust(t);
     justAdded = new Set();
+
+    save();
   }
 
   function renderPlank(t) {
@@ -278,6 +361,17 @@
 
   function setKerf(next) {
     kerf = Math.max(KERF_MIN, Math.min(KERF_MAX, next));
+    render();
+  }
+
+  function resetBench() {
+    seq = 1;
+    drawCursor = 0;
+    stock = 2400;
+    kerf = 3;
+    stockName = "Shelf run";
+    nameInput.value = stockName;
+    seedBench();
     render();
   }
 
@@ -421,6 +515,7 @@
 
   // ---- wiring ----
   addBtn.addEventListener("click", addCut);
+  resetBtn.addEventListener("click", resetBench);
   stockDown.addEventListener("click", () => setStock(stock - STOCK_STEP));
   stockUp.addEventListener("click", () => setStock(stock + STOCK_STEP));
   kerfDown.addEventListener("click", () => setKerf(kerf - KERF_STEP));
@@ -428,10 +523,11 @@
   nameInput.addEventListener("change", () => {
     stockName = nameInput.value.trim() || "Shelf run";
     nameInput.value = stockName;
+    save();
   });
 
   // ---- init ----
-  seedBench();
+  if (!load()) seedBench();
   nameInput.value = stockName;
   render();
   startSawdust();
