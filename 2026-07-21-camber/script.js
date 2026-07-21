@@ -75,7 +75,7 @@
     "span-down", "span-up", "load-down", "load-up", "camber-down", "camber-up",
     "build-true", "reset-bench", "presets",
     "reading-crown", "reading-unit", "reading-defl", "reading-cam",
-    "bench-verdict"
+    "bench-verdict", "bench-status"
   ].forEach(function (id) {
     el[id] = document.getElementById(id);
   });
@@ -236,6 +236,16 @@
       ? vt(v === "dip" ? Math.abs(c) : c)
       : vt;
     el["bench-verdict"].setAttribute("data-state", v);
+
+    // Announce the reading to screen readers, without the visual detail.
+    var spoken = {
+      flat: "no load and no crown.",
+      true: "true — the beam lands on the line.",
+      dip: "sagging " + Math.abs(c) + " mm below the line.",
+      proud: "standing " + c + " mm proud of the line."
+    }[v];
+    el["bench-status"].textContent = (state.name || "The beam") + ": " +
+      defl + " mm deflection, " + state.camber + " mm camber built — " + spoken;
 
     syncPresets();
     save();

@@ -76,8 +76,11 @@ Hero, the two shapes a beam has (built and arrived-at), the ladder from flat to
 over-arched, three steps, and then the bench: a beam, a span and a load that fix
 the deflection, a camber you build in, and a reading that comes true where the
 two cancel. Set the span, set the load, build the crown, and land it on the line.
-No account, no cloud, no build step. Open `index.html` in a browser; that is the
-whole of it.
+The whole bench is keyboard-workable — <kbd>[</kbd>/<kbd>]</kbd> to shape the
+crown, <kbd>,</kbd>/<kbd>.</kbd> for the load, <kbd>−</kbd>/<kbd>=</kbd> for the
+span, <kbd>T</kbd> to build it true, and <kbd>R</kbd> to reset — and every change
+is read out to screen readers through a polite status line. No account, no cloud,
+no build step. Open `index.html` in a browser; that is the whole of it.
 
 *Part of an ongoing series of small, single-file pages, each built around one
 old working word and the discipline hidden inside it.*
