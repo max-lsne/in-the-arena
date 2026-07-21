@@ -305,6 +305,29 @@
     render();
   });
 
+  // --- Keyboard ----------------------------------------------------------
+  // The whole bench is workable from the keys: [ ] shape the crown, , . set the
+  // load, − = set the span, T builds it true, R resets. Typing in the name
+  // field is left alone.
+  document.addEventListener("keydown", function (e) {
+    if (e.target === el["beam-name"]) return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+    var handled = true;
+    switch (e.key) {
+      case "[": stepCamber(-1); break;
+      case "]": stepCamber(1); break;
+      case ",": stepLoad(-1); break;
+      case ".": stepLoad(1); break;
+      case "-": case "_": stepSpan(-1); break;
+      case "=": case "+": stepSpan(1); break;
+      case "t": case "T": case "Enter": buildTrue(); break;
+      case "r": case "R": reset(); break;
+      default: handled = false;
+    }
+    if (handled) e.preventDefault();
+  });
+
   // --- Go ----------------------------------------------------------------
   load();
   render();

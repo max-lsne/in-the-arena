@@ -566,6 +566,27 @@ section { max-width: var(--maxw); margin: 0 auto; padding: 3.6rem 2rem; }
   color: var(--accent);
 }
 
+/* Keyboard hint ----------------------------------------------------------- */
+.bench-keys {
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  color: var(--ink-faint);
+  padding: 0 0.4rem;
+  margin-bottom: 1rem;
+  line-height: 2;
+}
+kbd {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  padding: 0.06rem 0.4rem;
+  margin: 0 0.05rem;
+}
+
 /* Reading ----------------------------------------------------------------- */
 .reading {
   display: flex;
