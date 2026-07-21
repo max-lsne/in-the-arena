@@ -27,6 +27,39 @@
     camber: SEED.camber
   };
 
+  // --- Persistence -------------------------------------------------------
+  // The beam you lay out — its name, span, load, and crown — is kept in the
+  // browser and nowhere else, so the bench is still there when you come back.
+  var STORAGE_KEY = "camber:beam:v1";
+
+  function save() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) { /* private mode or full quota — the bench still works */ }
+  }
+
+  function load() {
+    var raw;
+    try { raw = localStorage.getItem(STORAGE_KEY); } catch (e) { return; }
+    if (!raw) return;
+    var saved;
+    try { saved = JSON.parse(raw); } catch (e) { return; }
+    if (!saved || typeof saved !== "object") return;
+
+    if (typeof saved.name === "string") state.name = saved.name.slice(0, 40);
+    if (isFinite(saved.span)) {
+      state.span = clamp(Math.round(saved.span / SPAN_STEP) * SPAN_STEP,
+        SPAN_MIN, SPAN_MAX);
+    }
+    if (isFinite(saved.load)) {
+      state.load = clamp(Math.round(saved.load), LOAD_MIN, LOAD_MAX);
+    }
+    if (isFinite(saved.camber)) {
+      state.camber = clamp(Math.round(saved.camber / CAM_STEP) * CAM_STEP,
+        CAM_MIN, CAM_MAX);
+    }
+  }
+
   // --- Geometry of the drawing ------------------------------------------
   var VB_W = 900, VB_H = 300;
   var X_L = 70, X_R = 830, X_MID = (X_L + X_R) / 2;
@@ -205,6 +238,7 @@
     el["bench-verdict"].setAttribute("data-state", v);
 
     syncPresets();
+    save();
   }
 
   // --- Presets -----------------------------------------------------------
@@ -258,6 +292,7 @@
   el["beam-name"].addEventListener("input", function () {
     state.name = el["beam-name"].value;
     syncPresets();
+    save();
   });
 
   el["presets"].addEventListener("click", function (e) {
@@ -271,5 +306,6 @@
   });
 
   // --- Go ----------------------------------------------------------------
+  load();
   render();
 })();

@@ -67,6 +67,8 @@ past it the beam humps, and in the narrow band where the crown and the deflectio
 cancel the reading comes **true** and the loaded beam lands on the datum. *Build
 it true* sets the crown to the deflection in one move; the presets hand you a
 shelf, a mantel, a joist, a footbridge, and a barn ridge to camber for yourself.
+The beam you lay out — its name, span, load, and crown — is kept in your browser
+and nowhere else, so it is still there, set as you left it, when you come back.
 
 ## The shape of the page
 
