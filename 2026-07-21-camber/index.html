@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camber — you do not build a beam to the shape you want; you build it to the shape that becomes true once the load arrives</title>
+  <meta name="description" content="A camber is the slight upward curve a maker builds into a beam on purpose, so that when the load settles it, the beam comes down to level instead of sagging below the line. A small page about anticipating the deflection and building in its exact opposite — the correction you cannot see once it is carrying." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <path d="M4 20 Q16 10 28 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+          <line x1="4" y1="24" x2="28" y2="24" stroke="currentColor" stroke-width="1.4" stroke-dasharray="1.5 2.5" opacity="0.7" />
+          <path d="M6 24 l-1.5 3 h3 z" fill="currentColor" />
+          <path d="M26 24 l-1.5 3 h3 z" fill="currentColor" />
+        </svg>
+      </span>
+      <span>Camber</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">What load does</a>
+      <a href="#ladder">How much to build in</a>
+      <a href="#who">Who builds one</a>
+      <a href="#bench" class="nav-cta">Set a beam</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">Build in the sag before it happens</p>
+        <h1>
+          You do not build a beam<br />
+          to the shape you want it to hold.
+        </h1>
+        <p class="lede">
+          A <strong>camber</strong> is the slight upward curve a maker builds
+          into a beam on purpose — a crown you can sight down the edge before it
+          is ever loaded. It looks like a mistake. It is the opposite. Under its
+          own weight and everything it carries, the beam will settle; left flat,
+          it settles <em>below</em> the line into a visible dip. So you build it
+          proud by exactly what the load will take away, and the load itself
+          brings it true. <em>The good camber is the one you cannot see once it
+          is carrying.</em>
+        </p>
+        <div class="hero-cta">
+          <a href="#bench" class="btn btn-primary">Set a beam</a>
+          <a href="#how" class="btn btn-ghost">See what load does</a>
+        </div>
+        <p class="hero-note">
+          No account, no cloud, no build step. Everything stays in your browser.
+        </p>
+      </div>
+
+      <div class="hero-card" aria-hidden="true">
+        <div class="cam-demo">
+          <div class="cam-demo-head">
+            <span class="cam-demo-name">A mantel, cambered</span>
+            <span class="tag tag-ok">Comes true</span>
+          </div>
+          <svg class="cam-demo-svg" viewBox="0 0 320 150" preserveAspectRatio="none" aria-hidden="true">
+            <line x1="24" y1="96" x2="296" y2="96" class="demo-datum" />
+            <path d="M24 96 Q160 60 296 96" class="demo-built" />
+            <path d="M24 96 Q160 96 296 96" class="demo-loaded" />
+            <path d="M20 96 l-3 8 h6 z" class="demo-pier" />
+            <path d="M300 96 l-3 8 h6 z" class="demo-pier" />
+          </svg>
+          <p class="cam-demo-foot">
+            Built with a 36&nbsp;mm crown (the faint arc). The load pulls it down
+            exactly that far — the solid beam lands flat on the datum. No dip, no
+            hump. The crown did its whole job by disappearing.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="how" id="how">
+      <div class="section-head">
+        <p class="eyebrow">Every span settles under what it holds</p>
+        <h2>Flat is not the shape you build. It is the shape you arrive at.</h2>
+        <p class="section-sub">
+          A beam is not rigid. Loaded, it bends — and the longer the span and the
+          heavier the load, the more it bends. Build it dead level and the only
+          direction left to go is down. Two things fight over where it ends up,
+          and the maker sets one of them before the load is ever there.
+        </p>
+      </div>
+
+      <div class="how-grid">
+        <div class="how-card">
+          <h3><span class="how-mark how-mark-load" aria-hidden="true"></span>Deflection — what the load takes</h3>
+          <p>
+            The distance a loaded beam drops below where it started. It is not a
+            flaw in the timber; it is the fixed answer to a span and a weight. You
+            cannot argue it away — a long beam under a real load <em>will</em> come
+            down. The only question the maker gets is where it comes down
+            <em>from</em>.
+          </p>
+        </div>
+        <div class="how-card">
+          <h3><span class="how-mark how-mark-camber" aria-hidden="true"></span>Camber — what you build in</h3>
+          <p>
+            The upward crown you put in on purpose, before the load arrives, so
+            there is somewhere for the beam to settle down <em>to</em>. Match it to
+            the deflection and the beam lands on the line. It is the one move in
+            the whole business that is invisible when it works and glaring when it
+            does not.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="ladder" id="ladder">
+      <div class="section-head">
+        <p class="eyebrow">The crown is a judgement, not a constant</p>
+        <h2>Too little and it dips. Too much and it humps.</h2>
+        <p class="section-sub">
+          There is a right amount of camber, and it is set by the span and the
+          load — not by taste. Build in less than the beam will lose and it sags
+          under the line; build in more and it stands proud forever, a hump that
+          never comes down. The window that reads as <em>true</em> is narrow, and
+          the whole skill is landing in it.
+        </p>
+      </div>
+
+      <ol class="ladder-list">
+        <li><span class="rung-dot rung-none"></span><b>No camber — dead flat as built.</b> The honest-looking choice, and the wrong one. The load has nowhere to settle but below the line; a long span drops into a dip you will see from across the room.</li>
+        <li><span class="rung-dot rung-shy"></span><b>Shy — less than the deflection.</b> A crown, but not enough of one. The load eats it and keeps going. Better than flat, still short of true; the dip is smaller but it is there.</li>
+        <li><span class="rung-dot rung-true"></span><b>True — camber equals deflection.</b> The mark you are aiming for. The beam is built proud by exactly what the load will take, and the load brings it level. You cannot see the camber because it did its job.</li>
+        <li><span class="rung-dot rung-proud"></span><b>Proud — more than the deflection.</b> Over-built. The load cannot pull it all the way down; the beam keeps a hump. On a floor you would feel it underfoot; on a bridge you would see it against the sky.</li>
+        <li><span class="rung-dot rung-mock"></span><b>Way proud — a permanent arch.</b> The camber you would build if you feared the sag and never measured it. It never settles; it just stands there, curved, announcing that nobody ran the numbers.</li>
+      </ol>
+      <p class="ladder-note">
+        The crown here stands for any correction you build in ahead of a load you
+        know is coming — the buffer, the head start, the over-provision. Aim it at
+        the deflection you can actually expect. Build for a sag that never comes
+        and you are left with a hump.
+      </p>
+    </section>
+
+    <section class="steps">
+      <div class="section-head">
+        <p class="eyebrow">The whole of the method</p>
+        <h2>Set the span and the load. Read the sag. Build in its opposite.</h2>
+      </div>
+      <ol class="steps-grid">
+        <li class="step">
+          <span class="step-num">1</span>
+          <h3>Set the span and the load</h3>
+          <p>Start from the two things you do not control: how far the beam has to reach, and how much it has to carry. Between them they fix the deflection. Nothing you build in changes it — it only changes where the beam falls from.</p>
+        </li>
+        <li class="step">
+          <span class="step-num">2</span>
+          <h3>Read the deflection</h3>
+          <p>The bench works out how far this span under this load will drop, and draws the ghost of where a flat beam would end up — below the line, in the dip you are trying to avoid. That number is your target: it is exactly how much crown to build.</p>
+        </li>
+        <li class="step">
+          <span class="step-num">3</span>
+          <h3>Build in the camber and land it true</h3>
+          <p>Dial the crown up until the loaded beam lands on the datum. Short of it, the beam dips; past it, it humps. The reading turns green in the narrow band where the camber and the deflection cancel — where the correction disappears under the load.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="bench-sec" id="bench">
+      <div class="section-head">
+        <p class="eyebrow">The bench</p>
+        <h2>Camber a beam until the load lands it true.</h2>
+        <p class="section-sub">
+          Seeded with a mantel to start. Set the span and the load to fix how far
+          the beam will drop, then build in a crown to meet it. The faint arc is
+          the beam as built; the solid one is where the load leaves it. Match them
+          to the line and the reading comes true.
+        </p>
+      </div>
+
+      <div class="span-wrap">
+        <svg id="span" class="span-svg" viewBox="0 0 900 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="A beam drawn across two piers, showing the built-in camber and where the load settles it against a level datum line">
+          <g id="span-loadmarks" class="span-loadmarks"></g>
+          <line id="span-datum" class="span-datum" x1="70" y1="170" x2="830" y2="170" />
+          <path id="span-built" class="span-built" d="" />
+          <path id="span-loaded" class="span-loaded" d="" />
+          <path id="span-pier-l" class="span-pier" d="" />
+          <path id="span-pier-r" class="span-pier" d="" />
+          <g id="span-crownmark" class="span-crownmark"></g>
+        </svg>
+        <p class="span-caption" id="span-caption">A flat beam, unloaded — nothing built in, nothing taken away.</p>
+      </div>
+
+      <div class="bench-bar">
+        <label class="beam-name-field">
+          <span class="beam-name-label">Beam</span>
+          <input id="beam-name" class="beam-name-input" type="text" value="Oak mantel" maxlength="40" aria-label="Beam name" />
+        </label>
+        <div class="bench-dials">
+          <div class="dial">
+            <span class="dial-label">Span</span>
+            <div class="dial-set">
+              <button id="span-down" class="dial-btn" type="button" aria-label="Shorten the span">−</button>
+              <span id="span-val" class="dial-val">3.6 m</span>
+              <button id="span-up" class="dial-btn" type="button" aria-label="Lengthen the span">+</button>
+            </div>
+          </div>
+          <div class="dial">
+            <span class="dial-label">Load</span>
+            <div class="dial-set">
+              <button id="load-down" class="dial-btn" type="button" aria-label="Lighten the load">−</button>
+              <span id="load-val" class="dial-val">4</span>
+              <button id="load-up" class="dial-btn" type="button" aria-label="Heavier load">+</button>
+            </div>
+          </div>
+          <div class="dial dial-camber">
+            <span class="dial-label">Camber</span>
+            <div class="dial-set">
+              <button id="camber-down" class="dial-btn" type="button" aria-label="Less camber">−</button>
+              <span id="camber-val" class="dial-val">0 mm</span>
+              <button id="camber-up" class="dial-btn" type="button" aria-label="More camber">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="bench-actions">
+          <button id="build-true" class="btn btn-primary btn-sm" type="button">Build it true</button>
+          <button id="reset-bench" class="btn btn-ghost btn-sm" type="button">Reset</button>
+        </div>
+      </div>
+
+      <div class="presets" id="presets">
+        <span class="presets-label">Or take a span off the rack:</span>
+        <button class="preset" type="button" data-span="2.4" data-load="2" data-name="Pine shelf">Pine shelf</button>
+        <button class="preset" type="button" data-span="3.6" data-load="4" data-name="Oak mantel">Oak mantel</button>
+        <button class="preset" type="button" data-span="4.8" data-load="6" data-name="Floor joist">Floor joist</button>
+        <button class="preset" type="button" data-span="7.2" data-load="7" data-name="Footbridge">Footbridge</button>
+        <button class="preset" type="button" data-span="10.8" data-load="9" data-name="Barn ridge">Barn ridge</button>
+      </div>
+
+      <div class="reading" id="bench-reading">
+        <span class="reading-fig" id="reading-crown">0</span>
+        <span class="reading-unit" id="reading-unit">mm crown at rest</span>
+        <span class="reading-sep">·</span>
+        <span class="reading-defl" id="reading-defl">0 mm deflection</span>
+        <span class="reading-sep">·</span>
+        <span class="reading-cam" id="reading-cam">0 mm camber built</span>
+      </div>
+
+      <p id="bench-verdict" class="bench-verdict" data-state="flat">
+        Set a load, then build in a crown to meet it.
+      </p>
+    </section>
+
+    <section class="who" id="who">
+      <div class="section-head">
+        <p class="eyebrow">Who builds one</p>
+        <h2>For anyone who corrects for a load before it arrives.</h2>
+      </div>
+      <div class="who-grid">
+        <div class="who-card">
+          <h3>The builder</h3>
+          <p>A dead-level joist reads as a sagging one the day the furniture goes in. Camber the span to the load it will carry and it settles flat — the floor is true because it was built wrong on purpose.</p>
+        </div>
+        <div class="who-card">
+          <h3>The planner</h3>
+          <p>A schedule built to the exact hours available sags the moment reality loads it. Build in a crown of slack where you know the weight lands, and the plan settles onto the deadline instead of below it.</p>
+        </div>
+        <div class="who-card">
+          <h3>The estimator</h3>
+          <p>Quote a job to the penny and the first surprise puts you under. Camber the number by what the unknowns will cost, and you land on the figure when the load comes in — not beneath it, and not so proud you lose the work.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-word">
+      <span class="footer-word-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="20" height="20">
+          <path d="M4 20 Q16 10 28 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+          <line x1="4" y1="24" x2="28" y2="24" stroke="currentColor" stroke-width="1.3" stroke-dasharray="1.5 2.5" opacity="0.7" />
+        </svg>
+      </span>
+      <span><b>Camber</b> — <i>a slight upward curve given to a beam, deck, or road on purpose, so that under load and over time it settles to true rather than sagging below the line; the correction a maker builds in to meet a deflection they know is coming.</i></span>
+    </div>
+    <p class="footer-series">
+      Part of an ongoing series of small, single-file pages, each built around one
+      old working word and the discipline hidden inside it.
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
