@@ -42,6 +42,37 @@
 
   function fine(n) { return "·" + n; }
 
+  // --- Persistence -------------------------------------------------------
+  // The lot as you have worked it — bars assayed, bars valued on the stamp — is
+  // kept in the browser and nowhere else, so it is still there when you come
+  // back. A fresh lot clears it.
+  var STORAGE_KEY = "proof:assay:lot:v1";
+
+  function save() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ cursor: cursor, bars: bars }));
+    } catch (e) { /* private mode or full quota — the bench still works */ }
+  }
+
+  function restore() {
+    var raw;
+    try { raw = localStorage.getItem(STORAGE_KEY); } catch (e) { return false; }
+    if (!raw) return false;
+    var saved;
+    try { saved = JSON.parse(raw); } catch (e) { return false; }
+    if (!saved || !Array.isArray(saved.bars) || saved.bars.length !== COUNT) return false;
+    var ok = saved.bars.every(function (b) {
+      return b && typeof b.name === "string" && typeof b.claim === "number" &&
+        typeof b.debased === "boolean" && typeof b.trueFine === "number" &&
+        ["unassayed", "sound", "debased", "valued"].indexOf(b.state) !== -1;
+    });
+    if (!ok) return false;
+    bars = saved.bars;
+    cursor = (typeof saved.cursor === "number" && saved.cursor >= 0 &&
+      saved.cursor < COUNT) ? saved.cursor : 0;
+    return true;
+  }
+
   // --- Seeding -----------------------------------------------------------
   // A fresh lot: shuffle the bars, debase a handful of them, and light each
   // debased bar by a wandering amount so no two lots read the same.
@@ -132,6 +163,7 @@
       }
     }
     renderGauge();
+    save();
   }
 
   // --- The tally ----------------------------------------------------------
@@ -259,6 +291,6 @@
   });
 
   // --- Go -----------------------------------------------------------------
-  seed();
+  if (!restore()) seed();
   build();
 })();

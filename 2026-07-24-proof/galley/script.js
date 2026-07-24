@@ -40,6 +40,37 @@
     "board-verdict", "read-all", "send-all", "reset-board"]
     .forEach(function (id) { el[id] = document.getElementById(id); });
 
+  // --- Persistence -------------------------------------------------------
+  // The proof as you have marked it — lines read, lines sent unread — is kept
+  // in the browser and nowhere else, so it is still there when you come back. A
+  // fresh pull clears it.
+  var STORAGE_KEY = "proof:galley:sheet:v1";
+
+  function save() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ cursor: cursor, lines: lines }));
+    } catch (e) { /* private mode or full quota — the sheet still works */ }
+  }
+
+  function restore() {
+    var raw;
+    try { raw = localStorage.getItem(STORAGE_KEY); } catch (e) { return false; }
+    if (!raw) return false;
+    var saved;
+    try { saved = JSON.parse(raw); } catch (e) { return false; }
+    if (!saved || !Array.isArray(saved.lines) || saved.lines.length !== COUNT) return false;
+    var ok = saved.lines.every(function (l) {
+      return l && l.data && typeof l.data.clean === "string" &&
+        typeof l.flawed === "boolean" &&
+        ["unread", "read", "sent"].indexOf(l.state) !== -1;
+    });
+    if (!ok) return false;
+    lines = saved.lines;
+    cursor = (typeof saved.cursor === "number" && saved.cursor >= 0 &&
+      saved.cursor < COUNT) ? saved.cursor : 0;
+    return true;
+  }
+
   // --- Seeding -----------------------------------------------------------
   // A fresh pull: shuffle the lines and seed a handful of errors into the
   // forme. How many wanders a little, so no two proofs read the same.
@@ -114,6 +145,7 @@
       }
     }
     renderGauge();
+    save();
   }
 
   // --- The tally ----------------------------------------------------------
@@ -236,6 +268,6 @@
   });
 
   // --- Go -----------------------------------------------------------------
-  seed();
+  if (!restore()) seed();
   build();
 })();

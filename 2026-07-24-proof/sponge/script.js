@@ -30,6 +30,36 @@
     "board-verdict", "prove-all", "commit-all", "reset-board"]
     .forEach(function (id) { el[id] = document.getElementById(id); });
 
+  // --- Persistence -------------------------------------------------------
+  // The shelf as you have worked it — which jars proved, which you committed
+  // blind — is kept in the browser and nowhere else, so it is still there when
+  // you come back. A fresh batch clears it.
+  var STORAGE_KEY = "proof:sponge:shelf:v1";
+
+  function save() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ cursor: cursor, jars: jars }));
+    } catch (e) { /* private mode or full quota — the shelf still works */ }
+  }
+
+  function restore() {
+    var raw;
+    try { raw = localStorage.getItem(STORAGE_KEY); } catch (e) { return false; }
+    if (!raw) return false;
+    var saved;
+    try { saved = JSON.parse(raw); } catch (e) { return false; }
+    if (!saved || !Array.isArray(saved.jars) || saved.jars.length !== COUNT) return false;
+    var ok = saved.jars.every(function (j) {
+      return j && typeof j.name === "string" && typeof j.alive === "boolean" &&
+        ["set", "domed", "flat", "committed"].indexOf(j.state) !== -1;
+    });
+    if (!ok) return false;
+    jars = saved.jars;
+    cursor = (typeof saved.cursor === "number" && saved.cursor >= 0 &&
+      saved.cursor < COUNT) ? saved.cursor : 0;
+    return true;
+  }
+
   // --- Seeding -----------------------------------------------------------
   // A fresh batch: shuffle the starters, and let a handful come up flat. The
   // number of dead cultures wanders a little so no two batches read the same.
@@ -108,6 +138,7 @@
       if (i === cursor) card.classList.add("is-cursor");
     }
     renderGauge();
+    save();
   }
 
   // --- The tally ----------------------------------------------------------
@@ -232,6 +263,6 @@
   });
 
   // --- Go -----------------------------------------------------------------
-  seed();
+  if (!restore()) seed();
   build();
 })();
