@@ -23,6 +23,7 @@
   // Each jar: { name, alive, state } where state is one of
   // "set" | "domed" | "flat" | "committed".
   var jars = [];
+  var cursor = 0;   // the jar the keyboard is resting on
 
   var el = {};
   ["board-grid", "gauge-proved", "gauge-caught", "gauge-blind", "gauge-fill",
@@ -99,11 +100,12 @@
     var cards = el["board-grid"].children;
     for (var i = 0; i < cards.length; i++) {
       var card = cards[i], jar = jars[i];
-      card.classList.remove("is-domed", "is-flat", "is-committed");
+      card.classList.remove("is-domed", "is-flat", "is-committed", "is-cursor");
       if (jar.state === "domed") card.classList.add("is-domed");
       else if (jar.state === "flat") card.classList.add("is-flat");
       else if (jar.state === "committed") card.classList.add("is-committed");
       card.querySelector(".jar-state").textContent = STATE_LABEL[jar.state];
+      if (i === cursor) card.classList.add("is-cursor");
     }
     renderGauge();
   }
@@ -196,12 +198,38 @@
   el["board-grid"].addEventListener("click", function (e) {
     var card = e.target.closest(".jar");
     if (!card) return;
-    prove(parseInt(card.dataset.i, 10));
+    cursor = parseInt(card.dataset.i, 10);
+    prove(cursor);
   });
 
   el["prove-all"].addEventListener("click", proveAll);
   el["commit-all"].addEventListener("click", commitRest);
   el["reset-board"].addEventListener("click", reset);
+
+  // --- Keyboard ----------------------------------------------------------
+  // The whole shelf is workable from the keys: J/K walk the jars, P proves the
+  // one you are on, C commits it blind, A proves the lot, R sets a fresh batch.
+  function moveCursor(delta) {
+    cursor = (cursor + delta + jars.length) % jars.length;
+    paint();
+    var card = el["board-grid"].children[cursor];
+    if (card && card.focus) card.focus();
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var handled = true;
+    switch (e.key) {
+      case "j": case "J": case "ArrowRight": moveCursor(1); break;
+      case "k": case "K": case "ArrowLeft": moveCursor(-1); break;
+      case "p": case "P": case "Enter": prove(cursor); break;
+      case "c": case "C": commit(cursor); break;
+      case "a": case "A": proveAll(); break;
+      case "r": case "R": reset(); break;
+      default: handled = false;
+    }
+    if (handled) e.preventDefault();
+  });
 
   // --- Go -----------------------------------------------------------------
   seed();

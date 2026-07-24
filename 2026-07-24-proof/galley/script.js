@@ -33,6 +33,7 @@
 
   // Each entry: { data, flawed, state } where state is "unread" | "read" | "sent".
   var lines = [];
+  var cursor = 0;   // the line the keyboard is resting on
 
   var el = {};
   ["board-grid", "gauge-read", "gauge-caught", "gauge-blind", "gauge-fill",
@@ -95,7 +96,8 @@
       var row = rows[i], ln = lines[i];
       var type = row.querySelector(".line-type");
       var mark = row.querySelector(".line-mark");
-      row.classList.remove("is-read", "is-sent", "is-clean", "is-flawed");
+      row.classList.remove("is-read", "is-sent", "is-clean", "is-flawed", "is-cursor");
+      if (i === cursor) row.classList.add("is-cursor");
 
       if (ln.state === "read") {
         row.classList.add("is-read", ln.flawed ? "is-flawed" : "is-clean");
@@ -199,12 +201,39 @@
   el["board-grid"].addEventListener("click", function (e) {
     var row = e.target.closest(".line");
     if (!row) return;
-    read(parseInt(row.dataset.i, 10));
+    cursor = parseInt(row.dataset.i, 10);
+    read(cursor);
   });
 
   el["read-all"].addEventListener("click", readAll);
   el["send-all"].addEventListener("click", sendRest);
   el["reset-board"].addEventListener("click", reset);
+
+  // --- Keyboard ----------------------------------------------------------
+  // The whole proof is workable from the keys: J/K walk the lines, P reads the
+  // one you are on, C sends it to the run unread, A reads the lot, R pulls a
+  // fresh proof.
+  function moveCursor(delta) {
+    cursor = (cursor + delta + lines.length) % lines.length;
+    paint();
+    var row = el["board-grid"].children[cursor];
+    if (row && row.focus) row.focus();
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var handled = true;
+    switch (e.key) {
+      case "j": case "J": case "ArrowDown": moveCursor(1); break;
+      case "k": case "K": case "ArrowUp": moveCursor(-1); break;
+      case "p": case "P": case "Enter": read(cursor); break;
+      case "c": case "C": send(cursor); break;
+      case "a": case "A": readAll(); break;
+      case "r": case "R": reset(); break;
+      default: handled = false;
+    }
+    if (handled) e.preventDefault();
+  });
 
   // --- Go -----------------------------------------------------------------
   seed();

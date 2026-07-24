@@ -33,6 +33,7 @@
   // Each entry: { name, claim, debased, trueFine, state }
   // state is "unassayed" | "sound" | "debased" | "valued".
   var bars = [];
+  var cursor = 0;   // the bar the keyboard is resting on
 
   var el = {};
   ["board-grid", "gauge-assayed", "gauge-caught", "gauge-blind", "gauge-fill",
@@ -113,7 +114,8 @@
     for (var i = 0; i < cards.length; i++) {
       var card = cards[i], bar = bars[i];
       var read = card.querySelector(".bar-read");
-      card.classList.remove("is-sound", "is-debased", "is-valued");
+      card.classList.remove("is-sound", "is-debased", "is-valued", "is-cursor");
+      if (i === cursor) card.classList.add("is-cursor");
 
       if (bar.state === "sound") {
         card.classList.add("is-sound");
@@ -222,12 +224,39 @@
   el["board-grid"].addEventListener("click", function (e) {
     var card = e.target.closest(".bar");
     if (!card) return;
-    assay(parseInt(card.dataset.i, 10));
+    cursor = parseInt(card.dataset.i, 10);
+    assay(cursor);
   });
 
   el["assay-all"].addEventListener("click", assayAll);
   el["value-all"].addEventListener("click", valueRest);
   el["reset-board"].addEventListener("click", reset);
+
+  // --- Keyboard ----------------------------------------------------------
+  // The whole bench is workable from the keys: J/K walk the bars, P assays the
+  // one you are on, C values it blind on the stamp, A assays the lot, R lays
+  // out a fresh lot.
+  function moveCursor(delta) {
+    cursor = (cursor + delta + bars.length) % bars.length;
+    paint();
+    var card = el["board-grid"].children[cursor];
+    if (card && card.focus) card.focus();
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var handled = true;
+    switch (e.key) {
+      case "j": case "J": case "ArrowRight": moveCursor(1); break;
+      case "k": case "K": case "ArrowLeft": moveCursor(-1); break;
+      case "p": case "P": case "Enter": assay(cursor); break;
+      case "c": case "C": value(cursor); break;
+      case "a": case "A": assayAll(); break;
+      case "r": case "R": reset(); break;
+      default: handled = false;
+    }
+    if (handled) e.preventDefault();
+  });
 
   // --- Go -----------------------------------------------------------------
   seed();
