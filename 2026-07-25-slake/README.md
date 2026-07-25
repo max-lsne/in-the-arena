@@ -67,7 +67,8 @@ has rested past a few months — starve it and it blows, drown it and it stays
 lean, match it but use it young and it is merely green. *Slake it true* sets the
 water to the burn in one move; five jobs off the shelf — a limewash, a float
 coat, a pointing mortar, a fresco intonaco, an ashlar bedding — hand you a batch
-to correct for yourself.
+to correct for yourself. The batch you set is kept in your browser and nowhere
+else, so it is still there, mixed as you left it, when you come back.
 
 ## The shape of the page
 

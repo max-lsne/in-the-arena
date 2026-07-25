@@ -47,7 +47,29 @@
     [296, 210], [352, 244], [408, 200], [452, 232],
   ];
 
+  var STORE_KEY = "slake.batch.v1";
   var state = { water: WATER_TRUE, rest: 12 };
+  var activeName = null;
+
+  function save() {
+    try {
+      localStorage.setItem(
+        STORE_KEY,
+        JSON.stringify({ water: state.water, rest: state.rest, preset: activeName })
+      );
+    } catch (e) { /* private mode, quota, etc. — the bench just won't remember */ }
+  }
+
+  function load() {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return;
+      var saved = JSON.parse(raw);
+      if (typeof saved.water === "number") state.water = clamp(saved.water, 0, 100);
+      if (typeof saved.rest === "number") state.rest = clamp(saved.rest, 0, 36);
+      if (typeof saved.preset === "string") activeName = saved.preset;
+    } catch (e) { /* corrupt or unreadable — fall back to defaults */ }
+  }
 
   // --- steam: a few soft rising curls, opacity driven by reaction heat ---
   function buildSteam() {
@@ -187,9 +209,12 @@
       ? "Slaked true, rested — <strong>" + r.band + "</strong>"
       : "<strong>" + r.band + "</strong>";
     els.readingSub.textContent = r.sub;
+
+    save();
   }
 
   function setActivePreset(name) {
+    activeName = name;
     els.presets.forEach(function (b) {
       b.classList.toggle("is-active", b.dataset.name === name);
     });
@@ -266,6 +291,8 @@
   });
 
   buildSteam();
+  load();
+  if (activeName) setActivePreset(activeName);
   syncInputs();
   render();
 })();
