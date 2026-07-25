@@ -25,6 +25,7 @@
     bodyOut: document.getElementById("body-out"),
     reading: document.getElementById("reading"),
     readingSub: document.getElementById("reading-sub"),
+    srStatus: document.getElementById("sr-status"),
     putty: document.getElementById("putty"),
     water: document.getElementById("water"),
     sheen: document.getElementById("sheen"),
@@ -209,6 +210,15 @@
       ? "Slaked true, rested — <strong>" + r.band + "</strong>"
       : "<strong>" + r.band + "</strong>";
     els.readingSub.textContent = r.sub;
+
+    // plain-spoken summary for screen readers, announced politely on each change
+    var plainBand = r.band.replace(/&amp;/g, "&").replace(/\.$/, "");
+    var grainPhrase = r.grains === 0
+      ? "no live grains"
+      : r.grains + (r.grains === 1 ? " live grain" : " live grains");
+    els.srStatus.textContent =
+      plainBand + ". Water " + doseLabel(state.water) + ", rested " +
+      state.rest + (state.rest === 1 ? " month" : " months") + ", " + grainPhrase + ".";
 
     save();
   }

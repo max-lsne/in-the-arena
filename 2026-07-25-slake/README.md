@@ -77,7 +77,8 @@ from scorched to drowned, three steps, and then the bench: a tub, a dose of wate
 and a stretch of rest, and a reading that comes true only where the two meet. Set
 the water, set the months, and read the coat it will make. The whole bench is
 keyboard-workable — <kbd>,</kbd>/<kbd>.</kbd> for the water, <kbd>[</kbd>/<kbd>]</kbd>
-for the months, <kbd>S</kbd> to slake it true, and <kbd>R</kbd> to reset. No
+for the months, <kbd>S</kbd> to slake it true, and <kbd>R</kbd> to reset — and
+every reading is read out to screen readers through a polite status line. No
 account, no cloud, no build step. Open `index.html` in a browser; that is the
 whole of it.
 
