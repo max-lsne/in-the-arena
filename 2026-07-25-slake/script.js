@@ -237,6 +237,34 @@
     });
   });
 
+  // --- keyboard: work the whole bench without a mouse ---
+  function nudge(key, delta) {
+    state[key] = clamp(state[key] + delta, key === "water" ? 0 : 0, key === "water" ? 100 : 36);
+    setActivePreset(null);
+    syncInputs();
+    render();
+  }
+
+  document.addEventListener("keydown", function (e) {
+    var t = e.target;
+    // let range inputs keep their native arrow-key behaviour
+    if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA")) return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+    switch (e.key) {
+      case ",": nudge("water", -2); break;
+      case ".": nudge("water", 2); break;
+      case "[": nudge("rest", -1); break;
+      case "]": nudge("rest", 1); break;
+      case "s": case "S":
+        state.water = WATER_TRUE; setActivePreset(null); syncInputs(); render(); break;
+      case "r": case "R":
+        state.water = WATER_TRUE; state.rest = 12; setActivePreset(null); syncInputs(); render(); break;
+      default: return;
+    }
+    e.preventDefault();
+  });
+
   buildSteam();
   syncInputs();
   render();

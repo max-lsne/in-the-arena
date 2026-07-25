@@ -74,8 +74,11 @@ to correct for yourself.
 Hero, the two things the water starts (the reaction and the rest), the ladder
 from scorched to drowned, three steps, and then the bench: a tub, a dose of water
 and a stretch of rest, and a reading that comes true only where the two meet. Set
-the water, set the months, and read the coat it will make. No account, no cloud,
-no build step. Open `index.html` in a browser; that is the whole of it.
+the water, set the months, and read the coat it will make. The whole bench is
+keyboard-workable — <kbd>,</kbd>/<kbd>.</kbd> for the water, <kbd>[</kbd>/<kbd>]</kbd>
+for the months, <kbd>S</kbd> to slake it true, and <kbd>R</kbd> to reset. No
+account, no cloud, no build step. Open `index.html` in a browser; that is the
+whole of it.
 
 *Part of an ongoing series of small, single-file pages, each built around one old
 working word and the discipline hidden inside it.*

@@ -525,6 +525,24 @@ input[type="range"]:focus-visible::-webkit-slider-thumb { outline: 2px solid var
 .preset.is-active { background: var(--slate); border-color: var(--slate); color: #fff; }
 @media (prefers-color-scheme: dark) { .preset.is-active { color: #10201c; } }
 
+.bench-hint {
+  margin: 18px 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+  text-align: center;
+}
+kbd {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 1px 6px;
+  border: 1px solid var(--line);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  background: var(--panel);
+  color: var(--ink-soft);
+}
+
 /* ---- who ---- */
 .who-grid {
   display: grid;
