@@ -239,6 +239,35 @@
     render();
   }
 
+  /* ---- persistence ----
+   * The corner is kept in the browser and nowhere else, so a half-laid corner is
+   * still standing on the next visit. Reads and writes fall back quietly when
+   * storage is unavailable (private mode, quota, corrupt value) rather than
+   * throwing — a bench that cannot save is still a bench. */
+  var STORE_KEY = "quoin.corner.v1";
+
+  function persist() {
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify(courses));
+    } catch (e) { /* storage full or blocked — carry on unsaved */ }
+  }
+
+  function restore() {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return false;
+      var saved = JSON.parse(raw);
+      if (!Array.isArray(saved)) return false;
+      var clean = saved
+        .filter(function (f) { return f === "long" || f === "short"; })
+        .slice(0, MAX_COURSES);
+      courses = clean;
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   /* ---- wiring ---- */
   document.querySelectorAll("[data-lay]").forEach(function (btn) {
     btn.addEventListener("click", function () { lay(btn.getAttribute("data-lay")); });
@@ -248,9 +277,11 @@
   document.getElementById("btn-auto").addEventListener("click", bondToTop);
   document.getElementById("btn-flawed").addEventListener("click", loadFlawed);
 
-  // Persistence stub — replaced by localStorage wiring in a later pass.
-  function persist() {}
-
-  // First light: a flawed corner to read, so the bench is never empty on arrival.
-  loadFlawed();
+  // First light: pick up the corner left last time, or lay the flawed one to
+  // read so the bench is never empty on arrival.
+  if (restore()) {
+    render();
+  } else {
+    loadFlawed();
+  }
 })();
