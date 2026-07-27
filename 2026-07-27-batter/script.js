@@ -113,9 +113,10 @@
     var col = r.verdict.key === "hold" ? "var(--hold)"
             : r.verdict.key === "open" ? "var(--open)" : "var(--fail)";
 
+    // The drawing is decorative; the aria-live status line below carries the
+    // reading in words, so hide the SVG from assistive tech to avoid a double read.
     var p = [];
-    p.push('<svg viewBox="0 0 ' + VBW + ' ' + VBH + '" role="img" ' +
-      'aria-label="Cross-section of a gravity retaining wall with the line of thrust marked against the middle third of its base.">');
+    p.push('<svg viewBox="0 0 ' + VBW + ' ' + VBH + '" aria-hidden="true" focusable="false">');
 
     p.push(
       '<defs>' +
@@ -269,8 +270,20 @@
         '<span class="v ' + row[2] + '">' + row[1] + "</span></div>";
     }).join("");
 
+    // a plain-spoken reading for screen readers, announced on every change
+    var say = document.getElementById("say");
+    if (say) say.textContent = announce(state, r);
+
     syncControls();
     save();
+  }
+
+  function announce(s, r) {
+    var batter = s.f < 0.02 ? "built plumb" : "battered 1 in " + fmt(s.H / s.f, 1);
+    return "Wall " + fmt(s.H, 1) + " metres high on a " + fmt(s.B, 2) + " metre base, " +
+      batter + ", holding back " + MATERIALS[s.fill].label + ". " +
+      r.verdict.head + ": " + r.verdict.note + ". " +
+      "Factor against overturning " + fmt(r.FoS_ot, 1) + ", against sliding " + fmt(r.FoS_sl, 1) + ".";
   }
 
   // ---- controls ---------------------------------------------------------
