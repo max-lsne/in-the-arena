@@ -23,6 +23,7 @@
 
   var GAMMA_M = 23;   // unit weight of masonry, kN/m^3
   var MU = 0.55;      // coefficient of friction, wall base on rock
+  var KEY = "batter.wall.v1";  // where the wall is kept between visits
 
   var MATERIALS = {
     sand:   { label: "loose sand",     phi: 32, gamma: 18,   hydro: false },
@@ -300,9 +301,40 @@
     });
   }
 
-  // ---- persistence (browser only) --------------------------------------
-  function save() { /* filled in by a later commit */ }
-  function load() { return null; }
+  // ---- persistence ------------------------------------------------------
+  // The wall you build is kept in the browser and nowhere else, so a half-trued
+  // wall is standing exactly as you left it on the next visit. Reads and writes
+  // fall back quietly when storage is missing or corrupt (private mode, quota):
+  // the bench degrades to unsaved rather than throwing, and with nothing stored
+  // it still opens on the flawed wall there is something to true.
+  function save() {
+    try {
+      window.localStorage.setItem(KEY, JSON.stringify({
+        H: state.H, B: state.B, f: state.f, fill: state.fill
+      }));
+    } catch (e) { /* storage unavailable or full — carry on unsaved */ }
+  }
+
+  function load() {
+    var raw;
+    try { raw = window.localStorage.getItem(KEY); } catch (e) { return null; }
+    if (!raw) return null;
+    try {
+      var o = JSON.parse(raw);
+      var s = {
+        H: clamp(+o.H, 2, 6, DEFAULT.H),
+        B: clamp(+o.B, 0.8, 3.2, DEFAULT.B),
+        f: clamp(+o.f, 0, 1, DEFAULT.f),
+        fill: MATERIALS[o.fill] ? o.fill : DEFAULT.fill
+      };
+      return s;
+    } catch (e) { return null; }
+  }
+
+  function clamp(n, lo, hi, fallback) {
+    if (typeof n !== "number" || !isFinite(n)) return fallback;
+    return Math.min(hi, Math.max(lo, n));
+  }
 
   // ---- boot -------------------------------------------------------------
   function boot() {
