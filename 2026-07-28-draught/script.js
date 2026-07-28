@@ -319,8 +319,23 @@
         '<span class="v ' + row[2] + '">' + row[1] + "</span></div>";
     }).join("");
 
+    // a plain-spoken reading for screen readers, announced on every change
+    var say = document.getElementById("say");
+    if (say) say.textContent = announce(state, r);
+
     syncControls();
     save();
+  }
+
+  // The SVG is hidden from assistive tech, so the reading is carried in words
+  // here: the flue, the day, the verdict, and the two numbers that decide it.
+  function announce(s, r) {
+    var damper = s.k > 0.005 ? ", damper " + Math.round(s.k * 100) + "% closed" : "";
+    return "A flue " + fmt(s.H, 1) + " metres high, " + fmt(s.d, 2) + " metre bore, gas at " +
+      fmt(s.T, 0) + " degrees on a " + DAY[s.day].label + " day" + damper + ". " +
+      r.verdict.head + ": " + r.verdict.note + ". Draught " +
+      (r.dP <= 0 ? "none" : fmt(r.dP, 0) + " pascals") +
+      ", flue-gas velocity " + fmt(r.v, 1) + " metres per second.";
   }
 
   // ---- controls ---------------------------------------------------------
