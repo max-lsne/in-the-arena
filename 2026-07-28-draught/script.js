@@ -397,7 +397,31 @@
       render();
     });
     document.getElementById("draw-it").addEventListener("click", drawItClean);
+    document.addEventListener("keydown", onKey);
     render();
+  }
+
+  // ---- keyboard ---------------------------------------------------------
+  // The bench answers to the keys as well as the mouse: the two actions, the
+  // day, and a notch of damper either way. A focused slider keeps its native
+  // arrow keys — those are left well alone.
+  function onKey(e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var tag = (e.target && e.target.tagName || "").toLowerCase();
+    if (tag === "input" &&
+        (e.key === "ArrowUp" || e.key === "ArrowDown" || e.key === "ArrowLeft" || e.key === "ArrowRight")) return;
+    var handled = true;
+    switch (e.key.toLowerCase()) {
+      case "d": drawItClean(); break;
+      case "r": state = Object.assign({}, DEFAULT); render(); break;
+      case "1": state.day = "frost"; render(); break;
+      case "2": state.day = "mild"; render(); break;
+      case "3": state.day = "warm"; render(); break;
+      case "]": state.k = clamp(Math.round((state.k + 0.05) * 100) / 100, 0, 1, state.k); render(); break; // close a notch
+      case "[": state.k = clamp(Math.round((state.k - 0.05) * 100) / 100, 0, 1, state.k); render(); break; // open a notch
+      default: handled = false;
+    }
+    if (handled) e.preventDefault();
   }
 
   // Land the draught in the clean band. A pull that is too strong is throttled
