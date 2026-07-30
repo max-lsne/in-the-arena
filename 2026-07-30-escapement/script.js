@@ -58,8 +58,29 @@
   // Opens on a short pendulum beating fast on a warm afternoon: a clock gaining
   // about half an hour a day. Something to trim true on arrival.
   var DEFAULT = { L: 0.950, D: 55, F: 35, room: "warm" };
+  var KEY = "escapement.movement.v1";  // where the movement is kept between visits
 
-  var state = Object.assign({}, DEFAULT);
+  var state = load() || Object.assign({}, DEFAULT);
+
+  // ---- persistence -------------------------------------------------------
+  function load() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      if (typeof o.L !== "number" || !ROOM[o.room]) return null;
+      return {
+        L: clampNum(o.L, 0.7, 1.3),
+        D: clampNum(o.D, 0, 100) | 0,
+        F: clampNum(o.F, 5, 100) | 0,
+        room: o.room
+      };
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+  function clampNum(v, a, b) { v = +v; if (!isFinite(v)) return a; return v < a ? a : v > b ? b : v; }
 
   // ---- the movement ------------------------------------------------------
   function compute(s) {
@@ -397,6 +418,7 @@
     if (opts && opts.resyncPhase) { simT = 0; beatCount = 0; }
     syncLabels();
     render(current);
+    save();
   }
 
   inL.addEventListener("input", function () { state.L = parseFloat(inL.value); update(); });
