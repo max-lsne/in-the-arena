@@ -431,6 +431,31 @@
     window.requestAnimationFrame(step);
   }
 
+  // nudge the length by a small step (keyboard trimming)
+  function nudgeLength(delta) {
+    state.L = clamp(+(state.L + delta).toFixed(3), 0.7, 1.3);
+    inL.value = state.L.toFixed(3);
+    update();
+  }
+
+  // keyboard: the bench under the hands, without reaching for the mouse
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    // let a focused slider keep its own arrow keys
+    if (el && el.tagName === "INPUT" && el.type === "range") return;
+    var k = e.key;
+    if (k === "t" || k === "T") { $("regulate").click(); }
+    else if (k === "r" || k === "R") { $("reset").click(); }
+    else if (k === "1") { state.room = "cold"; update(); }
+    else if (k === "2") { state.room = "temperate"; update(); }
+    else if (k === "3") { state.room = "warm"; update(); }
+    else if (k === "[") { nudgeLength(-0.005); }   // shorter — beats faster
+    else if (k === "]") { nudgeLength(0.005); }     // longer — beats slower
+    else return;
+    e.preventDefault();
+  });
+
   // repaint on theme flips so canvas colours follow
   if (window.matchMedia) {
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () { draw(current); });
