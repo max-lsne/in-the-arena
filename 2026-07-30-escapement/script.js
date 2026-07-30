@@ -128,7 +128,7 @@
   var inL = $("in-L"), inD = $("in-D"), inF = $("in-F");
   var labL = $("lab-L"), labD = $("lab-D"), labF = $("lab-F");
   var roomBtns = Array.prototype.slice.call(document.querySelectorAll(".seg [data-room]"));
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
 
   function fmtDuration(sec) {
     var s = Math.round(Math.abs(sec));
@@ -418,7 +418,32 @@
     if (opts && opts.resyncPhase) { simT = 0; beatCount = 0; }
     syncLabels();
     render(current);
+    announce(current);
     save();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(r) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var L = state.L.toFixed(3) + " metre pendulum, " + state.D + " percent drive, "
+        + ROOM[state.room].label + " room. ";
+      var msg;
+      if (r.dead) {
+        msg = L + "Stopped — the drive can't sustain the swing.";
+      } else if (r.knocking) {
+        msg = L + "Knocking, over-driven at " + (r.A * 180 / Math.PI).toFixed(1)
+          + " degrees; losing " + fmtDuration(r.gain) + " a day. Ease the weight.";
+      } else if (r.verdict === "keep") {
+        msg = L + "Keeps time, within " + Math.abs(Math.round(r.gain)) + " seconds a day.";
+      } else {
+        msg = L + (r.gain > 0 ? "Gains " : "Loses ") + fmtDuration(r.gain)
+          + " a day; period " + r.period.toFixed(4) + " seconds.";
+      }
+      sayEl.textContent = msg;
+    }, 260);
   }
 
   inL.addEventListener("input", function () { state.L = parseFloat(inL.value); update(); });
