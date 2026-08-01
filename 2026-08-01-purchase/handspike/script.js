@@ -288,6 +288,35 @@
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () { draw(current); });
   }
 
+  // nudge the fulcrum and the bar (keyboard setting)
+  function nudgeA(d) {
+    state.a = clamp(+(state.a + d).toFixed(2), A_MIN, state.B - 0.10);
+    inA.value = state.a.toFixed(2);
+    update();
+  }
+  function nudgeBar(d) {
+    state.B = clamp(+(state.B + d).toFixed(2), 0.80, 3.00);
+    if (state.a > state.B - 0.10) state.a = +(state.B - 0.10).toFixed(2);
+    inB.value = state.B.toFixed(2); inA.value = state.a.toFixed(2);
+    update();
+  }
+
+  // keyboard: the bench under the hands, without reaching for the mouse
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    if (el && el.tagName === "INPUT" && el.type === "range") return;   // let a slider keep its arrows
+    var k = e.key;
+    if (k === "f" || k === "F") { $("setfulcrum").click(); }
+    else if (k === "r" || k === "R") { $("reset").click(); }
+    else if (k === "[") { nudgeA(-0.05); }     // fulcrum toward the load — stronger
+    else if (k === "]") { nudgeA(0.05); }       // fulcrum away — weaker
+    else if (k === ",") { nudgeBar(-0.10); }    // shorten the bar
+    else if (k === ".") { nudgeBar(0.10); }      // lengthen the bar
+    else return;
+    e.preventDefault();
+  });
+
   // ---- go ----------------------------------------------------------------
   inW.value = state.W; inB.value = state.B.toFixed(2); inA.value = state.a.toFixed(2);
   update();

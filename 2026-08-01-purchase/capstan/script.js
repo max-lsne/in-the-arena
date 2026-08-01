@@ -321,6 +321,30 @@
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () { draw(current); });
   }
 
+  // nudge the turns by a half (keyboard wrapping)
+  function nudgeTurns(d) {
+    state.turns = clamp(+(state.turns + d).toFixed(1), 0.5, MAXTURNS);
+    inT.value = state.turns;
+    update();
+  }
+
+  // keyboard: the bench under the hands, without reaching for the mouse
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    if (el && el.tagName === "INPUT" && el.type === "range") return;   // let a slider keep its arrows
+    var k = e.key;
+    if (k === "t" || k === "T") { $("turn").click(); }
+    else if (k === "r" || k === "R") { $("reset").click(); }
+    else if (k === "1") { state.surf = "greasy"; update(); }
+    else if (k === "2") { state.surf = "hemp"; update(); }
+    else if (k === "3") { state.surf = "rough"; update(); }
+    else if (k === "[") { nudgeTurns(-0.5); }   // fewer turns — less hold
+    else if (k === "]") { nudgeTurns(0.5); }      // another turn — more hold
+    else return;
+    e.preventDefault();
+  });
+
   // ---- go ----------------------------------------------------------------
   inL.value = state.L; inT.value = state.turns;
   update();

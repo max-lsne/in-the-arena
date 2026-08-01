@@ -332,6 +332,30 @@
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () { draw(current); });
   }
 
+  // nudge the parts by one (keyboard reeving)
+  function nudgeParts(d) {
+    state.N = clamp(state.N + d, 2, MAXPARTS);
+    inN.value = state.N;
+    update();
+  }
+
+  // keyboard: the bench under the hands, without reaching for the mouse
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    if (el && el.tagName === "INPUT" && el.type === "range") return;   // let a slider keep its arrows
+    var k = e.key;
+    if (k === "e" || k === "E") { $("reeve").click(); }
+    else if (k === "r" || k === "R") { $("reset").click(); }
+    else if (k === "1") { state.blocks = "greased"; update(); }
+    else if (k === "2") { state.blocks = "fair"; update(); }
+    else if (k === "3") { state.blocks = "stiff"; update(); }
+    else if (k === "[") { nudgeParts(-1); }    // fewer parts — quicker, harder
+    else if (k === "]") { nudgeParts(1); }      // more parts — lighter, slower
+    else return;
+    e.preventDefault();
+  });
+
   // ---- go ----------------------------------------------------------------
   inN.value = state.N; inW.value = state.W;
   update();
