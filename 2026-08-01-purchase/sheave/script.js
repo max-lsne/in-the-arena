@@ -95,7 +95,7 @@
   var inN = $("in-N"), inW = $("in-W");
   var labN = $("lab-N"), labW = $("lab-W");
   var blockBtns = Array.prototype.slice.call(document.querySelectorAll(".seg [data-blocks]"));
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
 
   function syncLabels() {
     labN.textContent = state.N + (state.N === 1 ? " part" : " parts");
@@ -328,7 +328,32 @@
     current = compute(state);
     syncLabels();
     render(current);
+    announce(current);
     save();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(r) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var pre = state.N + (state.N === 1 ? " part" : " parts") + ", " + state.W
+        + " kilogram load, " + BLOCKS[state.blocks].label + " blocks. ";
+      var msg;
+      if (r.verdict === "dead") {
+        msg = pre + "Won't start — the fall carries " + Math.round(r.P)
+          + " kilograms, more than a hand can hold. Reeve more parts.";
+      } else if (r.verdict === "drift") {
+        msg = pre + "Hard won — the fall is " + Math.round(r.P) + " kilograms, over a comfortable haul"
+          + (r.twoBlocked ? "; two-blocked, so grease the blocks" : "") + ".";
+      } else {
+        msg = pre + "Rove to advantage — the fall is " + Math.round(r.P)
+          + " kilograms, within an easy haul; purchase " + r.ma.toFixed(1) + " to one"
+          + (r.choke ? ", though friction is eating it" : "") + ".";
+      }
+      sayEl.textContent = msg;
+    }, 260);
   }
 
   inN.addEventListener("input", function () { state.N = parseInt(inN.value, 10); update(); });

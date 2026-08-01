@@ -87,7 +87,7 @@
   var inL = $("in-L"), inT = $("in-T");
   var labL = $("lab-L"), labT = $("lab-T");
   var surfBtns = Array.prototype.slice.call(document.querySelectorAll(".seg [data-surf]"));
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
 
   function fmtForce(kgf) {
     if (kgf >= 1000) return (kgf / 1000).toFixed(1) + '<span class="unit"> t</span>';
@@ -317,7 +317,32 @@
     current = compute(state);
     syncLabels();
     render(current);
+    announce(current);
     save();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(r) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var ratioStr = r.ratio >= 100 ? Math.round(r.ratio) : r.ratio.toFixed(1);
+      var pre = state.L.toFixed(1) + " tonne load, " + state.turns + (state.turns === 1 ? " turn" : " turns")
+        + ", " + SURF[state.surf].label + ". ";
+      var msg;
+      if (r.verdict === "dead") {
+        msg = pre + "Takes charge — the tail needs " + fmtPlain(r.hold)
+          + ", more than a hand can grip, so the line surges. Take another turn.";
+      } else if (r.verdict === "drift") {
+        msg = pre + "Rendering — the tail is " + fmtPlain(r.hold) + ", creeping round the drum under strain.";
+      } else {
+        msg = pre + "Holding fast — the tail is " + fmtPlain(r.hold) + ", an easy hand; purchase "
+          + ratioStr + " to one, so one hand could hold " + r.oneHand.toFixed(1) + " tonnes"
+          + (r.nipped ? ", though it won't render until you throw a turn off" : "") + ".";
+      }
+      sayEl.textContent = msg;
+    }, 260);
   }
 
   inL.addEventListener("input", function () { state.L = parseFloat(inL.value); update(); });

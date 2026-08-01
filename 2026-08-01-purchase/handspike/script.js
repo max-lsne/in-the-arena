@@ -83,7 +83,7 @@
   var $ = function (id) { return document.getElementById(id); };
   var inW = $("in-W"), inB = $("in-B"), inA = $("in-A");
   var labW = $("lab-W"), labB = $("lab-B"), labA = $("lab-A");
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
 
   function syncLabels() {
     labW.textContent = state.W + " kgf";
@@ -283,7 +283,32 @@
     current = compute(state);
     syncLabels();
     render(current);
+    announce(current);
     save();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(r) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var pre = state.W + " kilogram load, " + state.B.toFixed(2) + " metre bar, fulcrum "
+        + r.a.toFixed(2) + " metres from the load. ";
+      var msg;
+      if (r.against) {
+        msg = pre + "The fulcrum is past the middle — the arms are against you, adding to the load. Slide it toward the load.";
+      } else if (r.verdict === "dead") {
+        msg = pre + "Immovable — your hands need " + Math.round(r.P)
+          + " kilograms, beyond a hard heave. Set the fulcrum nearer the load.";
+      } else if (r.verdict === "drift") {
+        msg = pre + "Straining — " + Math.round(r.P) + " kilograms at your hands, over a comfortable lean.";
+      } else {
+        msg = pre + "Prised — " + Math.round(r.P) + " kilograms at your hands, within a bear-down; advantage "
+          + r.ma.toFixed(1) + " to one" + (r.allForce ? ", but almost no travel" : "") + ".";
+      }
+      sayEl.textContent = msg;
+    }, 260);
   }
 
   inW.addEventListener("input", function () { state.W = parseInt(inW.value, 10); update(); });
