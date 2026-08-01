@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capstan — take a few turns round the drum, and one hand holds what the other end can't drag</title>
+  <meta name="description" content="Wrap a rope a few times round a drum and the drum's friction eats the load's pull turn by turn, so the tail in your hand holds a tiny fraction of what the far end drags. Take another turn and the hold you need does not halve — it falls away faster. A small page, and a bench for one drum: set the load, the turns, and the surface, and find the turn where one hand holds fast." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233c4a52'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23e8e3d6' stroke-width='1.6'/%3E%3Ccircle cx='16' cy='16' r='10.5' fill='none' stroke='%23d6a63f' stroke-width='1.6'/%3E%3Cpath d='M16 26.5 V29 M16 5.5 L22 3' stroke='%23d6a63f' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#f3f1ea" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#14150f" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Capstan — purchase by the turns you take" />
+  <meta property="og:description" content="Wrap a rope round a drum and its friction eats the load's pull turn by turn, so the tail holds a fraction of what the far end drags. Take another turn and the hold falls away faster than half. A small page, and a bench for one drum: T_hold = T_load · e^(−μθ)." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">In the arena · 2026-08-01 · purchase, one of three</p>
+      <p class="pron"><b>capstan</b> · <i>noun</i> · /ˈkapst(ə)n/ — a drum a rope is wound round, so friction multiplies the hold</p>
+      <h1>Capstan</h1>
+      <p class="lede">Wrap the rope a few turns round the drum, and the friction does the holding — your hand only keeps the tail from paying out.</p>
+      <p class="sub">A capstan is just a drum — a bollard, a windlass barrel, a winch, a bitt. Its magic is not that it is turned but that a rope wound round it grips it, and the grip compounds. Where the rope first touches the drum it carries the load's full pull. As it wraps, the drum's friction bleeds that pull away, so a little further round the rope carries less, and less again, and by the time the rope leaves as the <b>tail</b> in your hand it carries only a whisper of what the load puts on the other end. The astonishing part is the rate: the hold does not fall by a fixed amount per turn but by a fixed <em>fraction</em>, so each turn strips away a slice of what is left. Three turns of hemp on an iron bitt, and one hand holds a berthing ship against the tide.</p>
+    </header>
+
+    <section id="how">
+      <p class="section-tag">Where the purchase comes from</p>
+      <h2>Friction that compounds with the wrap</h2>
+      <p>At every point the rope hugs the drum, the drum pushes back, and that push lets it rub — and the rubbing is what saps the tension. Because there is more rope in contact the further round you go, the loss is proportional to the tension already there, which is the signature of a thing that decays by a fixed fraction. Work it out and the tail tension is the load tension shrunk by a power of the wrap:</p>
+
+      <p class="pull">T_hold = T_load · e<sup>−μθ</sup>, where θ is the total angle wrapped (2π per turn) and μ is how much the rope and drum grip. The purchase — how many times your hold is multiplied — is e<sup>μθ</sup>.</p>
+
+      <p>Two things set it, and one of them is free. <b>The turns</b> pile up in the exponent: each full turn multiplies your purchase by the same factor again, so going from two turns to three does not add a third — it multiplies. <b>The surface</b> sets μ: greasy or wet rope on a smooth drum grips little; dry hemp on a rough iron bitt grips hard. And nothing here depends on the drum being turned, or on how big the load is — the <em>ratio</em> is fixed by the turns and the grip alone. That is why a child at the tail can hold what a capstan bar-gang put on the other end.</p>
+    </section>
+
+    <section id="rule">
+      <p class="section-tag">The one catch</p>
+      <h2>The same friction that holds will not let go</h2>
+      <p>Purchase this cheap has a price, and it is not paid in effort — it is paid in control. The friction that lets one hand hold the load is the same friction you must overcome to <em>ease</em> the load out, and it compounds just as fast in that direction:</p>
+
+      <p class="pull">Too few turns and the load takes charge — the tail overpowers your grip and the rope surges off the drum. Too many, and it will not render — you cannot pay it out at all without throwing a turn off first.</p>
+
+      <p>Between those is the working country. <b>Rendering</b> is when the tail sits just above your easy grip: the rope creeps round the drum under strain, slow and controlled — exactly what you want when lowering a load, and a warning when making fast. <b>Holding fast</b> is when the tail is inside an easy one-hand grip and the line will not move until you let it. And the craft is knowing that the cure for a load that surges is not a stronger arm — it is another turn — and the cure for a line you cannot ease is not a harder pull, but a turn taken off.</p>
+    </section>
+
+    <section id="ladder">
+      <p class="section-tag">Four wraps, surging to nipped</p>
+      <h2>From a load that runs away to one you cannot budge</h2>
+      <ol class="ladder">
+        <li><b>Takes charge.</b> <span class="rung-note">Too few turns: the tail carries more than a hand can grip, so the load overpowers you and the rope surges off the drum, running the line out. Nothing is broken. The wrap has not been given enough turns to strip the load's pull down to a grip.</span></li>
+        <li><b>Rendering.</b> <span class="rung-note">The tail sits just over an easy grip: the rope creeps round the drum under strain, slow and controlled. This is what you want for lowering — a load eased out hand over hand — and what you check when you meant to make fast.</span></li>
+        <li><b>Holding fast.</b> <span class="rung-note">The tail is inside an easy one-hand grip: the drum holds the load and your hand only keeps the tail from paying out. One hand belays tonnes, and the line will not move until you let it. The purchase has come home.</span></li>
+        <li><b>Nipped solid.</b> <span class="rung-note">So many turns, or such a gripping surface, that the tail force is all but nothing: the line will not surge — but it will not render either. A fine make-fast, a poor lowering; to ease the load you must first throw a turn off. Too much purchase is its own kind of trouble.</span></li>
+      </ol>
+    </section>
+
+    <section id="who">
+      <p class="section-tag">Three who take a turn</p>
+      <h2>The same drum, three trades</h2>
+      <div class="hands">
+        <div class="hand">
+          <h3>The docker</h3>
+          <p class="role">the turns</p>
+          <p>Reads the load and throws on turns to match — a couple to check a light line, three or four to hold a ship against the tide — and knows that each turn multiplies rather than adds. Takes a turn off, never fights the tail, when a made-fast line has to be eased.</p>
+        </div>
+        <div class="hand">
+          <h3>The climber</h3>
+          <p class="role">the surface</p>
+          <p>The belay device is a capstan folded small: the same `e^(−μθ)` in the hand. Chooses the friction for the fall he must hold and the lower he must give, and keeps a brake hand on the tail always — because the drum only holds the share the wrap has left it.</p>
+        </div>
+        <div class="hand">
+          <h3>The teamster</h3>
+          <p class="role">the render</p>
+          <p>Snubs a load down a slope with a turn round a tree or a post, and lives in the rendering band on purpose — enough turns that the line creeps and does not run, few enough that he can still pay it out. Knows the friction that saves him going up can trap him coming down.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="bench">
+      <p class="section-tag">The bench</p>
+      <h2>Take a turn. Bring the tail into your hand.</h2>
+      <p>One drum, from above: the load comes in on the thick part of the line, wraps the drum, and leaves as the tail in your hand. Set the <b>load</b> on the far end, the <b>turns</b> you throw on, and the <b>surface</b> — how much the rope and drum grip. The page works out the hold you need on the tail, the purchase the wrap gives back, and what one easy hand could hold at this setting, and lights the <b>one-hand band</b> on the gauge. It opens on a ship's line surging with a single turn, the tail far too heavy to hold. Take another turn — and watch the hold you need fall away faster than half each time.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div id="verdict" class="verdict v-dead" aria-hidden="true"></div>
+            <div id="stage" class="stage"></div>
+            <p id="say" class="sr-only" role="status" aria-live="polite"></p>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="in-L">Load on the far end <span id="lab-L" class="val">3.0 t</span></label>
+                <input id="in-L" type="range" min="0.5" max="8" step="0.5" value="3" />
+              </div>
+              <div class="ctl">
+                <label for="in-T">Turns round the drum <span id="lab-T" class="val">1</span></label>
+                <input id="in-T" type="range" min="0.5" max="5" step="0.5" value="1" />
+              </div>
+              <div class="ctl">
+                <label>The surface</label>
+                <div class="seg" role="group" aria-label="The rope and drum surface">
+                  <button type="button" data-surf="greasy" aria-pressed="false">greasy</button>
+                  <button type="button" data-surf="hemp" aria-pressed="true">hemp on iron</button>
+                  <button type="button" data-surf="rough" aria-pressed="false">dry &amp; rough</button>
+                </div>
+              </div>
+            </div>
+
+            <div id="reading" class="reading"></div>
+          </div>
+        </div>
+
+        <div class="bench-actions">
+          <button id="turn" class="btn" type="button">Take another turn</button>
+          <button id="reset" class="btn" type="button">Reset to the surging line</button>
+        </div>
+        <p class="hint">The <b>one-hand band</b> is the hold a single hand can keep on a tail — light enough to belay and stand easy. Throw on more <b>turns</b> to multiply the purchase (each turn multiplies, it does not add); a grippier <b>surface</b> does the same. The <b>load</b> is the pull on the far end, unchanged. <em>Take another turn</em> adds turns until the tail comes into an easy hand; <em>Reset</em> returns to the surging single turn it opens on. Keys: <kbd>T</kbd> takes a turn, <kbd>R</kbd> resets, <kbd>1</kbd>–<kbd>3</kbd> pick the surface, <kbd>[</kbd> <kbd>]</kbd> throw fewer and more turns; a focused slider takes the arrow keys.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p class="kin">Purchase, one of three — <a href="../sheave/">Sheave</a> · <a href="../handspike/">Handspike</a> · <a href="../capstan/">Capstan</a>. <a href="../">The day's three together.</a></p>
+      <p>Capstan · one drum in schematic, and the capstan equation that rules it: the tail tension is the load shrunk by <code>e^(−μθ)</code>, so the purchase grows as a power of the turns. Pure HTML, CSS, and JavaScript — no build, no account, no network once the page has loaded. Hold from the load, the turns, and a grip coefficient; the purchase and the one-hand hold from the same exponent.</p>
+      <p>One of a series — a page a day, each built on one old working word and the discipline hidden inside it. 2026-08-01.</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
