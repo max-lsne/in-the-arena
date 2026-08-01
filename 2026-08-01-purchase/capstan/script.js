@@ -31,9 +31,28 @@
   // hold, the load taking charge. Take another turn — the hold falls away fast.
   var DEFAULT = { L: 3, turns: 1, surf: "hemp" };
 
-  var state = Object.assign({}, DEFAULT);
+  var KEY = "purchase.capstan.v1";   // where the wrap is kept between visits
+  var state = load() || Object.assign({}, DEFAULT);
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+
+  // ---- persistence -------------------------------------------------------
+  function load() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      if (!SURF[o.surf]) return null;
+      return {
+        L: clamp(Math.round(o.L * 2) / 2, 0.5, 8),
+        turns: clamp(Math.round(o.turns * 2) / 2, 0.5, MAXTURNS),
+        surf: o.surf
+      };
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
 
   // ---- the drum ----------------------------------------------------------
   function compute(s) {
@@ -298,6 +317,7 @@
     current = compute(state);
     syncLabels();
     render(current);
+    save();
   }
 
   inL.addEventListener("input", function () { state.L = parseFloat(inL.value); update(); });

@@ -41,9 +41,28 @@
   // to hold. Reeve more parts — and, when the parts run out, grease the blocks.
   var DEFAULT = { N: 3, W: 250, blocks: "stiff" };
 
-  var state = Object.assign({}, DEFAULT);
+  var KEY = "purchase.sheave.v1";   // where the tackle is kept between visits
+  var state = load() || Object.assign({}, DEFAULT);
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+
+  // ---- persistence -------------------------------------------------------
+  function load() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      if (!BLOCKS[o.blocks]) return null;
+      return {
+        N: clamp(Math.round(o.N), 2, MAXPARTS),
+        W: clamp(Math.round(o.W / 10) * 10, 50, 500),
+        blocks: o.blocks
+      };
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
 
   // ---- the tackle --------------------------------------------------------
   function compute(s) {
@@ -309,6 +328,7 @@
     current = compute(state);
     syncLabels();
     render(current);
+    save();
   }
 
   inN.addEventListener("input", function () { state.N = parseInt(inN.value, 10); update(); });

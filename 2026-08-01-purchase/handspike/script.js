@@ -30,9 +30,29 @@
   // heave. Slide the fulcrum toward the load, or lengthen the bar.
   var DEFAULT = { W: 400, B: 1.50, a: 0.60 };
 
-  var state = Object.assign({}, DEFAULT);
+  var KEY = "purchase.handspike.v1";   // where the lever is kept between visits
+  var state = load() || Object.assign({}, DEFAULT);
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+
+  // ---- persistence -------------------------------------------------------
+  function load() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      if (typeof o.W !== "number" || typeof o.B !== "number" || typeof o.a !== "number") return null;
+      var B = clamp(o.B, 0.80, 3.00);
+      return {
+        W: clamp(Math.round(o.W / 10) * 10, 100, 800),
+        B: B,
+        a: clamp(o.a, A_MIN, B - 0.10)
+      };
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
 
   // ---- the lever ---------------------------------------------------------
   function compute(s) {
@@ -263,6 +283,7 @@
     current = compute(state);
     syncLabels();
     render(current);
+    save();
   }
 
   inW.addEventListener("input", function () { state.W = parseInt(inW.value, 10); update(); });
