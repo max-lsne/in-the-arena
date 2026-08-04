@@ -25,9 +25,28 @@
 
   // Opens on a gap cut too small for a long steel span in a hard summer.
   var DEFAULT = { g: 4, L: 60, T: 50, mat: "steel" };
-  var state = Object.assign({}, DEFAULT);
+
+  var KEY = "slack.breath.v1";   // where the joint is kept between visits
+  var state = load() || Object.assign({}, DEFAULT);
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+
+  // ---- persistence -------------------------------------------------------
+  function load() {
+    try {
+      var o = JSON.parse(window.localStorage.getItem(KEY));
+      if (!o || !MAT[o.mat]) return null;
+      return {
+        g: clamp(Math.round(o.g), 0, MAXG),
+        L: clamp(Math.round(o.L / 5) * 5, 10, 120),
+        T: clamp(Math.round(o.T), 10, 70),
+        mat: o.mat
+      };
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
 
   // ---- the joint ---------------------------------------------------------
   function compute(s) {
@@ -287,6 +306,7 @@
     current = compute(state);
     syncLabels();
     render(current);
+    save();
   }
 
   inG.addEventListener("input", function () { state.g = parseInt(inG.value, 10); update(); });

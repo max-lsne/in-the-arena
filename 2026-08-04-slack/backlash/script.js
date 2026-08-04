@@ -26,9 +26,27 @@
 
   // Opens on a gap cut too tight for a hot, heavy duty: the teeth binding.
   var DEFAULT = { c: 0.04, rpm: 800, duty: "heavy" };
-  var state = Object.assign({}, DEFAULT);
+
+  var KEY = "slack.backlash.v1";   // where the mesh is kept between visits
+  var state = load() || Object.assign({}, DEFAULT);
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+
+  // ---- persistence -------------------------------------------------------
+  function load() {
+    try {
+      var o = JSON.parse(window.localStorage.getItem(KEY));
+      if (!o || !DUTY[o.duty]) return null;
+      return {
+        c: clamp(Math.round(o.c * 100) / 100, 0, MAXC),
+        rpm: clamp(Math.round(o.rpm / 50) * 50, 100, 3000),
+        duty: o.duty
+      };
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
 
   // ---- the mesh ----------------------------------------------------------
   function compute(s) {
@@ -265,6 +283,7 @@
     current = compute(state);
     syncLabels();
     render(current);
+    save();
   }
 
   inC.addEventListener("input", function () { state.c = parseFloat(inC.value); update(); });

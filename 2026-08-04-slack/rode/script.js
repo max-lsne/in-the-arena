@@ -34,10 +34,28 @@
 
   // Opens on a short scope in a hard gust: the rode bar-taut, the anchor lifting.
   var DEFAULT = { S: 4, H: 3, tack: "chain" };
-  var state = Object.assign({}, DEFAULT);
+
+  var KEY = "slack.rode.v1";   // where the anchorage is kept between visits
+  var state = load() || Object.assign({}, DEFAULT);
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
   function asinh(x) { return Math.log(x + Math.sqrt(x * x + 1)); }
+
+  // ---- persistence -------------------------------------------------------
+  function load() {
+    try {
+      var o = JSON.parse(window.localStorage.getItem(KEY));
+      if (!o || !TACK[o.tack]) return null;
+      return {
+        S: clamp(Math.round(o.S * 2) / 2, 3, MAXSCOPE),
+        H: clamp(Math.round(o.H * 10) / 10, 0.3, 6),
+        tack: o.tack
+      };
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
 
   // ---- the catenary ------------------------------------------------------
   function compute(s) {
@@ -306,6 +324,7 @@
     current = compute(state);
     syncLabels();
     render(current);
+    save();
   }
 
   inS.addEventListener("input", function () { state.S = parseFloat(inS.value); update(); });
