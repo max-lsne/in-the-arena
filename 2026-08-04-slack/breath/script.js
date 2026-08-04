@@ -110,7 +110,8 @@
     var rows = [
       ["Growth the heat demands", r.demand.toFixed(1) + '<span class="unit"> mm</span>', ""],
       ["Compressive thrust", thrust, tCls],
-      ["Gap", state.g + '<span class="unit"> mm</span>', ""]
+      ["Gap", state.g + '<span class="unit"> mm</span>', ""],
+      ["Compressive stress", Math.round(r.sigma) + '<span class="unit"> MPa</span>', tCls]
     ];
     readingEl.innerHTML = rows.map(function (row) {
       return '<div class="row"><span class="k">' + row[0] + '</span><span class="v ' + row[2] + '">' + row[1] + "</span></div>";

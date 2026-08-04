@@ -135,7 +135,8 @@
     var rows = [
       ["Pull angle at the anchor", r.angle.toFixed(1) + '<span class="unit"> °</span>', aCls],
       ["Chain on the bottom", resStr, r.lifted ? "bad" : "good"],
-      ["Scope", state.S.toFixed(state.S % 1 ? 1 : 0) + '<span class="unit"> : 1</span>', ""]
+      ["Scope", state.S.toFixed(state.S % 1 ? 1 : 0) + '<span class="unit"> : 1</span>', ""],
+      ["Tension at the bow", r.Tbow.toFixed(1) + '<span class="unit"> kN</span>', ""]
     ];
     readingEl.innerHTML = rows.map(function (row) {
       return '<div class="row"><span class="k">' + row[0] + '</span><span class="v ' + row[2] + '">' + row[1] + "</span></div>";

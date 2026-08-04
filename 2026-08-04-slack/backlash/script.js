@@ -107,7 +107,8 @@
     var rows = [
       ["Lost motion on reversal", Math.round(r.lost) + '<span class="unit"> µm</span>', lostCls],
       ["Bind margin", (r.margin > 0 ? "+" : "") + r.margin.toFixed(2) + '<span class="unit"> mm</span>', r.margin > 0 ? "good" : "bad"],
-      ["Clearance", state.c.toFixed(2) + '<span class="unit"> mm</span>', ""]
+      ["Clearance", state.c.toFixed(2) + '<span class="unit"> mm</span>', ""],
+      ["Reversal knock", r.hammer < 0.3 ? "a tap" : (r.hammer < HAMMER_KNOCK ? "firm" : "a hammer"), r.knocking ? "warn" : "good"]
     ];
     readingEl.innerHTML = rows.map(function (row) {
       return '<div class="row"><span class="k">' + row[0] + '</span><span class="v ' + row[2] + '">' + row[1] + "</span></div>";
