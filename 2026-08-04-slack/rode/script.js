@@ -161,6 +161,7 @@
 
   var SEA = { x0: 60, x1: 496, top: 76, bed: 356 };   // water surface / seabed
   var GAUGE = { x0: 60, x1: 496, y: 392, max: 24 };   // angle gauge, degrees
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var phase = 0;
 
   function draw(cur) {
@@ -313,7 +314,7 @@
     if (lastTs == null) lastTs = ts;
     var dt = Math.min(0.05, (ts - lastTs) / 1000);
     lastTs = ts;
-    phase += dt * 1.1;
+    if (!reduce) phase += dt * 1.1;
     draw(current);
     window.requestAnimationFrame(frame);
   }

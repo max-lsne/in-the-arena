@@ -136,7 +136,8 @@
 
   var CX = 260, RY = 188, X0 = 60, X1 = 460;
   var GAUGE = { x0: 60, x1: 460, y: 384, max: 1.5 };
-  var day = 0;   // 0 cold → 1 hot → 0, cycled
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var day = reduce ? Math.PI : 0;   // 0 cold → 1 hot → 0, cycled; held at the peak if still
 
   function draw(cur) {
     var col = {
@@ -295,7 +296,7 @@
     if (lastTs == null) lastTs = ts;
     var dt = Math.min(0.05, (ts - lastTs) / 1000);
     lastTs = ts;
-    day += dt * 0.9;                 // the day runs cold → hot → cold
+    if (!reduce) day += dt * 0.9;    // the day runs cold → hot → cold
     draw(current);
     window.requestAnimationFrame(frame);
   }

@@ -133,6 +133,7 @@
 
   var CX = 260, PITCH = 176;                  // mesh centre, pitch line y
   var GAUGE = { x0: 56, x1: 464, y: 384, max: 400 };  // lost motion, µm
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var phase = 0, knockFlash = 0;
 
   function draw(cur) {
@@ -267,12 +268,14 @@
     if (lastTs == null) lastTs = ts;
     var dt = Math.min(0.05, (ts - lastTs) / 1000);
     lastTs = ts;
-    // reversal cadence rises with rpm; a knock lands each time the tooth turns back
-    phase += dt * (1.2 + state.rpm / 1400);
-    var sw = Math.sin(phase);
-    if (prevSwing * sw < 0 && current.verdict !== "dead") knockFlash = Math.min(1, current.hammer);
-    prevSwing = sw;
-    knockFlash *= 0.9;
+    if (!reduce) {
+      // reversal cadence rises with rpm; a knock lands each time the tooth turns back
+      phase += dt * (1.2 + state.rpm / 1400);
+      var sw = Math.sin(phase);
+      if (prevSwing * sw < 0 && current.verdict !== "dead") knockFlash = Math.min(1, current.hammer);
+      prevSwing = sw;
+      knockFlash *= 0.9;
+    }
     draw(current);
     window.requestAnimationFrame(frame);
   }
