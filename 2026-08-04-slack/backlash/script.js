@@ -80,7 +80,7 @@
   var inC = $("in-C"), inR = $("in-R");
   var labC = $("lab-C"), labR = $("lab-R");
   var dutyBtns = Array.prototype.slice.call(document.querySelectorAll(".seg [data-duty]"));
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
 
   function syncLabels() {
     labC.textContent = state.c.toFixed(2) + " mm";
@@ -283,7 +283,32 @@
     current = compute(state);
     syncLabels();
     render(current);
+    announce(current);
     save();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(r) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var pre = state.c.toFixed(2) + " millimetre clearance, " + DUTY[state.duty].label
+        + " duty, " + state.rpm + " rpm. ";
+      var msg;
+      if (r.verdict === "dead") {
+        msg = pre + "Binding — heat and load have closed the gap by " + Math.abs(r.margin).toFixed(2)
+          + " millimetres and the teeth wedge. Open the clearance.";
+      } else if (r.verdict === "drift") {
+        msg = pre + (r.knocking && r.lost <= r.tol * 1000
+          ? "Hammering — the reversal lands a hard knock at this speed."
+          : "Slop — the lost motion is " + Math.round(r.lost) + " microns, past what the duty allows.");
+      } else {
+        msg = pre + "Meshing clean — free with a " + r.margin.toFixed(2)
+          + " millimetre bind margin, and " + Math.round(r.lost) + " microns of lost motion, inside tolerance.";
+      }
+      sayEl.textContent = msg;
+    }, 260);
   }
 
   inC.addEventListener("input", function () { state.c = parseFloat(inC.value); update(); });

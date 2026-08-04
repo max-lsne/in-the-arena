@@ -107,7 +107,7 @@
   var inS = $("in-S"), inH = $("in-H");
   var labS = $("lab-S"), labH = $("lab-H");
   var tackBtns = Array.prototype.slice.call(document.querySelectorAll(".seg [data-tack]"));
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
 
   function syncLabels() {
     labS.textContent = state.S.toFixed(state.S % 1 ? 1 : 0) + " : 1";
@@ -324,7 +324,30 @@
     current = compute(state);
     syncLabels();
     render(current);
+    announce(current);
     save();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(r) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var pre = state.S.toFixed(state.S % 1 ? 1 : 0) + " to one scope, " + state.H.toFixed(1)
+        + " kilonewton blow, " + TACK[state.tack].label + ". ";
+      var msg;
+      if (r.verdict === "dead") {
+        msg = pre + "Snatching — the pull comes up " + r.angle.toFixed(0)
+          + " degrees off the bottom and lifts the anchor. Veer more scope.";
+      } else if (r.verdict === "drift") {
+        msg = pre + "Wandering — the pull lies flat and it holds, but the scope is long and the boat swings a wide circle.";
+      } else {
+        msg = pre + "Set and easy — the pull arrives at " + r.angle.toFixed(1)
+          + " degrees, with " + r.reserve.toFixed(1) + " metres of chain in reserve on the bottom.";
+      }
+      sayEl.textContent = msg;
+    }, 260);
   }
 
   inS.addEventListener("input", function () { state.S = parseFloat(inS.value); update(); });

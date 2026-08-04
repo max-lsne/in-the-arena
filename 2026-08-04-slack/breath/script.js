@@ -79,7 +79,7 @@
   var inG = $("in-G"), inL = $("in-L"), inT = $("in-T");
   var labG = $("lab-G"), labL = $("lab-L"), labT = $("lab-T");
   var matBtns = Array.prototype.slice.call(document.querySelectorAll(".seg [data-mat]"));
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
 
   function syncLabels() {
     labG.textContent = state.g + " mm";
@@ -306,7 +306,32 @@
     current = compute(state);
     syncLabels();
     render(current);
+    announce(current);
     save();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(r) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var pre = state.g + " millimetre gap, " + state.L + " metre " + MAT[state.mat].label
+        + " span, " + state.T + " degree swing. ";
+      var msg;
+      if (r.verdict === "dead") {
+        msg = pre + "Buckling — the heat demands " + r.demand.toFixed(0)
+          + " millimetres of growth and the thrust reaches " + Math.round(r.buckleFrac * 100)
+          + " percent of buckling. Cut the gap wider.";
+      } else if (r.verdict === "drift") {
+        msg = pre + "Clattering — the gap is " + r.excess.toFixed(0)
+          + " millimetres wider than the heat demands, so the cold joint gapes and hammers.";
+      } else {
+        msg = pre + "Breathing — the gap covers the " + r.demand.toFixed(0)
+          + " millimetres of growth, with thrust at " + Math.round(r.buckleFrac * 100) + " percent of buckling.";
+      }
+      sayEl.textContent = msg;
+    }, 260);
   }
 
   inG.addEventListener("input", function () { state.g = parseInt(inG.value, 10); update(); });
