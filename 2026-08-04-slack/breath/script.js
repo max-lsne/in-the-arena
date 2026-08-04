@@ -354,6 +354,29 @@
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () { draw(current); });
   }
 
+  // nudge the gap by a millimetre (keyboard)
+  function nudgeGap(d) {
+    state.g = clamp(state.g + d, 0, MAXG);
+    inG.value = state.g; update();
+  }
+
+  // keyboard: the bench under the hands, without reaching for the mouse
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    if (el && el.tagName === "INPUT" && el.type === "range") return;   // let a slider keep its arrows
+    var k = e.key;
+    if (k === "w" || k === "W") { $("cut").click(); }
+    else if (k === "r" || k === "R") { $("reset").click(); }
+    else if (k === "1") { state.mat = "steel"; update(); }
+    else if (k === "2") { state.mat = "concrete"; update(); }
+    else if (k === "3") { state.mat = "aluminium"; update(); }
+    else if (k === "[") { nudgeGap(-1); }   // smaller gap
+    else if (k === "]") { nudgeGap(1); }      // larger gap
+    else return;
+    e.preventDefault();
+  });
+
   inG.value = state.g; inL.value = state.L; inT.value = state.T;
   update();
 })();

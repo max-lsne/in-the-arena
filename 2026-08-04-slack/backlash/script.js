@@ -332,6 +332,29 @@
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () { draw(current); });
   }
 
+  // nudge the clearance by a thousandth of a centimetre (keyboard)
+  function nudgeClearance(d) {
+    state.c = clamp(+(state.c + d).toFixed(2), 0, MAXC);
+    inC.value = state.c; update();
+  }
+
+  // keyboard: the bench under the hands, without reaching for the mouse
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    if (el && el.tagName === "INPUT" && el.type === "range") return;   // let a slider keep its arrows
+    var k = e.key;
+    if (k === "o" || k === "O") { $("open").click(); }
+    else if (k === "r" || k === "R") { $("reset").click(); }
+    else if (k === "1") { state.duty = "precision"; update(); }
+    else if (k === "2") { state.duty = "general"; update(); }
+    else if (k === "3") { state.duty = "heavy"; update(); }
+    else if (k === "[") { nudgeClearance(-0.01); }   // tighter
+    else if (k === "]") { nudgeClearance(0.01); }     // looser
+    else return;
+    e.preventDefault();
+  });
+
   inC.value = state.c; inR.value = state.rpm;
   update();
 })();

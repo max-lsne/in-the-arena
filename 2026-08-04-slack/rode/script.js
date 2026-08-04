@@ -369,6 +369,29 @@
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () { draw(current); });
   }
 
+  // nudge the scope by a half (keyboard)
+  function nudgeScope(d) {
+    state.S = clamp(+(state.S + d).toFixed(1), 3, MAXSCOPE);
+    inS.value = state.S; update();
+  }
+
+  // keyboard: the bench under the hands, without reaching for the mouse
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    if (el && el.tagName === "INPUT" && el.type === "range") return;   // let a slider keep its arrows
+    var k = e.key;
+    if (k === "v" || k === "V") { $("veer").click(); }
+    else if (k === "r" || k === "R") { $("reset").click(); }
+    else if (k === "1") { state.tack = "light"; update(); }
+    else if (k === "2") { state.tack = "chain"; update(); }
+    else if (k === "3") { state.tack = "heavy"; update(); }
+    else if (k === "[") { nudgeScope(-0.5); }   // less scope
+    else if (k === "]") { nudgeScope(0.5); }     // more scope
+    else return;
+    e.preventDefault();
+  });
+
   inS.value = state.S; inH.value = state.H;
   update();
 })();
