@@ -450,6 +450,31 @@
     window.requestAnimationFrame(step);
   }
 
+  // nudge the applied cant by a small step (keyboard trimming)
+  function nudgeCant(delta) {
+    state.E = clamp(state.E + delta, 0, E_CAP);
+    inE.value = state.E;
+    update();
+  }
+
+  // keyboard: the bench under the hands, without reaching for the mouse
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    // let a focused slider keep its own arrow keys
+    if (el && el.tagName === "INPUT" && el.type === "range") return;
+    var k = e.key;
+    if (k === "c" || k === "C") { $("cant").click(); }
+    else if (k === "r" || k === "R") { $("reset").click(); }
+    else if (k === "1") { state.stock = "loco"; update(); }
+    else if (k === "2") { state.stock = "unit"; update(); }
+    else if (k === "3") { state.stock = "tilt"; update(); }
+    else if (k === "[") { nudgeCant(-5); }   // less tilt — leans out
+    else if (k === "]") { nudgeCant(5); }     // more tilt — leans in
+    else return;
+    e.preventDefault();
+  });
+
   // repaint on theme flips so canvas colours follow
   if (window.matchMedia) {
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () { draw(current); });
