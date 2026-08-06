@@ -52,8 +52,29 @@
   // deficiency, thrown to the high rail. Cant it true on arrival — or find that
   // a tilting set could take it as it stands.
   var DEFAULT = { R: 1000, E: 40, V: 120, stock: "loco" };
+  var KEY = "cant.curve.v1";     // where the curve is kept between visits
 
-  var state = Object.assign({}, DEFAULT);
+  var state = load() || Object.assign({}, DEFAULT);
+
+  // ---- persistence -------------------------------------------------------
+  function load() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      if (typeof o.R !== "number" || !STOCK[o.stock]) return null;
+      return {
+        R: clampNum(o.R, 300, 2500),
+        E: clampNum(o.E, 0, E_CAP),
+        V: clampNum(o.V, 40, 220),
+        stock: o.stock
+      };
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+  function clampNum(v, a, b) { v = +v; if (!isFinite(v)) return a; return v < a ? a : v > b ? b : v; }
 
   // ---- the curve ---------------------------------------------------------
   function compute(s) {
@@ -397,6 +418,7 @@
     current = compute(state);
     syncLabels();
     render(current);
+    save();
   }
 
   inR.addEventListener("input", function () { state.R = parseInt(inR.value, 10); update(); });
