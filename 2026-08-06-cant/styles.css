@@ -242,6 +242,18 @@ input[type="range"]::-moz-range-thumb {
 }
 input[type="range"]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 3px var(--keep-soft); }
 
+/* balancing-speed marker under the line-speed slider */
+.vetrack { position: relative; height: 8px; margin: -2px 9px 0; }
+.ve-mark {
+  position: absolute; top: 0; left: 50%;
+  width: 2px; height: 8px; border-radius: 1px;
+  background: var(--keep); transform: translateX(-1px);
+  transition: left .12s, opacity .12s;
+}
+.ve-mark.off { opacity: .25; }
+.ctl-note { font-family: var(--mono); font-size: 11px; color: var(--ink-faint); margin: 5px 0 0; }
+.ctl-note b { color: var(--keep); font-weight: 500; }
+
 /* segmented stock selector */
 .seg { display: flex; gap: 6px; }
 .seg button {

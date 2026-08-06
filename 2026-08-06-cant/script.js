@@ -124,6 +124,8 @@
   var labR = $("lab-R"), labE = $("lab-E"), labV = $("lab-V");
   var stockBtns = Array.prototype.slice.call(document.querySelectorAll(".seg [data-stock]"));
   var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
+  var veMark = $("ve-mark"), veNote = $("ve-note");
+  var V_MIN = 40, V_MAX = 220;
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
 
@@ -176,6 +178,21 @@
     readingEl.innerHTML = rows.map(function (row) {
       return '<div class="row"><span class="k">' + row[0] + '</span><span class="v ' + row[2] + '">' + row[1] + "</span></div>";
     }).join("");
+
+    markBalance(r);
+  }
+
+  // put the balancing speed on the line-speed track, so the dial reads against it
+  function markBalance(r) {
+    if (!veMark || !veNote) return;
+    var ve = Math.round(r.Ve);
+    var frac = clamp((r.Ve - V_MIN) / (V_MAX - V_MIN), 0, 1);
+    veMark.style.left = (frac * 100) + "%";
+    veMark.className = "ve-mark" + (r.Ve < V_MIN || r.Ve > V_MAX ? " off" : "");
+    var diff = Math.round(state.V - r.Ve);
+    var tail = Math.abs(diff) <= 2 ? "at the balancing speed"
+      : (diff > 0 ? diff + " km/h over balance" : Math.abs(diff) + " km/h under balance");
+    veNote.innerHTML = "balances at <b>" + ve + " km/h</b> · " + tail;
   }
 
   // ---- the stage (canvas cross-section) ----------------------------------
