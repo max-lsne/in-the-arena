@@ -123,7 +123,7 @@
   var inR = $("in-R"), inE = $("in-E"), inV = $("in-V");
   var labR = $("lab-R"), labE = $("lab-E"), labV = $("lab-V");
   var stockBtns = Array.prototype.slice.call(document.querySelectorAll(".seg [data-stock]"));
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
 
@@ -418,7 +418,34 @@
     current = compute(state);
     syncLabels();
     render(current);
+    announce(current);
     save();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(r) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var head = state.R + " metre curve, " + state.E + " mm cant, " + state.V
+        + " km per hour, " + STOCK[state.stock].label + ". ";
+      var ed = Math.abs(Math.round(r.Ed));
+      var msg;
+      if (r.verdict === "balance") {
+        msg = head + "In balance — the throw is cancelled, balancing speed " + Math.round(r.Ve) + ".";
+      } else if (r.verdict === "thrown") {
+        msg = head + "Thrown out — " + ed + " millimetres of cant deficiency, past the limit; "
+          + Math.abs(r.aLat).toFixed(2) + " metres per second squared toward the outer rail.";
+      } else if (r.verdict === "slide") {
+        msg = head + "Sliding in — " + ed + " millimetres of cant excess, past the limit; the load drags the inner rail.";
+      } else if (r.verdict === "wide") {
+        msg = head + "Running wide — " + ed + " millimetres of deficiency, inside the wall; leaning out.";
+      } else {
+        msg = head + "Leaning in — " + ed + " millimetres of excess, inside the wall.";
+      }
+      sayEl.textContent = msg;
+    }, 260);
   }
 
   inR.addEventListener("input", function () { state.R = parseInt(inR.value, 10); update(); });
