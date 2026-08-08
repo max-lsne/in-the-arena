@@ -354,6 +354,29 @@
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () { draw(current); });
   }
 
+  // nudge the cut angle by a degree (keyboard)
+  function nudgeAngle(d) {
+    state.a = clamp(state.a + d, 0, 90);
+    inA.value = state.a; update();
+  }
+
+  // keyboard: the cutting table under the hands, without reaching for the mouse
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    if (el && el.tagName === "INPUT" && el.type === "range") return;   // let a slider keep its arrows
+    var k = e.key;
+    if (k === "b" || k === "B") { $("fix").click(); }
+    else if (k === "r" || k === "R") { $("reset").click(); }
+    else if (k === "1") { state.cloth = "poplin"; update(); }
+    else if (k === "2") { state.cloth = "suiting"; update(); }
+    else if (k === "3") { state.cloth = "crepe"; update(); }
+    else if (k === "[") { nudgeAngle(-1); }   // toward the grain
+    else if (k === "]") { nudgeAngle(1); }      // toward the bias
+    else return;
+    e.preventDefault();
+  });
+
   inA.value = state.a; inD.value = state.d; inC.value = state.c;
   update();
 })();

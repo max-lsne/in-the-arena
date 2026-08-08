@@ -359,6 +359,29 @@
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () { draw(current); });
   }
 
+  // nudge the steer by a point (keyboard)
+  function nudgeSteer(d) {
+    state.s = clamp(state.s + d, 0, 100);
+    inS.value = state.s; prog = 0; update();
+  }
+
+  // keyboard: the froe under the hands, without reaching for the mouse
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    if (el && el.tagName === "INPUT" && el.type === "range") return;   // let a slider keep its arrows
+    var k = e.key;
+    if (k === "t" || k === "T") { $("fix").click(); }
+    else if (k === "r" || k === "R") { $("reset").click(); }
+    else if (k === "1") { state.stock = "oak"; update(); }
+    else if (k === "2") { state.stock = "ash"; update(); }
+    else if (k === "3") { state.stock = "elm"; update(); }
+    else if (k === "[") { nudgeSteer(-1); }   // ease the steer
+    else if (k === "]") { nudgeSteer(1); }      // take up the steer
+    else return;
+    e.preventDefault();
+  });
+
   inA.value = state.a; inL.value = state.L; inS.value = state.s;
   update();
 })();

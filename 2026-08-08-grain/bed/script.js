@@ -349,6 +349,29 @@
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () { draw(current); });
   }
 
+  // nudge the bed by a couple of degrees (keyboard)
+  function nudgeBed(d) {
+    state.b = clamp(state.b + d, 0, 90);
+    inB.value = state.b; update();
+  }
+
+  // keyboard: the mason's bench under the hands, without reaching for the mouse
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    if (el && el.tagName === "INPUT" && el.type === "range") return;   // let a slider keep its arrows
+    var k = e.key;
+    if (k === "t" || k === "T") { $("fix").click(); }
+    else if (k === "r" || k === "R") { $("reset").click(); }
+    else if (k === "1") { state.stone = "granite"; update(); }
+    else if (k === "2") { state.stone = "limestone"; update(); }
+    else if (k === "3") { state.stone = "sandstone"; update(); }
+    else if (k === "[") { nudgeBed(-2); }   // toward face-bedded
+    else if (k === "]") { nudgeBed(2); }      // toward square
+    else return;
+    e.preventDefault();
+  });
+
   inB.value = state.b; inF.value = state.f; inW.value = state.w;
   update();
 })();
