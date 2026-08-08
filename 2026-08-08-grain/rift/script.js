@@ -26,9 +26,27 @@
   // Opens on a long billet of sloping grain, no steer at all — the split running out.
   var DEFAULT = { a: 8, L: 620, s: 0, stock: "oak" };
 
-  var state = Object.assign({}, DEFAULT);
+  var KEY = "grain.rift.v1";   // where the billet is kept between visits
+  var state = load() || Object.assign({}, DEFAULT);
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+
+  // ---- persistence -------------------------------------------------------
+  function load() {
+    try {
+      var o = JSON.parse(window.localStorage.getItem(KEY));
+      if (!o || !STOCK[o.stock]) return null;
+      return {
+        a: clamp(Math.round(o.a), 0, 15),
+        L: clamp(Math.round(o.L / 20) * 20, 200, 900),
+        s: clamp(Math.round(o.s), 0, 100),
+        stock: o.stock
+      };
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
 
   // ---- the split ---------------------------------------------------------
   function compute(st) {
@@ -291,6 +309,7 @@
     current = compute(state);
     syncLabels();
     render(current);
+    save();
   }
 
   inA.addEventListener("input", function () { state.a = parseInt(inA.value, 10); update(); });

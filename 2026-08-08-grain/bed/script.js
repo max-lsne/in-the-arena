@@ -27,9 +27,27 @@
   // Opens on a thirsty sandstone set nearly face-bedded on a soaked, hard-freezing coping.
   var DEFAULT = { b: 10, f: 45, w: 85, stone: "sandstone" };
 
-  var state = Object.assign({}, DEFAULT);
+  var KEY = "grain.bed.v1";   // where the ashlar is kept between visits
+  var state = load() || Object.assign({}, DEFAULT);
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+
+  // ---- persistence -------------------------------------------------------
+  function load() {
+    try {
+      var o = JSON.parse(window.localStorage.getItem(KEY));
+      if (!o || !STONE[o.stone]) return null;
+      return {
+        b: clamp(Math.round(o.b / 2) * 2, 0, 90),
+        f: clamp(Math.round(o.f), 5, 60),
+        w: clamp(Math.round(o.w / 5) * 5, 5, 100),
+        stone: o.stone
+      };
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
 
   // ---- the stone ---------------------------------------------------------
   function compute(st) {
@@ -282,6 +300,7 @@
     current = compute(state);
     syncLabels();
     render(current);
+    save();
   }
 
   inB.addEventListener("input", function () { state.b = parseInt(inB.value, 10); update(); });

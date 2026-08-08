@@ -26,9 +26,27 @@
   // Opens on a soft collar cut nearly on the grain — standing stiff, refusing to roll.
   var DEFAULT = { a: 6, d: 24, c: 78, cloth: "crepe" };
 
-  var state = Object.assign({}, DEFAULT);
+  var KEY = "grain.bias.v1";   // where the piece is kept between visits
+  var state = load() || Object.assign({}, DEFAULT);
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+
+  // ---- persistence -------------------------------------------------------
+  function load() {
+    try {
+      var o = JSON.parse(window.localStorage.getItem(KEY));
+      if (!o || !CLOTH[o.cloth]) return null;
+      return {
+        a: clamp(Math.round(o.a), 0, 90),
+        d: clamp(Math.round(o.d / 2) * 2, 10, 140),
+        c: clamp(Math.round(o.c), 0, 100),
+        cloth: o.cloth
+      };
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
 
   // ---- the cloth ---------------------------------------------------------
   function compute(st) {
@@ -288,6 +306,7 @@
     current = compute(state);
     syncLabels();
     render(current);
+    save();
   }
 
   inA.addEventListener("input", function () { state.a = parseInt(inA.value, 10); update(); });
