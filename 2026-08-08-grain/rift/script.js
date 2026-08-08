@@ -287,18 +287,21 @@
   }
 
   // ---- loop --------------------------------------------------------------
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var current = compute(state);
   var lastTs = null, hold = 0;
   function frame(ts) {
     if (lastTs == null) lastTs = ts;
     var dt = Math.min(0.05, (ts - lastTs) / 1000);
     lastTs = ts;
-    if (hold > 0) { hold -= dt; }
+    if (reduce) {
+      prog = 1;   // show the whole rift at rest, no driving froe
+    } else if (hold > 0) { hold -= dt; }
     else {
       prog += dt * 0.5;
       if (prog >= 1) { prog = 1; hold = 0.7; }
     }
-    if (hold <= 0 && prog >= 1) prog = 0;
+    if (!reduce && hold <= 0 && prog >= 1) prog = 0;
     draw(current);
     window.requestAnimationFrame(frame);
   }

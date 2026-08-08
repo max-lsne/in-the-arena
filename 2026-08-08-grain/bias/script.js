@@ -289,13 +289,14 @@
   }
 
   // ---- loop --------------------------------------------------------------
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var current = compute(state);
   var lastTs = null;
   function frame(ts) {
     if (lastTs == null) lastTs = ts;
     var dt = Math.min(0.05, (ts - lastTs) / 1000);
     lastTs = ts;
-    sway += dt * 1.4;
+    if (!reduce) sway += dt * 1.4;    // a slow settle of the hanging cloth, stilled if unwanted
     draw(current);
     window.requestAnimationFrame(frame);
   }

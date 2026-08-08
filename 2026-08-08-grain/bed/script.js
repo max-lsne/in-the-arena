@@ -283,13 +283,15 @@
   }
 
   // ---- loop --------------------------------------------------------------
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) season = Math.PI;    // hold the season at the hard freeze, so the frost shows at rest
   var current = compute(state);
   var lastTs = null;
   function frame(ts) {
     if (lastTs == null) lastTs = ts;
     var dt = Math.min(0.05, (ts - lastTs) / 1000);
     lastTs = ts;
-    season += dt * 0.8;    // the year runs wet → freeze → wet
+    if (!reduce) season += dt * 0.8;    // the year runs wet → freeze → wet
     draw(current);
     window.requestAnimationFrame(frame);
   }
