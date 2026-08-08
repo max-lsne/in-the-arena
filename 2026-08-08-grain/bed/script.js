@@ -87,7 +87,7 @@
   var inB = $("in-B"), inF = $("in-F"), inW = $("in-W");
   var labB = $("lab-B"), labF = $("lab-F"), labW = $("lab-W");
   var stoneBtns = Array.prototype.slice.call(document.querySelectorAll(".seg [data-stone]"));
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
 
   function syncLabels() {
     labB.textContent = state.b + "°";
@@ -300,7 +300,32 @@
     current = compute(state);
     syncLabels();
     render(current);
+    announce(current);
     save();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(r) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var pre = "Bed " + state.b + " degrees to the weather, " + state.f + " freezes a winter, "
+        + state.w + " percent wet, " + STONE[state.stone].label + ". ";
+      var msg;
+      if (r.verdict === "dead") {
+        msg = pre + "Spalling — the beds hold " + Math.round(r.trap * 100)
+          + " percent water at the face and the frost sheds it off in about "
+          + yearsLabel(r.years) + " years. Turn the bed to shed.";
+      } else if (r.verdict === "drift") {
+        msg = pre + "Fretting — the face decays in about " + yearsLabel(r.years)
+          + " years, faster than it should. Turn the bed squarer, or choose a denser stone.";
+      } else {
+        msg = pre + "Weathers true — the beds shed the water and the face stands about "
+          + yearsLabel(r.years) + " years.";
+      }
+      sayEl.textContent = msg;
+    }, 260);
   }
 
   inB.addEventListener("input", function () { state.b = parseInt(inB.value, 10); update(); });

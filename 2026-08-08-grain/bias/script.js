@@ -76,7 +76,7 @@
   var inA = $("in-A"), inD = $("in-D"), inC = $("in-C");
   var labA = $("lab-A"), labD = $("lab-D"), labC = $("lab-C");
   var clothBtns = Array.prototype.slice.call(document.querySelectorAll(".seg [data-cloth]"));
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
 
   function syncLabels() {
     labA.textContent = state.a + "°";
@@ -306,7 +306,32 @@
     current = compute(state);
     syncLabels();
     render(current);
+    announce(current);
     save();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(r) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var pre = state.a + " degrees to the weave, " + state.d + " centimetre drop, curve "
+        + state.c + " percent, " + CLOTH[state.cloth].label + ". ";
+      var msg;
+      if (r.verdict === "dead") {
+        msg = pre + "Stands stiff — the cut offers " + r.give.toFixed(1)
+          + " percent give and the curve asks " + r.demand.toFixed(1)
+          + ", so it will not sit. Cut it on the bias, or choose a softer cloth.";
+      } else if (r.verdict === "drift") {
+        msg = pre + "Grows — the give is enough to round it, but a piece this long grows "
+          + r.sag.toFixed(1) + " centimetres and the hem sags. Ease the bias, or shorten the drop.";
+      } else {
+        msg = pre + "Hangs true — " + r.give.toFixed(1) + " percent give against a "
+          + r.demand.toFixed(1) + " percent curve, growing " + r.sag.toFixed(1) + " centimetres.";
+      }
+      sayEl.textContent = msg;
+    }, 260);
   }
 
   inA.addEventListener("input", function () { state.a = parseInt(inA.value, 10); update(); });

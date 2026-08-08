@@ -79,7 +79,7 @@
   var inA = $("in-A"), inL = $("in-L"), inS = $("in-S");
   var labA = $("lab-A"), labL = $("lab-L"), labS = $("lab-S");
   var stockBtns = Array.prototype.slice.call(document.querySelectorAll(".seg [data-stock]"));
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
 
   function syncLabels() {
     labA.textContent = state.a + "°";
@@ -309,7 +309,32 @@
     current = compute(state);
     syncLabels();
     render(current);
+    announce(current);
     save();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(r) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var pre = state.a + " degree grain slope, " + state.L + " millimetre "
+        + STOCK[state.stock].label + " billet, steer " + state.s + " percent. ";
+      var msg;
+      if (r.verdict === "dead") {
+        msg = pre + "Run-out — the grain demands " + r.runoff.toFixed(0)
+          + " millimetres and the steer pulls back only " + r.pull.toFixed(0)
+          + ", so the split leaves the billet. Take up the steer, or shorten the billet.";
+      } else if (r.verdict === "drift") {
+        msg = pre + "Torn — the steer strains the fibres to " + Math.round(r.tearFrac * 100)
+          + " percent of tearing and the face shears ragged. Ease the steer.";
+      } else {
+        msg = pre + "Rives true — the split exits at " + Math.round(Math.abs(r.exitFrac) * 100)
+          + " percent of the way to the edge, down the centre.";
+      }
+      sayEl.textContent = msg;
+    }, 260);
   }
 
   inA.addEventListener("input", function () { state.a = parseInt(inA.value, 10); update(); });
