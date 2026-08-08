@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bias — cut cloth near the grain to hold a line, on the bias to round a curve, and it grows if you cut too much</title>
+  <meta name="description" content="Woven cloth is stiff along the warp and weft and stretchy at 45° — on the bias. A cutter chooses the angle for the drape a garment needs: near the grain to hold a line, on the bias to round a curve and cling to the body. But bias grows: it sags under its own weight and wastes cloth. A small page, and a bench for one piece: set the cut angle, the drop, and the curve, and find the angle that hangs true." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%235a4a86'/%3E%3Cpath d='M4 12 H28 M4 20 H28 M12 4 V28 M20 4 V28' stroke='%23c9c3e0' stroke-width='1.2'/%3E%3Cpath d='M6 26 L26 6' stroke='%23d3e6e2' stroke-width='2'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#f2f0ec" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#14141c" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Bias — the grain of cloth" />
+  <meta property="og:description" content="Woven cloth is stiff on the grain and stretchy on the bias. Cut near the grain to hold a line, on the bias to round a curve — but bias grows and sags. A small page, and a bench for one piece: find the angle that hangs true." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">In the arena · 2026-08-08 · grain, one of three</p>
+      <p class="pron"><b>bias</b> · <i>noun</i> · /ˈbʌɪəs/ — the line at 45° to the weave, along which woven cloth stretches and drapes</p>
+      <h1>Bias</h1>
+      <p class="lede">Cut near the grain and the cloth holds a line; cut on the bias and it rounds a curve — but cut too much bias and it grows and sags.</p>
+      <p class="sub">Woven cloth is a lattice: <b>warp</b> threads running its length, <b>weft</b> threads crossing them at a right angle, locked over-and-under. Pull it along either thread and almost nothing happens — the threads are already straight and strong, and they simply take the load. But pull it at 45° to both, on the <em>bias</em>, and the whole lattice shears: the little squares rack over into diamonds, the cloth gives, stretches, and — released — drapes into soft folds and clings to a curve no straight-cut cloth could ever follow. This is the dressmaker's deepest lever, and it is pure grain. A waistband, a collar-stand, a straight seam that must hold its shape is cut <em>on grain</em>, near the thread, so it stays put and does not wander. A cowl, a bias-cut gown, a length of binding that must roll smoothly around a tight neckline is cut <em>on the bias</em>, so it flows. And the price of the bias is written into the same shear that gives it life: cloth cut on the bias <em>grows</em>. It stretches under its own hanging weight, the hem drops long and uneven over the days, the seams pucker, and every metre wants a third more cloth to lay out. Choose the angle to the weave, and you choose between a piece that will not move and a piece that will not hold still.</p>
+    </header>
+
+    <section id="how">
+      <p class="section-tag">Why the bias gives</p>
+      <h2>The threads do not stretch — the angles do</h2>
+      <p>The threads themselves barely extend; a woven cloth's give does not come from the fibre stretching but from the weave changing shape. On grain, a pull runs straight down threads that are already taut, and there is nowhere for it to go — the cloth is stiff. Off grain, the pull falls across the crossings, and the square cells are free to rack into diamonds, narrowing one way as they lengthen the other. That racking is greatest exactly at 45°, halfway between warp and weft, and falls to nothing as you turn toward either thread — so the give follows <code>sin(2α)</code>, zero on grain, full on the true bias.</p>
+
+      <p class="pull">Give peaks at the bias and vanishes on the grain: <code>give = maxGive · sin(2α)</code>. Turn the piece toward 45° for all the drape the cloth can offer; turn it toward the thread for none. The angle is the whole control, and the cloth sets how much it has to give.</p>
+
+      <p>Two things set whether that give is right. <b>The curve</b> is the demand: a straight seam asks for no give at all, a gentle drape asks for a little, a tight collar-roll or a bound curved edge asks for a great deal, and the cloth must be turned toward the bias until it can meet that ask. <b>The drop</b> is the cost: the longer a bias piece hangs, the more its own weight stretches it, so a short collar can take full bias for free while a floor-length skirt cut on the bias will grow at the hem for weeks and must be hung to settle before it is ever levelled.</p>
+    </section>
+
+    <section id="rule">
+      <p class="section-tag">The one choice</p>
+      <h2>Enough bias to round it, no more than will hold still</h2>
+      <p>So the angle to the weave is a quantity with a wall on each side, and the dressmaker sets it deliberately for the piece in hand. Too near the grain and a cloth asked to curve simply refuses: it stands away from the body in stiff planes, wrinkles across itself where it is forced round, and will not lie to the shape. Too near the bias, on a piece that hangs, and the same give that let it flow now betrays it: it grows under gravity, the hem sags long and wavers, the seams draw up and pucker, and the cloth is wasted three ways in the cutting.</p>
+
+      <p class="pull">Too little bias and the piece will not sit — it stands off the curve in stiff folds. Too much bias and it grows — it sags, wavers, and puckers. Between them it hangs true: enough give to take the curve, little enough that it keeps its length.</p>
+
+      <p>And the safe country between the walls is the cloth's to give. A crisp cotton poplin has little give at any angle — wonderful for a shirt that must hold a line, hopeless asked to round a tight curve — while a fluid silk crepe has give to spare and drapes beautifully, but grows the fastest and must be handled with the longest patience. The cure for a piece that will not sit is not to force it — it is more bias, or a softer cloth; and the cure for a piece that grows is less bias, a shorter drop, or a cloth with more backbone.</p>
+    </section>
+
+    <section id="ladder">
+      <p class="section-tag">Four cuts, stiff to sagging</p>
+      <h2>From a collar that stands off the neck to a hem that will not stop dropping</h2>
+      <ol class="ladder">
+        <li><b>Stands stiff.</b> <span class="rung-note">Cut on the grain and asked to curve: the cloth has no give to rack into the shape, so it stands away in flat planes and wrinkles where it is forced round. Strong and stable — exactly wrong for a curve. A collar that will not roll, a facing that gapes.</span></li>
+        <li><b>Holds its line.</b> <span class="rung-note">On or near the grain, on a piece that must not move: a waistband, a straight seam, a placket. The stiffness is the point — it stays where it is set and carries the load down the thread without wandering. Right, when nothing has to curve.</span></li>
+        <li><b>Hangs true.</b> <span class="rung-note">Turned toward the bias just enough to take the curve, and no further: the cloth racks into the shape, drapes to the body, and rolls round the edge — yet keeps its length, because the give it has is the give the curve asked for and not a scrap more. The cut you set for.</span></li>
+        <li><b>Grows and sags.</b> <span class="rung-note">Full bias on a piece that hangs long: it flows, but it will not hold still — the hem drops uneven over days, the seams pucker, and the lay wastes cloth. Beautiful and untrustworthy; it must be hung to settle for a week before it can be levelled, and even then it creeps.</span></li>
+      </ol>
+    </section>
+
+    <section id="who">
+      <p class="section-tag">Three who cut to the grain</p>
+      <h2>The same weave, three trades</h2>
+      <div class="hands">
+        <div class="hand">
+          <h3>The tailor</h3>
+          <p class="role">the roll</p>
+          <p>Cuts a collar and its undercollar with the grain turned so the stand rolls softly round the neck and the fall lies flat — reading the weave against the curve of the throat — and cuts the canvas beneath on the true bias so it hugs the chest without a wrinkle.</p>
+        </div>
+        <div class="hand">
+          <h3>The gown-maker</h3>
+          <p class="role">the drape</p>
+          <p>Lays a bias-cut gown so the 45° runs down the body, and the cloth clings and flows over every curve — then hangs the made piece for days to let it grow to the end of its stretch before levelling the hem, because a bias hem cut level today is uneven tomorrow.</p>
+        </div>
+        <div class="hand">
+          <h3>The binder</h3>
+          <p class="role">the edge</p>
+          <p>Cuts binding strips on the true bias so a single narrow band will round an inside curve, an armhole, a scalloped edge, lying flat where a grain-cut strip would ripple and refuse — the whole reason bias tape is bias and not straight.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="bench">
+      <p class="section-tag">The bench</p>
+      <h2>Turn the cut to the weave. Find the angle that hangs true.</h2>
+      <p>One piece of cloth laid to a curve, from the front: the weave printed on it at the cut angle, the curve it must round, and the way it hangs. Set the <b>cut angle</b> to the weave, the <b>drop</b> the piece hangs, the <b>curve</b> it must take, and the <b>cloth</b>. The page works out the give the angle offers, the give the curve demands, how much the piece will grow under its drop, and the cloth wasted in the lay, and lights the <b>true band</b>. It opens on a soft collar cut nearly on the grain — standing stiff, refusing to roll. Cut it on the bias — and watch it lie down to the curve before it starts to grow.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div id="verdict" class="verdict v-dead"></div>
+            <div id="stage" class="stage"></div>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="in-A">Cut angle to the weave <span id="lab-A" class="val">6°</span></label>
+                <input id="in-A" type="range" min="0" max="90" step="1" value="6" />
+              </div>
+              <div class="ctl">
+                <label for="in-D">The drop it hangs <span id="lab-D" class="val">24 cm</span></label>
+                <input id="in-D" type="range" min="10" max="140" step="2" value="24" />
+              </div>
+              <div class="ctl">
+                <label for="in-C">The curve it must round <span id="lab-C" class="val">78%</span></label>
+                <input id="in-C" type="range" min="0" max="100" step="1" value="78" />
+              </div>
+              <div class="ctl">
+                <label>The cloth</label>
+                <div class="seg" role="group" aria-label="The cloth">
+                  <button type="button" data-cloth="poplin" aria-pressed="false">poplin</button>
+                  <button type="button" data-cloth="suiting" aria-pressed="false">suiting</button>
+                  <button type="button" data-cloth="crepe" aria-pressed="true">silk crepe</button>
+                </div>
+              </div>
+            </div>
+
+            <div id="reading" class="reading"></div>
+          </div>
+        </div>
+
+        <div class="bench-actions">
+          <button id="fix" class="btn" type="button">Cut it on the bias</button>
+          <button id="reset" class="btn" type="button">Reset to the stiff set</button>
+        </div>
+        <p class="hint">The <b>true band</b> is where the cut offers enough give to take the curve without offering so much that a piece of this drop grows and sags. Turning the <b>cut angle</b> toward 45° gives more; a tighter <b>curve</b> demands more; a longer <b>drop</b> or a livelier <b>cloth</b> makes the give sag sooner. <em>Cut it on the bias</em> turns to the least angle that meets the curve; <em>Reset</em> returns to the stiff set it opens on. Some cloth cannot round a tight curve at any angle — then the piece wants a softer cloth. The angle is the cutter's; the growth is gravity's.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p class="kin">Grain, one of three — <a href="../rift/">Rift</a> · <a href="../bed/">Bed</a> · <a href="../bias/">Bias</a>. <a href="../">The day's three together.</a></p>
+      <p>Bias · one piece of cloth in schematic, and the weave law that rules it: a woven cloth's give racks with the angle to the thread as <code>give = maxGive·sin(2α)</code>, peaking on the true bias; the same give, hung over a drop, grows under its own weight. Pure HTML, CSS, and JavaScript — no build, no account, no network once the page has loaded. The drape from the angle and the cloth; the growth from the drape and the drop.</p>
+      <p>One of a series — a page a day, each built on one old working word and the discipline hidden inside it. 2026-08-08.</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
