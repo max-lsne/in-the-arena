@@ -532,6 +532,29 @@
     update();
   });
 
+  // nudge the haunch fill by a small step (keyboard packing)
+  function nudgeFill(delta) {
+    state.fill = clamp(state.fill + delta, 0, 100);
+    inFill.value = state.fill; update();
+  }
+
+  // keyboard: the bench under the hands, without reaching for the mouse
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    if (el && el.tagName === "INPUT" && el.type === "range") return;   // a focused slider keeps its arrows
+    var k = e.key;
+    if (k === "p" || k === "P") { $("pack").click(); }
+    else if (k === "r" || k === "R") { $("reset").click(); }
+    else if (k === "1") { state.line = "min"; update(); }
+    else if (k === "2") { state.line = "seat"; update(); }
+    else if (k === "3") { state.line = "max"; update(); }
+    else if (k === "[") { nudgeFill(-5); }    // unpack the haunches
+    else if (k === "]") { nudgeFill(5); }      // pack the haunches
+    else return;
+    e.preventDefault();
+  });
+
   // repaint on theme flips so the canvas colours follow
   if (window.matchMedia) {
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () {
