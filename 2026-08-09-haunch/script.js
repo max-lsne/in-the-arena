@@ -208,7 +208,7 @@
   var inRise = $("in-rise"), inT = $("in-t"), inFill = $("in-fill");
   var labRise = $("lab-rise"), labT = $("lab-t"), labFill = $("lab-fill");
   var lineBtns = Array.prototype.slice.call(document.querySelectorAll(".seg [data-line]"));
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
 
@@ -471,7 +471,33 @@
     syncLabels();
     render(current);
     draw(current);
+    announce(current);
     save();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var LINE_WORD = { min: "least thrust", seat: "the seated line", max: "most thrust" };
+  var sayTimer = null;
+  function announce(r) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var head = riseLabel(state.rise) + " arch, ring " + (state.t / 1000).toFixed(3)
+        + " of the radius, haunches " + fillLabel(state.fill) + ", " + LINE_WORD[state.line] + ". ";
+      var deg = Math.round(r.biteDeg), gsf = r.gsf.toFixed(2);
+      var msg;
+      if (!r.stands) {
+        msg = head + "Hinged — the line leaves the stone through the " + r.biteFace
+          + " at the " + r.biteWhere + ", " + deg + " degrees from the crown. "
+          + "Factor of safety " + gsf + ", below one. Pack the haunches or thicken the ring.";
+      } else {
+        var room = Math.round(r.margin * 100);
+        msg = head + (r.gsf >= 2 ? "Standing easy" : "Standing") + " — the line is contained, closest to the "
+          + r.biteFace + " at the " + r.biteWhere + " with " + room + " percent of the half-thickness to spare. "
+          + "Factor of safety " + gsf + ".";
+      }
+      sayEl.textContent = msg;
+    }, 280);
   }
 
   inRise.addEventListener("input", function () { state.rise = parseInt(inRise.value, 10); update(); });
