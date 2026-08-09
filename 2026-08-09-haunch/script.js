@@ -40,8 +40,29 @@
   // thickness slider 40..220 → t/R = 0.040..0.220
   // fill slider 0..100 → surface from springing (dry) up to crown level (packed)
   var DEFAULT = { rise: 100, t: 90, fill: 0, line: "min" };
+  var KEY = "haunch.arch.v1";        // where the arch is kept between visits
 
-  var state = Object.assign({}, DEFAULT);
+  var state = load() || Object.assign({}, DEFAULT);
+
+  // ---- persistence -------------------------------------------------------
+  function clampInt(v, a, b) { v = parseInt(v, 10); if (!isFinite(v)) return a; return v < a ? a : v > b ? b : v; }
+  function load() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      if (["min", "seat", "max"].indexOf(o.line) < 0) return null;
+      return {
+        rise: clampInt(o.rise, 30, 100),
+        t: clampInt(o.t, 40, 220),
+        fill: clampInt(o.fill, 0, 100),
+        line: o.line
+      };
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
 
   // ---- geometry + loads --------------------------------------------------
   function buildArch(s) {
@@ -450,6 +471,7 @@
     syncLabels();
     render(current);
     draw(current);
+    save();
   }
 
   inRise.addEventListener("input", function () { state.rise = parseInt(inRise.value, 10); update(); });
