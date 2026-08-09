@@ -507,8 +507,12 @@
     b.addEventListener("click", function () { state.line = b.dataset.line; update(); });
   });
 
-  // animate the fill up to the packing target
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ease the fill up to the packing target — or set it at once, if the reader
+  // has asked for no motion
   function animateFill(target) {
+    if (reduce) { state.fill = target; inFill.value = target; update(); return; }
     var start = state.fill, t0 = null, dur = 560;
     function step(ts) {
       if (t0 == null) t0 = ts;
