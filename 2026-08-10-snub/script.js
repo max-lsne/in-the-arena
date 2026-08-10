@@ -395,8 +395,12 @@
     b.addEventListener("click", function () { state.hand = b.dataset.hand; update(); });
   });
 
-  // ease the turns up to the holding target
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ease the turns up to the holding target — or set them at once, if the
+  // reader has asked for no motion
   function animateTurns(target) {
+    if (reduce) { state.turns = target; inTurns.value = target; update(); return; }
     var start = state.turns, t0 = null, dur = 560;
     function step(ts) {
       if (t0 == null) t0 = ts;
