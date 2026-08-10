@@ -420,6 +420,28 @@
     update();
   });
 
+  // nudge the wrap by a quarter turn (keyboard)
+  function nudgeTurns(delta) {
+    state.turns = clamp(state.turns + delta, 25, 500);
+    inTurns.value = state.turns; update();
+  }
+
+  // keyboard: the bench under the hands, without reaching for the mouse
+  var HAND_ORDER = ["finger", "hand", "heave"];
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    if (el && el.tagName === "INPUT" && el.type === "range") return;   // a focused slider keeps its arrows
+    var k = e.key;
+    if (k === "t" || k === "T") { $("take").click(); }
+    else if (k === "r" || k === "R") { $("reset").click(); }
+    else if (k === "1" || k === "2" || k === "3") { state.hand = HAND_ORDER[+k - 1]; update(); }
+    else if (k === "[") { nudgeTurns(-25); }    // ease off a quarter turn
+    else if (k === "]") { nudgeTurns(25); }      // throw on a quarter turn
+    else return;
+    e.preventDefault();
+  });
+
   // repaint on theme flips so the canvas colours follow
   if (window.matchMedia) {
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () {
