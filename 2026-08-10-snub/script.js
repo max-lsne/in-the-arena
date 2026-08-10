@@ -137,7 +137,7 @@
   var inLoad = $("in-load"), inMu = $("in-mu"), inTurns = $("in-turns");
   var labLoad = $("lab-load"), labMu = $("lab-mu"), labTurns = $("lab-turns");
   var handBtns = Array.prototype.slice.call(document.querySelectorAll(".seg [data-hand]"));
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
 
   function syncLabels(r) {
     labLoad.textContent = fmtWeightPlain(r.L);
@@ -359,7 +359,33 @@
     syncLabels(current);
     render(current);
     draw(current);
+    announce(current);
     save();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var HAND_WORD = { finger: "a finger", hand: "a hand", heave: "a heave" };
+  var sayTimer = null;
+  function announce(r) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var head = fmtWeightPlain(r.L) + " on the line, " + muLabel(r.m).split(" · ")[0]
+        + ", " + turnsWord(turns(state)) + " round the post, " + HAND_WORD[state.hand] + " on the tail. ";
+      var power = "The wrap holds " + Math.round(r.rho) + " times your hand. ";
+      var msg;
+      if (!r.holds) {
+        msg = head + power + "Rendered — the load needs " + fmtWeightPlain(r.Hneed)
+          + " on the tail, more than the hand can give, so the line runs round the post. "
+          + "It would take " + turnsWord(r.nNeed) + " to bring it down to this hand.";
+      } else if (r.ratio > 0.85) {
+        msg = head + power + "On the verge — the line holds, but there is almost nothing left in the hand. Take another turn.";
+      } else {
+        msg = head + power + (r.verdict === "finger" ? "Held on a finger" : "Held with a hand")
+          + " — the tail wants " + fmtWeightPlain(r.Hneed) + " against your " + fmtWeightPlain(r.H) + ".";
+      }
+      sayEl.textContent = msg;
+    }, 280);
   }
 
   inLoad.addEventListener("input", function () { state.load = parseInt(inLoad.value, 10); update(); });
