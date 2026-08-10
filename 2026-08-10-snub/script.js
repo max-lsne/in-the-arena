@@ -29,8 +29,29 @@
   // load slider 0..100 → kgf (log), mu slider 10..60 → μ = /100,
   // turns slider 25..500 → n turns = /100
   var DEFAULT = { load: 58, mu: 25, turns: 100, hand: "hand" };
+  var KEY = "snub.line.v1";        // where the snub is kept between visits
 
-  var state = Object.assign({}, DEFAULT);
+  var state = load() || Object.assign({}, DEFAULT);
+
+  // ---- persistence -------------------------------------------------------
+  function clampInt(v, a, b) { v = parseInt(v, 10); if (!isFinite(v)) return a; return v < a ? a : v > b ? b : v; }
+  function load() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      if (["finger", "hand", "heave"].indexOf(o.hand) < 0) return null;
+      return {
+        load: clampInt(o.load, 0, 100),
+        mu: clampInt(o.mu, 10, 60),
+        turns: clampInt(o.turns, 25, 500),
+        hand: o.hand
+      };
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
 
   // ---- model helpers -----------------------------------------------------
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
@@ -338,6 +359,7 @@
     syncLabels(current);
     render(current);
     draw(current);
+    save();
   }
 
   inLoad.addEventListener("input", function () { state.load = parseInt(inLoad.value, 10); update(); });
