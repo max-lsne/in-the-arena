@@ -208,13 +208,25 @@
     el.doubt.textContent = "±" + fmt(r.doubt, dp === 1 ? 2 : 3) + " mm";
     el.mag.textContent = "×" + state.n;
     el.gapVal.textContent = fmt(state.gap, 2) + " mm";
+  }
 
-    var dp2 = dp === 1 ? 1 : 2;
+  // Speak the settled reading, not every tick of the drag. A polite live region
+  // read on every slider event would flood a screen reader, so the announcement
+  // is debounced and phrased as words — "times", "plus or minus" — that a reader
+  // voices cleanly, where "×" and "±" would be swallowed or mangled.
+  var announceTimer = null;
+  function announce(r) {
+    var dp = decimalsFor(state.n);
+    var lcTxt = fmt(r.lc, dp === 1 ? 1 : 2);
     el.status.textContent =
-      "Vernier zero just past " + r.mainReading + " mm; mark " + r.kStar +
-      " of " + state.n + " lines up. " + r.mainReading + " + " + r.kStar +
-      "×" + fmt(r.lc, dp2) + " = " + fmt(r.total, dp) +
-      " mm, good to ±" + fmt(r.doubt, dp === 1 ? 2 : 3) + " mm.";
+      fmt(r.total, dp) + " millimetres. Vernier zero just past " + r.mainReading +
+      "; mark " + r.kStar + " of " + state.n + " lines up, giving " + r.kStar +
+      " times " + lcTxt + ". Reading good to plus or minus " +
+      fmt(r.doubt, dp === 1 ? 2 : 3) + " millimetres.";
+  }
+  function scheduleAnnounce(r) {
+    if (announceTimer) clearTimeout(announceTimer);
+    announceTimer = setTimeout(function () { announce(r); }, 350);
   }
 
   function render() {
@@ -222,6 +234,7 @@
     draw(r);
     paint(r);
     save();
+    scheduleAnnounce(r);
   }
 
   // ---- control wiring ----
