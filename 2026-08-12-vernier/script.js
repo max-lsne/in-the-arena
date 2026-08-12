@@ -17,6 +17,8 @@
   var GAP_MIN = 0;
   var GAP_MAX = 50;
   var DEFAULTS = { gap: 23.65, n: 20 };
+  var STORE_KEY = "arena.vernier.v1";
+  var VALID_N = [10, 20, 50];
 
   // svg geometry
   var VB_W = 720, VB_H = 260;
@@ -56,6 +58,24 @@
     return node;
   }
   function clamp(v, lo, hi) { return v < lo ? lo : (v > hi ? hi : v); }
+
+  // Keep the bench as you left it, across visits.
+  function save() {
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify({ gap: state.gap, n: state.n }));
+    } catch (e) { /* private mode or full quota — the bench still works */ }
+  }
+  function restore() {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return;
+      var saved = JSON.parse(raw);
+      if (saved && VALID_N.indexOf(saved.n) !== -1) state.n = saved.n;
+      if (saved && typeof saved.gap === "number" && isFinite(saved.gap)) {
+        state.gap = clamp(saved.gap, GAP_MIN, GAP_MAX);
+      }
+    } catch (e) { /* malformed or unreadable — fall back to defaults */ }
+  }
   function leastCount() { return D / state.n; }
   function decimalsFor(n) { return n <= 10 ? 1 : 2; }
   function fmt(v, dp) { return v.toFixed(dp); }
@@ -201,6 +221,7 @@
     var r = solve();
     draw(r);
     paint(r);
+    save();
   }
 
   // ---- control wiring ----
@@ -236,6 +257,7 @@
   // ---- boot ----
   gapRange.min = GAP_MIN;
   gapRange.max = GAP_MAX;
+  restore();
   setN(state.n);
   setGap(state.gap);
 })();
