@@ -198,7 +198,19 @@ section { margin: 2.9rem 0; }
 .jaw-soft { fill: var(--steel); opacity: 0.55; }
 .object-block { fill: var(--brass-bright); opacity: 0.16; stroke: var(--brass); stroke-width: 1; stroke-dasharray: 3 3; }
 .coincide-beam { stroke: var(--coincide); stroke-width: 1.2; stroke-dasharray: 2 3; opacity: 0.75; }
-.vern-slider { transition: transform 0.28s cubic-bezier(0.22, 0.61, 0.36, 1); }
+
+/* A soft settle when the coincidence jumps to a new mark — the only motion on
+   the page, and the only thing prefers-reduced-motion needs to quiet. */
+@keyframes vern-ping {
+  from { opacity: 0; stroke-width: 4.5; }
+  to   { opacity: 0.75; stroke-width: 1.2; }
+}
+.coincide-beam.pinged { animation: vern-ping 0.34s ease-out; }
+@keyframes hit-settle {
+  from { stroke-width: 5.5; }
+  to   { stroke-width: 2.6; }
+}
+.tick-hit.pinged { animation: hit-settle 0.34s ease-out; }
 
 /* readout */
 .readout {
@@ -414,6 +426,13 @@ kbd {
 }
 .foot-series { margin-bottom: 0; }
 .foot-date { color: var(--steel); }
+
+/* ---- reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .coincide-beam.pinged,
+  .tick-hit.pinged { animation: none; }
+}
 
 /* ---- responsive ---- */
 @media (max-width: 540px) {

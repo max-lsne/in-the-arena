@@ -32,6 +32,12 @@
 
   var state = { gap: DEFAULTS.gap, n: DEFAULTS.n };
 
+  // Motion preference — the one animation (the coincidence ping) is skipped
+  // when the reader asks for less motion, and re-checked live if they change it.
+  var reduceMQ = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+  function motionOff() { return !!(reduceMQ && reduceMQ.matches); }
+  var lastKStar = null, lastN = null;   // to ping only when the lit mark actually moves
+
   // ---- element handles ----
   var svg = document.getElementById("scaleSvg");
   var gapRange = document.getElementById("gapRange");
@@ -195,6 +201,16 @@
       }));
     }
     svg.appendChild(slider);
+
+    // Ping the coincidence only when it lands on a new mark — never on the first
+    // paint, and never while motion is turned down.
+    var moved = (lastKStar !== null) && (r.kStar !== lastKStar || state.n !== lastN);
+    if (moved && !motionOff()) {
+      var lit = svg.querySelectorAll(".tick-hit, .coincide-beam");
+      for (var q = 0; q < lit.length; q++) lit[q].classList.add("pinged");
+    }
+    lastKStar = r.kStar;
+    lastN = state.n;
   }
 
   // ---- readout + status ----
@@ -262,6 +278,11 @@
     b.addEventListener("click", function () { setN(Number(b.dataset.n)); });
   });
   snapBtn.addEventListener("click", snapToCoincidence);
+  if (reduceMQ) {
+    var onMotionChange = function () { render(); };
+    if (reduceMQ.addEventListener) reduceMQ.addEventListener("change", onMotionChange);
+    else if (reduceMQ.addListener) reduceMQ.addListener(onMotionChange);   // older browsers
+  }
   resetBtn.addEventListener("click", function () {
     setN(DEFAULTS.n);
     setGap(DEFAULTS.gap);
