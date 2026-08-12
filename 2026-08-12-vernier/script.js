@@ -288,6 +288,29 @@
     setGap(DEFAULTS.gap);
   });
 
+  // Keyboard: work the bench without the mouse. Arrows step by the least count
+  // so the coincidence walks one mark at a time; brackets step whole millimetres.
+  // When the range slider itself holds focus its native arrow-stepping is left
+  // alone, so the two never fight.
+  document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    var onRange = (e.target === gapRange);
+    var lc = leastCount();
+    switch (e.key) {
+      case "ArrowLeft":  if (onRange) return; setGap(state.gap - lc); break;
+      case "ArrowRight": if (onRange) return; setGap(state.gap + lc); break;
+      case "[": setGap(state.gap - 1); break;
+      case "]": setGap(state.gap + 1); break;
+      case "1": setN(10); break;
+      case "2": setN(20); break;
+      case "3": setN(50); break;
+      case "c": case "C": snapToCoincidence(); break;
+      case "r": case "R": setN(DEFAULTS.n); setGap(DEFAULTS.gap); break;
+      default: return;
+    }
+    e.preventDefault();
+  });
+
   // ---- boot ----
   gapRange.min = GAP_MIN;
   gapRange.max = GAP_MAX;
