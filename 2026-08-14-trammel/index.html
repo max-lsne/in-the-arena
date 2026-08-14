@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trammel — a rod held by two sliding pins, one in each of two crossed grooves, draws a true ellipse with no string and no arithmetic</title>
+  <meta name="description" content="Pin a rod so one point of it can only run left-and-right and another only up-and-down. Mark any third point on the rod and turn it: that point traces a perfect ellipse, its half-width and half-height equal to the marked point's distance from each pin. Equal distances give a circle; set one to zero and the point runs dead straight. This is the trammel of Archimedes — an ellipse drawn by two constraints and a stick. A small page, and a bench you can turn." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231d2733'/%3E%3Cg stroke='%238b98a6' stroke-width='1.6'%3E%3Cpath d='M16 4v24M4 16h24'/%3E%3C/g%3E%3Cpath d='M9 23 L24 9' stroke='%23c98a3a' stroke-width='2.2'/%3E%3Ccircle cx='9' cy='23' r='2.1' fill='%238b98a6'/%3E%3Ccircle cx='24' cy='9' r='2.1' fill='%238b98a6'/%3E%3Ccircle cx='27' cy='6' r='2.3' fill='%2358c98a'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#eef1f4" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0f141a" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Trammel — an ellipse drawn by two constraints and a stick" />
+  <meta property="og:description" content="Hold one point of a rod to a horizontal groove and another to a vertical one, mark a third point, and turn: it draws a true ellipse whose half-axes are the marked point's reach to each pin. Equal reaches give a circle; zero gives a straight line. The trammel of Archimedes, as a bench you can turn." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">In the arena · 2026-08-14</p>
+      <p class="pron"><b>trammel</b> · <i>noun</i> · /ˈtramɪl/ — a rod held by two sliding pins, one running a horizontal groove and one a vertical, so a marked point on the rod is compelled to draw an ellipse; also a beam-compass, a net, a pot-hook — anything that holds a thing to a fixed path</p>
+      <h1>Trammel</h1>
+      <p class="lede">Hold one point of a rod so it can only slide left and right, and another so it can only slide up and down. Now mark any third point on the rod and turn it. That point has no choice: it draws a <em>perfect ellipse</em>.</p>
+      <p class="sub">There is no string, no pair of pins with a loop around them, no arithmetic in the hand — only two grooves crossed at a right angle and one stiff rod laid across them. Each pin is a rule the rod must obey: this end stays on the flat line, that end stays on the upright one. Between two such rules a marked point is left exactly one freedom, and the shape of that freedom is an ellipse whose half-width is the marked point's distance to the pin on the upright groove and whose half-height is its distance to the pin on the flat one. This is the <b>trammel of Archimedes</b>, the ellipsograph a draughtsman kept in the drawer beside the compasses; and its rule is exact, not drawn by eye. Slide the marked point until the two distances are equal and the ellipse rounds into a true circle. Slide it onto one of the pins and the ellipse flattens to a straight line the point runs back and forth along — a rod that draws a straight line out of nothing but two that cross.</p>
+    </header>
+
+    <section id="how">
+      <p class="section-tag">Where the ellipse comes from</p>
+      <h2>Two constraints, one freedom, and the freedom is an ellipse</h2>
+      <p>Lay the flat groove along the x-axis and the upright groove along the y-axis, crossing at the origin. Put a pin of the rod on each: pin <b>A</b> is trapped on the upright groove, so its x is always zero; pin <b>B</b> is trapped on the flat groove, so its y is always zero. The rod is rigid, so as it leans over at an angle t the two pins slide to keep their grooves — A rides up and down the y-axis, B slides in and out along the x-axis, and the rod pivots between them like the hand of a clock that has lost its centre.</p>
+
+      <p>Mark a point P on the rod at distance <b>a</b> from pin A and distance <b>b</b> from pin B, both measured along the rod. A line of plain trigonometry — no more than resolving that distance into its across and up parts — puts P at exactly <span class="mono">(a·cos t, b·sin t)</span>. And that pair, as t runs round, is the ellipse itself: <span class="mono">x²/a² + y²/b² = 1</span>. The reach to the upright pin sets the half-width; the reach to the flat pin sets the half-height. The rod has done the drawing.</p>
+
+      <p class="pull">So the two numbers you can point at on the rod — how far the mark sits from each pin — <em>are</em> the two half-axes of the ellipse. Nothing is fitted or guessed; the geometry hands you the curve, exact, from the moment the pins are in their grooves.</p>
+
+      <p>It is the same bargain as any linkage that trades freedoms for a path. Two constraints on a plane point leave it one degree of freedom, and here that one degree is bent into a closed loop because the two grooves pull in directions square to each other. Tilt the grooves off square and the loop tilts and skews with them; keep them square and it stays an upright ellipse, waiting only for the reach of the mark to say how tall and how wide.</p>
+    </section>
+
+    <section id="rule">
+      <p class="section-tag">The two ends of the one rule</p>
+      <h2>Equal reaches make a circle; a zero reach makes a straight line</h2>
+      <p>Because the half-axes are just the two reaches, the whole family of ellipses is laid out along the rod, and you walk between them by sliding the mark. Bring the mark to where its distance to each pin is the same — <span class="mono">a = b</span> — and the ellipse rounds up into a circle, both pins folding onto the origin so the rod simply spins about the centre with the mark swung out at a fixed radius. This is the plainest circle-drawer there is: no centre pin driven into the paper, just a stick turning between two grooves.</p>
+
+      <p class="pull">Slide the mark the other way, right onto one of the pins, and one reach goes to zero. The ellipse has no height left, or no width left, and collapses to a straight line — the marked point, now sharing a pin's groove, simply runs the length of the other rod out and back. A machine of two circles' worth of constraint, drawing a dead-straight line.</p>
+
+      <p>That last case is the quiet marvel. Turning rotary motion into true straight-line motion was a real problem for the early engine-builders, solved with clever chains of links; the trammel does it for free, as a corner of the same rule that draws every ellipse between. The Tusi couple — a small circle rolling inside one twice its size — draws the very same straight line, and is the trammel seen from the centre. One mechanism, read three ways: an ellipse in the middle, a circle at one limit, a line at the other, and only the reach of the mark to choose between them.</p>
+    </section>
+
+    <section id="bench" aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">One rod, two grooves, and a mark that cannot help but trace</h2>
+      <p class="bench-intro">Turn the rod and watch the marked point lay down its curve. Set how far the mark sits from each pin — its reach to the upright groove is the ellipse's half-width, its reach to the flat groove the half-height — and read back the axes, the eccentricity, the area, and which of the three shapes you have made. Bring the two reaches level for a circle; run one to zero for a straight line. The numbers are the real ones: P is at (a·cos t, b·sin t), and the locus is x²/a² + y²/b² = 1, after Archimedes.</p>
+
+      <div class="bench" id="benchRoot">
+        <div class="scales" id="scalesWrap">
+          <svg id="stageSvg" viewBox="0 0 560 560" role="img"
+               aria-label="Two grooves crossed at a right angle, a rod laid across them held by a pin in each groove, and a marked point on the rod tracing an ellipse as the rod turns.">
+            <!-- populated by script.js -->
+          </svg>
+        </div>
+
+        <div class="readout" aria-hidden="false">
+          <div class="read-big">
+            <span class="read-num mono" id="readCase">ellipse</span>
+          </div>
+          <p class="read-break mono">
+            <span class="rb-main" id="rbEq">x²/a² + y²/b² = 1</span>
+          </p>
+          <ul class="read-facts">
+            <li><span class="rf-k">half-width a</span><span class="rf-v mono" id="rfA">150</span></li>
+            <li><span class="rf-k">half-height b</span><span class="rf-v mono" id="rfB">95</span></li>
+            <li><span class="rf-k">eccentricity</span><span class="rf-v mono" id="rfE">0.774</span></li>
+            <li><span class="rf-k">area πab</span><span class="rf-v mono" id="rfArea">44 767</span></li>
+            <li><span class="rf-k">turn t</span><span class="rf-v mono" id="rfT">0°</span></li>
+          </ul>
+        </div>
+
+        <div class="controls">
+          <div class="ctl">
+            <label for="aRange">reach to upright pin — a
+              <span class="ctl-val mono" id="aVal">150</span>
+            </label>
+            <input type="range" id="aRange" min="0" max="230" step="1" value="150"
+                   aria-describedby="aNote" />
+            <p class="ctl-note" id="aNote">The half-width of the ellipse. It is the marked point's distance to the pin riding the upright groove.</p>
+          </div>
+
+          <div class="ctl">
+            <label for="bRange">reach to flat pin — b
+              <span class="ctl-val mono" id="bVal">95</span>
+            </label>
+            <input type="range" id="bRange" min="0" max="230" step="1" value="95"
+                   aria-describedby="bNote" />
+            <p class="ctl-note" id="bNote">The half-height of the ellipse. It is the marked point's distance to the pin riding the flat groove.</p>
+          </div>
+
+          <div class="ctl ctl-gap">
+            <label for="tRange">turn — t
+              <span class="ctl-val mono" id="tValLabel">0°</span>
+            </label>
+            <input type="range" id="tRange" min="0" max="360" step="1" value="0"
+                   aria-describedby="tNote" />
+            <p class="ctl-note" id="tNote">The angle of the rod. Scrub it by hand, or press Turn to let it run. The mark lays down the curve as t goes round.</p>
+          </div>
+
+          <div class="ctl-actions">
+            <button type="button" class="btn" id="turnBtn" aria-pressed="false">Turn</button>
+            <button type="button" class="btn btn-ghost" id="circleBtn">Make circle</button>
+            <button type="button" class="btn btn-ghost" id="lineBtn">Make line</button>
+            <button type="button" class="btn btn-ghost" id="resetBtn">Reset</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="coda">
+      <p class="section-tag">Why keep it</p>
+      <h2>An exact curve, argued from two straight rules</h2>
+      <p>The trammel is worth a page because it makes a hard thing — a curve of two different radii, changing its bend everywhere along its length — out of the two simplest constraints there are: stay on this line, stay on that one. No template, no string with its stretch and slip, no table of points to join. Just a rigid rod and the fact that two square constraints leave a point one freedom shaped like an ellipse. Draughtsmen cut them from brass; machinists still meet the same geometry in the elliptic chuck and the Scotch yoke; and every student who has been shown the (a·cos t, b·sin t) parametrisation has, without always knowing it, been handed the trammel in symbols.</p>
+      <p>Turn the bench until the reasoning is in the hand and not just the eye: the mark cannot wander, cannot be coaxed, cannot draw anything but the one ellipse its reaches allow — and slides between circle and straight line as smoothly as you move the mark along the rod.</p>
+    </section>
+
+    <footer class="foot">
+      <p class="foot-series">One of a series — a page a day, each built on one old working word and the discipline hidden inside it. <span class="foot-date">2026-08-14</span>.</p>
+    </footer>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
