@@ -23,6 +23,7 @@
 
   var DEFAULTS = { a: 150, b: 95, t: 0 };
   var TURN_RATE = 60;                 // degrees per second when the rod runs
+  var STORE_KEY = "arena.trammel.v1";
 
   var state = { a: DEFAULTS.a, b: DEFAULTS.b, t: DEFAULTS.t, running: false };
 
@@ -63,6 +64,24 @@
   }
   function clamp(v, lo, hi) { return v < lo ? lo : (v > hi ? hi : v); }
   function rad(deg) { return deg * Math.PI / 180; }
+
+  // Keep the bench as you left it, across visits — the reaches and the turn,
+  // but not whether it was running (a page should not start moving on its own).
+  function save() {
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify({ a: state.a, b: state.b, t: state.t }));
+    } catch (e) { /* private mode or full quota — the bench still works */ }
+  }
+  function restore() {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (s && typeof s.a === "number" && isFinite(s.a)) state.a = clamp(Math.round(s.a), 0, REACH_MAX);
+      if (s && typeof s.b === "number" && isFinite(s.b)) state.b = clamp(Math.round(s.b), 0, REACH_MAX);
+      if (s && typeof s.t === "number" && isFinite(s.t)) state.t = ((s.t % 360) + 360) % 360;
+    } catch (e) { /* malformed or unreadable — fall back to defaults */ }
+  }
   function group(n) {
     // thin-space thousands, e.g. 44767 -> "44 767"
     return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
@@ -201,6 +220,7 @@
     var r = solve();
     draw(r);
     paint(r);
+    save();
   }
 
   // ---- control wiring ----
@@ -266,5 +286,6 @@
   // ---- boot ----
   aRange.max = REACH_MAX;
   bRange.max = REACH_MAX;
+  restore();
   setA(state.a); setB(state.b); setT(state.t);
 })();
