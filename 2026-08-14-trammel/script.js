@@ -311,6 +311,29 @@
     else if (reduceMQ.addListener) reduceMQ.addListener(onMotionChange);   // older browsers
   }
 
+  // Keyboard: work the bench without the mouse. Arrows turn the rod; brackets
+  // work the reach to the upright pin, the minus/equals keys the reach to the
+  // flat pin. When a range slider itself holds focus its native arrow-stepping
+  // is left alone, so the two never fight.
+  document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    var onRange = (e.target === aRange || e.target === bRange || e.target === tRange);
+    switch (e.key) {
+      case "ArrowLeft":  if (onRange) return; if (state.running) setRunning(false); setT(state.t - 5); break;
+      case "ArrowRight": if (onRange) return; if (state.running) setRunning(false); setT(state.t + 5); break;
+      case "[": setA(state.a - 5); break;
+      case "]": setA(state.a + 5); break;
+      case "-": setB(state.b - 5); break;
+      case "=": setB(state.b + 5); break;
+      case "t": case "T": setRunning(!state.running); break;
+      case "c": case "C": setB(state.a); break;
+      case "l": case "L": setB(0); break;
+      case "r": case "R": setRunning(false); setA(DEFAULTS.a); setB(DEFAULTS.b); setT(DEFAULTS.t); break;
+      default: return;
+    }
+    e.preventDefault();
+  });
+
   // ---- boot ----
   aRange.max = REACH_MAX;
   bRange.max = REACH_MAX;
