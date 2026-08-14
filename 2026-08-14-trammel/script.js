@@ -53,7 +53,8 @@
     t: document.getElementById("rfT"),
     aVal: document.getElementById("aVal"),
     bVal: document.getElementById("bVal"),
-    tValLabel: document.getElementById("tValLabel")
+    tValLabel: document.getElementById("tValLabel"),
+    status: document.getElementById("status")
   };
 
   // ---- small helpers ----
@@ -216,11 +217,38 @@
     el.tValLabel.textContent = Math.round(r.t) + "°";
   }
 
+  // Speak the settled shape, not every degree of the turn. A live region read
+  // on every frame would flood a screen reader, so the announcement is debounced
+  // and phrased as words a reader voices cleanly — no "×", no superscripts.
+  var announceTimer = null;
+  function announce(r) {
+    var msg;
+    if (r.isLine) {
+      var len = Math.max(r.a, r.b);
+      msg = "A straight line, length " + (2 * len) + ", drawn " +
+            (r.a === 0 ? "up and down the upright groove." : "along the flat groove.") +
+            " The mark sits on one pin, so its reach to that pin is zero.";
+    } else if (r.isCircle) {
+      msg = "A circle, radius " + r.a + ". The mark is an equal " + r.a +
+            " from each pin, and both pins sit at the centre.";
+    } else {
+      msg = "An ellipse, half-width " + r.a + ", half-height " + r.b +
+            ", eccentricity " + r.ecc.toFixed(2) + ". The mark reaches " + r.a +
+            " to the upright pin and " + r.b + " to the flat pin.";
+    }
+    el.status.textContent = msg;
+  }
+  function scheduleAnnounce(r) {
+    if (announceTimer) clearTimeout(announceTimer);
+    announceTimer = setTimeout(function () { announce(r); }, 400);
+  }
+
   function render() {
     var r = solve();
     draw(r);
     paint(r);
     save();
+    scheduleAnnounce(r);
   }
 
   // ---- control wiring ----
