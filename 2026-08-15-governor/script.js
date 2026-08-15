@@ -282,6 +282,14 @@
     el.loadVal.textContent = state.load + "%";
   }
 
+  // Speak the settled state, not every frame of the hunt. A live region written
+  // on every governing frame would flood a screen reader, so the announcement is
+  // debounced and phrased as plain words a reader voices cleanly.
+  var announceTimer = null;
+  function scheduleAnnounce(s) {
+    if (announceTimer) clearTimeout(announceTimer);
+    announceTimer = setTimeout(function () { speak(s); }, 400);
+  }
   function speak(s) {
     var msg;
     var thr = Math.round(s.throttle * 100);
@@ -309,7 +317,7 @@
     var s = solve();
     draw(s);
     paint(s);
-    speak(s);
+    scheduleAnnounce(s);
     save();
   }
 
@@ -322,13 +330,22 @@
   function setL(v) {
     state.L = clamp(Math.round(v), L_MIN, L_MAX);
     if (lRange.value !== String(state.L)) lRange.value = String(state.L);
+    disturb();                                  // the balance has moved
     render();
   }
   function setLoad(v) {
     state.load = clamp(Math.round(v), 0, 90);
     if (loadRange.value !== String(state.load)) loadRange.value = String(state.load);
-    settleTime = 0;                             // the balance has moved; let it re-settle
+    disturb();                                  // the balance has moved; let it re-settle
     render();
+  }
+  // A change to the load or the arm unsettles a governed shaft — wake the loop
+  // and let it hunt to the new balance.
+  function disturb() {
+    if (state.mode !== "govern") return;
+    lastGoverned = false;
+    settleTime = 0;
+    resumeGovernor();
   }
 
   // ---- the governing loop, run under its own power ----
@@ -360,7 +377,17 @@
     if (lastGoverned && !wasGoverned) pingCollar();
 
     render();
+    // Once it holds the balance, freeze — the shaft is steady, so there is
+    // nothing to redraw, and the stilled loop lets the announcer finally speak.
+    if (lastGoverned) { rafId = null; return; }
     rafId = window.requestAnimationFrame(tick);
+  }
+
+  function resumeGovernor() {
+    if (state.mode === "govern" && rafId === null) {
+      lastTs = null;
+      rafId = window.requestAnimationFrame(tick);
+    }
   }
 
   function pingCollar() {
