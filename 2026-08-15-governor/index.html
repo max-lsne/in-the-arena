@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Governor — two weighted arms fly wider the faster the shaft spins, lifting a collar that closes the valve that was making it spin</title>
+  <meta name="description" content="Hinge two heavy balls to a spinning shaft on arms that can swing out. Spin faster and the balls fly wider and rise; the height they hang below the pivot is exactly g over the spin rate squared, no matter their weight or the length of the arm. Tie that rise to the steam valve and the machine regulates itself: too fast closes the valve, too slow opens it, and the speed settles. This is the centrifugal governor — Watt's, and the first feedback loop anyone wrote the mathematics of. A small page, and a bench you can spin." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231d2733'/%3E%3Cline x1='16' y1='5' x2='16' y2='27' stroke='%238b98a6' stroke-width='1.8'/%3E%3Cpath d='M16 8 L7 19' stroke='%23c98a3a' stroke-width='2'/%3E%3Cpath d='M16 8 L25 19' stroke='%23c98a3a' stroke-width='2'/%3E%3Ccircle cx='7' cy='19' r='3' fill='%238b98a6'/%3E%3Ccircle cx='25' cy='19' r='3' fill='%238b98a6'/%3E%3Crect x='12' y='19' width='8' height='3' rx='1' fill='%2358c98a'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#eef1f4" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0f141a" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Governor — a machine that throttles its own speed" />
+  <meta property="og:description" content="Two balls on hinged arms fly wider the faster the shaft turns; the collar their rise lifts works the valve, so too-fast closes it and too-slow opens it, and the speed holds. The height the balls keep below the pivot is exactly g/ω². Watt's flyball governor, and the first feedback loop written in mathematics." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">In the arena · 2026-08-15</p>
+      <p class="pron"><b>governor</b> · <i>noun</i> · /ˈɡʌv(ə)nə/ — a pair of weighted arms hinged to a spinning shaft, flung wider the faster it turns, so the collar their rise lifts works a valve and reins the speed back in; a regulator; from Latin <i>gubernare</i>, to steer a ship, by way of the helmsman's hand on the tiller</p>
+      <h1>Governor</h1>
+      <p class="lede">Hang two heavy balls from a spinning shaft on arms that can swing out. Spin it faster and the balls fly wider and <em>ride up</em>. Tie that rise to the valve that feeds the engine, and the machine has been handed the one thing it needs to hold its own speed.</p>
+      <p class="sub">This is the whole of it: a ball flung around in a circle wants to fly outward, and the faster the shaft turns the harder it pulls, so the arms open and the balls climb. Left alone that is just a spinning toy. But run a link from the rising collar to the throttle — so that when the balls climb the valve closes, and when they fall it opens — and the toy becomes a <b>regulator</b>. Speed up past where you want it and the balls fly out, the valve shuts a little, the engine eases; drop below and the balls fall in, the valve opens, the engine picks up. The machine corrects the very thing that moves it. There is a clean number hidden in the climb, too: the height the balls keep below the pivot is exactly <span class="mono">g / ω²</span> — <em>g</em> over the spin rate squared — and it does not care how heavy the balls are or how long the arm is. This is the <b>centrifugal governor</b>, the pair of whirling balls on every drawing of a steam engine, and the first machine whose self-correction anyone sat down and wrote the mathematics of.</p>
+    </header>
+
+    <section id="how">
+      <p class="section-tag">Where the height comes from</p>
+      <h2>The balls hang at a height of g over the spin rate squared</h2>
+      <p>Take one ball, out at the end of an arm of length <b>L</b> hinged at the pivot, whirling around the shaft at rate <span class="mono">ω</span>. It rides around a horizontal circle of radius <span class="mono">r = L·sin θ</span>, where θ is how far the arm has swung from straight down. Two forces act on it: gravity pulling straight down, and the pull of the arm along its length. For the ball to circle steadily, those two must add up to exactly the inward force a circle demands — <span class="mono">m·ω²·r</span>, aimed at the axis.</p>
+
+      <p>Resolve the arm's pull into its up part and its inward part and the bookkeeping is short. Up must cancel gravity; inward must supply the circle. Divide one balance by the other and the arm's tension falls out, the ball's mass falls out, and what is left is <span class="mono">cos θ = g / (ω²·L)</span>. Multiply through by L and the left side becomes the <b>height of the cone</b> — how far the ball plane sits below the pivot, <span class="mono">h = L·cos θ</span> — so</p>
+
+      <p class="pull">the balls hang at a height <em>h = g / ω²</em> below the pivot, and nothing else — not their weight, not the length of the arm — has any say in it. Only the spin rate sets the height.</p>
+
+      <p>So the governor is, before it is anything else, a tachometer you can read with a ruler: measure how far the collar has risen and you have measured the speed, exactly, through <span class="mono">h = g/ω²</span>. Spin slowly and the balls hang almost straight down, the cone tall; spin faster and the height drops as one over the square of the speed, the balls swinging out toward level and the collar climbing to meet the pivot. There is a floor to this: below a <b>critical speed</b>, where <span class="mono">ω² L</span> only just reaches g, the formula asks for a cosine greater than one, which cannot be — and the balls simply hang dead straight, waiting for enough spin to lift.</p>
+    </section>
+
+    <section id="loop">
+      <p class="section-tag">The collar that reins in its own cause</p>
+      <h2>Tie the rise to the valve and the speed holds itself</h2>
+      <p>A height that reports the speed is useful; a height that <em>acts on</em> the speed is a governor. Run a link from the rising collar to the engine's throttle so that lifting the collar closes the valve. Now the loop is shut: the spin flings the balls out, the balls lift the collar, the collar shuts the valve, the shut valve slows the spin — which lets the balls fall, which opens the valve, which speeds the spin. Round and round, each step working against the last. This is <b>negative feedback</b>, and it is the reason the engine does not run away when the load is thrown off, nor stall when the load comes on.</p>
+
+      <p class="pull">Load the engine and it drops a hair; the balls fall a hair; the valve opens a hair; the engine takes on more steam and holds — not at the old speed, but close, a touch lower for the heavier load. That small permanent give is the <em>droop</em>, the honest price of a regulator that steers by how far it is off.</p>
+
+      <p>When James Clerk Maxwell took this whirling-ball linkage apart in 1868, in a paper he simply called <span class="mono">On Governors</span>, he was not admiring the mechanism — he was asking why some governors held steady and others hunted, swinging faster-slower-faster in a widening wobble until they shook themselves apart. The answer was in the mathematics of the loop, not the metal: the same equations that decide whether a nudged system settles back or rings on forever. That paper is where control theory starts. The brass balls on the engine were the first place a machine's stability became something you could calculate before you cast it.</p>
+    </section>
+
+    <section id="bench" aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">Spin it and watch the balls fly out; hand it the valve and watch it hold</h2>
+      <p class="bench-intro">Set the <b>spin</b> and watch the arms open to the angle the geometry demands, the collar rise, and the height settle to g/ω²; read back the arm angle, the cone height, the ball radius, the collar's lift, and how far the throttle the collar works has closed. Then press <b>Govern</b>: let go of the speed, set a <b>load</b>, and hand the throttle to the balls — the shaft finds its own steady speed, the one where the valve the collar has set feeds exactly the load it carries. Change the load and watch it settle again, a little lower. The numbers are the real ones: cos θ = g/(ω²L), h = g/ω², after Watt and Maxwell.</p>
+
+      <div class="bench" id="benchRoot">
+        <div class="scales" id="scalesWrap">
+          <svg id="stageSvg" viewBox="0 0 560 560" role="img"
+               aria-label="A vertical shaft with two weighted balls on arms hinged at the top, flung outward and up as the shaft spins, lifting a collar on the shaft that works a butterfly valve at the base.">
+            <!-- populated by script.js -->
+          </svg>
+        </div>
+
+        <div class="readout" aria-hidden="false">
+          <div class="read-big">
+            <span class="read-num mono" id="readCase">conical</span>
+          </div>
+          <p class="read-break mono">
+            <span class="rb-main" id="rbEq">cos θ = g / (ω²·L)</span>
+          </p>
+          <ul class="read-facts">
+            <li><span class="rf-k">spin</span><span class="rf-v mono" id="rfN">100 rpm</span></li>
+            <li><span class="rf-k">arm angle θ</span><span class="rf-v mono" id="rfTheta">53°</span></li>
+            <li><span class="rf-k">cone height h = g/ω²</span><span class="rf-v mono" id="rfH">89 mm</span></li>
+            <li><span class="rf-k">ball radius r</span><span class="rf-v mono" id="rfR">120 mm</span></li>
+            <li><span class="rf-k">collar lift</span><span class="rf-v mono" id="rfLift">60 mm</span></li>
+            <li><span class="rf-k">throttle</span><span class="rf-v mono" id="rfThrottle">60%</span></li>
+          </ul>
+        </div>
+
+        <div class="controls">
+          <div class="ctl">
+            <label for="nRange">spin — ω
+              <span class="ctl-val mono" id="nVal">100 rpm</span>
+            </label>
+            <input type="range" id="nRange" min="0" max="400" step="1" value="100"
+                   aria-describedby="nNote" />
+            <p class="ctl-note" id="nNote">How fast you turn the shaft. Below the critical speed the balls hang straight down; above it they fly out and the collar climbs.</p>
+          </div>
+
+          <div class="ctl">
+            <label for="lRange">arm length — L
+              <span class="ctl-val mono" id="lVal">150 mm</span>
+            </label>
+            <input type="range" id="lRange" min="50" max="300" step="1" value="150"
+                   aria-describedby="lNote" />
+            <p class="ctl-note" id="lNote">The reach from pivot to ball. A longer arm lowers the critical speed, but never changes the height rule: the cone is g/ω² tall either way.</p>
+          </div>
+
+          <div class="ctl ctl-gap">
+            <label for="loadRange">load on the engine
+              <span class="ctl-val mono" id="loadVal">40%</span>
+            </label>
+            <input type="range" id="loadRange" min="0" max="90" step="1" value="40"
+                   aria-describedby="loadNote" />
+            <p class="ctl-note" id="loadNote">How much work the engine is asked to do. It bites only in Govern mode, where the balls — not you — hold the speed against it.</p>
+          </div>
+
+          <div class="ctl-actions">
+            <button type="button" class="btn" id="governBtn" aria-pressed="false">Govern</button>
+            <button type="button" class="btn btn-ghost" id="restBtn">Let it rest</button>
+            <button type="button" class="btn btn-ghost" id="resetBtn">Reset</button>
+          </div>
+        </div>
+
+        <p class="status" id="status"></p>
+      </div>
+    </section>
+
+    <section id="coda">
+      <p class="section-tag">Why keep it</p>
+      <h2>The first machine that watched itself</h2>
+      <p>The governor is worth a page because it is the plainest possible picture of an idea that now runs almost everything: a machine that measures its own output and uses the measurement to correct its own input. The thermostat, the cruise control, the autopilot, the loop that holds the voltage steady in the charger on the desk — all of them are the whirling balls in other clothes, sensing an error and pushing back against it. The brass version wears its logic on the outside, turning where you can see it, so the abstraction has somewhere to stand.</p>
+      <p>Spin the bench until the loop is in the hand and not just the eye: the balls cannot fly out without lifting the collar, the collar cannot lift without closing the valve, and the valve cannot close without slowing the very spin that flung the balls out — a machine holding itself to a speed by leaning, always, a little against wherever it happens to be.</p>
+    </section>
+
+    <footer class="foot">
+      <p class="foot-series">One of a series — a page a day, each built on one old working word and the discipline hidden inside it. <span class="foot-date">2026-08-15</span>.</p>
+    </footer>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
