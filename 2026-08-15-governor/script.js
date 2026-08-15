@@ -46,6 +46,7 @@
   var L_MIN = 50, L_MAX = 300;        // arm length slider, mm
 
   var DEFAULTS = { N: 100, L: 150, load: 40 };
+  var STORE_KEY = "arena.governor.v1";
 
   var state = { N: DEFAULTS.N, L: DEFAULTS.L, load: DEFAULTS.load, mode: "direct" };
 
@@ -84,6 +85,27 @@
   function clamp(v, lo, hi) { return v < lo ? lo : (v > hi ? hi : v); }
   function omega(N) { return N * TWO_PI / 60; }               // rpm -> rad/s
   function rpm(w) { return w * 60 / TWO_PI; }                  // rad/s -> rpm
+
+  // Keep the bench as you left it, across visits — the spin, the arm, the load,
+  // but not whether it was governing (a page should not start driving itself the
+  // moment it opens).
+  function save() {
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify({
+        N: Math.round(state.N), L: state.L, load: state.load
+      }));
+    } catch (e) { /* private mode or full quota — the bench still works */ }
+  }
+  function restore() {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (s && typeof s.N === "number" && isFinite(s.N)) state.N = clamp(Math.round(s.N), 0, N_MAX);
+      if (s && typeof s.L === "number" && isFinite(s.L)) state.L = clamp(Math.round(s.L), L_MIN, L_MAX);
+      if (s && typeof s.load === "number" && isFinite(s.load)) state.load = clamp(Math.round(s.load), 0, 90);
+    } catch (e) { /* malformed or unreadable — fall back to defaults */ }
+  }
 
   // The throttle the collar commands at a given spin — cos θ, which is g/(ω²L)
   // above the critical speed and pinned wide open (1) below it, where the balls
@@ -288,6 +310,7 @@
     draw(s);
     paint(s);
     speak(s);
+    save();
   }
 
   // ---- control wiring ----
@@ -391,5 +414,6 @@
   // ---- boot ----
   nRange.max = N_MAX;
   lRange.min = L_MIN; lRange.max = L_MAX;
-  render();
+  restore();
+  setL(state.L); setLoad(state.load); setN(state.N);
 })();
