@@ -484,6 +484,31 @@
     setL(DEFAULTS.L); setLoad(DEFAULTS.load); setN(DEFAULTS.N);
   });
 
+  // Keyboard: work the whole bench without the mouse. Arrows slow and speed the
+  // shaft (and take the wheel back from the governor if it holds it); brackets
+  // work the arm, minus/equals the load, G hands the throttle over or takes it
+  // back. When a range slider itself holds focus its native arrow-stepping is
+  // left alone, so the two never fight.
+  document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    var onRange = (e.target === nRange || e.target === lRange || e.target === loadRange);
+    switch (e.key) {
+      case "ArrowLeft":  if (onRange) return; if (state.mode === "govern") setMode("direct"); setN(state.N - 5); break;
+      case "ArrowRight": if (onRange) return; if (state.mode === "govern") setMode("direct"); setN(state.N + 5); break;
+      case "[": setL(state.L - 5); break;
+      case "]": setL(state.L + 5); break;
+      case "-": setLoad(state.load - 5); break;
+      case "=": setLoad(state.load + 5); break;
+      case "g": case "G": setMode(state.mode === "govern" ? "direct" : "govern"); break;
+      case "0": if (state.mode === "govern") setMode("direct"); setN(0); break;
+      case "r": case "R":
+        if (state.mode === "govern") setMode("direct");
+        setL(DEFAULTS.L); setLoad(DEFAULTS.load); setN(DEFAULTS.N); break;
+      default: return;
+    }
+    e.preventDefault();
+  });
+
   // ---- boot ----
   nRange.max = N_MAX;
   lRange.min = L_MIN; lRange.max = L_MAX;
