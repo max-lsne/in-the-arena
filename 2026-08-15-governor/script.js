@@ -52,6 +52,12 @@
 
   var lastGoverned = false;
 
+  // Motion preference — a reader who asks for less motion gets the balance
+  // solved and set at once, with no animated hunt and no collar ping. Re-checked
+  // live, so toggling it takes effect without a reload.
+  var reduceMQ = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+  function motionOff() { return !!(reduceMQ && reduceMQ.matches); }
+
   // ---- element handles ----
   var svg = document.getElementById("stageSvg");
   var nRange = document.getElementById("nRange");
@@ -340,12 +346,38 @@
     render();
   }
   // A change to the load or the arm unsettles a governed shaft — wake the loop
-  // and let it hunt to the new balance.
+  // and let it hunt to the new balance, or, if motion is turned down, solve the
+  // balance and step straight to it.
   function disturb() {
     if (state.mode !== "govern") return;
+    if (motionOff()) { snapToBalance(); return; }
     lastGoverned = false;
     settleTime = 0;
     resumeGovernor();
+  }
+
+  // The steady speed is where the throttle the collar sets feeds exactly the
+  // load: throttle(ω) − load − damping·ω = 0. That residual only falls across the
+  // conical range, so a bisection finds the one root.
+  function balanceOmega() {
+    var L = state.L / 1000;
+    var wc = Math.sqrt(G / L);
+    var load = state.load / 100;
+    function resid(w) { return throttleFrac(w, L, wc) - load - DAMP * w; }
+    var lo = wc, hi = omega(N_MAX);
+    if (resid(hi) > 0) return hi;               // the balance is past the top of the dial
+    for (var i = 0; i < 44; i++) {
+      var mid = (lo + hi) / 2;
+      if (resid(mid) > 0) lo = mid; else hi = mid;
+    }
+    return (lo + hi) / 2;
+  }
+  function snapToBalance() {
+    state.N = clamp(rpm(balanceOmega()), 0, N_MAX);
+    nRange.value = String(Math.round(state.N));
+    lastGoverned = true;
+    settleTime = 1;
+    render();
   }
 
   // ---- the governing loop, run under its own power ----
@@ -374,7 +406,7 @@
     var wasGoverned = lastGoverned;
     if (Math.abs(residual) < 0.008) settleTime += dt; else settleTime = 0;
     lastGoverned = settleTime > 0.25;
-    if (lastGoverned && !wasGoverned) pingCollar();
+    if (lastGoverned && !wasGoverned && !motionOff()) pingCollar();
 
     render();
     // Once it holds the balance, freeze — the shaft is steady, so there is
@@ -410,6 +442,7 @@
       lastGoverned = false;
       settleTime = 0;
       lastTs = null;
+      if (motionOff()) { snapToBalance(); return; }   // solve the balance, skip the hunt
       rafId = window.requestAnimationFrame(tick);
     } else if (rafId) {
       window.cancelAnimationFrame(rafId);
@@ -429,6 +462,19 @@
   governBtn.addEventListener("click", function () {
     setMode(state.mode === "govern" ? "direct" : "govern");
   });
+  if (reduceMQ) {
+    var onMotionChange = function () {
+      if (state.mode !== "govern") { render(); return; }
+      if (motionOff()) {
+        if (rafId) { window.cancelAnimationFrame(rafId); rafId = null; }
+        snapToBalance();
+      } else if (!lastGoverned) {
+        resumeGovernor();
+      }
+    };
+    if (reduceMQ.addEventListener) reduceMQ.addEventListener("change", onMotionChange);
+    else if (reduceMQ.addListener) reduceMQ.addListener(onMotionChange);   // older browsers
+  }
   restBtn.addEventListener("click", function () {
     if (state.mode === "govern") setMode("direct");
     setN(0);                                    // let the shaft stop; the balls hang
