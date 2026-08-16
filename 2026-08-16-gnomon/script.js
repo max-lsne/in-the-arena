@@ -41,6 +41,12 @@
   var MDAYS = [31,28,31,30,31,30,31,31,30,31,30,31];
   var CARD = ["N","NE","E","SE","S","SW","W","NW"];
 
+  // Motion preference — a reader who asks for less motion gets no swept day and no
+  // noon pulse; pressing Run steps straight to solar noon instead. Re-checked
+  // live, so toggling it takes effect without a reload.
+  var reduceMQ = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+  function motionOff() { return !!(reduceMQ && reduceMQ.matches); }
+
   // ---- element handles ----
   var svg = document.getElementById("stageSvg");
   var latRange = document.getElementById("latRange");
@@ -361,7 +367,7 @@
 
     var next = state.time + RUN_RATE * dt;
     // ping the sun as the running day crosses solar noon
-    if (prevTime < 720 && next >= 720) pingSun();
+    if (prevTime < 720 && next >= 720 && !motionOff()) pingSun();
     if (next >= T_MAX) next -= T_MAX;             // round to the next day
     prevTime = next;
     state.time = next;
@@ -372,6 +378,7 @@
   }
 
   function setRunning(on) {
+    if (on && motionOff()) { setTime(720); return; }   // reduced motion: step to noon, no sweep
     state.running = on;
     runBtn.setAttribute("aria-pressed", on ? "true" : "false");
     runBtn.textContent = on ? "Stop" : "Run the day";
@@ -420,6 +427,13 @@
   });
 
   runBtn.addEventListener("click", function () { setRunning(!state.running); });
+  if (reduceMQ) {
+    var onMotionChange = function () {
+      if (motionOff() && state.running) { setRunning(false); setTime(720); }
+    };
+    if (reduceMQ.addEventListener) reduceMQ.addEventListener("change", onMotionChange);
+    else if (reduceMQ.addListener) reduceMQ.addListener(onMotionChange);   // older browsers
+  }
   noonBtn.addEventListener("click", function () {
     if (state.running) setRunning(false);
     setTime(720);
