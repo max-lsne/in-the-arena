@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gnomon — one fixed rod and a moving sun, and the shadow that reads back the hour and the season at once</title>
+  <meta name="description" content="Stand a rod upright in the sun and its shadow is not idle: the shadow swings round through the day to tell the hour, and stretches or shrinks through the year to tell the season. The tip traces a straight line at the equinox and a hyperbola on every other day. That is the gnomon — the oldest instrument there is, a stick that turns the turning sky into a number you can read off the ground. A small page, and a dial you can walk the sun across." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231d2733'/%3E%3Ccircle cx='24' cy='9' r='3.4' fill='%23c98a3a'/%3E%3Cline x1='13' y1='24' x2='13' y2='10' stroke='%238b98a6' stroke-width='2.2' stroke-linecap='round'/%3E%3Cline x1='13' y1='24' x2='7' y2='27' stroke='%2358c98a' stroke-width='2.4' stroke-linecap='round'/%3E%3Cellipse cx='13' cy='24' rx='2.2' ry='1' fill='%238b98a6'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#eef1f4" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0f141a" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Gnomon — the stick that tells the time and the season by its shadow" />
+  <meta property="og:description" content="A rod stood upright throws a shadow that swings round to give the hour and lengthens through the year to give the season. Its tip draws a straight line at the equinox and a hyperbola on every other day. The oldest instrument there is, worked here on a dial you can walk the sun across — sin a = sin φ sin δ + cos φ cos δ cos H, and the shadow that follows from it." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">In the arena · 2026-08-16</p>
+      <p class="pron"><b>gnomon</b> · <i>noun</i> · /ˈnəʊmɒn/ — the upright part of a sundial, the rod or plate whose shadow tells the time; the raised piece that casts the line you read; from Greek <i>gnṓmōn</i>, <i>one that knows</i> or <i>indicator</i>, from <i>gignṓskein</i>, to know — the same root as <i>diagnosis</i></p>
+      <h1>Gnomon</h1>
+      <p class="lede">Stand a rod upright in the sun. Its shadow is not idle: it <em>swings round</em> through the day, and it <em>stretches and shrinks</em> through the year. Read the swing and you have the hour; read the length and you have the season. One still stick, and the whole turning sky reporting to the ground.</p>
+      <p class="sub">This is the oldest instrument there is — older than writing, older than the wheel used for anything but pots — and it works because the thing it measures never stops moving. The sun climbs the sky through the morning and falls through the afternoon, so the shadow it throws is short and points away from it, swinging from west round to north to east as the day turns. And the sun rides higher in summer than in winter, so the same noon shadow is a stub in June and a long finger in December. A rod that does nothing but stand still turns both of those motions into marks you can read, because a shadow is just the sun's position, drawn on the floor. There is a clean geometry underneath it: the height of the sun above the horizon is set by <span class="mono">sin a = sin φ sin δ + cos φ cos δ cos H</span> — your latitude φ, the sun's tilt for the day δ, and how far the day has turned from noon, H — and the shadow follows straight from that. This is the <b>gnomon</b>, and the discipline of reading it, <b>gnomonics</b>, is where geometry and the calendar first met.</p>
+    </header>
+
+    <section id="how">
+      <p class="section-tag">Where the shadow comes from</p>
+      <h2>The shadow is the sun's height, drawn on the floor</h2>
+      <p>A shadow has only two things to say: which way it points, and how long it is. Both come from one fact — where the sun is in the sky — and where the sun is comes from three numbers. Your <b>latitude</b> <span class="mono">φ</span>, fixed for a place. The sun's <b>declination</b> <span class="mono">δ</span>, how far north or south of the celestial equator it stands that day, swinging slowly between <span class="mono">+23.4°</span> at midsummer and <span class="mono">−23.4°</span> at midwinter and passing through zero at the two equinoxes. And the <b>hour angle</b> <span class="mono">H</span>, how far the sky has turned since the sun stood due south at noon — fifteen degrees for every hour, since the whole sky comes round once in twenty-four.</p>
+
+      <p>Put those three into the one equation of the sundial and out comes the sun's <b>altitude</b> — its height above the horizon:</p>
+
+      <p class="pull">sin <em>a</em> = sin φ · sin δ + cos φ · cos δ · cos H.</p>
+
+      <p>That single line holds the whole day. At noon <span class="mono">H = 0</span>, its cosine is one, and the sun stands as high as it will get. Toward sunrise and sunset <span class="mono">H</span> grows, its cosine falls, and the altitude drops to zero — the moment the shadow runs out to the horizon and the sun slips under it. The shadow's <b>length</b> is then pure right-angle triangle: a rod of height <span class="mono">h</span> throws a shadow <span class="mono">h / tan a</span> long — short when the sun is high, stretching without limit as it sinks. And the shadow's <b>direction</b> is simply away from the sun: find the sun's compass bearing and the shadow lies on the opposite side, to the degree.</p>
+    </section>
+
+    <section id="curve">
+      <p class="section-tag">The mark a whole day makes</p>
+      <h2>The tip draws a straight line at the equinox and a hyperbola on every other day</h2>
+      <p>Watch not the shadow but its far <em>tip</em>, and let a whole day run. In the morning the sun is low in the east and the tip is flung far to the west; it swings round and pulls in toward the rod as noon approaches and the sun climbs; then it swings on and stretches out to the east as the sun sinks. The path it traces is not a circle and not an arc drawn by hand — it is a <b>conic section</b>, and which one depends on the day.</p>
+
+      <p class="pull">On the two equinoxes the tip runs dead straight, a clean east–west line. On every other day of the year it bends into a <em>hyperbola</em> — bowing south of that line all summer, north of it all winter — and inside the polar circles, where the sun wheels round without setting, the tip closes the curve into an ellipse.</p>
+
+      <p>The reason is older than the sundial and belongs to Apollonius: through the day the sun rides a slanted circle in the sky, and the rays grazing the rod's tip sweep out a <b>cone</b>. The ground is a flat plane slicing that cone, and a plane through a cone cuts a conic — a line when it is parallel to the cone's edge, which happens exactly at the equinox, and a hyperbola when it is steeper, which is every other day. So a sundial's face, if you scratch in the day-curves for a few dates, becomes a calendar too: the shadow tip tells you not just the hour, from where it sits along the curve, but the date, from which curve it is riding. The old dials call these the <b>declination lines</b>, and the pages of a stone one are the seasons.</p>
+    </section>
+
+    <section id="bench" aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">Set the place and the day, then walk the sun across the sky</h2>
+      <p class="bench-intro">Looking straight down on the ground, north at the top. The rod stands at the centre; its <b>shadow</b> reaches out from it, and the faint curve is the whole day's path of the shadow tip — the declination line for the date you have set. Move the <b>time</b> and watch the shadow swing and breathe; set the <b>latitude</b> and the <b>day of the year</b> and watch the curve change shape — straight at an equinox, bowed the rest of the year. The readout gives the sun's altitude and bearing, the shadow's length in rod-heights and its compass direction, and which conic the day is drawing. Then press <b>Run the day</b> and hand the sky its motion: the sun walks from sunrise to sunset and round again. The numbers are the real ones: sin a = sin φ sin δ + cos φ cos δ cos H.</p>
+
+      <div class="bench" id="benchRoot">
+        <div class="scales" id="scalesWrap">
+          <svg id="stageSvg" viewBox="0 0 560 560" role="img"
+               aria-label="A sundial seen from directly above, north at the top: an upright rod at the centre throwing a shadow, with the day's curve of the shadow tip drawn faintly behind it and the sun's direction marked at the edge.">
+            <!-- populated by script.js -->
+          </svg>
+        </div>
+
+        <div class="readout" aria-hidden="false">
+          <div class="read-big">
+            <span class="read-num mono" id="readCase">10:24</span>
+          </div>
+          <p class="read-break mono">
+            <span class="rb-main" id="rbEq">sin a = sin φ sin δ + cos φ cos δ cos H</span>
+          </p>
+          <ul class="read-facts">
+            <li><span class="rf-k">sun altitude a</span><span class="rf-v mono" id="rfAlt">34°</span></li>
+            <li><span class="rf-k">sun bearing</span><span class="rf-v mono" id="rfAz">128° SE</span></li>
+            <li><span class="rf-k">shadow length</span><span class="rf-v mono" id="rfLen">1.48 h</span></li>
+            <li><span class="rf-k">shadow points</span><span class="rf-v mono" id="rfDir">308° NW</span></li>
+            <li><span class="rf-k">declination δ</span><span class="rf-v mono" id="rfDec">+13.6°</span></li>
+            <li><span class="rf-k">day curve</span><span class="rf-v mono" id="rfCurve">hyperbola</span></li>
+          </ul>
+        </div>
+
+        <div class="controls">
+          <div class="ctl">
+            <label for="latRange">latitude — φ
+              <span class="ctl-val mono" id="latVal">51° N</span>
+            </label>
+            <input type="range" id="latRange" min="-66" max="66" step="1" value="51"
+                   aria-describedby="latNote" />
+            <p class="ctl-note" id="latNote">Where on the Earth the rod stands. Near the equator the noon sun rides overhead and shadows are short; toward the poles it stays low and shadows run long.</p>
+          </div>
+
+          <div class="ctl">
+            <label for="dayRange">day of the year — δ
+              <span class="ctl-val mono" id="dayVal">Jun 5 · δ +22.4°</span>
+            </label>
+            <input type="range" id="dayRange" min="1" max="365" step="1" value="156"
+                   aria-describedby="dayNote" />
+            <p class="ctl-note" id="dayNote">The date sets the sun's tilt δ. At the equinoxes δ is zero and the day-curve is straight; at the solstices δ is farthest out and the curve bows hardest.</p>
+          </div>
+
+          <div class="ctl ctl-gap">
+            <label for="timeRange">time — solar hour
+              <span class="ctl-val mono" id="timeVal">10:24</span>
+            </label>
+            <input type="range" id="timeRange" min="0" max="1440" step="1" value="624"
+                   aria-describedby="timeNote" />
+            <p class="ctl-note" id="timeNote">Solar time, where noon is the sun due south. Before sunrise and after sunset there is no shadow to read — only the empty dial and the curve it will trace.</p>
+          </div>
+
+          <div class="ctl-actions">
+            <button type="button" class="btn" id="runBtn" aria-pressed="false">Run the day</button>
+            <button type="button" class="btn btn-ghost" id="noonBtn">Noon</button>
+            <button type="button" class="btn btn-ghost" id="resetBtn">Reset</button>
+          </div>
+        </div>
+
+        <p class="status" id="status" role="status" aria-live="polite" aria-atomic="true"></p>
+
+        <details class="keys">
+          <summary>Keyboard</summary>
+          <ul>
+            <li><kbd>←</kbd> <kbd>→</kbd> wind the time back / on, four minutes a step</li>
+            <li><kbd>[</kbd> <kbd>]</kbd> south / north — move the latitude</li>
+            <li><kbd>-</kbd> <kbd>=</kbd> earlier / later in the year</li>
+            <li><kbd>Space</kbd> run the day, or stop it</li>
+            <li><kbd>N</kbd> jump to noon · <kbd>R</kbd> reset</li>
+          </ul>
+        </details>
+      </div>
+    </section>
+
+    <section id="coda">
+      <p class="section-tag">Why keep it</p>
+      <h2>The instrument that made time a place</h2>
+      <p>The gnomon is worth a page because it is the moment a natural motion first became a reading. Nobody built the sun; someone only noticed that a stick's shadow moved in a way that repeated, and thought to scratch marks where it fell. Every clock since is a descendant of that thought — the escapement, the pendulum, the quartz sliver, the atom counted in a lab — each one a steadier stand-in for a shadow, and each one still set, in the end, against the sun the gnomon reads directly.</p>
+      <p>There is one refinement the bench leaves out, and it is the whole art of the later dials: tilt the rod so it points not straight up but at the celestial pole — north, and up from the horizon by exactly your latitude — and the shadow's swing becomes even, a clean fifteen degrees an hour all day long, so the hour lines can be ruled at equal angles instead of crowded and stretched. That slanted rod is called the <b>style</b>, and the angle you tilt it is your latitude written into brass. A sundial, in the end, is a small model of the Earth's axis, laid on a wall, keeping the one time the whole sky agrees on.</p>
+    </section>
+
+    <footer class="foot">
+      <p class="foot-series">One of a series — a page a day, each built on one old working word and the discipline hidden inside it. <span class="foot-date">2026-08-16</span>.</p>
+    </footer>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
