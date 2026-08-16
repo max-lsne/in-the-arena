@@ -443,6 +443,32 @@
     setLat(DEFAULTS.lat); setDay(DEFAULTS.day); setTime(DEFAULTS.time);
   });
 
+  // Keyboard: work the whole bench without the mouse. Arrows wind the time back
+  // and on; brackets move the latitude; minus/equals walk through the year; Space
+  // runs the day or stops it; N jumps to noon, R resets. When a range slider holds
+  // focus its native arrow-stepping is left alone, so the two never fight, and a
+  // focused button keeps its own Space, so the global run-toggle never doubles it.
+  document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    var onRange = (e.target === latRange || e.target === dayRange || e.target === timeRange);
+    var onButton = e.target && (e.target.tagName === "BUTTON" || e.target.tagName === "SUMMARY");
+    switch (e.key) {
+      case "ArrowLeft":  if (onRange) return; if (state.running) setRunning(false); setTime(state.time - 4); break;
+      case "ArrowRight": if (onRange) return; if (state.running) setRunning(false); setTime(state.time + 4); break;
+      case "[": setLat(state.lat - 1); break;
+      case "]": setLat(state.lat + 1); break;
+      case "-": setDay(state.day - 1); break;
+      case "=": setDay(state.day + 1); break;
+      case " ": case "Spacebar": if (onButton) return; setRunning(!state.running); break;
+      case "n": case "N": if (state.running) setRunning(false); setTime(720); break;
+      case "r": case "R":
+        if (state.running) setRunning(false);
+        setLat(DEFAULTS.lat); setDay(DEFAULTS.day); setTime(DEFAULTS.time); break;
+      default: return;
+    }
+    e.preventDefault();
+  });
+
   // ---- boot ----
   latRange.min = LAT_MIN; latRange.max = LAT_MAX;
   dayRange.min = DAY_MIN; dayRange.max = DAY_MAX;
