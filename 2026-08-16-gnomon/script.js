@@ -61,7 +61,8 @@
     curve: document.getElementById("rfCurve"),
     latVal: document.getElementById("latVal"),
     dayVal: document.getElementById("dayVal"),
-    timeVal: document.getElementById("timeVal")
+    timeVal: document.getElementById("timeVal"),
+    status: document.getElementById("status")
   };
 
   // ---- small helpers ----
@@ -314,10 +315,37 @@
     return lenH.toFixed(2) + " h";
   }
 
+  // Speak the settled state, not every frame of the running day. A live region
+  // written on every swept frame would flood a screen reader, so the announcement
+  // is debounced and phrased as plain words a reader voices cleanly.
+  var announceTimer = null;
+  function scheduleAnnounce(s) {
+    if (announceTimer) clearTimeout(announceTimer);
+    announceTimer = setTimeout(function () { speak(s); }, 400);
+  }
+  function speak(s) {
+    var place = Math.abs(state.lat) + "° " + (state.lat < 0 ? "south" : "north") + ", " + dateLabel(state.day);
+    var msg;
+    if (s.polarNight) {
+      msg = "At " + place + " the sun stays below the horizon all day — polar night, and no shadow to read.";
+    } else if (!s.up) {
+      var when = (s.t <= s.sunrise) ? "before sunrise" : "after sunset";
+      msg = "At " + hhmm(state.time) + ", " + place + ", the sun is " + when + " — below the horizon, so there is no shadow. The dial shows only the curve the day will trace.";
+    } else {
+      msg = "At " + hhmm(state.time) + ", " + place + ", the sun stands " + Math.round(s.altDeg) +
+            "° above the horizon in the " + cardinal(s.azNorth) + ", bearing " + Math.round(s.azNorth) + "°. " +
+            "The rod's shadow falls " + shadowLenText(s.lenH) + " long toward the " + cardinal(s.bearing) +
+            ", bearing " + Math.round(s.bearing) + "°. Through the day the tip traces a " + s.curve +
+            "; the sun is up " + s.dayLen.toFixed(1) + " hours.";
+    }
+    el.status.textContent = msg;
+  }
+
   function render() {
     var s = solve();
     draw(s);
     paint(s);
+    scheduleAnnounce(s);
     save();
     return s;
   }
