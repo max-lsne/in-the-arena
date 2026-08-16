@@ -33,6 +33,7 @@
   var RUN_RATE = 72;                  // sim-minutes per real second when running
 
   var DEFAULTS = { lat: 51, day: 156, time: 624 };   // 51°N, Jun 5, 10:24
+  var STORE_KEY = "arena.gnomon.v1";
 
   var state = { lat: DEFAULTS.lat, day: DEFAULTS.day, time: DEFAULTS.time, running: false };
 
@@ -78,6 +79,27 @@
     var h = Math.floor(m / 60) % 24;
     var mm = ((m % 60) + 60) % 60;
     return (h < 10 ? "0" : "") + h + ":" + (mm < 10 ? "0" : "") + mm;
+  }
+
+  // Keep the dial as you left it, across visits — the place, the day and the
+  // time on the slider, but not whether it was running (a page should not start
+  // sweeping the sun the moment it opens).
+  function save() {
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify({
+        lat: state.lat, day: state.day, time: Math.round(state.time)
+      }));
+    } catch (e) { /* private mode or full quota — the dial still works */ }
+  }
+  function restore() {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (s && typeof s.lat === "number" && isFinite(s.lat)) state.lat = clamp(Math.round(s.lat), LAT_MIN, LAT_MAX);
+      if (s && typeof s.day === "number" && isFinite(s.day)) state.day = clamp(Math.round(s.day), DAY_MIN, DAY_MAX);
+      if (s && typeof s.time === "number" && isFinite(s.time)) state.time = clamp(Math.round(s.time), T_MIN, T_MAX);
+    } catch (e) { /* malformed or unreadable — fall back to defaults */ }
   }
 
   function dateLabel(day) {
@@ -296,6 +318,7 @@
     var s = solve();
     draw(s);
     paint(s);
+    save();
     return s;
   }
 
@@ -382,5 +405,6 @@
   latRange.min = LAT_MIN; latRange.max = LAT_MAX;
   dayRange.min = DAY_MIN; dayRange.max = DAY_MAX;
   timeRange.min = T_MIN; timeRange.max = T_MAX;
+  restore();
   setLat(state.lat); setDay(state.day); setTime(state.time);
 })();
