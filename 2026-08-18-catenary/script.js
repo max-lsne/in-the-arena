@@ -319,10 +319,40 @@
     return (h > 0 ? "+" : "−") + Math.abs(h).toFixed(1) + " m";
   }
 
+  // Speak the settled shape, not every frame of the flip. A live region written on
+  // every morph frame would flood a screen reader, so the announcement is debounced
+  // and phrased as plain words a reader voices cleanly.
+  var announceTimer = null;
+  function scheduleAnnounce(m, t) {
+    if (announceTimer) clearTimeout(announceTimer);
+    announceTimer = setTimeout(function () { speak(m, t); }, 400);
+  }
+  function speak(m, t) {
+    var place = "span " + m.S.toFixed(1) + " metres, " +
+      Math.round(state.slack) + " percent slack" +
+      (Math.abs(m.h) < 0.05 ? ", anchors level" : (", one anchor raised " + Math.abs(m.h).toFixed(1) + " metres"));
+    var msg;
+    if (t > 0.5) {
+      msg = "Inverted. The same curve stood on its head as an arch rising " + m.sag.toFixed(1) +
+        " metres, carrying itself in pure compression — every pull of the chain now a push. " + place + ".";
+    } else if (m.taut) {
+      msg = "Taut. With " + place + ", the chain has no slack left to hang and runs dead straight; " +
+        "holding it so would take an unbounded pull.";
+    } else {
+      msg = "A chain hanging with " + place + ". It sags " + m.sag.toFixed(1) +
+        " metres to a belly, the curve constant a is " + m.a.toFixed(1) +
+        " metres, and it reaches its steepest at " + Math.round(m.angleDeg) + " degrees at the anchors. " +
+        "The pull is " + m.endPullW.toFixed(2) + " of the chain's own weight at the anchors and " +
+        m.bellyPullW.toFixed(2) + " at the belly. Press flip to stand it up as an arch.";
+    }
+    el.status.textContent = msg;
+  }
+
   function render() {
     model = build();
     draw(model, morphT);
     paint(model, morphT);
+    scheduleAnnounce(model, morphT);
     save();
   }
 
@@ -347,7 +377,7 @@
     draw(model, morphT);
     paint(model, morphT);
     if (k < 1) flipRaf = window.requestAnimationFrame(flipStep);
-    else { morphT = flipTarget; flipRaf = null; }
+    else { morphT = flipTarget; flipRaf = null; scheduleAnnounce(model, morphT); }
   }
 
   // ---- control wiring ----
