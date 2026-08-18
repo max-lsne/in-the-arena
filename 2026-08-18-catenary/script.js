@@ -32,6 +32,7 @@
   var FLIP_MS = 720;                        // duration of the flip morph
 
   var DEFAULTS = { span: 10, slack: 30, tilt: 0 };
+  var STORE_KEY = "arena.catenary.v1";
 
   var state = { span: DEFAULTS.span, slack: DEFAULTS.slack, tilt: DEFAULTS.tilt };
   var paraOn = false;
@@ -77,6 +78,27 @@
   }
   function clamp(v, lo, hi) { return v < lo ? lo : (v > hi ? hi : v); }
   function lerp(a, b, t) { return a + (b - a) * t; }
+
+  // Keep the chain as you left it, across visits — the span, the slack and the
+  // tilt, but not whether it was flipped to an arch or which overlay was on (a
+  // page should open as a hanging chain, not mid-somersault).
+  function save() {
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify({
+        span: state.span, slack: state.slack, tilt: state.tilt
+      }));
+    } catch (e) { /* private mode or full quota — the bench still works */ }
+  }
+  function restore() {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (s && typeof s.span === "number" && isFinite(s.span)) state.span = clamp(s.span, SPAN_MIN, SPAN_MAX);
+      if (s && typeof s.slack === "number" && isFinite(s.slack)) state.slack = clamp(s.slack, SLACK_MIN, SLACK_MAX);
+      if (s && typeof s.tilt === "number" && isFinite(s.tilt)) state.tilt = clamp(s.tilt, TILT_MIN, TILT_MAX);
+    } catch (e) { /* malformed or unreadable — fall back to defaults */ }
+  }
 
   // sinh(u)/u climbs monotonically from 1 (as u→0) upward, so a plain bracketed
   // bisection finds the u that matches a given ratio r>1 without any guessing.
@@ -301,6 +323,7 @@
     model = build();
     draw(model, morphT);
     paint(model, morphT);
+    save();
   }
 
   // ---- the flip morph ----
@@ -363,5 +386,6 @@
   spanRange.min = SPAN_MIN; spanRange.max = SPAN_MAX;
   slackRange.min = SLACK_MIN; slackRange.max = SLACK_MAX;
   tiltRange.min = TILT_MIN; tiltRange.max = TILT_MAX;
+  restore();
   setSpan(state.span); setSlack(state.slack); setTilt(state.tilt);
 })();
