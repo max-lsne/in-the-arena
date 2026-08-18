@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catenary — the one exact curve a hanging chain must take, and the arch that is the same curve stood on its head</title>
+  <meta name="description" content="Hang a chain from two points and let it settle. It does not sag into just any droop — it takes one precise curve, the catenary, y = a cosh(x/a), because every link must carry the weight of all the links below it. Galileo guessed a parabola and was wrong; it took Huygens, Leibniz and Bernoulli to find the true shape. Turn that same curve upside down and it stands as an arch that holds itself up in pure compression — as hangs the chain, so stands the arch. A small page, and a chain you can slacken, span and tilt by hand." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231d2733'/%3E%3Cpath d='M7 8 C 12 27, 20 27, 25 8' fill='none' stroke='%23c98a3a' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='7' cy='8' r='2.4' fill='%238b98a6'/%3E%3Ccircle cx='25' cy='8' r='2.4' fill='%238b98a6'/%3E%3Ccircle cx='16' cy='22.2' r='1.9' fill='%2358c98a'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#eef1f4" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0f141a" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Catenary — the curve a hanging chain must take, and the arch it becomes inverted" />
+  <meta property="og:description" content="A free chain hangs in one exact curve, y = a cosh(x/a), because each link carries the weight of all below it. Galileo thought it a parabola and was wrong. Invert the curve and it stands as a self-supporting arch in pure compression — as hangs the flexible line, so but inverted stands the rigid arch. Worked here on a chain you can slacken, span and tilt." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">In the arena · 2026-08-18</p>
+      <p class="pron"><b>catenary</b> · <i>noun</i> · /kəˈtiːnəri/ — the curve a free, uniform chain or cable settles into when it hangs under its own weight between two points; from Latin <i>catēna</i>, <i>a chain</i>. The word was minted by Huygens; before it, people called the shape the <i>chainette</i> or, wrongly, the <i>parabola</i></p>
+      <h1>Catenary</h1>
+      <p class="lede">Hang a chain from two points and let it settle. It does not fall into just any droop — it takes <em>one exact curve</em>, the same every time, set by nothing but its own weight and where you pinned the ends. That curve has a name and a formula, and turned upside down it becomes the strongest way there is to bridge a gap in stone.</p>
+      <p class="sub">The reason there is only one shape is that the chain has no choice. Each link hangs from the ones beside it, and each must carry the full weight of every link below it, so the chain is steepest where it holds the most — at the ends, where the whole load pulls through — and flattest at the bottom, where it carries only itself. Follow that rule link by link and the curve it forces is not the parabola it resembles. Galileo, looking at a hanging chain, called it a parabola and was wrong; it took most of a century, and then the young <b>Huygens</b>, <b>Leibniz</b>, and <b>Johann Bernoulli</b> in 1691, to show the true curve is built from the exponential — <span class="mono">y = a·cosh(x/a)</span>, the hyperbolic cosine. This is the <b>catenary</b>, and its one secret, which Hooke saw first, is that a chain frozen and flipped over stands as an arch that carries itself in pure compression.</p>
+    </header>
+
+    <section id="how">
+      <p class="section-tag">Where the curve comes from</p>
+      <h2>Each link carries everything below it</h2>
+      <p>Take the chain at its lowest point and look at the piece from there out to some point further along. Three forces hold that piece still. At the low point the rest of the chain pulls it horizontally, with a tension call <span class="mono">H</span> — and because the low point is level, that pull is purely sideways. At the far end the chain above pulls it along the curve, at whatever slope the curve has there. And straight down hangs the weight of the piece itself, which is just its length times how heavy the chain is per unit length.</p>
+
+      <p>Balance those and something clean falls out. The horizontal pull <span class="mono">H</span> never changes along the whole chain — there is nothing sideways to alter it — so the <b>horizontal tension is constant end to end</b>. The vertical part of the tension, meanwhile, has to grow to match the weight hung below it, and the weight below grows with the <em>length</em> of chain, not with how far across you have gone. Written as a slope, that is</p>
+
+      <p class="pull">dy/dx = (weight of chain so far) / H,</p>
+
+      <p>and differentiating once more — because a little more <em>arc</em> adds a little more weight — turns it into the equation whose answer is the hyperbolic cosine. The chain settles to <span class="mono">y = a·cosh(x/a)</span>, where the single constant <span class="mono">a = H / w</span> is the horizontal tension divided by the weight per length: a taut, lightly-loaded chain has a large <span class="mono">a</span> and hangs shallow; a slack or heavy one has a small <span class="mono">a</span> and plunges. Every catenary in the world is this one curve, scaled.</p>
+    </section>
+
+    <section id="para">
+      <p class="section-tag">The curve it is not</p>
+      <h2>A chain is not a parabola — a loaded cable is</h2>
+      <p>The catenary looks so like a parabola that Galileo mistook one for the other, and near the bottom they very nearly agree. But they part at the ends, and the difference is not a flaw — it is a fact about <em>what is doing the loading</em>. A bare chain is loaded by <b>its own length</b>: the deeper and longer the droop, the more weight there is, spread evenly along the curve. That even-along-the-<em>arc</em> loading gives the cosh.</p>
+
+      <p class="pull">Load the same cable by its <em>horizontal span</em> instead — hang a heavy, level roadway from it, so every metre <em>across</em> carries equal weight and the cable's own weight barely counts — and the curve that results is an exact <b>parabola</b>.</p>
+
+      <p>That is the difference between a power line, which droops in a true catenary because it carries only itself, and a <b>suspension bridge</b>, whose main cables pull into a parabola because what they really hold is the flat deck below. The bench draws the matching parabola faintly behind the chain so you can watch the two curves kiss at the bottom and separate toward the ends — the catenary always the fuller of the two, standing a little steeper where the ends take the strain.</p>
+    </section>
+
+    <section id="bench" aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">Slacken it, widen it, tilt it — then flip it into an arch</h2>
+      <p class="bench-intro">A chain pinned between two anchors, drawn side-on. Pay out more <b>slack</b> and it plunges deeper and pulls its anchors less hard; draw the <b>span</b> wider and the same slack goes taut; <b>tilt</b> one anchor above the other and the low point slides toward the lower end, the way a real chain always finds it. The chain is drawn thicker where it pulls harder — thin and slack at the belly, taut and thick at the ends — and the readout gives the pull at the anchors and at the belly in multiples of the chain's own weight, the steepest slope, and the curve constant <span class="mono">a</span>. Then press <b>Flip to arch</b>: the very same curve turns over and stands on the ground as an arch, every pull becoming a push. The numbers are the real statics of the chain: y = a·cosh(x/a), with H constant along its whole length.</p>
+
+      <div class="bench" id="benchRoot">
+        <div class="scales" id="scalesWrap">
+          <svg id="stageSvg" viewBox="0 0 640 460" role="img"
+               aria-label="A chain hanging side-on between two anchors, drawn as a smooth curve dipping to a low point in the middle, with the straight chord between the anchors marked faintly and the deepest sag shown.">
+            <!-- populated by script.js -->
+          </svg>
+        </div>
+
+        <div class="readout" aria-hidden="false">
+          <div class="read-big">
+            <span class="read-num mono" id="readCase">3.7 m</span>
+            <span class="read-cap" id="readCap">sag</span>
+          </div>
+          <p class="read-break mono">
+            <span class="rb-main" id="rbEq">y = a·cosh(x ⁄ a)</span>
+          </p>
+          <ul class="read-facts">
+            <li><span class="rf-k">pull at the anchors</span><span class="rf-v mono" id="rfEnd">0.58 W</span></li>
+            <li><span class="rf-k">pull at the belly</span><span class="rf-v mono" id="rfBelly">0.30 W</span></li>
+            <li><span class="rf-k">steepest slope</span><span class="rf-v mono" id="rfAngle">59°</span></li>
+            <li><span class="rf-k">chain length</span><span class="rf-v mono" id="rfLen">13.0 m</span></li>
+            <li><span class="rf-k">curve constant a</span><span class="rf-v mono" id="rfA">3.9 m</span></li>
+            <li><span class="rf-k">extra length</span><span class="rf-v mono" id="rfSlack">+30%</span></li>
+          </ul>
+        </div>
+
+        <div class="controls">
+          <div class="ctl">
+            <label for="spanRange">span — anchor to anchor
+              <span class="ctl-val mono" id="spanVal">10.0 m</span>
+            </label>
+            <input type="range" id="spanRange" min="4" max="16" step="0.5" value="10"
+                   aria-describedby="spanNote" />
+            <p class="ctl-note" id="spanNote">How far apart the two anchors sit. Widen the span without paying out more chain and the same slack pulls taut, driving the anchor tension up.</p>
+          </div>
+
+          <div class="ctl">
+            <label for="slackRange">slack — length over the straight line
+              <span class="ctl-val mono" id="slackVal">+30%</span>
+            </label>
+            <input type="range" id="slackRange" min="2" max="120" step="1" value="30"
+                   aria-describedby="slackNote" />
+            <p class="ctl-note" id="slackNote">How much longer the chain is than the straight gap. A hair of slack hangs shallow and pulls hard; a lot of slack plunges deep but eases the anchors toward simply carrying half the weight each.</p>
+          </div>
+
+          <div class="ctl ctl-gap">
+            <label for="tiltRange">tilt — one anchor above the other
+              <span class="ctl-val mono" id="tiltVal">level</span>
+            </label>
+            <input type="range" id="tiltRange" min="-6" max="6" step="0.5" value="0"
+                   aria-describedby="tiltNote" />
+            <p class="ctl-note" id="tiltNote">Raise one end above the other. The chain keeps the same shape but slides its lowest point toward the lower anchor — and if you lift too far for the slack you have, it runs out straight.</p>
+          </div>
+
+          <div class="ctl-actions">
+            <button type="button" class="btn" id="flipBtn" aria-pressed="false">Flip to arch</button>
+            <button type="button" class="btn btn-ghost" id="paraBtn" aria-pressed="false">Parabola</button>
+            <button type="button" class="btn btn-ghost" id="resetBtn">Reset</button>
+          </div>
+        </div>
+
+        <p class="status" id="status" role="status" aria-live="polite" aria-atomic="true"></p>
+
+        <details class="keys">
+          <summary>Keyboard</summary>
+          <ul>
+            <li><kbd>←</kbd> <kbd>→</kbd> pay out / take in slack</li>
+            <li><kbd>[</kbd> <kbd>]</kbd> narrow / widen the span</li>
+            <li><kbd>-</kbd> <kbd>=</kbd> tilt one anchor down / up</li>
+            <li><kbd>F</kbd> flip to the arch, or hang it back</li>
+            <li><kbd>P</kbd> parabola overlay · <kbd>R</kbd> reset</li>
+          </ul>
+        </details>
+      </div>
+    </section>
+
+    <section id="coda">
+      <p class="section-tag">Why keep it</p>
+      <h2>As hangs the chain, so stands the arch</h2>
+      <p>The catenary is worth a page because it is a shape the world computes for free. No one has to solve the equation for the chain; the chain solves it, instantly and exactly, by the simple fact that it cannot hold a shape in which any link is unbalanced. Hang it and it settles into the one answer. That is the oldest kind of analog computer there is — a problem in the calculus of variations, worked in hemp.</p>
+      <p>And it has a twin. Robert Hooke, in 1675, hid the whole of arch theory inside a Latin anagram, and when it was unscrambled it read: <em>as hangs the flexible line, so but inverted will stand the rigid arch</em>. A hanging chain is in pure tension — every part pulls. Freeze that curve, turn it over, and every pull becomes a push: the inverted catenary stands in pure <b>compression</b>, each stone leaning on its neighbours with no sideways bending to crack it. Christopher Wren shaped the dome of St Paul's near this curve; Antoni Gaudí hung weighted strings upside down to design his churches and read the arches straight off the shadows; the Gateway Arch in St Louis is a <em>weighted</em> catenary, thickened at the feet. Flip the chain on the bench and you are doing, in a browser, what Gaudí did with string and lead — reading an arch off the curve of a chain.</p>
+    </section>
+
+    <footer class="foot">
+      <p class="foot-series">One of a series — a page a day, each built on one old working word and the discipline hidden inside it. <span class="foot-date">2026-08-18</span>.</p>
+    </footer>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
