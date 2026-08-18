@@ -436,6 +436,34 @@
     setSpan(DEFAULTS.span); setSlack(DEFAULTS.slack); setTilt(DEFAULTS.tilt);
   });
 
+  // Keyboard: work the whole bench without the mouse. Arrows pay slack out and take
+  // it in; brackets narrow and widen the span; minus/equals tilt the anchors; F
+  // flips to the arch and back; P toggles the parabola; R resets. When a range
+  // slider holds focus its native arrow-stepping is left alone, so the two never
+  // fight, and a focused button keeps its own Space/Enter.
+  document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    var onRange = (e.target === spanRange || e.target === slackRange || e.target === tiltRange);
+    switch (e.key) {
+      case "ArrowLeft":  if (onRange) return; setSlack(state.slack - 2); break;
+      case "ArrowRight": if (onRange) return; setSlack(state.slack + 2); break;
+      case "[": setSpan(state.span - 0.5); break;
+      case "]": setSpan(state.span + 0.5); break;
+      case "-": setTilt(state.tilt - 0.5); break;
+      case "=": setTilt(state.tilt + 0.5); break;
+      case "f": case "F": flipTo(flipTarget ? 0 : 1); break;
+      case "p": case "P":
+        paraOn = !paraOn;
+        paraBtn.setAttribute("aria-pressed", paraOn ? "true" : "false");
+        render(); break;
+      case "r": case "R":
+        if (flipTarget) flipTo(0);
+        setSpan(DEFAULTS.span); setSlack(DEFAULTS.slack); setTilt(DEFAULTS.tilt); break;
+      default: return;
+    }
+    e.preventDefault();
+  });
+
   // ---- boot ----
   spanRange.min = SPAN_MIN; spanRange.max = SPAN_MAX;
   slackRange.min = SLACK_MIN; slackRange.max = SLACK_MAX;
