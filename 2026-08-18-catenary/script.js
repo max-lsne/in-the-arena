@@ -39,6 +39,12 @@
   var morphT = 0;                           // 0 = hanging chain, 1 = inverted arch
   var flipTarget = 0;
 
+  // Motion preference — a reader who asks for less motion gets no flip morph: the
+  // chain snaps straight between hanging and arch. Re-checked live, so toggling the
+  // system setting takes effect without a reload.
+  var reduceMQ = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+  function motionOff() { return !!(reduceMQ && reduceMQ.matches); }
+
   // hyperbolic + inverse helpers, defined outright so the bench does not lean on
   // any one engine having Math.sinh / Math.atanh
   function sinh(x) { return (Math.exp(x) - Math.exp(-x)) / 2; }
@@ -365,9 +371,16 @@
     flipTarget = target;
     flipBtn.setAttribute("aria-pressed", target ? "true" : "false");
     flipBtn.textContent = target ? "Hang it back" : "Flip to arch";
+    if (flipRaf) { window.cancelAnimationFrame(flipRaf); flipRaf = null; }
+    if (motionOff()) {                       // reduced motion: snap, do not morph
+      morphT = target;
+      draw(model, morphT);
+      paint(model, morphT);
+      scheduleAnnounce(model, morphT);
+      return;
+    }
     flipFrom = morphT;
     flipStart = 0;
-    if (flipRaf) window.cancelAnimationFrame(flipRaf);
     flipRaf = window.requestAnimationFrame(flipStep);
   }
   function flipStep(ts) {
@@ -402,6 +415,17 @@
   tiltRange.addEventListener("input", function () { setTilt(parseFloat(tiltRange.value)); });
 
   flipBtn.addEventListener("click", function () { flipTo(flipTarget ? 0 : 1); });
+  if (reduceMQ) {
+    var onMotionChange = function () {
+      if (motionOff() && flipRaf) {          // caught mid-morph — jump to the target
+        window.cancelAnimationFrame(flipRaf); flipRaf = null;
+        morphT = flipTarget;
+        draw(model, morphT); paint(model, morphT); scheduleAnnounce(model, morphT);
+      }
+    };
+    if (reduceMQ.addEventListener) reduceMQ.addEventListener("change", onMotionChange);
+    else if (reduceMQ.addListener) reduceMQ.addListener(onMotionChange);   // older browsers
+  }
   paraBtn.addEventListener("click", function () {
     paraOn = !paraOn;
     paraBtn.setAttribute("aria-pressed", paraOn ? "true" : "false");
