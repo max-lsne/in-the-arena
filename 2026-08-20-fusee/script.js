@@ -36,6 +36,7 @@
   var RUN_MS = 4200;                        // sweep time for Run, full to empty
 
   var DEFAULTS = { wind: 62, droop: 260, turns: 8 };
+  var STORE_KEY = "arena.fusee.v1";
 
   // mechanism geometry (viewBox units)
   var BC = { x: 150, y: 170 }, RB = 62;     // barrel centre and drawn radius
@@ -83,6 +84,27 @@
   }
   function clamp(v, lo, hi) { return v < lo ? lo : (v > hi ? hi : v); }
   function add(node) { svg.appendChild(node); return node; }
+
+  // Keep the bench as you left it, across visits — the wind, the spring droop and
+  // the turns, but not whether the fusee had been taken off (a page should open
+  // with the cone fitted and the drive held level, not mid-demonstration).
+  function save() {
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify({
+        wind: state.wind, droop: state.droop, turns: state.turns
+      }));
+    } catch (e) { /* private mode or full quota — the bench still works */ }
+  }
+  function restore() {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (s && typeof s.wind === "number" && isFinite(s.wind)) state.wind = clamp(s.wind, WIND_MIN, WIND_MAX);
+      if (s && typeof s.droop === "number" && isFinite(s.droop)) state.droop = clamp(s.droop, DROOP_MIN, DROOP_MAX);
+      if (s && typeof s.turns === "number" && isFinite(s.turns)) state.turns = clamp(s.turns, TURNS_MIN, TURNS_MAX);
+    } catch (e) { /* malformed or unreadable — fall back to defaults */ }
+  }
   function label(x, y, anchor, text, cls) {
     var t = make("text", { x: x, y: y, "text-anchor": anchor, class: cls || "plot-tick" });
     t.textContent = text;
@@ -281,7 +303,7 @@
     el.turnsVal.textContent = state.turns + " turns";
   }
 
-  function render() { draw(); paint(); }
+  function render() { draw(); paint(); save(); }
 
   // ---- the Run sweep: let the spring drain from full to empty ----
   var runRaf = null, runStart = 0, runFrom = 1;
@@ -349,5 +371,6 @@
   windRange.min = WIND_MIN; windRange.max = WIND_MAX;
   droopRange.min = DROOP_MIN; droopRange.max = DROOP_MAX;
   turnsRange.min = TURNS_MIN; turnsRange.max = TURNS_MAX;
+  restore();
   setWind(state.wind); setDroop(state.droop); setTurns(state.turns);
 })();
