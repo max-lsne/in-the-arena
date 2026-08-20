@@ -396,6 +396,30 @@ input[type="range"]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px 
   border-left: 3px solid var(--brass);
 }
 
+.keys {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+}
+.keys summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--ink-soft);
+  letter-spacing: 0.03em;
+}
+.keys ul { margin: 0.7rem 0 0; padding-left: 0; list-style: none; display: grid; gap: 0.35rem; }
+.keys li { display: flex; gap: 0.5rem; align-items: baseline; }
+kbd {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.76rem;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  padding: 0.05rem 0.4rem;
+  color: var(--ink);
+}
+
 /* ---- coda + footer ---- */
 #coda p { color: var(--ink-soft); }
 

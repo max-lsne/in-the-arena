@@ -388,6 +388,20 @@
   droopRange.addEventListener("input", function () { setDroop(parseFloat(droopRange.value)); });
   turnsRange.addEventListener("input", function () { setTurns(parseFloat(turnsRange.value)); });
 
+  function toggleFusee() {
+    fuseeOn = !fuseeOn;
+    fuseeBtn.setAttribute("aria-pressed", fuseeOn ? "false" : "true");   // pressed = removed
+    fuseeBtn.textContent = fuseeOn ? "Remove the fusee" : "Refit the fusee";
+    render();
+  }
+  function doReset() {
+    stopRun();
+    fuseeOn = true;
+    fuseeBtn.setAttribute("aria-pressed", "false");
+    fuseeBtn.textContent = "Remove the fusee";
+    setWind(DEFAULTS.wind); setDroop(DEFAULTS.droop); setTurns(DEFAULTS.turns);
+  }
+
   runBtn.addEventListener("click", function () { if (runRaf) stopRun(); else startRun(); });
   if (reduceMQ) {
     var onMotionChange = function () {
@@ -396,18 +410,34 @@
     if (reduceMQ.addEventListener) reduceMQ.addEventListener("change", onMotionChange);
     else if (reduceMQ.addListener) reduceMQ.addListener(onMotionChange);   // older browsers
   }
-  fuseeBtn.addEventListener("click", function () {
-    fuseeOn = !fuseeOn;
-    fuseeBtn.setAttribute("aria-pressed", fuseeOn ? "false" : "true");   // pressed = removed
-    fuseeBtn.textContent = fuseeOn ? "Remove the fusee" : "Refit the fusee";
-    render();
-  });
-  resetBtn.addEventListener("click", function () {
-    stopRun();
-    fuseeOn = true;
-    fuseeBtn.setAttribute("aria-pressed", "false");
-    fuseeBtn.textContent = "Remove the fusee";
-    setWind(DEFAULTS.wind); setDroop(DEFAULTS.droop); setTurns(DEFAULTS.turns);
+  fuseeBtn.addEventListener("click", toggleFusee);
+  resetBtn.addEventListener("click", doReset);
+
+  // Keyboard: work the whole bench without the mouse. Arrows run the spring down
+  // and wind it up; brackets soften or harden the spring's droop; minus/equals set
+  // the turns; Space lets it run down from where it sits; X takes the fusee off and
+  // refits it; R resets. When a range slider holds focus its native arrow-stepping
+  // is left alone, so the two never fight, and a focused button keeps its own
+  // Space/Enter.
+  document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    var onRange = (e.target === windRange || e.target === droopRange || e.target === turnsRange);
+    var onButton = (e.target === runBtn || e.target === fuseeBtn || e.target === resetBtn);
+    switch (e.key) {
+      case "ArrowLeft":  if (onRange) return; stopRun(); setWind(state.wind - 4); break;
+      case "ArrowRight": if (onRange) return; stopRun(); setWind(state.wind + 4); break;
+      case "[": setDroop(state.droop - 10); break;
+      case "]": setDroop(state.droop + 10); break;
+      case "-": setTurns(state.turns - 1); break;
+      case "=": setTurns(state.turns + 1); break;
+      case " ": case "Spacebar":
+        if (onButton) return;                 // let the focused button take its own Space
+        if (runRaf) stopRun(); else startRun(); break;
+      case "x": case "X": toggleFusee(); break;
+      case "r": case "R": doReset(); break;
+      default: return;
+    }
+    e.preventDefault();
   });
 
   // ---- boot ----
