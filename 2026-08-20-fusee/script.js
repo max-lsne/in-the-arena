@@ -79,7 +79,8 @@
     swing: document.getElementById("rfSwing"),
     windVal: document.getElementById("windVal"),
     droopVal: document.getElementById("droopVal"),
-    turnsVal: document.getElementById("turnsVal")
+    turnsVal: document.getElementById("turnsVal"),
+    status: document.getElementById("status")
   };
 
   // ---- small helpers ----
@@ -309,7 +310,35 @@
     el.turnsVal.textContent = state.turns + " turns";
   }
 
-  function render() { draw(); paint(); save(); }
+  // Speak the settled state, not every frame of a run. A live region written on
+  // every step of the sweep would flood a screen reader, so the announcement is
+  // debounced and phrased as plain words a reader voices cleanly.
+  var announceTimer = null;
+  function scheduleAnnounce() {
+    if (announceTimer) clearTimeout(announceTimer);
+    announceTimer = setTimeout(speak, 400);
+  }
+  function speak() {
+    if (!el.status) return;
+    var w = windFrac(), tb = tauBarrel(w), rn = radiusNorm(w), r = rho();
+    var wound = state.wind + " percent wound";
+    var msg;
+    if (fuseeOn) {
+      msg = "The fusee is fitted. With the spring " + wound + ", the barrel torque has fallen to " +
+        tb.toFixed(2) + " of its full value, but the chain rides the cone at " + rn.toFixed(2) +
+        " times its smallest radius, and the two cancel: the drive handed to the train holds at a " +
+        "constant 1.00, flat from wound to run down. The cone flares " + r.toFixed(1) +
+        " to 1, exactly matching the spring's droop.";
+    } else {
+      msg = "The fusee is removed and the train is driven straight off the barrel. With the spring " +
+        wound + ", the drive is " + tb.toFixed(2) + " of full and falls all the way to " +
+        tauMin().toFixed(2) + " as the spring runs down — a drop of " + Math.round((1 - tauMin()) * 100) +
+        " percent across one winding, the uneven push the fusee was built to erase.";
+    }
+    el.status.textContent = msg;
+  }
+
+  function render() { draw(); paint(); scheduleAnnounce(); save(); }
 
   // ---- the Run sweep: let the spring drain from full to empty ----
   var runRaf = null, runStart = 0, runFrom = 1;

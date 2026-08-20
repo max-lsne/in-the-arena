@@ -384,6 +384,18 @@ input[type="range"]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px 
 }
 .btn:focus-visible { outline: 3px solid var(--drive-glow); outline-offset: 2px; }
 
+.status {
+  margin: 1.1rem 0 0;
+  padding: 0.7rem 0.9rem;
+  min-height: 1.2rem;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  background: var(--paper-2);
+  border-radius: 9px;
+  border-left: 3px solid var(--brass);
+}
+
 /* ---- coda + footer ---- */
 #coda p { color: var(--ink-soft); }
 
