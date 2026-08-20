@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fusee — the spiral cone that makes a fading mainspring drive a clock at a constant force</title>
+  <meta name="description" content="A wound mainspring shoves hard and a run-down one barely pushes, so a clock driven straight from it gains when fresh and loses when tired. The fusee is the cure and it is pure geometry: a spiral-grooved cone cut so its radius grows exactly as fast as the spring's torque fades, keeping radius times torque constant all the way down. The fusee is the reciprocal of the mainspring's own weakness, turned in brass. A small page, and a spring you can wind, slacken and run down by hand." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231d2733'/%3E%3Cpath d='M20 6 L24 6 L26 26 L18 26 Z' fill='%23c98a3a'/%3E%3Cpath d='M20 6 L24 6 M19.6 11 L24.4 11 M19.1 16 L24.9 16 M18.6 21 L25.4 21' stroke='%238b98a6' stroke-width='0.9'/%3E%3Ccircle cx='8' cy='16' r='5.4' fill='none' stroke='%238b98a6' stroke-width='1.6'/%3E%3Cpath d='M8 16 m-3 0 a3 3 0 1 1 6 0' fill='none' stroke='%23c98a3a' stroke-width='1.1'/%3E%3Cline x1='12.6' y1='13.5' x2='19.2' y2='11' stroke='%2358c98a' stroke-width='1.4'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#eef1f4" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0f141a" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Fusee — the cone that turns a spring's weakness into a constant drive" />
+  <meta property="og:description" content="A mainspring loses torque as it unwinds. The fusee, a spiral-grooved cone, is cut so the chain climbs to a wider radius exactly as fast as the spring weakens, so torque times radius stays constant and the clock is driven with an even force from full to empty. The fusee's flare is the exact reciprocal of the spring's droop. Worked here on a spring you can wind and run down." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">In the arena · 2026-08-20</p>
+      <p class="pron"><b>fusee</b> · <i>noun</i> · /fjuːˈziː/ — the spiral-grooved cone in a spring-driven clock or watch that equalises the pull of the mainspring, giving the train a constant drive from wound to run down; from Old French <i>fusée</i>, <i>a spindleful of thread</i>, from Latin <i>fūsus</i>, <i>a spindle</i></p>
+      <h1>Fusee</h1>
+      <p class="lede">A mainspring is a broken clock waiting to happen. Wound tight it shoves hard; run down it barely pushes — and a train driven straight from it would <em>gallop when fresh and crawl when tired</em>. The fusee is the fix, and it is nothing but a well-chosen curve turned in brass.</p>
+      <p class="sub">A hanging weight never tires: it pulls with the same force freshly wound or nearly spent, and a weight clock keeps even time for free. A spring is not so kind. A coiled mainspring is a torsion spring, and it obeys <b>Hooke's law</b> — the torque it returns falls very nearly in proportion to how far it is still wound, so it might hand the train three times the push when fresh as it does when almost run down. That would be harmless if a clock did not care how hard it is driven, but every escapement leaks a little of its drive into the swing it is meant only to count, so a bare spring clock <b>gains while it is fresh and loses as it tires</b>. The fusee cancels that by feeding the train a torque that does not change — and it makes that constant torque out of geometry alone, a spiral cone cut so its radius rises exactly as fast as the spring's pull dies.</p>
+    </header>
+
+    <section id="problem">
+      <p class="section-tag">The problem the cone solves</p>
+      <h2>A spring's push fades; a clock's rate must not</h2>
+      <p>Wind a coiled mainspring and it stores its energy the way any spring does, by being bent away from rest — and it pays that energy back as a torque very nearly proportional to how far it is still wound. Call the torque of a full spring <span class="mono">τ_max</span> and of one almost let down <span class="mono">τ_min</span>; the ratio between them, for a real spring, is often two or three to one. Across a single winding the drive is not a fixed thing but a sliding one.</p>
+
+      <p>A clock could ignore that only if its rate were deaf to its drive. No escapement is. The verge, the anchor, the lever, the balance — each hands the timekeeper a small push on every beat, and each of them lets the <em>size</em> of that push bleed into the rate, so the pendulum or balance swings a touch wider and faster under a stronger drive. Feed it a torque that falls by half over a day and it will <b>gain in the morning and lose by night</b>, an error stitched into the spring itself that no filing of the pallets removes.</p>
+
+      <p class="pull">The cure is not a better escapement but a steadier supply: give the train the <em>same</em> torque whether the spring is fresh or spent. The fusee is a machine that does exactly that, and its only working part is a radius chosen with care.</p>
+    </section>
+
+    <section id="relation">
+      <p class="section-tag">The one relation it embodies</p>
+      <h2>A rising arm for a failing force</h2>
+      <p>Hold the spring in a <b>barrel</b> of fixed radius <span class="mono">R</span>. The chain wound off the barrel pulls with a tension that is just the spring's torque over that radius,</p>
+
+      <p class="pull">F = τ_spring / R,</p>
+
+      <p>and because <span class="mono">R</span> does not change, that tension rises and falls in lockstep with the spring — strong when wound, weak when let down. The chain carries that same tension across to the <b>fusee</b> and pulls the train through the fusee's arbor, so the torque handed on is the tension times whatever fusee radius the chain happens to be riding:</p>
+
+      <p class="pull">τ_out = F · r(w) = (τ_spring / R) · r(w).</p>
+
+      <p>For that output to stay level while <span class="mono">τ_spring</span> sinks, the fusee radius must <b>climb in exact inverse proportion</b> to the spring's torque — <span class="mono">r(w) ∝ 1 / τ_spring(w)</span>. That is the whole design: the fusee's profile is the <em>reciprocal</em> of the mainspring's torque curve, drawn as a solid of revolution. Narrow at the top, where the spring is strong and the chain must ride a short arm; flared at the base, where the spring is weak and needs a long one. And the flare is fixed, not chosen: the biggest fusee radius over the smallest must equal the strongest spring torque over the weakest,</p>
+
+      <p class="pull"><span class="mono">r_max / r_min = τ_max / τ_min</span>.</p>
+
+      <p>A spring that sags three to one wants a fusee that flares three to one. The cone you see is the spring's own weakness, turned in brass so the two cancel.</p>
+    </section>
+
+    <section id="bench" aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">Wind it, run it down, then take the fusee away</h2>
+      <p class="bench-intro">A spring <b>barrel</b> on the left, the <b>fusee</b> on the right, the chain slung between, and along the foot a plot of torque against how far the spring is wound. Draw the <b>wind</b> down and watch the chain climb to the cone's wider turns as the barrel's pull weakens — the two cancel, and the output torque holds flat where the barrel's own torque slides away beneath it. Change the <b>spring droop</b> and the fusee is re-cut on the spot, its flare always the exact reciprocal of the droop. Press <b>Run</b> to let the spring drain from full to empty, or <b>Remove the fusee</b> to drive the train straight off the barrel and watch the drive droop with the spring — the error the fusee was built to erase.</p>
+
+      <div class="bench" id="benchRoot">
+        <div class="scales" id="scalesWrap">
+          <svg id="stageSvg" viewBox="0 0 640 470" role="img"
+               aria-label="A spring barrel on the left and a spiral-grooved fusee cone on the right, a chain running between them, above a plot of drive torque against how far the spring is wound.">
+            <!-- populated by script.js -->
+          </svg>
+        </div>
+
+        <div class="readout" aria-hidden="false">
+          <div class="read-big">
+            <span class="read-num mono" id="readBig">1.00 ×</span>
+            <span class="read-cap" id="readCap">drive torque</span>
+          </div>
+          <p class="read-break mono">
+            <span class="rb-main" id="rbEq">τ_out = τ_spring · r(w) ⁄ R</span>
+          </p>
+          <ul class="read-facts">
+            <li><span class="rf-k">barrel torque now</span><span class="rf-v mono" id="rfBarrel">0.62 ×</span></li>
+            <li><span class="rf-k">fusee radius now</span><span class="rf-v mono" id="rfRadius">1.61 r₀</span></li>
+            <li><span class="rf-k">torque × radius</span><span class="rf-v mono" id="rfProduct">1.00</span></li>
+            <li><span class="rf-k">fusee flare r_max ⁄ r_min</span><span class="rf-v mono" id="rfFlare">2.6 : 1</span></li>
+            <li><span class="rf-k">spring droop τ_max ⁄ τ_min</span><span class="rf-v mono" id="rfDroop">2.6 : 1</span></li>
+            <li><span class="rf-k">drive falls over a winding</span><span class="rf-v mono" id="rfSwing">0%</span></li>
+          </ul>
+        </div>
+
+        <div class="controls">
+          <div class="ctl">
+            <label for="windRange">wind — how far the spring is still wound
+              <span class="ctl-val mono" id="windVal">62%</span>
+            </label>
+            <input type="range" id="windRange" min="0" max="100" step="1" value="62"
+                   aria-describedby="windNote" />
+            <p class="ctl-note" id="windNote">Run down at the base of the cone, fully wound at its tip. Draw it down and the chain climbs to the fusee's wider turns while the barrel's pull weakens — the longer arm making up for the softer push.</p>
+          </div>
+
+          <div class="ctl">
+            <label for="droopRange">spring droop — τ_max : τ_min
+              <span class="ctl-val mono" id="droopVal">2.6 : 1</span>
+            </label>
+            <input type="range" id="droopRange" min="120" max="400" step="5" value="260"
+                   aria-describedby="droopNote" />
+            <p class="ctl-note" id="droopNote">How much the mainspring's torque falls from wound to run down. A stiff, even spring droops little and wants a nearly straight cone; a spring that sags hard wants a sharply flared one, cut to match.</p>
+          </div>
+
+          <div class="ctl ctl-gap">
+            <label for="turnsRange">turns — chain the fusee holds
+              <span class="ctl-val mono" id="turnsVal">8 turns</span>
+            </label>
+            <input type="range" id="turnsRange" min="4" max="16" step="1" value="8"
+                   aria-describedby="turnsNote" />
+            <p class="ctl-note" id="turnsNote">How many turns of chain wrap the fusee, and so how long the clock runs between windings. More turns, a taller cone and a longer going — the even drive stretched over more hours.</p>
+          </div>
+
+          <div class="ctl-actions">
+            <button type="button" class="btn" id="runBtn" aria-pressed="false">Run down</button>
+            <button type="button" class="btn btn-ghost" id="fuseeBtn" aria-pressed="false">Remove the fusee</button>
+            <button type="button" class="btn btn-ghost" id="resetBtn">Reset</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="coda">
+      <p class="section-tag">Why keep it</p>
+      <h2>A reciprocal, computed in brass</h2>
+      <p>The fusee is worth a page because it is a mechanism that works a reciprocal without arithmetic. No clockmaker sat down to solve <span class="mono">1 ⁄ τ(w)</span> and then turned the answer on a lathe; the cones were cut to a curve found by trial — filed and tried and filed again until the going stayed even — and the shape they arrived at <em>is</em> the inverse of the spring's failing torque, discovered in metal a century before the calculus that would have named it. The spring's weakness and the cone's flare are the same fact written twice.</p>
+      <p>It keeps company with the other small governors of constancy. The <b>centrifugal governor</b> flattens an engine's speed by letting rising balls throttle the steam; the <b>escapement</b> meters a clock's push into equal beats; the fusee holds the drive itself still while the spring behind it dies. Each is a machine built around a single stubborn idea — that one quantity shall not move while another runs away — and each solves it not with cleverness but with a shape. John Harrison trusted a <em>going</em> fusee to hold his sea-clock even through the very act of winding it, because at sea the seconds lost while you turned the key were seconds of longitude, and a ship cannot afford to forget where it is. Wind the spring on the bench, let it run down, and watch the drive refuse to fall: that refusal is the fusee, and it is only a radius, well chosen.</p>
+    </section>
+
+    <footer class="foot">
+      <p class="foot-series">One of a series — a page a day, each built on one old working word and the discipline hidden inside it. <span class="foot-date">2026-08-20</span>.</p>
+    </footer>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
