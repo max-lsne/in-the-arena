@@ -52,6 +52,12 @@
   var state = { wind: DEFAULTS.wind, droop: DEFAULTS.droop, turns: DEFAULTS.turns };
   var fuseeOn = true;                       // false = train driven straight off the barrel
 
+  // Motion preference — a reader who asks for less motion gets no run-down sweep:
+  // the spring steps straight to empty. Re-checked live, so toggling the system
+  // setting takes effect without a reload.
+  var reduceMQ = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+  function motionOff() { return !!(reduceMQ && reduceMQ.matches); }
+
   // ---- element handles ----
   var svg = document.getElementById("stageSvg");
   var windRange = document.getElementById("windRange");
@@ -318,6 +324,7 @@
   }
   function startRun() {
     if (windFrac() <= 0.02) setWind(WIND_MAX);     // fully run down — wind it first
+    if (motionOff()) { setWind(WIND_MIN); return; } // reduced motion: step to empty, no sweep
     runFrom = windFrac();
     runStart = 0;
     setRunning(true);
@@ -353,6 +360,13 @@
   turnsRange.addEventListener("input", function () { setTurns(parseFloat(turnsRange.value)); });
 
   runBtn.addEventListener("click", function () { if (runRaf) stopRun(); else startRun(); });
+  if (reduceMQ) {
+    var onMotionChange = function () {
+      if (motionOff() && runRaf) { stopRun(); setWind(WIND_MIN); }   // caught mid-sweep — jump to empty
+    };
+    if (reduceMQ.addEventListener) reduceMQ.addEventListener("change", onMotionChange);
+    else if (reduceMQ.addListener) reduceMQ.addListener(onMotionChange);   // older browsers
+  }
   fuseeBtn.addEventListener("click", function () {
     fuseeOn = !fuseeOn;
     fuseeBtn.setAttribute("aria-pressed", fuseeOn ? "false" : "true");   // pressed = removed
