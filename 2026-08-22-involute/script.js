@@ -490,12 +490,46 @@
     else if (reduceMQ.addListener) reduceMQ.addListener(onMotionChange);   // older browsers
   }
   spreadBtn.addEventListener("click", toggleSpread);
-  resetBtn.addEventListener("click", function () {
+  function doReset() {
     stopTurn();
     if (spreadRaf) { window.cancelAnimationFrame(spreadRaf); spreadRaf = null; }
     spreadOpen = false; setSpread(false);
     rot1 = 0;
     setTeeth(DEFAULTS.teeth); setPhi(DEFAULTS.phi); setCentre(DEFAULTS.centre);
+  }
+  resetBtn.addEventListener("click", doReset);
+
+  // roll the mesh by hand — a small step of the driver, stopping any running spin first
+  function stepMesh(dir) {
+    stopTurn();
+    rot1 += dir * (2 * Math.PI / N1) * 0.25;
+    draw();
+  }
+
+  // Keyboard: work the whole bench without the mouse. Arrows roll the mesh; brackets
+  // shallow or steepen the pressure angle; minus/equals set the driven teeth; Space
+  // turns the mesh; S spreads the centres and closes them; R resets. When a range
+  // slider holds focus its native arrow-stepping is left alone, and a focused button
+  // keeps its own Space/Enter.
+  document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    var onRange = (e.target === teethRange || e.target === phiRange || e.target === centreRange);
+    var onButton = (e.target === runBtn || e.target === spreadBtn || e.target === resetBtn);
+    switch (e.key) {
+      case "ArrowLeft":  if (onRange) return; stepMesh(-1); break;
+      case "ArrowRight": if (onRange) return; stepMesh(1); break;
+      case "[": setPhi(state.phi - 5); break;
+      case "]": setPhi(state.phi + 5); break;
+      case "-": setTeeth(state.teeth - 1); break;
+      case "=": setTeeth(state.teeth + 1); break;
+      case " ": case "Spacebar":
+        if (onButton) return;                             // let the focused button take its own Space
+        if (turnRaf) stopTurn(); else startTurn(); break;
+      case "s": case "S": toggleSpread(); break;
+      case "r": case "R": doReset(); break;
+      default: return;
+    }
+    e.preventDefault();
   });
 
   // ---- boot ----
