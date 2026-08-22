@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Involute — the tooth-curve that keeps two gears turning at one unchanging ratio, even as you pull their centres apart</title>
+  <meta name="description" content="Two gears made of pegs or triangles push each other unevenly through every tooth, so the driven wheel speeds and slows within each beat — a ripple that whines and wears. The involute is the cure and it is one curve: the shape traced by a string unwound from a circle, given to the tooth flanks so that contact glides along a single fixed straight line, tangent to both base circles. The ratio is then r_b2 over r_b1, a constant — and because the base circles never change, it holds even when the centres are spread. A small page, and a mesh you can turn, reshape and pull apart by hand." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231b2530'/%3E%3Ccircle cx='11' cy='16' r='6.6' fill='none' stroke='%238b98a6' stroke-width='1.4'/%3E%3Ccircle cx='11' cy='16' r='4.2' fill='none' stroke='%236f7d8b' stroke-width='0.8' stroke-dasharray='1.6 1.6'/%3E%3Ccircle cx='24' cy='16' r='4.4' fill='none' stroke='%238b98a6' stroke-width='1.3'/%3E%3Cline x1='15' y1='11.6' x2='22.6' y2='19' stroke='%2340c39a' stroke-width='1.5'/%3E%3Ccircle cx='18.4' cy='15' r='1.5' fill='%2340c39a'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#eef1f4" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0f141a" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Involute — the tooth-shape that transmits a perfectly constant ratio" />
+  <meta property="og:description" content="For two gears to turn at a fixed ratio, the tooth contact's common normal must always cross one fixed point on the line of centres. The involute is the only simple curve that makes that normal a fixed straight line — tangent to both base circles — so the drive is uniform and the ratio equals r_b2 / r_b1. Because the base circles never move, the ratio survives even a sloppy centre distance. Worked here on a mesh you can turn and pull apart." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">In the arena · 2026-08-22</p>
+      <p class="pron"><b>involute</b> · <i>noun</i> · /ˈɪnvəluːt/ — the curve traced by the end of a taut string as it is unwound from a fixed circle; the flank shape given to gear teeth so that they hand on rotation at a perfectly even ratio; from Latin <i>involūtus</i>, <i>rolled up, wrapped in</i>, from <i>involvere</i>, <i>to roll into</i></p>
+      <h1>Involute</h1>
+      <p class="lede">Cut gear teeth as plain pegs or triangles and the drive will <em>ripple</em> — the driven wheel racing and dragging within every single tooth, a stutter you can hear as a whine and feel as wear. The cure is not finer teeth but a particular curve, and it is the one a string draws as it unwinds from a circle.</p>
+      <p class="sub">Two wheels are meant to pass rotation between them at a <b>fixed ratio</b>: three turns of the little one for one of the big. But teeth touch at a moving point, and unless their shapes are chosen with care the point pushes off-square — so the far wheel gains speed as a tooth climbs and loses it as the next takes over, faster then slower many times a second. The <b>fundamental law of gearing</b> says exactly what shape avoids this: the line square to both teeth where they touch — the common normal — must cross one and the same point on the line joining the centres, whatever the moment in the mesh. The <b>involute</b> is the curve that obeys that law in the simplest way possible: it makes the common normal not merely pass through a fixed point but lie along a single <em>fixed straight line</em>, so the ratio never wavers — and because that line is set by two circles buried inside the wheels that never change, the ratio holds even if you set the gears too far apart.</p>
+    </header>
+
+    <section id="problem">
+      <p class="section-tag">The problem the curve solves</p>
+      <h2>A fixed ratio, from teeth that touch on the move</h2>
+      <p>A pair of smooth discs pressed together and rolling without slip would trade rotation perfectly evenly — the contact sits always on the line of centres, and the speeds stay in the ratio of the radii. But discs slip under load; you need teeth. The moment you cut teeth, contact leaves that tidy point and wanders out along a flank, and now the geometry of the <em>tooth</em>, not the disc, decides how hard and how square one wheel drives the next.</p>
+
+      <p>Get the flank wrong and the drive is uneven within each tooth. The far wheel is handed a little more angle here and a little less there, so a shaft that should turn like clock hands instead trembles — <b>transmission error</b>, the source of gear whine, of hammering under load, of teeth that wear themselves into an early grave. No amount of care in spacing the teeth removes it; it is baked into the shape of the flank.</p>
+
+      <p class="pull">The cure is a flank whose contact, wherever it happens to be, always pushes through the <em>same</em> point on the line of centres. Robert Willis named that the fundamental law of gearing; the involute is its neatest answer.</p>
+    </section>
+
+    <section id="relation">
+      <p class="section-tag">The one relation it embodies</p>
+      <h2>Contact glides along a fixed line</h2>
+      <p>Bury a <b>base circle</b> in each wheel — radius <span class="mono">r_b1</span> in the driver, <span class="mono">r_b2</span> in the driven. Cut every flank as the <b>involute</b> of that circle: the path drawn by a string's end as the string peels off the circle taut. An involute has one defining property — the string, at every instant, is <em>tangent to the base circle and perpendicular to the flank</em>. It is a normal to the tooth that is also a tangent to the circle.</p>
+
+      <p>Now let two such teeth touch. The common normal where they meet must be tangent to <em>both</em> base circles at once — and there is exactly one such line between two circles. So contact does not wander over a curve; it slides up and down a single <b>fixed straight line</b>, the <b>line of action</b>, tangent to both base circles and crossing the line of centres at the <b>pitch point</b>. The law is satisfied not approximately but perfectly, and at every instant of the mesh.</p>
+
+      <p>Because the contact force runs along that fixed line, the ratio it hands on is fixed too — the base-circle speeds must match, <span class="mono">ω₁·r_b1 = ω₂·r_b2</span>, so</p>
+
+      <p class="pull">ω₁ ⁄ ω₂ = r_b2 ⁄ r_b1 = N₂ ⁄ N₁,</p>
+
+      <p>a constant set only by the two base circles and the tooth counts. And here is the quiet miracle: those base circles are cut once and never move. Push the centres apart by a careless millimetre and the <b>pitch circles swell and the pressure angle steepens</b> — the line of action tilts — but <span class="mono">r_b1</span> and <span class="mono">r_b2</span> do not change, so the ratio does not change either. The relation that governs the whole spread is</p>
+
+      <p class="pull"><span class="mono">cos φ = (r_b1 + r_b2) ⁄ C</span>,</p>
+
+      <p>with <span class="mono">C</span> the centre distance and <span class="mono">φ</span> the pressure angle: stretch <span class="mono">C</span> and <span class="mono">φ</span> opens, but the ratio, riding on the base radii alone, holds dead still.</p>
+    </section>
+
+    <section id="bench" aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">Turn the mesh, reshape it, then pull the centres apart</h2>
+      <p class="bench-intro">A <b>driver</b> on the left and a <b>driven</b> wheel on the right, their <b>base circles</b> dashed inside them and the <b>line of action</b> drawn tangent to both, with the sliding <b>contact point</b> riding it. Along the foot, a plot against centre distance: the <b>velocity ratio</b> held flat where the <b>pressure angle</b> climbs away beneath it. Press <b>Turn</b> to roll the mesh and watch the contact glide the straight line at an even pace. Change the <b>driven teeth</b> to reset the ratio, or the <b>pressure angle</b> to recut the flanks. Then draw <b>centre distance</b> out — or press <b>Spread the centres</b> — and watch the ratio refuse to move while everything else does: the tolerance that made the involute win.</p>
+
+      <div class="bench" id="benchRoot">
+        <div class="scales" id="scalesWrap">
+          <svg id="stageSvg" viewBox="0 0 640 470" role="img"
+               aria-label="Two involute gears meshing, the smaller driver on the left and larger driven wheel on the right, with each wheel's base circle dashed inside it and a straight line of action drawn tangent to both, carrying a sliding contact point; below, a plot of velocity ratio and pressure angle against centre distance.">
+            <!-- populated by script.js -->
+          </svg>
+        </div>
+
+        <div class="readout" aria-hidden="false">
+          <div class="read-big">
+            <span class="read-num mono" id="readBig">2.00 : 1</span>
+            <span class="read-cap" id="readCap">velocity ratio</span>
+          </div>
+          <p class="read-break mono">
+            <span class="rb-main" id="rbEq">ω₁ ⁄ ω₂ = r_b2 ⁄ r_b1 = N₂ ⁄ N₁</span>
+          </p>
+          <ul class="read-facts">
+            <li><span class="rf-k">driver ⁄ driven teeth</span><span class="rf-v mono" id="rfTeeth">12 : 24</span></li>
+            <li><span class="rf-k">pressure angle now</span><span class="rf-v mono" id="rfPhi">20.0°</span></li>
+            <li><span class="rf-k">centre distance</span><span class="rf-v mono" id="rfCentre">1.00 × nominal</span></li>
+            <li><span class="rf-k">pitch radii r_p1 : r_p2</span><span class="rf-v mono" id="rfPitch">1.00 : 2.00</span></li>
+            <li><span class="rf-k">base radii r_b1 : r_b2 (fixed)</span><span class="rf-v mono" id="rfBase">0.94 : 1.88</span></li>
+            <li><span class="rf-k">ratio drift as centres spread</span><span class="rf-v mono" id="rfDrift">0%</span></li>
+          </ul>
+        </div>
+
+        <div class="controls">
+          <div class="ctl">
+            <label for="teethRange">driven teeth — N₂, the far wheel's count
+              <span class="ctl-val mono" id="teethVal">24</span>
+            </label>
+            <input type="range" id="teethRange" min="12" max="42" step="1" value="24"
+                   aria-describedby="teethNote" />
+            <p class="ctl-note" id="teethNote">The driver is fixed at twelve teeth; give the driven wheel more and the ratio deepens, its base and pitch circles growing to suit. The ratio is exactly N₂ over N₁, whatever the flank shape or the spacing.</p>
+          </div>
+
+          <div class="ctl">
+            <label for="phiRange">pressure angle — φ, the flanks' slant
+              <span class="ctl-val mono" id="phiVal">20.0°</span>
+            </label>
+            <input type="range" id="phiRange" min="145" max="270" step="5" value="200"
+                   aria-describedby="phiNote" />
+            <p class="ctl-note" id="phiNote">The nominal angle the line of action makes to the wheels' common tangent, and so how steeply the flanks lean. The old 14½° gives slender teeth and a gentler push; the modern 20° and 25° give stubbier, stronger ones. It recuts the base circles on the spot.</p>
+          </div>
+
+          <div class="ctl ctl-gap">
+            <label for="centreRange">centre distance — C, how far the shafts sit apart
+              <span class="ctl-val mono" id="centreVal">1.00 × nominal</span>
+            </label>
+            <input type="range" id="centreRange" min="100" max="112" step="1" value="100"
+                   aria-describedby="centreNote" />
+            <p class="ctl-note" id="centreNote">Nominal is the snug distance where the pitch circles just kiss. Draw it out and the wheels part: the pitch circles swell, the pressure angle steepens, the teeth take up a little backlash — and the ratio, set by the untouched base circles, does not stir. That immunity is the involute's whole advantage.</p>
+          </div>
+
+          <div class="ctl-actions">
+            <button type="button" class="btn" id="runBtn" aria-pressed="false">Turn</button>
+            <button type="button" class="btn btn-ghost" id="spreadBtn" aria-pressed="false">Spread the centres</button>
+            <button type="button" class="btn btn-ghost" id="resetBtn">Reset</button>
+          </div>
+        </div>
+
+        <p class="status" id="status" role="status" aria-live="polite" aria-atomic="true"></p>
+
+      </div>
+    </section>
+
+    <section id="coda">
+      <p class="section-tag">Why keep it</p>
+      <h2>A ratio that will not drift</h2>
+      <p>The involute is worth a page because it turns a demand into a shape. The demand — that two wheels trade motion at one unwavering ratio — is a statement about <em>every instant</em> of a mesh, an infinity of conditions; the involute meets all of them at once with a single curve, the one a string draws unwinding from a circle. Leonhard Euler set the theory down in the 1760s, and Philippe de la Hire had seen the essential trick a lifetime earlier, but the shape needs no theory to work: it satisfies the law by construction, the way a hanging chain finds the catenary without solving for it.</p>
+      <p>Its rival, the <b>cycloidal</b> tooth, transmits an even ratio too — but only if the centres are set exactly right, for its contact curve depends on the spacing. The involute does not care. Cut the base circles and the ratio is fixed for good; a worn bearing, a rough casting, a shaft a hair out of place all change the pressure angle and the backlash and leave the ratio untouched. That single tolerance is why nearly every gear you will ever meet — in a watch, a mill, a car's box, a rocket's turbopump — is an involute, and the cycloid kept only to the odd clock and the pump. It keeps company with the other machines that hold one thing still while another runs loose: the <b>fusee</b> that holds a clock's drive level as its spring dies, the <b>governor</b> that holds an engine's speed as its load swings, the <b>escapement</b> that holds a beat as the push behind it fades. Turn the mesh on the bench, then pull the centres apart, and watch the ratio sit unmoved: that refusal is the involute, and it is only a string, unwound from a circle.</p>
+    </section>
+
+    <footer class="foot">
+      <p class="foot-series">One of a series — a page a day, each built on one old working word and the discipline hidden inside it. <span class="foot-date">2026-08-22</span>.</p>
+    </footer>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
