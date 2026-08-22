@@ -38,6 +38,7 @@
   var TURN_RATE = 0.9;                      // driver spin, radians per second
 
   var DEFAULTS = { teeth: 24, phi: 200, centre: 100 };
+  var STORE_KEY = "arena.involute.v1";
 
   // mechanism box (viewBox units); the plot lives below it
   var MX0 = 44, MX1 = 598, GY_TOP = 34, GY_BOT = 322;
@@ -81,6 +82,26 @@
   function clamp(v, lo, hi) { return v < lo ? lo : (v > hi ? hi : v); }
   function add(node) { svg.appendChild(node); return node; }
   function inv(a) { return Math.tan(a) - a; }                 // involute function
+
+  // Keep the bench as you left it, across visits — the driven tooth count and the
+  // pressure angle, but not the centre distance: a page should open at the snug
+  // nominal spacing with the ratio held, not mid-demonstration with the wheels
+  // already pulled apart.
+  function save() {
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify({ teeth: state.teeth, phi: state.phi }));
+    } catch (e) { /* private mode or full quota — the bench still works */ }
+  }
+  function restore() {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (s && typeof s.teeth === "number" && isFinite(s.teeth)) state.teeth = clamp(Math.round(s.teeth), TEETH_MIN, TEETH_MAX);
+      if (s && typeof s.phi === "number" && isFinite(s.phi)) state.phi = clamp(Math.round(s.phi / 5) * 5, PHI_MIN, PHI_MAX);
+    } catch (e) { /* malformed or unreadable — fall back to defaults */ }
+  }
+
   function label(x, y, anchor, text, cls) {
     var t = make("text", { x: x, y: y, "text-anchor": anchor, class: cls || "plot-tick" });
     t.textContent = text;
@@ -361,6 +382,7 @@
     var g = geom();
     paint(g);
     scheduleAnnounce(g);
+    save();
   }
 
   // ---- the Turn animation: roll the mesh ----
@@ -455,5 +477,6 @@
   teethRange.min = TEETH_MIN; teethRange.max = TEETH_MAX;
   phiRange.min = PHI_MIN; phiRange.max = PHI_MAX;
   centreRange.min = CENTRE_MIN; centreRange.max = CENTRE_MAX;
+  restore();
   setTeeth(state.teeth); setPhi(state.phi); setCentre(state.centre);
 })();
