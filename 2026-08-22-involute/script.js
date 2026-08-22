@@ -48,6 +48,13 @@
   var state = { teeth: DEFAULTS.teeth, phi: DEFAULTS.phi, centre: DEFAULTS.centre };
   var rot1 = 0;                             // driver rotation (radians)
 
+  // Motion preference — a reader who asks for less motion gets no spinning mesh and no
+  // centre-spread sweep: Turn steps the wheels one tooth at a time, and Spread jumps
+  // straight to its target. Re-checked live, so toggling the system setting takes
+  // effect without a reload.
+  var reduceMQ = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+  function motionOff() { return !!(reduceMQ && reduceMQ.matches); }
+
   // ---- element handles ----
   var svg = document.getElementById("stageSvg");
   var teethRange = document.getElementById("teethRange");
@@ -397,6 +404,11 @@
   }
   function startTurn() {
     if (turnRaf) return;
+    if (motionOff()) {                                   // reduced motion: step one tooth, no spin
+      rot1 += 2 * Math.PI / N1;
+      draw();
+      return;
+    }
     lastTs = 0;
     setTurning(true);
     turnRaf = window.requestAnimationFrame(turnStep);
@@ -418,8 +430,9 @@
     spreadBtn.textContent = on ? "Close the centres" : "Spread the centres";
   }
   function animateCentre(target) {
+    if (spreadRaf) { window.cancelAnimationFrame(spreadRaf); spreadRaf = null; }
+    if (motionOff()) { setCentre(target); return; }      // reduced motion: jump, no sweep
     spreadFrom = state.centre; spreadTo = target; spreadStart = 0;
-    if (spreadRaf) window.cancelAnimationFrame(spreadRaf);
     spreadRaf = window.requestAnimationFrame(spreadStep);
   }
   function spreadStep(ts) {
@@ -464,6 +477,18 @@
   });
 
   runBtn.addEventListener("click", function () { if (turnRaf) stopTurn(); else startTurn(); });
+  if (reduceMQ) {
+    var onMotionChange = function () {
+      if (!motionOff()) return;
+      if (turnRaf) stopTurn();                            // caught mid-spin — halt where it sits
+      if (spreadRaf) {                                    // caught mid-sweep — jump to the target
+        window.cancelAnimationFrame(spreadRaf); spreadRaf = null;
+        setCentre(spreadTo);
+      }
+    };
+    if (reduceMQ.addEventListener) reduceMQ.addEventListener("change", onMotionChange);
+    else if (reduceMQ.addListener) reduceMQ.addListener(onMotionChange);   // older browsers
+  }
   spreadBtn.addEventListener("click", toggleSpread);
   resetBtn.addEventListener("click", function () {
     stopTurn();
