@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scarf — the join in a beam, lapped not butted</title>
+  <meta name="description" content="Two timbers butted end to end make a beam only as strong as the glue in one thin line, and it drops its load the moment that line lets go. A scarf cuts both ends to long matching tapers, tables and keys them, drives a peg through — so the two run together over many times the beam's depth and carry as if never cut. Butt, lapped, keyed, pegged — succession done as a long overlap." />
+  <meta name="color-scheme" content="light" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23efe8d6'/%3E%3Cpath d='M2 13 L18 13 L12 16 L20 16 L14 19 L30 19 L30 21 L14 21 L20 18 L12 18 L18 15 L2 15 Z' fill='%23c68a4e'/%3E%3Ccircle cx='11' cy='17' r='1.6' fill='%2333383f'/%3E%3Ccircle cx='21' cy='17' r='1.6' fill='%2333383f'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <path d="M2 12 L18 12 L11 16 L20 16 L13 20 L30 20 L30 22 L13 22 L20 18 L11 18 L18 14 L2 14 Z" fill="currentColor" />
+          <circle cx="10.5" cy="17" r="1.7" fill="#33383f" />
+          <circle cx="21" cy="17" r="1.7" fill="#33383f" />
+        </svg>
+      </span>
+      <span>Scarf</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#bench">The shipwright's day</a>
+      <a href="#who">Who cuts the same joint</a>
+      <a href="#hold" class="nav-cta">Cut a lap</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">What carries a span, given a long lap and a peg</p>
+        <h1>
+          Butt two beams and the load falls at the seam.<br />
+          <em>Scarf them and it never knows the join is there.</em>
+        </h1>
+        <p class="lede">
+          Set two timbers end to end and glue them, and you have a beam
+          as strong as one thin line of glue — which is to say not a beam
+          at all: put a load on it and it snaps clean at the butt the
+          instant that line lets go. A scarf refuses to have a seam. You
+          cut both ends to long matching tapers, table them so they hook,
+          drive an iron peg through, and the two timbers run together
+          over four, six, eight times the beam's own depth — so at no one
+          place is much of the load crossing, and the beam carries as if
+          the timber had never been cut. The join disappears into the
+          run of the grain.
+        </p>
+        <div class="hero-cta">
+          <a href="#bench" class="btn btn-primary">See the shipwright's day</a>
+          <a href="#hold" class="btn btn-ghost">Cut a lap</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One beam, one hard span. The butt broke at the seam. The scarf carried.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg class="hero-bed" viewBox="0 0 400 320" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="cOak" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#d29a5e" />
+              <stop offset="100%" stop-color="#a86f38" />
+            </linearGradient>
+            <linearGradient id="cOak2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#c68a4e" />
+              <stop offset="100%" stop-color="#98622f" />
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="400" height="320" fill="#e9dfc4" />
+
+          <!-- two posts the scarfed beam spans between -->
+          <rect x="30" y="150" width="26" height="150" rx="3" fill="#8a6e48" opacity="0.9" />
+          <rect x="344" y="150" width="26" height="150" rx="3" fill="#8a6e48" opacity="0.9" />
+
+          <!-- the scarfed beam: two timbers lapped over a long tabled joint -->
+          <!-- left timber, running in from the left, tapering to a long tongue -->
+          <path d="M40 128 L230 128 L250 150 L210 150 L232 170 L40 170 Z" fill="url(#cOak)" />
+          <!-- right timber, tapering to meet it, overlapping -->
+          <path d="M360 128 L172 128 L150 150 L192 150 L168 170 L360 170 Z" fill="url(#cOak2)" opacity="0.92" />
+
+          <!-- the tabled step where the two hook together -->
+          <path d="M172 128 L210 150 L172 170 L192 150 Z" fill="#7a5326" opacity="0.55" />
+          <!-- grain lines running the whole length, through the join -->
+          <g stroke="#8a5a2e" stroke-width="0.8" fill="none" opacity="0.35">
+            <path d="M44 138 q160 -3 312 0" />
+            <path d="M44 150 q160 3 312 0" />
+            <path d="M44 162 q160 -2 312 0" />
+          </g>
+
+          <!-- two iron pegs driven through the lap -->
+          <circle cx="150" cy="149" r="6" fill="#33383f" />
+          <circle cx="150" cy="149" r="2.4" fill="#5a626b" />
+          <circle cx="238" cy="149" r="6" fill="#33383f" />
+          <circle cx="238" cy="149" r="2.4" fill="#5a626b" />
+
+          <!-- an oak key (folding wedge) driven into the joint to draw it up -->
+          <path d="M196 132 L206 132 L204 168 L198 168 Z" fill="#46695a" opacity="0.8" />
+
+          <!-- the load coming down on the beam, carried across the whole lap -->
+          <path d="M200 96 L200 122 M192 112 L200 122 L208 112" stroke="#a5583a" stroke-width="2.4" fill="none" stroke-linecap="round" />
+
+          <!-- curled shavings on the floor from the plane -->
+          <g stroke="#c68a4e" stroke-width="1.6" fill="none" opacity="0.6" stroke-linecap="round">
+            <path d="M96 288 q10 -12 22 -6 q-14 2 -8 12 q10 -4 12 4" />
+            <path d="M280 292 q12 -10 24 -3 q-14 1 -9 11 q10 -5 13 3" />
+          </g>
+          <!-- a chisel laid on the bench -->
+          <path d="M300 250 L338 236" stroke="#5a626b" stroke-width="5" stroke-linecap="round" />
+          <path d="M338 236 L348 232" stroke="#7a5326" stroke-width="7" stroke-linecap="round" />
+        </svg>
+        <span class="hero-tick hero-tick-1">cut the long tapers</span>
+        <span class="hero-tick hero-tick-2">table, key and peg</span>
+        <span class="hero-tick hero-tick-3">carries as if solid</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>A handover with no overlap<br /><em>drops the load in the gap.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            A succession done as a butt joint is two clean ends set
+            together: the leaver's last day is the arriver's first, the
+            work touching at a single line. It looks efficient — no
+            wasted weeks of two people doing one job. But a butt is only
+            as strong as the thin seam of glue at the join, and the first
+            real span finds it out. The load that used to run smoothly
+            along the beam arrives at the seam, finds nothing lapped
+            across it, and drops straight through the gap between the one
+            who left and the one who came.
+          </p>
+          <p>
+            A scarf spends the weeks on purpose. You cut both ends long —
+            the leaver stays on past their last real task, the arriver
+            starts before their first — and you table the two together so
+            they hook, key them so they draw up tight, and peg them so
+            they cannot draw apart. Now the two carry the span together
+            over a long overlap: the leaver still answering while the
+            arriver already decides, the load never resting on one line.
+            When the leaver finally goes, the beam does not even feel it.
+            The grain runs on past the join.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Cut the ends long</h3>
+          <p>A scarf begins by refusing the clean butt. Cut both timbers back to long matching tapers — the leaver stays past the last task, the arriver starts before the first — so there is length to lap. The longer the taper, the stronger the joint. A short lap is barely better than a butt.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Table it so it hooks</h3>
+          <p>A plain tapered lap can still slide apart under tension. Cut a step — a table — into both faces so they hook into one another and the joint carries a pull as well as a push. The work handed over with a catch in it, so it cannot quietly come apart while your back is turned.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Key it up tight</h3>
+          <p>Drive a pair of folding wedges — the key — into the joint to draw the two tapers hard together, closing every gap so the whole lap beds down and shares the load evenly. The weeks of overlap are not enough on their own; you have to cinch them, make the two actually carry together, not just sit alongside.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Peg it and plane it fair</h3>
+          <p>Bore through the lap and drive an iron peg so the tapers can never draw apart, then plane the joint flush until the grain runs on unbroken. A finished scarf you cannot pick out by eye — the beam simply carries, and no one asks any more which end was cut and which was grown.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="bench" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A shipwright's day in the yard</h2>
+        <p>One day's worth of joints and how far each is lapped — twelve beams on the trestles, from two ends butted and glued in a hurry to a keel scarf tabled, keyed and pegged that has carried thirty years at sea, cut on a fictional day in the boatyard at Ferrymead in late August 2026. Some are dry, just offered up. Some have carried every load the water gave them. One is a butt that broke clean at the seam and is being cut back to scarf. Cut a lap, count a year carried, saw one back to a butt — the yard redraws in your browser.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">The yard</p>
+            <p class="chart-project" id="chart-project">Ferrymead · August 2026 · twelve on the trestles</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Years each joint has carried its load">
+          <p class="profile-axis-label top">years carried</p>
+          <p class="profile-axis-label bot">dry, just offered</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the joints">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="dry" role="tab">Dry</button>
+          <button type="button" data-filter="glued" role="tab">Glued</button>
+          <button type="button" data-filter="cramped" role="tab">Cramped</button>
+          <button type="button" data-filter="faired" role="tab">Faired</button>
+        </div>
+
+        <ul class="legs" id="items-list">
+          <!-- joints inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-level" aria-label="Kind of joint">
+              <option value="butt">Butt</option>
+              <option value="lapped">Lapped</option>
+              <option value="keyed">Keyed</option>
+              <option value="pegged">Pegged</option>
+            </select>
+            <input id="add-metric" type="number" step="1" min="0" value="0" aria-label="Years carried" />
+            <input id="add-name" type="text" placeholder="Name the joint — the handover you mean to lap, not butt" maxlength="94" />
+            <select id="add-state" aria-label="Condition of the joint">
+              <option value="dry">Dry</option>
+              <option value="glued">Glued</option>
+              <option value="cramped">Cramped</option>
+              <option value="faired">Faired</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Cut the lap</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original yard</a>
+        </div>
+
+        <p class="bench-status" id="bench-status" role="status" aria-live="polite"></p>
+
+        <p class="kbd-help">
+          <strong>Keys:</strong>
+          <kbd>J</kbd>/<kbd>K</kbd> move &middot;
+          <kbd>Enter</kbd> draw up &middot;
+          <kbd>Del</kbd> saw back &middot;
+          <kbd>N</kbd> new joint &middot;
+          <kbd>0</kbd>&ndash;<kbd>4</kbd> filter &middot;
+          <kbd>[</kbd>/<kbd>]</kbd> nudge years &middot;
+          <kbd>R</kbd> reset.
+        </p>
+      </div>
+
+      <div class="legend">
+        <h3>The four joints</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-butt"></span><div><strong>Butt.</strong> Two ends set together, glued at one thin line. No overlap at all — as strong as the seam and no stronger. It drops the load the moment the line lets go.</div></li>
+          <li><span class="legend-swatch swatch-lapped"></span><div><strong>Lapped.</strong> The ends cut to long tapers and laid over one another. Real overlap now, carrying a push well — but a plain lap can still slide apart under a pull.</div></li>
+          <li><span class="legend-swatch swatch-keyed"></span><div><strong>Keyed.</strong> Tabled so it hooks and drawn up tight with folding wedges. The lap beds down and shares the load evenly. The overlap made to actually carry together.</div></li>
+          <li><span class="legend-swatch swatch-pegged"></span><div><strong>Pegged.</strong> Bored and pegged through, planed fair, the grain running on unbroken. Carries as if the timber were never cut. A handover you can no longer find the seam of.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who cuts the same joint</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The shipwright at the yard</h3>
+          <p>Forty years scarfing oak for wooden hulls, where a butt joint in a keel is a drowning waiting to happen. He cuts his laps eight times the depth and pegs them with the yard's own oak trenails. "A scarf's not a repair," he says. "It's how you make a thing longer than the tree it came from." His joints outlast the boats.</p>
+        </article>
+        <article>
+          <h3>The head who overlapped the succession</h3>
+          <p>The trustees wanted a clean handover — old head gone Friday, new head Monday. She insisted on a two-term overlap instead: she stayed on the hard governance while the new head already ran the school day, the two carrying together. When she finally left, no parent could say what week it changed. The load never dropped.</p>
+        </article>
+        <article>
+          <h3>The surgeon teaching the registrar</h3>
+          <p>He does not hand over a list, he laps a season of theatre: the registrar cutting while he still holds the retractor, then holding while the registrar cuts, the responsibility tabled and keyed so it cannot slide back to him too soon or forward too fast. By the time he steps out, the join carries. The patients never met a seam.</p>
+        </article>
+        <article>
+          <h3>The two who merged their firms</h3>
+          <p>They could have butted the two companies together on a signing date and watched clients fall through the gap. Instead they cut long tapers — six months where both names answered every call, the accounts tabled across both books, the culture keyed slowly tight. The join is pegged now and planed fair. It reads as one firm that was always one firm.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="hold" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · late summer 2026</p>
+        <h2>One line when the first scarf has carried a year and never felt the join.</h2>
+        <p class="hold-lede">A small page, a set of trestles, and the slow way to make a join that carries: cut the ends long, table it so it hooks, key it up tight, peg it and plane it fair. A way to do the handovers that matter as a long overlap, not a clean cut and a dropped load. No streak. No badge. No alarm when a butt breaks. Leave your line and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@ferrymead.yard" />
+          <button class="btn btn-primary" type="submit">Cut a lap</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One line when the first scarf has carried a year and the beam never felt the join. You can stop cutting anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Scarf</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · the join in a beam, lapped not butted</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#bench">The yard</a>
+      <a href="../">Seam</a>
+      <a href="#hold">Cut a lap</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

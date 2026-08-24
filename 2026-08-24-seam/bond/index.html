@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bond — the join in a wall, offset not stacked</title>
+  <meta name="description" content="Stack bricks straight and every vertical joint runs unbroken from footing to coping — a single crack splits it top to bottom. The bond is the offset: each brick bridges the two beneath, so no joint ever lines up and a load is carried sideways across a dozen bricks. Stack, stretcher, English, Flemish — arranging commitments so the fault lines never run straight through." />
+  <meta name="color-scheme" content="light" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23efe6d8'/%3E%3Cg fill='%23a8503a'%3E%3Crect x='4' y='7' width='11' height='4.4' rx='0.8'/%3E%3Crect x='17' y='7' width='11' height='4.4' rx='0.8'/%3E%3Crect x='4' y='13' width='5' height='4.4' rx='0.8'/%3E%3Crect x='11' y='13' width='11' height='4.4' rx='0.8'/%3E%3Crect x='24' y='13' width='4' height='4.4' rx='0.8'/%3E%3Crect x='4' y='19' width='11' height='4.4' rx='0.8'/%3E%3Crect x='17' y='19' width='11' height='4.4' rx='0.8'/%3E%3Crect x='4' y='25' width='5' height='4.4' rx='0.8'/%3E%3Crect x='11' y='25' width='11' height='4.4' rx='0.8'/%3E%3Crect x='24' y='25' width='4' height='4.4' rx='0.8'/%3E%3C/g%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <g fill="currentColor">
+            <rect x="3" y="6" width="12" height="5" rx="1" />
+            <rect x="17" y="6" width="12" height="5" rx="1" />
+            <rect x="3" y="13" width="6" height="5" rx="1" />
+            <rect x="11" y="13" width="12" height="5" rx="1" />
+            <rect x="25" y="13" width="4" height="5" rx="1" />
+            <rect x="3" y="20" width="12" height="5" rx="1" />
+            <rect x="17" y="20" width="12" height="5" rx="1" />
+          </g>
+        </svg>
+      </span>
+      <span>Bond</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#bench">The bricklayer's wall</a>
+      <a href="#who">Who lays the same course</a>
+      <a href="#hold" class="nav-cta">Break a joint</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">What holds a wall, given an offset and a plumb line</p>
+        <h1>
+          A stack of bricks is not a wall.<br />
+          <em>The wall is in the offset.</em>
+        </h1>
+        <p class="lede">
+          Lay bricks straight, one directly over another, and you have
+          not built a wall — you have built a row of separate columns,
+          and every vertical joint runs unbroken from the footing to the
+          coping. A crack goes looking for the weakest path and finds a
+          joint that runs the whole height, and the wall splits top to
+          bottom along a line that was never bonded. The bond is the
+          cure, and it is only an offset: lay each brick to bridge the
+          two beneath it, so no joint ever lines up with the one below,
+          and a load pressing down at one point has to travel out
+          sideways across a dozen bricks before it reaches the ground.
+        </p>
+        <div class="hero-cta">
+          <a href="#bench" class="btn btn-primary">See the wall</a>
+          <a href="#hold" class="btn btn-ghost">Break a joint</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          Two walls, one settling footing. The stack cracked. The bond rode it.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg class="hero-bed" viewBox="0 0 400 320" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="bSky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#dfe3e0" />
+              <stop offset="100%" stop-color="#cdd2ce" />
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="400" height="320" fill="url(#bSky)" />
+
+          <!-- LEFT: a stack-bonded wall, joints aligned, a crack running down -->
+          <g>
+            <rect x="18" y="60" width="150" height="230" fill="#c99a7e" opacity="0.4" />
+            <!-- stacked bricks: every joint lines up -->
+            <g fill="#bd8a6e" stroke="#efe6d4" stroke-width="2">
+              <rect x="24" y="66" width="66" height="20" /><rect x="96" y="66" width="66" height="20" />
+              <rect x="24" y="90" width="66" height="20" /><rect x="96" y="90" width="66" height="20" />
+              <rect x="24" y="114" width="66" height="20" /><rect x="96" y="114" width="66" height="20" />
+              <rect x="24" y="138" width="66" height="20" /><rect x="96" y="138" width="66" height="20" />
+              <rect x="24" y="162" width="66" height="20" /><rect x="96" y="162" width="66" height="20" />
+              <rect x="24" y="186" width="66" height="20" /><rect x="96" y="186" width="66" height="20" />
+              <rect x="24" y="210" width="66" height="20" /><rect x="96" y="210" width="66" height="20" />
+              <rect x="24" y="234" width="66" height="20" /><rect x="96" y="234" width="66" height="20" />
+              <rect x="24" y="258" width="66" height="20" /><rect x="96" y="258" width="66" height="20" />
+            </g>
+            <!-- the straight joint, and the crack that found it -->
+            <path d="M92 66 L92 278" stroke="#8f4a37" stroke-width="1.4" opacity="0.5" />
+            <path d="M93 66 q-4 40 2 80 q-6 46 0 90 q-3 30 1 42" stroke="#2a2320" stroke-width="2.4" fill="none" opacity="0.85" />
+          </g>
+
+          <!-- RIGHT: a Flemish-bonded wall, joints broken, holding -->
+          <g>
+            <rect x="222" y="60" width="160" height="230" fill="#3f5a6a" opacity="0.12" />
+            <!-- alternating stretchers and headers, each course offset -->
+            <g fill="#a8503a" stroke="#efe6d4" stroke-width="2">
+              <rect x="228" y="66" width="44" height="20" /><rect x="274" y="66" width="22" height="20" /><rect x="298" y="66" width="44" height="20" /><rect x="344" y="66" width="22" height="20" /><rect x="368" y="66" width="14" height="20" />
+              <rect x="228" y="90" width="22" height="20" /><rect x="252" y="90" width="44" height="20" /><rect x="298" y="90" width="22" height="20" /><rect x="322" y="90" width="44" height="20" /><rect x="368" y="90" width="14" height="20" />
+              <rect x="228" y="114" width="44" height="20" /><rect x="274" y="114" width="22" height="20" /><rect x="298" y="114" width="44" height="20" /><rect x="344" y="114" width="22" height="20" /><rect x="368" y="114" width="14" height="20" />
+              <rect x="228" y="138" width="22" height="20" /><rect x="252" y="138" width="44" height="20" /><rect x="298" y="138" width="22" height="20" /><rect x="322" y="138" width="44" height="20" /><rect x="368" y="138" width="14" height="20" />
+              <rect x="228" y="162" width="44" height="20" /><rect x="274" y="162" width="22" height="20" /><rect x="298" y="162" width="44" height="20" /><rect x="344" y="162" width="22" height="20" /><rect x="368" y="162" width="14" height="20" />
+              <rect x="228" y="186" width="22" height="20" /><rect x="252" y="186" width="44" height="20" /><rect x="298" y="186" width="22" height="20" /><rect x="322" y="186" width="44" height="20" /><rect x="368" y="186" width="14" height="20" />
+              <rect x="228" y="210" width="44" height="20" /><rect x="274" y="210" width="22" height="20" /><rect x="298" y="210" width="44" height="20" /><rect x="344" y="210" width="22" height="20" /><rect x="368" y="210" width="14" height="20" />
+              <rect x="228" y="234" width="22" height="20" /><rect x="252" y="234" width="44" height="20" /><rect x="298" y="234" width="22" height="20" /><rect x="322" y="234" width="44" height="20" /><rect x="368" y="234" width="14" height="20" />
+              <rect x="228" y="258" width="44" height="20" /><rect x="274" y="258" width="22" height="20" /><rect x="298" y="258" width="44" height="20" /><rect x="344" y="258" width="22" height="20" /><rect x="368" y="258" width="14" height="20" />
+            </g>
+            <!-- the blue headers, the hard bricks that tie the two skins -->
+            <g fill="#3f5a6a">
+              <rect x="274" y="66" width="22" height="20" /><rect x="344" y="66" width="22" height="20" />
+              <rect x="274" y="162" width="22" height="20" /><rect x="344" y="162" width="22" height="20" />
+            </g>
+          </g>
+
+          <!-- a plumb line hung down the join between the two walls -->
+          <path d="M195 40 L195 300" stroke="#57544c" stroke-width="1" opacity="0.55" />
+          <path d="M188 300 l7 12 l7 -12 Z" fill="#57544c" opacity="0.7" />
+          <circle cx="195" cy="40" r="3" fill="#2a2320" />
+        </svg>
+        <span class="hero-tick hero-tick-1">joints lined up — a crack's road</span>
+        <span class="hero-tick hero-tick-2">each brick bridges two</span>
+        <span class="hero-tick hero-tick-3">the load runs sideways</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>Everything stacked in a straight line<br /><em>cracks in a straight line.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            A plan where every part rests squarely on one other part is a
+            stack, not a wall. The launch depends on the one hire, who
+            depends on the one contract, which depends on the one client
+            — a single column of joints all lined up. It looks tidy and
+            it stands in still weather. But the ground always settles
+            somewhere, and when it does the crack runs straight down the
+            aligned joint, because nothing was laid across it. One brick
+            slips and takes the whole course with it.
+          </p>
+          <p>
+            A bond is the same bricks, offset. You lay each commitment to
+            bridge the two beneath it, so no dependency sits directly on
+            one other — the hire's work overlaps two projects, the client
+            is really three smaller ones, the revenue crosses two
+            quarters. No joint runs unbroken, so a load that lands hard in
+            one place is carried out sideways across a dozen bricks before
+            it reaches the footing. The wall can lose a brick and not a
+            course. That is the whole art of the bricklayer, and it is
+            only an offset.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Never let a joint run</h3>
+          <p>The one rule under all the bonds: no vertical joint lines up with the one below it. Lay each brick to break the joint under it by a good lap — a quarter or a half. A joint that runs is a road for a crack; a broken joint sends the load sideways into solid brick.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Lap each brick over two</h3>
+          <p>Every brick should bear on two below it, not one. Then no single brick can fail on its own — to move it you must move its neighbours too. Depend on two things for anything that matters, lapped, so losing one only shifts the load, it does not drop it.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Send headers through the wall</h3>
+          <p>A wall two skins thick will split into two thin walls unless bricks are turned end-on — headers — to tie the skins together. The hard blue headers do the tying. Turn some work sideways on purpose, across the grain of the plan, to bind the faces into one wall.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Point it and let it weather</h3>
+          <p>Rake out the joints and point them with a weather struck finish so the rain runs off and the mortar sets hard over years. A bond does not prove itself the day it is laid; it proves itself in the twentieth winter, still standing where the stack came down.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="bench" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A bricklayer's wall, course by course</h2>
+        <p>One day's worth of courses and how well each is bonded — twelve stretches of wall, from a length stacked straight with every joint aligned to a Flemish-bonded pier that has weathered thirty winters, laid on a fictional site at Coalpit Row in late August 2026. Some are green, the mortar still wet. Some have taken every frost and settling the ground could give. One is a stacked panel a crack has already found. Bridge a joint, count a winter weathered, rake one back to green — the wall redraws in your browser.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">The wall</p>
+            <p class="chart-project" id="chart-project">Coalpit Row · August 2026 · twelve courses</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Winters each stretch has weathered">
+          <p class="profile-axis-label top">weathered years</p>
+          <p class="profile-axis-label bot">green, just laid</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the courses">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="green" role="tab">Green</button>
+          <button type="button" data-filter="set" role="tab">Set</button>
+          <button type="button" data-filter="pointed" role="tab">Pointed</button>
+          <button type="button" data-filter="weathered" role="tab">Weathered</button>
+        </div>
+
+        <ul class="legs" id="items-list">
+          <!-- courses inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-level" aria-label="Kind of bond">
+              <option value="stack">Stack</option>
+              <option value="stretcher">Stretcher</option>
+              <option value="english">English</option>
+              <option value="flemish">Flemish</option>
+            </select>
+            <input id="add-metric" type="number" step="1" min="0" value="0" aria-label="Winters weathered" />
+            <input id="add-name" type="text" placeholder="Name the course — the dependency you mean to bond, not stack" maxlength="94" />
+            <select id="add-state" aria-label="Condition of the course">
+              <option value="green">Green</option>
+              <option value="set">Set</option>
+              <option value="pointed">Pointed</option>
+              <option value="weathered">Weathered</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Lay the course</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original wall</a>
+        </div>
+
+        <p class="bench-status" id="bench-status" role="status" aria-live="polite"></p>
+
+        <p class="kbd-help">
+          <strong>Keys:</strong>
+          <kbd>J</kbd>/<kbd>K</kbd> move &middot;
+          <kbd>Enter</kbd> point up &middot;
+          <kbd>Del</kbd> rake back &middot;
+          <kbd>N</kbd> new course &middot;
+          <kbd>0</kbd>&ndash;<kbd>4</kbd> filter &middot;
+          <kbd>[</kbd>/<kbd>]</kbd> nudge winters &middot;
+          <kbd>R</kbd> reset.
+        </p>
+      </div>
+
+      <div class="legend">
+        <h3>The four bonds</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-stack"></span><div><strong>Stack.</strong> Bricks straight over one another, every joint aligned. No lap at all — a row of columns, not a wall. A crack runs the whole height along the first joint it meets.</div></li>
+          <li><span class="legend-swatch swatch-stretcher"></span><div><strong>Stretcher.</strong> Each brick lapped half over the one below. The simplest real bond — no joint runs — but only one skin thick, easily pushed over sideways.</div></li>
+          <li><span class="legend-swatch swatch-english"></span><div><strong>English.</strong> Whole courses of headers between courses of stretchers, tying two skins into one thick wall. Strong, plain, and slow. The joints break and the skins bind.</div></li>
+          <li><span class="legend-swatch swatch-flemish"></span><div><strong>Flemish.</strong> Header and stretcher alternating in every course, the hard blue headers threaded through the face. The strongest common bond, and the one that shrugs off a settling footing.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who lays the same course</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The bricklayer on the old canal</h3>
+          <p>Thirty years laying Staffordshire blue into lock walls that take the frost and the barge-wash and never move. He lays nothing straight-jointed, ever, even a garden wall no load will ever find. "A joint that runs is a crack you paid to build in," he says. His work outlasts the men who commissioned it.</p>
+        </article>
+        <article>
+          <h3>The founder who un-stacked the plan</h3>
+          <p>The board loved the tidy org chart: one head of sales on one anchor client on one renewal. She saw a column of aligned joints and pulled it apart — three mid clients instead of one whale, the sales work lapped across two people, revenue crossing quarters. When the anchor would have walked, the wall only shifted its load.</p>
+        </article>
+        <article>
+          <h3>The ops lead who broke the single point</h3>
+          <p>Every incident review found the same aligned joint: one service, one on-call engineer, one runbook only she had read. So she bonded it — paired the on-call, split the service, wrote the runbook so two could carry it. Nothing now runs unbroken from the top of the stack to the bottom. The three-a.m. page stopped being fatal.</p>
+        </article>
+        <article>
+          <h3>The family holding the smallholding</h3>
+          <p>They never let the farm rest on one crop, one grant, one good summer. Sheep lapped over hay lapped over the campsite lapped over the winter logs, each bridging the others, none load-bearing alone. Bad years come through like settling ground. The wall loses a brick and holds its course, the way their grandparents laid it.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="hold" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · late summer 2026</p>
+        <h2>One letter when the first bonded course has weathered a winter.</h2>
+        <p class="hold-lede">A small page, a plumb line, and the plain rule under every bond: never let a joint run, lap each brick over two, send headers through, then point it and let it weather. A way to lay your commitments so the fault lines never line up. No streak. No badge. No alarm when a stacked panel cracks. Leave your line and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@coalpitrow.build" />
+          <button class="btn btn-primary" type="submit">Break a joint</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One letter when the first bonded course has weathered a winter and held where the stack came down. You can stop laying anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Bond</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · the join in a wall, offset not stacked</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#bench">The wall</a>
+      <a href="../">Seam</a>
+      <a href="#hold">Break a joint</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

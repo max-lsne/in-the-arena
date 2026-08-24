@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Splice — the join in a rope, woven not tied</title>
+  <meta name="description" content="A knot keeps barely half a rope's strength and can spill under a shock. A splice unlays the strands and tucks each back through the standing part, over and under, so the join is a hand-span of woven overlap that holds almost the full strength and cannot run. Knot, seizing, short, eye — the handovers you weave instead of tie." />
+  <meta name="color-scheme" content="light" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23efe7d6'/%3E%3Cpath d='M6 20 q6 -8 13 -2 q7 6 1 12' stroke='%23c9a566' stroke-width='3.4' fill='none' stroke-linecap='round'/%3E%3Cpath d='M6 20 q-3 4 0 8' stroke='%23c9a566' stroke-width='3.4' fill='none' stroke-linecap='round'/%3E%3Cpath d='M13 12 l4 3 M17 11 l3 4 M20 12 l3 5' stroke='%2333291c' stroke-width='1.3' fill='none' stroke-linecap='round' opacity='0.8'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22">
+          <path d="M6 22 q6 -9 14 -2 q7 6 0 12" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" />
+          <path d="M6 22 q-3 4 0 8" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" />
+          <path d="M14 12 l4 3 M18 11 l3 4 M21 13 l3 4" stroke="#33291c" stroke-width="1.1" fill="none" stroke-linecap="round" opacity="0.8" />
+        </svg>
+      </span>
+      <span>Splice</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#bench">The rigger's day</a>
+      <a href="#who">Who works the same line</a>
+      <a href="#hold" class="nav-cta">Take a tuck</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">What holds a line, given three tucks and an hour</p>
+        <h1>
+          A knot is quick, and a knot is a lie.<br />
+          <em>A splice you have to weave.</em>
+        </h1>
+        <p class="lede">
+          Tie two ropes with a knot and the join keeps barely half the
+          strength of the line — the knot bites so hard the fibres cut
+          themselves — and under a snatching load it can spill and run
+          out to nothing. A splice takes the slow way. You unlay the
+          strands and tuck each one back through the standing part, over
+          and under, against the lay, three tucks and more, until the
+          join is a hand-span of woven rope that keeps very nearly the
+          whole strength of the line and can never come undone. It costs
+          you twenty minutes. It cannot spill.
+        </p>
+        <div class="hero-cta">
+          <a href="#bench" class="btn btn-primary">See the rigger's day</a>
+          <a href="#hold" class="btn btn-ghost">Take a tuck</a>
+        </div>
+        <p class="hero-foot">
+          <span class="dot"></span>
+          One line, one shock load. The knot let go. The splice held.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <svg class="hero-bed" viewBox="0 0 400 320" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="sWater" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7f958e" />
+              <stop offset="100%" stop-color="#5f776f" />
+            </linearGradient>
+            <linearGradient id="sHemp" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#d6b473" />
+              <stop offset="100%" stop-color="#b78f4c" />
+            </linearGradient>
+          </defs>
+
+          <rect x="0" y="0" width="400" height="320" fill="#e9dec2" />
+          <!-- a strip of cold harbour water low in the frame -->
+          <rect x="0" y="238" width="400" height="82" fill="url(#sWater)" opacity="0.5" />
+          <g stroke="#dce4e0" stroke-width="0.8" fill="none" opacity="0.4">
+            <path d="M0 262 q60 -3 120 0 q60 3 130 0 q60 -3 150 0" />
+            <path d="M0 280 q80 3 160 0 q80 -3 160 0" />
+          </g>
+
+          <!-- a weathered timber bollard the line leads to -->
+          <rect x="40" y="150" width="26" height="120" rx="5" fill="#7a5f3c" opacity="0.9" />
+          <ellipse cx="53" cy="150" rx="13" ry="6" fill="#8a6e48" />
+          <rect x="34" y="176" width="38" height="9" rx="3" fill="#5f4a2e" opacity="0.8" />
+
+          <!-- the standing part of the rope, laid manila, running in -->
+          <path d="M300 96 q-70 22 -128 40 q-40 12 -66 30" stroke="url(#sHemp)" stroke-width="13" fill="none" stroke-linecap="round" />
+          <path d="M300 96 q-70 22 -128 40 q-40 12 -66 30" stroke="#a9853f" stroke-width="13" fill="none" stroke-linecap="round" opacity="0.25" stroke-dasharray="2 9" />
+
+          <!-- the eye — a loop worked into the rope's end -->
+          <path d="M300 96 q56 -10 78 34 q20 44 -30 70 q-52 24 -86 -14" stroke="url(#sHemp)" stroke-width="13" fill="none" stroke-linecap="round" />
+          <!-- a galvanised thimble seized into the eye -->
+          <path d="M320 118 q40 -4 54 26 q12 30 -20 50" stroke="#8b98a0" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.85" />
+
+          <!-- the three tucked strands of the splice, over and under -->
+          <g stroke="#33291c" stroke-width="3.4" fill="none" stroke-linecap="round" opacity="0.9">
+            <path d="M262 156 q16 -10 30 -4 q12 6 8 18" />
+            <path d="M276 168 q16 -8 30 0 q10 6 4 18" />
+            <path d="M290 180 q14 -8 28 2 q9 7 2 18" />
+          </g>
+          <!-- the served whipping that finishes the tail -->
+          <g stroke="#efe3c4" stroke-width="1.6" opacity="0.9">
+            <path d="M244 190 l10 6 M248 186 l10 6 M252 182 l10 6 M256 178 l10 6" />
+          </g>
+
+          <!-- a marlinspike laid across, worn steel -->
+          <path d="M120 236 L214 150" stroke="#6e747a" stroke-width="6" stroke-linecap="round" />
+          <path d="M214 150 L226 142" stroke="#565b60" stroke-width="4" stroke-linecap="round" />
+          <ellipse cx="118" cy="238" rx="8" ry="5" fill="#4d5155" />
+        </svg>
+        <span class="hero-tick hero-tick-1">unlay the strands</span>
+        <span class="hero-tick hero-tick-2">over one, under one</span>
+        <span class="hero-tick hero-tick-3">nine tenths held</span>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="problem-grid">
+        <div>
+          <h2>The quick join is the one that<br /><em>lets go under load.</em></h2>
+        </div>
+        <div class="problem-body">
+          <p>
+            A handover done as a knot is fast and it feels finished: the
+            leaver writes a page of notes, forwards the folder, says the
+            names once, and walks. It holds in fair weather. But the
+            first real pull — a customer who only ever spoke to the one
+            who left, a decision that needed the reason and not just the
+            rule — and the join bites down on itself and spills. Half the
+            strength was never there. The rope remembers nothing the
+            knot did not carry across.
+          </p>
+          <p>
+            A splice is the slow way, and the only strong one. You do not
+            hand the work over at a line; you unlay it and tuck the
+            leaver's strands back through the stayer's, over and under,
+            against the lay — the reason behind the rule, the customer
+            behind the account, the fix behind the ticket — tuck after
+            tuck, until the two run together over a long overlap and the
+            join keeps almost the whole strength of the line. It takes an
+            afternoon of doing the work side by side. It cannot come
+            undone in your hand.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="how">
+      <h2 class="section-title">How it works</h2>
+      <ol class="how-list">
+        <li>
+          <span class="step-num">01</span>
+          <h3>Unlay the end</h3>
+          <p>Open the rope. A handover starts by taking the work apart into its strands — the accounts, the running jobs, the half-said reasons — not by forwarding it whole. You cannot tuck what you have not unlaid. Whip the ends first so nothing frays while you work.</p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3>Tuck each strand back through</h3>
+          <p>Over one, under one, against the lay. Each strand of the leaver's work goes back through the standing part the stayer will hold — done together, by hand, so the tuck actually grips. One tuck is a start. It is not yet a splice.</p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3>Take the next three tucks</h3>
+          <p>Strength comes from the number of tucks, not the first one. Three full tucks is the minimum that holds; a hard-worked line gets five. Each is another week of the two carrying the load side by side, until the overlap is longer than any single pull.</p>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <h3>Roll it fair and serve it</h3>
+          <p>Roll the splice underfoot until the tucks bed down and the join runs as smooth as the standing part, then serve it against chafe. A faired splice does not look like a join at all — the work simply runs on past where one hand left it and another took it up.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="bench" class="chart">
+      <div class="chart-head">
+        <h2 class="section-title">A rigger's afternoon on the quay</h2>
+        <p>One loft's worth of joins and how far each is woven — twelve lines on the bench, from a knot tied in a hurry that keeps half its strength to an eye splice served and rolled fair that has held eleven seasons, set on a fictional afternoon in the rigging loft at Bircham Quay in late August 2026. Some are slack, just started. Some have taken every shock the winter gave them. One spilled under a snatch load and is being unlaid to do again. Take a tuck, count a season stood, cut one back to slack — the bench redraws in your browser.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-meta">
+          <div class="chart-meta-block">
+            <p class="card-eyebrow">The bench</p>
+            <p class="chart-project" id="chart-project">Bircham Quay · August 2026 · twelve on the bench</p>
+          </div>
+          <div class="chart-meta-block chart-meta-totals" id="chart-totals">
+            <!-- filled by script -->
+          </div>
+        </div>
+
+        <div class="profile" id="profile" aria-label="Seasons each join has stood under load">
+          <p class="profile-axis-label top">held for seasons</p>
+          <p class="profile-axis-label bot">slack, just tied</p>
+        </div>
+
+        <div class="filters" id="filters" role="tablist" aria-label="Filter the joins">
+          <button type="button" data-filter="all" class="is-active" role="tab">All</button>
+          <button type="button" data-filter="slack" role="tab">Slack</button>
+          <button type="button" data-filter="tucked" role="tab">Tucked</button>
+          <button type="button" data-filter="set" role="tab">Set</button>
+          <button type="button" data-filter="fair" role="tab">Fair</button>
+        </div>
+
+        <ul class="legs" id="items-list">
+          <!-- joins inserted here -->
+        </ul>
+
+        <div class="chart-add">
+          <form class="add-form" id="add-form" autocomplete="off">
+            <select id="add-level" aria-label="Kind of join">
+              <option value="knot">Knot</option>
+              <option value="seizing">Seizing</option>
+              <option value="short">Short splice</option>
+              <option value="eye">Eye splice</option>
+            </select>
+            <input id="add-metric" type="number" step="1" min="0" value="0" aria-label="Seasons it has stood" />
+            <input id="add-name" type="text" placeholder="Name the join — the handover you mean to weave, not tie" maxlength="94" />
+            <select id="add-state" aria-label="Condition of the join">
+              <option value="slack">Slack</option>
+              <option value="tucked">Tucked</option>
+              <option value="set">Set</option>
+              <option value="fair">Fair</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Take a tuck</button>
+          </form>
+          <a href="#" class="reset-link" id="reset-demo">Reset to the original bench</a>
+        </div>
+
+        <p class="bench-status" id="bench-status" role="status" aria-live="polite"></p>
+
+        <p class="kbd-help">
+          <strong>Keys:</strong>
+          <kbd>J</kbd>/<kbd>K</kbd> move &middot;
+          <kbd>Enter</kbd> take a tuck &middot;
+          <kbd>Del</kbd> cut back &middot;
+          <kbd>N</kbd> new join &middot;
+          <kbd>0</kbd>&ndash;<kbd>4</kbd> filter &middot;
+          <kbd>[</kbd>/<kbd>]</kbd> nudge seasons &middot;
+          <kbd>R</kbd> reset.
+        </p>
+      </div>
+
+      <div class="legend">
+        <h3>The four joins</h3>
+        <ul>
+          <li><span class="legend-swatch swatch-knot"></span><div><strong>Knot.</strong> Two ends tied in a hurry. Quick, visible, and weak — it keeps barely half the line's strength and can spill under a shock. The handover done as a forwarded folder and a wave.</div></li>
+          <li><span class="legend-swatch swatch-seizing"></span><div><strong>Seizing.</strong> The ends bound together with turns of twine — better than a knot, but still two parts held side by side, not woven. A shared week or two, no strand yet tucked through.</div></li>
+          <li><span class="legend-swatch swatch-short"></span><div><strong>Short splice.</strong> Strands unlaid and tucked back through each other. Strong, if a little thick at the join. The work genuinely handed across, over and under, if not yet rolled smooth.</div></li>
+          <li><span class="legend-swatch swatch-eye"></span><div><strong>Eye splice.</strong> Woven, rolled fair, and served against chafe. Keeps almost the whole strength of the line and cannot come undone. A handover you cannot see the seam of any more.</div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="who" class="who">
+      <h2 class="section-title">Who works the same line</h2>
+      <div class="who-grid">
+        <article>
+          <h3>The rigger in the loft</h3>
+          <p>Forty years splicing wire and manila for the fishing fleet. He can tell a knotted eye from a spliced one across the quay by how it sits, and he will not send a line out on a knot. "A knot's for tonight," he says. "A splice is for the season." Every strop on his wall is woven, rolled, and served.</p>
+        </article>
+        <article>
+          <h3>The founder handing over her desk</h3>
+          <p>Six weeks of overlap she fought the board for, instead of the clean Friday exit they wanted. She sat beside the new lead through the hard calls, the ones with no rule to point at, and tucked the reason back through each one. The account that would have walked on a knot never noticed the change of hand.</p>
+        </article>
+        <article>
+          <h3>The staff nurse on nights</h3>
+          <p>The handover at the ward door is where patients are lost, so she never gives it as a list. She walks the bay, bed by bed, telling the next nurse not just the numbers but the worry behind them — the man in four who says he's fine and isn't. Over one, under one. The night takes nothing across a seam she wove.</p>
+        </article>
+        <article>
+          <h3>The maintainer archiving a project</h3>
+          <p>He could have tagged a final release and gone dark. Instead he spent a month writing down the reasons, not just the rules — why the ugly workaround stays, which test lies — and pairing with the two who'd carry it. The project reads now as if no one ever left it. That is a splice, not a knot.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="hold" class="hold">
+      <div class="hold-card">
+        <p class="eyebrow">Quiet release · late summer 2026</p>
+        <h2>One line when the first splice has stood a season and held.</h2>
+        <p class="hold-lede">A small page, a bench, a marlinspike, and the slow honest way to hand work across — unlay it, tuck each strand back through, take the next three tucks, roll it fair. A way to make the handovers you care about by weaving, not tying. No streak. No badge. No alarm when a knot spills. Leave your line and we'll write once.</p>
+        <form class="hold-form" id="hold-form" autocomplete="off">
+          <label for="email" class="visually-hidden">Email</label>
+          <input id="email" type="email" required placeholder="you@birchamquay.loft" />
+          <button class="btn btn-primary" type="submit">Take a tuck</button>
+        </form>
+        <p class="hold-foot" id="hold-foot">No newsletter. One line when the first splice has stood a season under load and held. You can stop tucking anytime.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <span class="foot-mark">Splice</span>
+      <span class="foot-dot">·</span>
+      <span>2026 · the join in a rope, woven not tied</span>
+    </div>
+    <div class="foot-right">
+      <a href="#how">How</a>
+      <a href="#bench">The bench</a>
+      <a href="../">Seam</a>
+      <a href="#hold">Take a tuck</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
