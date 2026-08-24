@@ -220,3 +220,20 @@ body {
   .leg { grid-template-columns: 12px 1fr; gap: 8px; }
   .leg-meta, .leg-actions { grid-column: 2; }
 }
+
+/* ---------- reduced motion ---------- */
+/* Hold the bench still for anyone who asks the system to reduce motion:
+   no hover lifts, no eased transitions, no smooth scroll. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+  .btn:hover,
+  .profile-bar:hover,
+  .profile-bar.is-focused { transform: none; }
+}
