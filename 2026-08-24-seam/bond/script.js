@@ -163,6 +163,17 @@ function escapeHtml(s) {
   ));
 }
 
+// Announce the latest change to screen readers via the aria-live region.
+function announce(msg) {
+  const el = $('#bench-status');
+  if (el) el.textContent = msg;
+}
+
+function shortName(name) {
+  const s = String(name).trim();
+  return s.length > 52 ? s.slice(0, 51).trimEnd() + '…' : s;
+}
+
 function wintersLabel(n) {
   if (n === 0) return 'just laid';
   if (n === 1) return '1 winter';
@@ -183,6 +194,7 @@ function sortedShown() {
 function addItem({ level, winters, name, state }) {
   items.push({ id: nextId++, level, winters, name, state });
   render();
+  announce(`Laid in "${shortName(name)}" as a ${LEVELS[level].label.toLowerCase()} bond, ${STATES[state].label.toLowerCase()}. ${items.length} courses.`);
 }
 
 function standItem(id) {
@@ -194,6 +206,7 @@ function standItem(id) {
   if (s.state === 'set'     && s.winters >= 3) s.state = 'pointed';
   if (s.state === 'pointed' && s.winters >= 6) s.state = 'weathered';
   render();
+  announce(`"${shortName(s.name)}" weathered another winter — ${wintersLabel(s.winters)}, now ${STATES[s.state].label.toLowerCase()}.`);
 }
 
 function advanceItem(id) {
@@ -203,6 +216,7 @@ function advanceItem(id) {
   const i = order.indexOf(s.state);
   s.state = order[Math.min(order.length - 1, i + 1)];
   render();
+  announce(`"${shortName(s.name)}" pointed up to ${STATES[s.state].label.toLowerCase()}.`);
 }
 
 function cutItem(id) {
@@ -210,6 +224,7 @@ function cutItem(id) {
   if (!s) return;
   s.state = 'green';
   render();
+  announce(`"${shortName(s.name)}" raked back to green.`);
 }
 
 function resetItems() {
@@ -225,6 +240,7 @@ function resetItems() {
     b.classList.toggle('is-active', b.dataset.filter === 'all');
   });
   render();
+  announce('Wall reset to the twelve courses laid on the site this morning.');
 }
 
 // ---------- Wire up ----------
@@ -250,6 +266,8 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('#filters button').forEach(b => b.classList.remove('is-active'));
       btn.classList.add('is-active');
       render();
+      const label = filter === 'all' ? 'all courses' : STATES[filter].label.toLowerCase();
+      announce(`Showing ${label} — ${visibleItems().length} of ${items.length} courses.`);
     });
   });
 

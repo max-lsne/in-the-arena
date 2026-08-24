@@ -163,6 +163,17 @@ function escapeHtml(s) {
   ));
 }
 
+// Announce the latest change to screen readers via the aria-live region.
+function announce(msg) {
+  const el = $('#bench-status');
+  if (el) el.textContent = msg;
+}
+
+function shortName(name) {
+  const s = String(name).trim();
+  return s.length > 52 ? s.slice(0, 51).trimEnd() + '…' : s;
+}
+
 function seasonsLabel(n) {
   if (n === 0) return 'just tied';
   if (n === 1) return '1 season';
@@ -183,6 +194,7 @@ function sortedShown() {
 function addItem({ level, seasons, name, state }) {
   items.push({ id: nextId++, level, seasons, name, state });
   render();
+  announce(`Tucked in "${shortName(name)}" as a ${LEVELS[level].label.toLowerCase()}, ${STATES[state].label.toLowerCase()}. ${items.length} on the bench.`);
 }
 
 function standItem(id) {
@@ -194,6 +206,7 @@ function standItem(id) {
   if (s.state === 'tucked' && s.seasons >= 3) s.state = 'set';
   if (s.state === 'set'    && s.seasons >= 6) s.state = 'fair';
   render();
+  announce(`"${shortName(s.name)}" stood another season — ${seasonsLabel(s.seasons)}, now ${STATES[s.state].label.toLowerCase()}.`);
 }
 
 function advanceItem(id) {
@@ -203,6 +216,7 @@ function advanceItem(id) {
   const i = order.indexOf(s.state);
   s.state = order[Math.min(order.length - 1, i + 1)];
   render();
+  announce(`"${shortName(s.name)}" tucked on to ${STATES[s.state].label.toLowerCase()}.`);
 }
 
 function cutItem(id) {
@@ -210,6 +224,7 @@ function cutItem(id) {
   if (!s) return;
   s.state = 'slack';
   render();
+  announce(`"${shortName(s.name)}" cut back to slack.`);
 }
 
 function resetItems() {
@@ -225,6 +240,7 @@ function resetItems() {
     b.classList.toggle('is-active', b.dataset.filter === 'all');
   });
   render();
+  announce('Bench reset to the twelve joins the rigger started the afternoon with.');
 }
 
 // ---------- Wire up ----------
@@ -250,6 +266,8 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('#filters button').forEach(b => b.classList.remove('is-active'));
       btn.classList.add('is-active');
       render();
+      const label = filter === 'all' ? 'all joins' : STATES[filter].label.toLowerCase();
+      announce(`Showing ${label} — ${visibleItems().length} of ${items.length} on the bench.`);
     });
   });
 

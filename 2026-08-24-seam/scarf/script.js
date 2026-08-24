@@ -163,6 +163,17 @@ function escapeHtml(s) {
   ));
 }
 
+// Announce the latest change to screen readers via the aria-live region.
+function announce(msg) {
+  const el = $('#bench-status');
+  if (el) el.textContent = msg;
+}
+
+function shortName(name) {
+  const s = String(name).trim();
+  return s.length > 52 ? s.slice(0, 51).trimEnd() + '…' : s;
+}
+
 function yearsLabel(n) {
   if (n === 0) return 'just offered up';
   if (n === 1) return '1 year';
@@ -183,6 +194,7 @@ function sortedShown() {
 function addItem({ level, years, name, state }) {
   items.push({ id: nextId++, level, years, name, state });
   render();
+  announce(`Offered up "${shortName(name)}" as a ${LEVELS[level].label.toLowerCase()} joint, ${STATES[state].label.toLowerCase()}. ${items.length} on the trestles.`);
 }
 
 function standItem(id) {
@@ -194,6 +206,7 @@ function standItem(id) {
   if (s.state === 'glued'   && s.years >= 3) s.state = 'cramped';
   if (s.state === 'cramped' && s.years >= 6) s.state = 'faired';
   render();
+  announce(`"${shortName(s.name)}" carried another year — ${yearsLabel(s.years)}, now ${STATES[s.state].label.toLowerCase()}.`);
 }
 
 function advanceItem(id) {
@@ -203,6 +216,7 @@ function advanceItem(id) {
   const i = order.indexOf(s.state);
   s.state = order[Math.min(order.length - 1, i + 1)];
   render();
+  announce(`"${shortName(s.name)}" drawn up to ${STATES[s.state].label.toLowerCase()}.`);
 }
 
 function cutItem(id) {
@@ -210,6 +224,7 @@ function cutItem(id) {
   if (!s) return;
   s.state = 'dry';
   render();
+  announce(`"${shortName(s.name)}" sawn back to a dry butt.`);
 }
 
 function resetItems() {
@@ -225,6 +240,7 @@ function resetItems() {
     b.classList.toggle('is-active', b.dataset.filter === 'all');
   });
   render();
+  announce('Yard reset to the twelve joints on the trestles this morning.');
 }
 
 // ---------- Wire up ----------
@@ -250,6 +266,8 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('#filters button').forEach(b => b.classList.remove('is-active'));
       btn.classList.add('is-active');
       render();
+      const label = filter === 'all' ? 'all joints' : STATES[filter].label.toLowerCase();
+      announce(`Showing ${label} — ${visibleItems().length} of ${items.length} on the trestles.`);
     });
   });
 
