@@ -293,4 +293,80 @@ document.addEventListener('DOMContentLoaded', () => {
     const foot = $('#hold-foot');
     foot.textContent = 'Line taken. We will write once, when the first scarf has carried a year and the beam never felt the join. A scarf is cut slow.';
   });
+
+  wireKeyboard();
 });
+
+// ---------- Keyboard ----------
+
+function isTypingInForm() {
+  const t = document.activeElement;
+  if (!t) return false;
+  const tag = t.tagName;
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return true;
+  if (t.isContentEditable) return true;
+  return false;
+}
+
+function prefersReducedMotion() {
+  return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function focusedIndexInShown(shown) {
+  if (focused == null) return -1;
+  return shown.findIndex(s => s.id === focused);
+}
+
+function moveFocus(delta) {
+  const shown = sortedShown();
+  if (shown.length === 0) { focused = null; render(); return; }
+  let i = focusedIndexInShown(shown);
+  if (i === -1) {
+    focused = delta > 0 ? shown[0].id : shown[shown.length - 1].id;
+  } else {
+    i = (i + delta + shown.length) % shown.length;
+    focused = shown[i].id;
+  }
+  render();
+  const el = document.querySelector(`.leg[data-id="${focused}"]`);
+  if (el && el.scrollIntoView) el.scrollIntoView({ block: 'nearest', behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+}
+
+function setFilter(f) {
+  filter = f;
+  document.querySelectorAll('#filters button').forEach(b => {
+    b.classList.toggle('is-active', b.dataset.filter === f);
+  });
+  render();
+  const label = f === 'all' ? 'all joints' : STATES[f].label.toLowerCase();
+  announce(`Showing ${label} — ${visibleItems().length} of ${items.length} on the trestles.`);
+}
+
+function nudgeYears(delta) {
+  if (focused == null) return;
+  const s = items.find(x => x.id === focused);
+  if (!s) return;
+  s.years = Math.max(0, s.years + delta);
+  render();
+  announce(`"${shortName(s.name)}" — ${yearsLabel(s.years)}.`);
+}
+
+function wireKeyboard() {
+  document.addEventListener('keydown', (e) => {
+    if (isTypingInForm()) return;
+    const k = e.key;
+    if (k === 'j' || k === 'J' || k === 'ArrowDown') { e.preventDefault(); moveFocus(1); return; }
+    if (k === 'k' || k === 'K' || k === 'ArrowUp')   { e.preventDefault(); moveFocus(-1); return; }
+    if (k === 'Enter') { if (focused != null) { e.preventDefault(); advanceItem(focused); } return; }
+    if (k === 'Delete' || k === 'Backspace') { if (focused != null) { e.preventDefault(); cutItem(focused); } return; }
+    if (k === 'n' || k === 'N') { e.preventDefault(); const el = $('#add-name'); if (el) el.focus(); return; }
+    if (k === '0') { e.preventDefault(); setFilter('all');     return; }
+    if (k === '1') { e.preventDefault(); setFilter('dry');     return; }
+    if (k === '2') { e.preventDefault(); setFilter('glued');   return; }
+    if (k === '3') { e.preventDefault(); setFilter('cramped'); return; }
+    if (k === '4') { e.preventDefault(); setFilter('faired');  return; }
+    if (k === '[') { e.preventDefault(); nudgeYears(-1); return; }
+    if (k === ']') { e.preventDefault(); nudgeYears(1);  return; }
+    if (k === 'r' || k === 'R') { e.preventDefault(); resetItems(); return; }
+  });
+}
