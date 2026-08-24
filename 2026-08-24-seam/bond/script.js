@@ -35,9 +35,38 @@ const SEED_ITEMS = [
 ];
 
 const DEFAULT_PROJECT = 'Coalpit Row · August 2026 · twelve courses';
+const STORAGE_KEY = 'seam.bond.items.v1';
+const PROJECT_KEY = 'seam.bond.wall.v1';
 
-let items = SEED_ITEMS.map((s, i) => ({ ...s, id: i + 1 }));
-let nextId = items.length + 1;
+function loadItems() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return SEED_ITEMS.map((s, i) => ({ ...s, id: i + 1 }));
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed) || parsed.length === 0) {
+      return SEED_ITEMS.map((s, i) => ({ ...s, id: i + 1 }));
+    }
+    return parsed.map((s, i) => ({ ...s, id: s.id || i + 1 }));
+  } catch {
+    return SEED_ITEMS.map((s, i) => ({ ...s, id: i + 1 }));
+  }
+}
+
+function saveItems() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(items)); } catch {}
+}
+
+function loadProject() {
+  try { return localStorage.getItem(PROJECT_KEY) || DEFAULT_PROJECT; }
+  catch { return DEFAULT_PROJECT; }
+}
+
+function saveProject(name) {
+  try { localStorage.setItem(PROJECT_KEY, name); } catch {}
+}
+
+let items = loadItems();
+let nextId = (items.reduce((m, s) => Math.max(m, s.id || 0), 0)) + 1;
 let filter = 'all';
 let focused = null;
 
@@ -123,6 +152,7 @@ function render() {
   renderTotals();
   renderProfile();
   renderList();
+  saveItems();
 }
 
 // ---------- Helpers ----------
@@ -183,10 +213,14 @@ function cutItem(id) {
 }
 
 function resetItems() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch {}
+  try { localStorage.removeItem(PROJECT_KEY); } catch {}
   items = SEED_ITEMS.map((s, i) => ({ ...s, id: i + 1 }));
   nextId = items.length + 1;
   filter = 'all';
   focused = null;
+  const project = $('#chart-project');
+  if (project) project.textContent = DEFAULT_PROJECT;
   document.querySelectorAll('#filters button').forEach(b => {
     b.classList.toggle('is-active', b.dataset.filter === 'all');
   });
@@ -196,6 +230,18 @@ function resetItems() {
 // ---------- Wire up ----------
 
 document.addEventListener('DOMContentLoaded', () => {
+  const project = $('#chart-project');
+  if (project) {
+    project.textContent = loadProject();
+    project.setAttribute('contenteditable', 'true');
+    project.setAttribute('spellcheck', 'false');
+    project.title = 'Click to rename the wall';
+    project.addEventListener('blur', () => saveProject(project.textContent.trim()));
+    project.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); project.blur(); }
+    });
+  }
+
   render();
 
   document.querySelectorAll('#filters button').forEach(btn => {
