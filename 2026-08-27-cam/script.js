@@ -465,6 +465,38 @@
   }
   resetBtn.addEventListener("click", doReset);
 
+  // nudge the cam by hand — a small step of the rotation, stopping any running turn first
+  function nudge(dir) {
+    stop();
+    rotDeg = ((rotDeg + dir * 6) % 360 + 360) % 360;
+    draw();
+  }
+
+  // Keyboard: work the whole bench without the mouse. Arrows nudge the cam; brackets shorten
+  // or lengthen the rise angle; minus/equals set the lift; L cycles the motion law; Space runs
+  // the cam; R resets. A focused range slider keeps its native arrow-stepping, and a focused
+  // button keeps its own Space/Enter.
+  document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    var onRange = (e.target === lawRange || e.target === betaRange || e.target === liftRange);
+    var onButton = (e.target === runBtn || e.target === resetBtn);
+    switch (e.key) {
+      case "ArrowLeft":  if (onRange) return; nudge(-1); break;
+      case "ArrowRight": if (onRange) return; nudge(1); break;
+      case "[": setBeta(state.beta - 5); break;
+      case "]": setBeta(state.beta + 5); break;
+      case "-": setLift(state.lift - 1); break;
+      case "=": setLift(state.lift + 1); break;
+      case "l": case "L": setLaw((state.law + 1) % 3); break;
+      case " ": case "Spacebar":
+        if (onButton) return;                 // let the focused button take its own Space
+        if (raf) stop(); else start(); break;
+      case "r": case "R": doReset(); break;
+      default: return;
+    }
+    e.preventDefault();
+  });
+
   // ---- boot ----
   lawRange.min = LAW_MIN; lawRange.max = LAW_MAX;
   betaRange.min = BETA_MIN; betaRange.max = BETA_MAX;
