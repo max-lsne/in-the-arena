@@ -360,21 +360,28 @@
     el.liftVal.textContent = (state.lift / R_BASE).toFixed(2) + " × base";
   }
 
-  function setStatus() {
+  // Speak the settled state to a screen reader, not every keystroke of a slider drag.
+  var announceTimer = null;
+  function scheduleAnnounce() {
+    if (announceTimer) clearTimeout(announceTimer);
+    announceTimer = setTimeout(speak, 400);
+  }
+  function speak() {
     if (!el.status) return;
-    var law = LAW_NAMES[state.law];
+    var lift = (state.lift / R_BASE).toFixed(2);
     var msg;
     if (state.law === 0) {
-      msg = "Constant-velocity rise over " + state.beta + "°: the follower leaps from rest to full " +
-        "speed, so the acceleration is a pair of impulses — infinite. Unrunnable at any speed.";
+      msg = "Constant-velocity cam, rise angle " + state.beta + " degrees, lift " + lift +
+        " base radii. The follower leaps from rest to full speed, so the acceleration is a pair of " +
+        "impulses — infinite. Unrunnable at any real speed.";
     } else if (state.law === 1) {
-      msg = "Simple-harmonic rise over " + state.beta + "°: peak acceleration factor " +
-        peakA().toFixed(2) + ", but the acceleration steps to the dwell's zero at each junction — " +
-        "an infinite jerk, and the follower rings.";
+      msg = "Simple-harmonic cam, rise angle " + state.beta + " degrees, lift " + lift +
+        " base radii. Peak acceleration factor " + peakA().toFixed(2) + ", but the acceleration steps to " +
+        "the dwell's zero at each junction — an infinite jerk, and the follower rings.";
     } else {
-      msg = "Cycloidal rise over " + state.beta + "°: peak acceleration factor " + peakA().toFixed(2) +
-        " — the highest of the three — yet the acceleration eases to zero at both ends, the jerk stays " +
-        "finite, and it runs smooth.";
+      msg = "Cycloidal cam, rise angle " + state.beta + " degrees, lift " + lift + " base radii. Peak " +
+        "acceleration factor " + peakA().toFixed(2) + ", the highest of the three, yet the acceleration " +
+        "eases to zero at both ends, the jerk stays finite, and it runs smooth.";
     }
     el.status.textContent = msg;
   }
@@ -382,7 +389,7 @@
   function render() {
     draw();
     paint();
-    setStatus();
+    scheduleAnnounce();
     save();
   }
 
