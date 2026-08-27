@@ -37,6 +37,7 @@
 
   var LAW_NAMES = ["constant velocity", "simple harmonic", "cycloidal"];
   var DEFAULTS = { law: 2, beta: 90, lift: 18 };
+  var STORE_KEY = "arena.cam.v1";
 
   var state = { law: DEFAULTS.law, beta: DEFAULTS.beta, lift: DEFAULTS.lift };
   var rotDeg = 0;                            // cam rotation (degrees)
@@ -93,6 +94,24 @@
     var t = make("text", { x: x, y: y, "text-anchor": anchor, class: cls || "lane-tick" });
     t.textContent = text;
     return add(t);
+  }
+
+  // Keep the bench as you left it, across visits — the law, the rise angle and the lift.
+  // Reset still puts them all back to the nominal cycloidal cam.
+  function save() {
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify({ law: state.law, beta: state.beta, lift: state.lift }));
+    } catch (e) { /* private mode or full quota — the bench still works */ }
+  }
+  function restore() {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (s && typeof s.law === "number" && isFinite(s.law)) state.law = clamp(Math.round(s.law), LAW_MIN, LAW_MAX);
+      if (s && typeof s.beta === "number" && isFinite(s.beta)) state.beta = clamp(Math.round(s.beta / 5) * 5, BETA_MIN, BETA_MAX);
+      if (s && typeof s.lift === "number" && isFinite(s.lift)) state.lift = clamp(Math.round(s.lift), LIFT_MIN, LIFT_MAX);
+    } catch (e) { /* malformed or unreadable — fall back to defaults */ }
   }
 
   // ---- the motion laws, on u ∈ [0,1] ----
@@ -364,6 +383,7 @@
     draw();
     paint();
     setStatus();
+    save();
   }
 
   // ---- the Turn animation ----
@@ -423,5 +443,6 @@
   lawRange.min = LAW_MIN; lawRange.max = LAW_MAX;
   betaRange.min = BETA_MIN; betaRange.max = BETA_MAX;
   liftRange.min = LIFT_MIN; liftRange.max = LIFT_MAX;
+  restore();
   setLaw(state.law); setBeta(state.beta); setLift(state.lift);
 })();
