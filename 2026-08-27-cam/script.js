@@ -41,6 +41,13 @@
 
   var state = { law: DEFAULTS.law, beta: DEFAULTS.beta, lift: DEFAULTS.lift };
   var rotDeg = 0;                            // cam rotation (degrees)
+  var STEP_DEG = 15;                         // hand-step of the cam when motion is reduced
+
+  // Motion preference — a reader who asks for less motion gets no spinning cam. Turn then
+  // advances the cam one step at a time instead of running it. Re-checked live, so toggling
+  // the system setting takes effect without a reload.
+  var reduceMQ = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+  function motionOff() { return !!(reduceMQ && reduceMQ.matches); }
 
   // ---- cam / follower box (viewBox units) ----
   var CX = 320, CY = 182;                    // cam centre
@@ -405,6 +412,11 @@
   }
   function start() {
     if (raf) return;
+    if (motionOff()) {                        // reduced motion: advance one step, no spin
+      rotDeg = (rotDeg + STEP_DEG) % 360;
+      draw();
+      return;
+    }
     lastTs = 0;
     setRunning(true);
     raf = window.requestAnimationFrame(step);
@@ -439,6 +451,13 @@
   liftRange.addEventListener("input", function () { setLift(parseFloat(liftRange.value)); });
 
   runBtn.addEventListener("click", function () { if (raf) stop(); else start(); });
+  if (reduceMQ) {
+    var onMotionChange = function () {
+      if (motionOff() && raf) stop();         // caught mid-spin — halt where it sits
+    };
+    if (reduceMQ.addEventListener) reduceMQ.addEventListener("change", onMotionChange);
+    else if (reduceMQ.addListener) reduceMQ.addListener(onMotionChange);   // older browsers
+  }
   function doReset() {
     stop();
     rotDeg = 0;
