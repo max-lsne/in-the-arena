@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cam — a shape that is a schedule, driving a follower through a fixed rise-and-return once a turn, smooth or hammering by the curve alone</title>
+  <meta name="description" content="A cam is a motion written as a shape. The follower's whole timetable — rise so far by this angle, held here, returned by there — is stored in the radius of the profile, R(θ) = base + s(θ), and read off once a revolution. But the law you cut into it decides everything: a straight ramp gives a velocity step and so an infinite acceleration that hammers the follower; simple harmonic motion bounds the acceleration but steps it at the dwells, an infinite jerk that rings; only the cycloidal law brings the acceleration to zero at both ends, matching the dwell it joins, and runs quiet. A small page, and a cam you can turn, reshape and re-cut by hand." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231b2530'/%3E%3Cpath d='M16 6 C22 6 26 11 26 16 C26 21 22 24 17 24 C12 24 8 21 8 16 C8 10 11 6 16 6 Z' fill='none' stroke='%238b98a6' stroke-width='1.5'/%3E%3Ccircle cx='16' cy='16' r='2.2' fill='%236f7d8b'/%3E%3Cline x1='16' y1='4' x2='16' y2='9' stroke='%2340c39a' stroke-width='1.8' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='6.6' r='1.8' fill='%2340c39a'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#eef1f4" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0f141a" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Cam — the shape that stores a motion" />
+  <meta property="og:description" content="A cam hands a follower a fixed schedule of rise, dwell and return, once per turn, by nothing but the shape of its edge. The catch is the law cut into that edge: a straight ramp hammers with infinite acceleration, simple harmonic motion rings with infinite jerk at the dwells, and only the cycloidal law brings acceleration to zero at both ends and runs smooth. Worked here on a cam you can turn, reshape and re-cut." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">In the arena · 2026-08-27</p>
+      <p class="pron"><b>cam</b> · <i>noun</i> · /kæm/ — a rotating piece whose shaped edge drives a follower through a set pattern of movement, once per turn; from Dutch <i>kam</i>, <i>comb</i>, the projecting tooth of a wheel, cognate with English <i>comb</i></p>
+      <h1>Cam</h1>
+      <p class="lede">A cam is a <em>motion drawn as a shape</em>. The whole timetable a follower must keep — risen this far by this angle, held level here, brought back by there — is stored in the swelling radius of an edge and read off once every revolution. Nothing computes it in the moment; the shape <em>is</em> the schedule.</p>
+      <p class="sub">And that is the trap. Any lump on a shaft will lift a follower and drop it; the demand a cam really answers is <b>how</b> — how steadily, how squarely, with what violence at the corners. Cut the rise as a plain straight ramp and the follower must leap from still to full speed in no angle at all: a step in velocity is an <b>infinite acceleration</b>, a hammer-blow at every start and stop. Round the ramp into <b>simple harmonic motion</b> and the acceleration is bounded, but it still <em>jumps</em> where the rise meets the dwell — a step in acceleration is an <b>infinite jerk</b>, and the follower rings. Only one common law brings the acceleration itself gently to zero at both ends, matched to the still dwell it joins: the <b>cycloidal</b>. Same lift, same rise, same dwell — and the difference between a machine that pounds itself apart and one that runs quiet is a choice of curve.</p>
+    </header>
+
+    <section id="problem">
+      <p class="section-tag">The problem the shape solves</p>
+      <h2>A fixed timetable, delivered once a turn</h2>
+      <p>Many machines need a part moved through the <em>same</em> stroke again and again, in step with a turning shaft: a valve opened just as a piston wants air and shut before it fires, a needle dipped as cloth advances, a tool fed in, held, and withdrawn. You could try to time each one with linkages and stops, but the timing would drift and the pattern would be hard to change. The cam does it with a single shaped wheel: the follower rides the edge, and the edge's rising and falling radius <b>is</b> the stroke, laid out around the turn.</p>
+
+      <p>Write the follower's height as <span class="mono">s(θ)</span> — how far it has lifted at cam angle <span class="mono">θ</span> — and the cam is just that graph wrapped into a disc: its radius at every angle is <span class="mono">R(θ) = R_base + s(θ)</span>. Turn the shaft at a steady speed and the follower re-lives <span class="mono">s(θ)</span> exactly, every revolution, forever. The <b>displacement diagram</b>, that graph of lift against angle, is the whole design; the metal is only its shadow.</p>
+
+      <p class="pull">But a follower does not feel displacement. It feels the <em>second</em> derivative — the acceleration, and so the force. Two cams with the identical lift can treat their followers as gently or as brutally as the difference between their curves.</p>
+    </section>
+
+    <section id="relation">
+      <p class="section-tag">The one relation it embodies</p>
+      <h2>The law lives in the derivatives</h2>
+      <p>Rise a follower through lift <span class="mono">h</span> over a rise angle <span class="mono">β</span>, at shaft speed <span class="mono">ω</span>. Differentiate the lift twice with respect to time and every law shares the same skeleton — a velocity that scales as <span class="mono">h·ω/β</span> and an acceleration that scales as <span class="mono">h·ω²/β²</span> — but the <em>shape</em> of those curves, and their peaks, are the law's own:</p>
+
+      <ul class="law-list">
+        <li><b>Constant velocity</b> — <span class="mono">s = h·(θ/β)</span>. The follower climbs at one speed. Elegant on paper, but velocity jumps <span class="mono">0 → v → 0</span> at the ends, so the acceleration is a pair of <em>impulses</em> — infinite. The corner cannot be run.</li>
+        <li><b>Simple harmonic</b> — <span class="mono">s = (h/2)(1 − cos(πθ/β))</span>. Velocity is a smooth half-sine, zero at both ends. But the acceleration is a half-<em>cosine</em>: it starts and ends at its full value and <em>steps</em> to the dwell's zero. Bounded force, but an infinite <b>jerk</b> at each junction — the follower is snatched, and rings.</li>
+        <li><b>Cycloidal</b> — <span class="mono">s = h·(θ/β − sin(2πθ/β)/2π)</span>. Velocity <em>and</em> acceleration are both zero at both ends. The acceleration is a full sine over the rise, rising from nothing and returning to nothing, matched to the dwell it meets. The jerk stays finite. Its peak acceleration is actually the <em>highest</em> of the three — and it is still the one that runs smooth.</li>
+      </ul>
+
+      <p>That last line is the quiet lesson. The cycloidal law does not win by pushing less hard; at <span class="mono">2π · h·ω²/β²</span> it pushes harder than simple harmonic's <span class="mono">(π²/2) · h·ω²/β²</span>. It wins by never <em>surprising</em> the follower — no step in acceleration, no infinite jerk, no ringing. And every one of these peaks scales as <span class="mono">1/β²</span>:</p>
+
+      <p class="pull">halve the rise angle and you quadruple the acceleration — the same lift, hurried, is four times as violent.</p>
+    </section>
+
+    <section id="bench" aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">Turn the cam, change the law, hurry the rise</h2>
+      <p class="bench-intro">A <b>cam</b> on its shaft, its <b>base circle</b> dashed inside it and the sectors of the turn — <b>rise</b>, dwell, <b>return</b>, dwell — banded around the rim. A knife-edge <b>follower</b> rides the top and rehearses the lift. Below, the <b>displacement diagram</b> in three lanes: the lift <span class="mono">s</span>, the velocity <span class="mono">v</span>, and the acceleration <span class="mono">a</span>, against cam angle, with a cursor at the present angle. Press <b>Turn</b> to run it. Change the <b>motion law</b> and watch the acceleration lane: impulses spike off the frame for constant velocity, step at the dwells for simple harmonic, and meet zero smoothly for cycloidal. Shorten the <b>rise angle</b> and every acceleration grows as one over its square.</p>
+
+      <div class="bench" id="benchRoot">
+        <div class="scales" id="scalesWrap">
+          <svg id="stageSvg" viewBox="0 0 640 500" role="img"
+               aria-label="A rotating cam on a shaft with its base circle dashed inside it and the rise, dwell, return and dwell sectors banded around its rim, driving a knife-edge follower that rides the top; below, a three-lane displacement diagram plotting the follower's lift, velocity and acceleration against cam angle, with a cursor at the present angle.">
+            <!-- populated by script.js -->
+          </svg>
+        </div>
+
+        <div class="readout" aria-hidden="false">
+          <div class="read-big">
+            <span class="read-num mono" id="readBig">6.28</span>
+            <span class="read-cap" id="readCap">peak acceleration · factor</span>
+          </div>
+          <p class="read-break mono">
+            <span class="rb-main" id="rbEq">a_max = 2π · h·ω² ⁄ β²</span>
+          </p>
+          <ul class="read-facts">
+            <li><span class="rf-k">motion law</span><span class="rf-v mono" id="rfLaw">cycloidal</span></li>
+            <li><span class="rf-k">rise angle β</span><span class="rf-v mono" id="rfBeta">90°</span></li>
+            <li><span class="rf-k">lift h (× base radius)</span><span class="rf-v mono" id="rfLift">0.60</span></li>
+            <li><span class="rf-k">peak velocity factor</span><span class="rf-v mono" id="rfVpk">2.00</span></li>
+            <li><span class="rf-k">peak acceleration factor</span><span class="rf-v mono" id="rfApk">6.28</span></li>
+            <li><span class="rf-k">jerk at the dwells</span><span class="rf-v mono" id="rfJerk">finite</span></li>
+          </ul>
+        </div>
+
+        <div class="controls">
+          <div class="ctl">
+            <label for="lawRange">motion law — the curve cut into the rise
+              <span class="ctl-val mono" id="lawVal">cycloidal</span>
+            </label>
+            <input type="range" id="lawRange" min="0" max="2" step="1" value="2"
+                   aria-describedby="lawNote" />
+            <p class="ctl-note" id="lawNote">Three laws for the same rise and fall. <b>Constant velocity</b> ramps straight and hammers with infinite acceleration at every corner. <b>Simple harmonic</b> rounds the speed but steps the acceleration at the dwells — an infinite jerk. <b>Cycloidal</b> eases the acceleration to zero at both ends and runs smooth, at the cost of the highest peak of the three.</p>
+          </div>
+
+          <div class="ctl">
+            <label for="liftRange">lift — h, the follower's whole travel
+              <span class="ctl-val mono" id="liftVal">0.60 × base</span>
+            </label>
+            <input type="range" id="liftRange" min="8" max="30" step="1" value="18"
+                   aria-describedby="liftNote" />
+            <p class="ctl-note" id="liftNote">How far the follower is raised between the low dwell and the high. Taller lift, taller everything — the velocity and the acceleration both scale straight up with it. The base circle underneath is fixed; the lift is the swell added onto it.</p>
+          </div>
+
+          <div class="ctl ctl-gap">
+            <label for="betaRange">rise angle — β, the turn allowed for the climb
+              <span class="ctl-val mono" id="betaVal">90°</span>
+            </label>
+            <input type="range" id="betaRange" min="40" max="150" step="5" value="90"
+                   aria-describedby="betaNote" />
+            <p class="ctl-note" id="betaNote">How much of the revolution the rise is given — the return is given the same, and the two dwells share what is left. Hurry the rise into a smaller angle and the lift is unchanged but the acceleration climbs as one over β squared: halve the angle, quadruple the force.</p>
+          </div>
+
+          <div class="ctl-actions">
+            <button type="button" class="btn" id="runBtn" aria-pressed="false">Turn</button>
+            <button type="button" class="btn btn-ghost" id="resetBtn">Reset</button>
+          </div>
+        </div>
+
+        <p class="status" id="status"></p>
+
+      </div>
+    </section>
+
+    <section id="coda">
+      <p class="section-tag">Why keep it</p>
+      <h2>The motion is the metal</h2>
+      <p>The cam is worth a page because it turns a demand about time into a fact about shape. The demand — move this follower through exactly this stroke, in exactly this phase with the shaft, again and again without drift — is a statement about <em>every instant</em> of the turn; the cam answers all of it at once by being cut to the right edge, and then needs no thought to obey, the way an <b>involute</b> tooth satisfies the law of gearing by its shape alone, or a hanging chain finds its <b>catenary</b> without solving for it. The cam is old — the trip-hammers of Han foundries, the shafts of pegs in Al-Jazari's water-clocks and automata around 1206, the lobes on every engine's camshaft opening its valves on the beat — but the discipline hidden in it is young: that the lift is the easy part, and the whole art is in the second derivative, in cutting a curve whose acceleration will not surprise the follower.</p>
+      <p>It keeps company with the other machines that hand out a schedule and hold to it: the <b>escapement</b> that doles a clock its beat from a failing push, the <b>governor</b> that holds an engine's speed against a swinging load, the <b>fusee</b> that keeps a mainspring's pull level as it dies. The cam is their cousin that carries the whole programme on its rim. Turn it on the bench, then switch the law and watch only the acceleration lane: the lift barely changes, the corners change utterly — a hammer, a ring, or nothing at all. That is the cam, and it is only a graph, wrapped into a wheel.</p>
+    </section>
+
+    <footer class="foot">
+      <p class="foot-series">One of a series — a page a day, each built on one old working word and the discipline hidden inside it. <span class="foot-date">2026-08-27</span>.</p>
+    </footer>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
