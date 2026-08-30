@@ -76,7 +76,8 @@
     r: document.getElementById("rfR"),
     peak: document.getElementById("rfPeak"),
     slotVal: document.getElementById("slotVal"),
-    speedVal: document.getElementById("speedVal")
+    speedVal: document.getElementById("speedVal"),
+    status: document.getElementById("status")
   };
 
   // ---- small helpers ----
@@ -337,9 +338,27 @@
     el.speedVal.textContent = (state.speed / SPD_NOM).toFixed(1) + "×";
   }
 
+  // Speak the settled state to a screen reader, not every keystroke of a slider drag.
+  var announceTimer = null;
+  function scheduleAnnounce() {
+    if (announceTimer) clearTimeout(announceTimer);
+    announceTimer = setTimeout(speak, 400);
+  }
+  function speak() {
+    if (!el.status) return;
+    el.status.textContent =
+      state.n + "-slot Geneva drive. The pin sits at r = " + (geom().r / A).toFixed(3) +
+      " of the shaft spacing, so it enters each slot from rest. The driver indexes the star " +
+      "through " + indexAngle().toFixed(0) + " degrees of its turn — a " + pitch().toFixed(0) +
+      " degree step — and the shoulder holds it still for the other " + (dwellFrac() * 100).toFixed(0) +
+      " percent. At mid-index the star briefly turns " + peakRatio().toFixed(2) +
+      " times the driver's speed.";
+  }
+
   function render() {
     draw();
     paint();
+    scheduleAnnounce();
     save();
   }
 
