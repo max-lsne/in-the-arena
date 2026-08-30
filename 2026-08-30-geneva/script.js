@@ -37,6 +37,13 @@
 
   var state = { n: DEFAULTS.n, speed: DEFAULTS.speed };
   var cd = 0;                                // driver angle (degrees), pin direction
+  var STEP_DEG = 18;                         // hand-step of the driver under reduced motion
+
+  // Motion preference — a reader who asks for less motion gets no spinning drive. Run then
+  // steps the driver one notch at a time instead of running it. Re-checked live, so toggling
+  // the system setting takes effect without a reload.
+  var reduceMQ = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+  function motionOff() { return !!(reduceMQ && reduceMQ.matches); }
 
   // ---- geometry (viewBox units) ----
   var Cx = 316, CyStage = 172;               // stage centre
@@ -348,6 +355,11 @@
   }
   function start() {
     if (raf) return;
+    if (motionOff()) {                        // reduced motion: step the driver, no spin
+      cd = (cd + STEP_DEG) % 360;
+      draw();
+      return;
+    }
     lastTs = 0;
     setRunning(true);
     raf = window.requestAnimationFrame(step);
@@ -376,6 +388,13 @@
   speedRange.addEventListener("input", function () { setSpeed(parseFloat(speedRange.value)); });
 
   runBtn.addEventListener("click", function () { if (raf) stop(); else start(); });
+  if (reduceMQ) {
+    var onMotionChange = function () {
+      if (motionOff() && raf) stop();         // caught mid-run — halt where it sits
+    };
+    if (reduceMQ.addEventListener) reduceMQ.addEventListener("change", onMotionChange);
+    else if (reduceMQ.addListener) reduceMQ.addListener(onMotionChange);   // older browsers
+  }
   function doReset() {
     stop();
     cd = 0;
