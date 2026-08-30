@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Geneva — a pin on a steady crank that indexes a star wheel one slot per turn and holds it still the rest, entering each slot from rest when r = a·sin(π/n)</title>
+  <meta name="description" content="A Geneva drive turns a steady rotation into a rhythm of turn-and-hold: a pin on a turning crank sweeps into a slot in a star wheel, carries it round exactly one slot, and slides out, while a curved shoulder holds the star dead still for the rest of the turn. Any pin will do it — but only a pin set at r = a·sin(π/n) enters and leaves each slot moving along it, easing the star from rest and back to rest with no snatch. Fewer slots flick harder; more slots index gentler but hold shorter. A small page, and a Geneva you can run, count the slots on, and read the speed ratio off." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231b2530'/%3E%3Cpath d='M16 6 L18.4 10.2 A6 6 0 0 1 21.8 13.6 L26 16 L21.8 18.4 A6 6 0 0 1 18.4 21.8 L16 26 L13.6 21.8 A6 6 0 0 1 10.2 18.4 L6 16 L10.2 13.6 A6 6 0 0 1 13.6 10.2 Z' fill='none' stroke='%238b98a6' stroke-width='1.4' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='16' r='1.8' fill='%236f7d8b'/%3E%3Ccircle cx='25' cy='9' r='1.9' fill='%2340c39a'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#eef1f4" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0f141a" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Geneva — the drive that carries a stop in its motion" />
+  <meta property="og:description" content="Continuous rotation in, step-and-hold out. A pin on a steady crank flicks a star wheel round one slot per turn and a curved shoulder holds it still the rest; set the pin at r = a·sin(π/n) and it enters each slot from rest, no snatch. Worked here on a Geneva you can run, re-slot and read." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">In the arena · 2026-08-30</p>
+      <p class="pron"><b>Geneva</b> · <i>noun</i> · /dʒɪˈniːvə/ — an intermittent-motion gear: a pin on a steadily turning crank indexes a slotted star wheel one step per revolution and a shoulder holds it still between; from the <i>Geneva stop</i> of watchmaking, the <i>croix de Malte</i>, named for the town where it was made</p>
+      <h1>Geneva</h1>
+      <p class="lede">A Geneva drive is a shaft that <em>never stops</em> turning a wheel that <em>mostly stands still</em>. A pin sweeps into a slot, carries the star round by exactly one station, and slides out; for the rest of the turn a curved shoulder holds the star dead still, waiting. Continuous in, step-and-hold out — the motion has a <em>stop</em> built into it.</p>
+      <p class="sub">And that is the trap. <b>Any</b> pin dropped into <b>any</b> slot will turn the star intermittently — but it will also snatch it to a start and jerk it to a halt, a step in velocity at each end, an <b>infinite acceleration</b>, a hammer-blow that wears and rings. The Geneva earns its name by the single condition that removes the shock: the pin sits at radius <span class="mono">r = a·sin(π/n)</span> from the crank centre — <span class="mono">a</span> the shaft spacing, <span class="mono">n</span> the slot count — and at that radius <em>alone</em> the pin enters and leaves each slot moving <b>exactly along it</b>, with no sideways snatch, the star eased from rest and set back to rest. Same step, same hold; the difference between a mechanism that batters itself and one that indexes clean is one choice of radius.</p>
+    </header>
+
+    <section id="problem">
+      <p class="section-tag">The problem the shape solves</p>
+      <h2>Steady drive in, turn-and-hold out</h2>
+      <p>Some machines need motion that <em>stops</em>. Not slows — stops, dead still, on a schedule, and then moves again: a film frame held in the gate while the shutter opens and the lamp prints it, an indexing table paused under a drill while the hole is cut, a tool-changer presenting each tool square and motionless. The drive shaft, meanwhile, wants to spin at a steady rate; stopping and restarting a heavy shaft every cycle is wasteful and violent. The task is to turn one <em>steady</em> rotation into a <b>rhythm of turn-and-dwell</b> at the output, without ever checking the input.</p>
+
+      <p>The Geneva does it with two wheels and a pin. The driver turns without pause. For most of its revolution a raised circular <b>locking shoulder</b> on the driver sits inside a matching hollow on the star and holds it still — the star cannot move even if pushed. Then the shoulder's throat comes round, freeing the star, and a <b>pin</b> sweeps into one of the star's radial <b>slots</b>, carries it round by one slot-pitch, <span class="mono">360°/n</span>, and withdraws, just as the shoulder swings back to lock the star at its new station.</p>
+
+      <p class="pull">One input revolution, one output step. The whole timetable — move now, hold there — is built into the geometry, and needs no sensing and no control to keep.</p>
+    </section>
+
+    <section id="relation">
+      <p class="section-tag">The one relation it embodies</p>
+      <h2>The pin enters the slot from rest</h2>
+      <p>Set the two shaft centres a distance <span class="mono">a</span> apart, the pin at radius <span class="mono">r</span> on the driver. The demand that makes the motion smooth is that the pin slip into the slot <em>along the slot's own length</em> — with no velocity across it — at entry, and leave the same way. Geometrically the crank arm must stand <b>perpendicular to the slot</b> at that instant. The slot points straight out from the star's centre, and at entry it stands half a slot-pitch, <span class="mono">π/n</span>, off the line joining the shafts. Crank, slot and centre-line then form a right triangle with the right angle at the pin:</p>
+
+      <ul class="law-list">
+        <li><b>The pin radius</b> — <span class="mono">r = a·sin(π/n)</span>. The one radius that makes the star enter and leave from rest, tangent to the slot, with a finite acceleration instead of a snatch. Everything else falls out of this triangle.</li>
+        <li><b>The index angle</b> — the driver is engaged only while its crank swings through <span class="mono">180°·(n−2)/n</span> either side of the centre-line; the star turns for that fraction, <span class="mono">(n−2)/(2n)</span>, of every revolution.</li>
+        <li><b>The dwell</b> — for the rest, <span class="mono">(n+2)/(2n)</span> of the turn, the shoulder holds the star still. Four slots: a quarter turning, three-quarters held.</li>
+      </ul>
+
+      <p>And the <em>violence</em> of the flick is set by the same count. Write <span class="mono">m = a/r = 1/sin(π/n)</span>, the centre distance in pin radii; the star's speed peaks, at the middle of the index, at <span class="mono">(ω_star/ω_driver)_max = 1/(m − 1)</span>. Read that downward and the whole character of the drive is in it:</p>
+
+      <p class="pull">few slots flick <em>hard</em> — a three-slot star whips past six times the driver's speed — many slots index gently but hold briefly; the four-slot cross of the projector sits in the middle, a peak near <span class="mono">2.4×</span>, a clean 90° index, a generous 75% hold.</p>
+    </section>
+
+    <section id="bench" aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">Run it, count the slots, read the ratio</h2>
+      <p class="bench-intro">Two wheels on their shafts, <span class="mono">a</span> apart: the <b>driver</b> on the right, turning steadily, with its <b>pin</b> and its curved <b>locking shoulder</b>; the <b>star</b> on the left, its radial slots cut for <span class="mono">n</span> stations. Press <b>Run</b> and watch the pin catch a slot, sweep the star round one notch, and let go as the shoulder swings back to hold it — turn, hold, turn, hold. Below, the <b>output diagram</b>: the star's cumulative angle against the driver's angle, a staircase of smooth rises and flat treads, with the <b>speed-ratio</b> curve <span class="mono">ω_star/ω_driver</span> laid over it — cresting at mid-index, flat-zero through every dwell — and a cursor at the present driver angle.</p>
+
+      <div class="bench" id="benchRoot">
+        <div class="scales" id="scalesWrap">
+          <svg id="stageSvg" viewBox="0 0 640 520" role="img"
+               aria-label="A Geneva drive: a driver wheel on the right turning steadily, carrying a pin and a curved locking shoulder, and a slotted star wheel on the left. The pin sweeps into a radial slot and indexes the star one station per revolution while the shoulder holds it still between. Below, an output diagram plots the star's cumulative angle against the driver's angle as a staircase of smooth rises and flat holds, with the speed-ratio curve overlaid and a cursor at the present driver angle.">
+            <!-- populated by script.js -->
+          </svg>
+        </div>
+
+        <div class="readout" aria-hidden="false">
+          <div class="read-big">
+            <span class="read-num mono" id="readBig">2.41</span>
+            <span class="read-cap" id="readCap">peak speed ratio · ω_star ⁄ ω_driver</span>
+          </div>
+          <p class="read-break mono">
+            <span class="rb-main" id="rbEq">r = a·sin(π⁄4) = 0.707 a</span>
+          </p>
+          <ul class="read-facts">
+            <li><span class="rf-k">slots n</span><span class="rf-v mono" id="rfN">4</span></li>
+            <li><span class="rf-k">slot pitch · 360°⁄n</span><span class="rf-v mono" id="rfPitch">90°</span></li>
+            <li><span class="rf-k">index angle · 180°(n−2)⁄n</span><span class="rf-v mono" id="rfIndex">90°</span></li>
+            <li><span class="rf-k">dwell · (n+2)⁄2n of turn</span><span class="rf-v mono" id="rfDwell">75%</span></li>
+            <li><span class="rf-k">pin radius r ⁄ a</span><span class="rf-v mono" id="rfR">0.707</span></li>
+            <li><span class="rf-k">peak ratio · 1⁄(m−1)</span><span class="rf-v mono" id="rfPeak">2.41</span></li>
+          </ul>
+        </div>
+
+        <div class="controls">
+          <div class="ctl">
+            <label for="slotRange">slots — n, the number of stations
+              <span class="ctl-val mono" id="slotVal">4</span>
+            </label>
+            <input type="range" id="slotRange" min="3" max="8" step="1" value="4"
+                   aria-describedby="slotNote" />
+            <p class="ctl-note" id="slotNote">How many slots the star carries, and so how many steps make a full output revolution. More slots means a smaller pin, a longer and gentler index, and a shorter dwell; fewer means a big pin, a short violent flick, and a long hold. The pin radius <b>r = a·sin(π/n)</b> re-cuts itself to keep the entry tangent every time you change it.</p>
+          </div>
+
+          <div class="ctl">
+            <label for="speedRange">speed — how fast the driver turns
+              <span class="ctl-val mono" id="speedVal">1.0×</span>
+            </label>
+            <input type="range" id="speedRange" min="20" max="150" step="5" value="70"
+                   aria-describedby="speedNote" />
+            <p class="ctl-note" id="speedNote">The tempo of the driver, nothing more. The index angle, the dwell fraction and the speed ratios are fixed by the slot count alone — turning the driver faster only runs the same schedule quicker. Below the nominal, the whole cycle plays in slow motion.</p>
+          </div>
+
+          <div class="ctl-actions">
+            <button type="button" class="btn" id="runBtn" aria-pressed="false">Run</button>
+            <button type="button" class="btn btn-ghost" id="resetBtn">Reset</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="coda">
+      <p class="section-tag">Why keep it</p>
+      <h2>The drive that carries a stop</h2>
+      <p>The Geneva is worth a page because it turns a demand about <em>time</em> — move, then hold, then move — into a fact about <b>shape</b>, and answers it with two wheels that need no clutch, no brake, no controller. Cut the pin to the right radius and the star indexes itself, holds itself, and cannot drift, the way an <b>involute</b> tooth obeys the law of gearing by its profile alone, or a <b>cam</b> hands its follower a whole schedule in the swell of an edge. The name is a loan from watchmaking — the <em>Geneva stop</em>, a Maltese cross with one arm left solid to stop a mainspring over-winding, made in the watch town and named for it — and turned from a stop into a drive it became the heart of the <b>film projector</b>, yanking each frame into the gate and holding it still to be lit, twenty-four times a second, behind nearly every reel of film for a century.</p>
+      <p>It keeps company with the other machines that hand out a schedule and hold to it: the <b>escapement</b> that doles a clock its beat one tooth at a time, the <b>governor</b> that holds an engine's speed against a swinging load, the <b>fusee</b> that keeps a mainspring's pull level as it dies. The Geneva is their cousin that carries a <em>stop</em> in its very motion — steady drive in, staccato out. Run it on the bench, then pull the slot count down to three and watch the same clean index turn into a snatch: the whole discipline is in one radius, and one count of slots.</p>
+    </section>
+
+    <footer class="foot">
+      <p class="foot-series">One of a series — a page a day, each built on one old working word and the discipline hidden inside it. <span class="foot-date">2026-08-30</span>.</p>
+    </footer>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
