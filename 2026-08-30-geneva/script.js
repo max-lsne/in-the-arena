@@ -33,6 +33,7 @@
   var SPD_MIN = 20, SPD_MAX = 150;           // driver speed, degrees per second
   var SPD_NOM = 70;                          // the nominal "1.0×"
   var DEFAULTS = { n: 4, speed: 70 };
+  var STORE_KEY = "arena.geneva.v1";
 
   var state = { n: DEFAULTS.n, speed: DEFAULTS.speed };
   var cd = 0;                                // driver angle (degrees), pin direction
@@ -144,6 +145,25 @@
     var a = rad(wrap180(d - 180));
     var c = Math.cos(a);
     return (g.m * c - 1) / (1 - 2 * g.m * c + g.m * g.m);
+  }
+
+  // Keep the bench as you left it, across visits — the slot count and the driver speed.
+  // Reset still puts them back to the nominal four-slot cross at the nominal speed.
+  function save() {
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify({ n: state.n, speed: state.speed }));
+    } catch (e) { /* private mode or full quota — the bench still works */ }
+  }
+  function restore() {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (s && typeof s.n === "number" && isFinite(s.n)) state.n = clamp(Math.round(s.n), N_MIN, N_MAX);
+      if (s && typeof s.speed === "number" && isFinite(s.speed)) {
+        state.speed = clamp(Math.round(s.speed / 5) * 5, SPD_MIN, SPD_MAX);
+      }
+    } catch (e) { /* malformed or unreadable — fall back to defaults */ }
   }
 
   // ---- drawing ----
@@ -313,6 +333,7 @@
   function render() {
     draw();
     paint();
+    save();
   }
 
   // ---- the Run animation ----
@@ -396,5 +417,6 @@
   // ---- boot ----
   slotRange.min = N_MIN; slotRange.max = N_MAX;
   speedRange.min = SPD_MIN; speedRange.max = SPD_MAX;
+  restore();
   setN(state.n); setSpeed(state.speed);
 })();
