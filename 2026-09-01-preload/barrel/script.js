@@ -347,6 +347,30 @@
   // ---- controls ----
   function setStatus(msg) { el.status.innerHTML = msg; }
 
+  // ---- announce the settled joint to a screen reader (debounced past slider drags) ----
+  var annTimer = 0, ready = false;
+  function announce() {
+    var m = physics();
+    var head = "Hoops driven to F₀ " + Math.round(m.F0) + " kN, split φ " + f2(m.phi) + ". ";
+    var body;
+    if (m.P < 0.5) {
+      body = "Cask empty; the marked seam holds " + Math.round(m.F0) +
+             " kN of squeeze and would open at a fill of P_sep " + Math.round(m.Psep) + " kN.";
+    } else if (!m.open) {
+      body = "Filled to P " + Math.round(m.P) + " kN — seam shut and watertight, " +
+             Math.round(m.squeeze) + " kN of squeeze left, opening at P_sep " + Math.round(m.Psep) + " kN.";
+    } else {
+      body = "Filled to P " + Math.round(m.P) + " kN — seam sprung and weeping; it opened at P_sep " +
+             Math.round(m.Psep) + " kN.";
+    }
+    el.status.textContent = head + body;
+  }
+  function scheduleAnnounce() {
+    if (!ready) return;
+    clearTimeout(annTimer);
+    annTimer = setTimeout(announce, 420);
+  }
+
   // ---- persistence: keep the bench as the reader last left it ----
   function persist() {
     try {
@@ -373,9 +397,10 @@
     el.phiVal.textContent = f2(state.phi);
     update();
     persist();
+    scheduleAnnounce();
   }
 
-  function setLoad(P) { load = clamp(P, 0, P_MAX); update(); persist(); }
+  function setLoad(P) { load = clamp(P, 0, P_MAX); update(); persist(); scheduleAnnounce(); }
 
   function tick(ts) {
     if (!running) return;
@@ -397,6 +422,7 @@
     running = false; cancelAnimationFrame(raf);
     runBtn.setAttribute("aria-pressed", "false"); runBtn.textContent = "Fill";
     persist();
+    announce();
   }
   function toggle() { running ? stop() : run(); }
 
@@ -417,4 +443,5 @@
   restore();
   build();
   readControls();
+  ready = true;
 })();

@@ -283,6 +283,30 @@
 
   function setStatus(msg) { el.status.innerHTML = msg; }
 
+  // ---- announce the settled rig to a screen reader (debounced past slider drags) ----
+  var annTimer = 0, ready = false;
+  function announce() {
+    var m = physics();
+    var head = "Rigging set up to T₀ " + Math.round(m.F0) + " kN, base φ " + f2(m.phi) + ". ";
+    var body;
+    if (m.P < 0.5) {
+      body = "No wind; both shrouds alive, the lee holding " + Math.round(m.F0) +
+             " kN and going dead at a gust of P_sep " + Math.round(m.Psep) + " kN.";
+    } else if (!m.open) {
+      body = "Gust P " + Math.round(m.P) + " kN — mast held both sides, lee shroud alive with " +
+             Math.round(m.leeLeft) + " kN, going dead at P_sep " + Math.round(m.Psep) + " kN.";
+    } else {
+      body = "Gust P " + Math.round(m.P) + " kN — lee shroud dead and the mast free to pump; it went dead at P_sep " +
+             Math.round(m.Psep) + " kN.";
+    }
+    el.status.textContent = head + body;
+  }
+  function scheduleAnnounce() {
+    if (!ready) return;
+    clearTimeout(annTimer);
+    annTimer = setTimeout(announce, 420);
+  }
+
   // ---- persistence: keep the bench as the reader last left it ----
   function persist() {
     try {
@@ -309,9 +333,10 @@
     el.phiVal.textContent = f2(state.phi);
     update();
     persist();
+    scheduleAnnounce();
   }
 
-  function setLoad(P) { load = clamp(P, 0, P_MAX); update(); persist(); }
+  function setLoad(P) { load = clamp(P, 0, P_MAX); update(); persist(); scheduleAnnounce(); }
 
   function tick(ts) {
     if (!running) return;
@@ -332,6 +357,7 @@
     running = false; cancelAnimationFrame(raf);
     runBtn.setAttribute("aria-pressed", "false"); runBtn.textContent = "Gust";
     persist();
+    announce();
   }
   function toggle() { running ? stop() : run(); }
 
@@ -352,4 +378,5 @@
   restore();
   build();
   readControls();
+  ready = true;
 })();
