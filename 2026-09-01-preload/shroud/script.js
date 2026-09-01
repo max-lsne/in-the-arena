@@ -397,6 +397,28 @@
     else if (reduceMQ.addListener) reduceMQ.addListener(onMotion);
   }
 
+  // ---- keyboard: work the bench without the mouse ----
+  function nudge(input, delta, lo, hi) {
+    input.value = clamp(parseInt(input.value, 10) + delta, lo, hi);
+    readControls();
+  }
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var a = document.activeElement, tag = a ? a.tagName : "", isRange = tag === "INPUT";
+    switch (e.key) {
+      case "ArrowRight": if (isRange) return; setLoad(load + STEP_P); break;   // build the gust
+      case "ArrowLeft":  if (isRange) return; setLoad(load - STEP_P); break;   // ease the gust
+      case "]": nudge(preRange, 6, PRE_MIN, PRE_MAX); break;                   // set up harder
+      case "[": nudge(preRange, -6, PRE_MIN, PRE_MAX); break;                  // set up softer
+      case "=": case "+": nudge(phiRange, 3, 15, 60); break;                   // wider base
+      case "-": case "_": nudge(phiRange, -3, 15, 60); break;                  // narrower base
+      case " ": case "Spacebar": if (tag === "BUTTON") return; toggle(); break;
+      case "r": case "R": reset(); break;
+      default: return;
+    }
+    e.preventDefault();
+  });
+
   restore();
   build();
   readControls();
