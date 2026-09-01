@@ -28,6 +28,7 @@
   var P_MAX = 180;                          // hardest gust the bench allows, kN
   var F_MAX = 132;                          // top of the force axis, kN
   var DEFAULTS = { pre: 60, phi: 0.30 };
+  var STORE_KEY = "arena.preload.shroud.v1";
 
   var state = { pre: DEFAULTS.pre, phi: DEFAULTS.phi };
   var load = 0;                             // current gust P, kN (the driven degree of freedom)
@@ -282,15 +283,35 @@
 
   function setStatus(msg) { el.status.innerHTML = msg; }
 
+  // ---- persistence: keep the bench as the reader last left it ----
+  function persist() {
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify({ pre: state.pre, phi: state.phi, load: load }));
+    } catch (e) { /* private mode, quota, or storage off — the bench simply won't remember */ }
+  }
+  function restore() {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (typeof s.pre === "number") state.pre = clamp(s.pre, PRE_MIN, PRE_MAX);
+      if (typeof s.phi === "number") state.phi = clamp(s.phi, PHI_MIN, PHI_MAX);
+      if (typeof s.load === "number") load = clamp(s.load, 0, P_MAX);
+      preRange.value = state.pre;
+      phiRange.value = Math.round(state.phi * 100);
+    } catch (e) { /* nothing stored, or storage unavailable */ }
+  }
+
   function readControls() {
     state.pre = clamp(parseInt(preRange.value, 10), PRE_MIN, PRE_MAX);
     state.phi = clamp(parseInt(phiRange.value, 10) / 100, PHI_MIN, PHI_MAX);
     el.preVal.textContent = kN(state.pre);
     el.phiVal.textContent = f2(state.phi);
     update();
+    persist();
   }
 
-  function setLoad(P) { load = clamp(P, 0, P_MAX); update(); }
+  function setLoad(P) { load = clamp(P, 0, P_MAX); update(); persist(); }
 
   function tick(ts) {
     if (!running) return;
@@ -310,6 +331,7 @@
   function stop() {
     running = false; cancelAnimationFrame(raf);
     runBtn.setAttribute("aria-pressed", "false"); runBtn.textContent = "Gust";
+    persist();
   }
   function toggle() { running ? stop() : run(); }
 
@@ -317,6 +339,7 @@
     stop();
     state.pre = DEFAULTS.pre; state.phi = DEFAULTS.phi; load = 0; dir = 1;
     preRange.value = DEFAULTS.pre; phiRange.value = Math.round(DEFAULTS.phi * 100);
+    try { localStorage.removeItem(STORE_KEY); } catch (e) { /* storage off */ }
     readControls();
     setStatus("Rig set up, boat upright, both shrouds alive. Press <b>Gust</b> to heel her and watch the tension bleed off the lee shroud.");
   }
@@ -326,6 +349,7 @@
   runBtn.addEventListener("click", toggle);
   resetBtn.addEventListener("click", reset);
 
+  restore();
   build();
   readControls();
 })();
