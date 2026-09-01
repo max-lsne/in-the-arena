@@ -36,6 +36,12 @@
   var FILL_RATE = 46;                        // kN per second while gusting
   var STEP_P = 12;                           // hand-step of the gust
 
+  // Motion preference — a reader who asks for less motion gets no building gust. Gust then steps
+  // the load one notch at a time instead of ramping it. Re-checked live, so toggling the system
+  // setting takes effect without a reload, and halts a sweep already running.
+  var reduceMQ = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+  function motionOff() { return !!(reduceMQ && reduceMQ.matches); }
+
   var svg = document.getElementById("stageSvg");
   var preRange = document.getElementById("preRange");
   var phiRange = document.getElementById("phiRange");
@@ -348,7 +354,16 @@
     update();
     raf = requestAnimationFrame(tick);
   }
+  function stepLoad() {
+    dir = load >= P_MAX ? -1 : (load <= 0 ? 1 : dir);
+    load = clamp(load + dir * STEP_P, 0, P_MAX);
+    if (load >= P_MAX) dir = -1;
+    if (load <= 0) dir = 1;
+    update(); persist(); announce();
+  }
+
   function run() {
+    if (motionOff()) { stepLoad(); return; }   // one notch, no building gust
     running = true; dir = load >= P_MAX ? -1 : 1; tPrev = 0;
     runBtn.setAttribute("aria-pressed", "true"); runBtn.textContent = "Stop";
     raf = requestAnimationFrame(tick);
@@ -374,6 +389,13 @@
   phiRange.addEventListener("input", readControls);
   runBtn.addEventListener("click", toggle);
   resetBtn.addEventListener("click", reset);
+
+  // if the reader turns on reduced motion mid-sweep, stop the running gust at once
+  if (reduceMQ) {
+    var onMotion = function () { if (motionOff() && running) stop(); };
+    if (reduceMQ.addEventListener) reduceMQ.addEventListener("change", onMotion);
+    else if (reduceMQ.addListener) reduceMQ.addListener(onMotion);
+  }
 
   restore();
   build();
