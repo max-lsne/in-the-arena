@@ -100,6 +100,26 @@
   function maxOneHand() { return CFG.handRef * amp(); }            // largest load one pull holds
   function surging() { return hold() > CFG.handRef + 1e-6; }       // the tail cannot hold it
 
+  // Keep the bench as you left it — the wrap, the surface and the applied load. Reset restores
+  // the nominal wrap on a clean surface, the load at its nominal.
+  function save() {
+    try {
+      localStorage.setItem(CFG.storeKey, JSON.stringify({
+        turns: state.turns, mu: state.mu, load: state.load
+      }));
+    } catch (e) { /* private mode or full quota — the bench still works */ }
+  }
+  function restore() {
+    try {
+      var raw = localStorage.getItem(CFG.storeKey);
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (s && isFinite(s.turns)) state.turns = clamp(Math.round(s.turns / 0.25) * 0.25, T_MIN, T_MAX);
+      if (s && isFinite(s.mu)) state.mu = clamp(Math.round(s.mu * 100) / 100, MU_MIN, MU_MAX);
+      if (s && isFinite(s.load)) state.load = clamp(s.load, CFG.loadMin, CFG.loadMax);
+    } catch (e) { /* malformed or unreadable — fall back to defaults */ }
+  }
+
   // ---- drawing ----
   function draw() {
     while (svg.firstChild) svg.removeChild(svg.firstChild);
@@ -248,7 +268,7 @@
   }
 
   function renderLight() { draw(); paint(); }
-  function render() { draw(); paint(); }
+  function render() { draw(); paint(); save(); }
 
   // ---- the "take the strain" ramp: bring the load on (or ease it off) ----
   var raf = null, lastTs = 0, target = state.load;
@@ -271,7 +291,7 @@
     var dir = target > state.load ? 1 : -1;
     var nl = state.load + dir * speed * dt;
     if ((dir > 0 && nl >= target) || (dir < 0 && nl <= target)) {
-      state.load = target; renderLight(); stopAnim(); return;
+      state.load = target; renderLight(); save(); stopAnim(); return;
     }
     state.load = nl; renderLight();
     raf = window.requestAnimationFrame(ramp);
@@ -299,6 +319,7 @@
 
   function doReset() {
     stopAnim();
+    try { localStorage.removeItem(CFG.storeKey); } catch (e) { /* nothing to clear */ }
     state.load = CFG.loadNom; target = state.load;
     setPressed(strained());
     setTurns(CFG.turnsDefault); setMu(CFG.muDefault);
@@ -308,6 +329,7 @@
   // ---- boot ----
   turnRange.min = T_MIN; turnRange.max = T_MAX;
   muRange.min = MU_MIN; muRange.max = MU_MAX;
+  restore();
   target = state.load;
   setPressed(strained());
   setTurns(state.turns); setMu(state.mu);
