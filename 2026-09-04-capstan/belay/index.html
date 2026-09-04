@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Belay — one brake hand holds a falling climber, because friction round the device's bends multiplies the grip by e^(μθ)</title>
+  <meta name="description" content="A climber falls with the whole force of the fall in the rope, and the belayer holds it with the light grip of one hand — because the rope is run round the bends of a belay device, and friction round a bend multiplies the hold you must supply by e^(μθ). The fall barely reaches the brake hand: it bleeds away exponentially round the wrap. Set the wrap and the surface, weight the rope, and read the amplification and the grip the brake hand must find." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231b2530'/%3E%3Ccircle cx='16' cy='16' r='6.5' fill='none' stroke='%238b98a6' stroke-width='1.6'/%3E%3Cpath d='M8 4 C11 11 12 13 16 13' fill='none' stroke='%23d75a55' stroke-width='2.4' stroke-linecap='round'/%3E%3Cpath d='M24 27 C21 21 19 20 16 19' fill='none' stroke='%2340c39a' stroke-width='1.3' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#eef1f4" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0f141a" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Belay — one hand holds a fall, because the wrap does the work" />
+  <meta property="og:description" content="Run the rope round a belay device and friction multiplies your grip by e^(μθ) — the fall force bleeds away exponentially round the bends and barely reaches the brake hand. Worked here on a belay you can wrap, weight and read." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">In the arena · 2026-09-04</p>
+      <p class="pron"><b>Belay</b> · <i>verb</i> · /bɪˈleɪ/ — to secure a climbing rope round a fixed point or through a friction device so that a fall can be held; earlier, to make a running rope fast round a cleat or pin aboard ship; from Old English <i>belecgan</i>, to lay a thing about</p>
+      <h1>Belay</h1>
+      <p class="lede">A climber comes off with the whole force of the fall gathering in the rope, and the person below stops it — not by being stronger than a falling body, but by <em>closing one hand</em>. The rope has been run through the bends of a small device, and the bends, or rather the friction of the rope round them, do very nearly all the holding.</p>
+      <p class="sub">It is the same trick a sailor plays on a bollard, brought to the mountain and made small enough to carry. Run a rope round a bend and the tension in it <b>bleeds away exponentially</b>: whatever the fall brings on above, only a fraction survives round the wrap to reach the hand below. The ratio is fixed and simple — the grip you must supply falls by a factor of <span class="mono">e^(μθ)</span>, where <span class="mono">μ</span> is the roughness of rope on metal and <span class="mono">θ</span> the total angle the rope is bent through. A little more bend goes a very long way, because it enters through an exponential.</p>
+    </header>
+
+    <section id="problem">
+      <p class="section-tag">The problem the wrap solves</p>
+      <h2>One hand against a falling body</h2>
+      <p>A falling climber is not a weight to be lifted but an energy to be caught, and caught in a moment. Held straight in the hands the rope would be torn through them, burning and gone, and the fall unchecked. Yet a fall <em>is</em> held, again and again, by a belayer who weighs less than the climber and grips with a fraction of their strength. The task is to turn a hold a hand can actually keep — a firm grip on the brake side, a hundred-odd newtons — into a restraint of thousands, and to do it with something light enough to hang from a harness.</p>
+
+      <p>The device does it with a bend and nothing else. The rope enters, turns hard round a bar or through a slot, and leaves; every point of that turn presses the rope into the metal, and the harder the fall pulls, the harder it presses and the more the metal grips back. The grip accumulates <b>round the whole arc of contact</b>, each patch shaving a little more off the tension, so the great force above dies smoothly to a mere pull at the brake hand below. The belayer holds only what is left when the bend is done.</p>
+
+      <p class="pull">They do not out-pull the fall. They hold the small change the wrap leaves them, and let the bend hold the climber.</p>
+    </section>
+
+    <section id="relation">
+      <p class="section-tag">The one relation it embodies</p>
+      <h2>Tension dies exponentially round a bend</h2>
+      <p>Follow the rope round the device through a small angle <span class="mono">dθ</span>. It presses on the metal with a force set by its own tension, and friction on that patch subtracts a slice of tension proportional to both the tension there and the little angle: <span class="mono">dT = −μ·T·dθ</span>. A quantity whose loss is proportional to itself decays exponentially, and integrating round the whole wrap gives the <b>capstan equation</b>:</p>
+
+      <ul class="law-list">
+        <li><b>The grip that survives</b> — <span class="mono">T_brake = T_fall · e^(−μθ)</span>. Whatever the fall, only this fraction reaches the brake hand. The wrap does the rest.</li>
+        <li><b>The amplification</b> — <span class="mono">A = T_fall ⁄ T_brake = e^(μθ)</span>. One newton of grip holds <span class="mono">A</span> newtons of fall. It depends on <em>only</em> the bend angle and the surface — never on how thick the rope is.</li>
+        <li><b>The cost of a bend</b> — more wrap <em>multiplies</em> the amplification, it does not add to it; a sharper or extra turn through the device buys a whole factor, which is why a device with two bends brakes so much harder than a bar with one.</li>
+      </ul>
+
+      <p>Two things set the whole affair. The <b>wrap</b> <span class="mono">θ</span> — how hard and how many times the rope is bent — is chosen by the device and how the brake hand holds it: drop the brake hand and the rope straightens toward the pull, the wrap falls away, and the amplification collapses. The <b>surface</b> <span class="mono">μ</span> — dry rope on clean alloy, or a wet, iced, muddy rope — is what the day hands you, and a slick rope can quietly halve the exponent and let a hold you trusted begin to run.</p>
+
+      <p class="pull">Nothing here is about strength. It is about how far the rope is bent before the brake hand catches what is left — and never letting that bend go.</p>
+    </section>
+
+    <section id="bench" aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">Wrap it, weight the rope, read the brake</h2>
+      <p class="bench-intro">A belay device with the rope run round its bends: the <b>fall</b> comes on at the thick, bright end — the climber's weight in the rope — and what is left runs off thin and faint to the <b>brake</b> hand below. The colour and weight of the rope fade round the wrap exactly as the tension does. Press <b>Weight it</b> to bring the fall force on and watch how little of it ever reaches the brake hand. Below, the <b>tension diagram</b>: the force decaying round the arc from fall to brake, and the line marking a single firm brake hand — cross it and the rope runs, so you add wrap or friction.</p>
+
+      <div class="bench" id="benchRoot">
+        <div class="scales" id="scalesWrap">
+          <svg id="stageSvg" viewBox="0 0 640 520" role="img"
+               aria-label="A belay device with a climbing rope run round its bends. The rope enters thick and bright at the fall end, the climber's weight, and leaves thin and faint at the brake hand below, the colour fading round the wrap as the tension bleeds away. Below, a tension diagram plots the force decaying exponentially round the arc of contact from the full fall down to the small brake grip, with a line marking one firm brake hand.">
+            <!-- populated by script.js -->
+          </svg>
+        </div>
+
+        <div class="readout" aria-hidden="false">
+          <div class="read-big">
+            <span class="read-num mono" id="readBig">27×</span>
+            <span class="read-cap" id="readCap">amplification</span>
+          </div>
+          <p class="read-break mono">
+            <span class="rb-main" id="rbEq">T_brake = T_fall · e^(−μθ)</span>
+          </p>
+          <ul class="read-facts">
+            <li><span class="rf-k">turns · N</span><span class="rf-v mono" id="rfTurns">1.5</span></li>
+            <li><span class="rf-k">wrap · θ</span><span class="rf-v mono" id="rfTheta">540°</span></li>
+            <li><span class="rf-k">surface · μ</span><span class="rf-v mono" id="rfMu">0.35</span></li>
+            <li><span class="rf-k">amplification · e^(μθ)</span><span class="rf-v mono" id="rfAmp">27×</span></li>
+            <li><span class="rf-k">load · the fall force</span><span class="rf-v mono" id="rfLoad">2.50 kN</span></li>
+            <li><span class="rf-k">brake must hold</span><span class="rf-v mono" id="rfHold">92 N</span></li>
+          </ul>
+        </div>
+
+        <div class="controls">
+          <div class="ctl">
+            <label for="turnRange">wrap — how far the rope is bent
+              <span class="ctl-val mono" id="turnVal">1.5</span>
+            </label>
+            <input type="range" id="turnRange" min="0.5" max="5" step="0.25" value="1.5"
+                   aria-describedby="turnNote" />
+            <p class="ctl-note" id="turnNote">How many turns of bend the rope takes through the device and round the brake hand. More wrap <b>multiplies</b> the amplification by <b>e^(2πμ)</b> a turn at a time. Keep the brake hand low and the rope hard round the bend; let it up and the wrap — and the hold — fall away.</p>
+          </div>
+
+          <div class="ctl">
+            <label for="muRange">surface — the roughness of the pair
+              <span class="ctl-val mono" id="muVal">0.35</span>
+            </label>
+            <input type="range" id="muRange" min="0.1" max="0.6" step="0.01" value="0.35"
+                   aria-describedby="muNote" />
+            <p class="ctl-note" id="muNote">Dry rope on clean alloy, or a rope run wet, iced or gritted with mud. The one the day hands you. A slick rope drops <b>μ</b> and quietly halves the exponent — a hold you trusted begins to <b>run</b>, the rope creeping through under the fall.</p>
+          </div>
+
+          <div class="ctl-actions">
+            <button type="button" class="btn" id="runBtn" aria-pressed="false">Weight it</button>
+            <button type="button" class="btn btn-ghost" id="resetBtn">Reset</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="coda">
+      <p class="section-tag">Why keep it</p>
+      <h2>The hold that lives in the bend</h2>
+      <p>The belay is worth a page because it is the bollard's law carried up a mountain and trusted with a life. Nothing about the device is strong — a scrap of alloy, a rope, a hand — and yet it holds a falling body, because the <em>shape of the path</em> the rope takes turns a grip anyone can keep into a restraint nobody's arm could. It is the same law that lets a <b>bollard</b> hold a ship on a dockhand's tail, and lets a <b>flat belt</b> carry a mill's whole power on a slack side barely tight at all. One equation, three trades.</p>
+      <p>It keeps company with the other quiet multipliers in this series — the <b>purchase</b> that trades distance for force, the <b>holdfast</b> that grips harder the harder it is pulled, the <b>preload</b> that spends a joint's danger in advance. The belay's trick is the most trusted of them: don't be strong, be <em>wrapped</em> — and never straighten the bend. Weight the rope on the bench, then slick the surface down and watch the brake begin to run — the whole discipline is in one exponent, and one hand kept low.</p>
+    </section>
+
+    <footer class="foot">
+      <p class="foot-series">One of a series — a page a day, each built on one old working word and the discipline hidden inside it. Some mornings, three. <span class="foot-date">2026-09-04</span>.</p>
+    </footer>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

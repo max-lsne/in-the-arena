@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bollard — a few turns of a hawser round a post and one hand holds a ship, because friction multiplies the hold by e^(μθ) around every wrap</title>
+  <meta name="description" content="A ship comes alongside carrying tonnes of drift, and a single dockhand holds and eases it with a light pull on the tail of the line — because the hawser is taken three or four turns round a bollard, and friction round a bend multiplies the hold you must supply by e^(μθ). The load barely reaches the hand: it bleeds away exponentially around each turn. Set the wrap and the surface, take the strain, and read the amplification and the hold the tail must find." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231b2530'/%3E%3Ccircle cx='16' cy='17' r='6.5' fill='none' stroke='%238b98a6' stroke-width='1.6'/%3E%3Cpath d='M6 27 C10 20 12 12 16 10.5' fill='none' stroke='%23e0864a' stroke-width='2.4' stroke-linecap='round'/%3E%3Cpath d='M22.5 12 C21 9 19 8 16 10.5' fill='none' stroke='%2340c39a' stroke-width='1.3' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#eef1f4" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0f141a" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Bollard — a hand holds a ship, because the wrap does the work" />
+  <meta property="og:description" content="Take a hawser three turns round a post and friction multiplies your hold by e^(μθ) — the ship's pull bleeds away exponentially around the bend and barely reaches the tail. Worked here on a bollard you can wrap, load and read." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">In the arena · 2026-09-04</p>
+      <p class="pron"><b>Bollard</b> · <i>noun</i> · /ˈbɒləd/ — a short, stout post on a quay or a ship's deck to which a mooring or towing line is made fast, most often by taking a few turns of the line round it; from Middle English, perhaps from <i>bole</i>, a tree-trunk</p>
+      <h1>Bollard</h1>
+      <p class="lede">A coaster comes alongside with the whole weight of her drift behind the line, and a single dockhand stops her and eases her in with a light pull on the loose end. He is not stronger than the ship. He has taken the hawser <em>three or four turns round a post</em>, and the post — or rather the friction of the rope on it — does very nearly all the holding.</p>
+      <p class="sub">This is the oldest force-multiplier at sea, and it costs nothing but a bend. Lead a line round a drum and the tension in it <b>bleeds away exponentially</b> as it goes: whatever comes on at the load end, only a small fraction survives round the turns to reach the hand. The ratio is fixed, and beautifully simple — the hold you must supply falls by a factor of <span class="mono">e^(μθ)</span>, where <span class="mono">μ</span> is the roughness of the pair and <span class="mono">θ</span> the total angle wrapped. Every extra turn is another whole factor of <span class="mono">e^(2πμ)</span>. Two turns hold a dinghy; four hold a ship; six would hold the pier.</p>
+    </header>
+
+    <section id="problem">
+      <p class="section-tag">The problem the wrap solves</p>
+      <h2>A hand against a hull</h2>
+      <p>A vessel adrift does not stop because someone pulls on a rope. Tonnes of steel carrying even a slow drift store more energy than any crew can absorb by grip, and a line held straight in the hands would either tear free or take the crew with it. Yet a ship <em>is</em> held, and stopped, and warped along a wall, by people who could not out-pull a bicycle. The task is to turn a hold a human can actually supply — a steady pull on a tail, a few hundred newtons — into a restraint of tens of thousands.</p>
+
+      <p>The bollard does it with a bend and nothing else. Take the hawser round the post and every point of contact leans the rope into the iron; the harder the rope is pulled, the harder it presses, and the more the surface can grip back. That grip is not spent all at once — it accumulates <b>around the whole arc of contact</b>, each little patch shaving a little more off the tension, so the pull dies away smoothly from the great load at one side to a mere tail at the other. The dockhand holds only what is left when the arc is done.</p>
+
+      <p class="pull">He does not fight the ship. He holds the small change the wrap leaves him, and lets the turns fight the ship.</p>
+    </section>
+
+    <section id="relation">
+      <p class="section-tag">The one relation it embodies</p>
+      <h2>Tension dies exponentially round a bend</h2>
+      <p>Follow the rope round the post through a small angle <span class="mono">dθ</span>. It presses on the drum with a force set by its own tension, and friction on that patch subtracts a slice of tension proportional to both the tension there and the little angle: <span class="mono">dT = −μ·T·dθ</span>. A quantity whose loss is proportional to itself decays exponentially, and integrating round the whole wrap gives the <b>capstan equation</b> — Euler's, and Eytelwein's after him:</p>
+
+      <ul class="law-list">
+        <li><b>The hold that survives</b> — <span class="mono">T_hold = T_load · e^(−μθ)</span>. Whatever the load, only this fraction reaches the hand. The wrap does the rest.</li>
+        <li><b>The amplification</b> — <span class="mono">A = T_load ⁄ T_hold = e^(μθ)</span>. One newton on the tail holds <span class="mono">A</span> newtons of ship. It depends on <em>only</em> the angle and the surface — never on the drum's size, nor on how thick the rope is.</li>
+        <li><b>The cost of a turn</b> — each full turn adds <span class="mono">2π</span> to <span class="mono">θ</span>, so it <em>multiplies</em> the amplification by <span class="mono">e^(2πμ)</span>. Amplification is not added a turn at a time; it compounds.</li>
+      </ul>
+
+      <p>Two things, and only two, set the whole affair. The <b>wrap</b> <span class="mono">θ</span> — how many turns you take — is the one you choose on the spot, and because it enters through an exponential a little more of it goes a very long way. The <b>surface</b> <span class="mono">μ</span> — rope on painted steel, wet or dry, tarred hemp on oak — is the one the world hands you, and a wet or greasy post can quietly halve the exponent and let a line you thought was fast begin to surge.</p>
+
+      <p class="pull">Nothing here is about strength. It is about how many times you let the load go round the bend before you catch what is left.</p>
+    </section>
+
+    <section id="bench" aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">Wrap it, take the strain, read the tail</h2>
+      <p class="bench-intro">A bollard seen from above, the hawser taken <span class="mono">N</span> turns round it: the <b>load</b> comes on at the thick, bright end — the ship's pull — and what is left runs off thin and faint to the <b>tail</b> the dockhand holds. The colour and weight of the rope fade around the wrap exactly as the tension does. Press <b>Take the strain</b> to bring the ship's pull up and watch how little of it ever reaches the tail. Below, the <b>tension diagram</b>: the pull decaying round the arc from load to hold, and the line marking a single steady human pull — cross it and one hand can no longer hold, so you take another turn.</p>
+
+      <div class="bench" id="benchRoot">
+        <div class="scales" id="scalesWrap">
+          <svg id="stageSvg" viewBox="0 0 640 520" role="img"
+               aria-label="A bollard seen from above with a hawser taken several turns around it. The rope enters thick and bright at the load end, the ship's pull, and leaves thin and faint at the tail the dockhand holds, the colour fading around the wrap as the tension bleeds away. Below, a tension diagram plots the pull decaying exponentially around the arc of contact from the full load down to the small hold, with a line marking one steady human pull.">
+            <!-- populated by script.js -->
+          </svg>
+        </div>
+
+        <div class="readout" aria-hidden="false">
+          <div class="read-big">
+            <span class="read-num mono" id="readBig">111×</span>
+            <span class="read-cap" id="readCap">amplification · e^(μθ)</span>
+          </div>
+          <p class="read-break mono">
+            <span class="rb-main" id="rbEq">T_hold = T_load · e^(−μθ)</span>
+          </p>
+          <ul class="read-facts">
+            <li><span class="rf-k">turns · N</span><span class="rf-v mono" id="rfTurns">3.0</span></li>
+            <li><span class="rf-k">wrap · θ</span><span class="rf-v mono" id="rfTheta">1080°</span></li>
+            <li><span class="rf-k">surface · μ</span><span class="rf-v mono" id="rfMu">0.25</span></li>
+            <li><span class="rf-k">amplification · e^(μθ)</span><span class="rf-v mono" id="rfAmp">111×</span></li>
+            <li><span class="rf-k">load · the ship's pull</span><span class="rf-v mono" id="rfLoad">30.0 kN</span></li>
+            <li><span class="rf-k">tail must hold</span><span class="rf-v mono" id="rfHold">271 N</span></li>
+          </ul>
+        </div>
+
+        <div class="controls">
+          <div class="ctl">
+            <label for="turnRange">wrap — how many turns round the post
+              <span class="ctl-val mono" id="turnVal">3.0</span>
+            </label>
+            <input type="range" id="turnRange" min="0.5" max="5" step="0.25" value="3"
+                   aria-describedby="turnNote" />
+            <p class="ctl-note" id="turnNote">The one you choose on the spot. Each full turn adds <b>2π</b> to the wrap and so <b>multiplies</b> the amplification by <b>e^(2πμ)</b> — the hold you need does not fall a little each turn, it falls by a whole factor. Take one more turn than you think you need.</p>
+          </div>
+
+          <div class="ctl">
+            <label for="muRange">surface — the roughness of the pair, μ
+              <span class="ctl-val mono" id="muVal">0.25</span>
+            </label>
+            <input type="range" id="muRange" min="0.1" max="0.6" step="0.01" value="0.25"
+                   aria-describedby="muNote" />
+            <p class="ctl-note" id="muNote">Rope on painted steel, tarred hemp on oak, dry or streaming wet. The one the world hands you. A wet or greasy post drops <b>μ</b> and quietly halves the exponent — a line you thought was fast begins to <b>surge</b>, creeping round the drum under load.</p>
+          </div>
+
+          <div class="ctl-actions">
+            <button type="button" class="btn" id="runBtn" aria-pressed="false">Take the strain</button>
+            <button type="button" class="btn btn-ghost" id="resetBtn">Reset</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="coda">
+      <p class="section-tag">Why keep it</p>
+      <h2>The hold that lives in the bend</h2>
+      <p>The bollard is worth a page because it is pure geometry standing in for strength. Nothing about it is strong — a post, a rope, a hand — and yet it holds a ship, because the <em>shape of the path</em> the rope takes turns a hold anyone can manage into a restraint nobody could. It is the same law that lets a <b>belay</b> catch a falling climber on the grip of one hand, and lets a <b>flat belt</b> carry a mill's whole power from shaft to shaft on the strength of a slack side barely tight at all. Euler wrote it down for the capstan; every quay, crag and line-shaft has leaned on it since.</p>
+      <p>It keeps company with the other quiet multipliers in this series — the <b>purchase</b> that trades distance for force through a tackle, the <b>holdfast</b> that grips harder the harder it is pulled, the <b>preload</b> that spends a joint's danger in advance. The bollard's trick is the plainest of them: don't be strong, be <em>wrapped</em>. Take the strain on the bench, then slick the surface down and watch the tail start to surge — the whole discipline is in one exponent, and one more turn.</p>
+    </section>
+
+    <footer class="foot">
+      <p class="foot-series">One of a series — a page a day, each built on one old working word and the discipline hidden inside it. Some mornings, three. <span class="foot-date">2026-09-04</span>.</p>
+    </footer>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
