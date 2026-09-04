@@ -67,7 +67,8 @@
     load: document.getElementById("rfLoad"),
     hold: document.getElementById("rfHold"),
     turnVal: document.getElementById("turnVal"),
-    muVal: document.getElementById("muVal")
+    muVal: document.getElementById("muVal"),
+    status: document.getElementById("status")
   };
 
   // ---- small helpers ----
@@ -264,8 +265,26 @@
     el.muVal.textContent = state.mu.toFixed(2);
   }
 
+  // Speak the settled state to a screen reader, debounced past a slider drag or a load ramp.
+  var announceTimer = null;
+  function scheduleAnnounce() {
+    if (announceTimer) clearTimeout(announceTimer);
+    announceTimer = setTimeout(speak, 420);
+  }
+  function speak() {
+    if (!el.status) return;
+    el.status.textContent =
+      f1(state.turns) + " turns round the post — a wrap of " + Math.round(state.turns * 360) +
+      " degrees — on a surface of mu " + state.mu.toFixed(2) + ". Friction multiplies the hold by " +
+      Math.round(amp()) + " times, so the ship's pull of " + fmtF(state.load) +
+      " arrives at the tail as only " + fmtF(hold()) + ". " +
+      (surging()
+        ? "That is more than one steady pull can hold — the line would surge; take another turn."
+        : "One steady hand can hold that, up to a pull of " + fmtF(maxOneHand()) + ".");
+  }
+
   function renderLight() { draw(); paint(); }
-  function render() { draw(); paint(); save(); }
+  function render() { draw(); paint(); save(); scheduleAnnounce(); }
 
   // ---- the "take the strain" ramp: bring the load on (or ease it off) ----
   var raf = null, lastTs = 0, target = state.load;
@@ -288,7 +307,7 @@
     var dir = target > state.load ? 1 : -1;
     var nl = state.load + dir * speed * dt;
     if ((dir > 0 && nl >= target) || (dir < 0 && nl <= target)) {
-      state.load = target; renderLight(); save(); stopAnim(); return;
+      state.load = target; renderLight(); save(); scheduleAnnounce(); stopAnim(); return;
     }
     state.load = nl; renderLight();
     raf = window.requestAnimationFrame(ramp);
