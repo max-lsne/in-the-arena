@@ -43,6 +43,11 @@
 
   var state = { turns: CFG.turnsDefault, mu: CFG.muDefault, load: CFG.loadNom };
 
+  // Motion preference — a reader who asks for less motion gets no ramping sweep. The action
+  // then steps the load one notch at a time instead of running it smoothly on; re-checked live.
+  var reduceMQ = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+  function motionOff() { return !!(reduceMQ && reduceMQ.matches); }
+
   // ---- stage geometry (viewBox units) ----
   var Cx = 250, Cy = 178, Rd = 42;                 // drum centre and radius
   var GAP = 6.4, PAD = 9;                           // spiral loop spacing, and its gap off the drum
@@ -299,6 +304,15 @@
   function stopAnim() { if (raf) { window.cancelAnimationFrame(raf); raf = null; } lastTs = 0; }
 
   function toggleStrain() {
+    if (motionOff()) {                               // reduced motion: step the load one notch
+      var step = (CFG.loadMax - CFG.loadMin) / 6;
+      var next = state.load + step;
+      if (next > CFG.loadMax - 1) next = CFG.loadMin;  // wrap back to slack when full
+      setLoad(next);
+      target = state.load;
+      setPressed(strained());
+      return;
+    }
     target = strained() ? CFG.loadMin : CFG.loadMax;
     setPressed(target > CFG.loadMin + 1);
     if (!raf) { lastTs = 0; raf = window.requestAnimationFrame(ramp); }
@@ -335,6 +349,12 @@
   turnRange.addEventListener("input", function () { setTurns(parseFloat(turnRange.value)); });
   muRange.addEventListener("input", function () { setMu(parseFloat(muRange.value)); });
   runBtn.addEventListener("click", toggleStrain);
+
+  if (reduceMQ) {
+    var onMotionChange = function () { if (motionOff() && raf) { target = state.load; stopAnim(); setPressed(strained()); } };
+    if (reduceMQ.addEventListener) reduceMQ.addEventListener("change", onMotionChange);
+    else if (reduceMQ.addListener) reduceMQ.addListener(onMotionChange);   // older browsers
+  }
 
   function doReset() {
     stopAnim();
