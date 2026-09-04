@@ -362,6 +362,36 @@
   }
   resetBtn.addEventListener("click", doReset);
 
+  // haul or ease the load by hand — a small step, stopping any ramp first
+  function nudgeLoad(dir) {
+    stopAnim(); target = state.load;
+    setLoad(state.load + dir * (CFG.loadMax - CFG.loadMin) / 40);
+    setPressed(strained());
+  }
+
+  // Keyboard: work the whole bench without the mouse. Arrows ease / haul the load; brackets
+  // change the wrap; minus/equals slick or grip the surface; Space works the action; R resets.
+  // A focused range slider keeps its native arrow-stepping, and a focused button its own Space.
+  document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    var onRange = (e.target === turnRange || e.target === muRange);
+    var onButton = (e.target === runBtn || e.target === resetBtn);
+    switch (e.key) {
+      case "ArrowLeft":  if (onRange) return; nudgeLoad(-1); break;
+      case "ArrowRight": if (onRange) return; nudgeLoad(1); break;
+      case "[": setTurns(state.turns - 0.25); break;
+      case "]": setTurns(state.turns + 0.25); break;
+      case "-": setMu(state.mu - 0.01); break;
+      case "=": setMu(state.mu + 0.01); break;
+      case " ": case "Spacebar":
+        if (onButton) return;
+        toggleStrain(); break;
+      case "r": case "R": doReset(); break;
+      default: return;
+    }
+    e.preventDefault();
+  });
+
   // ---- boot ----
   turnRange.min = T_MIN; turnRange.max = T_MAX;
   muRange.min = MU_MIN; muRange.max = MU_MAX;
