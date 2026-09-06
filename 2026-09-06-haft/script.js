@@ -118,7 +118,7 @@
   var inX = $("in-X"), inC = $("in-C"), inS = $("in-S");
   var labX = $("lab-X"), labC = $("lab-C"), labS = $("lab-S");
   var toolBtns = Array.prototype.slice.call(document.querySelectorAll(".seg [data-tool]"));
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
   var xMark = $("x-mark"), xNote = $("x-note");
   var X_MIN = 10, X_MAX = 100;
 
@@ -431,7 +431,35 @@
     current = compute(state);
     syncLabels(current);
     render(current);
+    announce(current);
     save();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(r) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var head = SWING_WORD[state.swing] + " swing of the " + TOOLS[state.tool].label
+        + ", struck " + Math.round(r.x * 100) + " centimetres down"
+        + (state.choke ? ", choked up " + state.choke + " centimetres" : "") + ". ";
+      var spot = "Sweet spot at " + Math.round(r.cop * 100) + " centimetres. ";
+      var dir = r.P > 0.001 ? "back" : "forward";
+      var mag = r.mag.toFixed(2);
+      var msg;
+      if (r.verdict === "dead") {
+        msg = head + spot + "Dead in the hand — the whole blow goes to the target, the grip carries nothing.";
+      } else if (r.verdict === "jar") {
+        msg = head + spot + "Jarred forward — struck short, " + mag + " newton-seconds throws the hands on, past comfort.";
+      } else if (r.verdict === "snap") {
+        msg = head + spot + "Snapped back — struck long, " + mag + " newton-seconds snaps the hands back, past comfort.";
+      } else {
+        msg = head + spot + (r.verdict === "push" ? "Pushing on" : "Catching back")
+          + " — " + mag + " newton-seconds " + dir + ", inside comfort.";
+      }
+      sayEl.textContent = msg;
+    }, 260);
   }
 
   inX.addEventListener("input", function () { state.strikePct = parseInt(inX.value, 10); update(); });
