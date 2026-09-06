@@ -206,6 +206,9 @@
   }
   sizeCanvas();
 
+  var reduceMQ = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+  var reduce = reduceMQ ? reduceMQ.matches : false;
+
   var cssVar = function (name) {
     return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   };
@@ -305,9 +308,13 @@
     label(ctx, col.forge, "blow", from.x - NRM.x * 8, from.y - NRM.y * 8, "center");
 
     // ---- the reaction at the grip: the jolt the hand takes ----
+    // off the sweet spot the arrow trembles with the sting; under reduced
+    // motion it is held dead steady, and only its length reads the reaction.
     var reactPx = shown.react;                          // signed px along +NRM (back)
-    var buzz = Math.min(cur.mag, 3) * 0.11 * Math.sin(buzzT * 26);
-    var amp = reactPx + (cur.mag > DEAD ? buzz * (reactPx >= 0 ? 1 : -1) * 6 : 0);
+    var tremor = (!reduce && cur.mag > DEAD)
+      ? Math.min(cur.mag, 3) * 0.11 * Math.sin(buzzT * 26) * (reactPx >= 0 ? 1 : -1) * 6
+      : 0;
+    var amp = reactPx + tremor;
     if (Math.abs(amp) > 1.5) {
       var rt = { x: GRIP.x + NRM.x * amp, y: GRIP.y + NRM.y * amp };
       arrow(ctx, accent, GRIP.x, GRIP.y, rt.x, rt.y, 3, 9);
@@ -413,11 +420,12 @@
     if (lastTs == null) lastTs = ts;
     var dt = Math.min(0.05, (ts - lastTs) / 1000);
     lastTs = ts;
-    buzzT += dt;
+    if (!reduce) buzzT += dt;
 
     var tg = targets(current);
+    // reduced motion: land the strike and the reaction in one step, no glide
+    var ease = reduce ? 1 : Math.min(1, dt * 13);
     if (!initShown) { shown.xPx = tg.xPx; shown.react = tg.react; initShown = true; }
-    var ease = Math.min(1, dt * 13);
     shown.xPx += (tg.xPx - shown.xPx) * ease;
     shown.react += (tg.react - shown.react) * ease;
 
@@ -480,8 +488,10 @@
     update();
   });
 
-  // ease the strike point to a target so a move reads as a slide, not a jump
+  // ease the strike point to a target so a move reads as a slide, not a jump —
+  // under reduced motion it lands on the sweet spot in one step
   function animateStrike(target) {
+    if (reduce) { state.strikePct = target; inX.value = target; update(); return; }
     var start = state.strikePct, t0 = null, dur = 480;
     function step(ts) {
       if (t0 == null) t0 = ts;
@@ -493,6 +503,11 @@
       if (pr < 1) window.requestAnimationFrame(step);
     }
     window.requestAnimationFrame(step);
+  }
+
+  // follow a live change to the motion setting
+  if (reduceMQ && reduceMQ.addEventListener) {
+    reduceMQ.addEventListener("change", function (e) { reduce = e.matches; });
   }
 
   // repaint on theme flips so canvas colours follow
