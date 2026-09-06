@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Haft — every tool you swing has one point on its head where the blow lands clean and no shock runs back to the hand</title>
+  <meta name="description" content="Strike a bat, a hammer, an axe or a sword at one particular point and the target takes the whole blow while the hand feels nothing; miss it and a sting runs back up the haft. That point is the centre of percussion, L_cop = I/(m·d), and the reaction the grip feels is J·(x/L_cop − 1) — the blow scaled by how far the strike sits past the sweet spot. It is also the centre of oscillation, the equal-pendulum length. Set the implement, the choke and the swing, and find the spot where the hand goes dead." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232a2019'/%3E%3Cline x1='7' y1='25' x2='24' y2='8' stroke='%23b98a4e' stroke-width='2.6' stroke-linecap='round'/%3E%3Crect x='20' y='5' width='7' height='7' rx='1.5' transform='rotate(45 23.5 8.5)' fill='%238b98a6'/%3E%3Ccircle cx='16.5' cy='16.5' r='2.4' fill='none' stroke='%235f8a55' stroke-width='1.6'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#efe9df" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#14100c" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Haft — the one point on a tool where a blow lands clean" />
+  <meta property="og:description" content="Every hafted thing has a sweet spot — the centre of percussion — where the blow goes wholly into the target and none of it back into the hand. Strike short and the handle throws you forward; strike long and the tip snaps you back. Worked here on a tool you can swing, choke, and read." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">In the arena · 2026-09-06</p>
+      <p class="pron"><b>haft</b> · <i>noun</i> · /hɑːft/ — the handle of a tool or weapon, the shaft of an axe, hammer, or knife by which it is held and swung; Old English <i>hæft</i>, a handle</p>
+      <h1>Haft</h1>
+      <p class="lede">There is one point on every tool you swing where the blow lands <em>clean</em> — the target takes the whole of it, and the hand feels nothing at all.</p>
+      <p class="sub">Miss that point and a shock runs back up the haft. Land the axe an inch too near the tip and the recoil stings your palms; land it too near the head and the handle throws your hands forward. But strike the one place between, and the same blow bites its deepest while your grip stays perfectly quiet. The wood did not change and the swing did not change — you found the tool's <b>centre of percussion</b>, the point conjugate to your hands where the reaction the handle must carry falls exactly to nothing. Where it sits is fixed by one thing only: how the tool's mass is spread along its length. The hand learns it long before the head does, by moving the grip until the sting goes out of the blow — and landing, without ever computing it, on the answer.</p>
+    </header>
+
+    <section id="how">
+      <p class="section-tag">Where the sting comes from</p>
+      <h2>A blow the hand does not have to hold</h2>
+      <p>Swing a bar hinged at one end and stop it dead against a nail. Somewhere along the bar the nail takes the blow; everywhere the bar would rather keep moving. Those two motions fight through the pivot — your hand — and the hand feels the difference as a jolt. Strike near the hinge and the far end of the bar sails on and levers your grip <em>forward</em>. Strike near the tip and the tip is halted hard and the recoil snaps your grip <em>back</em>. Between the two, at one point, the forward lean and the backward snap are exactly equal and opposite, and they cancel <b>in the hand</b>: the pivot carries no impulse, and the whole of the blow has gone into the target.</p>
+
+      <p class="pull">The sweet spot is not where the blow is hardest. It is where the blow is <em>cleanest</em> — where none of it is left over to run back up the haft and into the hand.</p>
+
+      <p>This is why a hammer struck true drives the nail and does not buzz, why a bat middled sends the ball and stings nothing, why a swordsman is taught to parry with one exact span of the blade. Each is the same fact: a rigid body swung about a pivot has one conjugate point where an impulse leaves the pivot at rest.</p>
+    </section>
+
+    <section id="rule">
+      <p class="section-tag">The one relation it embodies</p>
+      <h2>The shock is the blow, scaled by how far you missed</h2>
+      <p>Take the grip as the pivot, and a blow of impulse <span class="mono">J</span> landing a distance <span class="mono">x</span> down the head. The blow spins the tool about the grip, and the grip must supply whatever reaction keeps it fixed. Work the linear and angular impulse together and the reaction comes out with almost nothing left in it:</p>
+
+      <ul class="law-list">
+        <li><b>The reaction the hand feels</b> — <span class="mono">P = J · (x ⁄ L_cop − 1)</span>. The shock is the blow, multiplied by how far the strike sits past the sweet spot as a <em>fraction</em> of the sweet-spot distance. Land on it and <span class="mono">P = 0</span>, for any blow at all.</li>
+        <li><b>Where the sweet spot is</b> — <span class="mono">L_cop = I ⁄ (m·d) = k² ⁄ d</span>. The moment of inertia about the grip, over the mass and the grip-to-balance arm <span class="mono">d</span>. It moves with the mass and with nothing else — never with how hard you swing.</li>
+        <li><b>The geometric mean</b> — since <span class="mono">L_cop = k²⁄d</span>, the radius of gyration is the mean proportional between the two arms: <span class="mono">k² = L_cop · d</span>. The balance point and the sweet spot sit either side of it.</li>
+      </ul>
+
+      <p>Two arms, and only two, set the whole affair. The <b>balance</b> arm <span class="mono">d</span> — where the mass centres — and the <b>spread</b> of that mass about the grip, folded into <span class="mono">I</span>. Load the head and both grow, but <span class="mono">I</span> grows faster, so the sweet spot walks <em>out</em> toward the head: a hammer must be struck almost on its face. Thin the tool to an even rod off one end and it settles at <span class="mono">2⁄3</span> of the length, the schoolbook answer. Choke up on the handle and every arm shifts at once.</p>
+
+      <p class="pull">Nothing here is about strength. It is about landing the blow at the one distance where the tool's own inertia carries all of it, and leaves the hand with none.</p>
+    </section>
+
+    <section id="ladder">
+      <p class="section-tag">Four strikes, handle to tip</p>
+      <h2>From a blow that throws the hands to one that snaps them back</h2>
+      <ol class="ladder">
+        <li><b>Jarred forward.</b> <span class="rung-note">Struck well short of the sweet spot, up near the hands. The heavy far end sails on past the halted strike and levers the grip forward, out of the swing — the tool tries to twist out of your hands in the direction it was going. A blow half wasted, and a wrench felt in the wrists.</span></li>
+        <li><b>Pushing on.</b> <span class="rung-note">A little short of the spot. A mild forward push in the palms — inside what a hand shrugs off, and the blow still lands most of its weight. This is the near miss you stop noticing once the swing is grooved.</span></li>
+        <li><b>Dead in the hand.</b> <span class="rung-note">On the sweet spot. The reaction at the grip is nothing at all: the whole blow goes into the target, the hand stays still, and the tool feels — for that instant — weightless. The nail is driven, the ball is middled, and nothing buzzes back up the haft.</span></li>
+        <li><b>Snapped back.</b> <span class="rung-note">Struck out past the spot, toward the tip. The tip is stopped hard and the recoil throws the grip back against the swing — the sting that rings the hands and, mishit badly enough, jumps the tool loose. The failure the maker works hardest to keep off the striking face.</span></li>
+      </ol>
+    </section>
+
+    <section id="who">
+      <p class="section-tag">Three who read a sweet spot</p>
+      <h2>The same point, three trades</h2>
+      <div class="hands">
+        <div class="hand">
+          <h3>The striker</h3>
+          <p class="role">the swing</p>
+          <p>Finds it by the sting. The batter, the axeman, the framer — none of them measures the tool; they swing it until a blow lands with no jar in the hands, and then they land every blow there. What the hand is really tracking is the point where the pivot carries no impulse, but it never calls it that. It just calls it <em>the middle</em>, and knows the moment it misses.</p>
+        </div>
+        <div class="hand">
+          <h3>The maker</h3>
+          <p class="role">the mass</p>
+          <p>Puts it where the hands will hold. The bat-turner, the bladesmith, the hafting wright shapes the mass — thins the handle, weights the head, sets the balance — so the sweet spot falls exactly where the grip lands. To <em>balance</em> a tool is to place its percussion point. A blade with the spot too far out fatigues the wrist; too far in, and it never bites.</p>
+        </div>
+        <div class="hand">
+          <h3>The clockmaker</h3>
+          <p class="role">the measure</p>
+          <p>Knows it as the swing. The sweet spot is also the <em>centre of oscillation</em> — the length of the simple pendulum that keeps the tool's own time. Huygens proved the two points reciprocal; Kater hung a bar by each knife-edge in turn, matched the two swings, and read the Earth's gravity off a ruler and a clock. The place that eats the shock is the place that sets the beat.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="bench">
+      <p class="section-tag">The bench</p>
+      <h2>Swing it. Find the spot where the hand goes dead.</h2>
+      <p>One tool held at the grip and seen along its length: the <b>head</b>, the <b>centre of mass</b>, and the lit band of the <b>sweet spot</b>. Pick the <b>implement</b> — a bat, a framing hammer, a felling axe, or a sword, each with its mass spread differently — set where you <b>choke</b> up the handle and how hard you <b>swing</b>, then slide the <b>strike point</b> along the head. Watch the reaction arrow at the grip grow, vanish as the strike crosses the sweet spot, and flip to the other side. The page works out the sweet spot from the mass, the reaction the hand takes, the radius of gyration, and the equal-pendulum swing — and lights the <b>dead band</b> on the gauge. It opens on a bat middled too far out: snapped back. Find the spot.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div id="verdict" class="verdict v-drift" aria-hidden="true"></div>
+            <div id="stage" class="stage"></div>
+            <p id="say" class="sr-only" role="status" aria-live="polite"></p>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label>The implement</label>
+                <div class="seg" role="group" aria-label="The implement in the hand">
+                  <button type="button" data-tool="bat" aria-pressed="true">bat</button>
+                  <button type="button" data-tool="hammer" aria-pressed="false">hammer</button>
+                  <button type="button" data-tool="axe" aria-pressed="false">axe</button>
+                  <button type="button" data-tool="sword" aria-pressed="false">sword</button>
+                </div>
+              </div>
+              <div class="ctl">
+                <label for="in-X">Strike point <span id="lab-X" class="val">70 cm</span></label>
+                <input id="in-X" type="range" min="10" max="100" step="1" value="70" />
+                <div class="xtrack" aria-hidden="true"><span id="x-mark" class="x-mark"></span></div>
+                <p id="x-note" class="ctl-note" aria-hidden="true"></p>
+              </div>
+              <div class="ctl">
+                <label for="in-C">Choke up <span id="lab-C" class="val">0 cm</span></label>
+                <input id="in-C" type="range" min="0" max="30" step="1" value="0" />
+              </div>
+              <div class="ctl">
+                <label for="in-S">Swing <span id="lab-S" class="val">firm</span></label>
+                <input id="in-S" type="range" min="1" max="8" step="1" value="5" />
+              </div>
+            </div>
+
+            <div id="reading" class="reading"></div>
+          </div>
+        </div>
+
+        <div class="bench-actions">
+          <button id="find" class="btn" type="button">Find the sweet spot</button>
+          <button id="reset" class="btn" type="button">Reset to the mishit bat</button>
+        </div>
+        <p class="hint">The <b>dead band</b> is the narrow span around the sweet spot where the reaction is small enough that the hand shrugs it off. Slide the <b>strike point</b> to cross it — the arrow at the grip shrinks to nothing on the spot and flips sign either side. Change the <b>implement</b> and the sweet spot walks along the tool as the mass moves: out to the face of a hammer, back toward two-thirds on an even sword. <b>Choke up</b> the handle to shift the grip and move the spot again. <b>Swing</b> harder and the reaction off the spot grows, so the comfort walls close in around it. <em>Find the sweet spot</em> drops the strike onto <span class="mono">L_cop</span> for the tool you hold; <em>Reset</em> returns to the mishit bat it opens on. Keys: <kbd>F</kbd> finds the spot, <kbd>R</kbd> resets, <kbd>1</kbd>–<kbd>4</kbd> pick the implement, <kbd>[</kbd> <kbd>]</kbd> walk the strike along the head, <kbd>−</kbd> <kbd>=</kbd> ease and drive the swing; a focused slider takes the arrow keys.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>Haft · one tool held at the grip, and the single point on its head — the centre of percussion — where a blow lands wholly on the target and none of it back in the hand. Pure HTML, CSS, and JavaScript — no build, no account, no network once the page has loaded. Sweet spot as I ÷ (m·d) about the grip; the grip reaction as J·(x ÷ L_cop − 1); radius of gyration √(I/m); and the equal-pendulum period 2π√(L_cop/g), the centre of oscillation being the same point. The four tools' mass models are stylised — plausible, not measured — but the mechanics drawn from them are exact.</p>
+      <p>One of a series — a page a day, each built on one old working word and the discipline hidden inside it. 2026-09-06.</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
