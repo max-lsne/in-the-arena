@@ -505,6 +505,32 @@
     window.requestAnimationFrame(step);
   }
 
+  // nudge a slider-backed value by a step, from the keyboard
+  function nudge(field, delta, lo, hi, input) {
+    state[field] = clamp(state[field] + delta, lo, hi);
+    input.value = state[field];
+    update();
+  }
+
+  // keyboard: the bench under the hands, without reaching for the mouse
+  var TOOL_KEYS = { "1": "bat", "2": "hammer", "3": "axe", "4": "sword" };
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    // let a focused slider keep its own arrow keys
+    if (el && el.tagName === "INPUT" && el.type === "range") return;
+    var k = e.key;
+    if (k === "f" || k === "F") { $("find").click(); }
+    else if (k === "r" || k === "R") { $("reset").click(); }
+    else if (TOOL_KEYS[k]) { state.tool = TOOL_KEYS[k]; update(); }
+    else if (k === "[") { nudge("strikePct", -2, 10, 100, inX); }   // strike back toward the grip
+    else if (k === "]") { nudge("strikePct", 2, 10, 100, inX); }    // strike out toward the tip
+    else if (k === "-" || k === "_") { nudge("swing", -1, 1, 8, inS); }  // ease the swing
+    else if (k === "=" || k === "+") { nudge("swing", 1, 1, 8, inS); }   // drive it harder
+    else return;
+    e.preventDefault();
+  });
+
   // follow a live change to the motion setting
   if (reduceMQ && reduceMQ.addEventListener) {
     reduceMQ.addEventListener("change", function (e) { reduce = e.matches; });
