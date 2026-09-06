@@ -47,8 +47,29 @@
   // Opens on a bat middled too far out — struck near the tip, past the sweet
   // spot, so the recoil snaps the hands back. Find the spot on arrival.
   var DEFAULT = { tool: "bat", strikePct: 96, choke: 0, swing: 5 };
+  var KEY = "haft.tool.v1";     // where the tool in the hand is kept between visits
 
-  var state = Object.assign({}, DEFAULT);
+  var state = load() || Object.assign({}, DEFAULT);
+
+  // ---- persistence -----------------------------------------------------
+  function load() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      if (!TOOLS[o.tool]) return null;
+      return {
+        tool: o.tool,
+        strikePct: clampNum(o.strikePct, 10, 100),
+        choke: clampNum(o.choke, 0, 30),
+        swing: clampNum(o.swing, 1, 8)
+      };
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+  function clampNum(v, a, b) { v = Math.round(+v); if (!isFinite(v)) return a; return v < a ? a : v > b ? b : v; }
 
   // ---- the blow --------------------------------------------------------
   function blow(swing) { return 0.6 + swing * 0.9; }   // swing level 1..8 → J, N·s
@@ -410,6 +431,7 @@
     current = compute(state);
     syncLabels(current);
     render(current);
+    save();
   }
 
   inX.addEventListener("input", function () { state.strikePct = parseInt(inX.value, 10); update(); });
