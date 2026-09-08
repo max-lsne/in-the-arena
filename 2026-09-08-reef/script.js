@@ -143,7 +143,7 @@
   var inW = $("in-W"), inR = $("in-R");
   var labW = $("lab-W"), labR = $("lab-R");
   var boatBtns = Array.prototype.slice.call(document.querySelectorAll(".seg [data-boat]"));
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
   var rMark = $("r-mark"), rNote = $("r-note");
 
   function syncLabels(r) {
@@ -447,7 +447,32 @@
     current = compute(state);
     syncLabels(current);
     render(current);
+    announce(current);
     save();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(r) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var head = "The " + r.boat.label + " under " + REEFS[state.reef].name
+        + " in " + state.windKt + " knots, heeled " + Math.round(r.thetaDeg) + " degrees. ";
+      var msg;
+      if (r.verdict === "groove") {
+        msg = head + "In the groove — heeled as she was drawn, the rail dry and driving hard.";
+      } else if (r.verdict === "luff") {
+        msg = head + "Underpressed — soft, making less than she could; there is a reef to shake out.";
+      } else if (r.verdict === "press") {
+        msg = head + "Pressed — over-canvassed, the helm loading up; she would go better for a reef. Rail under at "
+          + Math.round(r.railKt) + " knots.";
+      } else {
+        msg = head + "Rail under — overpowered past what the hull can answer, the lee deck in the sea. Reef now; "
+          + "this sail buries the rail at " + Math.round(r.railKt) + " knots.";
+      }
+      sayEl.textContent = msg;
+    }, 260);
   }
 
   inW.addEventListener("input", function () { state.windKt = parseInt(inW.value, 10); update(); });
