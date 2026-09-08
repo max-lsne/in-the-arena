@@ -54,13 +54,32 @@
   // Opens on a tender gaffer overpressed in a gale under full sail — heeled past
   // her rail. Find the reef on arrival.
   var DEFAULT = { boat: "gaffer", windKt: 36, reef: 0 };
+  var KEY = "reef.boat.v1";     // where the boat, wind and reef are kept between visits
 
-  var state = Object.assign({}, DEFAULT);
+  var state = load() || Object.assign({}, DEFAULT);
 
   function clampNum(v, a, b) { v = Math.round(+v); if (!isFinite(v)) return a; return v < a ? a : v > b ? b : v; }
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
   function rad(d) { return d * Math.PI / 180; }
   function deg(r) { return r * 180 / Math.PI; }
+
+  // ---- persistence -----------------------------------------------------
+  function load() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      if (!BOATS[o.boat]) return null;
+      return {
+        boat: o.boat,
+        windKt: clampNum(o.windKt, 4, 45),
+        reef: clampNum(o.reef, 0, REEFS.length - 1)
+      };
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
 
   // ---- the balance -----------------------------------------------------
   function heelFor(b, A, h, V) {
@@ -428,6 +447,7 @@
     current = compute(state);
     syncLabels(current);
     render(current);
+    save();
   }
 
   inW.addEventListener("input", function () { state.windKt = parseInt(inW.value, 10); update(); });
