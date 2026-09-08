@@ -501,6 +501,32 @@
     })();
   }
 
+  // nudge a slider-backed value by a step, from the keyboard
+  function nudge(field, delta, lo, hi, input) {
+    state[field] = clamp(state[field] + delta, lo, hi);
+    input.value = state[field];
+    update();
+  }
+
+  // keyboard: sail the bench without reaching for the mouse
+  var BOAT_KEYS = { "1": "catboat", "2": "sloop", "3": "keelboat", "4": "gaffer" };
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    // let a focused slider keep its own arrow keys
+    if (el && el.tagName === "INPUT" && el.type === "range") return;
+    var k = e.key;
+    if (k === "f" || k === "F") { $("find").click(); }
+    else if (k === "r" || k === "R") { $("reset").click(); }
+    else if (BOAT_KEYS[k]) { state.boat = BOAT_KEYS[k]; update(); }
+    else if (k === "[") { nudge("reef", -1, 0, REEFS.length - 1, inR); }   // shake a reef out
+    else if (k === "]") { nudge("reef", 1, 0, REEFS.length - 1, inR); }    // take one in
+    else if (k === "-" || k === "_") { nudge("windKt", -1, 4, 45, inW); }  // ease the wind
+    else if (k === "=" || k === "+") { nudge("windKt", 1, 4, 45, inW); }   // freshen it
+    else return;
+    e.preventDefault();
+  });
+
   // follow a live change to the motion setting
   if (reduceMQ && reduceMQ.addEventListener) {
     reduceMQ.addEventListener("change", function (e) { reduce = e.matches; });
