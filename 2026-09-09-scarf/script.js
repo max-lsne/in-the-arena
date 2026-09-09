@@ -46,11 +46,35 @@
   // Opens on a fir plank cut too steep — a 1:2 scarf — and pulled hard, the
   // glue already shorn. Find the scarf on arrival.
   var DEFAULT = { joint: "fir", pull: 76, N: 2 };
+  var KEY = "scarf.joint.v1";      // where the joint, pull and scarf are kept between visits
 
-  var state = Object.assign({}, DEFAULT);
+  var state = load() || Object.assign({}, DEFAULT);
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
   function rad(d) { return d * Math.PI / 180; }
+  function clampStep(v, a, b, step) {
+    v = Math.round((+v) / step) * step;
+    if (!isFinite(v)) return a;
+    return v < a ? a : v > b ? b : v;
+  }
+
+  // ---- persistence -----------------------------------------------------
+  function load() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      if (!JOINTS[o.joint]) return null;
+      return {
+        joint: o.joint,
+        pull: clampStep(o.pull, 5, 130, 5),
+        N: clampStep(o.N, 0, 12, 0.5)
+      };
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
 
   // ---- the resolution -------------------------------------------------
   // Everything the joint does, from the slope N and the pull as a fraction of
@@ -425,6 +449,7 @@
     current = compute(state);
     syncLabels(current);
     render(current);
+    save();
   }
 
   inP.addEventListener("input", function () { state.pull = parseInt(inP.value, 10); update(); });
