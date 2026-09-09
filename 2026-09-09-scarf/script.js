@@ -507,6 +507,32 @@
     })();
   }
 
+  // nudge a slider-backed value by a step, from the keyboard
+  function nudge(field, delta, lo, hi, step, input) {
+    state[field] = Math.round(clamp(state[field] + delta, lo, hi) / step) * step;
+    input.value = state[field];
+    update();
+  }
+
+  // keyboard: work the bench without reaching for the mouse
+  var JOINT_KEYS = { "1": "pine", "2": "fir", "3": "oak", "4": "maple" };
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    // let a focused slider keep its own arrow keys
+    if (el && el.tagName === "INPUT" && el.type === "range") return;
+    var k = e.key;
+    if (k === "f" || k === "F") { $("find").click(); }
+    else if (k === "r" || k === "R") { $("reset").click(); }
+    else if (JOINT_KEYS[k]) { state.joint = JOINT_KEYS[k]; update(); }
+    else if (k === "[") { nudge("N", -0.5, 0, 12, 0.5, inN); }        // steepen the scarf
+    else if (k === "]") { nudge("N", 0.5, 0, 12, 0.5, inN); }         // shallow it out
+    else if (k === "-" || k === "_") { nudge("pull", -5, 5, 130, 5, inP); }  // ease the pull
+    else if (k === "=" || k === "+") { nudge("pull", 5, 5, 130, 5, inP); }   // harden it
+    else return;
+    e.preventDefault();
+  });
+
   // follow a live change to the motion setting
   if (reduceMQ && reduceMQ.addEventListener) {
     reduceMQ.addEventListener("change", function (e) { reduce = e.matches; });
