@@ -145,7 +145,7 @@
   var inP = $("in-P"), inN = $("in-N");
   var labP = $("lab-P"), labN = $("lab-N");
   var jointBtns = Array.prototype.slice.call(document.querySelectorAll(".seg [data-joint]"));
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
   var nMark = $("n-mark"), nNote = $("n-note");
 
   function fmtN(n) { return n === 0 ? "butt joint" : "1 : " + (Number.isInteger(n) ? n : n.toFixed(1)); }
@@ -449,7 +449,35 @@
     current = compute(state);
     syncLabels(current);
     render(current);
+    announce(current);
     save();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(r) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var scarf = state.N === 0 ? "a square butt joint" : "a 1 to " + (Number.isInteger(state.N) ? state.N : state.N.toFixed(1)) + " scarf";
+      var head = "A " + r.j.timber + " joint in " + r.j.glue + ", " + scarf
+        + ", pulled to " + state.pull + " percent of the timber's strength. ";
+      var msg;
+      if (r.verdict === "strong") {
+        msg = head + "Timber-strong — the glue outlasts the wood; pulled to failure it would break in clear timber, off the joint. "
+          + "Shear on the glue " + r.tau.toFixed(1) + " of " + r.j.shear + " megapascals.";
+      } else if (r.verdict === "wood") {
+        msg = head + "The timber gave — full strength reached, the member broken in clear wood well off the scarf.";
+      } else if (r.verdict === "limited") {
+        msg = head + "Holding, but glue-limited — the glue is the weak link and would let go before the wood, at "
+          + Math.round(r.F_fail / 1000) + " kilonewtons. Shallow the scarf to make full strength.";
+      } else if (r.verdict === "peeled") {
+        msg = head + "Peeled — the scarf too steep, the peel across the face past what the glue holds. The faces are prised apart.";
+      } else {
+        msg = head + "Shorn — the shear along the face past the glue line. The two tapers have slid clean past each other. Shallow the scarf.";
+      }
+      sayEl.textContent = msg;
+    }, 260);
   }
 
   inP.addEventListener("input", function () { state.pull = parseInt(inP.value, 10); update(); });
