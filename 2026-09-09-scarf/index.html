@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scarf — a joint is only as strong as the way it turns a pull into a slide, and a long shallow taper turns it into a shear the glue can hold</title>
+  <meta name="description" content="Glue is weak in tension and strong in shear, so a good timber joint refuses to load the glue in tension. A scarf cuts a long shallow taper in two pieces and laps them: the same pull is spread over a face A/sinφ across, resolving into a shear ½σ·sin2φ and a peel σ·sin²φ that both fall as the scarf shallows. Shallow it enough and the glue outlasts the wood — the member breaks in clear timber, not the joint. Set the joint, the pull and the scarf ratio, and find the shortest taper that makes full strength." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231d1710'/%3E%3Cpath d='M3 12 L21 12 L29 20 L11 20 Z' fill='%23a9743f'/%3E%3Cpath d='M3 20 L11 20 L29 12 L21 12 Z' fill='%23c79a5b' opacity='.55'/%3E%3Cpath d='M21 12 L11 20' stroke='%23d8a24a' stroke-width='1.6'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#141009" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Scarf — turning a pull into a slide the glue can hold" />
+  <meta property="og:description" content="Glue does its worst work in tension. A scarf lays a long shallow taper across the break so the pull becomes a shear over a face many times the cross-section — shallow it enough and the timber gives before the joint does. Worked here on a joint you can cut, pull, and shallow." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">In the arena · 2026-09-09</p>
+      <p class="pron"><b>scarf</b> · <i>noun &amp; verb</i> · /skɑːf/ — a joint made by cutting matching tapers in the ends of two pieces and lapping them so they read as one continuous length; to join timber in this way; Old Norse <i>skarfr</i>, a notched joint</p>
+      <h1>Scarf</h1>
+      <p class="lede">A joint is only as strong as the way it turns a <em>pull</em> into a <em>slide</em>.</p>
+      <p class="sub">Stand two timbers end to end and glue them — a <b>butt</b> joint — and you have asked the glue to do the one thing it does worst: hold in <em>tension</em>, straight across the grain, over nothing more than the bare cross-section. Pull, and it lets go almost at once. A <b>scarf</b> refuses the question. It cuts a long shallow taper in each end and laps them, so the break runs at a slant and the same pull no longer pries the faces apart — it tries to <em>slide</em> them past each other, as <b>shear</b>, spread over a glued face many times the area of the cut. And shear is what glue is <em>for</em>. Make the taper shallow enough and the joint quietly disappears: the member breaks in clear timber, well away from the scarf, as if it had never been cut at all.</p>
+    </header>
+
+    <section id="how">
+      <p class="section-tag">Where the load goes</p>
+      <h2>Glue is weak in tension and strong in shear</h2>
+      <p>An adhesive line has two ways to fail, and they are not close. Pull the two faces <em>apart</em> — tension, or its worse cousin peel, where the parting starts at one edge and unzips — and even a good glue gives at a low stress. Slide the faces <em>along</em> each other — shear — and the same glue holds several times harder, because now the whole bonded area is working at once instead of a crack front eating along an edge. Every joint that lasts is built on that gap: it arranges the geometry so the load arrives as shear and almost never as tension.</p>
+
+      <p class="pull">You cannot make the glue stronger. You can only decide, by the angle of a cut, whether it is asked to hold the load it is good at or the load it is bad at.</p>
+
+      <p>The butt joint gets it exactly wrong — pure tension on the smallest possible face. The scarf gets it right twice over. Slanting the cut resolves the axial pull into a large shear component along the face and only a small tension across it; and slanting it stretches the face itself, so both of those stresses are divided over more glue. Shallow the taper and the tension term collapses while the shear stays well within reach. There is no new material and no stronger glue anywhere in this — only a pull, redirected until it lands where the joint can carry it.</p>
+    </section>
+
+    <section id="rule">
+      <p class="section-tag">The one relation it embodies</p>
+      <h2>A shallow cut trades length for strength</h2>
+      <p>Take a member of cross-section <span class="mono">A</span> under an axial pull <span class="mono">F</span>, so the timber carries a stress <span class="mono">σ = F ⁄ A</span>. Cut the scarf at a slope of <b>1 : N</b> — one across the thickness for <span class="mono">N</span> along the length — and let <span class="mono">φ</span> be the angle the cut makes with the axis, so <span class="mono">tanφ = 1 ⁄ N</span>. Then the whole joint falls out of one resolution of that stress onto the slanted face:</p>
+
+      <ul class="law-list">
+        <li><b>The face</b> — a plane at angle <span class="mono">φ</span> across the bar has area <span class="mono">A ⁄ sinφ = A·√(1 + N²)</span>. A 1:8 scarf glues eight times the cross-section; that alone is most of the win.</li>
+        <li><b>The two stresses</b> — resolve <span class="mono">σ</span> onto the face and it splits into a <b>shear</b> <span class="mono">τ = σ·sinφ·cosφ = ½σ·sin2φ</span> that slides the faces, and a <b>peel</b> <span class="mono">σ_n = σ·sin²φ</span> that pries them apart. Shallow the scarf — small <span class="mono">φ</span> — and the peel term dies as <span class="mono">sin²φ</span> while the shear falls too; steepen it to the butt (<span class="mono">φ = 90°</span>) and all of it lands as pure tension, <span class="mono">σ_n = σ</span>.</li>
+        <li><b>The balance</b> — the joint reaches the timber's own strength when the glue outlasts the wood: when the shear at the wood's failing stress is still under the glue's, <span class="mono">σ_wood·N ⁄ (1 + N²) ≤ τ_glue</span>. The steepest — shortest — scarf that clears this is the answer the trades reach for, and for real wood and glue it lands between <b>1:8 and 1:12</b>.</li>
+      </ul>
+
+      <p>So the one dial is the length of the taper. A steep, short scarf saves timber and time and fails in the glue; a long, shallow one wastes a hand's width of good wood and develops the full strength of the piece. The cut does not add anything. It simply keeps handing the glue a gentler and gentler version of the same pull, until the weakest thing left in the member is the timber itself.</p>
+
+      <p class="pull">Nothing here is about a better adhesive. It is about giving the glue exactly the kind of load it can hold, and dividing that load over exactly as much face as the piece can spare.</p>
+    </section>
+
+    <section id="ladder">
+      <p class="section-tag">Four states, a clean break to a joint that lets go</p>
+      <h2>From timber-strong to sheared clean off</h2>
+      <ol class="ladder">
+        <li><b>Timber-strong.</b> <span class="rung-note">The taper is shallow enough that the glue outlasts the wood. Pull to failure and the member breaks in clear timber, off in the grain somewhere, not on the joint — the scarf has vanished into the piece. This is the whole aim, and the shortest scarf that reaches it is the one the trade cuts.</span></li>
+        <li><b>Glue-limited.</b> <span class="rung-note">Holding, and holding well, but the glue is now the weakest link. The joint carries the load in front of it, yet pull harder and it will let go before the wood does — its failing load sits below the timber's. Sound for the duty it was cut for, but not the full strength of the piece.</span></li>
+        <li><b>Peeled.</b> <span class="rung-note">The scarf is too steep, or square to the pull. The tension across the face has climbed past what the glue holds, and the faces are prised apart — the low, cheap failure the butt joint hands you almost for free. Unzips from an edge and runs.</span></li>
+        <li><b>Shorn.</b> <span class="rung-note">Steeper still, or simply overloaded. The shear along the face has run past the glue line and the two tapers slide clean past each other. The joint parts along the cut and the timber on either side is left whole and useless. The failure a longer taper is cut to keep off.</span></li>
+      </ol>
+    </section>
+
+    <section id="who">
+      <p class="section-tag">Three who cut the same slope</p>
+      <h2>The same taper, three trades</h2>
+      <div class="hands">
+        <div class="hand">
+          <h3>The boatbuilder</h3>
+          <p class="role">the length</p>
+          <p>Scarfs a plank or a spar and needs it to bend round the hull as if it were one length of timber. Cuts long — 1:8 for a plank, 1:12 for a mast — because a spar in a seaway is worked in bending as well as pull, and only a shallow taper carries that without a hard spot at the joint. Planes the two bevels together on a jig so they mate over their whole face, and the finished scarf is invisible under paint.</p>
+        </div>
+        <div class="hand">
+          <h3>The joiner</h3>
+          <p class="role">the face</p>
+          <p>Lengthens a moulding or a run of skirting and cares most about the glue face itself — that it is flat, clean, and fully wetted, because a shallow scarf is nearly all glue area and a starved or dusty patch shows up as the one place it eventually opens. Reaches for the long taper and the slow glue, clamps it the length of the lap, and lets the joint borrow the strength of the whole run.</p>
+        </div>
+        <div class="hand">
+          <h3>The engineer</h3>
+          <p class="role">the numbers</p>
+          <p>Reads the same joint as <span class="mono">σ</span>, <span class="mono">τ</span>, and a ratio. Knows the peel term dies as <span class="mono">sin²φ</span> and the shear as <span class="mono">sinφcosφ</span>, sets the scarf so the glue's shear allowable is never reached before the timber's tension one, and adds nothing for luck that the geometry has not already earned. To draw the slope is to choose, in one number, whether the wood or the glue is the weakest thing in the piece.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="bench">
+      <p class="section-tag">The bench</p>
+      <h2>Pull it apart. Find the shortest scarf that makes full strength.</h2>
+      <p>Two timbers lapped in a scarf and pulled end to end: the <b>two pieces</b> and the slanted <b>glue face</b> between them, the <b>pull</b> drawn as arrows at the ends, and on the face the resolved <b>shear</b> that slides it and the <b>peel</b> that pries it apart. Pick the <b>joint</b> — a knotty pine batten in PVA, a Douglas-fir plank in epoxy, an oak rail in hide glue, a hard-maple handle in polyurethane, each with its own timber and glue strengths — set how hard you <b>pull</b>, as a share of what the solid timber could take, and cut the <b>scarf</b> from a square butt out to a long 1:12 taper. The page resolves the pull onto the face, reads the shear and peel against what the glue holds, and lights the load the joint would break at and how. It opens on a fir plank cut too steep and pulled hard — the glue already shorn. Find the scarf.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div id="verdict" class="verdict v-drift" aria-hidden="true"></div>
+            <div id="stage" class="stage"></div>
+            <p id="say" class="sr-only" role="status" aria-live="polite"></p>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label>The joint</label>
+                <div class="seg" role="group" aria-label="The joint on the bench">
+                  <button type="button" data-joint="pine" aria-pressed="false">pine · PVA</button>
+                  <button type="button" data-joint="fir" aria-pressed="true">fir · epoxy</button>
+                  <button type="button" data-joint="oak" aria-pressed="false">oak · hide</button>
+                  <button type="button" data-joint="maple" aria-pressed="false">maple · PU</button>
+                </div>
+              </div>
+              <div class="ctl">
+                <label for="in-P">Pull <span id="lab-P" class="val">76% · 70 kN</span></label>
+                <input id="in-P" type="range" min="5" max="130" step="5" value="76" />
+              </div>
+              <div class="ctl">
+                <label for="in-N">Scarf <span id="lab-N" class="val">1 : 2</span></label>
+                <input id="in-N" type="range" min="0" max="12" step="0.5" value="2" />
+                <div class="xtrack" aria-hidden="true"><span id="n-mark" class="x-mark"></span></div>
+                <p id="n-note" class="ctl-note" aria-hidden="true"></p>
+              </div>
+            </div>
+
+            <div id="reading" class="reading"></div>
+          </div>
+        </div>
+
+        <div class="bench-actions">
+          <button id="find" class="btn" type="button">Find the scarf</button>
+          <button id="reset" class="btn" type="button">Reset to the shorn plank</button>
+        </div>
+        <p class="hint">The <b>pull</b> is set as a share of the load the solid timber itself could carry, so 100% is the wood at its own limit. The green band on the gauge is the load the joint holds; the oxblood wall is where it <b>breaks</b>, and the tick is the <b>timber</b> ceiling. When the wall sits at or past the tick the glue outlasts the wood and the joint is <em>timber-strong</em> — the whole aim. Steepen the <b>scarf</b> toward a butt and the pull lands as peel across a small face; shallow it toward 1:12 and it spreads as shear the glue can hold. Each <b>joint</b> pairs a timber with a glue: strong epoxy on fir wants only a moderate taper, weak hide glue on oak wants a long one. <em>Find the scarf</em> cuts the shortest taper that still makes full strength; <em>Reset</em> returns to the shorn fir plank it opens on. Keys: <kbd>F</kbd> finds the scarf, <kbd>R</kbd> resets, <kbd>1</kbd>–<kbd>4</kbd> pick the joint, <kbd>[</kbd> steepens the scarf and <kbd>]</kbd> shallows it, <kbd>−</kbd> <kbd>=</kbd> ease and harden the pull; a focused slider keeps its arrows.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>Scarf · two timbers lapped on a slanted face, and the single resolution of an axial pull onto it. Pure HTML, CSS, and JavaScript — no build, no account, no network once the page has loaded. Face area A·√(1+N²); shear τ = ½σ·sin2φ and peel σ_n = σ·sin²φ with tanφ = 1/N and σ = F/A; full strength when σ_wood·N/(1+N²) ≤ τ_glue and σ_wood/(1+N²) ≤ σ_glue. The four joints' timber and glue strengths are stylised — plausible, not measured — but the mechanics drawn from them are exact.</p>
+      <p>One of a series — a page a day, each built on one old working word and the discipline hidden inside it. 2026-09-09.</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
