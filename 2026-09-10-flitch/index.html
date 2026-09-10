@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flitch — bolt a steel plate between two timbers and they must bend as one, so the load splits in proportion to stiffness and the steel carries E_s/E_w times the wood's stress at every fibre</title>
+  <meta name="description" content="Fasten a steel plate between two timber leaves so they deflect together, and they share one curvature: the moment splits in proportion to flexural rigidity EI, and at any fibre the steel carries n = E_s/E_w times the wood's stress. The plate's thickness buys carrying power and stiffness — but which of the two reaches its limit first is fixed the moment you pair a timber with a steel, by whether n·f_wood exceeds the steel's yield. Set the beam, the load and the plate, and find the thinnest flitch that carries it inside every limit." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a1712'/%3E%3Crect x='4' y='12' width='9' height='8' fill='%23a9743f'/%3E%3Crect x='19' y='12' width='9' height='8' fill='%23c79a5b'/%3E%3Crect x='14' y='9' width='4' height='14' fill='%236f8494'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#141009" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Flitch — sharing one curvature between wood and steel" />
+  <meta property="og:description" content="Sandwich a steel plate between two timbers and fasten it so all three bend as one. They share a single curvature, so the load splits by stiffness and the steel carries E_s/E_w times the wood's stress at every fibre. Worked here on a beam you can load, plate, and bring inside its limits." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">In the arena · 2026-09-10</p>
+      <p class="pron"><b>flitch</b> · <i>noun</i> · /flɪtʃ/ — a slab of timber sawn the length of a log; and a steel plate bolted between two such timbers to make one stiffer, stronger beam — a <i>flitch beam</i>; Old English <i>flicce</i>, a side of bacon, a thing cut in a long slab</p>
+      <h1>Flitch</h1>
+      <p class="lede">Fasten two materials so they cannot bend apart, and they must bend <em>together</em>.</p>
+      <p class="sub">A timber beam is cheap, warm, and light, and it sags. A steel plate is stiff and strong and dear, and on its own it is a floppy thing on edge that wants to buckle. Bolt the plate between two timber leaves — a <b>flitch beam</b> — and something the trade has trusted for a century happens: the sandwich is forced to deflect as a single member, so the two materials <em>share one curvature</em>. From that one fact the whole beam follows. The load splits between wood and steel in proportion to their stiffness, not their strength; the timber gives the steel a fair face to work against and keeps it from buckling; and the pair carries more, and sags less, than the sum of the parts pretending to act alone. The only sizing dial is how thick a plate you slip between the leaves.</p>
+    </header>
+
+    <section id="how">
+      <p class="section-tag">Where the load goes</p>
+      <h2>Bonded together, they share one curvature</h2>
+      <p>Bending a beam bends it to some radius <span class="mono">R</span>: the fibres above the middle stretch, the fibres below squash, and the strain at a height <span class="mono">y</span> off the neutral axis is simply <span class="mono">y ⁄ R</span>. Now fasten a steel plate flat between two timbers, tight enough that they cannot slide past each other. They can no longer take up their own separate radii — a bolt through all three forbids it — so they take up <em>one</em> radius together. That is the whole trick, and it is a geometric fact, not a material one.</p>
+
+      <p class="pull">Strength is shared by strength; but <em>stiffness</em> decides who carries the load. Two materials made to bend as one split the moment in exact proportion to how hard each resists bending.</p>
+
+      <p>Because the strain at a fibre is the same for both, the <em>stress</em> is not: stress is stiffness times strain, so at any height the steel carries <span class="mono">E_s ⁄ E_w</span> times the stress the wood carries there — call that ratio <b>n</b>, and for steel on softwood it is about twenty. The steel works twenty times as hard as the wood beside it, which is exactly why a thin plate does so much. Slice the plate thicker and you raise the pair's stiffness, so the same load bends it less and every fibre relaxes — but you do not change <span class="mono">n</span>. The ratio between the two stresses is set the instant you choose the two materials; the plate thickness only sets how far from their limits both of them run.</p>
+    </section>
+
+    <section id="rule">
+      <p class="section-tag">The one relation it embodies</p>
+      <h2>Load splits by stiffness; one material reaches its limit first</h2>
+      <p>Take two timber leaves and a steel plate, all of depth <span class="mono">d</span>, bent about the strong axis. Each material has a flexural rigidity <span class="mono">E·I</span> — its stiffness <span class="mono">E</span> times its second moment of area <span class="mono">I</span> — and because they share one curvature <span class="mono">1 ⁄ R</span>, the applied moment <span class="mono">M</span> divides between them and the pair behaves as one member of rigidity <span class="mono">ΣEI = E_w I_w + E_s I_s</span>:</p>
+
+      <ul class="law-list">
+        <li><b>The share</b> — the moment splits as the rigidities do, <span class="mono">M_s ⁄ M_w = E_s I_s ⁄ E_w I_w</span>, and the pair bends to <span class="mono">1 ⁄ R = M ⁄ ΣEI</span>. Add plate and <span class="mono">ΣEI</span> climbs, so under a fixed load the curvature — and the deflection <span class="mono">δ = W L³ ⁄ 48 ΣEI</span> — falls.</li>
+        <li><b>The two stresses</b> — at the extreme fibre <span class="mono">y = d ⁄ 2</span>, the wood carries <span class="mono">σ_w = E_w (d ⁄ 2) ⁄ R</span> and the steel <span class="mono">σ_s = n·σ_w</span>, with <span class="mono">n = E_s ⁄ E_w</span>. Thicken the plate and both fall together, in fixed ratio; the plate never changes which one is closer to its limit.</li>
+        <li><b>Who gives first</b> — the wood reaches its bending strength <span class="mono">f_w</span> when <span class="mono">σ_w = f_w</span>; the steel yields when <span class="mono">σ_s = f_y</span>, i.e. when <span class="mono">σ_w = f_y ⁄ n</span>. So the timber governs if <span class="mono">n·f_w &lt; f_y</span> and the steel governs if it does not — a property of the <em>pairing</em>, decided before a single bolt is driven.</li>
+      </ul>
+
+      <p>So the plate thickness is the one dial, and it does two honest things at once: it raises the load the pair can carry and it cuts how far the pair sags. What it cannot do is change the character of the beam. A soft timber under a hard steel will always be the one that yields at the fibre; a strong timber under a mild steel will always feel the plate reach its limit first. You choose that when you choose the two slabs. After that, you are only choosing how much margin to buy.</p>
+
+      <p class="pull">Nothing here makes the wood stronger or the steel stronger. It only forces the two to keep the same curvature, and lets stiffness hand each of them exactly the share of the load it is fit to hold.</p>
+    </section>
+
+    <section id="ladder">
+      <p class="section-tag">Four states, from a plate that earns its steel to one that never will</p>
+      <h2>From balanced to overstressed</h2>
+      <ol class="ladder">
+        <li><b>Balanced.</b> <span class="rung-note">The thinnest plate that brings the timber, the steel, and the sag all inside their limits at once. The wood carries what wood is good at, the steel makes up the rest, and no slab is doing work another could do cheaper. This is the flitch the builder cuts — the beam earns every millimetre of plate in it.</span></li>
+        <li><b>Over-plated.</b> <span class="rung-note">Safe, and safe with room to spare — the stresses and the sag sit well under every limit. But the plate is thicker than the load asked for, and steel is the heavy, dear part of the beam. It works; it is simply more beam than the span needed, and a good eye reads that as waste, not virtue.</span></li>
+        <li><b>Sagging.</b> <span class="rung-note">Strong enough — nothing is anywhere near breaking — and yet the beam bends past what a floor or a lintel can live with, past the old serviceability line of a span in three-hundred-and-sixty. Doors bind, plaster cracks, the floor feels alive underfoot. The commonest reason a sound timber gets a flitch at all: not weakness, but bounce.</span></li>
+        <li><b>Overstressed.</b> <span class="rung-note">The extreme fibre — of the wood, or of the steel, whichever the pairing hands the limit to — has run past what it holds. Pushed here the beam does not merely deflect; it breaks, in the material that gave first. The plate is too thin, or absent, or the load simply too great for this section to carry safely at all.</span></li>
+      </ol>
+    </section>
+
+    <section id="who">
+      <p class="section-tag">Three who read the same beam</p>
+      <h2>The same sandwich, three trades</h2>
+      <div class="hands">
+        <div class="hand">
+          <h3>The builder</h3>
+          <p class="role">the bolts</p>
+          <p>Slips the plate between the leaves and knows the whole thing is a lie until the bolts are tight — that the sandwich only acts as one member if the fasteners carry the horizontal shear trying to slide the faces past each other. Staggers the bolts along the span where that shear runs highest, near the supports, snugs them, and drills the timber, not the steel, oversize for the seasonal move of the wood.</p>
+        </div>
+        <div class="hand">
+          <h3>The carpenter</h3>
+          <p class="role">the sag</p>
+          <p>Cares less that the beam is strong than that it is <em>quiet</em>. Has felt a floor that passes every strength check still tremble when you cross it, and reaches for a flitch not to stop a break but to stop a bounce — a stiff plate to pull the deflection back under the line the eye and the plaster can accept. Sizes to the sag first and finds the strength comes free.</p>
+        </div>
+        <div class="hand">
+          <h3>The engineer</h3>
+          <p class="role">the ratio</p>
+          <p>Reads the pair as one section through the modular ratio <span class="mono">n</span>: transforms the steel into <span class="mono">n</span> times its width in equivalent timber, works the homogeneous beam that results, then untransforms the steel's stress by multiplying back. Checks the fibre that governs, checks the deflection, checks the bolts against the shear flow <span class="mono">VQ ⁄ I</span>, and adds nothing the arithmetic did not ask for.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="bench">
+      <p class="section-tag">The bench</p>
+      <h2>Load it. Find the thinnest flitch that carries it.</h2>
+      <p>A flitch beam on two supports under a load at midspan: the <b>two timber leaves</b> and the <b>steel plate</b> between them, drawn both in span — bending down by the <b>sag</b> the load draws out of it — and in section, where the plate you set thickens between the leaves. Pick the <b>beam</b> — a spruce joist plated with mild steel, a Douglas-fir beam, a short deep oak lintel, a long glulam header — set the <b>load</b> as a share of what the bare timber alone could carry to its bending limit, and slide the <b>plate</b> from none up to a stout half-inch. The gauge reads the stress in the wood and in the steel against each one's limit, the deflection against the span-in-360 line, and the load the pair safely carries. Press <em>Find the flitch</em> to cut the thinnest plate that brings all three inside their limits. The numbers are the real ones: the shared curvature, the split by <span class="mono">ΣEI</span>, and the stresses in fixed ratio <span class="mono">n</span>.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div id="verdict" class="verdict v-drift" aria-hidden="true"></div>
+            <div id="stage" class="stage"></div>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label>The beam</label>
+                <div class="seg" role="group" aria-label="The beam on the bench">
+                  <button type="button" data-beam="pine" aria-pressed="false">spruce · S275</button>
+                  <button type="button" data-beam="fir" aria-pressed="true">fir · S275</button>
+                  <button type="button" data-beam="oak" aria-pressed="false">oak · S275</button>
+                  <button type="button" data-beam="glulam" aria-pressed="false">glulam · S355</button>
+                </div>
+              </div>
+              <div class="ctl">
+                <label for="in-W">Load <span id="lab-W" class="val">128% · 00 kN</span></label>
+                <input id="in-W" type="range" min="20" max="160" step="4" value="128" />
+              </div>
+              <div class="ctl">
+                <label for="in-T">Plate <span id="lab-T" class="val">none</span></label>
+                <input id="in-T" type="range" min="0" max="12" step="0.5" value="0" />
+                <div class="xtrack" aria-hidden="true"><span id="t-mark" class="x-mark"></span></div>
+                <p id="t-note" class="ctl-note" aria-hidden="true"></p>
+              </div>
+            </div>
+
+            <div id="reading" class="reading"></div>
+          </div>
+        </div>
+
+        <div class="bench-actions">
+          <button id="find" class="btn" type="button">Find the flitch</button>
+          <button id="reset" class="btn" type="button">Reset to the bare beam</button>
+        </div>
+        <p class="hint">The <b>load</b> is set as a share of the load the bare timber leaves alone could carry to their bending limit, so 100% is the wood at its own edge with no plate at all. The green band on the gauge is the load the flitch safely carries; the oxblood wall is where it <b>gives</b>, and the dashed tick is the other limit — strength or sag — waiting behind it. Thicken the <b>plate</b> and both stresses fall together while the beam stiffens and the sag pulls back. Each <b>beam</b> pairs a timber with a steel: a soft spruce yields in the wood, a hard oak makes the mild plate yield first, a long glulam runs into its deflection limit before either. <em>Find the flitch</em> cuts the thinnest plate that brings the wood, the steel, and the sag all inside their limits; <em>Reset</em> returns to the bare, overloaded beam it opens on.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>Flitch · two timber leaves and a steel plate bolted to share one curvature, and the single split of a bending moment between them. Pure HTML, CSS, and JavaScript — no build, no account, no network once the page has loaded. Shared curvature 1/R = M/ΣEI with ΣEI = E_w·I_w + E_s·I_s; extreme-fibre stress σ_w = E_w·(d/2)/R and σ_s = n·σ_w with n = E_s/E_w; deflection δ = W·L³/48ΣEI; the timber governs when n·f_w &lt; f_y, else the steel. The four beams' sections and material strengths are stylised — plausible, not measured — but the mechanics drawn from them are exact.</p>
+      <p>One of a series — a page a day, each built on one old working word and the discipline hidden inside it. 2026-09-10.</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
