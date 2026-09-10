@@ -143,7 +143,7 @@
   var inW = $("in-W"), inT = $("in-T");
   var labW = $("lab-W"), labT = $("lab-T");
   var beamBtns = Array.prototype.slice.call(document.querySelectorAll(".seg [data-beam]"));
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
   var tMark = $("t-mark"), tNote = $("t-note");
 
   function fmtkN(N) {
@@ -516,7 +516,40 @@
     current = compute(state);
     syncLabels(current);
     curVerdict = render(current);
+    announce(current, curVerdict);
     save();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(r, verdict) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var plate = state.t === 0 ? "no plate" : "a " + state.t.toFixed(1) + " millimetre plate";
+      var head = "A " + r.b.timber + " with " + plate + ", loaded to " + state.load
+        + " percent of what the bare timber could carry. ";
+      var msg;
+      if (verdict === "balanced") {
+        msg = head + "Balanced — the wood at " + r.sigW.toFixed(1) + " of " + r.b.fw
+          + " megapascals, the steel at " + Math.round(r.sigS) + " of " + r.b.fy
+          + ", the sag " + r.delta.toFixed(1) + " of " + r.dLim.toFixed(1)
+          + " millimetres. All three inside their limits on the thinnest plate that does it.";
+      } else if (verdict === "overbuilt") {
+        msg = head + "Over-plated — safe, but the stresses and sag sit well under every limit; "
+          + "a thinner plate would carry this load. Steel is the heavy, dear part of the beam.";
+      } else if (verdict === "sag") {
+        msg = head + "Sagging — strong enough, nothing near breaking, but it bends "
+          + r.delta.toFixed(1) + " millimetres, past the span-in-360 line of "
+          + r.dLim.toFixed(1) + ". Thicken the plate to stiffen it.";
+      } else {
+        var who = r.bindMode === "steel" ? "the steel plate, past its yield"
+          : "the timber, past its bending strength";
+        msg = head + "Overstressed — " + who + " at this load. It would break in "
+          + (r.bindMode === "steel" ? "the steel" : "the wood") + ". Thicken the plate, or ease the load.";
+      }
+      sayEl.textContent = msg;
+    }, 260);
   }
 
   inW.addEventListener("input", function () { state.load = parseInt(inW.value, 10); update(); });
