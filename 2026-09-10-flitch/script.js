@@ -222,6 +222,9 @@
   }
   sizeCanvas();
 
+  var reduceMQ = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+  var reduce = reduceMQ ? reduceMQ.matches : false;
+
   var cssVar = function (name) {
     return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   };
@@ -500,7 +503,7 @@
     lastTs = ts;
 
     var sagTarget = clamp(current.uDefl * 30, 0, 70);
-    var ease = Math.min(1, dt * 11);
+    var ease = reduce ? 1 : Math.min(1, dt * 11);
     if (!initShown) { shown.t = state.t; shown.sag = sagTarget; shown.strain = current.strain; initShown = true; }
     shown.t += (state.t - shown.t) * ease;
     shown.sag += (sagTarget - shown.sag) * ease;
@@ -567,15 +570,21 @@
     update();
   });
 
-  // step the plate toward the target so it is seen to thicken
+  // step the plate toward the target so it is seen to thicken — under reduced
+  // motion it lands in one step
   function animatePlate(target) {
-    if (Math.abs(target - state.t) < 0.26) { state.t = target; inT.value = target; update(); return; }
+    if (reduce || Math.abs(target - state.t) < 0.26) { state.t = target; inT.value = target; update(); return; }
     var dir = target > state.t ? TSTEP : -TSTEP;
     (function step() {
       state.t = Math.round((state.t + dir) / TSTEP) * TSTEP;
       inT.value = state.t; update();
       if (Math.abs(state.t - target) > 0.26) setTimeout(step, 80);
     })();
+  }
+
+  // follow a live change to the motion setting
+  if (reduceMQ && reduceMQ.addEventListener) {
+    reduceMQ.addEventListener("change", function (e) { reduce = e.matches; });
   }
 
   // repaint on theme flips so canvas colours follow
