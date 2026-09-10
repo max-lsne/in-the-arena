@@ -42,11 +42,35 @@
   // Opens on a bare Douglas-fir beam pushed to 128% of what the timber alone can
   // hold — overstressed in the wood, no plate in it. Find the flitch on arrival.
   var DEFAULT = { beam: "fir", load: 128, t: 0 };
+  var KEY = "flitch.beam.v1";     // where the beam, load and plate are kept between visits
   var TMAX = 12, TSTEP = 0.5;
 
-  var state = Object.assign({}, DEFAULT);
+  var state = load() || Object.assign({}, DEFAULT);
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+  function clampStep(v, a, b, step) {
+    v = Math.round((+v) / step) * step;
+    if (!isFinite(v)) return a;
+    return v < a ? a : v > b ? b : v;
+  }
+
+  // ---- persistence -----------------------------------------------------
+  function load() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      if (!BEAMS[o.beam]) return null;
+      return {
+        beam: o.beam,
+        load: clampStep(o.load, 20, 160, 4),
+        t: clampStep(o.t, 0, TMAX, TSTEP)
+      };
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
 
   // ---- the split -------------------------------------------------------
   // Everything the beam does, from the plate thickness t and the load as a share
@@ -492,6 +516,7 @@
     current = compute(state);
     syncLabels(current);
     curVerdict = render(current);
+    save();
   }
 
   inW.addEventListener("input", function () { state.load = parseInt(inW.value, 10); update(); });
