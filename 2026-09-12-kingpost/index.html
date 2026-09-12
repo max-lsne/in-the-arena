@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kingpost — the central upright of a roof truss does not prop the ridge up but hangs the tie beam from it, so it stands in tension and carries exactly the ceiling load, whatever the pitch</title>
+  <meta name="description" content="A kingpost roof truss carries its load by geometry alone. Method of joints gives three exact forces: the rafters take R/sinθ in compression, the tie takes R/tanθ in tension — the same force that pushes the walls apart, and it grows without limit as the roof flattens — and the kingpost, despite its name, hangs the tie beam and stands in tension, carrying exactly the ceiling load, independent of pitch and of the roof load above it. Set the truss, the pitch and the load, and find the pitch that shares the load best." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a1712'/%3E%3Cpath d='M4 23 L16 7 L28 23 Z' fill='none' stroke='%23b06a34' stroke-width='2.4'/%3E%3Cline x1='16' y1='7' x2='16' y2='23' stroke='%234d7091' stroke-width='2.4'/%3E%3Cline x1='4' y1='23' x2='28' y2='23' stroke='%234d7091' stroke-width='2.4'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#141009" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Kingpost — a post that holds by pulling" />
+  <meta property="og:description" content="The upright at the middle of a roof truss is named for propping, but it does not prop: it hangs the tie beam up to the ridge, and so stands in tension. It carries exactly the ceiling load — no more, and no less — whatever the pitch of the roof or the load on it. Worked here on a truss you can pitch, load, and bring inside its limits." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">In the arena · 2026-09-12</p>
+      <p class="pron"><b>kingpost</b> · <i>noun</i> · /ˈkɪŋpəʊst/ — the central upright of a roof truss, running from the ridge down to the middle of the tie beam; despite the name it does not prop the ridge up but <i>hangs the tie beam from it</i>, and so stands in tension; from <i>king</i>, the chief member of a frame, and <i>post</i></p>
+      <h1>Kingpost</h1>
+      <p class="lede">A post named for propping, that holds by <em>pulling</em>.</p>
+      <p class="sub">Set two rafters against each other and they make a stiff triangle — but their feet want to kick outward, and a wall cannot stop them. Lay a <b>tie beam</b> across the feet and it stops the spread, taking in tension exactly the thrust the rafters throw sideways. Now the tie beam has a new problem: it is long, and it sags in the middle under its own ceiling. So drop a <b>kingpost</b> from the ridge to the middle of the tie and hang the tie up to the apex. The surprise is in the word: a <em>post</em> should be in compression, propping something up — but this one is in <em>tension</em>, holding the tie beam up. Every force in the frame follows from the geometry of that one triangle, and the pitch of the roof is the dial that sets them all.</p>
+    </header>
+
+    <section id="how">
+      <p class="section-tag">Where the load goes</p>
+      <h2>One triangle, three jobs</h2>
+      <p>A truss carries load by making every member either purely stretch or purely squash — no bending, no leverage, just tension and compression running along straight lines to the supports. The kingpost truss is the plainest of them: two <b>rafters</b> leaning together to the ridge, a <b>tie beam</b> across their feet, and a <b>kingpost</b> hung from the ridge to the middle of the tie. Load the roof and the rafters squash — they carry the load down to the walls in compression. But a leaning rafter pushes its foot <em>outward</em> as well as down, and that sideways push is the whole trouble with roofs: it spreads the walls until they crack and the ridge drops.</p>
+
+      <p class="pull">The tie beam does not hold the roof up. It holds the walls <em>together</em> — taking in tension the exact sideways thrust the rafters would otherwise spend pushing the building apart.</p>
+
+      <p>That leaves the tie beam itself, spanning the whole width with nothing under it, sagging under any ceiling hung below. The kingpost answers that: it reaches down from the apex and picks the tie beam up at its middle. So the post carries the ceiling — not by standing under it, but by <em>hanging</em> it from the ridge. A member called a post, doing the work of a rope. Read the frame and you find the two chords that lean — the rafters — in compression, and the two members that pull things together — the tie and the post — in tension.</p>
+    </section>
+
+    <section id="rule">
+      <p class="section-tag">The one relation it embodies</p>
+      <h2>Three forces, all set by the pitch</h2>
+      <p>Cut the truss at a joint and balance the arrows. With a roof load and a ceiling load bearing down, each wall carries half the total, a reaction <span class="mono">R</span>. Let the rafters rise at a pitch <span class="mono">θ</span> above the tie. Everything the frame does is three lines of arithmetic:</p>
+
+      <ul class="law-list">
+        <li><b>The rafters</b> squash. At the foot, the reaction <span class="mono">R</span> pushes up, the rafter pushes down along its own slope; balancing the vertical gives <span class="mono">C = R ⁄ sin θ</span>. Flatten the roof and <span class="mono">sin θ</span> shrinks, so the compression climbs — a shallow rafter fights a steep uphill battle to carry the same load down.</li>
+        <li><b>The tie</b> stretches. Balancing the <em>horizontal</em> at the same foot, the tie must hold back the rafter's outward push: <span class="mono">T = R ⁄ tan θ</span>. This is the wall thrust, and it is the number that bites — as the pitch flattens, <span class="mono">tan θ</span> goes to zero and the tie force grows without bound. Halve the pitch and you roughly double the thrust into the tie and the walls.</li>
+        <li><b>The kingpost</b> hangs. Balance the joint at the middle of the tie: only the post reaches up from there, so it must carry whatever pulls down — the ceiling load, and nothing else. <span class="mono">P = W_ceiling</span>, in tension, <em>independent of the pitch and of the roof load overhead</em>. The post neither knows nor cares how steep the roof is.</li>
+      </ul>
+
+      <p>So the pitch is the one dial, and it pulls the rafters and the tie in opposite directions. Steepen the roof and the rafters shorten their reach but grow long and slender — apt to buckle; the tie relaxes. Flatten it and the rafters stand almost upright and stout, but the tie and the walls take a punishing thrust. Somewhere between is the pitch that shares the load most evenly — and for almost any span it lands near the pitch old roofs were cut to. The kingpost sits out this whole argument: pitch the roof how you like, it still carries the ceiling and no more.</p>
+
+      <p class="pull">A steeper roof spares the walls and strains the rafters; a flatter roof spares the rafters and strains the walls. The post carries the ceiling either way.</p>
+    </section>
+
+    <section id="ladder">
+      <p class="section-tag">Four states, from the pitch a load wants to a member past its limit</p>
+      <h2>From sound to overstressed</h2>
+      <ol class="ladder">
+        <li><b>Sound.</b> <span class="rung-note">The pitch shares the load evenly — the rafters, the tie, and the post all sit inside their limits with margin to spare, and no member is doing work a change of pitch could hand to another. This is the roof the framer cuts: steep enough to spare the walls, shallow enough to keep the rafters stout.</span></li>
+        <li><b>Over-pitched.</b> <span class="rung-note">Safe, but steeper than the load asked for. The tie and walls are barely worked, and the rafters have grown long and slender for nothing — more timber up in the air, more roof for the wind to catch, a taller ridge than the span needed. It stands; it is simply more roof than the job called for.</span></li>
+        <li><b>Under-pitched.</b> <span class="rung-note">Safe, too, but flatter than it should be, and the tie is paying for it. The thrust into the tie beam and the walls runs far higher than a little more pitch would ask, so the joints at the feet strain and the walls feel the push. Strong enough for now, but throwing more sideways force than good practice likes.</span></li>
+        <li><b>Overstressed.</b> <span class="rung-note">One member has run past what it holds — the rafters buckle, or the tie and its heel joint tear, or the post pulls apart under the ceiling it hangs. Which one gives first depends on the truss and the pitch, save for the post: when the ceiling is too heavy for it, no pitch on the dial will save it, because the post carries that load whatever the roof does.</span></li>
+      </ol>
+    </section>
+
+    <section id="who">
+      <p class="section-tag">Three who read the same frame</p>
+      <h2>The same truss, three trades</h2>
+      <div class="hands">
+        <div class="hand">
+          <h3>The framer</h3>
+          <p class="role">the joints</p>
+          <p>Knows the whole truss lives or dies at the feet, where the rafter meets the tie. That heel joint carries the full thrust in a notch of end grain, and end grain in shear is the weakest thing in the frame — so it is cut long, strapped with iron, and never trusted to the timber alone. Hangs the kingpost from the ridge with a stirrup, not a tenon, because the post pulls down, and a tenon in tension is no joint at all.</p>
+        </div>
+        <div class="hand">
+          <h3>The carpenter</h3>
+          <p class="role">the spread</p>
+          <p>Has seen the disease of a flat roof: the feet creeping outward, the tie beam straining, plaster cracking along the wall head where the thrust pushes it out. Reaches for pitch before strength — a steeper roof to pull the thrust back down — and keeps the tie in one unbroken length across the whole span, because a tie beam spliced in the middle is a tie beam that has stopped tying.</p>
+        </div>
+        <div class="hand">
+          <h3>The engineer</h3>
+          <p class="role">the polygon</p>
+          <p>Draws the frame as arrows and closes them into a triangle at each joint — the method of joints, or the force polygon Cremona drew a century and a half ago. Reads the rafter as <span class="mono">R ⁄ sin θ</span>, the tie as <span class="mono">R ⁄ tan θ</span>, the post as the ceiling load flat, and checks the rafter against its buckling length, the tie against its heel joint, the post against its hanger — and adds nothing the polygon did not ask for.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="bench">
+      <p class="section-tag">The bench</p>
+      <h2>Pitch it. Find the pitch the load wants.</h2>
+      <p>A kingpost truss on two walls under a roof load at the ridge and a ceiling load hung on the post: the <b>two rafters</b> in compression, the <b>tie</b> and the <b>kingpost</b> in tension, each drawn heavier and darker as it nears its limit, with the outward <b>thrust</b> on the walls and the force triangle that closes at the foot. Pick the <b>truss</b> — a steep cottage roof, a common barn, a wide low chapel, a loft carrying a heavy ceiling — set the <b>load</b> as a share of the truss's design load, and swing the <b>pitch</b> from a low 12° up to a steep 62°. The gauge reads the force in each member against its limit, and the load the truss safely carries. Press <em>Find the pitch</em> to swing the roof to the pitch that shares the load most evenly between the rafters and the tie. The numbers are the real ones: <span class="mono">C = R ⁄ sin θ</span>, <span class="mono">T = R ⁄ tan θ</span>, and the post carrying the ceiling load flat.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div id="verdict" class="verdict v-drift" aria-hidden="true"></div>
+            <div id="stage" class="stage"></div>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label>The truss</label>
+                <div class="seg" role="group" aria-label="The truss on the bench">
+                  <button type="button" data-truss="cottage" aria-pressed="false">cottage</button>
+                  <button type="button" data-truss="barn" aria-pressed="false">barn</button>
+                  <button type="button" data-truss="chapel" aria-pressed="true">chapel</button>
+                  <button type="button" data-truss="loft" aria-pressed="false">loft</button>
+                </div>
+              </div>
+              <div class="ctl">
+                <label for="in-W">Load <span id="lab-W" class="val">108% · 00 kN</span></label>
+                <input id="in-W" type="range" min="20" max="160" step="4" value="108" />
+              </div>
+              <div class="ctl">
+                <label for="in-P">Pitch <span id="lab-P" class="val">18°</span></label>
+                <input id="in-P" type="range" min="12" max="62" step="1" value="18" />
+                <div class="xtrack" aria-hidden="true"><span id="p-mark" class="x-mark"></span></div>
+                <p id="p-note" class="ctl-note" aria-hidden="true"></p>
+              </div>
+            </div>
+
+            <div id="reading" class="reading"></div>
+          </div>
+        </div>
+
+        <div class="bench-actions">
+          <button id="find" class="btn" type="button">Find the pitch</button>
+          <button id="reset" class="btn" type="button">Reset to the low chapel</button>
+        </div>
+        <p class="hint">The <b>load</b> is set as a share of each truss's own design load, so 100% is the load it is built for. The green band on the gauge is the load the truss safely carries at this pitch; the oxblood wall is where the first member <b>gives</b>, and the dashed tick is the next limit behind it. Swing the <b>pitch</b> and watch the rafters and the tie trade places — steep punishes the <em>rafters</em>, flat punishes the <em>tie</em> and the walls — while the <b>kingpost</b> holds its force flat, because it carries the ceiling whatever the roof does. Each <b>truss</b> shows a different member giving first: the steep <b>cottage</b> buckles a rafter, the wide low <b>chapel</b> tears the tie's heel joint, the <b>loft</b> hangs too much ceiling on its post for any pitch to help. <em>Find the pitch</em> swings the roof to where the rafters and tie share the load most evenly; <em>Reset</em> returns to the flat, overloaded chapel it opens on.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>Kingpost · two rafters, a tie, and an upright hung from the ridge, and the single set of joint balances that fixes every force in them. Pure HTML, CSS, and JavaScript — no build, no account, no network once the page has loaded. Reactions R = (W_roof + W_ceiling)/2; rafter compression C = R/sin θ; tie tension and wall thrust T = R/tan θ; kingpost tension P = W_ceiling, flat in the pitch. Rafter capacity by the Rankine blend of squash and Euler buckling over the rafter's length; the tie by its heel joint; the post by its hanger. The four trusses' sections and design loads are stylised — plausible, not measured — but the forces drawn from them are exact.</p>
+      <p>One of a series — a page a day, each built on one old working word and the discipline hidden inside it. 2026-09-12.</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
