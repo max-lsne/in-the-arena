@@ -41,6 +41,7 @@ not learn whether it exists.
 | GET | `/api/v1/companies/:slug` | 404 outside the grant |
 | GET | `/api/v1/metrics` | Filter by `company`, `keys`, `grain`, `from`. Capped at 500 |
 | POST | `/api/v1/retrieval/search` | `query` required; `source_ref` scopes to one document; limit capped at 20 |
+| GET | `/api/v1/initiatives` | Filter by `company`, `status`. Each one carries the current value of the metric it claims to move |
 
 ## Why metric responses look the way they do
 
@@ -63,6 +64,16 @@ against its source rather than against a model's recollection of it.
 A metric with no computed value returns an empty set rather than a zero. Absence
 has to stay distinguishable from measurement, or an agent reports a median of
 zero days as time to value.
+
+## Initiatives carry their own evidence
+
+An initiative that says it will lift retention is a claim. The response attaches
+the current value of the metric that would settle it, next to the recorded
+baseline and target, which is the difference between a plan and a status update.
+
+Progress is null rather than zero when the metric has no computed value. Zero
+reads as "no movement", which is a finding. Null is the truth, which is that
+nobody knows yet.
 
 ## Retrieval takes two steps
 

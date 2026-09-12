@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       get "companies/:slug", to: "companies#show", as: :company
 
       resources :metrics, only: %i[index]
+      resources :initiatives, only: %i[index]
 
       post "retrieval/search", to: "retrieval#search"
     end
