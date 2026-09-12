@@ -15,7 +15,7 @@ module Synthetic
     # expected answer must be computable, not that FX is simple.
     GBP_TO_EUR = 1.17
 
-    REVENUE_LEAKS_PER_COMPANY = 3
+    REVENUE_LEAKS_PER_COMPANY = 4
     CRM_DEFECTS_PER_COMPANY = 5
     AT_RISK_PER_COMPANY = 5
     STALLED_ONBOARDINGS_PER_COMPANY = 2
@@ -42,27 +42,41 @@ module Synthetic
 
       # --- revenue leakage ---------------------------------------------------
 
+      # Each kind is planted on a contract that actually has the term it breaches.
+      #
+      # The first version picked the seat-growth target from whatever was left
+      # over, which meant it sometimes landed on a contract with no committed
+      # user count. Nothing had been breached, and there was no clause for an
+      # agent to cite, so the grader was marking agents wrong for failing to
+      # quote a document that said nothing. A defect that cannot be evidenced is
+      # not a defect, it is noise in the answer key.
       def plant_revenue_leaks(company, contracts, subscriptions, rng, today)
         by_customer = subscriptions.index_by(&:customer_id)
         pool = contracts.select { |c| by_customer[c.customer_id] }.shuffle(random: rng)
+        used = []
 
-        uplift_candidates  = pool.select { |c| c.terms["uplift_pct"] && (today - c.starts_on).to_i > 400 }
-        discount_candidates = pool.select { |c| c.terms["discount_pct"] }
-        plain = pool - uplift_candidates - discount_candidates
+        candidates = {
+          uplift: ->(c) { c.terms["uplift_pct"] && (today - c.starts_on).to_i > 400 },
+          discount: ->(c) { c.terms["discount_pct"] },
+          seats: ->(c) { c.terms["seat_commitment"] },
+          currency: ->(_c) { true }
+        }
 
-        planted = 0
-        planted += 1 if uplift_candidates.any? && leak_uplift_not_applied(company, uplift_candidates.first, today)
-        planted += 1 if discount_candidates.any? && leak_expired_discount(company, discount_candidates.first, today)
+        planters = {
+          uplift: ->(c) { leak_uplift_not_applied(company, c, today) },
+          discount: ->(c) { leak_expired_discount(company, c, today) },
+          seats: ->(c) { leak_seat_growth_unbilled(company, c, by_customer[c.customer_id], rng, today) },
+          currency: ->(c) { leak_currency_mismatch(company, c, today) }
+        }
 
-        remaining = REVENUE_LEAKS_PER_COMPANY - planted
-        seat_target = plain.first
-        currency_target = plain[1]
+        candidates.each do |kind, precondition|
+          break if used.size >= REVENUE_LEAKS_PER_COMPANY
 
-        if remaining.positive? && seat_target
-          leak_seat_growth_unbilled(company, seat_target, by_customer[seat_target.customer_id], rng, today)
-          remaining -= 1
+          target = (pool - used).find(&precondition)
+          next unless target
+
+          used << target if planters.fetch(kind).call(target)
         end
-        leak_currency_mismatch(company, currency_target, today) if remaining.positive? && currency_target
       end
 
       # Contracted uplift silently not applied after an anniversary. The expected

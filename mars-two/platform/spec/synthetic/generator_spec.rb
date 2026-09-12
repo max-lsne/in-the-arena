@@ -108,6 +108,49 @@ RSpec.describe Synthetic::Generator, :seeded do
     end
   end
 
+  describe "the corpus makes every planted leak citable" do
+    before(:context) { described_class.new(usage_days: 14).run! }
+
+    # A finding without a citation is an assertion. If the clause that was
+    # breached is not in the corpus, the grader is asking an agent to quote a
+    # document that does not exist, and the agent is right to refuse.
+    it "writes a contract document for every contract carrying a planted leak" do
+      owner do
+        GroundTruth.where(defect_class: "revenue_leakage").find_each do |gt|
+          contract = Contract.find(gt.subject_id)
+          expect(Document.where(company_id: gt.company_id, source_ref: contract.reference)).to exist,
+            "no document for #{contract.reference}, so its leak cannot be cited"
+        end
+      end
+    end
+
+    it "puts the breached clause in the document text" do
+      owner do
+        GroundTruth.where(defect_class: "revenue_leakage").find_each do |gt|
+          contract = Contract.find(gt.subject_id)
+          body = Document.find_by(company_id: gt.company_id, source_ref: contract.reference).body
+
+          expected = case gt.expected["kind"]
+          when "uplift_not_applied" then "#{gt.expected['uplift_pct']}% on each anniversary"
+          when "expired_discount_still_applied" then "discount of #{gt.expected['discount_pct']}%"
+          when "seat_growth_unbilled" then "Committed User Count is #{gt.expected['seats_before']}"
+          when "currency_mismatch" then "payable in #{gt.expected['contract_currency']}"
+          end
+
+          expect(body).to include(expected),
+            "#{contract.reference} (#{gt.expected['kind']}) has no clause saying #{expected.inspect}"
+        end
+      end
+    end
+
+    it "embeds every chunk with the backend that is currently configured" do
+      owner do
+        expect(DocumentChunk.where.not(embedding_backend: Mars::Embedding.backend_name).count).to eq(0)
+        expect(DocumentChunk.where(embedding: nil).count).to eq(0)
+      end
+    end
+  end
+
   describe "planted defects are observable in the data" do
     before(:context) { described_class.new(usage_days: 14).run! }
 

@@ -59,6 +59,43 @@ RSpec.describe "Chunk retrieval", type: :model do
     expect(DocumentChunk.nearest_to(Mars::Embedding.embed("uplift"))).to be_empty
   end
 
+  # The finding that shaped how agents use retrieval here.
+  #
+  # Every uplift clause in the corpus is worded identically, because contracts
+  # are. Similarity therefore cannot answer "which contract is in breach": it
+  # ranks eight near-identical clauses in essentially arbitrary order, and the
+  # one that matters is as likely to be second as first.
+  #
+  # That question belongs to SQL. The agent identifies the contract from
+  # precomputed figures, then retrieval finds the clause inside that contract.
+  # Composing the scopes is what makes the second step exact.
+  describe "scoped to a document the caller already identified" do
+    it "returns the clause from that document rather than a similar one elsewhere" do
+      other = add_document(vaultline, "Vaultline contract VAU-0099",
+                           "4.2 Uplift\nThe Annual Fee shall increase by 4.0% on each anniversary of the Commencement Date.")
+
+      as_user_of(vaultline) do
+        query = Mars::Embedding.embed("annual uplift on each anniversary")
+        hit = DocumentChunk.where(document_id: other.id).nearest_to(query, limit: 1).first
+
+        expect(hit.document_id).to eq(other.id)
+        expect(hit.content).to include("4.0%")
+      end
+    end
+
+    it "still applies tenant isolation when scoped" do
+      # Read through the owner role. Looking this up with no grant returns nil,
+      # because the policy is already working, and the spec would then fail on a
+      # NoMethodError instead of asserting anything about isolation.
+      meterpath_document = seeding { Document.find_by(company_id: meterpath.id) }
+
+      as_user_of(vaultline) do
+        query = Mars::Embedding.embed("annual uplift on each anniversary")
+        expect(DocumentChunk.where(document_id: meterpath_document.id).nearest_to(query)).to be_empty
+      end
+    end
+  end
+
   it "carries enough with each hit to cite it" do
     as_user_of(vaultline) do
       hit = DocumentChunk.nearest_to(Mars::Embedding.embed("annual uplift on each anniversary")).first

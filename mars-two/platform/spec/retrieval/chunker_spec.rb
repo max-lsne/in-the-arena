@@ -28,7 +28,7 @@ RSpec.describe Mars::Chunker do
   end
 
   it "keeps every chunk under the size bound" do
-    long = (["The Annual Fee is payable monthly in arrears."] * 400).join(" ")
+    long = ([ "The Annual Fee is payable monthly in arrears." ] * 400).join(" ")
     expect(described_class.call(long).map { |c| c[:content].length }).to all(be <= Mars::Chunker::MAX_CHARS)
   end
 

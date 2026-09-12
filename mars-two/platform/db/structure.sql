@@ -415,7 +415,8 @@ CREATE TABLE public.document_chunks (
     section_ref character varying,
     embedding public.vector(1024),
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    embedding_backend character varying
 );
 
 ALTER TABLE ONLY public.document_chunks FORCE ROW LEVEL SECURITY;
@@ -1542,6 +1543,13 @@ CREATE INDEX index_document_chunks_on_company_id ON public.document_chunks USING
 
 
 --
+-- Name: index_document_chunks_on_company_id_and_embedding_backend; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_document_chunks_on_company_id_and_embedding_backend ON public.document_chunks USING btree (company_id, embedding_backend);
+
+
+--
 -- Name: index_document_chunks_on_document_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -2386,6 +2394,7 @@ ALTER TABLE public.usage_daily ENABLE ROW LEVEL SECURITY;
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20260912000004'),
 ('20260912000003'),
 ('20260912000002'),
 ('20260912000001');

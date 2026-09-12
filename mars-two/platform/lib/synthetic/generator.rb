@@ -2,6 +2,7 @@ require "zlib"
 require_relative "portfolio"
 require_relative "name_pools"
 require_relative "defects"
+require_relative "documents"
 
 module Synthetic
   # Builds the whole synthetic portfolio, deterministically.
@@ -87,6 +88,16 @@ module Synthetic
         customers: customers, contracts: contracts,
         subscriptions: subscriptions, employees: employees
       )
+
+      # After the defects, not before. A contract carrying a planted leak needs a
+      # document containing the clause that was breached, and which contracts
+      # those are is only known once they have been planted.
+      Documents.generate!(
+        company: company, spec: spec, rng: rng, today: today,
+        customers: customers, contracts: contracts, employees: employees
+      )
+      count(:documents, Document.where(company_id: company.id).count)
+      count(:document_chunks, DocumentChunk.where(company_id: company.id).count)
 
       count(:companies)
     end
