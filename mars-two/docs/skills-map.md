@@ -19,7 +19,7 @@ foundations.
 | --- | --- | --- |
 | LLM foundations | `intelligence/llm/` | Context window budgeting, structured output, the recorded-fixture client, cost and latency accounting per agent run |
 | Grounding models with data | `intelligence/retrieval/` | Document pipeline into pgvector, chunking with metadata, citation-carrying retrieval. The split between SQL facts and vector text is ADR 0005 |
-| Building agentic systems | `intelligence/agents/`, `intelligence/tools/` | Validated tool registry, single-agent runtime, one orchestrator agent, memory and context management across a long run, MCP surface |
+| Building agentic systems | `intelligence/agents/`, `intelligence/tools/` | Validated tool registry, single-agent runtime, one orchestrator agent, memory and context management across a long run, and the same registry exposed over MCP in `intelligence/app/mcp_server.py` |
 | Evaluation-driven development | `intelligence/evals/` | Three-layer harness of ADR 0003. Planted ground truth, structural validators, calibrated judge. Per-case ledger in `platform/app/lib/evals/case_ledger.rb`, read by the error analysis surface in `web/` |
 | Operating in production | `platform/`, `.github/workflows/` | Guardrails, adversarial input handling, the data exfiltration threat model in ADR 0002, run tracing, CI gates |
 | Machine learning foundations | `intelligence/evals/calibration/` | Precision, recall and ranking metrics done properly, judge calibration against a labelled set, why a single accuracy number hides the failure that matters |

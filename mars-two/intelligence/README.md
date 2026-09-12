@@ -37,6 +37,40 @@ previous answer. Re-record with `make fixtures` from the repo root.
 They are committed, and they are review artefacts. The diff when a prompt changes
 shows exactly how the model's answer changed.
 
+## The MCP surface
+
+`app/mcp_server.py` exposes the same registry over MCP, so an MCP client calls the
+objects the agent runtime calls in process. The tool list and the schemas are
+generated from the registry: a tool added for one is available to the other, and
+the two descriptions cannot drift apart.
+
+The server holds one platform token and every call runs with that token's grant.
+So the unit of deployment is one server per grant. A group operator's server sees
+eight companies because their token does; a portfolio company's server sees one.
+Handing a group-wide token to a client that answers a portfolio company's
+questions would give it the whole portfolio, and nothing downstream would notice.
+
+```jsonc
+// claude_desktop_config.json
+{
+  "mcpServers": {
+    "mars-two": {
+      "command": "uv",
+      "args": ["--directory", "/path/to/mars-two/intelligence", "run", "mars-two-mcp"],
+      "env": {
+        "MARS_PLATFORM_URL": "http://localhost:3000",
+        "MARS_PLATFORM_TOKEN": "mars_..."
+      }
+    }
+  }
+}
+```
+
+The tests drive it through the SDK's own client over memory streams rather than
+calling the handlers, because what matters is the protocol: that a client which
+knows nothing about this code can list the tools, call one, and be told what went
+wrong without the connection dying.
+
 ## Layout
 
 | Path | What lives there |
@@ -44,6 +78,7 @@ shows exactly how the model's answer changed.
 | `app/llm/` | The three-mode client and the fixture store |
 | `app/tools/` | The validated tool registry |
 | `app/agents/` | The agent runtime |
+| `app/mcp_server.py` | The same registry, over MCP |
 | `app/evals/` | The three-layer eval harness |
 | `fixtures/` | Recorded model responses, committed |
 
@@ -54,4 +89,5 @@ uv sync
 uv run pytest -q
 uv run ruff check . && uv run ruff format --check .
 uv run uvicorn app.main:app --reload --port 8000
+uv run mars-two-mcp   # the MCP server, over stdio
 ```
