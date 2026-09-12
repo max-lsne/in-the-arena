@@ -26,12 +26,13 @@ RSpec.describe "Initiatives API", type: :request do
       Initiative.create!(
         company: vaultline, owner_employee: owner_employee,
         title: "Lift net revenue retention above 105%", thesis: "Agreed at the 2025 value creation review.",
-        status: "in_progress", target_metric_key: "net_revenue_retention",
+        status: "in_progress", target_metric_key: "net_revenue_retention", target_unit: "ratio",
         baseline_value: 0.98, target_value: 1.05, due_on: Date.new(2026, 12, 31)
       )
       Initiative.create!(
         company: meterpath, title: "Cut time to first value", status: "at_risk",
-        target_metric_key: "median_onboarding_days", baseline_value: 60, target_value: 30,
+        target_metric_key: "median_onboarding_days", target_unit: "days",
+        baseline_value: 60, target_value: 30,
         due_on: Date.new(2026, 11, 30)
       )
       MetricValue.create!(
@@ -89,6 +90,32 @@ RSpec.describe "Initiatives API", type: :request do
     target = json["initiatives"].first["target"]
     expect(target["current_value"]).to be_nil
     expect(target["progress"]).to be_nil
+  end
+
+  # The bug this guards was invisible until the numbers were read: an initiative
+  # whose baseline is stated in one unit and whose metric is measured in another
+  # produced a progress figure that was arithmetically correct and meaningless.
+  it "refuses to compute progress when the units disagree" do
+    ApplicationRecord.as_owner do
+      Initiative.create!(
+        company: vaultline, title: "Mis-stated target", status: "in_progress",
+        target_metric_key: "net_revenue_retention", target_unit: "percent",
+        baseline_value: 98, target_value: 105, due_on: Date.new(2026, 12, 31)
+      )
+    end
+
+    get "/api/v1/initiatives", headers: auth_headers(token)
+    mismatched = json["initiatives"].find { |i| i["title"] == "Mis-stated target" }["target"]
+
+    expect(mismatched["unit_mismatch"]).to be(true)
+    expect(mismatched["progress"]).to be_nil
+    expect(mismatched["current_value"]).to be_present
+  end
+
+  it "reports no mismatch when the units agree" do
+    get "/api/v1/initiatives", headers: auth_headers(token)
+
+    expect(json["initiatives"].first["target"]["unit_mismatch"]).to be(false)
   end
 
   it "filters by status" do

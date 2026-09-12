@@ -402,24 +402,42 @@ module Synthetic
       count(:onboarding_steps, step_rows.size)
     end
 
+    # Each initiative targets a metric the rollup actually computes, with a
+    # baseline and target in that metric's own unit.
+    #
+    # The first version drew both from one range of 50 to 110 whatever the
+    # metric was, so an initiative to lift net revenue retention carried a
+    # baseline of 50 against a measured ratio of 1.027. Progress came out at
+    # 4.65, which reads as "four and a half times past target" and is noise.
+    # Two of the five also named metrics nothing computes, so their progress was
+    # permanently null.
+    INITIATIVE_TEMPLATES = [
+      { title: "Lift net revenue retention above 108%", metric: "net_revenue_retention", unit: "ratio",
+        baseline: ->(r) { (0.94 + (r.rand * 0.06)).round(4) }, target: ->(r) { (1.06 + (r.rand * 0.06)).round(4) } },
+      { title: "Cut median time to first value below 35 days", metric: "median_onboarding_days", unit: "days",
+        baseline: ->(r) { (48 + r.rand(24)).to_f }, target: ->(r) { (24 + r.rand(10)).to_f } },
+      { title: "Halve the open support backlog", metric: "open_tickets", unit: "count",
+        baseline: ->(r) { (90 + r.rand(60)).to_f }, target: ->(r) { (35 + r.rand(20)).to_f } },
+      { title: "Clear overdue invoices below EUR 100k", metric: "overdue_invoice_cents", unit: "eur_cents",
+        baseline: ->(r) { (300_000_00 + r.rand(200_000_00)).to_f }, target: ->(r) { (50_000_00 + r.rand(50_000_00)).to_f } },
+      { title: "Hold gross churn under 5%", metric: "gross_churn_rate", unit: "ratio",
+        baseline: ->(r) { (0.06 + (r.rand * 0.04)).round(4) }, target: ->(r) { (0.03 + (r.rand * 0.02)).round(4) } },
+      { title: "Build pipeline coverage to 4x", metric: "pipeline_coverage", unit: "ratio",
+        baseline: ->(r) { (2.0 + r.rand).round(4) }, target: ->(r) { (3.8 + (r.rand * 0.6)).round(4) } }
+    ].freeze
+
     def build_initiatives(company, employees, rng)
-      titles = [
-        [ "Lift net revenue retention above 105%", "net_revenue_retention" ],
-        [ "Cut time to first value to under 30 days", "median_onboarding_days" ],
-        [ "Move perpetual base onto subscription", "subscription_share" ],
-        [ "Raise gross margin by 4 points", "gross_margin" ],
-        [ "Reduce support backlog to under 40 open", "open_tickets" ]
-      ]
-      rows = titles.sample(3 + rng.rand(2), random: rng).map do |title, metric|
+      rows = INITIATIVE_TEMPLATES.sample(3 + rng.rand(2), random: rng).map do |template|
         {
           company_id: company.id,
           owner_employee_id: employees[rng.rand(employees.size)].id,
-          title: title,
+          title: template[:title],
           thesis: "Agreed at the #{company.acquired_on&.year || 2025} value creation review.",
           status: %w[in_progress in_progress at_risk done][rng.rand(4)],
-          target_metric_key: metric,
-          baseline_value: (50 + rng.rand(50)).to_f,
-          target_value: (70 + rng.rand(40)).to_f,
+          target_metric_key: template[:metric],
+          target_unit: template[:unit],
+          baseline_value: template[:baseline].call(rng),
+          target_value: template[:target].call(rng),
           due_on: today + 60 + rng.rand(300),
           created_at: Time.current, updated_at: Time.current
         }

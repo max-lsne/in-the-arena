@@ -44,15 +44,28 @@ module Api
       end
 
       def target_for(initiative, metric)
+        mismatch = unit_mismatch?(initiative, metric)
+
         {
           metric_key: initiative.target_metric_key,
           baseline_value: initiative.baseline_value&.to_s("F"),
           target_value: initiative.target_value&.to_s("F"),
+          target_unit: initiative.target_unit,
           current_value: metric&.value&.to_s("F"),
           unit: metric&.unit,
           measured_at: metric&.period_end,
-          progress: progress(initiative, metric)
+          unit_mismatch: mismatch,
+          progress: mismatch ? nil : progress(initiative, metric)
         }
+      end
+
+      # A baseline stated in one unit and a measurement taken in another produce
+      # a progress figure that is arithmetically fine and means nothing. Saying
+      # the units disagree is more useful than rendering the number.
+      def unit_mismatch?(initiative, metric)
+        return false if metric.nil? || initiative.target_unit.blank?
+
+        initiative.target_unit != metric.unit
       end
 
       # Nil rather than zero when there is nothing to measure against. Zero reads

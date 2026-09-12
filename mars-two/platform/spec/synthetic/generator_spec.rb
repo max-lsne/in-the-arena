@@ -151,6 +151,48 @@ RSpec.describe Synthetic::Generator, :seeded do
     end
   end
 
+  describe "initiatives are measurable against real metrics" do
+    before(:context) { described_class.new(usage_days: 14).run! }
+
+    it "targets only metrics the rollup actually computes" do
+      owner do
+        computable = Metrics::Rollup::METRICS.keys.map(&:to_s)
+        keys = Initiative.distinct.pluck(:target_metric_key).compact
+
+        expect(keys).to all(be_in(computable)),
+          "these initiatives name metrics nothing computes: #{(keys - computable).join(', ')}"
+      end
+    end
+
+    it "states the unit of every baseline and target" do
+      owner { expect(Initiative.where(target_unit: [ nil, "" ])).not_to exist }
+    end
+
+    # The bug: baselines were drawn from one range of 50 to 110 whatever the
+    # metric was, so a retention initiative carried a baseline of 50 against a
+    # measured ratio near 1.0, and progress came out at 4.65.
+    it "states baselines in the unit its metric is measured in" do
+      owner do
+        units = Metrics::Rollup::METRICS.transform_keys(&:to_s).transform_values(&:unit)
+
+        Initiative.find_each do |initiative|
+          expect(initiative.target_unit).to eq(units[initiative.target_metric_key]),
+            "#{initiative.title} targets #{initiative.target_metric_key} " \
+            "(#{units[initiative.target_metric_key]}) with a #{initiative.target_unit} baseline"
+        end
+      end
+    end
+
+    it "keeps ratio baselines in a plausible range for a ratio" do
+      owner do
+        Initiative.where(target_unit: "ratio").find_each do |initiative|
+          expect(initiative.baseline_value.to_f).to be_between(0, 10),
+            "#{initiative.title} has a ratio baseline of #{initiative.baseline_value}"
+        end
+      end
+    end
+  end
+
   describe "planted defects are observable in the data" do
     before(:context) { described_class.new(usage_days: 14).run! }
 

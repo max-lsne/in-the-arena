@@ -604,7 +604,8 @@ CREATE TABLE public.initiatives (
     target_value numeric(16,4),
     due_on date,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    target_unit character varying
 );
 
 ALTER TABLE ONLY public.initiatives FORCE ROW LEVEL SECURITY;
@@ -2394,6 +2395,7 @@ ALTER TABLE public.usage_daily ENABLE ROW LEVEL SECURITY;
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20260912000005'),
 ('20260912000004'),
 ('20260912000003'),
 ('20260912000002'),
