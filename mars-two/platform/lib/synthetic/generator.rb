@@ -82,6 +82,16 @@ module Synthetic
       build_onboardings(company, customers, rng)
       build_initiatives(company, employees, rng)
 
+      # Scatter the individual risk signals across the population before any are
+      # planted together.
+      #
+      # Without this, "has an overdue invoice" identified the at-risk set
+      # exactly, and a one-line query scored full recall. That is not a churn
+      # model, it is reading the answer key through a side channel. Real accounts
+      # pay late, complain, and go quiet for reasons that are not churn, and the
+      # skill is weighing the combination.
+      scatter_risk_signals(company, customers, rng)
+
       Defects.plant!(
         company: company, spec: spec, rng: rng, today: today,
         version: VERSION, seed: seed,
@@ -506,6 +516,54 @@ module Synthetic
       end
       Initiative.insert_all!(rows)
       count(:initiatives, rows.size)
+    end
+
+    # Independent draws, so a minority of customers carry two signals by chance
+    # and a handful carry all three without being at risk. That is what makes the
+    # ranking a judgement rather than a lookup.
+    def scatter_risk_signals(company, customers, rng)
+      active = customers.reject(&:churned_on)
+
+      active.each do |customer|
+        # A cohort that is loudly unhappy and renews anyway. Independent draws
+        # put all three signals on half a percent of accounts, which is not
+        # enough to make the ranking a judgement: the planted accounts saturated
+        # every counter and nothing else came close, so recall at five was a
+        # hundred percent and meant nothing. Real portfolios are full of accounts
+        # that complain, pay late, use less, and stay.
+        grumpy = rng.rand < 0.06
+        intensity = grumpy ? 2 + rng.rand(3) : 1 + rng.rand(2)
+
+        if grumpy || rng.rand < 0.12
+          Invoice.where(company_id: company.id, customer_id: customer.id)
+                 .order(period_start: :desc).limit(intensity)
+                 .update_all(status: "overdue", paid_on: nil)
+        end
+
+        (grumpy ? intensity : 1).times do |n|
+          next unless grumpy || rng.rand < 0.18
+
+          SupportTicket.create!(
+            company: company, customer: customer,
+            external_ref: "#{customer.external_ref}-N#{n}#{rng.rand(9999)}",
+            opened_at: (today - rng.rand(60)).to_time,
+            closed_at: nil, priority: %w[normal high][rng.rand(2)],
+            category: %w[billing performance data][rng.rand(3)],
+            subject: NamePools::TICKET_SUBJECTS[rng.rand(NamePools::TICKET_SUBJECTS.size)],
+            sentiment: (-0.75 + (rng.rand * 0.2)).round(3)
+          )
+          count(:support_tickets)
+        end
+
+        next unless grumpy || rng.rand < 0.22
+
+        # A dip, not a collapse. The planted accounts decline steeply and keep
+        # declining; these wobble and hold.
+        factor = grumpy ? 0.6 + (rng.rand * 0.2) : 0.7 + (rng.rand * 0.2)
+        UsageDaily.where(company_id: company.id, customer_id: customer.id)
+                  .where(on_date: (today - 30)..)
+                  .update_all(Arel.sql("value = ROUND(value * #{factor}, 2)"))
+      end
     end
 
     def count(key, n = 1) = @counts[key] += n
