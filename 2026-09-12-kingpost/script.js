@@ -44,10 +44,34 @@
   var DEFAULT = { truss: "chapel", pitch: 18, load: 108 };
   var PMIN = 12, PMAX = 62, PSTEP = 1;
   var LMIN = 20, LMAX = 160, LSTEP = 4;
-
-  var state = Object.assign({}, DEFAULT);
+  var KEY = "kingpost.truss.v1";     // where the truss, pitch and load are kept between visits
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+  function clampStep(v, a, b, step) {
+    v = Math.round((+v) / step) * step;
+    if (!isFinite(v)) return a;
+    return v < a ? a : v > b ? b : v;
+  }
+
+  // ---- persistence -----------------------------------------------------
+  function load() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      if (!TRUSSES[o.truss]) return null;
+      return {
+        truss: o.truss,
+        pitch: clampStep(o.pitch, PMIN, PMAX, PSTEP),
+        load: clampStep(o.load, LMIN, LMAX, LSTEP)
+      };
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  var state = load() || Object.assign({}, DEFAULT);
 
   // ---- the frame -------------------------------------------------------
   // Every force from the pitch and the load as a share of the design load.
@@ -481,6 +505,7 @@
     current = compute(state);
     syncLabels(current);
     curVerdict = render(current);
+    save();
   }
 
   inW.addEventListener("input", function () { state.load = parseInt(inW.value, 10); update(); });
