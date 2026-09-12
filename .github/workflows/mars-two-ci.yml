@@ -1,0 +1,122 @@
+name: mars-two CI
+
+on:
+  push:
+    paths: ['mars-two/**', '.github/workflows/mars-two-ci.yml']
+  pull_request:
+    paths: ['mars-two/**', '.github/workflows/mars-two-ci.yml']
+
+defaults:
+  run:
+    working-directory: mars-two
+
+jobs:
+  platform:
+    name: platform (Rails)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: mars
+          POSTGRES_PASSWORD: mars
+          POSTGRES_DB: mars_two_test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready --health-interval 10s
+          --health-timeout 5s --health-retries 5
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: postgres://mars:mars@localhost:5432/mars_two_test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.6'
+          bundler-cache: true
+          working-directory: mars-two/platform
+      - name: Lint
+        run: cd platform && bundle exec rubocop
+      - name: Migrate
+        run: cd platform && bin/rails db:test:prepare
+      - name: Spec
+        run: cd platform && bundle exec rspec
+
+  intelligence:
+    name: intelligence (Python)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: mars
+          POSTGRES_PASSWORD: mars
+          POSTGRES_DB: mars_two_test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready --health-interval 10s
+          --health-timeout 5s --health-retries 5
+    env:
+      DATABASE_URL: postgres://mars:mars@localhost:5432/mars_two_test
+      MARS_LLM_MODE: replay
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - name: Sync
+        run: cd intelligence && uv sync --all-extras
+      - name: Lint
+        run: cd intelligence && uv run ruff check . && uv run ruff format --check .
+      - name: Test
+        run: cd intelligence && uv run pytest -q
+
+  web:
+    name: web (TypeScript)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 10 }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+          cache-dependency-path: mars-two/web/pnpm-lock.yaml
+      - run: cd web && pnpm install --frozen-lockfile
+      - run: cd web && pnpm exec tsc --noEmit
+      - run: cd web && pnpm lint
+      - run: cd web && pnpm test
+
+  evals:
+    name: evals (gate)
+    runs-on: ubuntu-latest
+    needs: [platform, intelligence]
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: mars
+          POSTGRES_PASSWORD: mars
+          POSTGRES_DB: mars_two_test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready --health-interval 10s
+          --health-timeout 5s --health-retries 5
+    env:
+      DATABASE_URL: postgres://mars:mars@localhost:5432/mars_two_test
+      MARS_LLM_MODE: replay
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.6'
+          bundler-cache: true
+          working-directory: mars-two/platform
+      - uses: astral-sh/setup-uv@v5
+      - name: Seed synthetic data
+        run: cd platform && bin/rails db:test:prepare && bin/rails synthetic:seed
+        env:
+          RAILS_ENV: test
+      - name: Run evals against committed baselines
+        run: cd intelligence && uv sync --all-extras && uv run python -m evals.run --all --compare-baseline
