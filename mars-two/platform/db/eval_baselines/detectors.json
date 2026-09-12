@@ -1,0 +1,55 @@
+{
+  "generator_version": "1",
+  "seed": 20260912,
+  "as_of": "2026-09-12",
+  "detectors": {
+    "revenue_leakage": {
+      "planted": 32,
+      "flagged": 32,
+      "true_positives": 32,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "recall": 1.0,
+      "precision": 1.0,
+      "amount_exact": 32,
+      "cause_exact": 32,
+      "amount_accuracy": 1.0,
+      "cause_accuracy": 1.0
+    },
+    "crm_hygiene": {
+      "planted": 37,
+      "flagged": 37,
+      "true_positives": 37,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "recall": 1.0,
+      "precision": 1.0,
+      "kind_exact": 37,
+      "kind_accuracy": 1.0,
+      "by_kind": {
+        "amount_contradicts_contract": 7,
+        "close_date_in_past": 16,
+        "duplicate_account": 8,
+        "owner_departed": 6
+      }
+    },
+    "onboarding_stalls": {
+      "planted": 14,
+      "flagged": 14,
+      "true_positives": 14,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "recall": 1.0,
+      "precision": 1.0,
+      "step_exact": 14,
+      "step_accuracy": 1.0
+    },
+    "churn_risk": {
+      "planted": 40,
+      "recall_at_k": 1.0,
+      "k": 5,
+      "precision_at_k": 0.5,
+      "precision_k": 10
+    }
+  }
+}

@@ -6,7 +6,7 @@ on:
   pull_request:
     paths: [ 'mars-two/**', '.github/workflows/mars-two-ci.yml' ]
 
-# The web and eval jobs arrive in the commits that create those directories.
+# The web job arrives in the commit that creates that directory.
 #
 # A job that passes because it found nothing to run is worse than a missing job:
 # it reports a green check that means nothing, which is the same failure mode
@@ -108,3 +108,66 @@ jobs:
 
       - name: Test
         run: uv run pytest -q
+
+  evals:
+    name: evals (gate)
+    runs-on: ubuntu-latest
+    needs: [ platform ]
+
+    # Scores every model-free detector against the planted answer key and fails
+    # if any of them got worse than the committed baseline. A number moving is
+    # not news; a number moving the wrong way is.
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports: [ '5432:5432' ]
+        options: >-
+          --health-cmd pg_isready --health-interval 10s
+          --health-timeout 5s --health-retries 5
+
+    env:
+      RAILS_ENV: development
+      PGHOST: localhost
+      PGPASSWORD: postgres
+      MARS_DB_HOST: localhost
+      MARS_DB_OWNER_USER: mars
+      MARS_DB_OWNER_PASSWORD: mars
+      MARS_DB_APP_USER: mars_app
+      MARS_DB_APP_PASSWORD: mars_app
+
+    defaults:
+      run:
+        working-directory: mars-two/platform
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pgvector into template1
+        run: psql -U postgres -d template1 -c "CREATE EXTENSION IF NOT EXISTS vector;"
+
+      - name: Create roles
+        run: psql -U postgres -d postgres -f db/setup_roles.sql
+
+      - name: Create the database owned by the owner role
+        run: createdb -U postgres -O mars mars_two_development
+
+      - name: Grant the runtime role, and revoke the eval answer key
+        run: psql -U postgres -d mars_two_development -f db/setup_roles.sql
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.6'
+          bundler-cache: true
+          working-directory: mars-two/platform
+
+      - name: Migrate
+        run: bin/rails db:migrate
+
+      - name: Seed the synthetic portfolio
+        run: bin/rails synthetic:seed
+
+      - name: Score the detectors against the committed baseline
+        run: bin/rails evals:detectors

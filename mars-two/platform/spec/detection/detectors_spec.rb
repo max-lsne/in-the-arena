@@ -17,24 +17,26 @@ RSpec.describe "Detectors", :seeded do
   describe Detection::CrmHygiene do
     let(:findings) { owner { described_class.call } }
 
+    # Keyed on table and id together, because these findings span accounts and
+    # opportunities and the ids collide between them.
     it "finds every planted defect" do
-      found = findings.map(&:subject_id).to_set
-      missed = planted("crm_hygiene").reject { |g| found.include?(g.subject_id) }
+      found = findings.map { |f| [ f.subject_table, f.subject_id ] }.to_set
+      missed = planted("crm_hygiene").reject { |g| found.include?([ g.subject_table, g.subject_id ]) }
 
       expect(missed.map { |g| g.expected["kind"] }).to be_empty
     end
 
     it "flags nothing that was not planted" do
-      ids = planted("crm_hygiene").map(&:subject_id).to_set
+      keys = planted("crm_hygiene").map { |g| [ g.subject_table, g.subject_id ] }.to_set
 
-      expect(findings.reject { |f| ids.include?(f.subject_id) }).to be_empty
+      expect(findings.reject { |f| keys.include?([ f.subject_table, f.subject_id ]) }).to be_empty
     end
 
     it "names the kind that was planted" do
-      by_id = planted("crm_hygiene").index_by(&:subject_id)
+      by_key = planted("crm_hygiene").index_by { |g| [ g.subject_table, g.subject_id ] }
 
       findings.each do |finding|
-        expect(finding.kind).to eq(by_id[finding.subject_id].expected["kind"])
+        expect(finding.kind).to eq(by_key[[ finding.subject_table, finding.subject_id ]].expected["kind"])
       end
     end
 
