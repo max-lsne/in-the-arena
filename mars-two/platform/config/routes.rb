@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       resources :initiatives, only: %i[index]
 
       post "retrieval/search", to: "retrieval#search"
+
+      get "reconciliation/contract_billing", to: "reconciliation#contract_billing"
     end
   end
 

@@ -119,3 +119,27 @@ def list_initiatives(params: ListInitiativesParams, ctx: ToolContext) -> dict:
     return ctx.platform.get(
         "/api/v1/initiatives", {"company": params.company, "status": params.status}
     )
+
+
+class ContractBillingParams(BaseModel):
+    company: str | None = Field(
+        default=None, description="Company slug. Omit for the whole portfolio."
+    )
+    limit: int = Field(default=20, ge=1, le=50, description="Maximum findings to return.")
+
+
+@registry.register(
+    "contract_billing_reconciliation",
+    "List contracts whose invoices disagree with their own terms. The comparison "
+    "is already done: each finding states the shortfall in euro cents, the cause, "
+    "and the invoices that evidence it. Use these figures as given and do not "
+    "recompute them. To explain a finding, quote the clause that was breached by "
+    "searching that contract with search_documents and its contract reference.",
+    ContractBillingParams,
+    path="/api/v1/reconciliation/contract_billing",
+)
+def contract_billing_reconciliation(params: ContractBillingParams, ctx: ToolContext) -> dict:
+    return ctx.platform.get(
+        "/api/v1/reconciliation/contract_billing",
+        {"company": params.company, "limit": params.limit},
+    )

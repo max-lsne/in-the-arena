@@ -10,10 +10,15 @@ module Synthetic
   # one. Graders check precision and recall against these rows, and check stated
   # figures to within EUR 1.
   module Defects
-    # A fixed rate, so the currency-mismatch defect has an exact expected value.
-    # Real reconciliation would read a rate table; the lesson here is that the
-    # expected answer must be computable, not that FX is simple.
-    GBP_TO_EUR = 1.17
+    # The same rate table reconciliation uses. Planting a defect against one set
+    # of rates and checking it against another would make the grader wrong in a
+    # way that looks like the agent being wrong.
+    # A currency worth less than the contract's, so billing at face value
+    # under-collects. The first version used GBP, which is worth more than the
+    # euro, so the planted "shortfall" was arithmetically an overcharge: the
+    # supplier collected 17% too much and the defect was recorded as a loss. The
+    # sign of a leak is not a detail.
+    MISMATCH_CURRENCY = "USD".freeze
 
     REVENUE_LEAKS_PER_COMPANY = 4
     CRM_DEFECTS_PER_COMPANY = 5
@@ -117,7 +122,9 @@ module Synthetic
                                  .where(period_start: grew_on..).count
         return false if unbilled_months.zero?
 
-        subscription.update_columns(seats: old_seats + extra_seats)
+        # The date is recorded so reconciliation can derive the unbilled months
+        # from the record rather than from knowing how the data was made.
+        subscription.update_columns(seats: old_seats + extra_seats, seats_changed_on: grew_on)
 
         record(company, "revenue_leakage", contract, {
           kind: "seat_growth_unbilled",
@@ -165,14 +172,19 @@ module Synthetic
                           .where(period_start: (today - 200)..).order(:period_start).limit(6).to_a
         return false if affected.empty?
 
-        Invoice.where(id: affected.map(&:id)).update_all(currency: "GBP")
-        shortfall = affected.sum { |i| ((i.amount_cents * GBP_TO_EUR) - i.amount_cents).round }
+        Invoice.where(id: affected.map(&:id)).update_all(currency: MISMATCH_CURRENCY)
+        # Owed N euros, invoiced N dollars. What arrives is worth the dollar
+        # rate, so the gap is what the euro amount would have been minus what
+        # the dollar amount is actually worth.
+        shortfall = affected.sum do |i|
+          i.amount_cents - Mars::Fx.to_eur_cents(i.amount_cents, MISMATCH_CURRENCY)
+        end
 
         record(company, "revenue_leakage", contract, {
           kind: "currency_mismatch",
           contract_reference: contract.reference,
-          contract_currency: contract.currency, invoiced_currency: "GBP",
-          rate_used: GBP_TO_EUR,
+          contract_currency: contract.currency, invoiced_currency: MISMATCH_CURRENCY,
+          rate_used: Mars::Fx.rate(MISMATCH_CURRENCY),
           affected_invoice_count: affected.size,
           shortfall_cents: shortfall
         })

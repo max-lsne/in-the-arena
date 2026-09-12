@@ -851,7 +851,8 @@ CREATE TABLE public.subscriptions (
     ends_on date,
     status character varying DEFAULT 'active'::character varying NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    seats_changed_on date
 );
 
 ALTER TABLE ONLY public.subscriptions FORCE ROW LEVEL SECURITY;
@@ -2395,6 +2396,7 @@ ALTER TABLE public.usage_daily ENABLE ROW LEVEL SECURITY;
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20260912000006'),
 ('20260912000005'),
 ('20260912000004'),
 ('20260912000003'),
