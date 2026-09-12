@@ -5,7 +5,7 @@
 # working, and so a grader can check the stated figure against the source rather
 # than against a model's recollection of it.
 class MetricValue < TenantRecord
-  UNITS = %w[eur_cents ratio percent count days].freeze
+  UNITS = %w[eur_cents ratio percent multiple count days].freeze
   GRAINS = %w[month quarter].freeze
 
   validates :metric_key, :period_start, :period_end, :formula, presence: true

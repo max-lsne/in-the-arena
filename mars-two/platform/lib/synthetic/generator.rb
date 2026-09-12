@@ -494,7 +494,7 @@ module Synthetic
         baseline: ->(r) { (300_000_00 + r.rand(200_000_00)).to_f }, target: ->(r) { (50_000_00 + r.rand(50_000_00)).to_f } },
       { title: "Hold gross churn under 5%", metric: "gross_churn_rate", unit: "ratio",
         baseline: ->(r) { (0.06 + (r.rand * 0.04)).round(4) }, target: ->(r) { (0.03 + (r.rand * 0.02)).round(4) } },
-      { title: "Build pipeline coverage to 4x", metric: "pipeline_coverage", unit: "ratio",
+      { title: "Build pipeline coverage to 4x", metric: "pipeline_coverage", unit: "multiple",
         baseline: ->(r) { (2.0 + r.rand).round(4) }, target: ->(r) { (3.8 + (r.rand * 0.6)).round(4) } }
     ].freeze
 

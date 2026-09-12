@@ -121,7 +121,10 @@ module Metrics
 
       pipeline_coverage: Metric.new(
         zero_when_empty: false,
-        unit: "ratio",
+        # A multiple, not a percentage. Both are dimensionless and they read
+        # completely differently: 3.7x coverage rendered as "370.8%" is the same
+        # class of error as a bare number whose unit has to be guessed.
+        unit: "multiple",
         formula: "open pipeline closing within 90 days / one quarter of current run rate",
         sql: <<~SQL
           SELECT

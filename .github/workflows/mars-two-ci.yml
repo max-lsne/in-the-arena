@@ -6,8 +6,6 @@ on:
   pull_request:
     paths: [ 'mars-two/**', '.github/workflows/mars-two-ci.yml' ]
 
-# The web job arrives in the commit that creates that directory.
-#
 # A job that passes because it found nothing to run is worse than a missing job:
 # it reports a green check that means nothing, which is the same failure mode
 # docs/adr/0003-evaluation-strategy.md exists to avoid.
@@ -171,3 +169,31 @@ jobs:
 
       - name: Score the detectors against the committed baseline
         run: bin/rails evals:detectors
+
+  web:
+    name: web (TypeScript)
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: mars-two/web
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with: { version: 10 }
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+          cache-dependency-path: mars-two/web/pnpm-lock.yaml
+
+      - run: pnpm install --frozen-lockfile
+      - name: Typecheck
+        run: pnpm exec tsc --noEmit
+      - name: Lint
+        run: pnpm lint
+      - name: Test
+        run: pnpm test

@@ -1,0 +1,258 @@
+.page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding-block: clamp(24px, 5vh, 56px);
+  padding-inline: var(--gutter);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* --- the band: total, concentration and navigation in one object ---------- */
+
+.band {
+  margin-bottom: clamp(24px, 4vh, 44px);
+}
+
+.band__total {
+  /* Expanded width is the display treatment. One family, hierarchy by width. */
+  font-variation-settings: "wdth" 125;
+  font-weight: 600;
+  font-size: clamp(1.9rem, 5.5vw, 3.1rem);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin: 0 0 14px;
+  display: flex;
+  align-items: baseline;
+  gap: 0.7em;
+  flex-wrap: wrap;
+}
+
+.band__caption {
+  font-variation-settings: "wdth" 87;
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  letter-spacing: 0;
+}
+
+.band__track {
+  display: flex;
+  width: 100%;
+  height: 34px;
+  border-radius: 2px;
+  overflow: hidden;
+  background: var(--rule);
+}
+
+.band__segment {
+  border: 0;
+  padding: 0 6px;
+  cursor: pointer;
+  color: #fff;
+  text-align: left;
+  font: inherit;
+  font-size: 0.68rem;
+  font-variation-settings: "wdth" 75;
+  overflow: hidden;
+  white-space: nowrap;
+  /* The one place a transition is allowed: it answers a click. */
+  transition: filter 120ms ease-out, opacity 120ms ease-out;
+}
+
+.band__segment:hover {
+  filter: brightness(1.12);
+}
+
+.band__track:has(.band__segment[data-selected]) .band__segment:not([data-selected]) {
+  opacity: 0.32;
+}
+
+.band__label {
+  opacity: 0.92;
+}
+
+@media (max-width: 640px) {
+  .band__label {
+    display: none;
+  }
+  .band__track {
+    height: 22px;
+  }
+}
+
+/* --- the register -------------------------------------------------------- */
+
+.register {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  font-size: 0.86rem;
+}
+
+.register th,
+.register td {
+  text-align: right;
+  padding: 11px 12px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: middle;
+}
+
+.register thead th {
+  /* Condensed, because horizontal room is the scarce dimension in a table of
+     numbers and narrowing a header is a solution rather than a style. */
+  font-variation-settings: "wdth" 75;
+  font-weight: 500;
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  text-transform: none;
+  letter-spacing: 0.01em;
+  border-bottom-color: var(--ink-soft);
+}
+
+/* `.register th` is a class plus an element, which outranks a bare class, so
+   this has to match at least that specificity or the column silently renders
+   right-aligned. CSS specificity is the commonest way a layout rule loses
+   without any error. */
+.register th.register__name,
+.register td.register__name {
+  text-align: left;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.register__swatch {
+  display: inline-block;
+  width: 3px;
+  height: 1.05em;
+  margin-right: 9px;
+  vertical-align: -0.16em;
+  border-radius: 1px;
+}
+
+.register__definition {
+  display: block;
+  margin-left: 12px;
+  font-variation-settings: "wdth" 87;
+  font-weight: 400;
+  font-size: 0.68rem;
+  color: var(--ink-soft);
+}
+
+.register__value {
+  white-space: nowrap;
+}
+
+.register__number {
+  margin-left: 8px;
+}
+
+/* Steady state carries no colour. Only a value outside its band is tinted, and
+   the sparkline draws it outside the band as well, so this is never the only
+   signal. */
+.register__value[data-breach="below"] .register__number {
+  color: var(--below);
+}
+
+.register__value[data-breach="above"] .register__number {
+  color: var(--above);
+}
+
+.register__value--absent {
+  color: var(--ink-soft);
+}
+
+/* --- sparkline ----------------------------------------------------------- */
+
+.spark {
+  vertical-align: -0.35em;
+}
+
+.spark--empty {
+  display: inline-block;
+  width: 64px;
+}
+
+.spark__band {
+  fill: var(--rule);
+  opacity: 0.55;
+}
+
+.spark__line {
+  fill: none;
+  stroke: var(--ink-soft);
+  stroke-width: 1.1;
+  stroke-linejoin: round;
+}
+
+.spark__point {
+  fill: var(--ink);
+}
+
+.spark__point[data-breach="below"] {
+  fill: var(--below);
+}
+
+.spark__point[data-breach="above"] {
+  fill: var(--above);
+}
+
+/* --- notices ------------------------------------------------------------- */
+
+.notice {
+  max-width: var(--measure);
+  padding: 14px 16px;
+  background: var(--surface);
+  border-left: 3px solid var(--ink-soft);
+  line-height: 1.55;
+}
+
+.notice--error {
+  border-left-color: var(--below);
+}
+
+/* --- narrow screens ------------------------------------------------------ */
+
+@media (max-width: 720px) {
+  .register,
+  .register thead,
+  .register tbody,
+  .register tr,
+  .register th,
+  .register td {
+    display: block;
+  }
+
+  .register thead {
+    display: none;
+  }
+
+  .register tr {
+    margin-bottom: 14px;
+    border: 1px solid var(--rule);
+  }
+
+  .register td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* The column header comes back as a row label, because the table header is
+     gone and a bare number is not readable without it. */
+  .register td::before {
+    content: attr(data-label);
+    font-variation-settings: "wdth" 87;
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+  }
+}
