@@ -519,7 +519,8 @@
     if (sayTimer) clearTimeout(sayTimer);
     sayTimer = setTimeout(function () {
       var kR = Math.round(r.Fr / 1000), kT = Math.round(r.Ft / 1000), kP = Math.round(r.Fk / 1000);
-      var head = "A " + r.T.roofNote + " in " + r.T.timber + ", pitched at " + state.pitch
+      var roof = r.T.roofNote.charAt(0).toUpperCase() + r.T.roofNote.slice(1);
+      var head = roof + " in " + r.T.timber + ", pitched at " + state.pitch
         + " degrees and loaded to " + state.load + " percent of its design load. ";
       var forces = "The rafters carry " + kR + " of " + Math.round(r.capR / 1000)
         + " kilonewtons in compression, the tie " + kT + " of " + Math.round(r.capT / 1000)
@@ -569,6 +570,31 @@
       if (Math.abs(state.pitch - target) >= 1) setTimeout(step, 26);
     })();
   }
+
+  // nudge a slider-backed value by a step, from the keyboard
+  function nudge(field, delta, lo, hi, step, input) {
+    state[field] = Math.round(clamp(state[field] + delta, lo, hi) / step) * step;
+    input.value = state[field];
+    update();
+  }
+
+  // keyboard: work the bench without reaching for the mouse
+  var TRUSS_KEYS = { "1": "cottage", "2": "barn", "3": "chapel", "4": "loft" };
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    if (el && el.tagName === "INPUT" && el.type === "range") return;   // let a focused slider keep its arrows
+    var k = e.key;
+    if (k === "f" || k === "F") { $("find").click(); }
+    else if (k === "r" || k === "R") { $("reset").click(); }
+    else if (TRUSS_KEYS[k]) { state.truss = TRUSS_KEYS[k]; update(); }
+    else if (k === "[") { nudge("pitch", -2, PMIN, PMAX, PSTEP, inP); }       // flatten the roof
+    else if (k === "]") { nudge("pitch", 2, PMIN, PMAX, PSTEP, inP); }        // steepen it
+    else if (k === "-" || k === "_") { nudge("load", -LSTEP, LMIN, LMAX, LSTEP, inW); } // ease the load
+    else if (k === "=" || k === "+") { nudge("load", LSTEP, LMIN, LMAX, LSTEP, inW); }  // add load
+    else return;
+    e.preventDefault();
+  });
 
   // follow a live change to the motion setting
   if (reduceMQ && reduceMQ.addEventListener) {
