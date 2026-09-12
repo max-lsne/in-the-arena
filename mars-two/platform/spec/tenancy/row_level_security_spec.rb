@@ -19,12 +19,14 @@ RSpec.describe "Row-level security coverage", type: :model do
     grants
   ].freeze
 
+  # Every table is tenant-scoped unless explicitly exempted. Inferring it from
+  # the presence of a company_id column was the first version of this spec and
+  # it was too weak: agent_runs carries tenant data in its trace column and
+  # scopes itself by an array of company ids, so the inference missed it. A
+  # deny-by-default list catches the next table shaped like that one.
   def tenant_scoped_tables
     ApplicationRecord.as_owner do
-      conn = ApplicationRecord.connection
-      conn.tables.reject { |t| EXEMPT.include?(t) }.select do |table|
-        conn.columns(table).any? { |c| c.name == "company_id" } || table == "companies"
-      end
+      ApplicationRecord.connection.tables.reject { |t| EXEMPT.include?(t) }
     end
   end
 

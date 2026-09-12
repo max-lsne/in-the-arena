@@ -40,5 +40,12 @@ module Platform
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # Row-level security policies, the mars_company_ids() function and the
+    # REVOKE on ground_truths are all raw SQL, and schema.rb cannot represent
+    # any of them. A test database loaded from schema.rb would therefore have no
+    # isolation at all, and every isolation spec would pass while asserting
+    # nothing. structure.sql keeps them.
+    config.active_record.schema_format = :sql
   end
 end

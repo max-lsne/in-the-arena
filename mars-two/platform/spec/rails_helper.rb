@@ -14,7 +14,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
-  config.fixture_paths = [Rails.root.join("spec/fixtures")]
+  config.fixture_paths = [ Rails.root.join("spec/fixtures") ]
 
   # Transactional fixtures are off deliberately. Tests write through the owner
   # connection and read through the application connection, and those are two
