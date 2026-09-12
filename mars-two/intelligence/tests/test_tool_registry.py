@@ -82,7 +82,9 @@ def test_out_of_range_arguments_are_rejected_before_the_handler_runs(registry):
 
 
 def test_unexpected_arguments_are_rejected(registry):
-    result = registry.execute("echo", {"company": "vaultline", "drop_table": "users"}, ToolContext())
+    result = registry.execute(
+        "echo", {"company": "vaultline", "drop_table": "users"}, ToolContext()
+    )
 
     assert result.is_error is True
 
@@ -119,7 +121,10 @@ def test_no_tool_reaches_the_eval_answer_key():
     from app.tools import catalogue
 
     surface = " ".join(
-        [d["name"] + " " + d["description"] + str(d["input_schema"]) for d in catalogue.registry.definitions()]
+        [
+            d["name"] + " " + d["description"] + str(d["input_schema"])
+            for d in catalogue.registry.definitions()
+        ]
     ).lower()
 
     assert "ground_truth" not in surface
