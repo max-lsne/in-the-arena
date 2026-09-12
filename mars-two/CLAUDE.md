@@ -9,9 +9,9 @@ shaped this way.
 ```bash
 make setup            # deps, databases, migrations, seed
 make test             # every suite: rspec, pytest, vitest, tsc, lint
-make evals            # eval suite only, against recorded fixtures
+make evals            # score the model-free detectors, refresh the case ledger
 make dev              # all three services
-make fixtures         # re-record LLM fixtures (requires ANTHROPIC_API_KEY)
+make fixtures         # re-record LLM fixtures (requires ANTHROPIC_API_KEY, lands with the agents)
 
 cd platform    && bundle exec rspec spec/path_spec.rb     # one Ruby spec
 cd intelligence && uv run pytest tests/path_test.py -k name  # one Python test

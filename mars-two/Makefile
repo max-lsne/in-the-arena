@@ -35,11 +35,15 @@ lint: ## Run every linter
 	cd intelligence && uv run ruff check . && uv run ruff format --check .
 	cd web && pnpm lint
 
-evals: ## Run the eval suite against recorded fixtures
-	cd intelligence && uv run python -m evals.run --all
+evals: ## Score the model-free detectors and refresh the per-case ledger
+	cd platform && bin/rails evals:detectors
+	cd platform && bin/rails evals:cases
 
 fixtures: ## Re-record LLM fixtures. Requires ANTHROPIC_API_KEY
-	cd intelligence && MARS_LLM_MODE=record uv run python -m evals.run --all
+	@# Deliberately loud rather than silently doing nothing. No agent records a
+	@# fixture yet, so this target lands with them.
+	@echo "No agent records fixtures yet. This target lands with the agents."
+	@exit 1
 
 db-reset: ## Drop, recreate, migrate and reseed
 	cd platform && bin/rails db:drop db:create db:migrate && bin/rails synthetic:seed
