@@ -256,3 +256,403 @@
     color: var(--ink-soft);
   }
 }
+
+/* --- chrome: two views, no shell ----------------------------------------- */
+
+.chrome {
+  display: flex;
+  gap: 20px;
+  margin-bottom: clamp(14px, 2vh, 22px);
+  font-variation-settings: "wdth" 87;
+  font-size: 0.76rem;
+}
+
+.chrome a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
+}
+
+.chrome a[aria-current="page"] {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+/* --- needs a decision ---------------------------------------------------- */
+
+.decisions {
+  margin-top: clamp(22px, 4vh, 40px);
+}
+
+.decisions h2,
+.evals h2 {
+  font-variation-settings: "wdth" 87;
+  font-weight: 500;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  margin: 0 0 10px;
+}
+
+.decisions ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.decision {
+  display: grid;
+  grid-template-columns: 12rem 1fr auto 3.5rem;
+  gap: 14px;
+  align-items: baseline;
+  padding: 12px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--rule);
+  color: inherit;
+  text-decoration: none;
+  font-size: 0.86rem;
+}
+
+.decision__company {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.decision__what {
+  color: var(--ink-soft);
+}
+
+.decision__amount {
+  text-align: right;
+}
+
+.decision__open {
+  text-align: right;
+  font-variation-settings: "wdth" 87;
+  font-size: 0.72rem;
+  color: var(--focus);
+}
+
+.decision:hover .decision__open {
+  text-decoration: underline;
+}
+
+/* --- artefact: the claim on the left, its evidence on the right ---------- */
+
+.artefact__head {
+  margin-bottom: 16px;
+}
+
+.artefact h2 {
+  font-variation-settings: "wdth" 112;
+  font-weight: 600;
+  font-size: 1.15rem;
+  margin: 0 0 8px;
+}
+
+.artefact__lede {
+  max-width: var(--measure);
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.artefact__body {
+  display: grid;
+  /* Evidence is a column, not a disclosure. An artefact whose evidence is
+     hidden gets trusted without being checked. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--ink-soft);
+}
+
+.claims {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-right: 1px solid var(--rule);
+}
+
+.claim {
+  display: grid;
+  grid-template-columns: 7rem 1fr auto;
+  gap: 12px;
+  align-items: baseline;
+  width: 100%;
+  padding: 13px 16px 13px 0;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  border-left: 3px solid transparent;
+  padding-left: 13px;
+  font: inherit;
+  font-size: 0.86rem;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+}
+
+.claim[aria-pressed="true"] {
+  border-left-color: var(--ink);
+  background: var(--surface);
+}
+
+.claim__ref {
+  font-weight: 500;
+}
+
+.claim__cause {
+  color: var(--ink-soft);
+  font-variation-settings: "wdth" 87;
+}
+
+.claim__amount {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.evidence {
+  padding: 13px 0 13px 20px;
+}
+
+.evidence h3 {
+  font-variation-settings: "wdth" 87;
+  font-weight: 500;
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  margin: 0 0 12px;
+}
+
+.evidence__block {
+  margin-bottom: 20px;
+}
+
+.evidence__cite {
+  margin: 0 0 6px;
+  font-variation-settings: "wdth" 87;
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+}
+
+.evidence__quote {
+  margin: 0;
+  padding: 10px 14px;
+  background: var(--surface);
+  border-left: 2px solid var(--rule);
+  font-size: 0.84rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  max-width: var(--measure);
+}
+
+.evidence__quiet {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  max-width: var(--measure);
+  line-height: 1.55;
+}
+
+.evidence__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+}
+
+.evidence__table th,
+.evidence__table td {
+  text-align: right;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--rule);
+  white-space: nowrap;
+}
+
+.evidence__table th:first-child,
+.evidence__table td:first-child,
+.evidence__table th:nth-child(2),
+.evidence__table td:nth-child(2) {
+  text-align: left;
+}
+
+.evidence__table thead th {
+  font-variation-settings: "wdth" 75;
+  font-weight: 500;
+  color: var(--ink-soft);
+  border-bottom-color: var(--ink-soft);
+}
+
+.evidence__currency {
+  color: var(--below);
+  font-variation-settings: "wdth" 87;
+}
+
+.evidence__provenance {
+  margin: 0;
+  font-size: 0.72rem;
+  font-variation-settings: "wdth" 87;
+  color: var(--ink-soft);
+  max-width: var(--measure);
+  line-height: 1.55;
+}
+
+/* --- error analysis ------------------------------------------------------ */
+
+.evals__head {
+  margin-bottom: 14px;
+}
+
+.evals__meta {
+  margin-left: 12px;
+  font-variation-settings: "wdth" 87;
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+.evals__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 10px;
+  font-variation-settings: "wdth" 87;
+  font-size: 0.76rem;
+}
+
+.evals__filters a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+}
+
+.evals__filters a[aria-current="page"] {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+.evals__counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+/* A match and an unplanted rank are both steady state and carry no colour.
+   Only a row that needs reading is tinted. */
+.evals__count[data-verdict="match"],
+.evals__count[data-verdict="unplanted"] {
+  color: var(--ink-soft);
+}
+
+.evals__verdict {
+  max-width: var(--measure);
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  background: var(--surface);
+  border-left: 3px solid var(--above);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.cases {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  font-size: 0.82rem;
+}
+
+.cases th,
+.cases td {
+  text-align: left;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: baseline;
+}
+
+.cases thead th {
+  font-variation-settings: "wdth" 75;
+  font-weight: 500;
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  border-bottom-color: var(--ink-soft);
+}
+
+.cases__subject {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.cases__detector {
+  color: var(--ink-soft);
+  font-variation-settings: "wdth" 87;
+}
+
+/* A match is the steady state and carries no colour. Only a row that needs
+   reading is tinted, and the verdict word says which kind of wrong it is, so
+   colour is never the only signal. */
+.verdict {
+  font-variation-settings: "wdth" 87;
+  font-size: 0.74rem;
+  color: var(--ink-soft);
+}
+
+.cases tr[data-verdict="miss"] .verdict,
+.evals__count[data-verdict="miss"] {
+  color: var(--below);
+}
+
+.cases tr[data-verdict="false_positive"] .verdict,
+.evals__count[data-verdict="false_positive"] {
+  color: var(--above);
+}
+
+.cases tr:not([data-verdict="match"]):not([data-verdict="unplanted"]) .cases__subject {
+  box-shadow: inset 3px 0 0 var(--ink);
+}
+
+/* --- narrow screens, the artefact and the ledger ------------------------- */
+
+@media (max-width: 860px) {
+  .artefact__body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .claims {
+    border-right: 0;
+  }
+
+  .evidence {
+    padding-left: 0;
+    border-top: 1px solid var(--ink-soft);
+  }
+}
+
+@media (max-width: 720px) {
+  .decision {
+    grid-template-columns: 1fr auto;
+  }
+
+  .decision__what {
+    grid-column: 1 / -1;
+  }
+
+  .claim {
+    grid-template-columns: 1fr auto;
+  }
+
+  .claim__cause {
+    grid-column: 1 / -1;
+  }
+
+  .cases {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+/* A table of five money columns does not fit a 400px screen. It gets its own
+   scroller so the page body never scrolls sideways. */
+.evidence__scroll {
+  overflow-x: auto;
+}

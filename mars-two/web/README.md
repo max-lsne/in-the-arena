@@ -7,8 +7,14 @@ records what it cost to follow.
 
 ## What is built
 
-The portfolio register and the ARR band. The agent artefact view and the error
-analysis view from the brief are not built yet.
+All three views in the brief: the portfolio register with the ARR band, the
+agent artefact view, and the error analysis view. The artefact view shows the
+deterministic half of the reconciliation agent, which is every figure on it; the
+narrative half arrives when the agents do.
+
+Routing is the URL hash and twenty lines, no dependency. A selected company and
+an open artefact are both things an operator sends to someone else, and held in
+component state they are not addressable.
 
 ## Tradeoff taken
 
@@ -42,12 +48,31 @@ a test for exactly that string.
 reading names. Sorting by a metric would move rows under the cursor on every
 refresh.
 
+**Evidence is a column, not a disclosure.** An artefact whose evidence is hidden
+gets trusted without being checked, so the clause and the invoices sit beside the
+figures. When retrieval finds no clause, the column says so; an empty evidence
+column reads as "no evidence needed".
+
+**A ranking's unplanted rows are not failures.** The error analysis view sorts
+failures to the top. Scoring an unplanted account at rank seven as a false
+positive put forty non-failures above the real ones, in the one view that exists
+to surface the real ones. They are `unplanted` now, and they carry no colour.
+
+**A clean ledger says so.** A reader who has to scan 163 rows to conclude that
+none of them is wrong will not conclude it.
+
 ## A specificity trap worth knowing
 
 `.register th` is a class plus an element and outranks the bare class
 `.register__name`, so the name column silently rendered right-aligned with no
 error anywhere. The fix is `th.register__name`, and a test asserts the selector
 keeps its specificity.
+
+## Known limitation
+
+Archivo loads from Google Fonts at runtime. Where that is blocked the whole type
+system falls back, and width-axis hierarchy is the first thing lost. Self-hosting
+the variable font is the fix and is not done.
 
 ## Running it
 

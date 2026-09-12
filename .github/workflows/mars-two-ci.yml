@@ -170,6 +170,14 @@ jobs:
       - name: Score the detectors against the committed baseline
         run: bin/rails evals:detectors
 
+      # The ledger the error analysis view reads is a committed artefact. A
+      # detector change that nobody re-recorded leaves the view showing last
+      # week's cases, with nothing to say that it is.
+      - name: Fail if the committed case ledger is stale
+        run: |
+          bin/rails evals:cases
+          git diff --exit-code -- db/eval_baselines/cases.json
+
   web:
     name: web (TypeScript)
     runs-on: ubuntu-latest

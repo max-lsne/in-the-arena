@@ -46,3 +46,58 @@ export function formatEuros(cents: number): string {
 export function share(part: number, whole: number): number {
   return whole === 0 ? 0 : part / whole;
 }
+
+/** Exact euros, for an artefact.
+ *
+ * The register rounds to €41k because a column of rounded figures is readable
+ * and the exact digits are noise there. An artefact is the opposite: it is the
+ * document someone forwards to a finance team, and "about €41k" is not a number
+ * anyone can invoice against.
+ */
+export function formatEurosExact(cents: number): string {
+  return `€${(cents / 100).toLocaleString("en-GB", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`;
+}
+
+/** Machine names, as a person reads them.
+ *
+ * The platform names causes in snake case because they are keys. Rendering the
+ * key would leak an implementation detail into the one screen a finance team
+ * reads.
+ */
+export function humanise(value: string): string {
+  const words = value.replace(/_/g, " ").trim();
+  return words.charAt(0).toUpperCase() + words.slice(1);
+}
+
+/** Contract text, rewrapped for the width it is quoted at.
+ *
+ * The corpus is hard-wrapped at about ninety characters, which is right for a
+ * contract and wrong for a 500px evidence column: every line breaks twice and
+ * the quote reads as broken rather than as a clause. Joining a continuation
+ * line to the one above it changes no words.
+ *
+ * A line that opens a numbered clause keeps its break, because the numbering is
+ * the structure a reader is checking the citation against.
+ */
+const CLAUSE_OPENER = /^\d+(\.\d+)*\.?\s/;
+
+export function rewrapClause(text: string): string {
+  const out: string[] = [];
+
+  for (const raw of text.split("\n")) {
+    const line = raw.trim();
+    if (line === "") {
+      out.push("");
+      continue;
+    }
+
+    const previous = out[out.length - 1];
+    if (previous === undefined || previous === "" || CLAUSE_OPENER.test(line)) out.push(line);
+    else out[out.length - 1] = `${previous} ${line}`;
+  }
+
+  return out.join("\n").trim();
+}

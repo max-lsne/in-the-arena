@@ -14,7 +14,16 @@ module Evals
   module CaseLedger
     # Failures first. The view exists for the rows that are wrong, and putting
     # 37 matches above the 2 misses hides the thing you opened it to see.
-    VERDICT_ORDER = %w[miss false_positive wrong_cause wrong_amount wrong_step wrong_kind match].freeze
+    #
+    # "unplanted" is not "false_positive". A detector that flags a clean record
+    # has fired wrongly. A ranking that puts an unplanted account seventh has
+    # done what a ranking does, and with five planted accounts per company and a
+    # list of ten, half the list is unplanted before the detector runs. Calling
+    # those forty rows false positives put forty failures at the top of a view
+    # whose job is to surface the real ones.
+    VERDICT_ORDER = %w[
+      miss false_positive wrong_cause wrong_amount wrong_step wrong_kind unplanted match
+    ].freeze
 
     class << self
       def call(as_of: DetectorScores::AS_OF)
@@ -141,7 +150,7 @@ module Evals
                         hit ? { kind: "at_risk" } : nil,
                         { kind: "ranked", rank: index + 1, score: entry.score.round(4),
                           within_recall_k: index < DetectorScores::CHURN_K },
-                        hit ? "match" : "false_positive")
+                        hit ? "match" : "unplanted")
           end
 
           listed = ranked.map { |entry| entry.customer.id }.to_set

@@ -1,4 +1,10 @@
-import type { Company, MetricValue, ReconciliationFinding } from "./types";
+import type {
+  Company,
+  EvalLedger,
+  MetricValue,
+  ReconciliationFinding,
+  RetrievalHit,
+} from "./types";
 
 /** The platform is the only source of data, and it holds the tenancy grant.
  *
@@ -10,6 +16,22 @@ const TOKEN = import.meta.env.VITE_MARS_TOKEN ?? "";
 async function get<T>(path: string): Promise<T> {
   const response = await fetch(path, {
     headers: { Authorization: `Bearer ${TOKEN}`, Accept: "application/json" },
+  });
+
+  if (response.status === 401) throw new Error("The platform rejected this token.");
+  if (!response.ok) throw new Error(`${path} returned ${response.status}`);
+  return (await response.json()) as T;
+}
+
+async function post<T>(path: string, body: unknown): Promise<T> {
+  const response = await fetch(path, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
   });
 
   if (response.status === 401) throw new Error("The platform rejected this token.");
@@ -37,5 +59,24 @@ export const api = {
       total_shortfall_cents: number;
       currency: string;
     }>(`/api/v1/reconciliation/contract_billing?${query}`);
+  },
+
+  /** Retrieval scoped to a document the caller already identified.
+   *
+   * Every uplift clause in the corpus is worded identically, so similarity alone
+   * ranks eight near-identical clauses arbitrarily. The contract comes from the
+   * reconciliation figures; retrieval only has to find the clause inside it.
+   */
+  clause: (sourceRef: string, query: string) =>
+    post<{ backend: string; results: RetrievalHit[] }>("/api/v1/retrieval/search", {
+      query,
+      source_ref: sourceRef,
+      limit: 2,
+    }),
+
+  evalCases: (detector?: string) => {
+    const query = new URLSearchParams();
+    if (detector) query.set("detector", detector);
+    return get<EvalLedger>(`/api/v1/evals/cases?${query}`);
   },
 };

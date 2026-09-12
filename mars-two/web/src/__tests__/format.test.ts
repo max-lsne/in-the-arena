@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatMetric, formatEuros, share } from "../lib/format";
+import { formatMetric, formatEuros, rewrapClause, share } from "../lib/format";
 
 describe("formatMetric", () => {
   it("reads euros from cents rather than guessing", () => {
@@ -49,5 +49,35 @@ describe("formatEuros", () => {
 describe("share", () => {
   it("is zero rather than NaN when the whole is zero", () => {
     expect(share(5, 0)).toBe(0);
+  });
+});
+
+describe("rewrapClause", () => {
+  it("joins a hard-wrapped sentence without changing a word", () => {
+    const wrapped = "the Supplier shall invoice the excess at the prevailing per-user rate from\nthe month in which the excess arises.";
+
+    expect(rewrapClause(wrapped)).toBe(
+      "the Supplier shall invoice the excess at the prevailing per-user rate from the month in which the excess arises.",
+    );
+  });
+
+  it("keeps the break before a numbered clause, because that is the structure", () => {
+    const clause = "3. Committed users\n3.1 The Committed User Count is 63.\n3.2 Where the Customer's actual user\ncount exceeds it, the excess is invoiced.";
+
+    expect(rewrapClause(clause).split("\n")).toEqual([
+      "3. Committed users",
+      "3.1 The Committed User Count is 63.",
+      "3.2 Where the Customer's actual user count exceeds it, the excess is invoiced.",
+    ]);
+  });
+
+  it("preserves a blank line between paragraphs", () => {
+    expect(rewrapClause("one\n\ntwo")).toBe("one\n\ntwo");
+  });
+
+  it("never drops or reorders words", () => {
+    const source = "4.2 Annual uplift\nThe Annual Fee shall increase by 4.0% on each\nanniversary of the Commencement Date.";
+
+    expect(rewrapClause(source).split(/\s+/)).toEqual(source.split(/\s+/));
   });
 });

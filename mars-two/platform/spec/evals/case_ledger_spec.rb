@@ -51,7 +51,7 @@ RSpec.describe Evals::CaseLedger, :seeded do
     ledger[:cases].each do |row|
       case row[:verdict]
       when "miss" then expect(row[:found]).to be_nil
-      when "false_positive" then expect(row[:planted]).to be_nil
+      when "false_positive", "unplanted" then expect(row[:planted]).to be_nil
       else
         expect(row[:planted]).to be_present
         expect(row[:found]).to be_present
@@ -68,6 +68,16 @@ RSpec.describe Evals::CaseLedger, :seeded do
 
   # Scored at the k precision is measured at, not the k recall is measured at.
   # At recall's k every row is planted and the ledger shows nothing.
+  # A ranking that lists an unplanted account seventh has not fired wrongly, and
+  # scoring it as a false positive puts forty non-failures above the real ones.
+  it "separates an unplanted rank from a detector firing wrongly" do
+    rows = ledger[:cases].select { |c| c[:detector] == "churn_risk" }
+
+    expect(rows.map { |c| c[:verdict] }.uniq).to match_array(%w[match unplanted])
+    expect(ledger[:cases].index { |c| c[:verdict] == "unplanted" })
+      .to be > (ledger[:cases].rindex { |c| c[:verdict] == "false_positive" } || -1)
+  end
+
   it "ranks churn cases out to the precision cut, marking the recall cut" do
     rows = ledger[:cases].select { |c| c[:detector] == "churn_risk" && c[:found] }
 
