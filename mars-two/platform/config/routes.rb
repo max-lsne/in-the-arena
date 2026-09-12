@@ -10,6 +10,8 @@ Rails.application.routes.draw do
       post "retrieval/search", to: "retrieval#search"
 
       get "reconciliation/contract_billing", to: "reconciliation#contract_billing"
+
+      get "evals/cases", to: "evals#cases"
     end
   end
 

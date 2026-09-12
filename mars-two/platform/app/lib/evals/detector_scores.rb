@@ -125,11 +125,19 @@ module Evals
         at_precision_k = hits.call(CHURN_PRECISION_K)
         companies = Company.count
 
+        # The ceiling is reported next to the number because precision at a k
+        # wider than the number of planted accounts cannot reach 1.0. Forty
+        # planted accounts in eighty slots caps precision@10 at 0.5, so 0.5 is a
+        # perfect score here and reads like a failing one without the ceiling
+        # beside it.
+        slots = CHURN_PRECISION_K * companies
+
         {
           planted: expected_ids.size,
           recall_at_k: ratio(at_k, expected_ids.size),
           k: CHURN_K,
-          precision_at_k: ratio(at_precision_k, CHURN_PRECISION_K * companies),
+          precision_at_k: ratio(at_precision_k, slots),
+          precision_at_k_ceiling: ratio([ expected_ids.size, slots ].min, slots),
           precision_k: CHURN_PRECISION_K
         }
       end

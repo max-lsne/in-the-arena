@@ -49,6 +49,7 @@
       "recall_at_k": 1.0,
       "k": 5,
       "precision_at_k": 0.5,
+      "precision_at_k_ceiling": 0.5,
       "precision_k": 10
     }
   }
