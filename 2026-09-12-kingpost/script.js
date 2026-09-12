@@ -220,6 +220,9 @@
   }
   sizeCanvas();
 
+  var reduceMQ = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+  var reduce = reduceMQ ? reduceMQ.matches : false;
+
   var cssVar = function (name) {
     return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   };
@@ -490,7 +493,7 @@
     var dt = Math.min(0.05, (ts - lastTs) / 1000);
     lastTs = ts;
 
-    var ease = Math.min(1, dt * 11);
+    var ease = reduce ? 1 : Math.min(1, dt * 11);
     if (!initShown) { shown.pitch = state.pitch; shown.load = state.load; initShown = true; }
     shown.pitch += (state.pitch - shown.pitch) * ease;
     shown.load += (state.load - shown.load) * ease;
@@ -555,15 +558,21 @@
     update();
   });
 
-  // swing the roof toward the target pitch so it is seen to rise or fall
+  // swing the roof toward the target pitch so it is seen to rise or fall —
+  // under reduced motion it lands in one step
   function animatePitch(target) {
-    if (Math.abs(target - state.pitch) < 1) { state.pitch = target; inP.value = target; update(); return; }
+    if (reduce || Math.abs(target - state.pitch) < 1) { state.pitch = target; inP.value = target; update(); return; }
     var dir = target > state.pitch ? PSTEP : -PSTEP;
     (function step() {
       state.pitch = clamp(state.pitch + dir, PMIN, PMAX);
       inP.value = state.pitch; update();
       if (Math.abs(state.pitch - target) >= 1) setTimeout(step, 26);
     })();
+  }
+
+  // follow a live change to the motion setting
+  if (reduceMQ && reduceMQ.addEventListener) {
+    reduceMQ.addEventListener("change", function (e) { reduce = e.matches; });
   }
 
   // repaint on theme flips so canvas colours follow
