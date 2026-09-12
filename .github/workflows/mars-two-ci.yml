@@ -6,8 +6,7 @@ on:
   pull_request:
     paths: [ 'mars-two/**', '.github/workflows/mars-two-ci.yml' ]
 
-# Only the platform job exists, because only platform/ exists. The intelligence,
-# web and eval jobs arrive in the commits that create those directories.
+# The web and eval jobs arrive in the commits that create those directories.
 #
 # A job that passes because it found nothing to run is worse than a missing job:
 # it reports a green check that means nothing, which is the same failure mode
@@ -78,3 +77,34 @@ jobs:
       # determinism of the synthetic generator that every eval grades against.
       - name: Spec
         run: bundle exec rspec --format progress
+
+  intelligence:
+    name: intelligence (Python)
+    runs-on: ubuntu-latest
+
+    # No ANTHROPIC_API_KEY, deliberately. The suite runs against recorded
+    # fixtures, and a test that needs a live model is a test that fails for
+    # reasons unrelated to the code. See docs/adr/0007-agent-loop-and-fixtures.md.
+    env:
+      MARS_LLM_MODE: replay
+
+    defaults:
+      run:
+        working-directory: mars-two/intelligence
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: mars-two/intelligence/uv.lock
+
+      - name: Sync
+        run: uv sync --frozen
+
+      - name: Lint
+        run: uv run ruff check . && uv run ruff format --check .
+
+      - name: Test
+        run: uv run pytest -q

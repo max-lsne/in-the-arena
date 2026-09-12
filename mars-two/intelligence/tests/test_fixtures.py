@@ -10,7 +10,7 @@ import json
 
 import pytest
 
-from app.llm.fixtures import FixtureMiss, FixtureStore, request_key
+from app.llm.fixtures import FixtureMissError, FixtureStore, request_key
 
 REQUEST = {
     "model": "claude-opus-5",
@@ -60,7 +60,7 @@ def test_roundtrip(tmp_path):
 
 
 def test_a_miss_raises_rather_than_returning_none(tmp_path):
-    with pytest.raises(FixtureMiss) as excinfo:
+    with pytest.raises(FixtureMissError) as excinfo:
         FixtureStore(tmp_path).get(REQUEST)
 
     # The message has to name the key, because re-recording is the fix and the

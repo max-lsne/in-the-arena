@@ -8,8 +8,8 @@ a test run.
 
 import pytest
 
-from app.llm.client import LlmClient, LlmMode, MissingApiKey
-from app.llm.fixtures import FixtureMiss, FixtureStore
+from app.llm.client import LlmClient, LlmMode, MissingApiKeyError
+from app.llm.fixtures import FixtureMissError, FixtureStore
 
 REQUEST = {
     "model": "claude-opus-5",
@@ -46,7 +46,7 @@ def test_replay_raises_on_a_miss_instead_of_calling_the_api(tmp_path):
     api = RecordingApi()
     client = LlmClient(mode=LlmMode.REPLAY, store=FixtureStore(tmp_path), api=api)
 
-    with pytest.raises(FixtureMiss):
+    with pytest.raises(FixtureMissError):
         client.create(**REQUEST)
 
     assert api.calls == [], "a miss must not fall through to the network"
@@ -88,7 +88,7 @@ def test_live_calls_the_api_and_writes_nothing(tmp_path):
     LlmClient(mode=LlmMode.LIVE, store=store, api=api).create(**REQUEST)
 
     assert len(api.calls) == 1
-    with pytest.raises(FixtureMiss):
+    with pytest.raises(FixtureMissError):
         store.get(REQUEST)
 
 
@@ -96,7 +96,7 @@ def test_live_calls_the_api_and_writes_nothing(tmp_path):
 def test_modes_that_call_the_api_require_a_key(tmp_path, monkeypatch, mode):
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
 
-    with pytest.raises(MissingApiKey):
+    with pytest.raises(MissingApiKeyError):
         LlmClient(mode=mode, store=FixtureStore(tmp_path))
 
 
