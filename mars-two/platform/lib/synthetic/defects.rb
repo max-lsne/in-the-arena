@@ -313,8 +313,23 @@ module Synthetic
           next unless blocker
 
           blocked_since = today - (45 + rng.rand(90))
-          onboarding.update_columns(blocked_since: blocked_since)
+
+          # An onboarding blocked since a date must have started before it.
+          # Leaving a recent start date against an older block produced a record
+          # that contradicted itself, and a detector reading the steps rather
+          # than the annotation saw an onboarding that had barely begun.
+          started_on = [ onboarding.started_on, blocked_since - (10 + rng.rand(30)) ].min
+          onboarding.update_columns(blocked_since: blocked_since, started_on: started_on)
           steps.select { |s| s.position > blocker.position }.each { |s| s.update_columns(completed_on: nil) }
+
+          # Blocked since a date means nothing has moved since that date. Leaving
+          # the completed steps at their recent dates would say the opposite, and
+          # a detector reading the steps rather than the annotation would see an
+          # onboarding that is progressing fine.
+          done = steps.select { |s| s.completed_on }.sort_by(&:position)
+          done.reverse.each_with_index do |step, back|
+            step.update_columns(completed_on: blocked_since - (back * (3 + rng.rand(4))))
+          end
 
           record(company, "onboarding_stall", onboarding, {
             kind: "stalled_at_step",

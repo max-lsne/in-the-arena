@@ -332,10 +332,22 @@ module Synthetic
     end
 
     def build_crm(company, spec, customers, employees, rng)
+      # Correct behaviour is the baseline, in the CRM as much as in billing.
+      #
+      # Owners were drawn from everyone including leavers, open opportunities
+      # were given close dates up to forty days in the past, and closed-won
+      # amounts were unrelated to the contracts they closed. Against that
+      # baseline the hygiene checks flagged 67, 221 and 224 records where 6, 16
+      # and 8 had been planted, so a detector could score well while finding
+      # almost nothing that was put there. A defect has to be a departure from
+      # a clean baseline or there is nothing to measure.
+      current = employees.reject(&:left_on)
+      current = employees if current.empty?
+
       account_rows = customers.each_with_index.map do |customer, i|
         {
           company_id: company.id, customer_id: customer.id,
-          owner_employee_id: employees[rng.rand(employees.size)].id,
+          owner_employee_id: current[rng.rand(current.size)].id,
           external_ref: format("%s-A%04d", company.slug[0, 3].upcase, i + 1),
           name: customer.name, country: customer.country,
           created_at: Time.current, updated_at: Time.current
@@ -345,19 +357,37 @@ module Synthetic
       count(:crm_accounts, account_rows.size)
 
       accounts = CrmAccount.where(company_id: company.id).order(:id).to_a
+      contract_values = Contract.where(company_id: company.id).pluck(:customer_id, :contracted_value_cents).to_h
       stages = %w[qualify discover propose negotiate closed_won closed_lost]
       opp_rows = []
       accounts.each_with_index do |account, i|
         (1 + rng.rand(3)).times do |j|
+          stage = stages[rng.rand(stages.size)]
+          closed = %w[closed_won closed_lost].include?(stage)
+
+          # An open opportunity closes in the future. One whose date has passed
+          # without being closed is the hygiene defect, so it cannot also be the
+          # norm.
+          close_date = closed ? today - rng.rand(200) : today + 10 + rng.rand(170)
+
+          # Closing a deal means signing the contract, so a won opportunity is
+          # worth what the contract is worth. An amount that disagrees is the
+          # defect.
+          amount = if stage == "closed_won" && contract_values[account.customer_id]
+                     contract_values[account.customer_id]
+          else
+                     5_000_00 + rng.rand(400_000_00)
+          end
+
           opp_rows << {
             company_id: company.id, crm_account_id: account.id,
-            owner_employee_id: employees[rng.rand(employees.size)].id,
+            owner_employee_id: current[rng.rand(current.size)].id,
             external_ref: format("%s-O%05d", company.slug[0, 3].upcase, (i * 5) + j + 1),
             name: "#{account.name} #{spec[:plans][rng.rand(spec[:plans].size)]} expansion",
-            stage: stages[rng.rand(stages.size)],
-            amount_cents: (5_000_00 + rng.rand(400_000_00)),
+            stage: stage,
+            amount_cents: amount,
             currency: "EUR",
-            close_date: today + rng.rand(180) - 40,
+            close_date: close_date,
             last_activity_at: (today - rng.rand(90)).to_time,
             created_at: Time.current, updated_at: Time.current
           }
@@ -372,8 +402,20 @@ module Synthetic
       return if recent.empty?
 
       onboarding_rows = recent.map do |customer|
-        started = customer.first_seen_on + rng.rand(10)
         done = rng.rand < 0.62
+
+        # A finished onboarding started when the customer signed. An unfinished
+        # one started recently, because an onboarding that began a year ago and
+        # has completed nothing is not in progress, it is stalled. Leaving those
+        # in the baseline meant the stall detector was right about records the
+        # answer key had never marked, which reads as a precision problem and is
+        # really an incomplete answer key.
+        started = if done
+                    customer.first_seen_on + rng.rand(10)
+        else
+                    [ customer.first_seen_on + rng.rand(10), today - (5 + rng.rand(22)) ].max
+        end
+
         {
           company_id: company.id, customer_id: customer.id,
           started_on: started,
@@ -388,12 +430,32 @@ module Synthetic
       onboardings = Onboarding.where(company_id: company.id).order(:id).to_a
       step_rows = []
       onboardings.each do |onboarding|
-        completed_through = onboarding.completed_on ? NamePools::ONBOARDING_STEPS.size : rng.rand(NamePools::ONBOARDING_STEPS.size)
+        finished = onboarding.completed_on
+        completed_through = finished ? NamePools::ONBOARDING_STEPS.size : rng.rand(NamePools::ONBOARDING_STEPS.size)
+
+        # An onboarding still in progress has been progressing. Anchoring its
+        # completed steps to a start date a year ago made every unfinished
+        # onboarding look abandoned, so a stall detector flagged 34 where 13 had
+        # been planted and the twenty-one extras were real by the definition.
+        # The answer key was incomplete rather than the detector wrong, which is
+        # the harder failure to notice. A genuinely stalled onboarding has to be
+        # a departure from a baseline that is moving.
+        last_progress = finished ? nil : [ today - rng.rand(24), onboarding.started_on ].max
+
         NamePools::ONBOARDING_STEPS.each_with_index do |name, idx|
+          completed_on =
+            if idx >= completed_through
+              nil
+            elsif finished
+              onboarding.started_on + (idx * 6) + rng.rand(5)
+            else
+              last_progress - ((completed_through - 1 - idx) * (4 + rng.rand(4)))
+            end
+
           step_rows << {
             company_id: company.id, onboarding_id: onboarding.id,
             name: name, position: idx + 1,
-            completed_on: idx < completed_through ? onboarding.started_on + (idx * 6) + rng.rand(5) : nil,
+            completed_on: completed_on,
             created_at: Time.current, updated_at: Time.current
           }
         end
