@@ -1,6 +1,8 @@
 -- Role setup for mars-two. See docs/adr/0002-tenancy-and-isolation.md.
 --
--- Run once per database, as a superuser:
+-- Run as a superuser, once against any database to create the roles, then once
+-- per application database for its grants. Idempotent, so running it twice is fine:
+--   psql -d postgres -f db/setup_roles.sql
 --   psql -d mars_two_development -f db/setup_roles.sql
 --
 -- Two roles exist so that row-level security cannot be bypassed by accident.
@@ -9,6 +11,15 @@
 -- application runs as has neither attribute.
 
 -- Owner. Runs migrations and seeding, which legitimately write across tenants.
+-- Created here rather than assumed, so this script is the single source of truth
+-- for roles in development and in CI alike.
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'mars') THEN
+    CREATE ROLE mars LOGIN PASSWORD 'mars';
+  END IF;
+END
+$$;
 ALTER ROLE mars NOSUPERUSER BYPASSRLS CREATEDB;
 
 -- Runtime. Every query it makes is filtered by policy.

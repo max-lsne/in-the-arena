@@ -47,5 +47,17 @@ module Platform
     # isolation at all, and every isolation spec would pass while asserting
     # nothing. structure.sql keeps them.
     config.active_record.schema_format = :sql
+
+    # pg_dump writes COMMENT ON EXTENSION vector, and replaying that statement
+    # requires owning the extension. The owner role is not a superuser and
+    # cannot install pgvector itself, so the extension is inherited from
+    # template1 and owned by the cluster superuser. Loading the dump then fails
+    # with "must be owner of extension vector".
+    #
+    # Nothing here depends on database comments, so they are dropped from the
+    # dump. The alternative is granting the application's owner role superuser,
+    # which trades a real privilege for a cosmetic line of SQL.
+    config.active_record.dump_schema_after_migration = true
+    ActiveRecord::Tasks::DatabaseTasks.structure_dump_flags = [ "--no-comments" ]
   end
 end
