@@ -23,8 +23,13 @@ RSpec.configure do |config|
   # make every isolation spec pass for the wrong reason.
   config.use_transactional_fixtures = false
 
-  config.before(:each) do
+  # Specs tagged :seeded build the whole synthetic portfolio themselves and are
+  # slow, so the per-example truncation is skipped for them. They are responsible
+  # for their own state, and the generator truncates before it writes anyway.
+  config.before(:each) do |example|
     Mars::Tenancy.clear
+    next if example.metadata[:seeded]
+
     ApplicationRecord.as_owner do
       tables = ApplicationRecord.connection.tables - %w[schema_migrations ar_internal_metadata]
       next if tables.empty?
