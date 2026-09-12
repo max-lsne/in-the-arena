@@ -75,9 +75,7 @@ def build_server(
             ]
         )
 
-    async def on_call_tool(
-        _ctx: Any, params: types.CallToolRequestParams
-    ) -> types.CallToolResult:
+    async def on_call_tool(_ctx: Any, params: types.CallToolRequestParams) -> types.CallToolResult:
         # The registry validates before it executes and returns every failure as
         # a result rather than raising. An MCP client is another untrusted
         # caller, so it goes through the same door as the model does.
