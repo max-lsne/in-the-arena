@@ -8,10 +8,10 @@ all of them are how an agent fails in production.
 """
 
 import pytest
+from pydantic import BaseModel, Field
 
 from app.agents.runtime import AgentRuntime, AgentSpec, StopReason
 from app.tools.registry import ToolContext, ToolRegistry
-from pydantic import BaseModel, Field
 
 
 class LookupParams(BaseModel):
@@ -75,7 +75,9 @@ def test_a_run_with_no_tool_calls_returns_the_text(registry):
 
 
 def test_a_tool_call_is_executed_and_fed_back(registry):
-    llm = ScriptedLlm(tool_turn("lookup", {"company": "vaultline"}), text_turn("Vaultline is EUR 12.0M"))
+    llm = ScriptedLlm(
+        tool_turn("lookup", {"company": "vaultline"}), text_turn("Vaultline is EUR 12.0M")
+    )
 
     result = run(llm, registry)
 
