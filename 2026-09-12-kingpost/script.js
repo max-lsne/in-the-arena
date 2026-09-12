@@ -140,7 +140,7 @@
   var inW = $("in-W"), inP = $("in-P");
   var labW = $("lab-W"), labP = $("lab-P");
   var trussBtns = Array.prototype.slice.call(document.querySelectorAll(".seg [data-truss]"));
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
   var pMark = $("p-mark"), pNote = $("p-note");
 
   function fmtkN(N) {
@@ -505,7 +505,41 @@
     current = compute(state);
     syncLabels(current);
     curVerdict = render(current);
+    announce(current, curVerdict);
     save();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(r, verdict) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var kR = Math.round(r.Fr / 1000), kT = Math.round(r.Ft / 1000), kP = Math.round(r.Fk / 1000);
+      var head = "A " + r.T.roofNote + " in " + r.T.timber + ", pitched at " + state.pitch
+        + " degrees and loaded to " + state.load + " percent of its design load. ";
+      var forces = "The rafters carry " + kR + " of " + Math.round(r.capR / 1000)
+        + " kilonewtons in compression, the tie " + kT + " of " + Math.round(r.capT / 1000)
+        + " in tension, the kingpost " + kP + " of " + Math.round(r.capK / 1000) + ".";
+      var msg;
+      if (verdict === "sound") {
+        msg = head + "Sound — the pitch shares the load evenly and every member sits inside its limit. " + forces;
+      } else if (verdict === "steep") {
+        msg = head + "Over-pitched — safe, but steeper than the load needs; the rafters run long while the tie is barely worked. "
+          + "Flatten the roof, or find the pitch. " + forces;
+      } else if (verdict === "low") {
+        msg = head + "Under-pitched — safe, but flat, and the tie and the walls take a hard thrust. "
+          + "Steepen the roof, or find the pitch. " + forces;
+      } else {
+        var who = r.bind === "rafter" ? "a rafter has passed its buckling limit"
+          : r.bind === "tie" ? "the tie's heel joint has passed its limit under the thrust"
+          : "the kingpost has passed its hanger's limit under the ceiling it carries";
+        var fix = r.bind === "post" ? "No pitch relieves the post — deepen it or ease the load. "
+          : "Find the pitch, or ease the load. ";
+        msg = head + "Overstressed — " + who + ". " + fix + forces;
+      }
+      sayEl.textContent = msg;
+    }, 260);
   }
 
   inW.addEventListener("input", function () { state.load = parseInt(inW.value, 10); update(); });
