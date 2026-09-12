@@ -50,3 +50,30 @@ Rake::Task["db:test:prepare"].enhance { Mars::Harden.apply("test") } if Rake::Ta
 %w[db:migrate db:prepare db:schema:load db:structure:load].each do |name|
   Rake::Task[name].enhance { Mars::Harden.apply(Rails.env) } if Rake::Task.task_defined?(name)
 end
+
+namespace :mars do
+  desc "Create the three personas and print their API tokens. Development only"
+  task users: :environment do
+    abort "refusing to mint tokens outside development" unless Rails.env.development?
+
+    ApplicationRecord.as_owner do
+      User.destroy_all
+      companies = Company.order(:slug).to_a
+      abort "seed the portfolio first: bin/rails synthetic:seed" if companies.empty?
+
+      personas = [
+        [ "group_operator", "operator@aries.example", companies ],
+        [ "portco_exec", "exec@#{companies.first.slug}.example", [ companies.first ] ],
+        [ "fde", "fde@aries.example", companies.first(3) ]
+      ]
+
+      personas.each do |role, email, granted|
+        user = User.create!(email: email, name: role.tr("_", " ").titleize, role: role)
+        granted.each { |c| Grant.create!(user: user, company: c) }
+        raw = "mars_#{SecureRandom.hex(16)}"
+        ApiToken.create!(user: user, name: "development", token_digest: ApiToken.digest(raw))
+        puts format("%-16s %-32s %2d companies  %s", role, email, granted.size, raw)
+      end
+    end
+  end
+end
