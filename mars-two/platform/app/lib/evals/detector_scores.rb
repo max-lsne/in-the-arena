@@ -78,7 +78,7 @@ module Evals
       def crm_hygiene
         expected = planted("crm_hygiene")
         by_subject = expected.index_by { |g| [ g.subject_table, g.subject_id ] }
-        findings = Detection::CrmHygiene.call
+        findings = Detection::CrmHygiene.call(as_of: AS_OF)
 
         kind_exact = findings.count do |finding|
           truth = by_subject[[ finding.subject_table, finding.subject_id ]]

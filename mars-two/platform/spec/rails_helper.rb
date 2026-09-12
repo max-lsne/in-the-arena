@@ -14,6 +14,9 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
+  # For asserting that scored code does not read the clock.
+  config.include ActiveSupport::Testing::TimeHelpers
+
   config.fixture_paths = [ Rails.root.join("spec/fixtures") ]
 
   # Transactional fixtures are off deliberately. Tests write through the owner

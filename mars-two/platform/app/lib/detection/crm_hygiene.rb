@@ -16,8 +16,12 @@ module Detection
     end
 
     class << self
-      def call(company_id: nil)
-        departed_owners(company_id) + stale_opportunities(company_id) +
+      # as_of is a parameter rather than "now" because this detector is scored
+      # against a committed baseline. Reading the clock would make the score
+      # drift every day as more open opportunities pass their close date, and the
+      # gate would fail on a Tuesday for no reason anyone changed.
+      def call(company_id: nil, as_of: Date.current)
+        departed_owners(company_id) + stale_opportunities(company_id, as_of) +
           duplicate_accounts(company_id) + amount_disagreements(company_id)
       end
 
@@ -37,17 +41,17 @@ module Detection
           end
       end
 
-      def stale_opportunities(company_id)
+      def stale_opportunities(company_id, as_of)
         scope(CrmOpportunity.includes(:company), company_id)
           .where.not(stage: %w[closed_won closed_lost])
-          .where(close_date: ...Date.current)
+          .where(close_date: ...as_of)
           .map do |opportunity|
             Finding.new(
               kind: "close_date_in_past", subject_table: "crm_opportunities",
               subject_id: opportunity.id, reference: opportunity.external_ref,
               company: opportunity.company,
               detail: { stage: opportunity.stage, close_date: opportunity.close_date,
-                        days_overdue: (Date.current - opportunity.close_date).to_i }
+                        days_overdue: (as_of - opportunity.close_date).to_i }
             )
           end
       end

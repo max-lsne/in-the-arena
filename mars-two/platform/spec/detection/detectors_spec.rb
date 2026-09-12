@@ -15,7 +15,7 @@ RSpec.describe "Detectors", :seeded do
   def planted(klass) = owner { GroundTruth.where(defect_class: klass).to_a }
 
   describe Detection::CrmHygiene do
-    let(:findings) { owner { described_class.call } }
+    let(:findings) { owner { described_class.call(as_of: Date.new(2026, 9, 12)) } }
 
     # Keyed on table and id together, because these findings span accounts and
     # opportunities and the ids collide between them.
@@ -49,7 +49,7 @@ RSpec.describe "Detectors", :seeded do
     it "can be narrowed to one company" do
       owner do
         company = Company.find_by!(slug: "vaultline")
-        scoped = described_class.call(company_id: company.id)
+        scoped = described_class.call(company_id: company.id, as_of: Date.new(2026, 9, 12))
 
         expect(scoped.map { |f| f.company.id }.uniq).to eq([ company.id ])
       end
