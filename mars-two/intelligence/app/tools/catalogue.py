@@ -143,3 +143,69 @@ def contract_billing_reconciliation(params: ContractBillingParams, ctx: ToolCont
         "/api/v1/reconciliation/contract_billing",
         {"company": params.company, "limit": params.limit},
     )
+
+
+class DetectionParams(BaseModel):
+    company: str | None = Field(
+        default=None, description="Company slug. Omit for the whole portfolio."
+    )
+    as_of: str | None = Field(
+        default=None,
+        description=(
+            "ISO date to evaluate against, for example '2026-09-12'. Omit for today. "
+            "State the date you were given; figures computed as of different days "
+            "are not comparable."
+        ),
+    )
+    limit: int = Field(default=25, ge=1, le=100, description="Maximum records to return.")
+
+
+@registry.register(
+    "crm_pipeline_hygiene",
+    "List CRM records that contradict something else on the record: an account "
+    "owned by someone who has left, an open opportunity whose close date has "
+    "passed, two accounts for one customer, and a won deal worth something other "
+    "than the contract it closed. Each finding carries the contradiction, so say "
+    "what disagrees with what rather than that a record looks wrong.",
+    DetectionParams,
+    path="/api/v1/detections/crm_hygiene",
+)
+def crm_pipeline_hygiene(params: DetectionParams, ctx: ToolContext) -> dict:
+    return ctx.platform.get(
+        "/api/v1/detections/crm_hygiene",
+        {"company": params.company, "as_of": params.as_of, "limit": params.limit},
+    )
+
+
+@registry.register(
+    "onboarding_stalls",
+    "List onboardings that have stopped moving, with the step each one is stuck "
+    "at and how long it has been stuck. The response states the threshold that "
+    "defines a stall; quote it when you quote the count. Name the blocking step: "
+    "'stalled' is a status, 'stalled at identity integration for 62 days' is "
+    "something someone can act on this afternoon.",
+    DetectionParams,
+    path="/api/v1/detections/onboarding_stalls",
+)
+def onboarding_stalls(params: DetectionParams, ctx: ToolContext) -> dict:
+    return ctx.platform.get(
+        "/api/v1/detections/onboarding_stalls",
+        {"company": params.company, "as_of": params.as_of, "limit": params.limit},
+    )
+
+
+@registry.register(
+    "churn_risk_ranking",
+    "Rank accounts by churn risk, highest first, with the signals behind each "
+    "score. This is a ranking and not a verdict: a score of 0.81 against a "
+    "neighbour's 0.79 does not mean one account is leaving and the other is not. "
+    "Report it as an ordered list to work through, never as a set of accounts "
+    "that will churn, and give the signals rather than the score alone.",
+    DetectionParams,
+    path="/api/v1/detections/churn_risk",
+)
+def churn_risk_ranking(params: DetectionParams, ctx: ToolContext) -> dict:
+    return ctx.platform.get(
+        "/api/v1/detections/churn_risk",
+        {"company": params.company, "as_of": params.as_of, "limit": params.limit},
+    )

@@ -11,6 +11,10 @@ Rails.application.routes.draw do
 
       get "reconciliation/contract_billing", to: "reconciliation#contract_billing"
 
+      get "detections/crm_hygiene", to: "detections#crm_hygiene"
+      get "detections/onboarding_stalls", to: "detections#onboarding_stalls"
+      get "detections/churn_risk", to: "detections#churn_risk"
+
       get "evals/cases", to: "evals#cases"
     end
   end

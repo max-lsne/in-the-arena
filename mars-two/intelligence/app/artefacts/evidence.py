@@ -85,8 +85,16 @@ class EvidenceIndex:
             self.metrics.add(f"{company}:{key}:{period}" if company else key)
             self.metrics.add(key)
 
-        if isinstance(node.get("contract_reference"), str):
-            self.findings.add(node["contract_reference"])
+        # Every identifier a detector hands back is citable: a contract, a CRM
+        # record, a customer. They share one set, so a citation of kind "finding"
+        # resolves against all of them. That is deliberate and it is also the
+        # limit of this check: it separates a finding from a metric and from a
+        # document, not one finding from another. Whether the cited record is the
+        # one the claim is about is Layer 1's question, against the answer key.
+        for key in ("contract_reference", "reference", "customer_ref", "external_ref"):
+            value = node.get(key)
+            if isinstance(value, str):
+                self.findings.add(value)
 
         if isinstance(node.get("cite"), str):
             self.documents.add(node["cite"])
