@@ -37,6 +37,27 @@ previous answer. Re-record with `make fixtures` from the repo root.
 They are committed, and they are review artefacts. The diff when a prompt changes
 shows exactly how the model's answer changed.
 
+## Structural validation
+
+`app/artefacts/` is Layer 2 of ADR 0003: the properties an artefact must have
+whatever it says. A prompt that asks for citations is not a citation system. An
+artefact that cannot produce its evidence fails here and is not shown.
+
+The rule that does the most work is the last one. Every number in a claim's prose
+has to be a number the platform returned, in a unit it returned it in: as
+written, times a hundred, or divided by a hundred, which covers euros quoted
+against cents and a percentage quoted against a ratio. It does not cover
+addition. An agent that sums two cited figures and states the total produces a
+number no tool ever said, and it fails even though both inputs are cited.
+
+The mirror of that is worth stating: a total the platform computed is evidence
+like any other figure. The invariant is not "no totals", it is "no totals the
+model worked out".
+
+The tests run against payloads captured from a running platform rather than
+written by hand, because a validator tested against an imagined payload passes
+until the first real one arrives.
+
 ## The MCP surface
 
 `app/mcp_server.py` exposes the same registry over MCP, so an MCP client calls the
@@ -78,6 +99,7 @@ wrong without the connection dying.
 | `app/llm/` | The three-mode client and the fixture store |
 | `app/tools/` | The validated tool registry |
 | `app/agents/` | The agent runtime |
+| `app/artefacts/` | Structural validation of what an agent hands back |
 | `app/mcp_server.py` | The same registry, over MCP |
 | `app/evals/` | The three-layer eval harness |
 | `fixtures/` | Recorded model responses, committed |
