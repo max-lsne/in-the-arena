@@ -127,7 +127,6 @@ wrong without the connection dying.
 | `app/agents/` | The agent runtime, the agent specs and the run pipeline |
 | `app/artefacts/` | Structural validation of what an agent hands back |
 | `app/mcp_server.py` | The same registry, over MCP |
-| `app/evals/` | The three-layer eval harness |
 | `fixtures/` | Recorded model responses, committed |
 
 ## Running it

@@ -17,12 +17,12 @@ foundations.
 
 | Sub-skill | Where | What specifically |
 | --- | --- | --- |
-| LLM foundations | `intelligence/llm/` | Context window budgeting, structured output, the recorded-fixture client, cost and latency accounting per agent run |
-| Grounding models with data | `intelligence/retrieval/` | Document pipeline into pgvector, chunking with metadata, citation-carrying retrieval. The split between SQL facts and vector text is ADR 0005 |
-| Building agentic systems | `intelligence/agents/`, `intelligence/tools/` | Validated tool registry, single-agent runtime, one orchestrator agent, memory and context management across a long run, and the same registry exposed over MCP in `intelligence/app/mcp_server.py` |
-| Evaluation-driven development | `intelligence/evals/` | Three-layer harness of ADR 0003. Planted ground truth, structural validators, calibrated judge. Per-case ledger in `platform/app/lib/evals/case_ledger.rb`, read by the error analysis surface in `web/` |
-| Operating in production | `platform/`, `.github/workflows/` | Guardrails, adversarial input handling, the data exfiltration threat model in ADR 0002, run tracing, CI gates |
-| Machine learning foundations | `intelligence/evals/calibration/` | Precision, recall and ranking metrics done properly, judge calibration against a labelled set, why a single accuracy number hides the failure that matters |
+| LLM foundations | `intelligence/app/llm/` | Context window budgeting, structured output, the recorded-fixture client, cost and latency accounting per agent run |
+| Grounding models with data | `platform/app/lib/mars/`, `platform/app/controllers/api/v1/retrieval_controller.rb` | Document pipeline into pgvector, chunking with metadata, citation-carrying retrieval. The split between SQL facts and vector text is ADR 0005 |
+| Building agentic systems | `intelligence/app/agents/`, `intelligence/app/tools/`, `intelligence/app/mcp_server.py` | Validated tool registry, single-agent runtime, one orchestrator agent, memory and context management across a long run, and the same registry exposed over MCP in `intelligence/app/mcp_server.py` |
+| Evaluation-driven development | `platform/app/lib/evals/`, `intelligence/app/artefacts/` | Layers 1 and 2 of ADR 0003: planted ground truth scored in `platform/app/lib/evals/detector_scores.rb`, structural validators in `intelligence/app/artefacts/validator.py`. The per-case ledger is read by the error analysis surface in `web/`. Layer 3, the calibrated judge, needs a key and is not built |
+| Operating in production | `platform/`, `intelligence/app/main.py`, `.github/workflows/` | Guardrails, adversarial input handling, the data exfiltration threat model in ADR 0002, run tracing, CI gates |
+| Machine learning foundations | `platform/app/lib/evals/` | Precision, recall and ranking metrics reported separately and never averaged, a ceiling reported beside a precision that cannot reach 1.0, and why a single accuracy number hides the failure that matters. Judge calibration against a labelled set is not built: it needs a key |
 
 ## 2. Software engineering fundamentals
 
@@ -35,7 +35,7 @@ toward full-stack breadth.
 | --- | --- | --- |
 | System architecture | `docs/adr/0001` | The three-service split, and why the service boundary is a security mechanism rather than an organisational one |
 | Data store design | `platform/db/` | Schema for eight companies that disagree about what ARR means, time-series rollups, indexing for the queries that actually run |
-| Security and privacy | `platform/app/policies/`, ADR 0002 | Row-level security as the boundary, tested by attacking it |
+| Security and privacy | `platform/db/migrate/`, `platform/app/lib/mars/tenancy.rb`, ADR 0002 | Row-level security as the boundary, tested by attacking it |
 | Testing | `platform/spec/`, `intelligence/tests/` | Property assertions over phrasing assertions, isolation tests that attempt breaches, fixtures that keep the suite offline |
 | Tradeoff recognition | `docs/adr/` | Every ADR names what lost and why. That is the skill |
 | Full-stack breadth | All three services | Ruby, Python and TypeScript in one change when a feature needs it |
@@ -50,8 +50,8 @@ This skill is exercised by how this repo is built, not by a module inside it.
 | Sub-skill | Where | What specifically |
 | --- | --- | --- |
 | Context management | `CLAUDE.md`, `docs/log/` | What the agent was told, what it was not, and which omissions caused which defects |
-| Verification | `.github/workflows/ci.yml` | Tests, evals and acceptance criteria as gates rather than suggestions |
-| Agentic code review | CI | Automated review on every change, with the security and architecture audit as a separate pass |
+| Verification | `.github/workflows/mars-two-ci.yml` | Tests, evals and acceptance criteria as gates rather than suggestions |
+| Agentic code review | CI | Four jobs, each of which has failed for a real reason at least once. The eval gate and the case-ledger staleness check are the two that catch what tests do not |
 | Human review where AI review is insufficient | `docs/log/` | Recorded cases where automated review passed something a human caught |
 | Spec-first workflow | Git history | Specs and failing tests committed before implementations, deliberately not squashed |
 

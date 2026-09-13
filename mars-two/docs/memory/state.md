@@ -12,7 +12,7 @@ Last updated 2026-09-13, after the benchmark and the register fixes.
 | Four detectors | `platform/app/lib/{reconciliation,detection}/` | Scored against the planted key: revenue 32/32, CRM 37/37, onboarding 14/14, churn recall@5 1.0 |
 | Eval gate and case ledger | `platform/app/lib/evals/` | CI fails on a worse score or a stale ledger |
 | API | `platform/app/controllers/api/v1/` | Nine endpoints, each grant-filtered, listed in `platform/README.md` |
-| Tool registry and MCP | `intelligence/app/tools/`, `app/mcp_server.py` | Probed end to end over stdio with a portfolio company's token |
+| Tool registry and MCP | `intelligence/app/tools/`, `intelligence/app/mcp_server.py` | Probed end to end over stdio with a portfolio company's token |
 | Artefact validation | `intelligence/app/artefacts/` | Layer 2 of ADR 0003, against captured payloads |
 | Agent pipeline | `intelligence/app/agents/` | Six specs, run pipeline tested with a scripted model |
 | Three views | `web/src/` | Register, artefact, error analysis. 53 tests, rendered and measured in a browser |

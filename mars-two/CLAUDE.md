@@ -45,7 +45,7 @@ your source" is not a citation system; a post-processor that rejects an artefact
 an uncited claim is.
 
 **Tools are named, and their parameters are validated before execution.** Every tool
-is declared in `intelligence/tools/registry.py` with a Pydantic schema. Unvalidated
+is declared in `intelligence/app/tools/registry.py` with a Pydantic schema. Unvalidated
 arguments never reach a query.
 
 **Every agent artefact carries its evidence.** Each claim links to the record, metric
