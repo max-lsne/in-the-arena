@@ -77,6 +77,13 @@ The tests run against payloads captured from a running platform rather than
 written by hand, because a validator tested against an imagined payload passes
 until the first real one arrives.
 
+### What structural validation cannot do
+
+It catches an invented number. It does not catch an invented ordering: "Meterpath
+ranks first on ARR" contains no figure, and ARR is returned without a rank
+precisely because ranking it would be false. Orderings are Layer 1's problem,
+scored against the answer key, and Layer 3's for prose.
+
 ## The MCP surface
 
 `app/mcp_server.py` exposes the same registry over MCP, so an MCP client calls the

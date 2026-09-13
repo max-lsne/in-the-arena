@@ -91,4 +91,52 @@ RSpec.describe "Metrics API", type: :request do
       expect(json["metrics"].map { |m| m["company"] }.uniq).to match_array(%w[vaultline meterpath])
     end
   end
+
+  # The defect this guards. Ordering chronologically and taking the first N drops
+  # the most recent months rather than the oldest, so the caller is handed stale
+  # figures with nothing to say they are stale. The front end rendered a
+  # month-old value as current for three companies, and no test noticed because
+  # every test asked for fewer rows than the limit.
+  describe "when there are more values than the limit" do
+    let(:operator) do
+      auth_headers(issue_token(role: :group_operator, companies: [ vaultline, meterpath ]))
+    end
+    let(:newest) { Date.new(2026, 9, 1) }
+
+    before do
+      ApplicationRecord.as_owner do
+        (1..5).each do |months_ago|
+          period = newest << months_ago
+          MetricValue.create!(
+            company: vaultline, metric_key: "arr_cents", grain: "month",
+            period_start: period, period_end: period.end_of_month,
+            value: 11_000_000_00, unit: "eur_cents", formula: "f",
+            input_count: 100, computed_at: Time.current
+          )
+        end
+      end
+    end
+
+    it "returns the most recent ones, not the oldest" do
+      get "/api/v1/metrics", params: { company: "vaultline", limit: 3 }, headers: operator
+
+      expect(json["metrics"].size).to eq(3)
+      expect(Date.parse(json["metrics"].last["period_start"])).to eq(newest)
+    end
+
+    it "says that it truncated rather than leaving the caller to guess" do
+      get "/api/v1/metrics", params: { company: "vaultline", limit: 1 }, headers: operator
+
+      expect(json["truncated"]).to be(true)
+      expect(json["total"]).to eq(6)
+      expect(json["returned"]).to eq(1)
+    end
+
+    it "still returns them oldest first, so a series reads left to right" do
+      get "/api/v1/metrics", params: { company: "vaultline", limit: 4 }, headers: operator
+
+      periods = json["metrics"].map { |m| m["period_start"] }
+      expect(periods).to eq(periods.sort)
+    end
+  end
 end

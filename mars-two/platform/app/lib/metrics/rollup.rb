@@ -20,11 +20,18 @@ module Metrics
     # there hands an agent a figure that reads as "time to value is zero days".
     # Metrics that cannot be known with no inputs are omitted, so absence means
     # absence and an agent has to say it does not know.
-    Metric = Struct.new(:unit, :formula, :sql, :zero_when_empty, keyword_init: true)
+    # higher_is_better is a property of the metric, and every metric has to
+    # declare one. Without it a rank is just an ordering: first place on gross
+    # churn means the worst churn in the portfolio, and "Clausemark ranks first
+    # on churn" is a sentence that reads as praise.
+    Metric = Struct.new(
+      :unit, :formula, :sql, :zero_when_empty, :higher_is_better, keyword_init: true
+    )
 
     METRICS = {
       arr_cents: Metric.new(
         zero_when_empty: true,
+        higher_is_better: true,
         unit: "eur_cents",
         formula: "sum(subscriptions.mrr_cents active at period_end) * 12",
         sql: <<~SQL
@@ -41,6 +48,7 @@ module Metrics
       # was intended; the reconciliation agent exists because those two differ.
       net_revenue_retention: Metric.new(
         zero_when_empty: false,
+        higher_is_better: true,
         unit: "ratio",
         formula: "billed this month / billed twelve months ago, over customers billed twelve months ago",
         sql: <<~SQL
@@ -71,6 +79,7 @@ module Metrics
 
       gross_churn_rate: Metric.new(
         zero_when_empty: false,
+        higher_is_better: false,
         unit: "ratio",
         formula: "customers churned in period / customers active at period start",
         sql: <<~SQL
@@ -95,6 +104,7 @@ module Metrics
       # the backlog grows.
       open_tickets: Metric.new(
         zero_when_empty: true,
+        higher_is_better: false,
         unit: "count",
         formula: "tickets opened on or before period_end and not closed by period_end",
         sql: <<~SQL
@@ -108,6 +118,7 @@ module Metrics
 
       overdue_invoice_cents: Metric.new(
         zero_when_empty: true,
+        higher_is_better: false,
         unit: "eur_cents",
         formula: "sum(invoices.amount_cents where status = overdue and period_start <= period_end)",
         sql: <<~SQL
@@ -121,6 +132,7 @@ module Metrics
 
       pipeline_coverage: Metric.new(
         zero_when_empty: false,
+        higher_is_better: true,
         # A multiple, not a percentage. Both are dimensionless and they read
         # completely differently: 3.7x coverage rendered as "370.8%" is the same
         # class of error as a bare number whose unit has to be guessed.
@@ -148,6 +160,7 @@ module Metrics
 
       median_onboarding_days: Metric.new(
         zero_when_empty: false,
+        higher_is_better: false,
         unit: "days",
         formula: "median(completed_on - started_on) over onboardings completed in period",
         sql: <<~SQL

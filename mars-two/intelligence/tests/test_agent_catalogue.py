@@ -138,3 +138,40 @@ def test_the_churn_brief_runs_end_to_end_and_validates() -> None:
     )
 
     assert outcome.ok, str(outcome.report)
+
+
+class TestBenchmarkEvidence:
+    """A comparison an agent is allowed to state, and one it is not."""
+
+    def payload(self) -> dict:
+        return json.loads((DATA / "benchmark_portfolio.json").read_text())
+
+    def index(self) -> EvidenceIndex:
+        return EvidenceIndex().record(self.payload())
+
+    def test_a_rank_and_a_median_the_platform_computed_are_quotable(self) -> None:
+        nrr = self.payload()["metrics"]["net_revenue_retention"]
+        index = self.index()
+
+        assert index.knows_number(Decimal(nrr["companies"][0]["value"]))
+        assert index.knows_number(Decimal(nrr["portfolio_median"]))
+        assert index.knows_number(Decimal(1))  # the rank itself
+
+    # Prose rounds. "EUR 5.5M" has to be a figure a tool returned, or the
+    # validator would have to allow arbitrary rescaling to let it through, and
+    # that is the hole an invented number walks through.
+    def test_the_rounded_figure_a_sentence_would_use_is_quotable(self) -> None:
+        index = self.index()
+
+        assert index.knows_number(Decimal("5.5"))
+        # And the unrounded one, as returned.
+        arr = self.payload()["metrics"]["arr_cents"]["companies"][0]
+        assert index.knows_number(Decimal(arr["value"]))
+
+    def test_a_difference_between_two_companies_is_not(self) -> None:
+        nrr = self.payload()["metrics"]["net_revenue_retention"]["companies"]
+        gap = Decimal(nrr[0]["value"]) - Decimal(nrr[-1]["value"])
+
+        # "Sayline is 1.8 points ahead of the bottom of the portfolio" is the
+        # agent doing arithmetic, however small.
+        assert not self.index().knows_number(gap * 100)

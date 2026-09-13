@@ -209,3 +209,30 @@ def churn_risk_ranking(params: DetectionParams, ctx: ToolContext) -> dict:
         "/api/v1/detections/churn_risk",
         {"company": params.company, "as_of": params.as_of, "limit": params.limit},
     )
+
+
+class BenchmarkParams(BaseModel):
+    keys: str | None = Field(
+        default=None,
+        description="Comma-separated metric keys. Omit for every metric.",
+    )
+    as_of: str | None = Field(
+        default=None,
+        description="ISO date. The latest month at or before it is used. Omit for the latest.",
+    )
+
+
+@registry.register(
+    "portfolio_benchmark",
+    "Compare one month across the portfolio. Each metric comes back with every "
+    "company's value, the rank, the portfolio median, and which direction is "
+    "good, so a rank means better rather than bigger. Two kinds of figure come "
+    "back without a rank or a median: ARR, because the companies use three "
+    "different definitions of it, and absolute counts, because they scale with "
+    "company size. Both carry the reason. Do not rank them yourself, and do not "
+    "describe an unranked figure as a standing.",
+    BenchmarkParams,
+    path="/api/v1/benchmark",
+)
+def portfolio_benchmark(params: BenchmarkParams, ctx: ToolContext) -> dict:
+    return ctx.platform.get("/api/v1/benchmark", {"keys": params.keys, "as_of": params.as_of})

@@ -117,3 +117,68 @@ numeric only rather than inventing a reason for it.
 BY_KEY = {
     spec.key: spec for spec in (CONTRACT_BILLING, PIPELINE_HYGIENE, ONBOARDING_CHASER, CHURN_BRIEF)
 }
+
+
+CROSS_PORTFOLIO_BENCHMARK = AgentSpec(
+    key="cross_portfolio_benchmark",
+    system=f"""You compare the eight companies in a holding company's portfolio
+on one month's figures.
+
+`portfolio_benchmark` has already done the comparison: values, ranks, the
+portfolio median, and which direction is good for each metric. Read the ranks;
+do not work them out.
+
+Two kinds of figure come back without a rank, each with the reason. ARR, because
+these companies use three different definitions of it, so a league table would be
+a table of three different quantities. Absolute counts, because they scale with
+company size, and the largest company having the most open tickets is a fact
+about headcount. When you mention one of those, say why it is not ranked. A
+sentence that gives an unranked figure a standing is the failure this agent
+exists to avoid.
+
+Lead with where a company sits against the median, not with the ordering.
+Somebody is eighth on every metric by arithmetic; whether eighth is a problem
+depends on the distance.
+
+{ARTEFACT_CONTRACT}""",
+    tools=["portfolio_benchmark", "list_companies"],
+)
+
+BOARD_PACK = AgentSpec(
+    key="board_pack",
+    system=f"""You draft the group operating section of a board pack for a
+holding company that owns eight B2B SaaS businesses.
+
+Read the figures with `portfolio_benchmark` and `company_metrics`, the plan with
+`list_initiatives`, and the history with `search_documents` over board minutes.
+An initiative carries the current value of the metric it claims to move, so say
+whether it moved. An initiative whose progress is null has no computed value for
+its metric; say that rather than implying nothing happened.
+
+A board section is not a list of numbers. It says what changed, against what was
+expected, and what is being done. But every figure in it is a figure a tool
+returned, and the quarter's story has to survive being checked against them.
+
+{ARTEFACT_CONTRACT}""",
+    tools=[
+        "portfolio_benchmark",
+        "company_metrics",
+        "list_initiatives",
+        "search_documents",
+        "list_companies",
+    ],
+    max_iterations=12,
+)
+
+
+BY_KEY = {
+    spec.key: spec
+    for spec in (
+        CONTRACT_BILLING,
+        PIPELINE_HYGIENE,
+        ONBOARDING_CHASER,
+        CHURN_BRIEF,
+        CROSS_PORTFOLIO_BENCHMARK,
+        BOARD_PACK,
+    )
+}
