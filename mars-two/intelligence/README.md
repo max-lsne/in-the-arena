@@ -37,6 +37,25 @@ previous answer. Re-record with `make fixtures` from the repo root.
 They are committed, and they are review artefacts. The diff when a prompt changes
 shows exactly how the model's answer changed.
 
+## What an agent run is
+
+`app/agents/pipeline.py` does three things the loop does not. The platform client
+is wrapped so every payload it returns is remembered, the final message is parsed
+into a structured artefact, and the artefact is validated before anyone sees it.
+
+The parse is the one place a model gets a second chance. Malformed JSON is a
+recoverable mistake and the error is a good instruction, so it is handed back
+once. A validation failure is not handed back: an artefact that cited nothing, or
+stated a number nobody returned, failed on the substance, and asking the same
+model again is how a wrong answer becomes a well-formatted wrong answer.
+
+The first agent is `contract_billing`. Its tests script the model rather than
+record it, because no fixtures exist yet and because what is under test is
+everything except the model's judgement: that tool results reach the evidence
+index, that a reply outside the agent's tool list is refused before it reaches
+the platform, and that an artefact stating a figure nobody returned is rejected
+even though it is well formed and fully cited.
+
 ## Structural validation
 
 `app/artefacts/` is Layer 2 of ADR 0003: the properties an artefact must have
@@ -98,7 +117,7 @@ wrong without the connection dying.
 | --- | --- |
 | `app/llm/` | The three-mode client and the fixture store |
 | `app/tools/` | The validated tool registry |
-| `app/agents/` | The agent runtime |
+| `app/agents/` | The agent runtime, the agent specs and the run pipeline |
 | `app/artefacts/` | Structural validation of what an agent hands back |
 | `app/mcp_server.py` | The same registry, over MCP |
 | `app/evals/` | The three-layer eval harness |
