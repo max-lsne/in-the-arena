@@ -7,6 +7,10 @@ import { Sparkline } from "./Sparkline";
  * Without it, a band flags anything outside it and the colour says "above" or
  * "below" rather than "better" or "worse". 180 open tickets rendered green as
  * "above the band" is a confident wrong signal, which is worse than no signal.
+ *
+ * The platform now sends `higher_is_better` with every value and that is what is
+ * used. These stay as the fallback for a metric the platform has no declaration
+ * for, and as the bands, which are a display decision and live here.
  */
 const COLUMNS = [
   { key: "arr_cents", label: "ARR", band: null, higherIsBetter: true },
@@ -89,6 +93,8 @@ export function Register({ companies, metrics }: Props) {
               }
 
               const value = Number(latest.value);
+              // The platform's declaration wins. The column's is the fallback.
+              const higherIsBetter = latest.higher_is_better ?? column.higherIsBetter;
               const outside = column.band
                 ? value < column.band.low
                   ? "low"
@@ -98,7 +104,7 @@ export function Register({ companies, metrics }: Props) {
                 : null;
               // Colour says better or worse, never merely higher or lower.
               const breach = outside
-                ? (outside === "high") === column.higherIsBetter
+                ? (outside === "high") === higherIsBetter
                   ? "above"
                   : "below"
                 : null;
@@ -114,7 +120,7 @@ export function Register({ companies, metrics }: Props) {
                     <Sparkline
                       values={points.map((p) => Number(p.value))}
                       band={column.band}
-                      higherIsBetter={column.higherIsBetter}
+                      higherIsBetter={higherIsBetter}
                       label={`${column.label} for ${company.name}, last ${points.length} months`}
                     />
                   )}

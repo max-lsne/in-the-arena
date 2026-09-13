@@ -18,6 +18,12 @@ export interface MetricValue {
   /** A string, because the platform sends a decimal and a float would round it. */
   value: string;
   unit: MetricUnit;
+  /** Which direction is good, as the platform declares it.
+   *
+   * The display used to keep its own copy of this. Two copies of a rule that
+   * decides whether a colour means better or worse is one copy too many, and the
+   * one on this side was the one nobody would think to update. */
+  higher_is_better?: boolean | null;
   formula: string;
   input_count: number;
   computed_at: string;

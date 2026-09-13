@@ -154,3 +154,35 @@ describe("direction of good", () => {
     expect(container.querySelector('[data-breach="below"]')).not.toBeNull();
   });
 });
+
+describe("Register, direction of good", () => {
+  // Two copies of a rule that decides whether a colour means better or worse is
+  // one copy too many, and the copy in the browser is the one nobody would think
+  // to update. The platform's declaration wins.
+  it("takes the platform's word for which direction is good", () => {
+    const overridden = {
+      ...metric("vaultline", "pipeline_coverage", "9.0", "multiple"),
+      higher_is_better: false,
+    };
+
+    render(
+      <Register companies={[company("vaultline", "Vaultline", 12_000_000_00)]} metrics={[overridden]} />,
+    );
+
+    // 9.0x is above the band. Declared lower-is-better, that is a breach below.
+    const cell = screen.getByText("9.0x").closest("td");
+    expect(cell).toHaveAttribute("data-breach", "below");
+  });
+
+  it("falls back to the column when the platform declares nothing", () => {
+    render(
+      <Register
+        companies={[company("vaultline", "Vaultline", 12_000_000_00)]}
+        metrics={[metric("vaultline", "pipeline_coverage", "9.0", "multiple")]}
+      />,
+    );
+
+    const cell = screen.getByText("9.0x").closest("td");
+    expect(cell).toHaveAttribute("data-breach", "above");
+  });
+});
