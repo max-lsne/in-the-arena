@@ -80,7 +80,13 @@ export function Register({ companies, metrics }: Props) {
               const points = (series.get(`${company.slug}:${column.key}`) ?? [])
                 .slice()
                 .sort((a, b) => a.period_start.localeCompare(b.period_start));
-              const latest = points[points.length - 1];
+              // The last finished period, not the last one computed. A month in
+              // progress is not a result: on the third of the month every flow
+              // metric reads near zero, and a register that prints that as the
+              // figure says churn stopped and retention collapsed.
+              const finished = points.filter((p) => p.complete !== false);
+              const latest = finished[finished.length - 1] ?? points[points.length - 1];
+              const partial = latest?.complete === false;
 
               if (!latest) {
                 return (
@@ -118,13 +124,19 @@ export function Register({ companies, metrics }: Props) {
                 >
                   {column.band && (
                     <Sparkline
-                      values={points.map((p) => Number(p.value))}
+                      values={finished.length > 0 ? finished.map((p) => Number(p.value)) : points.map((p) => Number(p.value))}
                       band={column.band}
                       higherIsBetter={higherIsBetter}
                       label={`${column.label} for ${company.name}, last ${points.length} months`}
                     />
                   )}
                   <span className="register__number">{formatMetric(latest.value, latest.unit)}</span>
+                  {/* Only ever shown when nothing finished exists to show. */}
+                  {partial && (
+                    <span className="register__partial" title="this month, still running">
+                      MTD
+                    </span>
+                  )}
                 </td>
               );
             })}

@@ -186,3 +186,52 @@ describe("Register, direction of good", () => {
     expect(cell).toHaveAttribute("data-breach", "above");
   });
 });
+
+describe("Register, a month still running", () => {
+  const finished = {
+    ...metric("vaultline", "gross_churn_rate", "0.0096", "ratio", "2026-08-01"),
+    complete: true,
+  };
+  const running = {
+    ...metric("vaultline", "gross_churn_rate", "0", "ratio", "2026-09-01"),
+    complete: false,
+  };
+
+  // On the third of the month every flow metric reads near zero. A register that
+  // prints that as the figure says churn stopped.
+  it("shows the last finished period rather than the month in progress", () => {
+    render(
+      <Register
+        companies={[company("vaultline", "Vaultline", 12_000_000_00)]}
+        metrics={[finished, running]}
+      />,
+    );
+
+    expect(screen.getByText("1.0%")).toBeInTheDocument();
+    expect(screen.queryByText("0.0%")).not.toBeInTheDocument();
+  });
+
+  it("falls back to the running month when nothing has finished, and says so", () => {
+    render(
+      <Register
+        companies={[company("vaultline", "Vaultline", 12_000_000_00)]}
+        metrics={[running]}
+      />,
+    );
+
+    expect(screen.getByText("0.0%")).toBeInTheDocument();
+    expect(screen.getByText("MTD")).toBeInTheDocument();
+  });
+
+  it("says nothing when the platform does not send completeness", () => {
+    render(
+      <Register
+        companies={[company("vaultline", "Vaultline", 12_000_000_00)]}
+        metrics={[metric("vaultline", "gross_churn_rate", "0.0096", "ratio")]}
+      />,
+    );
+
+    expect(screen.getByText("1.0%")).toBeInTheDocument();
+    expect(screen.queryByText("MTD")).not.toBeInTheDocument();
+  });
+});

@@ -65,6 +65,14 @@ module Api
           # number an improvement, a benchmark that puts eight of them in order.
           # Sent with the value so nobody has to keep a second copy of it.
           higher_is_better: Metrics::Rollup::METRICS[metric.metric_key.to_sym]&.higher_is_better,
+          # Whether the period it covers has finished.
+          #
+          # A flow metric for the current month is a month in progress: churn
+          # reads 0.0% on the third of the month because nobody has churned yet,
+          # not because churn stopped. Sent so that a display can show the last
+          # finished month as the figure and a reader is never told a partial
+          # month is a result.
+          complete: metric.period_end < Date.current,
           formula: metric.formula,
           input_count: metric.input_count,
           computed_at: metric.computed_at

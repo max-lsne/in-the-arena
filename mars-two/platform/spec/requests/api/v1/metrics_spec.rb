@@ -139,4 +139,37 @@ RSpec.describe "Metrics API", type: :request do
       expect(periods).to eq(periods.sort)
     end
   end
+
+  # A flow metric for the current month is a month in progress. Gross churn reads
+  # 0.0% on the third of the month because nobody has churned yet, and a register
+  # that prints that as the figure tells an operator churn stopped.
+  describe "a period that has not finished" do
+    let(:operator) do
+      auth_headers(issue_token(role: :group_operator, companies: [ vaultline, meterpath ]))
+    end
+
+    it "marks the current month incomplete and a finished one complete" do
+      ApplicationRecord.as_owner do
+        MetricValue.create!(
+          company: vaultline, metric_key: "gross_churn_rate", grain: "month",
+          period_start: Date.current.beginning_of_month,
+          period_end: Date.current.end_of_month,
+          value: 0, unit: "ratio", formula: "f", input_count: 10, computed_at: Time.current
+        )
+        MetricValue.create!(
+          company: vaultline, metric_key: "gross_churn_rate", grain: "month",
+          period_start: (Date.current << 1).beginning_of_month,
+          period_end: (Date.current << 1).end_of_month,
+          value: "0.0096", unit: "ratio", formula: "f", input_count: 10, computed_at: Time.current
+        )
+      end
+
+      get "/api/v1/metrics", params: { company: "vaultline", keys: "gross_churn_rate" },
+          headers: operator
+
+      by_period = json["metrics"].index_by { |m| m["period_start"] }
+      expect(by_period[Date.current.beginning_of_month.to_s]["complete"]).to be(false)
+      expect(by_period[(Date.current << 1).beginning_of_month.to_s]["complete"]).to be(true)
+    end
+  end
 end

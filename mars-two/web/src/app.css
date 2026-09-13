@@ -656,3 +656,12 @@
 .evidence__scroll {
   overflow-x: auto;
 }
+
+/* Shown only when a company has no finished period for a metric, so the figure
+   on screen is a month still running. */
+.register__partial {
+  margin-left: 6px;
+  font-variation-settings: "wdth" 75;
+  font-size: 0.62rem;
+  color: var(--ink-soft);
+}

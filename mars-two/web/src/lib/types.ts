@@ -24,6 +24,13 @@ export interface MetricValue {
    * decides whether a colour means better or worse is one copy too many, and the
    * one on this side was the one nobody would think to update. */
   higher_is_better?: boolean | null;
+  /** Whether the period it covers has finished.
+   *
+   * A flow metric for the current month is a month in progress. Churn reads
+   * 0.0% on the third because nobody has churned yet, not because churn
+   * stopped, and printing that as the figure tells the operator something
+   * false. */
+  complete?: boolean;
   formula: string;
   input_count: number;
   computed_at: string;
