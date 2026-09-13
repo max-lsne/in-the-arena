@@ -1,0 +1,207 @@
+name: mars-two CI
+
+on:
+  push:
+    paths: [ 'mars-two/**', '.github/workflows/mars-two-ci.yml' ]
+  pull_request:
+    paths: [ 'mars-two/**', '.github/workflows/mars-two-ci.yml' ]
+
+# A job that passes because it found nothing to run is worse than a missing job:
+# it reports a green check that means nothing, which is the same failure mode
+# docs/adr/0003-evaluation-strategy.md exists to avoid.
+
+jobs:
+  platform:
+    name: platform (Rails)
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports: [ '5432:5432' ]
+        options: >-
+          --health-cmd pg_isready --health-interval 10s
+          --health-timeout 5s --health-retries 5
+
+    env:
+      RAILS_ENV: test
+      PGHOST: localhost
+      PGPASSWORD: postgres
+      MARS_DB_HOST: localhost
+      MARS_DB_OWNER_USER: mars
+      MARS_DB_OWNER_PASSWORD: mars
+      MARS_DB_APP_USER: mars_app
+      MARS_DB_APP_PASSWORD: mars_app
+
+    defaults:
+      run:
+        working-directory: mars-two/platform
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # pgvector installs only as a superuser unless the extension is marked
+      # trusted, and the application's owner role is deliberately not one.
+      # Installing into template1 means every database created afterwards
+      # inherits it, including the ones db:test:prepare drops and recreates.
+      - name: Install pgvector into template1
+        run: psql -U postgres -d template1 -c "CREATE EXTENSION IF NOT EXISTS vector;"
+
+      - name: Create roles
+        run: psql -U postgres -d postgres -f db/setup_roles.sql
+
+      - name: Create the test database owned by the owner role
+        run: createdb -U postgres -O mars mars_two_test
+
+      - name: Grant the runtime role, and revoke the eval answer key
+        run: psql -U postgres -d mars_two_test -f db/setup_roles.sql
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.6'
+          bundler-cache: true
+          working-directory: mars-two/platform
+
+      - name: Lint
+        run: bundle exec rubocop
+
+      - name: Load schema
+        run: bin/rails db:test:prepare
+
+      # Asserts the isolation design of ADR 0002 by attacking it, and the
+      # determinism of the synthetic generator that every eval grades against.
+      - name: Spec
+        run: bundle exec rspec --format progress
+
+  intelligence:
+    name: intelligence (Python)
+    runs-on: ubuntu-latest
+
+    # No ANTHROPIC_API_KEY, deliberately. The suite runs against recorded
+    # fixtures, and a test that needs a live model is a test that fails for
+    # reasons unrelated to the code. See docs/adr/0007-agent-loop-and-fixtures.md.
+    env:
+      MARS_LLM_MODE: replay
+
+    defaults:
+      run:
+        working-directory: mars-two/intelligence
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: mars-two/intelligence/uv.lock
+
+      - name: Sync
+        run: uv sync --frozen
+
+      - name: Lint
+        run: uv run ruff check . && uv run ruff format --check .
+
+      - name: Test
+        run: uv run pytest -q
+
+  evals:
+    name: evals (gate)
+    runs-on: ubuntu-latest
+    needs: [ platform ]
+
+    # Scores every model-free detector against the planted answer key and fails
+    # if any of them got worse than the committed baseline. A number moving is
+    # not news; a number moving the wrong way is.
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports: [ '5432:5432' ]
+        options: >-
+          --health-cmd pg_isready --health-interval 10s
+          --health-timeout 5s --health-retries 5
+
+    env:
+      RAILS_ENV: development
+      PGHOST: localhost
+      PGPASSWORD: postgres
+      MARS_DB_HOST: localhost
+      MARS_DB_OWNER_USER: mars
+      MARS_DB_OWNER_PASSWORD: mars
+      MARS_DB_APP_USER: mars_app
+      MARS_DB_APP_PASSWORD: mars_app
+
+    defaults:
+      run:
+        working-directory: mars-two/platform
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pgvector into template1
+        run: psql -U postgres -d template1 -c "CREATE EXTENSION IF NOT EXISTS vector;"
+
+      - name: Create roles
+        run: psql -U postgres -d postgres -f db/setup_roles.sql
+
+      - name: Create the database owned by the owner role
+        run: createdb -U postgres -O mars mars_two_development
+
+      - name: Grant the runtime role, and revoke the eval answer key
+        run: psql -U postgres -d mars_two_development -f db/setup_roles.sql
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.6'
+          bundler-cache: true
+          working-directory: mars-two/platform
+
+      - name: Migrate
+        run: bin/rails db:migrate
+
+      - name: Seed the synthetic portfolio
+        run: bin/rails synthetic:seed
+
+      - name: Score the detectors against the committed baseline
+        run: bin/rails evals:detectors
+
+      # The ledger the error analysis view reads is a committed artefact. A
+      # detector change that nobody re-recorded leaves the view showing last
+      # week's cases, with nothing to say that it is.
+      - name: Fail if the committed case ledger is stale
+        run: |
+          bin/rails evals:cases
+          git diff --exit-code -- db/eval_baselines/cases.json
+
+  web:
+    name: web (TypeScript)
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: mars-two/web
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with: { version: 10 }
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+          cache-dependency-path: mars-two/web/pnpm-lock.yaml
+
+      - run: pnpm install --frozen-lockfile
+      - name: Typecheck
+        run: pnpm exec tsc --noEmit
+      - name: Lint
+        run: pnpm lint
+      - name: Test
+        run: pnpm test

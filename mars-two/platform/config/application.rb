@@ -1,0 +1,63 @@
+require_relative "boot"
+
+require "rails"
+# Pick the frameworks you want:
+require "active_model/railtie"
+require "active_job/railtie"
+require "active_record/railtie"
+# require "active_storage/engine"
+require "action_controller/railtie"
+# require "action_mailer/railtie"
+# require "action_mailbox/engine"
+# require "action_text/engine"
+require "action_view/railtie"
+# require "action_cable/engine"
+# require "rails/test_unit/railtie"
+
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
+Bundler.require(*Rails.groups)
+
+module Platform
+  class Application < Rails::Application
+    # Initialize configuration defaults for originally generated Rails version.
+    config.load_defaults 8.1
+
+    # Please, add to the `ignore` list any other `lib` subdirectories that do
+    # not contain `.rb` files, or that should not be reloaded or eager loaded.
+    # Common ones are `templates`, `generators`, or `middleware`, for example.
+    config.autoload_lib(ignore: %w[assets tasks])
+
+    # Configuration for the application, engines, and railties goes here.
+    #
+    # These settings can be overridden in specific environments using the files
+    # in config/environments, which are processed later.
+    #
+    # config.time_zone = "Central Time (US & Canada)"
+    # config.eager_load_paths << Rails.root.join("extras")
+
+    # Only loads a smaller set of middleware suitable for API only apps.
+    # Middleware like session, flash, cookies can be added back manually.
+    # Skip views, helpers and assets when generating a new resource.
+    config.api_only = true
+
+    # Row-level security policies, the mars_company_ids() function and the
+    # REVOKE on ground_truths are all raw SQL, and schema.rb cannot represent
+    # any of them. A test database loaded from schema.rb would therefore have no
+    # isolation at all, and every isolation spec would pass while asserting
+    # nothing. structure.sql keeps them.
+    config.active_record.schema_format = :sql
+
+    # pg_dump writes COMMENT ON EXTENSION vector, and replaying that statement
+    # requires owning the extension. The owner role is not a superuser and
+    # cannot install pgvector itself, so the extension is inherited from
+    # template1 and owned by the cluster superuser. Loading the dump then fails
+    # with "must be owner of extension vector".
+    #
+    # Nothing here depends on database comments, so they are dropped from the
+    # dump. The alternative is granting the application's owner role superuser,
+    # which trades a real privilege for a cosmetic line of SQL.
+    config.active_record.dump_schema_after_migration = true
+    ActiveRecord::Tasks::DatabaseTasks.structure_dump_flags = [ "--no-comments" ]
+  end
+end
