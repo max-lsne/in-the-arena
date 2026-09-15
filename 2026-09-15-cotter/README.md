@@ -56,7 +56,9 @@ free. The joint, draw and taper you set are kept in `localStorage`, so a reader
 finds the bench as they left it; *Reset* returns it to the too-steep, creeping rod.
 A live status line (`aria-live`) reads each state to a screen reader — the joint
 and the taper, whether the key holds, seizes, or creeps, and each part against its
-limit.
+limit. Under `prefers-reduced-motion` the bench holds still: the key does not grow
+into its taper or the members ease shut, each lands in one step, and *Find* drops
+straight onto the taper it wants.
 
 The four joints give first in a different part: the **strap** and the **beam**
 crush their soft bearing, the **rod** shears its steel key, the **stay** tears

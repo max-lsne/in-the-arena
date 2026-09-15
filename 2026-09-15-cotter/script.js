@@ -207,6 +207,9 @@
   }
   sizeCanvas();
 
+  var reduceMQ = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+  var reduce = reduceMQ ? reduceMQ.matches : false;
+
   var cssVar = function (name) {
     return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   };
@@ -473,7 +476,7 @@
     var dt = Math.min(0.05, (ts - lastTs) / 1000);
     lastTs = ts;
 
-    var ease = Math.min(1, dt * 11);
+    var ease = reduce ? 1 : Math.min(1, dt * 11);
     if (!initShown) { shown.rN = state.rN; shown.load = state.load; shown.seat = 1; initShown = true; }
     shown.rN += (state.rN - shown.rN) * ease;
     shown.load += (state.load - shown.load) * ease;
@@ -542,15 +545,21 @@
     update();
   });
 
-  // cut the key toward the target taper so it is seen to grow finer or bolder
+  // cut the key toward the target taper so it is seen to grow finer or bolder —
+  // under reduced motion it lands in one step
   function animateTaper(target) {
-    if (Math.abs(target - state.rN) < 1) { state.rN = target; inP.value = target; update(); return; }
+    if (reduce || Math.abs(target - state.rN) < 1) { state.rN = target; inP.value = target; update(); return; }
     var dir = target > state.rN ? RSTEP : -RSTEP;
     (function step() {
       state.rN = clamp(state.rN + dir, RMIN, RMAX);
       inP.value = state.rN; update();
       if (Math.abs(state.rN - target) >= 1) setTimeout(step, 22);
     })();
+  }
+
+  // follow a live change to the motion setting
+  if (reduceMQ && reduceMQ.addEventListener) {
+    reduceMQ.addEventListener("change", function (e) { reduce = e.matches; });
   }
 
   // repaint on theme flips so canvas colours follow
