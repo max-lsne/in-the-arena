@@ -124,7 +124,7 @@
   var inW = $("in-W"), inP = $("in-P");
   var labW = $("lab-W"), labP = $("lab-P");
   var jointBtns = Array.prototype.slice.call(document.querySelectorAll(".seg [data-joint]"));
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
   var pMark = $("p-mark"), pNote = $("p-note");
 
   function fmtkN(N) {
@@ -493,7 +493,40 @@
     current = compute(state);
     syncLabels(current);
     curVerdict = render(current);
+    announce(current, curVerdict);
     save();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(r, verdict) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var kT = Math.round(r.T / 1000), kF = Math.round(r.Fdrive / 1000);
+      var joint = r.J.material.charAt(0).toUpperCase() + r.J.material.slice(1);
+      var head = joint + ", drawn to " + state.load + " percent of its design load with the key cut to a taper of one in "
+        + state.rN + ". ";
+      var forces = "The draw is " + kT + " kilonewtons, seated by a drive of " + kF
+        + "; the bearing carries " + Math.round(r.uB * 100) + " percent of its crushing limit, the key "
+        + Math.round(r.uS * 100) + " percent of its shear, the member " + Math.round(r.uR * 100) + " percent of its tension.";
+      var msg;
+      if (verdict === "sound") {
+        msg = head + "Holds — the taper is shallower than the friction with margin to spare, self-locking and still strikeable, and every part sits inside its limit. " + forces;
+      } else if (verdict === "seized") {
+        msg = head + "Seized — self-locking, but far too fine: it seats only under a heavy blow and will not strike free. "
+          + "Cut a bolder taper, or find the taper. " + forces;
+      } else if (verdict === "loose") {
+        msg = head + "Works loose — the taper is steeper than the friction, so the key is not self-locking and creeps out under the load. "
+          + "Cut a finer taper, or find the taper. " + forces;
+      } else {
+        var who = r.bind === "bearing" ? "the bearing has crushed past its limit under the draw"
+          : r.bind === "key" ? "the key has sheared past its limit"
+          : "the member has torn across the slot its section is left with";
+        msg = head + "Overstressed — " + who + ". No taper relieves it — ease the draw or widen the bearing. " + forces;
+      }
+      sayEl.textContent = msg;
+    }, 260);
   }
 
   inW.addEventListener("input", function () { state.load = parseInt(inW.value, 10); update(); });

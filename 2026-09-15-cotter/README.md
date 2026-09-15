@@ -54,6 +54,9 @@ part against its limit, and the draw the joint safely holds. Press *Find the tap
 to cut the key to the taper that locks with a comfortable margin and still strikes
 free. The joint, draw and taper you set are kept in `localStorage`, so a reader
 finds the bench as they left it; *Reset* returns it to the too-steep, creeping rod.
+A live status line (`aria-live`) reads each state to a screen reader — the joint
+and the taper, whether the key holds, seizes, or creeps, and each part against its
+limit.
 
 The four joints give first in a different part: the **strap** and the **beam**
 crush their soft bearing, the **rod** shears its steel key, the **stay** tears
