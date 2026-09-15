@@ -557,6 +557,31 @@
     })();
   }
 
+  // nudge a slider-backed value by a step, from the keyboard
+  function nudge(field, delta, lo, hi, step, input) {
+    state[field] = Math.round(clamp(state[field] + delta, lo, hi) / step) * step;
+    input.value = state[field];
+    update();
+  }
+
+  // keyboard: work the bench without reaching for the mouse
+  var JOINT_KEYS = { "1": "strap", "2": "rod", "3": "beam", "4": "stay" };
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    if (el && el.tagName === "INPUT" && el.type === "range") return;   // let a focused slider keep its arrows
+    var k = e.key;
+    if (k === "f" || k === "F") { $("find").click(); }
+    else if (k === "r" || k === "R") { $("reset").click(); }
+    else if (JOINT_KEYS[k]) { state.joint = JOINT_KEYS[k]; update(); }
+    else if (k === "[") { nudge("rN", -2, RMIN, RMAX, RSTEP, inP); }         // a bolder, steeper taper
+    else if (k === "]") { nudge("rN", 2, RMIN, RMAX, RSTEP, inP); }          // a finer, shallower taper
+    else if (k === "-" || k === "_") { nudge("load", -LSTEP, LMIN, LMAX, LSTEP, inW); }  // ease the draw
+    else if (k === "=" || k === "+") { nudge("load", LSTEP, LMIN, LMAX, LSTEP, inW); }   // add draw
+    else return;
+    e.preventDefault();
+  });
+
   // follow a live change to the motion setting
   if (reduceMQ && reduceMQ.addEventListener) {
     reduceMQ.addEventListener("change", function (e) { reduce = e.matches; });

@@ -58,7 +58,10 @@ A live status line (`aria-live`) reads each state to a screen reader — the joi
 and the taper, whether the key holds, seizes, or creeps, and each part against its
 limit. Under `prefers-reduced-motion` the bench holds still: the key does not grow
 into its taper or the members ease shut, each lands in one step, and *Find* drops
-straight onto the taper it wants.
+straight onto the taper it wants. The whole bench works from the keyboard —
+<kbd>F</kbd> finds the taper, <kbd>R</kbd> resets, <kbd>1</kbd>–<kbd>4</kbd> pick
+the joint, <kbd>[</kbd> and <kbd>]</kbd> cut the taper bolder and finer, and
+<kbd>−</kbd>/<kbd>=</kbd> ease and add draw.
 
 The four joints give first in a different part: the **strap** and the **beam**
 crush their soft bearing, the **rod** shears its steel key, the **stay** tears
