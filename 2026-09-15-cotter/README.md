@@ -52,7 +52,8 @@ iron stay — set the **draw** as a share of the joint's design load, and cut th
 **taper** from a bold `1 : 3` to a fine `1 : 42`. The gauge reads the force in each
 part against its limit, and the draw the joint safely holds. Press *Find the taper*
 to cut the key to the taper that locks with a comfortable margin and still strikes
-free.
+free. The joint, draw and taper you set are kept in `localStorage`, so a reader
+finds the bench as they left it; *Reset* returns it to the too-steep, creeping rod.
 
 The four joints give first in a different part: the **strap** and the **beam**
 crush their soft bearing, the **rod** shears its steel key, the **stay** tears

@@ -44,10 +44,34 @@
   var MTARGET = 2.6;                          // the lock margin a good taper aims for
   var SEIZE = 5.0;                            // above this margin the key is seized
   var LOCK = 1.0;                             // below this it creeps out under load
+  var KEY = "cotter.joint.v1";               // where the joint, draw and taper are kept between visits
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+  function clampStep(v, a, b, step) {
+    v = Math.round((+v) / step) * step;
+    if (!isFinite(v)) return a;
+    return v < a ? a : v > b ? b : v;
+  }
 
-  var state = Object.assign({}, DEFAULT);
+  // ---- persistence -----------------------------------------------------
+  function load() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      if (!JOINTS[o.joint]) return null;
+      return {
+        joint: o.joint,
+        rN: clampStep(o.rN, RMIN, RMAX, RSTEP),
+        load: clampStep(o.load, LMIN, LMAX, LSTEP)
+      };
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  var state = load() || Object.assign({}, DEFAULT);
 
   // ---- the joint -------------------------------------------------------
   // Every force from the taper and the draw as a share of the design load.
@@ -469,6 +493,7 @@
     current = compute(state);
     syncLabels(current);
     curVerdict = render(current);
+    save();
   }
 
   inW.addEventListener("input", function () { state.load = parseInt(inW.value, 10); update(); });
