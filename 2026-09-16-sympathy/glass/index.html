@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glass — a wine glass has one note, and a voice that holds exactly that note pours energy into the rim faster than the glass can shed it, until the rim flexes past what it bears and bursts, while the same voice a tone away does nothing</title>
+  <meta name="description" content="A wine glass sings at one natural pitch. A sustained tone on that pitch drives the rim into its oval flexing mode, and because the glass sheds energy slowly, the flex builds until it passes the breaking strain and the glass shatters — while a tone even a little off the note barely stirs it. Set the pitch of the tone against the glass's note, the loudness, and the glass itself, from a thick forgiving tumbler to a thin ringing crystal, and find the note that breaks it. Deflection = static × 1 ⁄ √((1 − r²)² + (r ⁄ Q)²); the peak rises to about Q at r = 1 and is about 1 ⁄ Q wide." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f141a'/%3E%3Cpath d='M11 6 L21 6 C21 13 18 16 16 16 C14 16 11 13 11 6 Z' fill='none' stroke='%234f95b0' stroke-width='2' stroke-linejoin='round'/%3E%3Cline x1='16' y1='16' x2='16' y2='25' stroke='%234f95b0' stroke-width='2'/%3E%3Cline x1='11' y1='25' x2='21' y2='25' stroke='%234f95b0' stroke-width='2'/%3E%3Cpath d='M23 9 q3 1 0 5' fill='none' stroke='%23c98a3c' stroke-width='1.6'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#eef1f4" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0d1116" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Glass — the one note that breaks it" />
+  <meta property="og:description" content="A wine glass has a single pitch, and a voice that holds it exactly pours in energy faster than the rim can shed it, until the flex passes the breaking strain and the glass bursts — while the same voice a tone away does nothing. Not the loudest input, the matched one. Worked here on a glass you can tune to, sound, and shatter." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">In the arena · 2026-09-16 · sympathy · two of three</p>
+      <p class="pron"><b>glass</b> · <i>noun</i> · /ɡlɑːs/ — a vessel of fused silica, hard and brittle, that rings at a clear pitch when struck and flexes into an oval when driven at it; a thin crystal glass rings long and true, a thick tumbler briefly and dull; from Old English <i>glæs</i></p>
+      <h1>Glass</h1>
+      <p class="lede">Not the loudest voice that breaks it — <em>the one that matches</em>.</p>
+      <p class="sub">Ping a wine glass with a fingernail and it rings at one clear pitch — its <b>natural note</b>, fixed by the shape and thickness of the bowl. Now hold a steady tone at that exact note. The rim answers, flexing from round to oval and back at the pitch of the tone; and because good glass sheds its ringing slowly, each cycle of the tone adds a little more flex than the glass has yet lost, so the oval grows, cycle on cycle, far past what the tone's own loudness could ever push it in a single shove. Grow it far enough and the silica flexes past the strain it can bear, and the glass bursts. Sing a tone even a little off the note and none of this happens — the rim barely stirs, because the pushes no longer land in step. The pitch is the one dial, and it decides everything: whether the glass is silent, sings, strains, or shatters. Loudness only sets how far a matched note carries it.</p>
+    </header>
+
+    <section id="how">
+      <p class="section-tag">Where the energy goes</p>
+      <h2>A push kept, cycle on cycle</h2>
+      <p>A glass rim, left alone after a tap, rings at its own pitch and slowly dies away — a little of its ringing lost to the air and to the silica's own faint internal friction each cycle. A thin crystal loses very little and rings for a long time; a thick tumbler loses a lot and stops almost at once. That rate of loss is the glass's own, and the one thing a voice must reckon with.</p>
+
+      <p class="pull">A matched tone does not have to be loud. It has to be patient, and on the note — then every cycle banks a little more flex than the last one shed, and the small becomes the enormous.</p>
+
+      <p>Hold a tone exactly on the note and each cycle's push arrives just as the rim is moving with it, so the whole of the push is added — and because the glass sheds so little between cycles, what is added stays. The flex climbs until the energy poured in by the tone each cycle equals the energy the glass sheds each cycle, and there it settles — but for a good glass that settling point is very high, high enough to break it. Sing off the note and the pushes walk out of step: some cycles help, some fight, and across a held note they cancel, so the rim never builds. The energy is not lost to loudness — it is lost to <em>mismatch</em>. Read the glass and you find a rim keeping its own clear pitch, a tone pouring in energy of your choosing, and the flex standing tiny or fatal entirely on whether the two agree.</p>
+    </section>
+
+    <section id="rule">
+      <p class="section-tag">The one relation it embodies</p>
+      <h2>The gain, and the note that unlocks it</h2>
+      <p>Let the tone's pitch be <span class="mono">f</span> and the glass's own note <span class="mono">f₀</span>, and write <span class="mono">r = f ⁄ f₀</span>. Let <span class="mono">Q</span> be the glass — how many cycles it rings on after a tap. The settled flex of the rim is the flex a slow steady push would give, multiplied by a gain that is the whole of the matter:</p>
+
+      <ul class="law-list">
+        <li><b>The gain.</b> <span class="mono">gain = 1 ⁄ √((1 − r²)² + (r ⁄ Q)²)</span>. It is how many times deeper the rim flexes under a held, matched tone than under the same push held still. Every glass a singer ever broke is in this one curve.</li>
+        <li><b>On the note.</b> At <span class="mono">r = 1</span> the gain rises to about <span class="mono">Q</span> — a crystal that rings for a thousand cycles flexes a thousandfold on its note. This is why a voice no louder than a shout can burst a glass no hand could crush: not force, but match, multiplied by the glass's own long ringing.</li>
+        <li><b>The width.</b> The peak is narrow — only about <span class="mono">1 ⁄ Q</span> wide in <span class="mono">r</span>. The finer the crystal, the taller the flex it will reach <em>and</em> the more exactly the voice must sit on the note. A thick tumbler makes a low, broad hump: easy to hit, impossible to break.</li>
+      </ul>
+
+      <p>So the very quality that makes a glass sing makes it break, and the note is a target the voice can miss by a hair. A dull tumbler flexes a little under almost any nearby tone and never enough to crack. A fine crystal flexes barely at all until the tone is dead on its note, and then flexes catastrophically. And the flex has no ceiling but the glass's own strain: a crystal held exactly on its note, loudly, does not settle to a safe ring — it settles past breaking.</p>
+
+      <p class="pull">You do not break a glass by singing louder. You break it by singing <em>truer</em> — and the finer the glass, the truer you must be.</p>
+    </section>
+
+    <section id="ladder">
+      <p class="section-tag">Four states, from a still rim to a burst bowl</p>
+      <h2>From silent to shattered</h2>
+      <ol class="ladder">
+        <li><b>Silent.</b> <span class="rung-note">The tone is off the note, or too soft to matter. The pushes fall out of step and cancel, or are too small to add to; the rim barely stirs and the glass sits mute. No loudness at the wrong pitch wakes it — a shout a tone away is a shout wasted.</span></li>
+        <li><b>Rings.</b> <span class="rung-note">The tone is near the note and the rim flexes visibly, singing back the pitch it is given — the sympathetic answer, well within the strain the glass can bear. This is the glass a musician plays: it sounds, it holds, it comes to no harm. Beautiful, and safe.</span></li>
+        <li><b>Strains.</b> <span class="rung-note">The tone sits right on the note and loud, and the flex has climbed near the breaking strain — the rim whipping from round to oval so hard the glass hums and blurs. One notch louder, or one cycle longer, and it goes. The state a wary singer backs off from, and a showman holds.</span></li>
+        <li><b>Shatters.</b> <span class="rung-note">The flex has passed the strain the silica can bear, and the bowl bursts. It took no great loudness — only the exact note, held on a glass fine enough to bank it. Matched, and driven past its limit: the same long ringing that made it sing made it break.</span></li>
+      </ol>
+    </section>
+
+    <section id="who">
+      <p class="section-tag">Three who read the same note</p>
+      <h2>The same glass, three trades</h2>
+      <div class="hands">
+        <div class="hand">
+          <h3>The singer</h3>
+          <p class="role">the note</p>
+          <p>Finds the glass's note by ear first — a ping, then matches it in the throat — because loudness spent off the note is loudness wasted. Holds the pitch dead steady, for the peak is a hair wide and a wavering voice slides off it and the flex falls away. Knows a thin crystal will break and a thick tumbler never will, and reaches for the ring before the volume: the trick is <em>match</em>, and the crowd only hears the loudness.</p>
+        </div>
+        <div class="hand">
+          <h3>The glassmaker</h3>
+          <p class="role">the ring</p>
+          <p>Reads a glass by its ring: a long, pure tone means thin, even walls and few flaws — a high <em>Q</em> — and a dull short one means thick or cracked. Prizes the long ring as the mark of quality, and knows it for the same thing that makes the glass fragile to its note. Anneals to take out the locked-in strain that would let a resonance find a flaw and run it into a crack, so the glass rings long and still forgives the odd matched tone.</p>
+        </div>
+        <div class="hand">
+          <h3>The engineer</h3>
+          <p class="role">the curve</p>
+          <p>Sees a lightly-damped oscillator and reads the whole thing off one curve. Writes the flex as the static push times <span class="mono">1 ⁄ √((1 − r²)² + (r ⁄ Q)²)</span>, marks the peak near <span class="mono">r = 1</span> of height <span class="mono">≈ Q</span> and width <span class="mono">≈ 1 ⁄ Q</span>, and warns that a high-<span class="mono">Q</span> part is a hazard as much as a virtue: near its natural frequency a small steady input becomes a large stress. Detunes it, or damps it, before a stray tone finds it.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="bench">
+      <p class="section-tag">The bench</p>
+      <h2>Tune it. Find the note that breaks it.</h2>
+      <p>A wine glass driven by a held tone, its rim flexing from round to oval to the depth your matched note wins, the bowl coloured heavier and darker as the flex nears the breaking strain, with the <b>gain</b> the match wins and the <b>deflection</b> it reaches. Set the <b>pitch</b> of the tone against the glass's own note, the <b>loudness</b> you hold it at, and the <b>glass</b> itself — from a thick forgiving tumbler to a thin ringing crystal. The curve plots the gain against pitch and marks where your tone falls; the gauge reads the flex against the strain the glass can bear. Press <em>Find the note</em> to bring the tone dead onto the glass's pitch. The numbers are the real ones for a lightly-damped rim: the gain <span class="mono">1 ⁄ √((1 − r²)² + (r ⁄ Q)²)</span>, the peak of height <span class="mono">≈ Q</span> at <span class="mono">r = 1</span>, and the flex checked against the breaking strain.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div id="verdict" class="verdict v-keep" aria-hidden="true"></div>
+            <div id="stage" class="stage"></div>
+            <p id="say" class="sr-only" role="status" aria-live="polite"></p>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="in-f">Pitch <span id="lab-f" class="val">600 Hz · r 0.91</span></label>
+                <input id="in-f" type="range" min="520" max="820" step="2" value="600" />
+                <div class="xtrack" aria-hidden="true"><span id="f-mark" class="x-mark"></span></div>
+                <p id="f-note" class="ctl-note" aria-hidden="true"></p>
+              </div>
+              <div class="ctl">
+                <label for="in-Q">The glass <span id="lab-Q" class="val">Q 18 · crystal</span></label>
+                <input id="in-Q" type="range" min="4" max="40" step="1" value="18" />
+              </div>
+              <div class="ctl">
+                <label for="in-P">Loudness <span id="lab-P" class="val">6 · 92 dB</span></label>
+                <input id="in-P" type="range" min="1" max="10" step="1" value="6" />
+              </div>
+            </div>
+
+            <div id="reading" class="reading"></div>
+          </div>
+        </div>
+
+        <div class="bench-actions">
+          <button id="find" class="btn" type="button">Find the note</button>
+          <button id="reset" class="btn" type="button">Reset to the off-note tone</button>
+        </div>
+        <p class="hint">The glass's own note is <b>660 Hz</b>; the <b>pitch</b> is the tone you hold, and <span class="mono">r</span> is the two compared — <span class="mono">r = 1</span> is dead on the note. The green band on the gauge is a safe ring, the amber is a rim strained near breaking, and the oxblood wall is the <b>strain</b> the silica bears before it bursts. Slide the <b>pitch</b> across the note and watch the flex rise to a peak and fall — a fine <em>crystal</em> (high <b>glass</b> Q) gives a tall, needle-thin peak that shatters but only dead on the note; a thick <em>tumbler</em> gives a low, broad one that rings under any near tone and never breaks. The <b>loudness</b> only scales what the match has already won: off the note, a loud tone is a loud tone wasted; turn it down and even a matched note falls silent. <em>Find the note</em> tunes the tone onto the glass's pitch; the bench is kept as you left it between visits, and <em>Reset</em> returns to the off-note tone it opens on. Keys: <kbd>F</kbd> finds the note, <kbd>R</kbd> resets, <kbd>[</kbd> flattens and <kbd>]</kbd> sharpens the tone, <kbd>−</kbd> <kbd>=</kbd> soften and swell the loudness, <kbd>,</kbd> thickens and <kbd>.</kbd> thins the glass; a focused slider keeps its arrows.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>Glass · the one note that breaks a thing not by being loud but by matching it — and the single curve, gain against pitch, that decides whether the rim is silent, rings, strains, or shatters. Pure HTML, CSS, and JavaScript — no build, no account, no network once the page has loaded. Settled flex = static push × 1 ⁄ √((1 − r²)² + (r ⁄ Q)²); peak height ≈ Q at r = 1, width ≈ 1 ⁄ Q. The glass's note, wall and breaking strain are stylised — plausible, not measured — and the ring Q here is drawn far lower than real crystal so the curve reads on the page — but the gain and the flex drawn from them are exact.</p>
+      <p>One of a series — a page a day, each built on one old working word and the discipline hidden inside it. Some mornings, three. 2026-09-16.</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
