@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bridge — a footbridge sways a little under a crowd; the sway tips each walker's stride into its rhythm; the matched strides feed the sway, which tips more walkers, and a span nobody meant to drive drives itself to a standstill</title>
+  <meta name="description" content="A slender footbridge has a natural sideways sway, and a crowd walking on it delivers a small sideways push each step. When the sway grows enough, walkers unconsciously match their stride to it — and the matched strides feed the sway, which sways harder, which pulls in more walkers: a runaway lock-in that closed London's Millennium Bridge. You cannot ask a crowd to break step, so you raise the floor: dampers that bleed the sway away faster than the crowd can feed it. Set the crowd's step against the deck's sway, the size of the crowd, and the dampers fitted, and fit the dampers that hold it steady. Gain = 1 ⁄ √((1 − r²)² + (r ⁄ Q)²); dampers cut Q, and with it the peak." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f1214'/%3E%3Cpath d='M4 18 q12 -7 24 0' fill='none' stroke='%235f86a0' stroke-width='2'/%3E%3Cline x1='4' y1='18' x2='4' y2='24' stroke='%235f86a0' stroke-width='2'/%3E%3Cline x1='28' y1='18' x2='28' y2='24' stroke='%235f86a0' stroke-width='2'/%3E%3Ccircle cx='12' cy='13' r='1.6' fill='%23c98f45'/%3E%3Ccircle cx='17' cy='12' r='1.6' fill='%23c98f45'/%3E%3Ccircle cx='22' cy='13' r='1.6' fill='%23c98f45'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#eef0f1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0e1113" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Bridge — the accidental match you brace against" />
+  <meta property="og:description" content="A footbridge sways under a crowd; the sway tips each stride into its rhythm; the matched strides feed the sway, which pulls in more walkers — a runaway nobody intended. You cannot ask a crowd to break step, so you raise the floor: dampers that bleed the sway faster than the crowd feeds it. Worked here on a span you can crowd, and brace." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">In the arena · 2026-09-16 · sympathy · three of three</p>
+      <p class="pron"><b>bridge</b> · <i>noun</i> · /brɪdʒ/ — a span carrying a way over a gap; a slender footbridge has a natural sideways sway, slow and fixed by its span and stiffness, that a crowd can feed without meaning to; from Old English <i>brycg</i></p>
+      <h1>Bridge</h1>
+      <p class="lede">The push it cannot refuse is the one nobody meant to give — so it must <em>brace</em>.</p>
+      <p class="sub">A slender footbridge has a sway of its own, a slow sideways rock fixed by its span — and a crowd crossing it delivers, with every step, a small sideways shove as the body sways over each planted foot. Usually the shoves fall at all angles and cancel. But let the deck sway a little, and something uncanny happens: people feel the floor move under them and, without deciding to, plant their feet <em>with</em> it, to keep their balance. Now the strides match the sway; the matched strides feed it; the bigger sway tips still more walkers into step — a loop that pumps itself, until a bridge no one meant to drive is heaving so hard it must be closed. It happened to the Millennium Bridge on its opening day. You cannot ask a thousand strangers to break step. So the cure is not to fight the crowd but to <b>raise the floor</b>: fit dampers that drink the sway's energy faster than the crowd can pour it in. The dampers are the one dial you truly hold.</p>
+    </header>
+
+    <section id="how">
+      <p class="section-tag">Where the energy goes</p>
+      <h2>A match nobody intended</h2>
+      <p>A footbridge, nudged and left, sways at its own slow sideways rate — set by how long the span and how stiff, and not by the crowd. Every deck sheds that sway over time, to friction in its joints and bearings; a bare, slender deck sheds very little and rocks for a long time, a well-damped one sheds a lot and settles at once. That rate of shedding is the deck's own, and the one thing the designer actually controls.</p>
+
+      <p class="pull">No one on the bridge is trying to drive it. Each walker only tries to stay upright — and staying upright, on a moving floor, means stepping in time with the move. The crowd resonates the bridge by accident.</p>
+
+      <p>Let the sway be tiny and the strides stay random and cancel. But once the sway is felt, each walker plants a foot to steady themselves against it, and a foot planted against a sideways sway pushes back <em>in time</em> with that sway — the exact push that feeds it. The more it sways, the more walkers fall into step, and the more of the crowd's weight is delivered on the beat: not a fixed push but one that grows with the sway itself. The deck climbs until the energy the crowd pours in each cycle equals the energy the deck sheds — and on a slender, lightly-shedding span, that balance sits dangerously high. Read the bridge and you find a deck keeping its own slow sway, a crowd feeding it a push that no one chose to give, and the amplitude standing safe or fatal on how fast the deck can shed what the crowd pours in.</p>
+    </section>
+
+    <section id="rule">
+      <p class="section-tag">The one relation it embodies</p>
+      <h2>The gain, and the floor you can raise</h2>
+      <p>Let the crowd's step come at frequency <span class="mono">f</span> and the deck's sway be <span class="mono">f₀</span>, with <span class="mono">r = f ⁄ f₀</span>. Let <span class="mono">Q</span> be the deck's freedom — how many sways it keeps after a nudge, which the dampers set. The settled sway is the sway a slow steady lean would give, times a gain that is the whole of the matter:</p>
+
+      <ul class="law-list">
+        <li><b>The gain.</b> <span class="mono">gain = 1 ⁄ √((1 − r²)² + (r ⁄ Q)²)</span>. It is how many times wider the deck sways under the crowd's matched, repeated push than under one slow lean. Every wobbling bridge is in this one curve.</li>
+        <li><b>On the sway.</b> At <span class="mono">r = 1</span> the gain rises to about <span class="mono">Q</span> — a bare deck that rocks for fifty sways amplifies the crowd's little push some fiftyfold. And because the crowd's push itself grows with the sway, a slender span does not settle to a safe wobble; it runs away.</li>
+        <li><b>The floor.</b> You cannot move the peak — the crowd's step and the deck's sway are what they are. But you can lower the peak, by cutting <span class="mono">Q</span>: fit dampers, and the gain has nowhere to climb. Halve the ring-time and you roughly halve the worst sway. The one dial you hold is not the beat but the freedom.</li>
+      </ul>
+
+      <p>So the trade is the mirror of the bell and the glass. There, a maker prized a high <span class="mono">Q</span> and a player hunted the exact beat, to <em>build</em> the swing. Here, the beat arrives uninvited and cannot be moved, and a high <span class="mono">Q</span> is the hazard, not the prize. The only sure defence is to spend the freedom — to damp — so that whatever push the crowd happens to deliver on the beat, the deck drinks it away before it can stack.</p>
+
+      <p class="pull">You do not keep a bridge still by asking the crowd to break step. You keep it still by raising the floor beneath the sway — damping it until the match has nothing left to build on.</p>
+    </section>
+
+    <section id="ladder">
+      <p class="section-tag">Four states, from a deck held to a span closed</p>
+      <h2>From steady to shut</h2>
+      <ol class="ladder">
+        <li><b>Steady.</b> <span class="rung-note">The dampers are enough: whatever push the crowd delivers on the sway, the deck sheds it as fast as it comes, and the sway stays below what a walker even notices. The floor has been raised past the crowd's reach. This is the bridge that opens and stays open — braced, not lucky.</span></li>
+        <li><b>Sways.</b> <span class="rung-note">The sway has climbed past comfort and is felt underfoot. Walkers notice the floor moving and begin, here and there, to step with it — the first turn of the loop. Still bounded, still safe for now, but it has started to feed itself, and a larger crowd or a slacker deck will carry it on.</span></li>
+        <li><b>Locks in.</b> <span class="rung-note">The sway is big enough that much of the crowd is now stepping with it, pouring weight in on the beat, and the loop is pumping hard. The deck heaves; people grab the rails and — walking to keep balance — feed it more. It is no longer a nuisance but a mechanism running away, a hair from the limit.</span></li>
+        <li><b>Runs away.</b> <span class="rung-note">The sway has passed what the span can safely carry. The crowd is locked to it, driving it near its own weight in sideways force; the deck must be cleared and the bridge closed. No one drove it there on purpose — and no plea to the crowd will bring it back. Only the floor, raised too late.</span></li>
+      </ol>
+    </section>
+
+    <section id="who">
+      <p class="section-tag">Three who read the same sway</p>
+      <h2>The same bridge, three trades</h2>
+      <div class="hands">
+        <div class="hand">
+          <h3>The walker</h3>
+          <p class="role">the balance</p>
+          <p>Drives the bridge without meaning to. Feels the deck move, and — to stay upright — plants each foot with the sway, which is exactly the push that feeds it. Cannot help it: balance is faster than thought, and a whole crowd does it at once. Told to break step, breaks step for a moment and drifts back. Is not the villain but the mechanism — the reason the cure can never be the crowd.</p>
+        </div>
+        <div class="hand">
+          <h3>The engineer</h3>
+          <p class="role">the damper</p>
+          <p>Cannot move the deck's sway off the crowd's step — both are fixed — so lowers the peak instead. Fits tuned mass dampers and viscous dampers under the deck, spending the span's <em>freedom</em> to drop its <span class="mono">Q</span> until the worst credible crowd cannot build a felt sway. Sizes them for lock-in, not for a tidy average, because the load grows with the very motion it causes. Raises the floor, and leaves the crowd alone.</p>
+        </div>
+        <div class="hand">
+          <h3>The physicist</h3>
+          <p class="role">the curve</p>
+          <p>Sees a driven oscillator with feedback and reads it off one curve, plus a warning. Writes the sway as the static lean times <span class="mono">1 ⁄ √((1 − r²)² + (r ⁄ Q)²)</span>, notes the peak near <span class="mono">r = 1</span> of height <span class="mono">≈ Q</span> — and adds that here the drive rises with the response, so above a crowd threshold the balance runs away rather than settling. Concludes that damping is not a refinement but the whole safety case.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="bench">
+      <p class="section-tag">The bench</p>
+      <h2>Brace it. Fit the dampers that hold it steady.</h2>
+      <p>A footbridge swaying sideways to the width the crowd's matched footfall drives it to, the deck coloured heavier and darker as the sway climbs toward the limit, with the <b>gain</b> the crowd wins and the <b>sway</b> it reaches. Set the crowd's <b>step</b> against the deck's own sway, the <b>crowd</b> on the span, and the <b>dampers</b> fitted beneath it. The curve plots the gain against step and marks where the crowd's footfall falls; the gauge reads the sway against comfort and the limit. Press <em>Fit the dampers</em> to raise the damping until the deck holds steady — the one cure you control, since you cannot ask the crowd to break step. The numbers are the real ones for a driven, damped span: the gain <span class="mono">1 ⁄ √((1 − r²)² + (r ⁄ Q)²)</span>, the peak of height <span class="mono">≈ Q</span> at <span class="mono">r = 1</span>, and the sway checked against comfort and the safe limit.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div id="verdict" class="verdict v-dead" aria-hidden="true"></div>
+            <div id="stage" class="stage"></div>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="in-f">Step <span id="lab-f" class="val">60 ⁄ min · r 1.00</span></label>
+                <input id="in-f" type="range" min="40" max="80" step="1" value="60" />
+                <div class="xtrack" aria-hidden="true"><span id="f-mark" class="x-mark"></span></div>
+                <p id="f-note" class="ctl-note" aria-hidden="true"></p>
+              </div>
+              <div class="ctl">
+                <label for="in-C">Crowd <span id="lab-C" class="val">800 on the span</span></label>
+                <input id="in-C" type="range" min="1" max="12" step="1" value="8" />
+              </div>
+              <div class="ctl">
+                <label for="in-D">Dampers <span id="lab-D" class="val">none · Q 30</span></label>
+                <input id="in-D" type="range" min="0" max="10" step="1" value="0" />
+              </div>
+            </div>
+
+            <div id="reading" class="reading"></div>
+          </div>
+        </div>
+
+        <div class="bench-actions">
+          <button id="find" class="btn" type="button">Fit the dampers</button>
+          <button id="reset" class="btn" type="button">Reset to the bare deck</button>
+        </div>
+        <p class="hint">The deck's own sway is <b>60 a minute</b> (a slow sideways rock near 1 Hz); the <b>step</b> is the crowd's lateral pace, and <span class="mono">r</span> is the two compared — <span class="mono">r = 1</span> is the crowd walking on the deck's own sway. The green band on the gauge is a sway below notice, the amber is a sway felt underfoot and beginning to lock in, and the oxblood wall is the <b>limit</b> where the span must be closed. Slide the <b>step</b> across the sway and watch the gain peak — but note you do not command the crowd's pace. The <b>crowd</b> pours in more push, and because the push grows with the sway a slender deck runs away rather than settling. The <b>dampers</b> are the one dial you hold: raise them and the peak drops, the freedom spent to drink the sway away. <em>Fit the dampers</em> raises the damping until the deck holds steady; <em>Reset</em> returns to the bare, undamped deck it opens on.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>Bridge · the accidental match a span cannot refuse and must be braced against — and the single curve, gain against step, plus the one dial you truly hold: the dampers that lower the peak. Pure HTML, CSS, and JavaScript — no build, no account, no network once the page has loaded. Settled sway = static lean × 1 ⁄ √((1 − r²)² + (r ⁄ Q)²); peak height ≈ Q at r = 1; dampers cut Q, and with it the peak. The deck's sway, span and safe limit are stylised — plausible, not measured, and the crowd's self-driving feedback is sketched, not solved — but the gain and the sway drawn from them are exact.</p>
+      <p>One of a series — a page a day, each built on one old working word and the discipline hidden inside it. Some mornings, three. 2026-09-16.</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
