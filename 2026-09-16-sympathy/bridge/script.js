@@ -175,6 +175,9 @@
   }
   sizeCanvas();
 
+  var reduceMQ = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+  var reduce = reduceMQ ? reduceMQ.matches : false;
+
   var cssVar = function (name) {
     return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   };
@@ -399,12 +402,17 @@
     var dt = Math.min(0.05, (ts - lastTs) / 1000);
     lastTs = ts;
 
-    var ease = Math.min(1, dt * 3.0);
+    // under reduced motion the deck does not rock to and fro: the sway lands in
+    // one step and the deck holds at its settled bow, read as a still curve
+    var ease = reduce ? 1 : Math.min(1, dt * 3.0);
     if (!initShown) { shown.sway = current.sway; initShown = true; }
     shown.sway += (current.sway - shown.sway) * ease;
 
-    phase += dt * (F0 / 60) * 2 * Math.PI;
-    if (phase > 1e6) phase = phase % (2 * Math.PI);
+    if (reduce) { phase = Math.PI / 2; }              // hold at the fullest bow, no rocking
+    else {
+      phase += dt * (F0 / 60) * 2 * Math.PI;
+      if (phase > 1e6) phase = phase % (2 * Math.PI);
+    }
 
     draw(current, curVerdict);
     window.requestAnimationFrame(frame);
@@ -462,6 +470,11 @@
     inF.value = state.step; inC.value = state.crowd; inD.value = state.damp;
     update();
   });
+
+  // follow a live change to the motion setting
+  if (reduceMQ && reduceMQ.addEventListener) {
+    reduceMQ.addEventListener("change", function (e) { reduce = e.matches; });
+  }
 
   if (window.matchMedia) {
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () { draw(current, curVerdict); });

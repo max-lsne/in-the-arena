@@ -163,6 +163,9 @@
   }
   sizeCanvas();
 
+  var reduceMQ = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+  var reduce = reduceMQ ? reduceMQ.matches : false;
+
   var cssVar = function (name) {
     return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   };
@@ -396,13 +399,17 @@
     var dt = Math.min(0.05, (ts - lastTs) / 1000);
     lastTs = ts;
 
-    var ease = Math.min(1, dt * 3.2);                 // the swing rings up / dies away
+    // under reduced motion the swing does not ring up or sweep: it lands in one
+    // step and holds at its settled extent, read as a still arc
+    var ease = reduce ? 1 : Math.min(1, dt * 3.2);
     if (!initShown) { shown.swing = current.swing; initShown = true; }
     shown.swing += (current.swing - shown.swing) * ease;
 
-    // the visible swinging, at the bell's own stroke
-    phase += dt * (F0 / 60) * 2 * Math.PI;
-    if (phase > 1e6) phase = phase % (2 * Math.PI);
+    if (reduce) { phase = Math.PI / 2; }              // hold at full swing, no sweep
+    else {
+      phase += dt * (F0 / 60) * 2 * Math.PI;          // the visible swinging, at the bell's own stroke
+      if (phase > 1e6) phase = phase % (2 * Math.PI);
+    }
 
     draw(current, curVerdict);
     window.requestAnimationFrame(frame);
@@ -459,6 +466,11 @@
     inF.value = state.tempo; inQ.value = state.Q; inP.value = state.pull;
     update();
   });
+
+  // follow a live change to the motion setting
+  if (reduceMQ && reduceMQ.addEventListener) {
+    reduceMQ.addEventListener("change", function (e) { reduce = e.matches; });
+  }
 
   // repaint on theme flips so canvas colours follow
   if (window.matchMedia) {

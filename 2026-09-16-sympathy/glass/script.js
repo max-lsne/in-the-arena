@@ -180,6 +180,9 @@
   }
   sizeCanvas();
 
+  var reduceMQ = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+  var reduce = reduceMQ ? reduceMQ.matches : false;
+
   var cssVar = function (name) {
     return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   };
@@ -410,13 +413,17 @@
     var dt = Math.min(0.05, (ts - lastTs) / 1000);
     lastTs = ts;
 
-    var ease = Math.min(1, dt * 3.4);
+    // under reduced motion the rim does not flex to and fro: the flex lands in
+    // one step and the rim holds at its settled oval, read as a still shape
+    var ease = reduce ? 1 : Math.min(1, dt * 3.4);
     if (!initShown) { shown.flex = current.flex; initShown = true; }
     shown.flex += (current.flex - shown.flex) * ease;
 
-    // the rim flexes fast — draw it at a legible rate, not the true 660 Hz
-    phase += dt * 3.2 * 2 * Math.PI;
-    if (phase > 1e6) phase = phase % (2 * Math.PI);
+    if (reduce) { phase = Math.PI / 2; }              // hold at the fullest oval, no flexing
+    else {
+      phase += dt * 3.2 * 2 * Math.PI;                // the rim flexes fast — a legible rate, not the true 660 Hz
+      if (phase > 1e6) phase = phase % (2 * Math.PI);
+    }
 
     draw(current, curVerdict);
     window.requestAnimationFrame(frame);
@@ -474,6 +481,11 @@
     inF.value = state.pitch; inQ.value = state.Q; inP.value = state.loud;
     update();
   });
+
+  // follow a live change to the motion setting
+  if (reduceMQ && reduceMQ.addEventListener) {
+    reduceMQ.addEventListener("change", function (e) { reduce = e.matches; });
+  }
 
   if (window.matchMedia) {
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () { draw(current, curVerdict); });
