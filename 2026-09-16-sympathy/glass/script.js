@@ -482,6 +482,31 @@
     update();
   });
 
+  // nudge a slider-backed value by a step, from the keyboard
+  function nudge(field, delta, lo, hi, step, input) {
+    state[field] = Math.round(clamp(state[field] + delta, lo, hi) / step) * step;
+    input.value = state[field];
+    update();
+  }
+
+  // keyboard: work the bench without reaching for the mouse
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    if (el && el.tagName === "INPUT" && el.type === "range") return;   // let a focused slider keep its arrows
+    var k = e.key;
+    if (k === "f" || k === "F") { $("find").click(); }
+    else if (k === "r" || k === "R") { $("reset").click(); }
+    else if (k === "[") { nudge("pitch", -10, FMIN, FMAX, FSTEP, inF); }      // flatten the tone
+    else if (k === "]") { nudge("pitch", 10, FMIN, FMAX, FSTEP, inF); }       // sharpen the tone
+    else if (k === "-" || k === "_") { nudge("loud", -PSTEP, PMIN, PMAX, PSTEP, inP); }   // soften
+    else if (k === "=" || k === "+") { nudge("loud", PSTEP, PMIN, PMAX, PSTEP, inP); }    // swell
+    else if (k === "," || k === "<") { nudge("Q", -2, QMIN, QMAX, QSTEP, inQ); }          // a thicker, duller glass
+    else if (k === "." || k === ">") { nudge("Q", 2, QMIN, QMAX, QSTEP, inQ); }           // a thinner, finer glass
+    else return;
+    e.preventDefault();
+  });
+
   // follow a live change to the motion setting
   if (reduceMQ && reduceMQ.addEventListener) {
     reduceMQ.addEventListener("change", function (e) { reduce = e.matches; });
