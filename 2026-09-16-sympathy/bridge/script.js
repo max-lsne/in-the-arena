@@ -105,7 +105,7 @@
   var $ = function (id) { return document.getElementById(id); };
   var inF = $("in-f"), inC = $("in-C"), inD = $("in-D");
   var labF = $("lab-f"), labC = $("lab-C"), labD = $("lab-D");
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
   var fMark = $("f-mark"), fNote = $("f-note");
 
   function syncLabels(c) {
@@ -416,7 +416,38 @@
     current = compute(state);
     syncLabels(current);
     curVerdict = render(current);
+    announce(current, curVerdict);
     saveState();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(c, verdict) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var head = "A footbridge with " + (state.crowd * 100) + " on the span, stepping at " + state.step
+        + " a minute against its sway of " + F0 + " — r " + c.r.toFixed(2) + ", dampers " + damperWord(state.damp)
+        + ", Q " + c.Q.toFixed(0) + ". ";
+      var sway = Math.round(c.sway);
+      var gainLine = " The gain is " + c.gain.toFixed(1) + " times, against a peak of about "
+        + Math.round(c.peakGain) + " on the sway.";
+      var msg;
+      if (verdict === "steady") {
+        msg = head + "Steady — the dampers hold it; the deck sways only about " + sway
+          + " millimetres, below what a walker notices." + gainLine;
+      } else if (verdict === "sway") {
+        msg = head + "Sways — the deck sways about " + sway
+          + " millimetres, felt underfoot, and the crowd has begun to step with it. Fit the dampers." + gainLine;
+      } else if (verdict === "lockin") {
+        msg = head + "Locks in — the deck heaving about " + sway
+          + " millimetres, much of the crowd now driving it on the beat, a hair from the limit. Fit the dampers." + gainLine;
+      } else {
+        msg = head + "Runs away — the sway has passed the safe limit at about " + sway
+          + " millimetres; the crowd is locked to it and the span must be closed. Fit the dampers." + gainLine;
+      }
+      sayEl.textContent = msg;
+    }, 260);
   }
 
   inF.addEventListener("input", function () { state.step = parseInt(inF.value, 10); update(); });

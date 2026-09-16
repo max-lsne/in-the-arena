@@ -93,7 +93,7 @@
   var $ = function (id) { return document.getElementById(id); };
   var inF = $("in-f"), inQ = $("in-Q"), inP = $("in-P");
   var labF = $("lab-f"), labQ = $("lab-Q"), labP = $("lab-P");
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
   var fMark = $("f-mark"), fNote = $("f-note");
 
   function syncLabels(c) {
@@ -414,7 +414,37 @@
     current = compute(state);
     syncLabels(current);
     curVerdict = render(current);
+    announce(current, curVerdict);
     saveState();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(c, verdict) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var head = "The bell, pulled at " + state.tempo + " a minute against its own stroke of "
+        + F0 + " — r " + c.r.toFixed(2) + ", freedom Q " + state.Q + ", pull " + state.pull + ". ";
+      var swing = Math.round(c.swing);
+      var gainLine = " The gain is " + c.gain.toFixed(1) + " times, against a peak of about "
+        + Math.round(c.peakGain) + " on the beat.";
+      var msg;
+      if (verdict === "peal") {
+        msg = head + "Rings up — the pull is timed near the beat and the bell swings freely, so the swing climbs to a full peal of about "
+          + swing + " degrees, short of the stay." + gainLine;
+      } else if (verdict === "labour") {
+        msg = head + "Labours — the tempo is right, but the bell is hung too stiff; the swing reaches only about "
+          + swing + " degrees and will not climb. Free the hanging, or find the stroke." + gainLine;
+      } else if (verdict === "cold") {
+        msg = head + "Won't build — the pull is off the beat, so the pulls quarrel and cancel; the bell rocks only about "
+          + swing + " degrees. Find the stroke." + gainLine;
+      } else {
+        msg = head + "Over the stay — driven past the balance to about " + swing
+          + " degrees; the swing throws its weight onto the stay and breaks it. Ease the pull, or the tempo." + gainLine;
+      }
+      sayEl.textContent = msg;
+    }, 260);
   }
 
   inF.addEventListener("input", function () { state.tempo = parseInt(inF.value, 10); update(); });

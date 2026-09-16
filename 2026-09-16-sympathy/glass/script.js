@@ -109,7 +109,7 @@
   var $ = function (id) { return document.getElementById(id); };
   var inF = $("in-f"), inQ = $("in-Q"), inP = $("in-P");
   var labF = $("lab-f"), labQ = $("lab-Q"), labP = $("lab-P");
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
   var fMark = $("f-mark"), fNote = $("f-note");
 
   function syncLabels(c) {
@@ -428,7 +428,38 @@
     current = compute(state);
     syncLabels(current);
     curVerdict = render(current);
+    announce(current, curVerdict);
     saveState();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(c, verdict) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var head = "A " + glassWord(state.Q) + " glass, driven by a tone at " + state.pitch
+        + " hertz against its note of " + F0 + " — r " + c.r.toFixed(2) + ", ring Q " + state.Q
+        + ", loudness " + state.loud + ". ";
+      var flex = c.flex.toFixed(0);
+      var gainLine = " The gain is " + c.gain.toFixed(1) + " times, against a peak of about "
+        + Math.round(c.peakGain) + " on the note.";
+      var msg;
+      if (verdict === "ring") {
+        msg = head + "Rings — near the note, the rim flexing about " + flex
+          + " microns, singing back the pitch well within its strain." + gainLine;
+      } else if (verdict === "silent") {
+        msg = head + "Silent — the tone is off the note, or too soft; the rim flexes only about " + flex
+          + " microns and the glass sits mute." + gainLine;
+      } else if (verdict === "strain") {
+        msg = head + "Strains — on the note and loud, the rim flexed to about " + flex
+          + " microns, near the breaking strain of " + SHAT + ". One notch louder and it goes." + gainLine;
+      } else {
+        msg = head + "Shatters — the flex has passed the breaking strain and the bowl bursts. "
+          + "It took no great loudness, only the matched note." + gainLine;
+      }
+      sayEl.textContent = msg;
+    }, 260);
   }
 
   inF.addEventListener("input", function () { state.pitch = parseInt(inF.value, 10); update(); });
