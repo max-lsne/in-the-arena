@@ -41,10 +41,33 @@
   // Opens on the bare deck, crowd on the sway — a runaway. Fit the dampers
   // brings it steady.
   var DEFAULT = { step: 60, crowd: 8, damp: 0 };
+  var KEY = "sympathy.bridge.v1";   // where the step, crowd and dampers are kept between visits
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+  function clampStep(v, a, b, step) {
+    v = Math.round((+v) / step) * step;
+    if (!isFinite(v)) return a;
+    return v < a ? a : v > b ? b : v;
+  }
 
-  var state = Object.assign({}, DEFAULT);
+  // ---- persistence -----------------------------------------------------
+  function loadState() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      return {
+        step: clampStep(o.step, SMIN, SMAX, SSTEP),
+        crowd: clampStep(o.crowd, CMIN, CMAX, CSTEP),
+        damp: clampStep(o.damp, DMIN, DMAX, DSTEP)
+      };
+    } catch (e) { return null; }
+  }
+  function saveState() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  var state = loadState() || Object.assign({}, DEFAULT);
 
   // ---- the sway --------------------------------------------------------
   function compute(s) {
@@ -393,6 +416,7 @@
     current = compute(state);
     syncLabels(current);
     curVerdict = render(current);
+    saveState();
   }
 
   inF.addEventListener("input", function () { state.step = parseInt(inF.value, 10); update(); });

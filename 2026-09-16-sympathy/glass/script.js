@@ -35,10 +35,33 @@
   // Opens off the note — a tone a little flat of the glass — so it rings but
   // does not break. Find the note tunes onto the pitch and it shatters.
   var DEFAULT = { pitch: 600, Q: 18, loud: 6 };
+  var KEY = "sympathy.glass.v1";   // where the pitch, glass and loudness are kept between visits
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+  function clampStep(v, a, b, step) {
+    v = Math.round((+v) / step) * step;
+    if (!isFinite(v)) return a;
+    return v < a ? a : v > b ? b : v;
+  }
 
-  var state = Object.assign({}, DEFAULT);
+  // ---- persistence -----------------------------------------------------
+  function loadState() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      return {
+        pitch: clampStep(o.pitch, FMIN, FMAX, FSTEP),
+        Q: clampStep(o.Q, QMIN, QMAX, QSTEP),
+        loud: clampStep(o.loud, PMIN, PMAX, PSTEP)
+      };
+    } catch (e) { return null; }
+  }
+  function saveState() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  var state = loadState() || Object.assign({}, DEFAULT);
 
   // ---- the flex --------------------------------------------------------
   function compute(s) {
@@ -405,6 +428,7 @@
     current = compute(state);
     syncLabels(current);
     curVerdict = render(current);
+    saveState();
   }
 
   inF.addEventListener("input", function () { state.pitch = parseInt(inF.value, 10); update(); });

@@ -34,10 +34,33 @@
   // Opens off the beat — a slow, mistimed pull — so the bell rocks and hangs
   // dead. Find the stroke brings the tempo onto the beat and it rings up.
   var DEFAULT = { tempo: 22, Q: 12, pull: 6 };
+  var KEY = "sympathy.bell.v1";   // where the tempo, freedom and pull are kept between visits
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+  function clampStep(v, a, b, step) {
+    v = Math.round((+v) / step) * step;
+    if (!isFinite(v)) return a;
+    return v < a ? a : v > b ? b : v;
+  }
 
-  var state = Object.assign({}, DEFAULT);
+  // ---- persistence -----------------------------------------------------
+  function loadState() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      return {
+        tempo: clampStep(o.tempo, TMIN, TMAX, TSTEP),
+        Q: clampStep(o.Q, QMIN, QMAX, QSTEP),
+        pull: clampStep(o.pull, PMIN, PMAX, PSTEP)
+      };
+    } catch (e) { return null; }
+  }
+  function saveState() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  var state = loadState() || Object.assign({}, DEFAULT);
 
   // ---- the swing -------------------------------------------------------
   function compute(s) {
@@ -391,6 +414,7 @@
     current = compute(state);
     syncLabels(current);
     curVerdict = render(current);
+    saveState();
   }
 
   inF.addEventListener("input", function () { state.tempo = parseInt(inF.value, 10); update(); });
