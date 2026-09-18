@@ -47,10 +47,34 @@
   var UNITY = 26.565;                          // θ where the advantage is exactly one (atan ½)
   var LOCK_ANGLE = 4;                          // at or below this, on the dead centre — takes charge
   var LOCK_FLOOR = 6;                          // a found angle never goes below this, to bite clear of lock
+  var KEY = "toggle.mech.v1";                  // where the mechanism, push and angle are kept between visits
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+  function clampStep(v, a, b, step) {
+    v = Math.round((+v) / step) * step;
+    if (!isFinite(v)) return a;
+    return v < a ? a : v > b ? b : v;
+  }
 
-  var state = Object.assign({}, DEFAULT);
+  // ---- persistence -----------------------------------------------------
+  function load() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      if (!MECHS[o.mech]) return null;
+      return {
+        mech: o.mech,
+        ang: clampStep(o.ang, AMIN, AMAX, ASTEP),
+        push: clampStep(o.push, PMIN, PMAX, PSTEP)
+      };
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  var state = load() || Object.assign({}, DEFAULT);
 
   // ---- the mechanism ---------------------------------------------------
   // Every force from the angle and the push as a share of the design input.
@@ -471,6 +495,7 @@
     current = compute(state);
     syncLabels(current);
     curVerdict = render(current);
+    save();
   }
 
   inP.addEventListener("input", function () { state.push = parseInt(inP.value, 10); update(); });

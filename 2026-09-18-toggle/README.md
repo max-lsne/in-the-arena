@@ -52,8 +52,9 @@ mechanism's design input, and sweep the **angle** from a wide-open `60°` down
 through the working bite to the `2°` edge of dead centre. The gauge reads the force
 in each part against its limit, and the push the mechanism safely takes at this
 angle. Press *Find the angle* to set the knee to the flattest angle that still
-bites within every part's limit; *Reset* returns it to the wide, force-losing press
-it opens on.
+bites within every part's limit. The mechanism, push and angle you set are kept in
+`localStorage`, so a reader finds the bench as they left it; *Reset* returns it to
+the wide, force-losing press it opens on.
 
 The four mechanisms give first in a different part: the **clamp** buckles its
 slender links, the **press** shears its knee pin, the **crusher** folds its
