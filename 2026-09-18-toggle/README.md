@@ -60,7 +60,10 @@ idles, bites, locks, or breaks, and each part against its limit. Under
 `prefers-reduced-motion` the bench holds still: the links do not sweep as the toggle
 straightens, each angle lands in one step, and *Find* drops straight onto the angle
 it wants rather than closing the knee down to it; a live change to the setting is
-honoured.
+honoured. The whole bench works from the keyboard — <kbd>F</kbd> finds the angle,
+<kbd>R</kbd> resets, <kbd>1</kbd>–<kbd>4</kbd> pick the mechanism, <kbd>[</kbd> opens
+the toggle and <kbd>]</kbd> closes it, and <kbd>−</kbd>/<kbd>=</kbd> ease and add
+push.
 
 The four mechanisms give first in a different part: the **clamp** buckles its
 slender links, the **press** shears its knee pin, the **crusher** folds its

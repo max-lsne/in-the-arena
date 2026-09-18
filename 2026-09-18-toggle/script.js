@@ -562,6 +562,31 @@
     })();
   }
 
+  // nudge a slider-backed value by a step, from the keyboard
+  function nudge(field, delta, lo, hi, step, input) {
+    state[field] = Math.round(clamp(state[field] + delta, lo, hi) / step) * step;
+    input.value = state[field];
+    update();
+  }
+
+  // keyboard: work the bench without reaching for the mouse
+  var MECH_KEYS = { "1": "clamp", "2": "press", "3": "crusher", "4": "latch" };
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    if (el && el.tagName === "INPUT" && el.type === "range") return;   // let a focused slider keep its arrows
+    var k = e.key;
+    if (k === "f" || k === "F") { $("find").click(); }
+    else if (k === "r" || k === "R") { $("reset").click(); }
+    else if (MECH_KEYS[k]) { state.mech = MECH_KEYS[k]; update(); }
+    else if (k === "[") { nudge("ang", 3, AMIN, AMAX, ASTEP, inA); }          // open the toggle
+    else if (k === "]") { nudge("ang", -3, AMIN, AMAX, ASTEP, inA); }         // close the toggle
+    else if (k === "-" || k === "_") { nudge("push", -PSTEP, PMIN, PMAX, PSTEP, inP); }  // ease the push
+    else if (k === "=" || k === "+") { nudge("push", PSTEP, PMIN, PMAX, PSTEP, inP); }   // add push
+    else return;
+    e.preventDefault();
+  });
+
   // follow a live change to the motion setting
   if (reduceMQ && reduceMQ.addEventListener) {
     reduceMQ.addEventListener("change", function (e) { reduce = e.matches; });
