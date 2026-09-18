@@ -56,7 +56,11 @@ bites within every part's limit. The mechanism, push and angle you set are kept 
 `localStorage`, so a reader finds the bench as they left it; *Reset* returns it to
 the wide, force-losing press it opens on. A live status line (`aria-live`) reads
 each state to a screen reader — the mechanism and the angle, whether the toggle
-idles, bites, locks, or breaks, and each part against its limit.
+idles, bites, locks, or breaks, and each part against its limit. Under
+`prefers-reduced-motion` the bench holds still: the links do not sweep as the toggle
+straightens, each angle lands in one step, and *Find* drops straight onto the angle
+it wants rather than closing the knee down to it; a live change to the setting is
+honoured.
 
 The four mechanisms give first in a different part: the **clamp** buckles its
 slender links, the **press** shears its knee pin, the **crusher** folds its

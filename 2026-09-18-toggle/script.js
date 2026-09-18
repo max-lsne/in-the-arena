@@ -222,6 +222,9 @@
   }
   sizeCanvas();
 
+  var reduceMQ = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+  var reduce = reduceMQ ? reduceMQ.matches : false;
+
   var cssVar = function (name) {
     return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   };
@@ -480,7 +483,7 @@
     var dt = Math.min(0.05, (ts - lastTs) / 1000);
     lastTs = ts;
 
-    var ease = Math.min(1, dt * 11);
+    var ease = reduce ? 1 : Math.min(1, dt * 11);
     if (!initShown) { shown.ang = state.ang; shown.push = state.push; initShown = true; }
     shown.ang += (state.ang - shown.ang) * ease;
     shown.push += (state.push - shown.push) * ease;
@@ -547,15 +550,21 @@
     update();
   });
 
-  // close or open the toggle toward the target angle so it is seen to straighten
+  // close or open the toggle toward the target angle so it is seen to straighten —
+  // under reduced motion it lands in one step
   function animateAngle(target) {
-    if (Math.abs(target - state.ang) < 1) { state.ang = target; inA.value = target; update(); return; }
+    if (reduce || Math.abs(target - state.ang) < 1) { state.ang = target; inA.value = target; update(); return; }
     var dir = target > state.ang ? ASTEP : -ASTEP;
     (function step() {
       state.ang = clamp(state.ang + dir, AMIN, AMAX);
       inA.value = state.ang; update();
       if (Math.abs(state.ang - target) >= 1) setTimeout(step, 18);
     })();
+  }
+
+  // follow a live change to the motion setting
+  if (reduceMQ && reduceMQ.addEventListener) {
+    reduceMQ.addEventListener("change", function (e) { reduce = e.matches; });
   }
 
   // repaint on theme flips so canvas colours follow
