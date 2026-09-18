@@ -134,7 +134,7 @@
   var inP = $("in-P"), inA = $("in-A");
   var labP = $("lab-P"), labA = $("lab-A");
   var mechBtns = Array.prototype.slice.call(document.querySelectorAll(".seg [data-mech]"));
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
   var aMark = $("a-mark"), aNote = $("a-note");
 
   function fmtkN(N) {
@@ -495,7 +495,40 @@
     current = compute(state);
     syncLabels(current);
     curVerdict = render(current);
+    announce(current, curVerdict);
     save();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(r, verdict) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var mech = r.J.material.charAt(0).toUpperCase() + r.J.material.slice(1);
+      var ma = r.MA >= 10 ? Math.round(r.MA) : Math.round(r.MA * 10) / 10;
+      var head = mech + ", worked at a knee angle of " + state.ang + " degrees, "
+        + state.push + " percent of its design push, an advantage of " + ma + " times. ";
+      var forces = "The thrust is " + Math.round(r.Q / 1000) + " kilonewtons from a push of "
+        + Math.round(r.P / 1000) + "; the pin carries " + Math.round(r.uP * 100) + " percent of its shear limit, the links "
+        + Math.round(r.uL * 100) + " percent of their buckling, the frame " + Math.round(r.uF * 100) + " percent of its tension.";
+      var msg;
+      if (verdict === "bites") {
+        msg = head + "Bites — the toggle is flat enough to multiply the push into a real thrust, yet every part sits inside its limit and the stroke stays in hand. " + forces;
+      } else if (verdict === "slack") {
+        msg = head + "Slack — the toggle is too far open; its advantage is below one, so it delivers less force than the push. "
+          + "Bring the knee toward straight, or find the angle. " + forces;
+      } else if (verdict === "locked") {
+        msg = head + "Locked — the knee is on the dead centre: the advantage has run away, the travel is nearly nil, and the joint self-holds against the load, but the smallest extra push spikes every force. "
+          + "Open the toggle a little, or find the angle. " + forces;
+      } else {
+        var who = r.bind === "pin" ? "the knee pin has sheared past its limit"
+          : r.bind === "link" ? "a link has buckled past its limit"
+          : "the frame has torn at its anchor";
+        msg = head + "Overstressed — " + who + " under the thrust. No angle relieves it — ease the push, do not close the toggle. " + forces;
+      }
+      sayEl.textContent = msg;
+    }, 260);
   }
 
   inP.addEventListener("input", function () { state.push = parseInt(inP.value, 10); update(); });

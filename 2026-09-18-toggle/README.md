@@ -54,7 +54,9 @@ in each part against its limit, and the push the mechanism safely takes at this
 angle. Press *Find the angle* to set the knee to the flattest angle that still
 bites within every part's limit. The mechanism, push and angle you set are kept in
 `localStorage`, so a reader finds the bench as they left it; *Reset* returns it to
-the wide, force-losing press it opens on.
+the wide, force-losing press it opens on. A live status line (`aria-live`) reads
+each state to a screen reader — the mechanism and the angle, whether the toggle
+idles, bites, locks, or breaks, and each part against its limit.
 
 The four mechanisms give first in a different part: the **clamp** buckles its
 slender links, the **press** shears its knee pin, the **crusher** folds its
