@@ -199,6 +199,9 @@
   }
   sizeCanvas();
 
+  var reduceMQ = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+  var reduce = reduceMQ ? reduceMQ.matches : false;
+
   var cssVar = function (name) {
     return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   };
@@ -459,7 +462,7 @@
     var dt = Math.min(0.05, (ts - lastTs) / 1000);
     lastTs = ts;
 
-    var ease = Math.min(1, dt * 11);
+    var ease = reduce ? 1 : Math.min(1, dt * 11);
     if (!initShown) { shown.lift = state.lift; shown.fall = state.fall; initShown = true; }
     shown.lift += (state.lift - shown.lift) * ease;
     shown.fall += (state.fall - shown.fall) * ease;
@@ -524,15 +527,21 @@
     update();
   });
 
-  // raise or lower the crest toward the target so it is seen to rise
+  // raise or lower the crest toward the target so it is seen to rise —
+  // under reduced motion it lands in one step
   function animateLift(target) {
-    if (Math.abs(target - state.lift) < LSTEP) { state.lift = target; inL.value = target; update(); return; }
+    if (reduce || Math.abs(target - state.lift) < LSTEP) { state.lift = target; inL.value = target; update(); return; }
     var dir = target > state.lift ? LSTEP : -LSTEP;
     (function step() {
       state.lift = clamp(Math.round((state.lift + dir) / LSTEP) * LSTEP, LMIN, LMAX);
       inL.value = state.lift; update();
       if (Math.abs(state.lift - target) >= LSTEP) setTimeout(step, 16);
     })();
+  }
+
+  // follow a live change to the motion setting
+  if (reduceMQ && reduceMQ.addEventListener) {
+    reduceMQ.addEventListener("change", function (e) { reduce = e.matches; });
   }
 
   // repaint on theme flips so canvas colours follow

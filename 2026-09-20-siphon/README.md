@@ -67,7 +67,11 @@ finds the bench as they left it between visits; *Reset* returns it to the low,
 timid crest it opens on. A live status line (`aria-live`) reads each state to a
 screen reader — the liquid, the fall and the crest against the ceiling, whether
 the siphon runs, trickles, strains, or has parted, and the flow and the crest
-pressure against the vapour point.
+pressure against the vapour point. Under `prefers-reduced-motion` the bench holds
+still: the crest does not rise and the outlet does not drop as you drag the
+sliders, each height landing in one step, and *Find the crest* sets the bend
+straight to the height it wants rather than climbing to it; a live change to the
+setting is honoured.
 
 The four liquids break at wildly different lifts, and none of it is the fall's to
 fix: **water** clears about ten metres, light **oil** a little more (lighter, and

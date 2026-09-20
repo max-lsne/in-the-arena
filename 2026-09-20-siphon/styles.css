@@ -332,3 +332,7 @@ footer a { color: var(--ink-soft); }
 
 /* focus visibility */
 :focus-visible { outline: 2px solid var(--iron-2); outline-offset: 2px; border-radius: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
