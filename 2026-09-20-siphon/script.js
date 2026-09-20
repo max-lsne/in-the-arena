@@ -45,6 +45,7 @@
   var UTARGET = 0.85;                           // the ceiling fraction a found crest aims to sit under
   var STRAIN_U = 0.85;                          // at or above this share of the ceiling, strained
   var FALL_SLACK = 0.4;                         // below this fall, slack — a trickle or none
+  var KEY = "siphon.rig.v1";                    // where the liquid, fall and lift are kept between visits
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
   function clampStep(v, a, b, step) {
@@ -55,7 +56,25 @@
   function round1(v) { return Math.round(v * 10) / 10; }
   function hbar(liq) { var L = LIQ[liq]; return (PATM - L.pv) / (L.rho * G); }
 
-  var state = Object.assign({}, DEFAULT);
+  // ---- persistence -----------------------------------------------------
+  function load() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      if (!LIQ[o.liquid]) return null;
+      return {
+        liquid: o.liquid,
+        fall: clampStep(o.fall, HMIN, HMAX, HSTEP),
+        lift: clampStep(o.lift, LMIN, LMAX, LSTEP)
+      };
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  var state = load() || Object.assign({}, DEFAULT);
 
   // ---- the physics -----------------------------------------------------
   function compute(s) {
@@ -455,6 +474,7 @@
     current = compute(state);
     syncLabels();
     curVerdict = render(current);
+    save();
   }
 
   inH.addEventListener("input", function () { state.fall = clampStep(inH.value, HMIN, HMAX, HSTEP); update(); });

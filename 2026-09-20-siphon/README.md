@@ -62,7 +62,9 @@ the outlet, and the **lift** of the crest above the source. The gauge reads the
 crest against the ceiling the liquid can clear *at this fall*, and the panel reads
 the flow, the crest pressure, and the head to spare. Press *Find the crest* to
 raise the bend to the tallest it will still carry with margin below the vapour
-point.
+point. The liquid, fall and lift you set are kept in `localStorage`, so a reader
+finds the bench as they left it between visits; *Reset* returns it to the low,
+timid crest it opens on.
 
 The four liquids break at wildly different lifts, and none of it is the fall's to
 fix: **water** clears about ten metres, light **oil** a little more (lighter, and
