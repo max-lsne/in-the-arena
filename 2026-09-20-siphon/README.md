@@ -71,7 +71,10 @@ pressure against the vapour point. Under `prefers-reduced-motion` the bench hold
 still: the crest does not rise and the outlet does not drop as you drag the
 sliders, each height landing in one step, and *Find the crest* sets the bend
 straight to the height it wants rather than climbing to it; a live change to the
-setting is honoured.
+setting is honoured. The whole bench works from the keyboard — <kbd>F</kbd> finds
+the crest, <kbd>R</kbd> resets, <kbd>1</kbd>–<kbd>4</kbd> pick the liquid,
+<kbd>[</kbd> lowers the crest and <kbd>]</kbd> raises it, and <kbd>−</kbd>/<kbd>=</kbd>
+ease and add the fall.
 
 The four liquids break at wildly different lifts, and none of it is the fall's to
 fix: **water** clears about ten metres, light **oil** a little more (lighter, and

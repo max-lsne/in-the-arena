@@ -539,6 +539,31 @@
     })();
   }
 
+  // nudge a slider-backed value by a step, from the keyboard
+  function nudge(field, delta, lo, hi, step, input) {
+    state[field] = clamp(Math.round((state[field] + delta) / step) * step, lo, hi);
+    input.value = state[field];
+    update();
+  }
+
+  // keyboard: work the bench without reaching for the mouse
+  var LIQ_KEYS = { "1": "water", "2": "oil", "3": "mercury", "4": "hot" };
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    if (el && el.tagName === "INPUT" && el.type === "range") return;   // let a focused slider keep its arrows
+    var k = e.key;
+    if (k === "f" || k === "F") { $("find").click(); }
+    else if (k === "r" || k === "R") { $("reset").click(); }
+    else if (LIQ_KEYS[k]) { state.liquid = LIQ_KEYS[k]; update(); }
+    else if (k === "]") { nudge("lift", 0.3, LMIN, LMAX, LSTEP, inL); }         // raise the crest
+    else if (k === "[") { nudge("lift", -0.3, LMIN, LMAX, LSTEP, inL); }        // lower the crest
+    else if (k === "-" || k === "_") { nudge("fall", -0.2, HMIN, HMAX, HSTEP, inH); }  // ease the fall
+    else if (k === "=" || k === "+") { nudge("fall", 0.2, HMIN, HMAX, HSTEP, inH); }   // add fall
+    else return;
+    e.preventDefault();
+  });
+
   // follow a live change to the motion setting
   if (reduceMQ && reduceMQ.addEventListener) {
     reduceMQ.addEventListener("change", function (e) { reduce = e.matches; });
