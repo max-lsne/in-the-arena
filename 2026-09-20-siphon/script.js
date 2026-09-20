@@ -109,7 +109,7 @@
   var inH = $("in-H"), inL = $("in-L");
   var labH = $("lab-H"), labL = $("lab-L");
   var liqBtns = Array.prototype.slice.call(document.querySelectorAll(".seg [data-liq]"));
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
   var lMark = $("l-mark"), lNote = $("l-note");
 
   function fmtM(x) {
@@ -474,7 +474,38 @@
     current = compute(state);
     syncLabels();
     curVerdict = render(current);
+    announce(current, curVerdict);
     save();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(r, verdict) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var liq = r.Lq.label.charAt(0).toUpperCase() + r.Lq.label.slice(1);
+      var head = liq + ", a fall of " + fmtM(r.H) + " to the outlet and a crest "
+        + fmtM(r.L) + " above the source, against a barometric ceiling of " + fmtM(r.Hbar) + ". ";
+      var flow = verdict === "broken"
+        ? "The column has parted, so nothing flows. "
+        : "It flows at " + r.v.toFixed(1) + " metres a second, " + Math.round(r.v * AREA * 60000) + " litres a minute. ";
+      var press = verdict === "broken"
+        ? "The pressure at the crest has fallen to the vapour point."
+        : "The pressure at the crest is " + Math.round(Math.max(r.Pc, r.Lq.pv) / 1000)
+          + " kilopascals, " + Math.round(r.u * 100) + " percent of the way to the vapour point.";
+      var msg;
+      if (verdict === "runs") {
+        msg = head + "Runs — a real fall, and the crest well under the ceiling, so the column stays continuous and holds its own prime. " + flow + press;
+      } else if (verdict === "slack") {
+        msg = head + "Slack — the outlet sits nearly level with the source, so the fall is small and the flow a trickle, or none. Lower the outlet to give it a fall. " + flow + press;
+      } else if (verdict === "strained") {
+        msg = head + "Strained — the crest is near the barometric ceiling; it still runs, but the pressure at the top of the bend is close to the vapour point, and a little more lift, or a faster fall, will tip it over. Lower the crest, or find the crest. " + flow + press;
+      } else {
+        msg = head + "Broken — the crest is over the ceiling: the pressure there has reached the vapour point, the liquid has boiled, and the column has parted and fallen back. No fall relieves it — lower the crest, or change to a liquid the atmosphere can lift higher. " + flow + press;
+      }
+      sayEl.textContent = msg;
+    }, 260);
   }
 
   inH.addEventListener("input", function () { state.fall = clampStep(inH.value, HMIN, HMAX, HSTEP); update(); });

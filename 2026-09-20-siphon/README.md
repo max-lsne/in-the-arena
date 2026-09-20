@@ -64,7 +64,10 @@ the flow, the crest pressure, and the head to spare. Press *Find the crest* to
 raise the bend to the tallest it will still carry with margin below the vapour
 point. The liquid, fall and lift you set are kept in `localStorage`, so a reader
 finds the bench as they left it between visits; *Reset* returns it to the low,
-timid crest it opens on.
+timid crest it opens on. A live status line (`aria-live`) reads each state to a
+screen reader — the liquid, the fall and the crest against the ceiling, whether
+the siphon runs, trickles, strains, or has parted, and the flow and the crest
+pressure against the vapour point.
 
 The four liquids break at wildly different lifts, and none of it is the fall's to
 fix: **water** clears about ten metres, light **oil** a little more (lighter, and
