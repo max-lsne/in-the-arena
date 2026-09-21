@@ -62,7 +62,9 @@ returns to the modest self-locking lead it opens on. A live status line
 (`aria-live`) reads each state to a screen reader — the mesh and its friction angle,
 the reduction and the lead, the drive efficiency, and whether the worm holds, buries
 its work in heat, creeps past the hold, or runs the load back — debounced past
-slider drags.
+slider drags. Under `prefers-reduced-motion` the bench holds still: the worm and
+wheel do not spin and the drive arrow does not sweep, each state read as a settled
+arrangement rather than a running machine; a live change to the setting is honoured.
 
 The four frictions place the wall very differently: an **oil bath** self-locks only
 below about `1.7°`, so a greased worm barely holds; **dry bronze** holds up to about

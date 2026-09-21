@@ -179,6 +179,9 @@
   }
   sizeCanvas();
 
+  var reduceMQ = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+  var reduce = reduceMQ ? reduceMQ.matches : false;
+
   var cssVar = function (name) {
     return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   };
@@ -509,7 +512,9 @@
     if (lastTs == null) lastTs = ts;
     var dt = Math.min(0.05, (ts - lastTs) / 1000);
     lastTs = ts;
-    phase += dt * 1.4;
+    // under reduced motion the drive is held still — the worm and wheel do not spin,
+    // and each state reads as a settled arrangement rather than a running machine
+    if (!reduce) phase += dt * 1.4;
     draw(current, curVerdict);
     window.requestAnimationFrame(frame);
   }
@@ -563,6 +568,11 @@
     inLam.value = state.lambda; inTeeth.value = state.teeth;
     update();
   });
+
+  // follow a live change to the motion setting
+  if (reduceMQ && reduceMQ.addEventListener) {
+    reduceMQ.addEventListener("change", function (e) { reduce = e.matches; });
+  }
 
   // repaint on theme flips so canvas colours follow
   if (window.matchMedia) {
