@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Worm — a screw driving a wheel: it will push but will not be pushed back, and the hold is the lead angle's alone — self-locking only while λ ≤ arctan μ, an efficiency of tan λ ⁄ tan(λ+ρ) bought against it</title>
+  <meta name="description" content="A worm is a screw meshing with a toothed wheel: turn the worm and the wheel turns, slowly and with great force; try to turn the wheel and, if the thread is fine enough, nothing moves — the load cannot drive the worm back. The whole of it is one angle. The worm drives the wheel at an efficiency of tan λ ⁄ tan(λ+ρ), where λ is the lead angle of the thread and ρ = arctan μ the friction angle; and the wheel can drive the worm back only while λ > ρ. Fine lead: high reduction, self-locking, but efficiency far below half and the rest is heat. Steep lead: efficient, but the load overhauls and drops unless a brake holds it. Set the lead, the friction, and the wheel, and find the steepest lead that still holds." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a1712'/%3E%3Ccircle cx='21' cy='18' r='8' fill='none' stroke='%23b06a34' stroke-width='2.2'/%3E%3Cpath d='M21 8 L21 6 M21 30 L21 28 M31 18 L29 18 M13 18 L11 18' stroke='%23b06a34' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M3 14 L14 14 L14 22 L3 22 Z' fill='none' stroke='%234d7091' stroke-width='2'/%3E%3Cpath d='M4 14 L7 22 M8 14 L11 22 M12 14 L14 20' stroke='%234d7091' stroke-width='1.4'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#141009" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Worm — a drive that will push but will not be pushed back" />
+  <meta property="og:description" content="A screw turning a toothed wheel: great force, great reduction, and — if the thread is fine enough — a lock, the load cannot drive it back. The whole of it is one angle. Fine lead self-locks but wastes most of the work as heat; steep lead runs free but drops the load without a brake. Set the lead and the friction and find the steepest lead that still holds." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">In the arena · 2026-09-21</p>
+      <p class="pron"><b>worm</b> · <i>noun</i> · /wəːm/ — the screw of a worm-and-wheel gear, whose single spiral thread meshes with the teeth of a wheel set across it; one turn of the worm advances the wheel by a single tooth, so a fine thread gives great reduction and, if fine enough, a drive the wheel cannot turn back; from Old English <i>wyrm</i>, a serpent — for the coil of the thread</p>
+      <h1>Worm</h1>
+      <p class="lede">A screw that turns a wheel with great force, and — cut fine enough — will <em>not be turned back</em>.</p>
+      <p class="sub">A worm is a screw laid against a toothed wheel so its spiral thread drives the teeth. Turn the worm and the wheel creeps round, one tooth per turn, slow and immensely strong: a single-thread worm on a forty-tooth wheel is a forty-to-one reduction in one small mesh. Then try it the other way — push on the wheel, try to drive the worm — and if the thread is fine enough <b>nothing moves</b>. The load cannot back-drive it; the gear <em>holds itself</em>, no brake, no pawl. That self-lock is the worm's whole reputation — a hoist that stays where you leave it, a tuning peg that keeps its string — and it is not free. It is bought, in full, from efficiency: the finer the thread that locks it, the more of every turn you put in is lost to friction as heat. One angle sets both.</p>
+    </header>
+
+    <section id="how">
+      <p class="section-tag">Where the hold comes from</p>
+      <h2>A thread is a ramp wrapped round a shaft</h2>
+      <p>Unroll one turn of the worm's thread and it is a straight ramp: it climbs a height — the <em>lead</em>, how far the thread advances in one turn — across a length, the circumference. The angle that ramp makes with the flat is the <b>lead angle</b> <span class="mono">λ</span>. Every tooth of the wheel rides on that ramp, and the whole behaviour of the gear is the old, plain question of a block on an incline: will it slide, or will friction hold it?</p>
+
+      <p class="pull">A worm gear is a block on a ramp, wrapped into a circle. Drive the worm and you push the block along the ramp; push the wheel and you ask the block to slide back down. Friction answers, and the answer depends only on how steep the ramp is.</p>
+
+      <p>Friction sets a limit angle of its own — the <b>friction angle</b> <span class="mono">ρ = arctan μ</span>, where <span class="mono">μ</span> is the coefficient of friction at the mesh. A block on a ramp shallower than <span class="mono">ρ</span> will not slide however hard gravity pulls down the slope: the friction cone swallows the weight. Steeper than <span class="mono">ρ</span> and it slides. That is the entire self-locking rule, read straight off the incline: the worm holds the load — the wheel cannot drive it back — exactly while <span class="mono">λ ≤ ρ</span>.</p>
+
+      <p>So a worm is not self-locking because it is a screw, or because it reduces; a coarse, steep-thread worm hands the load straight back to your hand the moment you let go. It is self-locking only when its thread is cut shallower than the friction can hold, and the shallower you cut it the more surely it holds — and the more of the drive it burns getting there.</p>
+    </section>
+
+    <section id="rule">
+      <p class="section-tag">The one relation it embodies</p>
+      <h2>One angle, two jobs</h2>
+      <p>Take the lead angle <span class="mono">λ</span> of the thread, the friction angle <span class="mono">ρ = arctan μ</span> at the mesh, and a single-start worm on a wheel of <span class="mono">z</span> teeth. Idealise it as a square thread and the whole of it is three short lines:</p>
+
+      <ul class="law-list">
+        <li><b>The drive.</b> Turn the worm and the wheel turns at a reduction of <span class="mono">z : 1</span> — one tooth per turn — with an efficiency <span class="mono">η = tan λ ⁄ tan(λ + ρ)</span>. It falls away as the lead grows fine: at the self-lock boundary it is already below one half, and below that boundary most of the work is heat.</li>
+        <li><b>The hold.</b> Try to drive it backward, from the wheel, and the efficiency is <span class="mono">η′ = tan(λ − ρ) ⁄ tan λ</span>. When <span class="mono">λ ≤ ρ</span> that is zero or less: the load <em>cannot</em> move the worm, and the gear holds itself. When <span class="mono">λ > ρ</span> the load overhauls — it runs the worm backward and drops, unless a brake holds it.</li>
+        <li><b>The trade.</b> The two share one number. Cut the lead fine — <span class="mono">λ</span> well under <span class="mono">ρ</span> — and you buy a firm self-lock and a high reduction, and pay with an efficiency near zero. Cut it steep and you buy efficiency, and pay by losing the hold. There is no lead that is both free and self-locking; the boundary <span class="mono">λ = ρ</span> is the best either can do.</li>
+      </ul>
+
+      <p>So one angle does two opposite jobs, and setting it is the whole of the craft. A holding worm — a hoist, a jack, a peg — is cut deliberately shallow, under the friction angle, and its low efficiency is not a fault but the price of the lock, carried away as heat the housing must shed. A worm cut for <em>power</em>, to move a load and not hold it, is cut steep and above the friction angle, and given a brake to hold what it will no longer hold itself.</p>
+
+      <p class="pull">The worm gives you the hold or the efficiency, and charges the same coin for both: the lead angle. Ask it to hold without a brake and it will, and keep more than half of your work as heat for the favour.</p>
+    </section>
+
+    <section id="ladder">
+      <p class="section-tag">Four leads, from a buried lock to a load that runs back</p>
+      <h2>Along the one angle</h2>
+      <ol class="ladder">
+        <li><b>Buried.</b> <span class="rung-note">The lead is far under the friction angle — it holds the load like a wall, but the reduction is enormous and the efficiency near nothing: almost every turn you put in comes out as <em>heat</em>, and the gear runs hot. A firm lock, dearly paid for.</span></li>
+        <li><b>Holds.</b> <span class="rung-note">The lead sits just under the friction angle. The worm holds the load with no brake, at the highest efficiency a self-locking lead allows — still under half, but the most the hold will give. This is where a holding worm is cut.</span></li>
+        <li><b>Creeps.</b> <span class="rung-note">The lead has just passed the friction angle. The hold is gone: the load overhauls, but slowly — it <em>creeps</em> the worm backward, and a light brake or a touch more friction holds it. The edge of the cliff.</span></li>
+        <li><b>Runs back.</b> <span class="rung-note">The lead is well over the friction angle. Efficient forward, and no hold at all: let go and the load runs the worm backward and <em>drops</em>. Fast, free, and useless as a brake — this worm must be braked to hold anything.</span></li>
+      </ol>
+    </section>
+
+    <section id="hands">
+      <p class="section-tag">Who reads it, and for what</p>
+      <h2>The same angle, three ways</h2>
+      <div class="hands">
+        <div class="hand">
+          <h3>The hoist-builder</h3>
+          <p class="role">wants the hold</p>
+          <p>Cuts the lead <em>under</em> the friction angle so the winch stays where it stops — no ratchet, no band brake, the gear its own lock. Pays in efficiency and cooling, and counts it cheap against a load that never runs away.</p>
+        </div>
+        <div class="hand">
+          <h3>The gear-cutter</h3>
+          <p class="role">wants the power</p>
+          <p>For a drive that must <em>move</em>, not hold, cuts the lead <em>over</em> the friction angle — often a multi-start worm, steeper still — for efficiency, and fits a brake to hold what the gear no longer will. Reads <span class="mono">λ</span> against <span class="mono">ρ</span> and chooses which side to sit.</p>
+        </div>
+        <div class="hand">
+          <h3>The luthier</h3>
+          <p class="role">wants it to stay put</p>
+          <p>Sets a worm to each tuning machine so the string's pull cannot back-drive the peg: the note holds. A fine lead, deep in the self-lock — efficiency no concern where the load never turns the gear more than a hair.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="bench">
+      <p class="section-tag">The bench</p>
+      <h2>Set the lead against the friction</h2>
+      <p>A worm driving a wheel that lifts a load. Set the <b>lead angle</b> of the thread and the <b>friction</b> at the mesh, and read whether the load is held or runs back, and at what efficiency it drives. The gauge below sets the lead against the friction angle — the self-lock threshold — and the ramp inset shows why: a block on the thread's incline, and the friction cone that either swallows its weight or lets it slide. Press <em>Find the hold</em> for the steepest lead that still locks, with margin.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div id="verdict" class="verdict v-keep" role="status" aria-live="off">
+              <span class="dot"></span><span>Holds</span><small>lead under the friction angle</small>
+            </div>
+            <div class="stage" id="stage" aria-hidden="true"></div>
+            <p class="hint">
+              <b>Read it:</b> the <span class="mono">worm</span> drives the <span class="mono">wheel</span>, which lifts the load; the ramp inset is one turn of the thread unrolled — a block on the incline <span class="mono">λ</span> within the friction cone <span class="mono">ρ</span> cannot slide back. Green while the lead stays under the friction angle and the load is held; oxblood when it runs back.
+            </p>
+          </div>
+
+          <div class="controls">
+            <div class="ctl">
+              <label for="in-lambda">Lead angle <span class="val" id="lab-lambda">3.0°</span></label>
+              <input id="in-lambda" type="range" min="1" max="24" step="0.5" value="3"
+                     aria-describedby="lambda-note" />
+              <div class="xtrack"><span class="x-mark" id="l-mark"></span></div>
+              <p class="ctl-note" id="l-note">the steepest lead that still holds: <b>—</b></p>
+            </div>
+
+            <div class="ctl">
+              <label for="in-teeth">Wheel <span class="val" id="lab-teeth">40 teeth</span></label>
+              <input id="in-teeth" type="range" min="20" max="80" step="2" value="40" />
+            </div>
+
+            <div class="ctl">
+              <label>Friction at the mesh</label>
+              <div class="seg" role="group" aria-label="Friction at the mesh">
+                <button type="button" data-fric="oilbath" aria-pressed="false">oil bath</button>
+                <button type="button" data-fric="greased" aria-pressed="false">greased</button>
+                <button type="button" data-fric="dry" aria-pressed="true">bronze dry</button>
+                <button type="button" data-fric="steel" aria-pressed="false">steel dry</button>
+              </div>
+            </div>
+
+            <div id="reading" class="reading"></div>
+
+            <div class="bench-actions">
+              <button class="btn" id="find" type="button">Find the hold</button>
+              <button class="btn" id="reset" type="button">Reset</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="close">
+      <p class="section-tag">The discipline in the word</p>
+      <h2>A machine that will push, but not be pushed</h2>
+      <p>The worm is one of the few machines whose limitation is its point. A gear that could be driven from either end would be no good as a hold; the worm's refusal to be back-driven is exactly what makes it a brake, a lock, a thing that stays. And that refusal is not stubbornness of metal but a plain fact of the ramp: cut shallower than the friction can hold, a slope will not let its load slide back. The discipline is to see that the hold and the loss are the same fact seen twice, and to set the one angle knowing you cannot have both — to decide, before cutting the thread, whether this worm is to hold or to move.</p>
+
+      <p>Each page is one HTML file, one stylesheet, one script. No build, no account, no network once it has loaded. The efficiencies are the ideal square-thread figures; a real worm's teeth meet at a pressure angle that raises the effective friction a little — <span class="mono">μ′ = μ ⁄ cos φₙ</span> — lowering the efficiency and lifting the self-lock threshold a touch, but the shape is exact: the drive <span class="mono">tan λ ⁄ tan(λ+ρ)</span>, the back-drive <span class="mono">tan(λ−ρ) ⁄ tan λ</span>, and the lock at <span class="mono">λ = ρ</span>.</p>
+    </section>
+
+    <footer>
+      <p>In the arena · one page a day, each built on a single old working word and the discipline hidden inside it. · 2026-09-21 · <a href="../">index</a></p>
+    </footer>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
