@@ -65,6 +65,10 @@ its work in heat, creeps past the hold, or runs the load back — debounced past
 slider drags. Under `prefers-reduced-motion` the bench holds still: the worm and
 wheel do not spin and the drive arrow does not sweep, each state read as a settled
 arrangement rather than a running machine; a live change to the setting is honoured.
+The whole bench works from the keyboard — <kbd>F</kbd> finds the hold, <kbd>R</kbd>
+resets, <kbd>1</kbd>–<kbd>4</kbd> pick the mesh, <kbd>[</kbd> cuts a finer lead and
+<kbd>]</kbd> a steeper one, and <kbd>−</kbd>/<kbd>=</kbd> take teeth off the wheel
+and add them.
 
 The four frictions place the wall very differently: an **oil bath** self-locks only
 below about `1.7°`, so a greased worm barely holds; **dry bronze** holds up to about

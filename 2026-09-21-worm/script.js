@@ -569,6 +569,31 @@
     update();
   });
 
+  // nudge a slider-backed value by a step, from the keyboard
+  function nudge(field, delta, lo, hi, step, input) {
+    state[field] = clamp(Math.round((state[field] + delta) / step) * step, lo, hi);
+    input.value = state[field];
+    update();
+  }
+
+  // keyboard: work the bench without reaching for the mouse
+  var FRIC_KEYS = { "1": "oilbath", "2": "greased", "3": "dry", "4": "steel" };
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    if (el && el.tagName === "INPUT" && el.type === "range") return;   // let a focused slider keep its arrows
+    var k = e.key;
+    if (k === "f" || k === "F") { $("find").click(); }
+    else if (k === "r" || k === "R") { $("reset").click(); }
+    else if (FRIC_KEYS[k]) { state.fric = FRIC_KEYS[k]; update(); }
+    else if (k === "]") { nudge("lambda", LSTEP, LMIN, LMAX, LSTEP, inLam); }        // steeper lead
+    else if (k === "[") { nudge("lambda", -LSTEP, LMIN, LMAX, LSTEP, inLam); }       // finer lead
+    else if (k === "=" || k === "+") { nudge("teeth", TSTEP, TMIN, TMAX, TSTEP, inTeeth); }   // more teeth
+    else if (k === "-" || k === "_") { nudge("teeth", -TSTEP, TMIN, TMAX, TSTEP, inTeeth); }  // fewer teeth
+    else return;
+    e.preventDefault();
+  });
+
   // follow a live change to the motion setting
   if (reduceMQ && reduceMQ.addEventListener) {
     reduceMQ.addEventListener("change", function (e) { reduce = e.matches; });
