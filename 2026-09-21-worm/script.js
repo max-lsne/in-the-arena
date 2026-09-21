@@ -40,6 +40,7 @@
   var FIND_MARGIN = 1.0;                        // degrees under ρ a found lead aims to sit
   var SMOTHER = 0.20;                           // below this drive efficiency, buried (mostly heat)
   var CREEP = 0.20;                             // back-drive efficiency below this: creeps, not runs
+  var KEY = "worm.gear.v1";                     // where the mesh, lead and wheel are kept between visits
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
   function clampStep(v, a, b, step) {
@@ -49,7 +50,25 @@
   }
   function rhoDeg(fric) { return Math.atan(FRIC[fric].mu) / DEG; }
 
-  var state = Object.assign({}, DEFAULT);
+  // ---- persistence -----------------------------------------------------
+  function load() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      if (!FRIC[o.fric]) return null;
+      return {
+        fric: o.fric,
+        lambda: clampStep(o.lambda, LMIN, LMAX, LSTEP),
+        teeth: clampStep(o.teeth, TMIN, TMAX, TSTEP)
+      };
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  var state = load() || Object.assign({}, DEFAULT);
 
   // ---- the physics -----------------------------------------------------
   function compute(s) {
@@ -501,6 +520,7 @@
     current = compute(state);
     syncLabels();
     curVerdict = render(current);
+    save();
   }
 
   inLam.addEventListener("input", function () { state.lambda = clampStep(inLam.value, LMIN, LMAX, LSTEP); update(); });

@@ -56,8 +56,9 @@ cone that either swallows the block's weight (it cannot slide) or lets it go (it
 slides back down). The **curve** plots the drive efficiency against the lead, the
 self-locking band shaded, the half-efficiency line drawn. Press *Find the hold* to
 raise the lead to the steepest that still self-locks with margin — the highest
-efficiency a holding lead allows; *Reset* returns to the modest self-locking lead it
-opens on.
+efficiency a holding lead allows. The mesh, lead and wheel you set are kept in
+`localStorage`, so a reader finds the bench as they left it between visits; *Reset*
+returns to the modest self-locking lead it opens on.
 
 The four frictions place the wall very differently: an **oil bath** self-locks only
 below about `1.7°`, so a greased worm barely holds; **dry bronze** holds up to about
