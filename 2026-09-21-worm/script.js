@@ -102,7 +102,7 @@
   var inLam = $("in-lambda"), inTeeth = $("in-teeth");
   var labLam = $("lab-lambda"), labTeeth = $("lab-teeth");
   var fricBtns = Array.prototype.slice.call(document.querySelectorAll(".seg [data-fric]"));
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
   var lMark = $("l-mark"), lNote = $("l-note");
 
   function pct(x) { return Math.round(clamp(x, 0, 1) * 100) + "%"; }
@@ -520,7 +520,32 @@
     current = compute(state);
     syncLabels();
     curVerdict = render(current);
+    announce(current, curVerdict);
     save();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(r, verdict) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var head = "A " + r.F.label + " mesh, friction angle " + deg(r.rhoDeg)
+        + ", a single-start worm on a " + r.teeth + "-tooth wheel — a " + r.teeth
+        + " to 1 reduction — cut to a lead of " + deg(r.lamDeg) + ". ";
+      var drive = "It drives the wheel at " + Math.round(r.etaF * 100) + " percent efficiency. ";
+      var back;
+      if (verdict === "holds") {
+        back = "Holds — the lead sits " + deg(r.margin) + " under the friction angle, so the load cannot drive the worm back; the gear holds itself with no brake, at the highest efficiency a self-locking lead allows.";
+      } else if (verdict === "buried") {
+        back = "Buried — it self-locks, and firmly, " + deg(r.margin) + " under the friction angle, but the lead is so fine that most of the drive is lost to heat and the gear runs hot. Raise the lead toward the friction angle, or find the hold, to keep the lock at more efficiency.";
+      } else if (verdict === "creeps") {
+        back = "Creeps — the lead has just passed the friction angle by " + deg(-r.margin) + ", so the hold is gone: the load overhauls, slowly, at " + Math.round(r.etaB * 100) + " percent, and a light brake or a touch more friction holds it. Ease the lead, or find the hold, to lock it again.";
+      } else {
+        back = "Runs back — the lead is " + deg(-r.margin) + " over the friction angle, well past the hold: let go and the load runs the worm backward at " + Math.round(r.etaB * 100) + " percent and drops. This worm must be braked to hold anything. Ease the lead under the friction angle, or find the hold.";
+      }
+      sayEl.textContent = head + drive + back;
+    }, 260);
   }
 
   inLam.addEventListener("input", function () { state.lambda = clampStep(inLam.value, LMIN, LMAX, LSTEP); update(); });

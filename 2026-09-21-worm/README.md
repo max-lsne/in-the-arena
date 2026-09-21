@@ -58,7 +58,11 @@ self-locking band shaded, the half-efficiency line drawn. Press *Find the hold* 
 raise the lead to the steepest that still self-locks with margin — the highest
 efficiency a holding lead allows. The mesh, lead and wheel you set are kept in
 `localStorage`, so a reader finds the bench as they left it between visits; *Reset*
-returns to the modest self-locking lead it opens on.
+returns to the modest self-locking lead it opens on. A live status line
+(`aria-live`) reads each state to a screen reader — the mesh and its friction angle,
+the reduction and the lead, the drive efficiency, and whether the worm holds, buries
+its work in heat, creeps past the hold, or runs the load back — debounced past
+slider drags.
 
 The four frictions place the wall very differently: an **oil bath** self-locks only
 below about `1.7°`, so a greased worm barely holds; **dry bronze** holds up to about
