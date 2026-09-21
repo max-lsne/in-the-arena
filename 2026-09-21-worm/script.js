@@ -311,7 +311,7 @@
     ctx.fillStyle = withAlpha(col.field2, 0.9);
     roundRect(bx, by, bw, bh, 8); ctx.fill();
     ctx.strokeStyle = col.rule; ctx.lineWidth = 1; ctx.stroke();
-    label(ctx, col.faint, "one turn of the thread, unrolled — a block on the ramp", bx + 12, by + 18, "left");
+    label(ctx, col.faint, "one turn of the thread, unrolled", bx + 12, by + 18, "left");
 
     var A = { x: bx + 34, y: by + bh - 30 }, len = 250;
     var lam = clamp(cur.lamDeg, 1, 24) * DEG, rho = cur.rhoDeg * DEG;
@@ -388,7 +388,7 @@
     ctx.fillStyle = withAlpha(col.field2, 0.9);
     roundRect(ix, iy, iw, ih, 8); ctx.fill();
     ctx.strokeStyle = col.rule; ctx.lineWidth = 1; ctx.stroke();
-    label(ctx, col.faint, "drive η · tan λ ⁄ tan(λ+ρ)", ix + 10, iy + 16, "left");
+    label(ctx, col.faint, "drive η vs lead", ix + 10, iy + 16, "left");
 
     var Ox = ix + pad, Oy = iy + ih - pad, L = iw - 2 * pad, Hc = ih - 2 * pad - 8;
     var xFor = function (d) { return Ox + (d - LMIN) / (LMAX - LMIN) * L; };
