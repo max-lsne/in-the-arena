@@ -77,7 +77,11 @@ exact edge — the most this ground will take before the inner wheel spins — a
 *Reset* to return to the gentle, gripping state it opens on.
 
 The turn, throttle and ground you set are kept in `localStorage`, so a reader finds
-the bench as they left it between visits.
+the bench as they left it between visits. A live status line (`aria-live`) reads each
+state to a screen reader — the corner and the two wheel speeds, the equal torque, and
+whether the axle drives, nears the edge, or has broken into spin, with the tractive
+torque it delivers against the ceiling of twice the weaker wheel's grip — debounced
+past slider drags.
 
 The four grounds move the ceiling enormously: **dry tarmac** takes almost any
 throttle before a wheel lets go; **wet** halves it; **gravel** less again; **sheet

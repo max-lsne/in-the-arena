@@ -126,7 +126,7 @@
   var inTurn = $("in-turn"), inThr = $("in-throttle");
   var labTurn = $("lab-turn"), labThr = $("lab-throttle");
   var groundBtns = Array.prototype.slice.call(document.querySelectorAll(".seg [data-ground]"));
-  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage");
+  var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
   var tMark = $("t-mark"), tNote = $("t-note");
 
   function nm(x) { return Math.round(x) + " N·m"; }
@@ -551,7 +551,40 @@
     current = compute(state);
     syncLabels();
     curVerdict = render(current);
+    announce(current, curVerdict);
     save();
+  }
+
+  // ---- screen-reader status (debounced, so dragging a slider doesn't chatter) ----
+  var sayTimer = null;
+  function announce(r, verdict) {
+    if (!sayEl) return;
+    if (sayTimer) clearTimeout(sayTimer);
+    sayTimer = setTimeout(function () {
+      var kpct = Math.round(r.k * 100);
+      var head = r.turn < STRAIGHT
+        ? "Straight, both wheels running together at the carrier speed of " + rpm(r.wc) + " rpm. "
+        : "A " + TURN_WORD(r.turn) + " corner: the outer wheel at " + rpm(r.wOut) + " and the inner at "
+          + rpm(r.wIn) + " rpm, their sum pinned to twice the carrier. ";
+      var split = "The torque splits equally, " + nm(r.torqueEach) + " to each wheel. ";
+      var tail;
+      if (verdict === "even") {
+        tail = "Even — both wheels grip on " + r.g.label + " and dry, and all " + nm(r.delivered)
+          + " reaches the road, well under the ceiling of " + nm(2 * r.tauWeak) + ", twice the weaker wheel's grip.";
+      } else if (verdict === "corner") {
+        tail = "Cornering — both wheels grip, the outer gaining exactly what the inner loses, and all "
+          + nm(r.delivered) + " reaches the road under the ceiling of " + nm(2 * r.tauWeak) + ".";
+      } else if (verdict === "edge") {
+        tail = "At the edge — the inner wheel, on " + r.g.label + ", is near its grip of " + nm(r.tauWeak)
+          + "; a touch more throttle and it lets go. Ease off, or find the break, to keep both wheels holding.";
+      } else {
+        tail = "Spinning — the inner wheel on " + r.g.label + " has broken free and runs up toward "
+          + rpm(r.wIn) + " rpm while the outer stalls toward " + rpm(r.wOut)
+          + "; the axle delivers only " + nm(r.delivered) + ", twice that wheel's grip, and the car sits still. "
+          + "Ease the throttle under the break, or lock the differential, to pull again.";
+      }
+      sayEl.textContent = head + split + tail;
+    }, 260);
   }
 
   inTurn.addEventListener("input", function () { state.turn = clampStep(inTurn.value, TURN_MIN, TURN_MAX, TURN_STEP); update(); });
