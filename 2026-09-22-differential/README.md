@@ -84,7 +84,10 @@ torque it delivers against the ceiling of twice the weaker wheel's grip — debo
 past slider drags. Under `prefers-reduced-motion` the bench holds still: the wheels
 and carrier do not turn and the drive arrows do not sweep, each state landing as a
 settled arrangement read at a glance rather than a running machine; a live change to
-the setting is honoured.
+the setting is honoured. The whole bench works from the keyboard — <kbd>F</kbd> finds
+the break, <kbd>R</kbd> resets, <kbd>1</kbd>–<kbd>4</kbd> pick the ground, <kbd>[</kbd>
+eases the turn and <kbd>]</kbd> tightens it, and <kbd>−</kbd>/<kbd>=</kbd> back off and
+add throttle.
 
 The four grounds move the ceiling enormously: **dry tarmac** takes almost any
 throttle before a wheel lets go; **wet** halves it; **gravel** less again; **sheet

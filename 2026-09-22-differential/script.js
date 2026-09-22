@@ -611,6 +611,31 @@
     update();
   });
 
+  // nudge a slider-backed value by a step, from the keyboard
+  function nudge(field, delta, lo, hi, step, input) {
+    state[field] = clamp(Math.round((state[field] + delta) / step) * step, lo, hi);
+    input.value = state[field];
+    update();
+  }
+
+  // keyboard: work the bench without reaching for the mouse
+  var GROUND_KEYS = { "1": "dry", "2": "wet", "3": "gravel", "4": "ice" };
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var el = document.activeElement;
+    if (el && el.tagName === "INPUT" && el.type === "range") return;   // let a focused slider keep its arrows
+    var k = e.key;
+    if (k === "f" || k === "F") { $("find").click(); }
+    else if (k === "r" || k === "R") { $("reset").click(); }
+    else if (GROUND_KEYS[k]) { state.ground = GROUND_KEYS[k]; update(); }
+    else if (k === "]") { nudge("turn", TURN_STEP, TURN_MIN, TURN_MAX, TURN_STEP, inTurn); }       // tighten the turn
+    else if (k === "[") { nudge("turn", -TURN_STEP, TURN_MIN, TURN_MAX, TURN_STEP, inTurn); }      // ease the turn
+    else if (k === "=" || k === "+") { nudge("throttle", THR_STEP, THR_MIN, THR_MAX, THR_STEP, inThr); }   // more throttle
+    else if (k === "-" || k === "_") { nudge("throttle", -THR_STEP, THR_MIN, THR_MAX, THR_STEP, inThr); }  // less throttle
+    else return;
+    e.preventDefault();
+  });
+
   // follow a live change to the motion setting
   if (reduceMQ && reduceMQ.addEventListener) {
     reduceMQ.addEventListener("change", function (e) { reduce = e.matches; });
