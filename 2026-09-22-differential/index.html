@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Differential — a gear that lets two driven wheels differ in speed while driving both, because the carrier turns at their average (ω_L + ω_R = 2·ω_c); and the same symmetry splits the torque equally, so an open axle can pull no harder than twice its worst wheel's grip</title>
+  <meta name="description" content="A differential lets the two driven wheels of an axle turn at different speeds while still driving both — the outer wheel running further than the inner round a corner, with no scrub and no fight. The whole of it is a mechanical average: the carrier turns at the mean of the two wheels, so ω_L + ω_R = 2·ω_c — their difference free, their sum pinned to the drive. The same pinion that averages the speeds sits like a beam on a fulcrum, so the torque splits equally: T_L = T_R, always. That equal split is why one wheel on ice strands the car — the axle can deliver at most twice the grip of its worst wheel, and the freed torque only spins the wheel that already slips. Set the turn, the throttle, and the ground under the inner wheel, and find the throttle at which it breaks into spin." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a1712'/%3E%3Ccircle cx='16' cy='16' r='6.5' fill='none' stroke='%23b06a34' stroke-width='2.2'/%3E%3Ccircle cx='16' cy='16' r='1.8' fill='%23b06a34'/%3E%3Ccircle cx='5' cy='16' r='3.4' fill='none' stroke='%234d7091' stroke-width='2'/%3E%3Ccircle cx='27' cy='16' r='3.4' fill='none' stroke='%234d7091' stroke-width='2'/%3E%3Cpath d='M8.4 16 L9.5 16 M22.5 16 L23.6 16' stroke='%234d7091' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#141009" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Differential — a gear that frees the speeds and equalises the torque" />
+  <meta property="og:description" content="The carrier turns at the average of the two wheels (ω_L + ω_R = 2·ω_c), so their speeds are free to differ round a corner; the same symmetry splits the torque equally, so one wheel on ice caps the whole axle at twice a tiny grip and spins. Set the turn, the throttle and the ground, and find where it breaks." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">In the arena · 2026-09-22</p>
+      <p class="pron"><b>differential</b> · <i>noun</i> · /ˌdɪfəˈrɛnʃ(ə)l/ — the gear train that divides one drive between two shafts and lets them turn at different speeds, the carrier turning always at the mean of the two; from Latin <i>differre</i>, to carry apart — for the two speeds it carries apart while holding their sum</p>
+      <h1>Differential</h1>
+      <p class="lede">A gear that lets two wheels turn at <em>different</em> speeds while driving them both — and can push them only <em>equally</em> hard.</p>
+      <p class="sub">Round a corner the outer wheel travels further than the inner and must turn faster; a solid axle would force them to agree, and one tyre would scrub while the other dragged. A differential dissolves the fight. Its carrier — the cage the drive turns — carries a small pinion free to spin on its own pin, meshing with a gear on each half-shaft, and that pinion shares the drive out: run one wheel faster and the other runs slower by exactly as much. So the carrier turns always at the <b>average</b> of the two wheels, and <b>their sum is fixed</b> — their difference is the corner, their sum is the drive. But the pinion that averages the speeds sits like a beam on a fulcrum, an equal arm each side, and so it can only ever push the two wheels <em>equally hard</em>. That equal push is the same symmetry as the free speeds — and it is why one wheel on ice will sit and spin while the other, with grip to spare, does nothing.</p>
+    </header>
+
+    <section id="how">
+      <p class="section-tag">Where the freedom comes from</p>
+      <h2>A pinion is a beam on a fulcrum, wrapped into a gear</h2>
+      <p>Picture the carrier as a spinning cage. Bridged across it, on a pin fixed to the cage, sits a small bevel pinion — the <em>spider</em> — free to roll on that pin. It meshes with a bevel gear on the end of each half-shaft, one to the left wheel, one to the right. Turn the cage and it drags the pinion round with it; the pinion, meshing both side gears, drives both wheels. That is the drive.</p>
+
+      <p class="pull">Now hold the cage still and turn one wheel by hand: the pinion rolls on its pin and turns the other wheel <em>backward</em> by exactly as much. The cage sees the average; the pinion carries the difference. Sum pinned, difference free — the whole gear in one sentence.</p>
+
+      <p>So the two wheels are not locked to each other, only to their <b>mean</b>. Whatever the road asks of their difference — a gentle bend, a tight hairpin, one wheel in a rut — the pinion supplies it by rolling on its pin, and the carrier turns on, indifferent, at the average. The half-shafts may run at any two speeds at all, provided they sum to twice the carrier: <span class="mono">ω_L + ω_R = 2·ω_c</span>. Read straight off the gear.</p>
+
+      <p>And here is the catch, hidden in the same pinion. A gear on a fulcrum with equal arms can only push its two ends with equal force. The pinion pushes each side gear with the same tooth load, so the torque to each wheel is equal — <span class="mono">T_L = T_R</span> — no matter how the speeds differ. The differential cannot favour a wheel. The freedom in the speeds and the equality in the torque are one fact, seen from the two ends of the same pin.</p>
+    </section>
+
+    <section id="rule">
+      <p class="section-tag">The one relation it embodies</p>
+      <h2>Free in speed, equal in torque</h2>
+      <p>Take the two wheel speeds <span class="mono">ω_L</span>, <span class="mono">ω_R</span>, the carrier speed <span class="mono">ω_c</span> the driveshaft sets, and the torque <span class="mono">T</span> the engine feeds the carrier. Idealise the gears as lossless and the whole of it is two lines that never let go of each other:</p>
+
+      <ul class="law-list">
+        <li><b>The speeds split freely.</b> <span class="mono">ω_L + ω_R = 2·ω_c</span>. The carrier turns at the average of the two wheels; their sum is fixed by the drive, their difference is whatever the road asks. Straight, they run together; in a corner the outer gains exactly what the inner loses. This freedom is the entire point of the gear.</li>
+        <li><b>The torque splits equally.</b> <span class="mono">T_L = T_R = T ⁄ 2</span>, always, whatever the speeds. The pinion is a beam with equal arms; it pushes both sides with the same force and cannot favour one. Not a fault to tune out — the same symmetry that frees the speeds.</li>
+        <li><b>The sting.</b> A wheel passes to the road no more torque than its grip allows. So the equal split caps the axle at <em>twice the grip of its worst wheel</em>: put one wheel on ice and the good wheel is held down to the same near-nothing, the extra throttle only spinning the wheel that slips — <span class="mono">ω_ice</span> climbing by exactly what <span class="mono">ω_grip</span> falls, sum still pinned, car still still.</li>
+      </ul>
+
+      <p>So one pin does two opposite-seeming jobs, and they are the same job. A differential meant to <em>pull</em> — a tractor, a rally car, an off-roader — is given a way to break the symmetry when it hurts: a limited-slip that leaks torque toward the wheel that still grips, or a lock that welds the shafts into one solid axle while you hold it. Each buys traction back by surrendering, for a moment, the very freedom the differential was for.</p>
+
+      <p class="pull">The differential gives the wheels their freedom in speed and charges for it in torque: it will drive them both, around any corner, but only ever <em>equally hard</em> — and so it is only ever as strong as its weakest wheel, twice over.</p>
+    </section>
+
+    <section id="ladder">
+      <p class="section-tag">Four states, from an even drive to one wheel spinning</p>
+      <h2>Along the one axle</h2>
+      <ol class="ladder">
+        <li><b>Even.</b> <span class="rung-note">Straight and gripping. Both wheels turn together at the carrier speed, the torque split evenly between them, and every bit of it reaches the road. The plain, happy case the gear runs in almost all the time.</span></li>
+        <li><b>Cornering.</b> <span class="rung-note">The road asks a difference. The outer wheel gains exactly what the inner loses — their sum unchanged, pinned to twice the carrier — while the torque stays even and the axle still pulls. No scrub, no fight: the freedom doing its work.</span></li>
+        <li><b>At the edge.</b> <span class="rung-note">The inner wheel — on the poorer ground — nears its grip. The torque each wheel carries has risen to almost all that ground will hold; a touch more throttle and it lets go. The cliff's edge, where a careful foot keeps traction.</span></li>
+        <li><b>Spinning.</b> <span class="rung-note">The inner wheel breaks free and <em>spins</em>, up toward twice the carrier; the good wheel gets only the same small torque and barely turns. The axle delivers twice a tiny grip and no more, the extra throttle poured into a blur of one wheel. The freedom, turned against you.</span></li>
+      </ol>
+    </section>
+
+    <section id="hands">
+      <p class="section-tag">Who reads it, and for what</p>
+      <h2>The same pin, three ways</h2>
+      <div class="hands">
+        <div class="hand">
+          <h3>The road-car engineer</h3>
+          <p class="role">wants the freedom</p>
+          <p>Fits an open differential so the tyres never scrub or fight through the thousand small turns of a car-park and a commute. Accepts the ice failing as rare, and leaves the symmetry whole — the ride smoother for it, every day it does not snow.</p>
+        </div>
+        <div class="hand">
+          <h3>The rally driver</h3>
+          <p class="role">wants the freedom gone when it hurts</p>
+          <p>Runs a limited-slip or a lockable differential, to break the equal split the instant one wheel loses grip and shove torque to the wheel that still bites. Trades a little scrub and a heavier feel for a car that pulls out of the mud instead of digging in.</p>
+        </div>
+        <div class="hand">
+          <h3>The instrument-maker</h3>
+          <p class="role">wants the average</p>
+          <p>Reads the differential not as a drive but as an <em>adder</em>: feed the two shafts and the carrier returns their mean. Built into odometers, fire-control computers and the mechanical differential analyser, the same gear sums and averages inputs — the corner-turner turned calculator.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="bench">
+      <p class="section-tag">The bench</p>
+      <h2>Set the turn against the grip</h2>
+      <p>A driven rear axle in a corner. Set the <b>turn</b> the road asks and watch the outer wheel gain exactly what the inner loses, their sum pinned to twice the carrier — the sum-bar inset is a beam whose ends slide apart about a fixed midpoint. Set the <b>throttle</b> the engine feeds the carrier and the <b>ground under the inner wheel</b>, and read whether the axle drives, nears the edge, or breaks into spin. Press <em>Find the break</em> for the exact throttle this ground will take before the inner wheel lets go.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div id="verdict" class="verdict v-keep" role="status" aria-live="off">
+              <span class="dot"></span><span>Even</span><small>both wheels grip</small>
+            </div>
+            <div class="stage" id="stage" aria-hidden="true"></div>
+            <p class="hint">
+              <b>Read it:</b> the <span class="mono">carrier</span> drives both <span class="mono">wheels</span>; the sum-bar shows their two speeds sliding apart about a fixed midpoint, the carrier's average. The <span class="mono">torque</span> arrows are always equal. Green while both wheels grip; oxblood when the inner wheel breaks free and spins.
+            </p>
+            <p class="hint">
+              <b>Keys:</b> <kbd>F</kbd> find the break · <kbd>R</kbd> reset · <kbd>1</kbd>–<kbd>4</kbd> pick the ground · <kbd>[</kbd> ease the turn <kbd>]</kbd> tighten · <kbd>−</kbd>/<kbd>=</kbd> less / more throttle. A focused slider keeps its own arrows.
+            </p>
+            <p id="say" class="sr-only" aria-live="polite"></p>
+          </div>
+
+          <div class="controls">
+            <div class="ctl">
+              <label for="in-turn">Turn <span class="val" id="lab-turn">gentle</span></label>
+              <input id="in-turn" type="range" min="0" max="100" step="2" value="24" />
+            </div>
+
+            <div class="ctl">
+              <label for="in-throttle">Throttle <span class="val" id="lab-throttle">900 N·m</span></label>
+              <input id="in-throttle" type="range" min="0" max="3000" step="50" value="900"
+                     aria-describedby="t-note" />
+              <div class="xtrack"><span class="x-mark" id="t-mark"></span></div>
+              <p class="ctl-note" id="t-note">the throttle the inner wheel breaks at: <b>—</b></p>
+            </div>
+
+            <div class="ctl">
+              <label>Ground under the inner wheel</label>
+              <div class="seg" role="group" aria-label="Ground under the inner wheel">
+                <button type="button" data-ground="dry" aria-pressed="true">dry</button>
+                <button type="button" data-ground="wet" aria-pressed="false">wet</button>
+                <button type="button" data-ground="gravel" aria-pressed="false">gravel</button>
+                <button type="button" data-ground="ice" aria-pressed="false">ice</button>
+              </div>
+            </div>
+
+            <div id="reading" class="reading"></div>
+
+            <div class="bench-actions">
+              <button class="btn" id="find" type="button">Find the break</button>
+              <button class="btn" id="reset" type="button">Reset</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="close">
+      <p class="section-tag">The discipline in the word</p>
+      <h2>A gear that carries apart, and holds the sum</h2>
+      <p>The differential is one of the few machines named for what it lets happen rather than what it does: it does not <em>make</em> a difference, it <em>permits</em> one — carries the two speeds apart while keeping their sum in hand. That permission is its genius and its whole limitation at once. A drive that forced the wheels to agree could never round a corner cleanly; a drive that freed them entirely could send no torque at all. The differential threads the two, and pays for the thread in a coin it cannot help spending: it can push the wheels only equally, and so is only ever as strong as its weakest. The discipline is to see that the freedom and the equality are the same pin seen twice, and to decide — before the ice, not on it — whether this axle should be left free to corner or given the means to lock and pull.</p>
+
+      <p>Each page is one HTML file, one stylesheet, one script. No build, no account, no network once it has loaded. The gears are idealised as lossless and the grounds are stylised, but the shape is exact: the speeds sum to twice the carrier <span class="mono">ω_L + ω_R = 2·ω_c</span>, the torque splits equally <span class="mono">T_L = T_R</span>, and an open differential's tractive effort is capped at twice the grip of its worst wheel.</p>
+    </section>
+
+    <footer>
+      <p>In the arena · one page a day, each built on a single old working word and the discipline hidden inside it. · 2026-09-22 · <a href="../">index</a></p>
+    </footer>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
