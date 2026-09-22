@@ -44,6 +44,7 @@
   var DEFAULT = { turn: 24, throttle: 900, ground: "dry" };
   var TURN_MIN = 0, TURN_MAX = 100, TURN_STEP = 2;     // turn, arbitrary 0..100
   var THR_MIN = 0, THR_MAX = 3000, THR_STEP = 50;      // throttle fed to carrier, N·m
+  var KEY = "diff.axle.v1";                            // where the turn, throttle and ground are kept between visits
 
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
   function clampStep(v, a, b, step) {
@@ -52,7 +53,25 @@
     return v < a ? a : v > b ? b : v;
   }
 
-  var state = Object.assign({}, DEFAULT);
+  // ---- persistence -----------------------------------------------------
+  function load() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (!raw) return null;
+      var o = JSON.parse(raw);
+      if (!GROUND[o.ground]) return null;
+      return {
+        ground: o.ground,
+        turn: clampStep(o.turn, TURN_MIN, TURN_MAX, TURN_STEP),
+        throttle: clampStep(o.throttle, THR_MIN, THR_MAX, THR_STEP)
+      };
+    } catch (e) { return null; }
+  }
+  function save() {
+    try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  var state = load() || Object.assign({}, DEFAULT);
 
   // ---- the physics -----------------------------------------------------
   function compute(s) {
@@ -532,6 +551,7 @@
     current = compute(state);
     syncLabels();
     curVerdict = render(current);
+    save();
   }
 
   inTurn.addEventListener("input", function () { state.turn = clampStep(inTurn.value, TURN_MIN, TURN_MAX, TURN_STEP); update(); });

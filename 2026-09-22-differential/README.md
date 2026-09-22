@@ -76,6 +76,9 @@ and the rest is wasted spin. Press *Find the break* to raise the throttle to the
 exact edge — the most this ground will take before the inner wheel spins — and
 *Reset* to return to the gentle, gripping state it opens on.
 
+The turn, throttle and ground you set are kept in `localStorage`, so a reader finds
+the bench as they left it between visits.
+
 The four grounds move the ceiling enormously: **dry tarmac** takes almost any
 throttle before a wheel lets go; **wet** halves it; **gravel** less again; **sheet
 ice** breaks at a breath, and the axle delivers barely a tenth of what one wheel on
