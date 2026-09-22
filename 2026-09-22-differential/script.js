@@ -210,6 +210,9 @@
   }
   sizeCanvas();
 
+  var reduceMQ = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+  var reduce = reduceMQ ? reduceMQ.matches : false;
+
   var cssVar = function (name) {
     return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   };
@@ -539,8 +542,13 @@
     if (lastTs == null) lastTs = ts;
     var dt = Math.min(0.05, (ts - lastTs) / 1000);
     lastTs = ts;
-    phase += dt * 1.4;
-    spinPhase += dt * 6.0;    // a spinning wheel runs away
+    // under reduced motion the axle is held still — the wheels and carrier do not
+    // turn and the drive arrows do not sweep, each state read as a settled arrangement
+    // rather than a running machine
+    if (!reduce) {
+      phase += dt * 1.4;
+      spinPhase += dt * 6.0;    // a spinning wheel runs away
+    }
     draw(current, curVerdict);
     window.requestAnimationFrame(frame);
   }
@@ -602,6 +610,11 @@
     inTurn.value = state.turn; inThr.value = state.throttle;
     update();
   });
+
+  // follow a live change to the motion setting
+  if (reduceMQ && reduceMQ.addEventListener) {
+    reduceMQ.addEventListener("change", function (e) { reduce = e.matches; });
+  }
 
   // repaint on theme flips so canvas colours follow
   if (window.matchMedia) {

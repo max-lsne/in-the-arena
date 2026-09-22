@@ -81,7 +81,10 @@ the bench as they left it between visits. A live status line (`aria-live`) reads
 state to a screen reader — the corner and the two wheel speeds, the equal torque, and
 whether the axle drives, nears the edge, or has broken into spin, with the tractive
 torque it delivers against the ceiling of twice the weaker wheel's grip — debounced
-past slider drags.
+past slider drags. Under `prefers-reduced-motion` the bench holds still: the wheels
+and carrier do not turn and the drive arrows do not sweep, each state landing as a
+settled arrangement read at a glance rather than a running machine; a live change to
+the setting is honoured.
 
 The four grounds move the ceiling enormously: **dry tarmac** takes almost any
 throttle before a wheel lets go; **wet** halves it; **gravel** less again; **sheet
