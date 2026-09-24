@@ -476,6 +476,7 @@
   var current = compute(state);
   var curVerdict = verdictOf(current);
   var lastTs = null;
+  var TAU = Math.PI * 2;
 
   function frame(ts) {
     if (lastTs == null) lastTs = ts;
@@ -484,11 +485,18 @@
 
     // ease the drum toward wherever a stroke is carrying it; the pawl kick decays
     var da = targetAngle - wheelAngle;
-    if (Math.abs(da) > 0.0005) {
+    if (Math.abs(da) > 0.0008) {
       if (reduce) { wheelAngle = targetAngle; }
       else { wheelAngle += da * Math.min(1, dt * 8); }
       pawlKick = Math.abs(Math.sin(wheelAngle * current.t.teeth / 2)) * (reduce ? 0 : 1);
-    } else { pawlKick += (0 - pawlKick) * Math.min(1, dt * 6); }
+    } else {
+      // settle exactly on the tooth so the sawtooth stays aligned under the pawl,
+      // and keep the running angle bounded so a long session never drifts
+      wheelAngle = targetAngle;
+      if (wheelAngle > TAU) { wheelAngle -= TAU; targetAngle -= TAU; }
+      else if (wheelAngle < -TAU) { wheelAngle += TAU; targetAngle += TAU; }
+      pawlKick += (0 - pawlKick) * Math.min(1, dt * 6);
+    }
 
     // under reduced motion the lever rests at the full stroke rather than sweeping
     if (reduce) { leverPhase = 1; }
