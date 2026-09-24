@@ -112,6 +112,8 @@
 
   function nm(x) { return Math.round(x) + " N·m"; }
   function deg(x) { return Math.round(x) + "°"; }
+  // group a running total with a thin space every three digits, as the prose does
+  function group(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " "); }
 
   var STROKE_WORD = function (st, pitch) {
     if (st < pitch) return "short of a stop";
@@ -155,7 +157,7 @@
       ["The back-push", nm(r.load) + '<span class="unit"> · on the stop</span>', holdClass],
       ["Running count", r.overhaul
         ? 'driven back<span class="unit"> · −' + r.slip + " a barge</span>"
-        : (state.total + '<span class="unit"> admitted</span>'), r.overhaul ? "bad" : ""]
+        : (group(state.total) + '<span class="unit"> admitted</span>'), r.overhaul ? "bad" : ""]
     ];
     readingEl.innerHTML = rows.map(function (row) {
       return '<div class="row"><span class="k">' + row[0] + '</span><span class="v ' + row[2] + '">' + row[1] + "</span></div>";
@@ -338,7 +340,7 @@
     label(ctx, col.soft, "admitted", colX + colW + 20, by + 44, "left");
     ctx.fillStyle = cur.overhaul ? col.dead : col.keep;
     ctx.font = "600 30px ui-monospace, monospace"; ctx.textAlign = "left";
-    ctx.fillText(String(state.total), colX + colW + 20, by + 76);
+    ctx.fillText(group(state.total), colX + colW + 20, by + 76);
     ctx.font = "11px ui-monospace, monospace";
     label(ctx, col.faint, "through", colX + colW + 20, by + 92, "left");
     var foot = cur.overhaul ? "the tally is defeated" : cur.teeth < 1 ? "a push admits no one" : "admit " + cur.teeth + " more";

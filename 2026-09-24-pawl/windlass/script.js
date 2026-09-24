@@ -115,6 +115,8 @@
 
   function nm(x) { return Math.round(x) + " N·m"; }
   function deg(x) { return Math.round(x) + "°"; }
+  // group a running total with a thin space every three digits, as the prose does
+  function group(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " "); }
 
   var STROKE_WORD = function (st, pitch) {
     if (st < pitch) return "short of a notch";
@@ -158,7 +160,7 @@
       ["The weight", nm(r.load) + '<span class="unit"> · on the drum</span>', holdClass],
       ["Running height", r.overhaul
         ? 'runs back<span class="unit"> · −' + r.slip + " notches a heave</span>"
-        : (state.total + '<span class="unit"> notches raised</span>'), r.overhaul ? "bad" : ""]
+        : (group(state.total) + '<span class="unit"> notches raised</span>'), r.overhaul ? "bad" : ""]
     ];
     readingEl.innerHTML = rows.map(function (row) {
       return '<div class="row"><span class="k">' + row[0] + '</span><span class="v ' + row[2] + '">' + row[1] + "</span></div>";
@@ -364,7 +366,7 @@
     label(ctx, col.soft, "raised", colX + colW + 20, by + 44, "left");
     ctx.fillStyle = cur.overhaul ? col.dead : col.keep;
     ctx.font = "600 30px ui-monospace, monospace"; ctx.textAlign = "left";
-    ctx.fillText(String(state.total), colX + colW + 20, by + 76);
+    ctx.fillText(group(state.total), colX + colW + 20, by + 76);
     ctx.font = "11px ui-monospace, monospace";
     label(ctx, col.faint, "notches", colX + colW + 20, by + 92, "left");
     var foot = cur.overhaul ? "runs back down" : cur.teeth < 1 ? "a heave banks nothing" : "haul to bank " + cur.teeth + " more";
