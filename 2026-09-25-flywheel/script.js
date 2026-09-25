@@ -592,6 +592,10 @@
       var idx = Math.floor(uNow * NSAMP) % NSAMP;
       var rel = current.wbar > 0 ? current.trace[idx] / current.wbar : 1;
       theta += dt * 2.0 * clamp(rel, 0.4, 2.2);
+      // wrap the running angle at two full turns so a long session never accumulates
+      // a large float; the wheel is drawn at ½·theta (period two turns) and the arrow
+      // at theta (period one), so both are seamless across the wrap
+      if (theta >= 2 * TWO_PI) theta -= 2 * TWO_PI;
       uNow = (uNow + dt * 0.22) % 1;   // one cycle roughly every ~4.5 s, readable
     }
     draw(current, curVerdict);
