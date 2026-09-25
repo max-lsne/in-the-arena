@@ -184,6 +184,12 @@
 
   function nm(x) { return Math.round(x) + " N·m"; }
   function rpm(x) { return Math.round(x); }
+  // group the running figures a thin space every three digits — the mean speed and
+  // the swing climb into the thousands, and a bare 1400 is harder to read at a glance
+  // than 1 400. The spoken status line keeps rpm() plain so a screen reader reads it
+  // as one number.
+  function group(x) { return String(Math.round(x)).replace(/\B(?=(\d{3})+(?!\d))/g, " "); }
+  function grpm(x) { return group(x); }
   function pct(x) { return (x * 100).toFixed(1) + "%"; }
   function kj(x) { return (x / 1000).toFixed(x < 10000 ? 1 : 0) + " kJ"; }
   function ms(x) { return x.toFixed(0) + " m ⁄ s"; }
@@ -220,10 +226,10 @@
 
     var csClass = r.burst ? "bad" : r.rough ? "warn" : "good";
     var rimClass = r.burst ? "bad" : r.nearBurst ? "warn" : "good";
-    var swing = rpm(r.wmaxRpm) + " · " + rpm(r.wminRpm);
+    var swing = grpm(r.wmaxRpm) + " · " + grpm(r.wminRpm);
 
     var rows = [
-      ['Mean speed <span class="tag">ω̄</span>', rpm(r.wbarRpm) + '<span class="unit"> rpm · load sets it</span>', ""],
+      ['Mean speed <span class="tag">ω̄</span>', grpm(r.wbarRpm) + '<span class="unit"> rpm · load sets it</span>', ""],
       ["Speed swing", swing + '<span class="unit"> rpm · max · min</span>', r.burst ? "bad" : r.rough ? "warn" : ""],
       ['Fluctuation <span class="tag">Cs</span>', pct(r.Cs) + '<span class="unit"> · tol ' + pct(TOL) + "</span>", csClass],
       ['Stored <span class="tag c">½Iω²</span>', kj(r.Estore) + '<span class="unit"> · in the rim</span>', ""],
@@ -349,7 +355,7 @@
     drawFlywheel(cx, cy, rr, theta * 0.5, wheelCol, col, cur);
 
     // its mean speed
-    label(ctx, spin ? col.dead : col.iron2, "ω̄ " + rpm(cur.wbarRpm) + " rpm", cx, cy + rr + 22, "center");
+    label(ctx, spin ? col.dead : col.iron2, "ω̄ " + grpm(cur.wbarRpm) + " rpm", cx, cy + rr + 22, "center");
     label(ctx, col.faint, "stored " + kj(cur.Estore), cx, cy + rr + 36, "center");
 
     // rotation hint
