@@ -1,0 +1,8 @@
+flask
+pillow
+numpy
+qiskit
+qiskit-aer
+quantumaudio
+requests
+python-dotenv
