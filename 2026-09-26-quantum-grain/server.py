@@ -1,4 +1,4 @@
-"""Quantum Grain server — the one bench in the series with a backend, because
+"""Quantum Grain server: the one bench in the series with a backend, because
 the point here is a real device's measurement noise, and no browser can run
 that locally. Serves the static bench and one endpoint that runs the actual
 encode → measure → decode loop.
@@ -59,7 +59,7 @@ def process():
     body = request.get_json(force=True)
     try:
         img = _decode_data_url(body["image"])
-    except Exception as exc:  # noqa: BLE001 — surfaced to the UI as a plain message
+    except Exception as exc:  # noqa: BLE001, surfaced to the UI as a plain message
         return jsonify({"error": f"couldn't read that image: {exc}"}), 400
 
     block = int(body.get("block", 8))

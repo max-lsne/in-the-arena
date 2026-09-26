@@ -1,7 +1,7 @@
-/* Quantum Grain — an indigo-and-amber palette.
+/* Quantum Grain, an indigo-and-amber palette.
    The same warm paper ground as the rest of the series; a cool violet for the
-   quantum amplitude — the state you prepare and can only ever measure, never
-   read outright — and a warm amber for the classical pixel it stands for.
+   quantum amplitude, the state you prepare and can only ever measure, never
+   read outright, and a warm amber for the classical pixel it stands for.
    Patina-green for a block recovered clean, amber for one gone grainy, oxblood
    for one collapsed past use.
    Fraunces for headings, Inter for body, JetBrains Mono for marginalia. */
@@ -13,9 +13,9 @@
   --ink-soft:   #574d3d;
   --ink-faint:  #8a7f6c;
   --rule:       #dcd4c5;
-  --timber:     #b0752e;      /* the classical pixel — warm amber */
+  --timber:     #b0752e;      /* the classical pixel, warm amber */
   --timber-2:   #8a5a1c;
-  --iron:       #6b5b9c;      /* the quantum amplitude — violet */
+  --iron:       #6b5b9c;      /* the quantum amplitude, violet */
   --iron-2:     #4f4278;
   --iron-b:     #a89cc8;
   --keep:       #4f8a4a;

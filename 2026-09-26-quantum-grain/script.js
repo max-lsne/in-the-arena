@@ -254,5 +254,5 @@
 
   load();
   syncControls();
-  fetchSample().catch(() => say("couldn't reach the server — run: python server.py"));
+  fetchSample().catch(() => say("couldn't reach the server, run: python server.py"));
 })();

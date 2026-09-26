@@ -1,4 +1,4 @@
-"""atlas_backend.py — adapter for Moth's Atlas API (platform.mothquantum.com).
+"""atlas_backend.py: adapter for Moth's Atlas API (platform.mothquantum.com).
 
 Every engine in this pipeline shares one contract:
 
@@ -7,14 +7,14 @@ Every engine in this pipeline shares one contract:
 `counts` is either a flat array of length 2**n (index i -> how many of
 `shots` measurements landed on basis state i) or a dict {"<index>": count}.
 `quantum_pipeline.py` and the whole rest of the app only ever see that
-contract — nothing downstream cares how a given engine satisfies it.
+contract. Nothing downstream cares how a given engine satisfies it.
 
 This sends the amplitude vector itself, not a hand-built quantum circuit or
-QASM string — a bet that Atlas, built to need "no quantum experience,"
+QASM string. It's a bet that Atlas, built to need "no quantum experience,"
 exposes a state-prep-and-measure endpoint rather than requiring callers to
 construct circuits by hand. That bet, and the exact job-submission shape
 below (`_submit` / `_await_counts`), is the one piece of this repo that
-could not be verified end-to-end: outbound access to
+could not be verified end-to-end. Outbound access to
 platform.mothquantum.com was blocked from the sandbox this was built in.
 Before relying on this at the hackathon, check the API reference shown next
 to your key at https://platform.mothquantum.com/keys and adjust those two
@@ -45,7 +45,7 @@ class AtlasBackend:
         self.api_key = api_key or os.environ.get("ATLAS_API_KEY")
         if not self.api_key:
             raise AtlasError(
-                "No Atlas API key. Set ATLAS_API_KEY in your environment — "
+                "No Atlas API key. Set ATLAS_API_KEY in your environment, "
                 "generate one at https://platform.mothquantum.com/keys"
             )
         self.base_url = (
@@ -94,8 +94,8 @@ class AtlasBackend:
                 raise AtlasError(f"Atlas job {job_id} failed: {payload.get('error')}")
             time.sleep(self.poll_interval)
         raise AtlasError(
-            f"Atlas job {job_id} did not finish within {self.timeout}s — "
-            "a real QPU queues jobs; try fewer shots or fewer blocks"
+            f"Atlas job {job_id} did not finish within {self.timeout}s. "
+            "A real QPU queues jobs; try fewer shots or fewer blocks"
         )
 
 
