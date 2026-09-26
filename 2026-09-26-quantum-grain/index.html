@@ -5,9 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quantum Grain</title>
   <meta name="description" content="Quantum Grain flattens each block of a photograph into a signal and puts it on a quantum circuit the way Moth's own quantum-audio package puts sound there, as the amplitudes of a prepared state. You cannot read an amplitude directly. You measure it, many times, and the pixel you get back is a statistical guess built from a finite number of shots. Few shots give a coarse guess, and the result reads as real grain, the same shape as shot noise anywhere. Run it on a real QPU through Moth's Atlas API instead of a simulator and the guess also carries the device's own decoherence, a texture no simulator can fake because no simulator has a real qubit's imperfections to fake." />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2317140d'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%236b5b9c'/%3E%3Ccircle cx='20' cy='10' r='1.4' fill='%236b5b9c'/%3E%3Ccircle cx='22' cy='19' r='1.7' fill='%236b5b9c'/%3E%3Ccircle cx='10' cy='21' r='1.3' fill='%236b5b9c'/%3E%3Ccircle cx='16' cy='16' r='2.6' fill='none' stroke='%23b0752e' stroke-width='1.4'/%3E%3C/svg%3E" />
-  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#141009" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%230a0e16'/%3E%3Ccircle cx='12' cy='12' r='1.8' fill='%234fd8c4'/%3E%3Ccircle cx='21' cy='11' r='1.3' fill='%234fd8c4'/%3E%3Ccircle cx='22' cy='20' r='1.6' fill='%234fd8c4'/%3E%3Ccircle cx='10' cy='21' r='1.2' fill='%234fd8c4'/%3E%3Ccircle cx='16' cy='16' r='2.8' fill='none' stroke='%23d3a24a' stroke-width='1.5'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#0a0e16" />
   <meta property="og:title" content="Quantum Grain" />
   <meta property="og:description" content="Each block of a photo becomes the amplitudes of a quantum state. Measuring it a finite number of times gives back the pixel only approximately. The gap is real shot noise, and on a real QPU through Atlas it's real decoherence too, neither one a filter's guess." />
   <meta property="og:type" content="website" />
@@ -15,17 +14,18 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
 </head>
 <body>
+  <div class="grain-field" aria-hidden="true"></div>
   <div class="wrap">
 
     <header class="hero">
-      <p class="eyebrow">In the arena · 2026-09-26 · Moth Hack, built on Atlas</p>
-      <p class="pron"><b>grain</b> · <i>noun</i> · the fine, granular texture a picture is left with when it's rebuilt from too little evidence, here, too few measurements of a quantum state</p>
-      <h1>Quantum Grain</h1>
-      <p class="lede">A photograph's pixels, held as the <em>amplitudes</em> of a quantum state. An amplitude is a thing you can never read. You can only <em>measure</em> it.</p>
-      <p class="sub">Take a block of pixels, flatten it into a signal, and prepare a quantum circuit whose amplitudes are exactly those pixel values. It's the same trick Moth's own <span class="mono">quantum-audio</span> package uses to put sound on a circuit, applied here to sight instead of hearing. There is no way to ask the circuit what its amplitudes are. You can only measure it, many times, and count how often each outcome came up. From that histogram you reconstruct the pixels, approximately, because a finite number of shots is a finite amount of evidence. Few shots and the picture comes back <b>grainy</b>, in the oldest sense of the word. That's literally what a measurement looks like when it hasn't been given enough tries. Run the same circuit on a real quantum processor through Moth's <b>Atlas</b> API instead of a simulator and the grain picks up something a simulator has no way to add. The device's own decoherence sits on top of the shot noise.</p>
+      <p class="eyebrow"><span class="reveal" style="--d:0">In the arena</span> <span class="reveal" style="--d:1">·</span> <span class="reveal" style="--d:2">2026-09-26</span> <span class="reveal" style="--d:3">·</span> <span class="reveal" style="--d:4">Moth Hack, built on Atlas</span></p>
+      <p class="pron reveal" style="--d:5"><b>grain</b> · <i>noun</i> · the fine, granular texture a picture is left with when it's rebuilt from too little evidence, here, too few measurements of a quantum state</p>
+      <h1 id="scramble-title" data-final="Quantum Grain">Quantum Grain</h1>
+      <p class="lede reveal" style="--d:7">A photograph's pixels, held as the <em>amplitudes</em> of a quantum state. An amplitude is a thing you can never read. You can only <em>measure</em> it.</p>
+      <p class="sub reveal" style="--d:8">Take a block of pixels, flatten it into a signal, and prepare a quantum circuit whose amplitudes are exactly those pixel values. It's the same trick Moth's own <span class="mono">quantum-audio</span> package uses to put sound on a circuit, applied here to sight instead of hearing. There is no way to ask the circuit what its amplitudes are. You can only measure it, many times, and count how often each outcome came up. From that histogram you reconstruct the pixels, approximately, because a finite number of shots is a finite amount of evidence. Few shots and the picture comes back <b>grainy</b>, in the oldest sense of the word. That's literally what a measurement looks like when it hasn't been given enough tries. Run the same circuit on a real quantum processor through Moth's <b>Atlas</b> API instead of a simulator and the grain picks up something a simulator has no way to add. The device's own decoherence sits on top of the shot noise.</p>
     </header>
 
     <section id="how">
