@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quantum Grain</title>
-  <meta name="description" content="Quantum Grain flattens each block of a photograph into a signal and puts it on a quantum circuit the way Moth's own quantum-audio package puts sound there, as the amplitudes of a prepared state. You cannot read an amplitude directly. You measure it, many times, and the pixel you get back is a statistical guess built from a finite number of shots. Few shots give a coarse guess, and the result reads as real grain, the same shape as shot noise anywhere. Run it on a real QPU through Moth's Atlas API instead of a simulator and the guess also carries the device's own decoherence, a texture no simulator can fake because no simulator has a real qubit's imperfections to fake." />
+  <meta name="description" content="Quantum Grain flattens each block of a photograph into a signal and puts it on a quantum circuit the way Moth's own quantum-audio package puts sound there, as the amplitudes of a prepared state. You cannot read an amplitude directly. You measure it, many times, and the pixel you get back is a statistical estimate built from a finite number of shots. Few shots give an imprecise estimate, and the result looks like real grain, the same statistics as shot noise anywhere. Run it on a real QPU through Moth's Atlas API instead of a simulator and the result also includes the device's own decoherence, an effect no simulator can produce because no simulator has a real qubit's imperfections." />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%230a0e16'/%3E%3Ccircle cx='12' cy='12' r='1.8' fill='%234fd8c4'/%3E%3Ccircle cx='21' cy='11' r='1.3' fill='%234fd8c4'/%3E%3Ccircle cx='22' cy='20' r='1.6' fill='%234fd8c4'/%3E%3Ccircle cx='10' cy='21' r='1.2' fill='%234fd8c4'/%3E%3Ccircle cx='16' cy='16' r='2.8' fill='none' stroke='%23d3a24a' stroke-width='1.5'/%3E%3C/svg%3E" />
   <meta name="theme-color" content="#0a0e16" />
   <meta property="og:title" content="Quantum Grain" />
@@ -22,39 +22,39 @@
 
     <header class="hero">
       <p class="eyebrow"><span class="reveal" style="--d:0">In the arena</span> <span class="reveal" style="--d:1">·</span> <span class="reveal" style="--d:2">2026-09-26</span> <span class="reveal" style="--d:3">·</span> <span class="reveal" style="--d:4">Moth Hack, built on Atlas</span></p>
-      <p class="pron reveal" style="--d:5"><b>grain</b> · <i>noun</i> · the fine, granular texture a picture is left with when it's rebuilt from too little evidence, here, too few measurements of a quantum state</p>
+      <p class="pron reveal" style="--d:5"><b>grain</b> · <i>noun</i> · the fine, granular texture a picture has when it's rebuilt from too little evidence, here, too few measurements of a quantum state</p>
       <h1 id="scramble-title" data-final="Quantum Grain">Quantum Grain</h1>
       <p class="lede reveal" style="--d:7">A photograph's pixels, held as the <em>amplitudes</em> of a quantum state. An amplitude is a thing you can never read. You can only <em>measure</em> it.</p>
-      <p class="sub reveal" style="--d:8">Take a block of pixels, flatten it into a signal, and prepare a quantum circuit whose amplitudes are exactly those pixel values. It's the same trick Moth's own <span class="mono">quantum-audio</span> package uses to put sound on a circuit, applied here to sight instead of hearing. There is no way to ask the circuit what its amplitudes are. You can only measure it, many times, and count how often each outcome came up. From that histogram you reconstruct the pixels, approximately, because a finite number of shots is a finite amount of evidence. Few shots and the picture comes back <b>grainy</b>, in the oldest sense of the word. That's literally what a measurement looks like when it hasn't been given enough tries. Run the same circuit on a real quantum processor through Moth's <b>Atlas</b> API instead of a simulator and the grain picks up something a simulator has no way to add. The device's own decoherence sits on top of the shot noise.</p>
+      <p class="sub reveal" style="--d:8">Take a block of pixels, flatten it into a signal, and prepare a quantum circuit whose amplitudes are exactly those pixel values. It's the same method Moth's own <span class="mono">quantum-audio</span> package uses to put sound on a circuit, applied here to sight instead of hearing. There is no operation that returns a circuit's amplitudes directly. You can only measure it, many times, and count how often each outcome came up. From that histogram you reconstruct the pixels, approximately, because a finite number of shots is a finite amount of data. Few shots and the picture comes back <b>grainy</b>. That's literally what a reconstruction looks like when it's based on too few measurements. Run the same circuit on a real quantum processor through Moth's <b>Atlas</b> API instead of a simulator and the result also contains something a simulator cannot produce. The device's own decoherence adds to the shot noise.</p>
     </header>
 
     <section id="how">
       <p class="section-tag">Where the grain comes from</p>
       <h2>An amplitude is not a number you can read</h2>
       <p>Encoding a block of <span class="mono">n</span> pixels takes <span class="mono">log₂(n)</span> qubits: an 8×8 block is 64 pixels and needs only 6 qubits, because a quantum state's amplitudes are indexed by <em>every</em> combination its qubits can take at once. Preparing that state is the whole of the "encode" step. After it, the pixel values live in the circuit as amplitudes, normalised so their squares sum to one, the way any quantum state must be.</p>
-      <p class="pull">Then comes the only thing you're allowed to do to a quantum state: measure it. One measurement returns one bitstring, chosen with probability equal to the square of its amplitude, and destroys the state in the process. To learn the amplitudes back you don't read them. You measure the same circuit over and over, count how often each bitstring came up, and treat that frequency as an estimate of the probability it came from.</p>
-      <p>That's a statistical estimate, and statistical estimates have noise. With <span class="mono">S</span> shots, the count in any one bucket carries a relative uncertainty on the order of <span class="mono">1⁄√S</span>. It's the same square-root law behind shot noise in a photon count or a Geiger counter. Decode the circuit after only a few hundred shots and every pixel you reconstruct carries that uncertainty, visibly, as grain. Decode it after tens of thousands and the grain all but disappears, because you finally gave the measurement enough tries to pin the amplitude down.</p>
+      <p class="pull">There is only one operation you can perform on a quantum state: measure it. One measurement returns one bitstring, chosen with probability equal to the square of its amplitude, and destroys the state in the process. You don't read the amplitudes back directly. You measure the same circuit over and over, count how often each bitstring came up, and treat that frequency as an estimate of the probability it came from.</p>
+      <p>That's a statistical estimate, and statistical estimates have noise. With <span class="mono">S</span> shots, the count in any one bucket has a relative uncertainty on the order of <span class="mono">1⁄√S</span>. It's the same square-root law that produces shot noise in a photon count or a Geiger counter. Decode the circuit after only a few hundred shots and every pixel you reconstruct shows that uncertainty visibly, as grain. Decode it after tens of thousands and the grain becomes nearly invisible, because there are finally enough measurements to determine the amplitude precisely.</p>
     </section>
 
     <section id="rule">
       <p class="section-tag">The one relation, read three ways</p>
       <h2>Shots buy fidelity; qubits spend it</h2>
       <ul class="law-list">
-        <li><b>Fidelity rises with shots, but only as a square root.</b> Halving the noise takes <em>four times</em> the shots, not two. It's the same diminishing return that makes a flywheel's last inch of steadiness the most expensive inch. On a real QPU, shots are not free. They're queued time on a scarce device.</li>
-        <li><b>Bigger blocks spend the same shot budget on exponentially more amplitudes.</b> Doubling a block's side doesn't double the qubits it needs. An 8×8 block (6 qubits) and a 16×16 block (8 qubits) look close, but the second has <em>four times</em> as many amplitude buckets sharing the same <span class="mono">S</span> shots, so each one is measured four times more thinly. Coarser detail costs less per pixel. Finer detail starves for shots at the same budget.</li>
-        <li><b>A real device adds a floor no shot count erases.</b> A simulator's only error is shot noise, and shot noise goes to zero as <span class="mono">S → ∞</span>. A real QPU's qubits decohere, its gates aren't perfect, and its readout misfires sometimes. That's a noise floor set by the hardware itself, sitting under the shot noise, unmoved by adding more shots. A simulator cannot fake that floor, because faking it would mean simulating a specific machine's specific imperfections rather than an idealised one.</li>
+        <li><b>Fidelity rises with shots, but only as a square root.</b> Halving the noise takes <em>four times</em> the shots, not two. Each further halving costs disproportionately more shots than the one before it. On a real QPU, shots are not free. They're queued time on a scarce device.</li>
+        <li><b>Bigger blocks spend the same shot budget on exponentially more amplitudes.</b> Doubling a block's side doesn't double the qubits it needs. An 8×8 block (6 qubits) and a 16×16 block (8 qubits) look close, but the second has <em>four times</em> as many amplitude buckets sharing the same <span class="mono">S</span> shots, so each one is measured four times more thinly. Coarser detail costs less per pixel. Finer detail gets fewer shots per amplitude at the same budget.</li>
+        <li><b>A real device adds a floor no shot count erases.</b> A simulator's only error is shot noise, and shot noise goes to zero as <span class="mono">S → ∞</span>. A real QPU's qubits decohere, its gates aren't perfect, and its readout misfires sometimes. That's a noise floor set by the hardware itself, sitting under the shot noise, not reduced by adding more shots. A simulator cannot reproduce that floor, because reproducing it would mean simulating a specific machine's specific imperfections rather than an idealised one.</li>
       </ul>
-      <p class="pull">Every other bench in this series idealises its bearings as frictionless and asks you to trust the law. This one can't. The whole point is a texture that only exists if a real device measured something, which is what the Atlas engine is for.</p>
+      <p class="pull">Every other bench in this series idealises its bearings as frictionless; its numbers are only as accurate as that idealisation. This one can't do that. The whole point is a texture that only exists if a real device measured something, which is what the Atlas engine is for.</p>
     </section>
 
     <section id="ladder">
       <p class="section-tag">Four states, from a clean frame to a useless one</p>
       <h2>Around the one loop: encode, measure, decode</h2>
       <ol class="ladder">
-        <li><b>Clean.</b> <span class="rung-note">Shots to spare against the block size, thousands per qubit's worth of amplitude. The reconstruction sits within a shade of the original; the grain is there in principle but below what the eye catches.</span></li>
-        <li><b>Grainy.</b> <span class="rung-note">Shots thinned by a larger block or a smaller budget. Structure and colour survive; fine detail dissolves into a visible, even texture, the honest signature of <span class="mono">1⁄√S</span> at work.</span></li>
-        <li><b>Noisy.</b> <span class="rung-note">Shots stretched thin over too many amplitudes. Blocks start disagreeing with their neighbours; the picture is still recognisably itself but every patch looks independently reconstructed, because it was.</span></li>
-        <li><b>Collapsed.</b> <span class="rung-note">A handful of shots per block, or, on Atlas, a real device's decoherence stacked on top. The estimate is barely better than a guess, and it shows in blocky, discoloured, sometimes unrecognisable results. Not a bug: this is what insufficient evidence looks like when the evidence is quantum.</span></li>
+        <li><b>Clean.</b> <span class="rung-note">Shots to spare against the block size, thousands per qubit's worth of amplitude. The reconstruction is very close to the original; the grain is present in principle but too small to see.</span></li>
+        <li><b>Grainy.</b> <span class="rung-note">Shots thinned by a larger block or a smaller budget. Structure and colour survive; fine detail is replaced by a visible, even texture, exactly what <span class="mono">1⁄√S</span> predicts at this shot count.</span></li>
+        <li><b>Noisy.</b> <span class="rung-note">Shots stretched thin over too many amplitudes. Each block's reconstruction differs visibly from its neighbours; the picture is still recognisably itself but every patch was reconstructed independently, and it shows.</span></li>
+        <li><b>Collapsed.</b> <span class="rung-note">A handful of shots per block, or, on Atlas, a real device's decoherence added to that. The estimate is barely better than a guess, and it shows in blocky, discoloured, sometimes unrecognisable results. Not a bug: this is what too few measurements produce, whether the measurement is quantum or not.</span></li>
       </ol>
     </section>
 
@@ -65,17 +65,17 @@
         <div class="hand">
           <h3>The compressionist</h3>
           <p class="role">wants the least noise per shot</p>
-          <p>Reads <span class="mono">PSNR</span> against shots and block size the way a codec engineer reads bitrate against distortion. This is a lossy quantum channel, with shots standing in for bits spent.</p>
+          <p>Reads <span class="mono">PSNR</span> against shots and block size the way a codec engineer reads bitrate against distortion. This is a lossy quantum channel, and shots play the same role bits do in a codec.</p>
         </div>
         <div class="hand">
           <h3>The hardware skeptic</h3>
           <p class="role">wants proof this needed a QPU</p>
-          <p>Compares the Atlas patch against the simulator directly, block for block. If the two ever looked identical, this would be a filter wearing a costume. They don't. The patch carries a device's own signature, unrepeatable on any simulator.</p>
+          <p>Compares the Atlas patch against the simulator directly, block for block. If the two ever produced identical results, Atlas wouldn't be using real hardware at all. They don't. The patch shows patterns specific to that device, which no simulator can reproduce.</p>
         </div>
         <div class="hand">
           <h3>The media artist</h3>
           <p class="role">wants a texture, not an error</p>
-          <p>Turns the shot slider into an instrument rather than a settings dial, dialling grain in on purpose, the way a photographer once chose a faster, grainier film for the look of it rather than in spite of it.</p>
+          <p>Sets the shot count deliberately for more grain, not less, the way a photographer once chose a faster, grainier film for its look rather than in spite of it.</p>
         </div>
       </div>
     </section>
@@ -153,7 +153,7 @@
     <section id="close">
       <p class="section-tag">The discipline in the word, and the one it breaks</p>
       <h2>Grain, honestly measured</h2>
-      <p>Every other page in this series idealises its mechanism and runs entirely in your browser: one HTML file, one stylesheet, one script, no build, no account, no network once it has loaded. This one breaks that on purpose. Its whole subject is what a real measurement costs, in shots, in fidelity, and on Atlas, in a real device's own imperfection. There is no way to simulate that honestly without either lying about it or actually asking a quantum computer to try. So this bench keeps a small local server whose only job is the encode → measure → decode loop, using Moth's open <span class="mono">quantum-audio</span> package for the quantum-signal-processing half and Atlas for the real-device half. Nothing about the picture on screen is faked to look quantum. It either came from a simulator's shot noise or a real QPU's shot noise plus decoherence, and the reading panel always says which.</p>
+      <p>Every other page in this series idealises its mechanism and runs entirely in your browser: one HTML file, one stylesheet, one script, no build, no account, no network once it has loaded. This one breaks that on purpose. Its whole subject is what a real measurement costs, in shots, in fidelity, and on Atlas, in a real device's own imperfection. There is no way to simulate that honestly without either presenting false data or actually running it on a quantum computer. So this bench keeps a small local server whose only purpose is the encode → measure → decode loop, using Moth's open <span class="mono">quantum-audio</span> package for the quantum-signal-processing half and Atlas for the real-device half. Nothing about the picture on screen is faked to look quantum. It either came from a simulator's shot noise or a real QPU's shot noise plus decoherence, and the reading panel always says which.</p>
       <p>Run it: <span class="mono">pip install -r requirements.txt && python server.py</span>, then open <span class="mono">http://localhost:5057</span>. Full source, including the Atlas adapter, is in this folder.</p>
     </section>
 

@@ -5,16 +5,16 @@ amplitude is a thing you can never read, only measure.** Each block of pixels
 is flattened into a signal and its values become the amplitudes of a quantum
 state, normalised so their squares sum to one. That's the same QPAM (Quantum
 Probability Amplitude Modulation) scheme Moth's own `quantum-audio` package
-uses for sound, applied here to pixels. There is no way to ask a quantum
-state what its amplitudes are. You measure it, many times, and count how
-often each outcome came up. From that histogram you reconstruct the pixels,
-approximately, because a finite number of shots is a finite amount of
-evidence. Few shots and the picture comes back **grainy**, in the oldest
-sense of the word. That's literally what a measurement looks like when it
-hasn't been given enough tries. Run the same circuit on a real quantum
-processor through Moth's **Atlas** API instead of a simulator, and the grain
-picks up something no simulator can add: the device's own decoherence, on
-top of the shot noise.
+uses for sound, applied here to pixels. There is no operation that returns a
+quantum state's amplitudes directly. You measure it, many times, and count
+how often each outcome came up. From that histogram you reconstruct the
+pixels, approximately, because a finite number of shots is a finite amount
+of data. Few shots and the picture comes back **grainy**. That's literally
+what a reconstruction looks like when it's based on too few measurements.
+Run the same circuit on a real quantum processor through Moth's **Atlas**
+API instead of a simulator, and the result also contains something no
+simulator can produce: the device's own decoherence, added to the shot
+noise.
 
 Built for [Moth Hack 2026](https://luma.com/wmrrdpcj), the "Quantum-native"
 challenge: a repo of a quantum application that runs a process on media.
@@ -89,10 +89,10 @@ blocks actually got processed.
 
 ## Why this, for judging
 
-Most "quantum-native media" entries reach for a quantum RNG bolted onto a
-classical filter. This doesn't fake anything. The grain you see *is* the
-reconstruction error from a finite number of real measurements, the same
-statistics behind shot noise anywhere, computed with the same amplitude
+Most "quantum-native media" entries add a quantum RNG to a classical filter.
+This doesn't fake anything. The grain you see *is* the reconstruction error
+from a finite number of real measurements, the same statistics that produce
+shot noise anywhere, computed with the same amplitude
 scheme Moth's own quantum-audio package publishes rather than a bespoke
 encoding. The `atlas` engine's patch is never backfilled with simulated
 pixels: if a pixel doesn't come from the QPU, it isn't shown as if it did.
