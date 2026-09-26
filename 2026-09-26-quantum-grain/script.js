@@ -252,7 +252,30 @@
     }
   });
 
+  function scrambleTitle() {
+    const el = document.getElementById("scramble-title");
+    if (!el) return;
+    const final = el.dataset.final || el.textContent;
+    if (reduceMotion.matches) return;
+    const glyphs = "01#*+=-_/\\<>{}[]";
+    const totalFrames = 16;
+    let frame = 0;
+    (function tick() {
+      let out = "";
+      for (let i = 0; i < final.length; i++) {
+        if (final[i] === " ") { out += " "; continue; }
+        const revealAt = (i / final.length) * totalFrames * 0.6;
+        out += frame >= revealAt ? final[i] : glyphs[(Math.random() * glyphs.length) | 0];
+      }
+      el.textContent = out;
+      frame++;
+      if (frame <= totalFrames) requestAnimationFrame(tick);
+      else el.textContent = final;
+    })();
+  }
+
   load();
   syncControls();
+  scrambleTitle();
   fetchSample().catch(() => say("couldn't reach the server, run: python server.py"));
 })();
