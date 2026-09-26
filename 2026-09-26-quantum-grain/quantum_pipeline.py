@@ -1,27 +1,27 @@
-"""Quantum Grain — block-wise QPAM-equivalent encode/measure/decode over image data.
+"""Quantum Grain: block-wise QPAM-equivalent encode/measure/decode over image data.
 
 Pure NumPy. No Qiskit, no scipy, no Aer.
 
 Each block of pixels is flattened into a signal and its values become the
-amplitudes of a quantum state, normalised so their squares sum to one — the
-same QPAM (Quantum Probability Amplitude Modulation) scheme Moth's own
+amplitudes of a quantum state, normalised so their squares sum to one. That's
+the same QPAM (Quantum Probability Amplitude Modulation) scheme Moth's own
 `quantum-audio` package uses for sound, applied here to pixels. An amplitude
-cannot be read directly, only measured: sampling `shots` times from
+cannot be read directly, only measured. Sampling `shots` times from
 |amplitude|^2 and reconstructing from the resulting histogram is the only
 way back. That reconstruction is exact quantum mechanics for a circuit that
-does nothing but prepare a state and then measure every qubit — there is no
+does nothing but prepare a state and then measure every qubit: there is no
 later gate for a simulator to add interference from, so its output
 distribution *is* a multinomial draw from |amplitude|^2, not an
 approximation of one. This module computes that draw directly instead of
 building a circuit and simulating it, which produces numerically identical
 statistics (verified against qiskit-aer) while cutting a ~450MB dependency
-stack down to two ordinary libraries — the difference between a bench that
-only runs on a laptop and one that deploys anywhere.
+stack down to two ordinary libraries. That's the difference between a bench
+that only runs on a laptop and one that deploys anywhere.
 
 Two engines share one contract: run(amplitudes, shots) -> counts.
   - `simulator`: local, in-process, unlimited shots, no queue.
-  - `atlas`: Moth's Atlas API, a real QPU, shots that cost time and money —
-    and whose counts carry a real device's decoherence on top of this same
+  - `atlas`: Moth's Atlas API, a real QPU, shots that cost time and money.
+    Its counts carry a real device's decoherence on top of this same
     shot noise, which no local engine can add honestly.
 """
 
@@ -47,7 +47,7 @@ def qubits_for_block(block_size: int) -> int:
 
 
 def _encode(flat_pm1: np.ndarray) -> tuple[np.ndarray, float]:
-    """flat_pm1: samples in [-1, 1]. Returns (amplitudes, norm) — QPAM's convert step."""
+    """flat_pm1: samples in [-1, 1]. Returns (amplitudes, norm), QPAM's convert step."""
     shifted = (flat_pm1 + 1.0) / 2.0
     norm = float(np.linalg.norm(shifted))
     if not norm:

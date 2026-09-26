@@ -1,6 +1,6 @@
 """Vercel serverless entrypoint for POST /api/process.
 
-Thin HTTP wrapper around quantum_pipeline.process_image — see that module
+Thin HTTP wrapper around quantum_pipeline.process_image. See that module
 (and atlas_backend.py) for the actual encode/measure/decode logic, which is
 identical to what server.py runs for local development. Both import from
 the project root, one directory up, added to sys.path below.
@@ -46,7 +46,7 @@ async def process(request: Request, _path: str = ""):
     body = await request.json()
     try:
         img = _decode_data_url(body["image"])
-    except Exception as exc:  # noqa: BLE001 — surfaced to the UI as a plain message
+    except Exception as exc:  # noqa: BLE001, surfaced to the UI as a plain message
         return JSONResponse({"error": f"couldn't read that image: {exc}"}, status_code=400)
 
     block = int(body.get("block", 8))
