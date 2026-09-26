@@ -1,68 +1,89 @@
-"""Quantum Grain — block-wise QPAM encode/measure/decode over image data.
+"""Quantum Grain — block-wise QPAM-equivalent encode/measure/decode over image data.
 
-Each block of pixels is flattened into a signal, the same shape of object
-quantumaudio.QPAM already knows how to put onto a circuit (an image, read
-this way, is just another 1-D signal). The circuit is measured and decoded
-back. Whatever comes back is not a filter's guess at what grain should look
-like — it is the real gap between the amplitudes you asked for and the ones
-a finite number of measurements actually recovered, on whichever engine ran
-the shots.
+Pure NumPy. No Qiskit, no scipy, no Aer.
 
-Two engines share one contract: run(circuit, shots) -> counts (dict).
-  - `simulator`: qiskit-aer, local, unlimited shots, no queue.
-  - `atlas`: Moth's Atlas API, a real QPU, shots that cost time and money.
+Each block of pixels is flattened into a signal and its values become the
+amplitudes of a quantum state, normalised so their squares sum to one — the
+same QPAM (Quantum Probability Amplitude Modulation) scheme Moth's own
+`quantum-audio` package uses for sound, applied here to pixels. An amplitude
+cannot be read directly, only measured: sampling `shots` times from
+|amplitude|^2 and reconstructing from the resulting histogram is the only
+way back. That reconstruction is exact quantum mechanics for a circuit that
+does nothing but prepare a state and then measure every qubit — there is no
+later gate for a simulator to add interference from, so its output
+distribution *is* a multinomial draw from |amplitude|^2, not an
+approximation of one. This module computes that draw directly instead of
+building a circuit and simulating it, which produces numerically identical
+statistics (verified against qiskit-aer) while cutting a ~450MB dependency
+stack down to two ordinary libraries — the difference between a bench that
+only runs on a laptop and one that deploys anywhere.
+
+Two engines share one contract: run(amplitudes, shots) -> counts.
+  - `simulator`: local, in-process, unlimited shots, no queue.
+  - `atlas`: Moth's Atlas API, a real QPU, shots that cost time and money —
+    and whose counts carry a real device's decoherence on top of this same
+    shot noise, which no local engine can add honestly.
 """
 
 from __future__ import annotations
 
 import time
-from dataclasses import dataclass, field
-from typing import Callable, Optional
+from dataclasses import dataclass
+from typing import Callable, Optional, Union
 
 import numpy as np
-import quantumaudio
 from PIL import Image
-from qiskit import QuantumCircuit
 
-_QPAM = quantumaudio.load_scheme("qpam")
-
-CountsFn = Callable[[QuantumCircuit, int], dict]
+Counts = Union[np.ndarray, list, dict]
+CountsFn = Callable[[np.ndarray, int], Counts]
 
 
 def qubits_for_block(block_size: int) -> int:
-    """Index qubits QPAM will allocate for a block_size**2-sample block."""
+    """Index qubits needed for a block_size**2-sample block (must be a power of two)."""
     n_samples = block_size * block_size
-    _, (num_index_qubits, num_value_qubits) = _QPAM.calculate(
-        np.zeros(n_samples), verbose=False
-    )
-    return num_index_qubits + num_value_qubits
+    q = int(round(np.log2(n_samples)))
+    assert 2 ** q == n_samples, "block_size**2 must be a power of two"
+    return q
 
 
-def _encode_block(flat: np.ndarray) -> QuantumCircuit:
-    circuit = _QPAM.encode(flat, measure=True, verbose=0)
-    return circuit
+def _encode(flat_pm1: np.ndarray) -> tuple[np.ndarray, float]:
+    """flat_pm1: samples in [-1, 1]. Returns (amplitudes, norm) — QPAM's convert step."""
+    shifted = (flat_pm1 + 1.0) / 2.0
+    norm = float(np.linalg.norm(shifted))
+    if not norm:
+        norm = 1.0
+    amplitudes = shifted / norm
+    return amplitudes, norm
 
 
-def _decode_block(counts: dict, metadata: dict, shots: int, n_samples: int) -> np.ndarray:
-    # QPAM's amplitude convention assumes samples in [-1, 1]; blocks are
-    # pre-scaled to that range before encoding (see process_channel), which
-    # spends the full amplitude range instead of only its upper half and
-    # roughly halves the shot-noise floor for the same shot budget. Undo
-    # that scaling here, back to the [0, 1] pixel range.
-    data = _QPAM.decode_counts(counts, metadata=metadata, shots=shots)
-    data = (data + 1.0) / 2.0
-    data = np.clip(data, 0.0, 1.0)
-    if len(data) < n_samples:
-        data = np.pad(data, (0, n_samples - len(data)))
-    return data[:n_samples]
+def run_simulator(amplitudes: np.ndarray, shots: int, rng: Optional[np.random.Generator] = None) -> np.ndarray:
+    """The Born rule, sampled directly: counts[i] ~ Multinomial(shots, |amplitudes|^2)."""
+    probs = amplitudes.astype(np.float64) ** 2
+    total = probs.sum()
+    probs = probs / total if total > 0 else np.full_like(probs, 1.0 / len(probs))
+    rng = rng or np.random.default_rng()
+    return rng.multinomial(shots, probs)
 
 
-def run_simulator(circuit: QuantumCircuit, shots: int) -> dict:
-    from qiskit_aer import AerSimulator
+def _counts_to_array(counts: Counts, n: int) -> np.ndarray:
+    if isinstance(counts, dict):
+        arr = np.zeros(n)
+        for k, v in counts.items():
+            arr[int(k)] = v
+        return arr
+    arr = np.asarray(counts, dtype=np.float64)
+    if arr.shape[0] < n:
+        arr = np.pad(arr, (0, n - arr.shape[0]))
+    return arr[:n]
 
-    backend = AerSimulator()
-    transpiled = backend.run(circuit, shots=shots, optimization_level=1)
-    return transpiled.result().get_counts()
+
+def _decode(counts: Counts, norm: float, shots: int, n_samples: int) -> np.ndarray:
+    """QPAM's restore step: 2*norm*sqrt(p/shots) - 1, then back from [-1,1] to [0,1]."""
+    arr = _counts_to_array(counts, n_samples)
+    p = arr / shots
+    restored_pm1 = 2.0 * norm * np.sqrt(np.clip(p, 0.0, None)) - 1.0
+    data = (restored_pm1 + 1.0) / 2.0
+    return np.clip(data, 0.0, 1.0)
 
 
 @dataclass
@@ -108,6 +129,7 @@ def process_channel(
     padded, orig_h, orig_w = _pad_to_grid(channel, block)
     out = padded.copy()
     n_rows, n_cols = padded.shape[0] // block, padded.shape[1] // block
+    n_samples = block * block
     report = ChannelReport(qubits_per_block=qubits_for_block(block))
 
     t0 = time.time()
@@ -120,10 +142,9 @@ def process_channel(
             patch = padded[y0 : y0 + block, x0 : x0 + block]
             flat = patch.reshape(-1)
 
-            circuit = _encode_block(2.0 * flat - 1.0)
-            metadata = dict(circuit.metadata)
-            counts = run_fn(circuit, shots)
-            decoded = _decode_block(counts, metadata, shots, flat.size)
+            amplitudes, norm = _encode(2.0 * flat - 1.0)
+            counts = run_fn(amplitudes, shots)
+            decoded = _decode(counts, norm, shots, n_samples)
 
             out[y0 : y0 + block, x0 : x0 + block] = decoded.reshape(block, block)
 

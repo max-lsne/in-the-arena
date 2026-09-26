@@ -1,22 +1,24 @@
 """atlas_backend.py — adapter for Moth's Atlas API (platform.mothquantum.com).
 
-Everything else in this repo — the QPAM encode/decode, the block loop, the
-stats, the UI — is finished and tested against a local simulator. The one
-piece that could not be verified from the sandbox this was built in is this
-file: outbound network access to platform.mothquantum.com was blocked there,
-so the exact job-submission contract (endpoint paths, request/response
-shape) below is a best-effort placeholder, not a confirmed one.
+Every engine in this pipeline shares one contract:
 
-Before the hackathon: open https://platform.mothquantum.com/keys, find the
-API reference / code sample shown next to your key, and adjust `_submit`
-and `_await_counts` to match it. The contract the rest of the pipeline
-needs from you is exactly one method:
+    run(amplitudes: np.ndarray, shots: int) -> counts
 
-    AtlasBackend(...).run(circuit: QuantumCircuit, shots: int) -> dict
+`counts` is either a flat array of length 2**n (index i -> how many of
+`shots` measurements landed on basis state i) or a dict {"<index>": count}.
+`quantum_pipeline.py` and the whole rest of the app only ever see that
+contract — nothing downstream cares how a given engine satisfies it.
 
-...where the returned dict is Qiskit-counts-shaped: bitstrings (e.g.
-"0110") mapped to how many of `shots` measurements produced them. Nothing
-downstream cares how you got there.
+This sends the amplitude vector itself, not a hand-built quantum circuit or
+QASM string — a bet that Atlas, built to need "no quantum experience,"
+exposes a state-prep-and-measure endpoint rather than requiring callers to
+construct circuits by hand. That bet, and the exact job-submission shape
+below (`_submit` / `_await_counts`), is the one piece of this repo that
+could not be verified end-to-end: outbound access to
+platform.mothquantum.com was blocked from the sandbox this was built in.
+Before relying on this at the hackathon, check the API reference shown next
+to your key at https://platform.mothquantum.com/keys and adjust those two
+methods if the real shape differs. Nothing else needs to change.
 """
 
 from __future__ import annotations
@@ -24,8 +26,8 @@ from __future__ import annotations
 import os
 import time
 
+import numpy as np
 import requests
-from qiskit import QuantumCircuit, qasm2
 
 
 class AtlasError(RuntimeError):
@@ -43,8 +45,8 @@ class AtlasBackend:
         self.api_key = api_key or os.environ.get("ATLAS_API_KEY")
         if not self.api_key:
             raise AtlasError(
-                "No Atlas API key. Set ATLAS_API_KEY in your environment or "
-                ".env file — generate one at https://platform.mothquantum.com/keys"
+                "No Atlas API key. Set ATLAS_API_KEY in your environment — "
+                "generate one at https://platform.mothquantum.com/keys"
             )
         self.base_url = (
             base_url or os.environ.get("ATLAS_API_BASE") or "https://platform.mothquantum.com/api"
@@ -55,11 +57,10 @@ class AtlasBackend:
     def _headers(self) -> dict:
         return {"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"}
 
-    def run(self, circuit: QuantumCircuit, shots: int) -> dict:
-        """Submit `circuit`, block until it completes, return a counts dict."""
-        qasm = qasm2.dumps(circuit)
+    def run(self, amplitudes: np.ndarray, shots: int):
+        """Submit `amplitudes`, block until the job completes, return counts."""
         try:
-            job_id = self._submit(qasm, shots)
+            job_id = self._submit(amplitudes, shots)
             return self._await_counts(job_id)
         except AtlasError:
             raise
@@ -68,17 +69,17 @@ class AtlasBackend:
 
     # -- placeholder wire format; confirm against the Atlas API reference --
 
-    def _submit(self, qasm: str, shots: int) -> str:
+    def _submit(self, amplitudes: np.ndarray, shots: int) -> str:
         resp = requests.post(
             f"{self.base_url}/jobs",
             headers=self._headers(),
-            json={"qasm": qasm, "shots": shots},
+            json={"amplitudes": amplitudes.tolist(), "shots": shots},
             timeout=30,
         )
         resp.raise_for_status()
         return resp.json()["id"]
 
-    def _await_counts(self, job_id: str) -> dict:
+    def _await_counts(self, job_id: str):
         deadline = time.time() + self.timeout
         while time.time() < deadline:
             resp = requests.get(
@@ -99,7 +100,7 @@ class AtlasBackend:
 
 
 def get_run_fn(engine: str):
-    """engine -> callable(circuit, shots) -> counts, the one contract every
+    """engine -> callable(amplitudes, shots) -> counts, the one contract every
     engine in this repo shares."""
     if engine == "simulator":
         from quantum_pipeline import run_simulator
