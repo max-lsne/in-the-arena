@@ -66,6 +66,18 @@ body {
 .wrap { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 0 24px; }
 .mono { font-family: var(--mono); color: var(--ink); }
 
+.topbar { position: relative; z-index: 1; border-bottom: 1px solid var(--rule); background: var(--bg); }
+.topbar-inner {
+  max-width: 900px; margin: 0 auto; padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 14px 24px; flex-wrap: wrap;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
+}
+.topbar-name { color: var(--ink-faint); }
+.topbar-name b { color: var(--ink); font-weight: 600; }
+.topbar-links { display: flex; gap: 18px; flex-wrap: wrap; }
+.topbar-links a { color: var(--ink-faint); text-decoration: none; transition: color .12s; }
+.topbar-links a:hover, .topbar-links a:focus-visible { color: var(--accent); }
+
 /* ---- staggered reveal on load ---- */
 .reveal {
   display: inline-block;
