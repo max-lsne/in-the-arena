@@ -30,16 +30,21 @@
       </nav>
     </div>
   </div>
-  <div class="grain-field" aria-hidden="true"></div>
-  <div class="wrap">
-
-    <header class="hero">
+  <header class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="hero-inner">
       <p class="eyebrow"><span class="reveal" style="--d:0">In the arena</span> <span class="reveal" style="--d:1">·</span> <span class="reveal" style="--d:2">2026-09-26</span> <span class="reveal" style="--d:3">·</span> <span class="reveal" style="--d:4">Moth Hack, built on Atlas</span></p>
       <p class="pron reveal" style="--d:5"><b>grain</b> · <i>noun</i> · the fine, granular texture a picture has when it's rebuilt from too little evidence, here, too few measurements of a quantum state</p>
       <h1 id="scramble-title" data-final="Quantum Grain">Quantum Grain</h1>
       <p class="lede reveal" style="--d:7">A photograph's pixels, held as the <em>amplitudes</em> of a quantum state. You can't read an amplitude. Only <em>measure</em> it.</p>
       <p class="sub reveal" style="--d:8">A block of pixels becomes a quantum circuit's amplitudes, the same method Moth's <span class="mono">quantum-audio</span> package uses for sound. Amplitudes can't be read, only measured, and few measurements make a <b>grainy</b> result. The <b>atlas</b> engine runs the same idea on a real quantum processor instead, through one of Moth's own Atlas engines.</p>
-    </header>
+    </div>
+    <div class="scroll-cue" aria-hidden="true"><i></i>scroll</div>
+  </header>
+
+  <div class="grain-field" aria-hidden="true"></div>
+  <div class="wrap">
 
     <section id="how">
       <p class="section-tag">Where the grain comes from</p>
@@ -52,39 +57,75 @@
     <section id="rule">
       <p class="section-tag">The one relation, read three ways</p>
       <h2>Shots buy fidelity; qubits spend it</h2>
-      <ul class="law-list">
-        <li><b>Fidelity rises with shots, but only as a square root.</b> Halving the noise takes <em>four times</em> the shots, not two. On a real QPU, shots are queued time on a scarce device.</li>
-        <li><b>Bigger blocks spend the same shot budget on exponentially more amplitudes.</b> An 8×8 block (6 qubits) and a 16×16 block (8 qubits) look close, but the second has <em>four times</em> as many amplitude buckets sharing the same <span class="mono">S</span> shots. Coarser detail costs less per pixel; finer detail gets fewer shots per amplitude.</li>
-        <li><b>A real device adds a floor no shot count erases.</b> A simulator's only error is shot noise, which vanishes as <span class="mono">S → ∞</span>. A real QPU also decoheres, its gates aren't perfect, its readout misfires. That floor sits under the shot noise, untouched by more shots, and no simulator can fake it.</li>
-      </ul>
+      <div class="laws">
+        <div class="law-card card-spot reveal-up">
+          <p class="law-stat mono">1⁄√S</p>
+          <h3>Fidelity rises with shots, but only as a square root.</h3>
+          <p>Halving the noise takes <em>four times</em> the shots, not two. On a real QPU, shots are queued time on a scarce device.</p>
+        </div>
+        <div class="law-card card-spot reveal-up">
+          <p class="law-stat mono">×4</p>
+          <h3>Bigger blocks spend the same shot budget on exponentially more amplitudes.</h3>
+          <p>An 8×8 block (6 qubits) and a 16×16 block (8 qubits) look close, but the second has <em>four times</em> as many amplitude buckets sharing the same <span class="mono">S</span> shots. Coarser detail costs less per pixel; finer detail gets fewer shots per amplitude.</p>
+        </div>
+        <div class="law-card card-spot reveal-up">
+          <p class="law-stat mono">+ε</p>
+          <h3>A real device adds a floor no shot count erases.</h3>
+          <p>A simulator's only error is shot noise, which vanishes as <span class="mono">S → ∞</span>. A real QPU also decoheres, its gates aren't perfect, its readout misfires. That floor sits under the shot noise, untouched by more shots, and no simulator can fake it.</p>
+        </div>
+      </div>
     </section>
 
     <section id="ladder">
       <p class="section-tag">Four states, from a clean frame to a useless one</p>
       <h2>Around the one loop: encode, measure, decode</h2>
-      <ol class="ladder">
-        <li><b>Clean.</b> <span class="rung-note">Shots to spare. Reconstruction close to the original; grain invisible in practice.</span></li>
-        <li><b>Grainy.</b> <span class="rung-note">Fewer shots, or a bigger block. Structure and colour hold; fine detail turns into a visible, even texture, exactly what <span class="mono">1⁄√S</span> predicts.</span></li>
-        <li><b>Noisy.</b> <span class="rung-note">Shots stretched over too many amplitudes. Each block drifts from its neighbours: still recognisable, visibly patchwork.</span></li>
-        <li><b>Collapsed.</b> <span class="rung-note">A handful of shots, or real decoherence on top. Barely better than a guess: blocky, discoloured, sometimes unrecognisable. Too few measurements, quantum or not.</span></li>
-      </ol>
+      <div class="ladder-grid">
+        <figure class="ladder-card card-spot v-keep reveal-up">
+          <div class="ladder-media"><img src="assets/ladder-clean.webp" alt="Sample image reconstructed at 4 000 shots: clean, grain invisible" loading="lazy" /></div>
+          <figcaption>
+            <span class="ladder-head"><span class="ladder-num mono">01</span><span class="ladder-title">Clean</span></span>
+            <span class="rung-note">Shots to spare. Reconstruction close to the original; grain invisible in practice.</span>
+          </figcaption>
+        </figure>
+        <figure class="ladder-card card-spot v-keep reveal-up">
+          <div class="ladder-media"><img src="assets/ladder-grainy.webp" alt="Sample image reconstructed at 1 000 shots: grainy, structure and colour hold" loading="lazy" /></div>
+          <figcaption>
+            <span class="ladder-head"><span class="ladder-num mono">02</span><span class="ladder-title">Grainy</span></span>
+            <span class="rung-note">Fewer shots, or a bigger block. Structure and colour hold; fine detail turns into a visible, even texture, exactly what <span class="mono">1⁄√S</span> predicts.</span>
+          </figcaption>
+        </figure>
+        <figure class="ladder-card card-spot v-drift reveal-up">
+          <div class="ladder-media"><img src="assets/ladder-noisy.webp" alt="Sample image reconstructed at 200 shots: noisy, patchwork between blocks" loading="lazy" /></div>
+          <figcaption>
+            <span class="ladder-head"><span class="ladder-num mono">03</span><span class="ladder-title">Noisy</span></span>
+            <span class="rung-note">Shots stretched over too many amplitudes. Each block drifts from its neighbours: still recognisable, visibly patchwork.</span>
+          </figcaption>
+        </figure>
+        <figure class="ladder-card card-spot v-dead reveal-up">
+          <div class="ladder-media"><img src="assets/ladder-collapsed.webp" alt="Sample image reconstructed at 50 shots: collapsed, barely better than a guess" loading="lazy" /></div>
+          <figcaption>
+            <span class="ladder-head"><span class="ladder-num mono">04</span><span class="ladder-title">Collapsed</span></span>
+            <span class="rung-note">A handful of shots, or real decoherence on top. Barely better than a guess: blocky, discoloured, sometimes unrecognisable. Too few measurements, quantum or not.</span>
+          </figcaption>
+        </figure>
+      </div>
     </section>
 
     <section id="hands">
       <p class="section-tag">Who reads it, and for what</p>
       <h2>The same grain, three ways</h2>
       <div class="hands">
-        <div class="hand">
+        <div class="hand card-spot reveal-up">
           <h3>The compressionist</h3>
           <p class="role">wants the least noise per shot</p>
           <p>Reads <span class="mono">PSNR</span> against shots and block size the way a codec engineer reads bitrate against distortion: a lossy quantum channel, shots standing in for bits.</p>
         </div>
-        <div class="hand">
+        <div class="hand card-spot reveal-up">
           <h3>The hardware skeptic</h3>
           <p class="role">wants proof this needed a QPU</p>
           <p>Checks the job id and machine Atlas reports, then runs the same photo twice. A simulator repeats itself exactly; real hardware drifts with its calibration. No simulator can fake that drift.</p>
         </div>
-        <div class="hand">
+        <div class="hand card-spot reveal-up">
           <h3>The media artist</h3>
           <p class="role">wants a texture, not an error</p>
           <p>Dials the shot count down on purpose, the way photographers once chose faster, grainier film for its look.</p>

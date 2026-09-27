@@ -289,8 +289,58 @@
     })();
   }
 
+  function setupHeaderScroll() {
+    const topbar = document.querySelector(".topbar");
+    if (!topbar) return;
+    const onScroll = () => topbar.classList.toggle("scrolled", window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  function setupScrollReveal() {
+    const els = document.querySelectorAll(".reveal-up");
+    if (!els.length) return;
+    if (reduceMotion.matches || !("IntersectionObserver" in window)) {
+      els.forEach((el) => el.classList.add("is-visible"));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    els.forEach((el) => io.observe(el));
+  }
+
+  function setupCardSpotlight() {
+    document.querySelectorAll(".card-spot").forEach((card) => {
+      card.addEventListener("pointermove", (e) => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+        card.style.setProperty("--my", `${e.clientY - rect.top}px`);
+      });
+    });
+  }
+
+  function setupHeroParallax() {
+    const bg = document.querySelector(".hero-bg");
+    if (!bg || reduceMotion.matches) return;
+    const onScroll = () => {
+      const y = Math.min(window.scrollY, 700);
+      bg.style.transform = `translateY(${y * 0.1}px)`;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
   load();
   syncControls();
   scrambleTitle();
+  setupHeaderScroll();
+  setupScrollReveal();
+  setupCardSpotlight();
+  setupHeroParallax();
   fetchSample().catch(() => say("couldn't reach the server, run: python server.py"));
 })();

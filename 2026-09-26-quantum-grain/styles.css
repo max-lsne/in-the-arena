@@ -66,7 +66,15 @@ body {
 .wrap { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 0 24px; }
 .mono { font-family: var(--mono); color: var(--ink); }
 
-.topbar { position: relative; z-index: 1; border-bottom: 1px solid var(--rule); background: var(--bg); }
+.topbar {
+  position: sticky; top: 0; z-index: 20;
+  border-bottom: 1px solid transparent;
+  background: rgba(0, 0, 0, .3);
+  backdrop-filter: blur(10px) saturate(1.1);
+  -webkit-backdrop-filter: blur(10px) saturate(1.1);
+  transition: background .25s ease, border-color .25s ease;
+}
+.topbar.scrolled { background: rgba(0, 0, 0, .88); border-bottom-color: var(--rule); }
 .topbar-inner {
   max-width: 900px; margin: 0 auto; padding: 14px 24px;
   display: flex; align-items: center; justify-content: space-between; gap: 14px 24px; flex-wrap: wrap;
@@ -102,7 +110,53 @@ p.reveal { display: block; }
   border-bottom: 1px solid var(--rule);
 }
 
-header.hero { padding: 64px 0 36px; }
+.hero {
+  position: relative;
+  z-index: 3;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: clamp(560px, 88vh, 780px);
+  display: flex;
+  align-items: center;
+  padding: 48px 0 64px;
+}
+.hero-bg {
+  position: absolute; inset: -4% -4%; z-index: 0;
+  background-image: url("assets/hero.webp");
+  background-size: cover;
+  background-position: center right;
+  will-change: transform;
+}
+.hero-scrim {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.15) 30%, rgba(0,0,0,.65) 82%, var(--bg) 100%),
+    linear-gradient(90deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.05) 55%);
+}
+.hero-inner {
+  position: relative; z-index: 2;
+  max-width: 620px;
+  padding-left: max(24px, calc((100vw - 900px) / 2 + 24px));
+  padding-right: 24px;
+}
+
+.scroll-cue {
+  position: absolute; left: max(24px, calc((100vw - 900px) / 2 + 24px)); bottom: 26px; z-index: 2;
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.scroll-cue i {
+  display: block; width: 1px; height: 24px; background: var(--rule);
+  position: relative; overflow: hidden; font-style: normal;
+}
+.scroll-cue i::after {
+  content: ""; position: absolute; left: 0; top: -100%; width: 100%; height: 60%;
+  background: var(--accent);
+  animation: scroll-cue-drip 1.9s ease-in-out infinite;
+}
+@keyframes scroll-cue-drip { 0% { top: -60%; } 65%, 100% { top: 100%; } }
+@media (max-width: 640px) { .scroll-cue { display: none; } }
 
 .pron {
   font-size: 12.5px;
@@ -187,31 +241,52 @@ p a { color: var(--ink); text-decoration-thickness: 1px; text-underline-offset: 
 }
 .pull em { color: var(--accent-2); font-style: normal; }
 
-ul.law-list { list-style: none; padding: 0; margin: 22px 0; max-width: 72ch; }
-ul.law-list li { padding: 14px 0 14px 22px; border-top: 1px solid var(--rule); position: relative; color: var(--ink-soft); }
-ul.law-list li:first-child { border-top: none; }
-ul.law-list li::before {
-  content: ""; position: absolute; left: 0; top: 23px;
-  width: 8px; height: 1px;
-  background: var(--accent);
-}
-ul.law-list b { color: var(--ink); font-weight: 600; }
-ul.law-list em { color: var(--ink); font-style: normal; }
+/* ---- reactive card grids: laws, ladder, hands ---- */
+.reveal-up { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+.reveal-up.is-visible { opacity: 1; transform: none; }
 
-ol.ladder { list-style: none; counter-reset: rung; padding: 0; margin: 22px 0 0; max-width: 72ch; }
-ol.ladder li { counter-increment: rung; position: relative; padding: 16px 0 16px 48px; border-top: 1px solid var(--rule); }
-ol.ladder li:first-child { border-top: none; }
-ol.ladder li::before {
-  content: "0" counter(rung); position: absolute; left: 0; top: 15px; width: 30px;
-  font-family: var(--mono); font-size: 12px;
-  color: var(--ink-faint);
+.card-spot {
+  position: relative;
+  overflow: hidden;
+  transition: transform .25s ease, border-color .25s ease;
 }
-ol.ladder b { font-weight: 700; color: var(--ink); }
-ol.ladder .rung-note { color: var(--ink-soft); }
-ol.ladder .mono { color: var(--ink); }
+.card-spot::after {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0; transition: opacity .3s ease;
+  background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), rgba(255,90,31,.14), transparent 62%);
+}
+.card-spot:hover::after { opacity: 1; }
+.card-spot:hover { transform: translateY(-3px); border-color: var(--ink-faint); }
+.card-spot > * { position: relative; z-index: 1; }
+
+.laws { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 24px; background: var(--rule); border: 1px solid var(--rule); }
+.law-card { background: var(--bg); padding: 24px 20px; }
+.law-stat { font-family: var(--mono); font-size: 2.1rem; font-weight: 500; color: var(--accent); margin: 0 0 16px; line-height: 1; }
+.law-card h3 { font-family: var(--display); font-weight: 700; font-size: .96rem; margin: 0 0 8px; color: var(--ink); text-transform: none; letter-spacing: -.005em; line-height: 1.3; }
+.law-card p { font-size: .88rem; color: var(--ink-soft); margin: 0; }
+.law-card em { color: var(--ink); font-style: normal; }
+.law-card:nth-child(2) { transition-delay: 80ms; }
+.law-card:nth-child(3) { transition-delay: 160ms; }
+@media (max-width: 720px) { .laws { grid-template-columns: 1fr; } }
+
+.ladder-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 24px; background: var(--rule); border: 1px solid var(--rule); }
+.ladder-card { background: var(--bg); margin: 0; display: flex; flex-direction: column; }
+.ladder-media { aspect-ratio: 1 / 1; overflow: hidden; background: var(--bg-3); border-bottom: 1px solid var(--rule); }
+.ladder-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
+.ladder-card:hover .ladder-media img { transform: scale(1.06); }
+.ladder-card figcaption { padding: 16px 16px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.ladder-head { display: flex; align-items: baseline; gap: 8px; }
+.ladder-num { font-size: 11px; color: var(--ink-faint); }
+.ladder-title { font-family: var(--display); font-weight: 700; font-size: .96rem; text-transform: uppercase; color: var(--ink); }
+.ladder-card.v-keep .ladder-num  { color: var(--keep); }
+.ladder-card.v-drift .ladder-num { color: var(--drift); }
+.ladder-card.v-dead .ladder-num  { color: var(--dead); }
+.ladder-card .rung-note { font-size: .84rem; color: var(--ink-soft); line-height: 1.55; }
+.ladder-card .mono { color: var(--ink); }
+@media (max-width: 800px) { .ladder-grid { grid-template-columns: repeat(2, 1fr); } }
 
 .hands { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 24px; background: var(--rule); border: 1px solid var(--rule); counter-reset: tile; }
-.hand { background: var(--bg); padding: 22px 20px; position: relative; counter-increment: tile; }
+.hand { background: var(--bg); padding: 22px 20px; overflow: hidden; counter-increment: tile; }
 .hand::before {
   content: "0" counter(tile);
   display: block;
@@ -219,9 +294,13 @@ ol.ladder .mono { color: var(--ink); }
   margin-bottom: 14px;
 }
 .hand h3 { font-family: var(--display); font-weight: 700; font-size: .96rem; margin: 0 0 4px; color: var(--ink); text-transform: uppercase; letter-spacing: -.005em; }
+.hand h3::after { content: " \2192"; display: inline-block; opacity: 0; transform: translateX(-4px); transition: opacity .2s ease, transform .2s ease; color: var(--accent); }
+.hand:hover h3::after { opacity: 1; transform: none; }
 .hand .role { font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em; color: var(--ink-faint); margin: 0 0 14px; }
 .hand p { font-size: .9rem; color: var(--ink-soft); margin: 0; }
 .hand em { color: var(--ink); font-style: normal; }
+.hand:nth-child(2) { transition-delay: 80ms; }
+.hand:nth-child(3) { transition-delay: 160ms; }
 @media (max-width: 720px) { .hands { grid-template-columns: 1fr; } }
 
 /* ============ the bench ============ */
