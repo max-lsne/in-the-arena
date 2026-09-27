@@ -100,10 +100,10 @@ p.reveal { display: block; }
 }
 
 .eyebrow {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0;
   color: var(--ink-faint);
   margin: 0 0 22px;
   padding-bottom: 14px;
