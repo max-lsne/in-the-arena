@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quantum Grain</title>
   <meta name="description" content="Quantum Grain flattens each block of a photograph into a signal and puts it on a quantum circuit the way Moth's own quantum-audio package puts sound there, as the amplitudes of a prepared state. You cannot read an amplitude directly. You measure it, many times, and the pixel you get back is a statistical estimate built from a finite number of shots. Few shots give an imprecise estimate, and the result looks like real grain, the same statistics as shot noise anywhere. Run it on a real QPU through Moth's Atlas API instead of a simulator and the result also includes the device's own decoherence, an effect no simulator can produce because no simulator has a real qubit's imperfections." />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%230a0e16'/%3E%3Ccircle cx='12' cy='12' r='1.8' fill='%234fd8c4'/%3E%3Ccircle cx='21' cy='11' r='1.3' fill='%234fd8c4'/%3E%3Ccircle cx='22' cy='20' r='1.6' fill='%234fd8c4'/%3E%3Ccircle cx='10' cy='21' r='1.2' fill='%234fd8c4'/%3E%3Ccircle cx='16' cy='16' r='2.8' fill='none' stroke='%23d3a24a' stroke-width='1.5'/%3E%3C/svg%3E" />
-  <meta name="theme-color" content="#0a0e16" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Crect x='6' y='6' width='20' height='20' fill='none' stroke='%23fff' stroke-width='1.5'/%3E%3Crect x='14' y='14' width='4' height='4' fill='%23ff5a1f'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#000000" />
   <meta property="og:title" content="Quantum Grain" />
   <meta property="og:description" content="Each block of a photo becomes the amplitudes of a quantum state. Measuring it a finite number of times gives back the pixel only approximately. The gap is real shot noise, and on a real QPU through Atlas it's real decoherence too, neither one a filter's guess." />
   <meta property="og:type" content="website" />
@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
 </head>
 <body>
   <div class="grain-field" aria-hidden="true"></div>
