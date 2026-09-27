@@ -43,7 +43,7 @@
     return Math.log2(block * block);
   }
 
-  function drawDataUrlToCanvas(dataUrl, canvas, ctx, box) {
+  function drawDataUrlToCanvas(dataUrl, canvas, ctx) {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => {
@@ -51,14 +51,6 @@
         canvas.height = img.height;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0);
-        if (box) {
-          ctx.save();
-          ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue("--iron").trim() || "#6b5b9c";
-          ctx.lineWidth = 2;
-          ctx.setLineDash([6, 5]);
-          ctx.strokeRect(box[0] + 1, box[1] + 1, box[2] - 2, box[3] - 2);
-          ctx.restore();
-        }
         resolve();
       };
       img.src = dataUrl;
@@ -101,6 +93,13 @@
   }
 
   function renderIdleReading() {
+    if (state.engine === "atlas") {
+      readingEl.innerHTML =
+        row("Engine", "atlas") +
+        row("Runs on", "tessa-image-v1, real QPU") +
+        row("Shots", fmt(SHOT_PRESETS[state.shotsIndex]));
+      return;
+    }
     const qubits = qubitsForBlock(state.block);
     readingEl.innerHTML =
       row("Block", `${state.block}×${state.block} <span class="unit">px</span>`) +
@@ -111,15 +110,23 @@
 
   function renderResultReading(stats) {
     const [, cls] = classify(stats.psnrDb);
-    const worstCls = classify(stats.worstPsnrDb)[1];
-    let rows =
-      row("Engine", stats.engine) +
-      row("Qubits / block", stats.qubitsPerBlock) +
-      row("Shots / block", fmt(stats.shots)) +
-      row("Blocks processed", `${fmt(stats.blocksProcessed)} / ${fmt(stats.blocksTotal)}`) +
-      row("PSNR, mean", `${stats.psnrDb.toFixed(1)} <span class="unit">dB</span>`, cls) +
-      row("PSNR, worst block", `${stats.worstPsnrDb.toFixed(1)} <span class="unit">dB</span>`, worstCls) +
-      row("Wall time", `${stats.wallTimeS.toFixed(2)} <span class="unit">s</span>`);
+    let rows = row("Engine", stats.engine);
+    if (stats.engine === "atlas") {
+      rows +=
+        row("Machine", stats.machine) +
+        row("Job", stats.jobId) +
+        row("Shots", fmt(stats.shots)) +
+        row("PSNR vs. original", `${stats.psnrDb.toFixed(1)} <span class="unit">dB</span>`, cls);
+    } else {
+      const worstCls = classify(stats.worstPsnrDb)[1];
+      rows +=
+        row("Qubits / block", stats.qubitsPerBlock) +
+        row("Shots / block", fmt(stats.shots)) +
+        row("Blocks processed", `${fmt(stats.blocksProcessed)} / ${fmt(stats.blocksTotal)}`) +
+        row("PSNR, mean", `${stats.psnrDb.toFixed(1)} <span class="unit">dB</span>`, cls) +
+        row("PSNR, worst block", `${stats.worstPsnrDb.toFixed(1)} <span class="unit">dB</span>`, worstCls) +
+        row("Wall time", `${stats.wallTimeS.toFixed(2)} <span class="unit">s</span>`);
+    }
     readingEl.innerHTML = rows;
   }
 
@@ -140,7 +147,7 @@
     shotsInput.value = String(state.shotsIndex);
     updateBlockLabel();
     updateShotsLabel();
-    afterLabel.textContent = state.engine === "atlas" ? "Reconstructed · atlas patch dashed" : "Reconstructed";
+    afterLabel.textContent = "Reconstructed";
     renderIdleReading();
   }
 
@@ -155,8 +162,13 @@
     if (!currentImage) { say("load a photo first"); return; }
     runBtn.disabled = true;
     runBtn.classList.add("busy");
-    setVerdict("Running", `${qubitsForBlock(state.block)}q × ${fmt(SHOT_PRESETS[state.shotsIndex])} shots on ${state.engine}…`, "keep");
-    say(`running ${state.block} by ${state.block} blocks, ${qubitsForBlock(state.block)} qubits each, ${fmt(SHOT_PRESETS[state.shotsIndex])} shots, on the ${state.engine} engine`);
+    if (state.engine === "atlas") {
+      setVerdict("Running", `${fmt(SHOT_PRESETS[state.shotsIndex])} shots on a real QPU…`, "keep");
+      say(`running the whole photo through tessa-image-v1 on Atlas, ${fmt(SHOT_PRESETS[state.shotsIndex])} shots, on real quantum hardware — this can take a while, it's a real device queue`);
+    } else {
+      setVerdict("Running", `${qubitsForBlock(state.block)}q × ${fmt(SHOT_PRESETS[state.shotsIndex])} shots on ${state.engine}…`, "keep");
+      say(`running ${state.block} by ${state.block} blocks, ${qubitsForBlock(state.block)} qubits each, ${fmt(SHOT_PRESETS[state.shotsIndex])} shots, on the ${state.engine} engine`);
+    }
 
     try {
       const res = await fetch("/api/process", {
@@ -172,12 +184,15 @@
       const body = await res.json();
       if (!res.ok) throw new Error(body.error || "request failed");
 
-      const box = body.stats.patchBox;
-      await drawDataUrlToCanvas(body.image, after, afterCtx, box);
+      await drawDataUrlToCanvas(body.image, after, afterCtx);
       renderResultReading(body.stats);
       const [word, cls] = classify(body.stats.psnrDb);
       setVerdict(word, `${body.stats.psnrDb.toFixed(1)} dB`, cls);
-      say(`done: ${word.toLowerCase()}, ${body.stats.psnrDb.toFixed(1)} decibels, ${body.stats.blocksProcessed} of ${body.stats.blocksTotal} blocks processed on ${state.engine}`);
+      if (state.engine === "atlas") {
+        say(`done: ${word.toLowerCase()}, ${body.stats.psnrDb.toFixed(1)} decibels against the original, run on ${body.stats.machine}`);
+      } else {
+        say(`done: ${word.toLowerCase()}, ${body.stats.psnrDb.toFixed(1)} decibels, ${body.stats.blocksProcessed} of ${body.stats.blocksTotal} blocks processed on ${state.engine}`);
+      }
     } catch (err) {
       setVerdict("Error", "see status line", "dead");
       say(`error: ${err.message}`);

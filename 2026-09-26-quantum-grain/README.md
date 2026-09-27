@@ -11,10 +11,10 @@ how often each outcome came up. From that histogram you reconstruct the
 pixels, approximately, because a finite number of shots is a finite amount
 of data. Few shots and the picture comes back **grainy**. That's literally
 what a reconstruction looks like when it's based on too few measurements.
-Run the same circuit on a real quantum processor through Moth's **Atlas**
-API instead of a simulator, and the result also contains something no
-simulator can produce: the device's own decoherence, added to the shot
-noise.
+The `atlas` engine runs the same idea through a different, real pipeline: it
+sends the whole photo to one of Moth's own published Atlas engines, which
+does its own encode, measure, and decode on a real quantum processor,
+decoherence included.
 
 Built for [Moth Hack 2026](https://luma.com/wmrrdpcj), the "Quantum-native"
 challenge: a repo of a quantum application that runs a process on media.
@@ -42,46 +42,52 @@ python server.py
 # open http://localhost:5057
 ```
 
-Drop in a photo (or click "use sample"), pick a block size and shot budget,
-pick an engine, hit Run. `simulator` runs instantly and locally. `atlas`
-sends the same amplitudes to a real QPU through Moth's API, and because real
-QPU time is queued, it processes a bounded patch of the frame (marked with a
-dashed line) rather than the whole thing. The rest of the frame is shown
-exactly as uploaded, never simulated in its place. The reading panel gives
-PSNR against the original, mean and worst-block, plus wall time and how many
-blocks actually got processed.
+Drop in a photo (or click "use sample"), pick a shot budget, pick an engine,
+hit Run.
+
+`simulator` runs this page's own block-by-block loop instantly and locally,
+no queue; block size sets how many pixels share one circuit there. `atlas`
+instead uploads the whole photo and sends it to `tessa-image-v1`, one of
+Atlas's own published engines, which encodes each pixel's colour onto a
+qubit and measures it on a real quantum processor. Real hardware is queued,
+so an atlas run can take anywhere from several seconds to a few minutes. The
+reading panel shows different fields per engine: block/qubit/PSNR detail for
+`simulator`, and the job id and machine name Atlas reports for `atlas`.
 
 ## Architecture
 
-- `quantum_pipeline.py`: the encode, measure, decode loop, in plain NumPy.
-  For a circuit that only prepares a state and measures it once, the exact
-  output distribution is a multinomial draw from `|amplitude|^2`, not an
-  approximation of one, because there's no later gate for a simulator to add
-  interference from. This computes that draw directly instead of building
-  and simulating a Qiskit circuit: verified numerically identical to real
-  qiskit-aer output, and it cuts the dependency stack from roughly 450MB
-  (Qiskit, qiskit-aer, scipy) down to numpy and pillow. Pixel values are
-  pre-scaled from `[0, 1]` to `[-1, 1]` before encoding, matching QPAM's
-  amplitude convention; that alone roughly halves the shot-noise floor at a
-  given shot budget, since it spends the full amplitude range instead of
-  only its upper half.
-- `atlas_backend.py`: the one piece that could not be tested end to end.
-  Outbound access to `platform.mothquantum.com` was blocked from the sandbox
-  this was built in, so the exact job-submission contract (endpoint paths,
-  request/response shape) is a **documented best-effort placeholder**, not a
-  confirmed one. It sends the amplitude vector itself rather than a
-  hand-built circuit or QASM string, on the bet that Atlas exposes a
-  state-prep-and-measure endpoint rather than requiring callers to construct
-  circuits by hand. Everything it needs to satisfy is one method,
-  `AtlasBackend.run(amplitudes, shots) -> counts`, so fixing it up against
-  the real API reference (shown on your dashboard next to your key) is a
-  self-contained, one-file change. Nothing downstream needs to know.
+- `quantum_pipeline.py`: the encode, measure, decode loop the `simulator`
+  engine runs, in plain NumPy. For a circuit that only prepares a state and
+  measures it once, the exact output distribution is a multinomial draw
+  from `|amplitude|^2`, not an approximation of one, because there's no
+  later gate for a simulator to add interference from. This computes that
+  draw directly instead of building and simulating a Qiskit circuit:
+  verified numerically identical to real qiskit-aer output, and it cuts the
+  dependency stack from roughly 450MB (Qiskit, qiskit-aer, scipy) down to
+  numpy and pillow. Pixel values are pre-scaled from `[0, 1]` to `[-1, 1]`
+  before encoding, matching QPAM's amplitude convention; that alone roughly
+  halves the shot-noise floor at a given shot budget, since it spends the
+  full amplitude range instead of only its upper half.
+- `atlas_backend.py`: the `atlas` engine's adapter. Atlas doesn't take a raw
+  circuit or amplitude vector; it works through named engines, each with its
+  own JSON param schema and declared input/output file slots, called via
+  `POST /engines/{engine_id}/process`, polled via `GET /jobs/{id}/status`,
+  and fetched via `GET /jobs/{id}/result`. This calls `tessa-image-v1`, an
+  Atlas engine that encodes an image's pixels onto qubits (each pixel's
+  colour becomes a point on a sphere, the same coordinates that describe a
+  qubit's own state), transforms it on the device, measures, and decodes it
+  back into an image, optionally on real IBM hardware. Confirmed directly
+  against the live OpenAPI spec at `api.mothquantum.com/openapi.json`
+  (outbound access to `mothquantum.com` was blocked from the sandbox this
+  was built in, so the spec was fetched by hand and read in rather than
+  queried live).
 - `server.py` (local) and `api/process.py` / `api/sample.py` (Vercel): thin
-  HTTP wrappers around the same pipeline. This is the one backend in the
-  whole `in-the-arena` series. Every other page is one HTML file, one
-  stylesheet, one script, no build, no account, no network once loaded. This
-  one breaks that on purpose: its entire point is a texture that only exists
-  if a real measurement happened, and there's no honest way to simulate that
+  HTTP wrappers that route to one engine or the other and report PSNR
+  against the original either way. This is the one backend in the whole
+  `in-the-arena` series. Every other page is one HTML file, one stylesheet,
+  one script, no build, no account, no network once loaded. This one breaks
+  that on purpose: its entire point is a texture that only exists if a real
+  measurement happened, and there's no honest way to simulate that
   in-browser.
 - `index.html` / `styles.css` / `script.js`: the bench itself, in the same
   visual language as the rest of the series (localStorage, `aria-live`
@@ -90,12 +96,13 @@ blocks actually got processed.
 ## Why this, for judging
 
 Most "quantum-native media" entries add a quantum RNG to a classical filter.
-This doesn't fake anything. The grain you see *is* the reconstruction error
-from a finite number of real measurements, the same statistics that produce
-shot noise anywhere, computed with the same amplitude
-scheme Moth's own quantum-audio package publishes rather than a bespoke
-encoding. The `atlas` engine's patch is never backfilled with simulated
-pixels: if a pixel doesn't come from the QPU, it isn't shown as if it did.
+This doesn't fake anything. The `simulator` engine's grain *is* the
+reconstruction error from a finite number of real measurements, the same
+statistics that produce shot noise anywhere, computed with the same
+amplitude scheme Moth's own `quantum-audio` package publishes rather than a
+bespoke encoding. The `atlas` engine doesn't reimplement that scheme on real
+hardware; it calls Atlas's own production image-encoding engine directly,
+so the real-QPU result comes from Moth's own pipeline, not a guess at one.
 
 *One of a series, a page a day, each built on one old working word and the
 discipline hidden inside it. For one day, on a real quantum processor

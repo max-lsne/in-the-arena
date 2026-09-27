@@ -25,7 +25,7 @@
       <p class="pron reveal" style="--d:5"><b>grain</b> · <i>noun</i> · the fine, granular texture a picture has when it's rebuilt from too little evidence, here, too few measurements of a quantum state</p>
       <h1 id="scramble-title" data-final="Quantum Grain">Quantum Grain</h1>
       <p class="lede reveal" style="--d:7">A photograph's pixels, held as the <em>amplitudes</em> of a quantum state. An amplitude is a thing you can never read. You can only <em>measure</em> it.</p>
-      <p class="sub reveal" style="--d:8">Take a block of pixels, flatten it into a signal, and prepare a quantum circuit whose amplitudes are exactly those pixel values. It's the same method Moth's own <span class="mono">quantum-audio</span> package uses to put sound on a circuit, applied here to sight instead of hearing. There is no operation that returns a circuit's amplitudes directly. You can only measure it, many times, and count how often each outcome came up. From that histogram you reconstruct the pixels, approximately, because a finite number of shots is a finite amount of data. Few shots and the picture comes back <b>grainy</b>. That's literally what a reconstruction looks like when it's based on too few measurements. Run the same circuit on a real quantum processor through Moth's <b>Atlas</b> API instead of a simulator and the result also contains something a simulator cannot produce. The device's own decoherence adds to the shot noise.</p>
+      <p class="sub reveal" style="--d:8">Take a block of pixels, flatten it into a signal, and prepare a quantum circuit whose amplitudes are exactly those pixel values. It's the same method Moth's own <span class="mono">quantum-audio</span> package uses to put sound on a circuit, applied here to sight instead of hearing. There is no operation that returns a circuit's amplitudes directly. You can only measure it, many times, and count how often each outcome came up. From that histogram you reconstruct the pixels, approximately, because a finite number of shots is a finite amount of data. Few shots and the picture comes back <b>grainy</b>. That's literally what a reconstruction looks like when it's based on too few measurements. The <b>atlas</b> engine runs the same idea through a different, real pipeline: it sends the whole photo to one of Moth's own published Atlas engines, which does its own encode, measure, and decode on a real quantum processor, decoherence included.</p>
     </header>
 
     <section id="how">
@@ -54,7 +54,7 @@
         <li><b>Clean.</b> <span class="rung-note">Shots to spare against the block size, thousands per qubit's worth of amplitude. The reconstruction is very close to the original; the grain is present in principle but too small to see.</span></li>
         <li><b>Grainy.</b> <span class="rung-note">Shots thinned by a larger block or a smaller budget. Structure and colour survive; fine detail is replaced by a visible, even texture, exactly what <span class="mono">1⁄√S</span> predicts at this shot count.</span></li>
         <li><b>Noisy.</b> <span class="rung-note">Shots stretched thin over too many amplitudes. Each block's reconstruction differs visibly from its neighbours; the picture is still recognisably itself but every patch was reconstructed independently, and it shows.</span></li>
-        <li><b>Collapsed.</b> <span class="rung-note">A handful of shots per block, or, on Atlas, a real device's decoherence added to that. The estimate is barely better than a guess, and it shows in blocky, discoloured, sometimes unrecognisable results. Not a bug: this is what too few measurements produce, whether the measurement is quantum or not.</span></li>
+        <li><b>Collapsed.</b> <span class="rung-note">A handful of shots, or, on Atlas, a real device's decoherence added to that. The estimate is barely better than a guess, and it shows in blocky, discoloured, sometimes unrecognisable results. Not a bug: this is what too few measurements produce, whether the measurement is quantum or not.</span></li>
       </ol>
     </section>
 
@@ -70,7 +70,7 @@
         <div class="hand">
           <h3>The hardware skeptic</h3>
           <p class="role">wants proof this needed a QPU</p>
-          <p>Compares the Atlas patch against the simulator directly, block for block. If the two ever produced identical results, Atlas wouldn't be using real hardware at all. They don't. The patch shows patterns specific to that device, which no simulator can reproduce.</p>
+          <p>Checks the job id and machine name Atlas reports, then runs the same photo twice. A simulator gives the same answer every time; a real device drifts slightly between runs as its calibration does. That drift is the proof no simulator can fake, because faking it would mean faking a specific device's specific day.</p>
         </div>
         <div class="hand">
           <h3>The media artist</h3>
@@ -83,7 +83,7 @@
     <section id="bench">
       <p class="section-tag">The bench</p>
       <h2>Encode a photo, measure it, and look at what came back</h2>
-      <p>Drop in a photo or use the sample. Pick a <b>block size</b>, how many pixels share one circuit, and so how many qubits it takes. Pick a <b>shot budget</b>, how many times that circuit gets measured. Pick an <b>engine</b>: <span class="mono">simulator</span> runs instantly and locally with no queue; <span class="mono">atlas</span> sends the same circuits to a real quantum processor through Moth's API. Because real QPU time is queued and rate-limited, not free, it processes a bounded patch of the frame rather than all of it, leaving the rest of the frame shown exactly as uploaded, never simulated in its place.</p>
+      <p>Drop in a photo or use the sample. Pick a <b>shot budget</b>, how many times the state gets measured. Pick an <b>engine</b>: <span class="mono">simulator</span> runs this page's own block-by-block loop instantly and locally, no queue, and <b>block size</b> sets how many pixels share one circuit there. <span class="mono">atlas</span> instead sends the whole photo to <span class="mono">tessa-image-v1</span>, one of Moth's own published Atlas engines, which encodes each pixel's colour onto a qubit and measures it on a real quantum processor. Real hardware is queued, so an atlas run can take anywhere from several seconds to a few minutes.</p>
 
       <div class="bench">
         <div class="bench-grid">
@@ -107,7 +107,7 @@
               </div>
             </div>
             <p class="hint">
-              <b>Read it:</b> <span class="mono">block</span> sets qubits per circuit; <span class="mono">shots</span> sets how many times each is measured. The <span class="mono">reading</span> panel gives PSNR against the original: the higher, the closer the measurement got. On <span class="mono">atlas</span>, a dashed line marks the real-QPU patch; below it is shown unprocessed, not simulated.
+              <b>Read it:</b> <span class="mono">block</span> sets qubits per circuit on <span class="mono">simulator</span>; <span class="mono">shots</span> sets how many times each state is measured, on either engine. The <span class="mono">reading</span> panel gives PSNR against the original: the higher, the closer the measurement got. On <span class="mono">atlas</span> it also shows the job id and which real device ran it, since that run used a different pipeline (Moth's own <span class="mono">tessa-image-v1</span>) than the simulator's block loop.
             </p>
             <p class="hint">
               <b>Keys:</b> <kbd>R</kbd> run · <kbd>1</kbd>/<kbd>2</kbd>/<kbd>3</kbd> block 4/8/16 · <kbd>[</kbd>/<kbd>]</kbd> fewer/more shots · <kbd>S</kbd> simulator · <kbd>A</kbd> atlas · <kbd>U</kbd> use sample.
@@ -153,7 +153,7 @@
     <section id="close">
       <p class="section-tag">The discipline in the word, and the one it breaks</p>
       <h2>Grain, honestly measured</h2>
-      <p>Every other page in this series idealises its mechanism and runs entirely in your browser: one HTML file, one stylesheet, one script, no build, no account, no network once it has loaded. This one breaks that on purpose. Its whole subject is what a real measurement costs, in shots, in fidelity, and on Atlas, in a real device's own imperfection. There is no way to simulate that honestly without either presenting false data or actually running it on a quantum computer. So this bench keeps a small local server whose only purpose is the encode → measure → decode loop, using Moth's open <span class="mono">quantum-audio</span> package for the quantum-signal-processing half and Atlas for the real-device half. Nothing about the picture on screen is faked to look quantum. It either came from a simulator's shot noise or a real QPU's shot noise plus decoherence, and the reading panel always says which.</p>
+      <p>Every other page in this series idealises its mechanism and runs entirely in your browser: one HTML file, one stylesheet, one script, no build, no account, no network once it has loaded. This one breaks that on purpose. Its whole subject is what a real measurement costs, in shots, in fidelity, and on Atlas, in a real device's own imperfection. There is no way to simulate that honestly without either presenting false data or actually running it on a quantum computer. So this bench keeps a small local server whose only purpose is the encode → measure → decode loop: this page's own from-scratch implementation of the amplitude-encoding idea, modelled on Moth's open <span class="mono">quantum-audio</span> package, for the simulator half, and one of Atlas's own published engines, <span class="mono">tessa-image-v1</span>, for the real-device half. Nothing about the picture on screen is faked to look quantum. It either came from the simulator's own shot noise or a real QPU's shot noise plus decoherence, and the reading panel always says which.</p>
       <p>Run it: <span class="mono">pip install -r requirements.txt && python server.py</span>, then open <span class="mono">http://localhost:5057</span>. Full source, including the Atlas adapter, is in this folder.</p>
     </section>
 
