@@ -18,11 +18,13 @@ statistics (verified against qiskit-aer) while cutting a ~450MB dependency
 stack down to two ordinary libraries. That's the difference between a bench
 that only runs on a laptop and one that deploys anywhere.
 
-Two engines share one contract: run(amplitudes, shots) -> counts.
-  - `simulator`: local, in-process, unlimited shots, no queue.
-  - `atlas`: Moth's Atlas API, a real QPU, shots that cost time and money.
-    Its counts carry a real device's decoherence on top of this same
-    shot noise, which no local engine can add honestly.
+The `simulator` engine runs this module's own block-by-block loop, local,
+in-process, unlimited shots, no queue. The `atlas` engine (see
+atlas_backend.py) instead sends the whole photo to one of Atlas's own
+published engines, `tessa-image-v1`, which does its own encode/measure/decode
+on a real QPU. The two don't share a contract at that level; this module's
+`compare_images` gives both a common way to report PSNR against the
+original.
 """
 
 from __future__ import annotations
@@ -123,7 +125,6 @@ def process_channel(
     block: int,
     shots: int,
     run_fn: CountsFn,
-    max_blocks: Optional[int] = None,
 ) -> tuple[np.ndarray, ChannelReport]:
     """channel: 2-D float array in [0, 1]. Returns (reconstructed, report)."""
     padded, orig_h, orig_w = _pad_to_grid(channel, block)
@@ -133,11 +134,8 @@ def process_channel(
     report = ChannelReport(qubits_per_block=qubits_for_block(block))
 
     t0 = time.time()
-    done = 0
     for r in range(n_rows):
         for c in range(n_cols):
-            if max_blocks is not None and done >= max_blocks:
-                break
             y0, x0 = r * block, c * block
             patch = padded[y0 : y0 + block, x0 : x0 + block]
             flat = patch.reshape(-1)
@@ -153,9 +151,6 @@ def process_channel(
             report.mse_sum += mse
             if report.worst is None or mse > report.worst.mse:
                 report.worst = BlockReport(r, c, report.qubits_per_block, mse)
-            done += 1
-        if max_blocks is not None and done >= max_blocks:
-            break
     report.wall_time_s = time.time() - t0
     return out[:orig_h, :orig_w], report
 
@@ -173,7 +168,6 @@ class ProcessResult:
     psnr_db: float
     worst_psnr_db: float
     wall_time_s: float
-    patch_box: Optional[tuple[int, int, int, int]] = None
 
 
 def process_image(
@@ -182,7 +176,6 @@ def process_image(
     shots: int,
     run_fn: CountsFn,
     engine_name: str,
-    max_blocks_per_channel: Optional[int] = None,
 ) -> ProcessResult:
     img = img.convert("RGB")
     arr = np.asarray(img).astype(np.float64) / 255.0  # H, W, 3
@@ -196,9 +189,7 @@ def process_image(
     qpb = qubits_for_block(block)
 
     for ch in range(3):
-        recon, rep = process_channel(
-            arr[:, :, ch], block, shots, run_fn, max_blocks=max_blocks_per_channel
-        )
+        recon, rep = process_channel(arr[:, :, ch], block, shots, run_fn)
         out[:, :, ch] = recon
         total_mse += rep.mse_sum
         processed_blocks += rep.blocks
@@ -210,15 +201,6 @@ def process_image(
 
     mean_mse = total_mse / max(processed_blocks, 1)
     out_img = Image.fromarray((np.clip(out, 0, 1) * 255).astype(np.uint8))
-
-    patch_box = None
-    if max_blocks_per_channel is not None and processed_blocks < total_blocks:
-        h, w, _ = arr.shape
-        n_cols_full = (w + block - 1) // block
-        n_done = min(max_blocks_per_channel, n_cols_full * ((h + block - 1) // block))
-        rows_done = -(-n_done // n_cols_full)
-        patch_h = min(h, rows_done * block)
-        patch_box = (0, 0, w, patch_h)
 
     return ProcessResult(
         image=out_img,
@@ -232,5 +214,16 @@ def process_image(
         psnr_db=_psnr(mean_mse),
         worst_psnr_db=worst_psnr,
         wall_time_s=wall,
-        patch_box=patch_box,
     )
+
+
+def compare_images(original: Image.Image, other: Image.Image) -> tuple[float, float]:
+    """Resize `other` to match `original` if needed, return (mse, psnr_db)."""
+    original = original.convert("RGB")
+    other = other.convert("RGB")
+    if other.size != original.size:
+        other = other.resize(original.size)
+    a = np.asarray(original).astype(np.float64) / 255.0
+    b = np.asarray(other).astype(np.float64) / 255.0
+    mse = float(np.mean((a - b) ** 2))
+    return mse, _psnr(mse)

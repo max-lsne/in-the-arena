@@ -1,111 +1,145 @@
-"""atlas_backend.py: adapter for Moth's Atlas API (platform.mothquantum.com).
+"""atlas_backend.py: adapter for Moth's Atlas API (api.mothquantum.com).
 
-Every engine in this pipeline shares one contract:
+Atlas does not take a raw circuit or amplitude vector. It works through
+engines: fixed, pre-registered quantum programs, each with a JSON schema for
+its params and declared input/output file slots. You call
+POST /engines/{engine_id}/process, poll GET /jobs/{id}/status, then fetch
+GET /jobs/{id}/result.
 
-    run(amplitudes: np.ndarray, shots: int) -> counts
+This adapter calls one of Atlas's own published engines, `tessa-image-v1`.
+It encodes an image's pixels onto qubits (each pixel's colour becomes a
+point on a sphere, the same coordinates that describe a qubit's own state:
+a radius and two angles), transforms it on the device, measures, and decodes
+it back into an image, optionally on a real IBM QPU. That is the same
+encode/measure/decode idea this whole project is built on, published as a
+real engine rather than hand-built here, so the Atlas engine in this bench
+runs the whole photo through Moth's own pipeline instead of a custom
+per-block amplitude scheme.
 
-`counts` is either a flat array of length 2**n (index i -> how many of
-`shots` measurements landed on basis state i) or a dict {"<index>": count}.
-`quantum_pipeline.py` and the whole rest of the app only ever see that
-contract. Nothing downstream cares how a given engine satisfies it.
-
-This sends the amplitude vector itself, not a hand-built quantum circuit or
-QASM string. It's a bet that Atlas, built to need "no quantum experience,"
-exposes a state-prep-and-measure endpoint rather than requiring callers to
-construct circuits by hand. That bet, and the exact job-submission shape
-below (`_submit` / `_await_counts`), is the one piece of this repo that
-could not be verified end-to-end. Outbound access to
-platform.mothquantum.com was blocked from the sandbox this was built in.
-Before relying on this at the hackathon, check the API reference shown next
-to your key at https://platform.mothquantum.com/keys and adjust those two
-methods if the real shape differs. Nothing else needs to change.
+Confirmed against the live OpenAPI spec at api.mothquantum.com/openapi.json,
+fetched by hand and pasted in (outbound access to mothquantum.com is
+blocked from the sandbox this was built in). Endpoint paths, request/response
+shapes, and the engine's param names below are taken directly from that spec,
+not guessed.
 """
 
 from __future__ import annotations
 
+import io
 import os
 import time
+from typing import Optional
 
-import numpy as np
 import requests
+from PIL import Image
+
+API_BASE = os.environ.get("ATLAS_API_BASE", "https://api.mothquantum.com/api/v1")
+ENGINE_ID = os.environ.get("ATLAS_ENGINE_ID", "tessa-image-v1")
+# Real IBM hardware by default ("least_busy" picks whichever device is
+# queued shortest). Set ATLAS_MACHINE=aer for a fast noiseless check, or a
+# fake_<chip> name for a real chip's noise model without the real queue.
+MACHINE = os.environ.get("ATLAS_MACHINE", "least_busy")
 
 
 class AtlasError(RuntimeError):
     pass
 
 
-class AtlasBackend:
-    def __init__(
-        self,
-        api_key: str | None = None,
-        base_url: str | None = None,
-        poll_interval: float = 1.5,
-        timeout: float = 90.0,
-    ):
+class AtlasClient:
+    def __init__(self, api_key: str | None = None):
         self.api_key = api_key or os.environ.get("ATLAS_API_KEY")
         if not self.api_key:
             raise AtlasError(
                 "No Atlas API key. Set ATLAS_API_KEY in your environment, "
-                "generate one at https://platform.mothquantum.com/keys"
+                "create one at https://platform.mothquantum.com/"
             )
-        self.base_url = (
-            base_url or os.environ.get("ATLAS_API_BASE") or "https://platform.mothquantum.com/api"
-        ).rstrip("/")
-        self.poll_interval = poll_interval
-        self.timeout = timeout
 
     def _headers(self) -> dict:
-        return {"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"}
+        return {"Authorization": f"Bearer {self.api_key}"}
 
-    def run(self, amplitudes: np.ndarray, shots: int):
-        """Submit `amplitudes`, block until the job completes, return counts."""
+    def _request(self, method: str, path: str, **kwargs):
+        timeout = kwargs.pop("timeout", 30)
         try:
-            job_id = self._submit(amplitudes, shots)
-            return self._await_counts(job_id)
-        except AtlasError:
-            raise
+            resp = requests.request(method, f"{API_BASE}{path}", headers=self._headers(), timeout=timeout, **kwargs)
         except requests.RequestException as exc:
-            raise AtlasError(f"couldn't reach Atlas at {self.base_url}: {exc}") from exc
+            raise AtlasError(f"couldn't reach Atlas at {API_BASE}: {exc}") from exc
+        if resp.status_code >= 400:
+            detail = resp.text
+            try:
+                body = resp.json()
+                detail = body.get("detail") or body.get("title") or detail
+                errors = body.get("errors")
+                if errors:
+                    detail += ": " + "; ".join(f"{e.get('location')}: {e.get('message')}" for e in errors)
+            except ValueError:
+                pass
+            raise AtlasError(f"Atlas {method} {path} failed ({resp.status_code}): {detail}")
+        return resp
 
-    # -- placeholder wire format; confirm against the Atlas API reference --
+    def upload_image(self, image_bytes: bytes, filename: str = "photo.png", content_type: str = "image/png") -> str:
+        created = self._request(
+            "POST", "/assets",
+            json={"filename": filename, "content_type": content_type, "size_bytes": len(image_bytes)},
+        ).json()
+        asset_id = created["asset_id"]
+        upload = created["upload"]
+        put = requests.put(upload["url"], data=image_bytes, headers=upload.get("headers", {}), timeout=60)
+        if put.status_code >= 300:
+            raise AtlasError(f"asset upload failed ({put.status_code}): {put.text}")
+        self._request("POST", f"/assets/{asset_id}/complete")
+        return asset_id
 
-    def _submit(self, amplitudes: np.ndarray, shots: int) -> str:
-        resp = requests.post(
-            f"{self.base_url}/jobs",
-            headers=self._headers(),
-            json={"amplitudes": amplitudes.tolist(), "shots": shots},
-            timeout=30,
-        )
-        resp.raise_for_status()
-        return resp.json()["id"]
+    def submit_job(self, engine_id: str, params: dict, input_files: dict | None = None) -> str:
+        body = {"params": params}
+        if input_files:
+            body["input_files"] = input_files
+        return self._request("POST", f"/engines/{engine_id}/process", json=body).json()["job_id"]
 
-    def _await_counts(self, job_id: str):
-        deadline = time.time() + self.timeout
+    def wait_for_job(self, job_id: str, poll_interval: float = 2.0, timeout: Optional[float] = None) -> dict:
+        if timeout is None:
+            timeout = float(os.environ.get("ATLAS_JOB_TIMEOUT", 280.0))
+        deadline = time.time() + timeout
         while time.time() < deadline:
-            resp = requests.get(
-                f"{self.base_url}/jobs/{job_id}", headers=self._headers(), timeout=30
-            )
-            resp.raise_for_status()
-            payload = resp.json()
-            status = payload.get("status")
-            if status in ("completed", "done", "succeeded"):
-                return payload["result"]["counts"]
-            if status in ("failed", "error"):
-                raise AtlasError(f"Atlas job {job_id} failed: {payload.get('error')}")
-            time.sleep(self.poll_interval)
+            status = self._request("GET", f"/jobs/{job_id}/status").json()
+            state = status["status"]
+            if state == "completed":
+                return status
+            if state in ("failed", "cancelled"):
+                err = status.get("error") or {}
+                raise AtlasError(f"Atlas job {job_id} {state}: {err.get('message', 'no detail given')}")
+            time.sleep(poll_interval)
         raise AtlasError(
-            f"Atlas job {job_id} did not finish within {self.timeout}s. "
-            "A real QPU queues jobs; try fewer shots or fewer blocks"
+            f"Atlas job {job_id} did not finish within {timeout}s. "
+            "A real QPU queues jobs; try again or set ATLAS_MACHINE=aer to check the pipeline without the queue."
         )
 
+    def fetch_result(self, job_id: str) -> dict:
+        return self._request("GET", f"/jobs/{job_id}/result").json()
 
-def get_run_fn(engine: str):
-    """engine -> callable(amplitudes, shots) -> counts, the one contract every
-    engine in this repo shares."""
-    if engine == "simulator":
-        from quantum_pipeline import run_simulator
 
-        return run_simulator
-    if engine == "atlas":
-        return AtlasBackend().run
-    raise ValueError(f"unknown engine {engine!r}")
+def run_image_on_atlas(image: Image.Image, shots: int, machine: str | None = None) -> tuple[Image.Image, dict]:
+    """Upload `image`, run it through Atlas's tessa-image-v1 engine, return
+    (result_image, info). info has job_id, machine, engine_id."""
+    client = AtlasClient()
+    machine = machine or MACHINE
+
+    buf = io.BytesIO()
+    image.convert("RGB").save(buf, format="PNG")
+    asset_id = client.upload_image(buf.getvalue())
+
+    job_id = client.submit_job(
+        ENGINE_ID,
+        params={"shots": shots, "machine": machine},
+        input_files={"image": asset_id},
+    )
+    client.wait_for_job(job_id)
+    result = client.fetch_result(job_id)
+
+    outputs = result.get("outputs")
+    if not outputs:
+        raise AtlasError(f"{ENGINE_ID} returned no file output: {result}")
+    img_resp = requests.get(outputs[0]["url"], timeout=60)
+    if img_resp.status_code >= 300:
+        raise AtlasError(f"couldn't download Atlas result image ({img_resp.status_code})")
+    result_image = Image.open(io.BytesIO(img_resp.content)).convert("RGB")
+    return result_image, {"job_id": job_id, "machine": machine, "engine_id": ENGINE_ID}

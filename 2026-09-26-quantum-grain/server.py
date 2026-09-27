@@ -17,18 +17,16 @@ from dotenv import load_dotenv
 from flask import Flask, jsonify, request, send_from_directory
 from PIL import Image
 
-from quantum_pipeline import process_image
-from atlas_backend import AtlasError, get_run_fn
+from quantum_pipeline import process_image, run_simulator, compare_images
+from atlas_backend import AtlasError, run_image_on_atlas
 
 load_dotenv()
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__, static_folder=HERE, static_url_path="")
 
-MAX_SIDE = 256          # longest edge we'll accept, simulator engine
-# Hard cap on real-QPU jobs per request. Tune this once you've seen actual
-# Atlas job latency: each block is one job, submitted and polled in series.
-MAX_BLOCKS_ATLAS = int(os.environ.get("MAX_BLOCKS_ATLAS", 24))
+MAX_SIDE = 256                                              # simulator engine
+ATLAS_MAX_SIDE = int(os.environ.get("ATLAS_MAX_SIDE", 96))  # keeps real-QPU jobs quick and cheap by default
 
 
 def _decode_data_url(data_url: str) -> Image.Image:
@@ -70,46 +68,43 @@ def process():
         return jsonify({"error": "block must be 4, 8, or 16"}), 400
     if not (10 <= shots <= 20000):
         return jsonify({"error": "shots must be between 10 and 20000"}), 400
+    if engine not in ("simulator", "atlas"):
+        return jsonify({"error": f"unknown engine {engine!r}"}), 400
 
-    img.thumbnail((MAX_SIDE, MAX_SIDE))
-
-    max_blocks = None
-    if engine == "atlas":
-        max_blocks = MAX_BLOCKS_ATLAS
-
-    try:
-        run_fn = get_run_fn(engine)
-    except AtlasError as exc:
-        return jsonify({"error": str(exc)}), 400
-    except ValueError as exc:
-        return jsonify({"error": str(exc)}), 400
-
-    try:
-        result = process_image(
-            img, block=block, shots=shots, run_fn=run_fn, engine_name=engine,
-            max_blocks_per_channel=max_blocks,
-        )
-    except AtlasError as exc:
-        return jsonify({"error": str(exc)}), 502
-
-    return jsonify(
-        {
-            "image": _encode_data_url(result.image),
-            "stats": {
-                "engine": result.engine,
-                "block": result.block,
-                "shots": result.shots,
-                "qubitsPerBlock": result.qubits_per_block,
-                "blocksProcessed": result.blocks_processed,
-                "blocksTotal": result.blocks_total,
-                "mse": result.mse,
-                "psnrDb": result.psnr_db,
-                "worstPsnrDb": result.worst_psnr_db,
-                "wallTimeS": result.wall_time_s,
-                "patchBox": result.patch_box,
-            },
+    if engine == "simulator":
+        img.thumbnail((MAX_SIDE, MAX_SIDE))
+        result = process_image(img, block=block, shots=shots, run_fn=run_simulator, engine_name="simulator")
+        stats = {
+            "engine": "simulator",
+            "block": result.block,
+            "shots": result.shots,
+            "qubitsPerBlock": result.qubits_per_block,
+            "blocksProcessed": result.blocks_processed,
+            "blocksTotal": result.blocks_total,
+            "psnrDb": result.psnr_db,
+            "worstPsnrDb": result.worst_psnr_db,
+            "wallTimeS": result.wall_time_s,
         }
-    )
+        result_image = result.image
+    else:
+        img = img.convert("RGB")
+        img.thumbnail((ATLAS_MAX_SIDE, ATLAS_MAX_SIDE))
+        try:
+            result_image, info = run_image_on_atlas(img, shots=shots)
+        except AtlasError as exc:
+            return jsonify({"error": str(exc)}), 502
+        mse, psnr_db = compare_images(img, result_image)
+        stats = {
+            "engine": "atlas",
+            "shots": shots,
+            "machine": info["machine"],
+            "jobId": info["job_id"],
+            "psnrDb": psnr_db,
+            "worstPsnrDb": psnr_db,
+            "wallTimeS": None,
+        }
+
+    return jsonify({"image": _encode_data_url(result_image), "stats": stats})
 
 
 if __name__ == "__main__":

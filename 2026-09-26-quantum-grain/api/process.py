@@ -1,9 +1,9 @@
 """Vercel serverless entrypoint for POST /api/process.
 
-Thin HTTP wrapper around quantum_pipeline.process_image. See that module
-(and atlas_backend.py) for the actual encode/measure/decode logic, which is
-identical to what server.py runs for local development. Both import from
-the project root, one directory up, added to sys.path below.
+Thin HTTP wrapper around quantum_pipeline / atlas_backend — see those
+modules for the actual encode/measure/decode logic and the Atlas engine
+call, which is identical to what server.py runs for local development. Both
+import from the project root, one directory up, added to sys.path below.
 """
 
 import base64
@@ -17,15 +17,13 @@ from fastapi import FastAPI, Request  # noqa: E402
 from fastapi.responses import JSONResponse  # noqa: E402
 from PIL import Image  # noqa: E402
 
-from atlas_backend import AtlasError, get_run_fn  # noqa: E402
-from quantum_pipeline import process_image  # noqa: E402
+from atlas_backend import AtlasError, run_image_on_atlas  # noqa: E402
+from quantum_pipeline import process_image, run_simulator, compare_images  # noqa: E402
 
 app = FastAPI()
 
-MAX_SIDE = 256          # longest edge accepted, simulator engine
-# Hard cap on real-QPU jobs per request. Tune this once you've seen actual
-# Atlas job latency: each block is one job, submitted and polled in series.
-MAX_BLOCKS_ATLAS = int(os.environ.get("MAX_BLOCKS_ATLAS", 24))
+MAX_SIDE = 256                                              # simulator engine
+ATLAS_MAX_SIDE = int(os.environ.get("ATLAS_MAX_SIDE", 96))  # keeps real-QPU jobs quick and cheap by default
 
 
 def _decode_data_url(data_url: str) -> Image.Image:
@@ -57,39 +55,40 @@ async def process(request: Request, _path: str = ""):
         return JSONResponse({"error": "block must be 4, 8, or 16"}, status_code=400)
     if not (10 <= shots <= 20000):
         return JSONResponse({"error": "shots must be between 10 and 20000"}, status_code=400)
+    if engine not in ("simulator", "atlas"):
+        return JSONResponse({"error": f"unknown engine {engine!r}"}, status_code=400)
 
-    img.thumbnail((MAX_SIDE, MAX_SIDE))
-
-    max_blocks = MAX_BLOCKS_ATLAS if engine == "atlas" else None
-
-    try:
-        run_fn = get_run_fn(engine)
-    except (AtlasError, ValueError) as exc:
-        return JSONResponse({"error": str(exc)}, status_code=400)
-
-    try:
-        result = process_image(
-            img, block=block, shots=shots, run_fn=run_fn, engine_name=engine,
-            max_blocks_per_channel=max_blocks,
-        )
-    except AtlasError as exc:
-        return JSONResponse({"error": str(exc)}, status_code=502)
-
-    return JSONResponse(
-        {
-            "image": _encode_data_url(result.image),
-            "stats": {
-                "engine": result.engine,
-                "block": result.block,
-                "shots": result.shots,
-                "qubitsPerBlock": result.qubits_per_block,
-                "blocksProcessed": result.blocks_processed,
-                "blocksTotal": result.blocks_total,
-                "mse": result.mse,
-                "psnrDb": result.psnr_db,
-                "worstPsnrDb": result.worst_psnr_db,
-                "wallTimeS": result.wall_time_s,
-                "patchBox": result.patch_box,
-            },
+    if engine == "simulator":
+        img.thumbnail((MAX_SIDE, MAX_SIDE))
+        result = process_image(img, block=block, shots=shots, run_fn=run_simulator, engine_name="simulator")
+        stats = {
+            "engine": "simulator",
+            "block": result.block,
+            "shots": result.shots,
+            "qubitsPerBlock": result.qubits_per_block,
+            "blocksProcessed": result.blocks_processed,
+            "blocksTotal": result.blocks_total,
+            "psnrDb": result.psnr_db,
+            "worstPsnrDb": result.worst_psnr_db,
+            "wallTimeS": result.wall_time_s,
         }
-    )
+        result_image = result.image
+    else:
+        img = img.convert("RGB")
+        img.thumbnail((ATLAS_MAX_SIDE, ATLAS_MAX_SIDE))
+        try:
+            result_image, info = run_image_on_atlas(img, shots=shots)
+        except AtlasError as exc:
+            return JSONResponse({"error": str(exc)}, status_code=502)
+        mse, psnr_db = compare_images(img, result_image)
+        stats = {
+            "engine": "atlas",
+            "shots": shots,
+            "machine": info["machine"],
+            "jobId": info["job_id"],
+            "psnrDb": psnr_db,
+            "worstPsnrDb": psnr_db,
+            "wallTimeS": None,
+        }
+
+    return JSONResponse({"image": _encode_data_url(result_image), "stats": stats})
