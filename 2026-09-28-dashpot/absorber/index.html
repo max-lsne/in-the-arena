@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Absorber — a shock absorber is the dashpot across a car's spring; it resists speed, not position (ζ = c ⁄ 2√km), so too little lets the body float and the tyre skip, too much passes the bump straight through, and critical settles it in one motion</title>
+  <meta name="description" content="A shock absorber is not the spring — the spring holds the body up and gives back every bump. The absorber is the dashpot across it: a piston in oil that resists the body's motion in proportion to how fast it moves and burns that motion to heat. Too little and the body floats and wallows on the spring while the tyre skips off the road and loses grip; too much and the damper locks the body to the wheel so the bump comes straight through. Between them is critical damping, ζ = 1, where the body recovers to level in one motion. Set the load and the damper and find the least that settles it." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2317140d'/%3E%3Cpath d='M8 7 L8 25 M6 9 h4 M6 13 h4 M6 17 h4 M6 21 h4' stroke='%235b7f9c' stroke-width='1.6' fill='none'/%3E%3Crect x='18' y='9' width='7' height='16' rx='2' fill='none' stroke='%23b0762e' stroke-width='1.8'/%3E%3Cline x1='21.5' y1='6' x2='21.5' y2='15' stroke='%23b0762e' stroke-width='1.8'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#141009" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Absorber — a dashpot that settles a bump in one motion" />
+  <meta property="og:description" content="A shock absorber is the dashpot across a car's spring. Too little damping and the body floats and the tyre skips; too much and the bump comes straight through; at critical damping (ζ = 1) the body settles in one motion. Set the load and the damper and find the least that settles it." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Dashpot</a> · absorber · 2026-09-28</p>
+      <p class="pron"><b>absorber</b> · <i>noun</i> · /əbˈzɔːbə/ — the oil-filled damper set across a vehicle's spring to take the energy out of a bump; not the spring that holds the car up, but the thing that stops it bouncing</p>
+      <h1>Absorber</h1>
+      <p class="lede">The spring holds the car up. The absorber decides whether a bump <em>settles</em> or <em>bobs away</em>.</p>
+      <p class="sub">People call the whole strut a "shock absorber," but the spring absorbs nothing — it stores the bump and hands it straight back, and a car on springs alone would pogo down the road for a hundred yards after every pothole. The absorber is the other part: a <b>dashpot</b>, a piston forced through oil, that resists the body's motion in proportion to <em>how fast it moves</em> and turns that motion into heat. Fit too little and the body <em>floats</em> — it wallows on the spring and, worse, the tyre skips off the road on the rebound and grip goes with it. Fit too much and the damper <em>locks</em> the body to the wheel, so every sharp bump comes straight up through the seat. Between them is one setting where a bump dies in a single motion.</p>
+    </header>
+
+    <section id="how">
+      <p class="section-tag">Where the ride comes from</p>
+      <h2>The spring stores, the dashpot spends</h2>
+      <p>Hit a bump and the wheel drives up into the body; the spring compresses, storing the blow, and then pushes back — and, left alone, pushes the body up past level, whereupon gravity and the spring pull it back down past level, and so on. A spring is a bank that never charges a fee: it returns all it takes, so the bounce, once started, has no reason to stop. Something must <em>lose</em> the energy, and lose it fastest when the body moves fastest. That is the dashpot.</p>
+
+      <p class="pull">A spring gives the bump back. A dashpot takes the bump out — into heat, and never back. Comfort is not softness; it is loss, timed right.</p>
+
+      <p>Because the dashpot fights <em>speed</em>, not position — <span class="mono">F = c·v</span> — it does nothing to hold the car at ride height and everything to kill a fast bob. Too little and it cannot catch the bounce before it repeats; the ride floats and the contact patch chatters. Too much and the oil will not let the piston move at all on a quick input, so the damper behaves like a solid strut and passes the road straight through. The whole engineering is choosing how much, against the mass it must settle.</p>
+    </section>
+
+    <section id="rule">
+      <p class="section-tag">The one relation, read three ways</p>
+      <h2>Natural bob, damping, recovery</h2>
+      <p>Take the sprung mass <span class="mono">m</span>, the spring <span class="mono">k</span>, and the damper <span class="mono">c</span>. Idealise the tyre and road as one sprung mass, and the recovery from a bump is a single second-order system, read three ways off the <em>damping ratio</em>:</p>
+
+      <ul class="law-list">
+        <li><b>It has a natural bob.</b> <span class="mono">ωn = √(k ⁄ m)</span> — the rate the body would bounce on its spring, undamped. A heavier load or a softer spring bobs slower; this is the frequency the damper has to tame.</li>
+        <li><b>Damping is the one dial.</b> <span class="mono">ζ = c ⁄ (2·√(k·m))</span> — the damper measured against that bob. Below one the body <em>floats</em>, bobbing past level again and again; above one it <em>drags</em>, sinking back slow and stiff; at exactly one — <b>critical</b> — it returns to level in one motion, in the least time, with no bob at all. Ride engineers often pick a little under one on purpose, trading a touch of float for a softer ride — but past that the float owns the car.</li>
+        <li><b>The dashpot stores nothing.</b> Every joule the damper takes out of the bounce leaves as heat in the oil, <span class="mono">P = c·v²</span> — which is why a hard-worked damper runs hot, and why a worn one that has boiled its oil stops damping at all. It can only subtract the bob, never store or return it.</li>
+      </ul>
+
+      <p>Those three are one fact. The bob is set by the load and the spring; the taming by the damper against that bob; and the taming only ever spends. Float loses grip; harshness loses comfort; and the honest middle — one clean motion — is bought with exactly enough loss and no more.</p>
+
+      <p class="pull">Under-damped, the tyre leaves the road. Over-damped, the road comes into the cabin. The absorber lives in the narrow band where neither happens.</p>
+    </section>
+
+    <section id="ladder">
+      <p class="section-tag">Four recoveries, from a pogo to a jarring strut</p>
+      <h2>Around the one bump</h2>
+      <ol class="ladder">
+        <li><b>Floats.</b> <span class="rung-note">Almost no damper. The body bobs on the spring, up and down, many times before it rests — and on each rebound the tyre unloads and skips off the road, so the car loses grip exactly when it is moving most. Seasick and unsafe at once.</span></li>
+        <li><b>Wallows.</b> <span class="rung-note">Some damper, not enough. <span class="mono">ζ &lt; 1</span>: the body overshoots level once or twice and rolls before it settles — soft, comfortable on a smooth road, vague and slow to recover on a rough one.</span></li>
+        <li><b>Settles.</b> <span class="rung-note">The damper sized to the load, <span class="mono">ζ ≈ 1</span>. The body takes the bump and comes back to level in a single motion, no bob, in the least time — the fastest clean recovery, and the reference every ride is tuned around.</span></li>
+        <li><b>Harsh.</b> <span class="rung-note">Far too much damper. <span class="mono">ζ ≫ 1</span>: the oil will not let the piston move on a quick input, so the strut behaves like a solid link — the bump comes straight through to the body, and what motion there is drags back slow. A jarring, tiring ride, and hard on the car.</span></li>
+      </ol>
+    </section>
+
+    <section id="hands">
+      <p class="section-tag">Who tunes it, and for what</p>
+      <h2>The same damper, three ways</h2>
+      <div class="hands">
+        <div class="hand">
+          <h3>The ride engineer</h3>
+          <p class="role">wants it to settle</p>
+          <p>Sizes the damper to the sprung mass so a bump dies in one motion — near <span class="mono">ζ ≈ 1</span>, or a little under for comfort. Re-tunes every time the load changes, because <span class="mono">ζ</span> falls as the car is loaded up: a damper right for one is soft for four.</p>
+        </div>
+        <div class="hand">
+          <h3>The racer</h3>
+          <p class="role">wants the tyre down</p>
+          <p>Fears float above all: a tyre that skips on the rebound is a tyre not gripping. Runs the damping firm to keep the contact patch pressed to the road through every ripple, and accepts the harsher ride as the price of grip.</p>
+        </div>
+        <div class="hand">
+          <h3>The mechanic</h3>
+          <p class="role">wants to read wear</p>
+          <p>Bounces a corner by hand: one clean return is a good damper; two or three bobs is oil worn out or boiled. The damper's whole life is spent turning motion to heat, and heat is what finally kills it.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="bench">
+      <p class="section-tag">The bench</p>
+      <h2>Set the load against the damper</h2>
+      <p>A wheel takes a bump; the body responds through a spring and a damper. Set the <b>load</b> — the mass the corner carries — and the <b>damper</b> — how hard the dashpot resists. Watch the recovery trace: too little damper and the body bobs back past level again and again; too much and it drags back slow and stiff; at critical damping it returns to level in one motion. Press <em>Settle it</em> to set the damper that does, for this load.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div id="verdict" class="verdict v-keep" role="status" aria-live="off">
+              <span class="dot"></span><span>Settles</span><small>one motion, then level</small>
+            </div>
+            <div class="stage" id="stage" aria-hidden="true"></div>
+            <p class="hint">
+              <b>Read it:</b> the <span class="mono">wheel</span> takes a bump and the <span class="mono">body</span> rides on a <span class="mono">spring</span> and a <span class="mono">damper</span> that sheds the bounce as heat. The <span class="mono">recovery trace</span> shows the body dying back to level — crossing below is a bob past level, a float. The <span class="mono">ζ gauge</span> sets the damping against critical. Green when it settles in one; amber when it wallows or drags; oxblood when it floats or turns harsh.
+            </p>
+            <p class="hint">
+              <b>Keys:</b> <kbd>C</kbd> settle it (critical) · <kbd>R</kbd> reset · <kbd>[</kbd> softer damper <kbd>]</kbd> firmer · <kbd>−</kbd>/<kbd>=</kbd> lighter / heavier load · <kbd>space</kbd> take the bump again. A focused slider keeps its own arrows.
+            </p>
+            <p id="say" class="sr-only" aria-live="polite"></p>
+          </div>
+
+          <div class="controls">
+            <div class="ctl">
+              <label for="in-m">Load <span class="val" id="lab-m">loaded</span></label>
+              <input id="in-m" type="range" min="2" max="14" step="0.5" value="6" />
+            </div>
+
+            <div class="ctl">
+              <label for="in-c">Damper <span class="val" id="lab-c">soft</span></label>
+              <input id="in-c" type="range" min="0" max="46" step="1" value="10"
+                     aria-describedby="c-note" />
+              <div class="xtrack"><span class="x-mark" id="c-mark"></span></div>
+              <p class="ctl-note" id="c-note">the damper that settles it: <b>—</b></p>
+            </div>
+
+            <div id="reading" class="reading"></div>
+
+            <div class="bench-actions">
+              <button class="btn" id="crit" type="button">Settle it</button>
+              <button class="btn" id="reset" type="button">Reset</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="close">
+      <p class="section-tag">The discipline in the word</p>
+      <h2>The part that actually absorbs</h2>
+      <p>Of the two parts on every wheel, only one absorbs, and it is not the one that carries the weight. The spring is a memory — it holds the bump and gives it back. The absorber is a forgetting: it meets the body's motion in proportion to its speed, hardest where it moves fastest, and spends that motion into heat that never returns, so the bump has somewhere to go besides back into the ride. That is the whole of damping, and it is the same discipline as a door landing at its latch or a needle coming to rest on its reading: take just enough to kill the overshoot, no more, and know that what you take is gone. Too little and it floats; too much and it jars; and the best ride is not the softest. It is the least loss that settles the bump in one clean motion.</p>
+
+      <p>This page is one HTML file, one stylesheet, one script — no build, no account, no network once it has loaded. The tyre and the road are idealised as a single sprung mass, but the recovery is exact: it is the free response of <span class="mono">m·ẍ + c·ẋ + k·x = 0</span> from a unit kick, and the setting that settles it is <span class="mono">ζ = c ⁄ 2√(k·m) = 1</span>.</p>
+    </section>
+
+    <footer>
+      <p>Dashpot · absorber · one of three trades for a single old working word, made the same morning. · 2026-09-28 · <a href="../">the three</a> · <a href="../../">index</a></p>
+    </footer>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
