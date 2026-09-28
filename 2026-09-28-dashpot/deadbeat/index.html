@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deadbeat — an instrument needle is a second-order system; its damping resists speed, not position (ζ = c ⁄ 2√km), so too little makes it hunt about the mark, too much makes it crawl, and at critical it beats once to the reading and dies — deadbeat</title>
+  <meta name="description" content="A moving-needle instrument is a coil on a hairspring: its inertia and the spring set how fast it swings to a new reading, and a dashpot — an air vane, oil, or the coil's own eddy currents — decides whether it arrives clean or hunts. Too little damping and the needle oscillates about the mark, unreadable until it tires; too much and it crawls and the reading is late. Between them is critical damping, ζ = 1, where the needle beats once, to the reading, and dies — deadbeat. Set the movement and the damping and find the least that reads clean." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2317140d'/%3E%3Cpath d='M6 21 A10 10 0 0 1 26 21' fill='none' stroke='%235b7f9c' stroke-width='1.8'/%3E%3Cline x1='16' y1='21' x2='23' y2='13' stroke='%23b0762e' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='21' r='2' fill='%235b7f9c'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#141009" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Deadbeat — a needle that beats once to the reading, and dies" />
+  <meta property="og:description" content="An instrument needle is a second-order system. Too little damping and it hunts about the mark; too much and it crawls; at critical damping (ζ = 1) it beats once to the reading and stops — deadbeat. Set the movement and the damping and find the least that reads clean." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Dashpot</a> · deadbeat · 2026-09-28</p>
+      <p class="pron"><b>deadbeat</b> · <i>adjective</i> · /ˈdɛdbiːt/ — of an instrument or escapement, so damped that it comes to rest without a single swing past its mark; it beats once, dead, and stops</p>
+      <h1>Deadbeat</h1>
+      <p class="lede">A needle that swings to its reading, and <em>stops there</em> — no hunting, no crawl.</p>
+      <p class="sub">Every needle instrument is a tiny pendulum: a coil on a hairspring, with inertia to swing and a spring to pull it back toward zero. Send a current through it and the needle wants to swing to a new reading — but a pendulum overshoots, and a raw movement would swing past the mark, back past it, and hunt about the true value for seconds, unreadable, before it tires. So the maker adds a <b>dashpot</b>: an air vane, a drop of oil, or, cleverest of all, the coil's own <em>eddy currents</em> dragging against the field — a damping that resists in proportion to <em>how fast the needle moves</em>. Too little and it hunts; too much and it crawls up to the mark so slowly the reading comes late. Exactly enough and it is <em>deadbeat</em>: it beats once, lands on the reading, and dies.</p>
+    </header>
+
+    <section id="how">
+      <p class="section-tag">Where the reading comes from</p>
+      <h2>A spring to swing, a dashpot to stop</h2>
+      <p>The hairspring is the will: it sets a definite rest angle for each current, and pulls the needle toward it. But a spring and a mass together are an oscillator — pull the needle off and let go, and it will not simply arrive, it will swing through and past, because at the mark it is moving fastest and cannot stop on a coin. That overshoot is the enemy of a fast, honest reading: a needle still swinging is a needle you cannot trust.</p>
+
+      <p class="pull">A spring tells the needle where to go. A dashpot tells it when to stop. Without the second, the first is only a promise the needle keeps overshooting.</p>
+
+      <p>The dashpot fights the needle's <em>speed</em>, <span class="mono">F = c·v</span>, so it is strongest exactly at the mark, where the needle moves fastest, and gentlest at the ends of the swing, where it barely moves. That is precisely the manners a reading wants: let the needle come quickly, then take the overshoot out of it at the last instant. The whole art of a good movement is choosing how much drag — enough to kill the swing, not so much that the needle forgets it was ever in a hurry.</p>
+    </section>
+
+    <section id="rule">
+      <p class="section-tag">The one relation, read three ways</p>
+      <h2>Natural swing, damping, arrival</h2>
+      <p>Take the movement's inertia <span class="mono">m</span>, the hairspring <span class="mono">k</span>, and the damping <span class="mono">c</span>. Idealise the pivot as frictionless, and the swing to a new reading is a second-order step response, read three ways off the <em>damping ratio</em>:</p>
+
+      <ul class="law-list">
+        <li><b>It has a natural swing.</b> <span class="mono">ωn = √(k ⁄ m)</span> — how fast the needle and hairspring would oscillate, undamped. A lighter movement or a stiffer spring swings faster and settles sooner, but overshoots harder if undamped.</li>
+        <li><b>Damping is the one dial.</b> <span class="mono">ζ = c ⁄ (2·√(k·m))</span> — the drag measured against that swing. Below one the needle <em>hunts</em>: it overshoots the mark and swings back, again and again. Above one it <em>crawls</em>: it creeps to the mark with no overshoot but takes its time. At exactly one — <b>deadbeat</b> — it reaches the mark in the least time with no swing past it at all.</li>
+        <li><b>The dashpot stores nothing.</b> The swing's energy goes to heat — in the vane's air, the oil, or the eddy currents in the coil, <span class="mono">P = c·v²</span> — and never comes back. That is why damping can only ever end a swing, never start one, and why a deadbeat movement is a movement that <em>forgets</em> its momentum exactly at the reading.</li>
+      </ul>
+
+      <p>Those three are one fact. The swing is set by the movement and the spring; the stopping by the drag against that swing; and the drag only spends. Hunt and the reading is unreadable; crawl and it is late; and the fastest honest reading is the one that beats once — the least damping that lands the needle without a swing.</p>
+
+      <p class="pull">A needle that hunts cannot be read. A needle that crawls reads too late. Deadbeat is the single setting that is neither: once to the mark, and done.</p>
+    </section>
+
+    <section id="ladder">
+      <p class="section-tag">Four arrivals, from a hunt to a needle that never gets there</p>
+      <h2>Around the one mark</h2>
+      <ol class="ladder">
+        <li><b>Hunts.</b> <span class="rung-note">Almost no damping. The needle swings past the mark and back, over and over, oscillating about the true value — you must wait and average by eye, or wait for it to tire. The reading is there, buried in a swing you cannot stop.</span></li>
+        <li><b>Swings.</b> <span class="rung-note">Some damping, not enough. <span class="mono">ζ &lt; 1</span>: the needle overshoots once or twice and settles after a wobble. Readable, but not at a glance, and not the instant it moves.</span></li>
+        <li><b>Reads.</b> <span class="rung-note">The damping sized to the movement, <span class="mono">ζ ≈ 1</span> — deadbeat. The needle sweeps to the mark and stops there, no overshoot, in the least time any setting allows. The whole aim of a good instrument: the true value, now, once.</span></li>
+        <li><b>Crawls.</b> <span class="rung-note">Far too much damping. <span class="mono">ζ ≫ 1</span>: the drag smothers the swing so the needle creeps toward the mark and never quite arrives before you have given up on it. A reading too late to use is as good as no reading at all.</span></li>
+      </ol>
+    </section>
+
+    <section id="hands">
+      <p class="section-tag">Who sets it, and for what</p>
+      <h2>The same damping, three ways</h2>
+      <div class="hands">
+        <div class="hand">
+          <h3>The instrument maker</h3>
+          <p class="role">wants it deadbeat</p>
+          <p>Tunes the vane or the eddy-current damping so the needle lands on the mark once and stops — <span class="mono">ζ ≈ 1</span> — the fastest reading with no swing to average out. A galvanometer's whole reputation is how cleanly its needle settles.</p>
+        </div>
+        <div class="hand">
+          <h3>The clockmaker</h3>
+          <p class="role">wants no recoil</p>
+          <p>Knows the same word from the deadbeat escapement: a pallet face cut so the escape wheel is held dead between beats, not shoved backward. Damping and geometry meeting the same demand — take the overshoot out, keep the count honest.</p>
+        </div>
+        <div class="hand">
+          <h3>The panel reader</h3>
+          <p class="role">wants a glance</p>
+          <p>Reads a moving needle a hundred times a shift and trusts it only if it settles at once. A hunting gauge hides its value in a blur; a crawling one lags the thing it measures. Deadbeat is what lets a glance be a reading.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="bench">
+      <p class="section-tag">The bench</p>
+      <h2>Set the movement against the damping</h2>
+      <p>A needle swings from an old reading to a new one. Set the <b>movement</b> — the inertia of the needle and coil — and the <b>damping</b> — how hard the dashpot resists. Watch the arrival trace: too little damping and the needle overshoots the mark and hunts; too much and it crawls and never arrives; at critical damping it beats once and reads clean. Press <em>Read it</em> to set the damping that does, for this movement.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div id="verdict" class="verdict v-keep" role="status" aria-live="off">
+              <span class="dot"></span><span>Reads</span><small>lands on the mark, once</small>
+            </div>
+            <div class="stage" id="stage" aria-hidden="true"></div>
+            <p class="hint">
+              <b>Read it:</b> the <span class="mono">needle</span> swings from the old reading to the new mark, the <span class="mono">damping</span> vane taking the swing out and shedding it as heat. The <span class="mono">arrival trace</span> climbs to the reading — over the <em>reading</em> line is an overshoot, a hunt. The <span class="mono">ζ gauge</span> sets the damping against deadbeat. Green when it reads at once; amber when it swings or lags; oxblood when it hunts or crawls.
+            </p>
+            <p class="hint">
+              <b>Keys:</b> <kbd>C</kbd> read it (deadbeat) · <kbd>R</kbd> reset · <kbd>[</kbd> less damping <kbd>]</kbd> more · <kbd>−</kbd>/<kbd>=</kbd> lighter / heavier movement · <kbd>space</kbd> send the reading again. A focused slider keeps its own arrows.
+            </p>
+            <p id="say" class="sr-only" aria-live="polite"></p>
+          </div>
+
+          <div class="controls">
+            <div class="ctl">
+              <label for="in-m">Movement <span class="val" id="lab-m">normal</span></label>
+              <input id="in-m" type="range" min="1" max="9" step="0.5" value="4" />
+            </div>
+
+            <div class="ctl">
+              <label for="in-c">Damping <span class="val" id="lab-c">light</span></label>
+              <input id="in-c" type="range" min="0" max="40" step="1" value="8"
+                     aria-describedby="c-note" />
+              <div class="xtrack"><span class="x-mark" id="c-mark"></span></div>
+              <p class="ctl-note" id="c-note">the damping that reads clean: <b>—</b></p>
+            </div>
+
+            <div id="reading" class="reading"></div>
+
+            <div class="bench-actions">
+              <button class="btn" id="crit" type="button">Read it</button>
+              <button class="btn" id="reset" type="button">Reset</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="close">
+      <p class="section-tag">The discipline in the word</p>
+      <h2>To beat once, and be still</h2>
+      <p>Deadbeat is the finest word of the three, because it names not a part but a <em>virtue</em>: to arrive and be still, in one motion, with nothing left over. A needle earns it, a clock's escapement earns it, and both are asking the same thing of a dashpot — meet the motion in proportion to its speed, take exactly the overshoot out and no more, and spend what you take on heat that never returns. Too little and it hunts; too much and it crawls; and the best is not the most damping but the least that beats once. It is the same discipline as a door that lands at its latch and a car that settles after a bump: the swing must be met and ended, cleanly, at the mark — and the mark, for a needle, is the truth it was built to tell.</p>
+
+      <p>This page is one HTML file, one stylesheet, one script — no build, no account, no network once it has loaded. The pivot friction is idealised away and the reading normalised, but the arrival is exact: it is the step response of <span class="mono">m·θ̈ + c·θ̇ + k·θ = k</span>, and the setting that reads it deadbeat is <span class="mono">ζ = c ⁄ 2√(k·m) = 1</span>.</p>
+    </section>
+
+    <footer>
+      <p>Dashpot · deadbeat · one of three trades for a single old working word, made the same morning. · 2026-09-28 · <a href="../">the three</a> · <a href="../../">index</a></p>
+    </footer>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
