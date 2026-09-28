@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Closer — a door closer is a spring that shuts the leaf and a dashpot that governs how it arrives; the damping resists speed, not position (ζ = c ⁄ 2√km), so the least that lands it clean is critical — under it slams, over it hangs ajar</title>
+  <meta name="description" content="A door closer is two parts working against each other: a spring that pulls the leaf shut, and a dashpot — a small oil-filled cylinder — that resists in proportion to how fast the leaf moves and turns that motion into heat. The dashpot stores nothing; its only product is the death of the swing. Set too light, the spring wins and the leaf slams into the frame; set too heavy, the leaf crawls and hangs ajar. Between them is one setting — critical damping, ζ = 1 — where the leaf arrives at the latch as fast as it can without overshoot, and lands clean. Set the spring and the check and find it." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2317140d'/%3E%3Cpath d='M9 6 L9 26 L20 23 L20 9 Z' fill='none' stroke='%235b7f9c' stroke-width='2'/%3E%3Cline x1='9' y1='6' x2='9' y2='26' stroke='%235b7f9c' stroke-width='2.6'/%3E%3Crect x='20' y='14' width='6' height='4' rx='1' fill='none' stroke='%23b0762e' stroke-width='1.6'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#141009" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Closer — a spring shuts the leaf, a dashpot lands it" />
+  <meta property="og:description" content="A door closer is a spring that shuts and a dashpot that governs the arrival. Too light and it slams; too heavy and it hangs ajar; at critical damping (ζ = 1) it lands clean. Set the spring and the check and find the least damping that lands it." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Dashpot</a> · closer · 2026-09-28</p>
+      <p class="pron"><b>closer</b> · <i>noun</i> · /ˈkləʊzə/ — the sprung, oil-checked arm at the head of a door that shuts it and governs the shutting; the spring supplies the will to close, the dashpot the manners</p>
+      <h1>Closer</h1>
+      <p class="lede">A spring that <em>shuts</em> the door, and a dashpot that decides whether it <em>lands</em> or <em>slams</em>.</p>
+      <p class="sub">Take the spring off a closer and the door bangs the frame; take the door off the spring and it hangs open in the draught. The closer holds both, at odds: a <b>spring</b> that wants the leaf shut now, and a <b>dashpot</b> — a piston in a cylinder of oil — that fights the leaf in proportion to <em>how fast it moves</em>, and turns that motion into heat. Get the check too light and the spring wins the argument and drives the leaf into the jamb. Too heavy and the leaf crawls and is caught ajar. Somewhere between is a single setting where the leaf arrives at the latch as quickly as it possibly can <em>without overshooting</em> — the fastest clean close there is. That setting has a name.</p>
+    </header>
+
+    <section id="how">
+      <p class="section-tag">Where the manners come from</p>
+      <h2>A spring for the will, a dashpot for the arrival</h2>
+      <p>The spring is easy: wind it, and it stores a closing force it pays back the moment you let go, always pulling the leaf toward shut. Left alone with only the spring, the leaf would swing shut and keep going — into the frame — and rebound, over and over, because a spring gives back all it takes. It needs something that <em>loses</em> energy, and loses it fastest when the leaf moves fastest. That is the dashpot.</p>
+
+      <p class="pull">A spring cares where the leaf is. A dashpot cares only how fast it is going. One stores; the other spends — into heat, and never back.</p>
+
+      <p>A dashpot is a piston forced through oil: shove it quickly and the oil fights hard; ease it and the oil barely notices. Its resistance rises with <em>speed</em>, <span class="mono">F = c·v</span>, so it does nothing to hold the leaf in place and everything to slow a fast swing. That is exactly the manners a close wants — free early, when the leaf is far out and moving slow; firm late, checking the leaf hard as the spring whips it toward the frame. The whole design is choosing how hard: too little and the check cannot catch the swing; too much and it smothers it.</p>
+    </section>
+
+    <section id="rule">
+      <p class="section-tag">The one relation, read three ways</p>
+      <h2>Natural swing, damping, arrival</h2>
+      <p>Take the leaf's inertia <span class="mono">m</span>, the spring <span class="mono">k</span>, and the check <span class="mono">c</span>. Idealise the hinge as frictionless, and the whole close is a single second-order system, read three ways off one number — the <em>damping ratio</em>:</p>
+
+      <ul class="law-list">
+        <li><b>It has a natural swing.</b> <span class="mono">ωn = √(k ⁄ m)</span> — the rate the spring and inertia alone would rock the leaf, undamped. A stiffer spring or a lighter leaf swings faster; this sets the clock every other quantity is measured against.</li>
+        <li><b>Damping is the one dial.</b> <span class="mono">ζ = c ⁄ (2·√(k·m))</span> — the check measured against that swing. Below one the leaf <em>rings</em>: it overshoots the latch and rebounds. Above one it <em>crawls</em>: it creeps home with no overshoot but takes its time. At exactly one — <b>critical</b> — it arrives in the least time with no overshoot at all. Every closer is trying to sit near one.</li>
+        <li><b>The dashpot stores nothing.</b> The spring's energy that is not left in the shut door is burned in the oil, <span class="mono">P = c·v²</span> — all of it to heat, none given back. That is why a dashpot can only ever <em>subtract</em> a swing, never start or hold one: its single product is the death of motion.</li>
+      </ul>
+
+      <p>Those three are one fact. The swing you must tame is set by the spring and the leaf; the taming is set by the check against that swing; and the taming can only spend, never store — so there is exactly one best answer, and it is not "as much check as possible." It is <em>just enough</em>.</p>
+
+      <p class="pull">Under-check and the door bangs. Over-check and it hangs. The art of the closer is the narrow band between, where it merely lands.</p>
+    </section>
+
+    <section id="ladder">
+      <p class="section-tag">Four arrivals, from a bang to a door left ajar</p>
+      <h2>Around the one latch</h2>
+      <ol class="ladder">
+        <li><b>Slams.</b> <span class="rung-note">Almost no check. The spring drives the leaf into the frame at full speed and it rebounds — the loud failure, and the one that splits jambs and pinches fingers. The spring was never the problem; the missing dashpot was.</span></li>
+        <li><b>Bounces.</b> <span class="rung-note">Some check, not enough. <span class="mono">ζ &lt; 1</span>: the leaf overshoots the latch, rebounds a little, and settles after a wobble or two. It closes, but not cleanly, and not on the first try.</span></li>
+        <li><b>Lands.</b> <span class="rung-note">The check sized to the spring, <span class="mono">ζ ≈ 1</span>. The leaf sweeps home and stops at the latch with no overshoot, in the least time any setting can manage. This is the whole aim — the fastest clean close.</span></li>
+        <li><b>Hangs.</b> <span class="rung-note">Far too much check. <span class="mono">ζ ≫ 1</span>: the oil smothers the swing so thoroughly the leaf crawls and never reaches the latch before it is caught ajar — a failure as real as a slam, only silent. A fire door that hangs open is a fire door that failed.</span></li>
+      </ol>
+    </section>
+
+    <section id="hands">
+      <p class="section-tag">Who sets it, and for what</p>
+      <h2>The same check, three ways</h2>
+      <div class="hands">
+        <div class="hand">
+          <h3>The fitter</h3>
+          <p class="role">wants a clean latch</p>
+          <p>Turns the sweep and latch valves until the leaf comes home firm and quiet, catching every time without a bang. Reads the arrival by ear and hand — no overshoot, no crawl — which is <span class="mono">ζ ≈ 1</span> felt rather than calculated.</p>
+        </div>
+        <div class="hand">
+          <h3>The fire officer</h3>
+          <p class="role">wants it never ajar</p>
+          <p>Cares that the leaf <em>always</em> reaches the latch, in weather and draught, so the door can hold smoke. Fears the over-checked door more than the brisk one: a slam is a nuisance, a door hung open is a breach.</p>
+        </div>
+        <div class="hand">
+          <h3>The access designer</h3>
+          <p class="role">wants it openable</p>
+          <p>Balances the spring against the people who must push it — light enough for a child or a wheelchair, strong enough to shut. A heavier spring needs a heavier check to stay clean, so <span class="mono">ζ</span> must be re-found every time the spring moves.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="bench">
+      <p class="section-tag">The bench</p>
+      <h2>Set the spring against the check</h2>
+      <p>A leaf on a closer, released from open. Set the <b>spring</b> — how hard it pulls shut — and the <b>check</b> — how hard the dashpot resists. Watch the arrival trace climb from open to shut: too little check and it overshoots the stop and bangs; too much and it crawls and never latches; at critical damping it lands clean in the least time. Press <em>Land it</em> to set the check that does, for this spring.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div id="verdict" class="verdict v-keep" role="status" aria-live="off">
+              <span class="dot"></span><span>Lands</span><small>shuts clean and latches</small>
+            </div>
+            <div class="stage" id="stage" aria-hidden="true"></div>
+            <p class="hint">
+              <b>Read it:</b> the <span class="mono">leaf</span> swings from open to shut on its <span class="mono">closer</span>, the <span class="mono">dashpot</span> checking it and shedding the swing as heat. The <span class="mono">arrival trace</span> climbs open → shut — over the <em>shut</em> line is an overshoot into the stop, a bang. The <span class="mono">ζ gauge</span> sets the damping against critical. Green when it lands clean; amber when it bounces or crawls; oxblood when it slams or hangs.
+            </p>
+            <p class="hint">
+              <b>Keys:</b> <kbd>C</kbd> land it (critical) · <kbd>R</kbd> reset · <kbd>[</kbd> lighter check <kbd>]</kbd> heavier · <kbd>−</kbd>/<kbd>=</kbd> softer / stiffer spring · <kbd>space</kbd> release the leaf again. A focused slider keeps its own arrows.
+            </p>
+            <p id="say" class="sr-only" aria-live="polite"></p>
+          </div>
+
+          <div class="controls">
+            <div class="ctl">
+              <label for="in-k">Spring <span class="val" id="lab-k">brisk</span></label>
+              <input id="in-k" type="range" min="4" max="40" step="1" value="18" />
+            </div>
+
+            <div class="ctl">
+              <label for="in-c">Check <span class="val" id="lab-c">light</span></label>
+              <input id="in-c" type="range" min="0" max="54" step="1" value="12"
+                     aria-describedby="c-note" />
+              <div class="xtrack"><span class="x-mark" id="c-mark"></span></div>
+              <p class="ctl-note" id="c-note">the check that lands it: <b>—</b></p>
+            </div>
+
+            <div id="reading" class="reading"></div>
+
+            <div class="bench-actions">
+              <button class="btn" id="crit" type="button">Land it</button>
+              <button class="btn" id="reset" type="button">Reset</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="close">
+      <p class="section-tag">The discipline in the word</p>
+      <h2>A thing that shuts, and knows how</h2>
+      <p>A closer is not the spring — anyone can make a door shut, by hanging a weight on it. A closer is the <em>manners</em>: the knowledge, built into a valve of oil, that a swing let loose must be met and spent, hardest where it is fastest, and spent down to nothing exactly at the latch. That is the whole of damping, and it is the same discipline whether the thing arriving is a door, a car over a bump, or an instrument's needle: meet the motion in proportion to its speed, take just enough to kill the overshoot and no more, and remember that what you take is gone to heat and will not come back. Too little and it rings; too much and it crawls; and the best is never the most. It is the least that lands it clean.</p>
+
+      <p>This page is one HTML file, one stylesheet, one script — no build, no account, no network once it has loaded. The hinge is idealised as frictionless and the spring as linear, but the arrival is exact: it is the step response of <span class="mono">m·ẍ + c·ẋ + k·x = k</span>, and the setting that lands it is <span class="mono">ζ = c ⁄ 2√(k·m) = 1</span>.</p>
+    </section>
+
+    <footer>
+      <p>Dashpot · closer · one of three trades for a single old working word, made the same morning. · 2026-09-28 · <a href="../">the three</a> · <a href="../../">index</a></p>
+    </footer>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
