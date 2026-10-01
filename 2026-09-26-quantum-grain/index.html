@@ -4,23 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quantum Grain</title>
-  <meta name="description" content="Quantum Grain flattens each block of a photograph into a signal and puts it on a quantum circuit the way Moth's own quantum-audio package puts sound there, as the amplitudes of a prepared state. You cannot read an amplitude directly. You measure it, many times, and the pixel you get back is a statistical estimate built from a finite number of shots. Few shots give an imprecise estimate, and the result looks like real grain, the same statistics as shot noise anywhere. Run it on a real QPU through Moth's Atlas API instead of a simulator and the result also includes the device's own decoherence, an effect no simulator can produce because no simulator has a real qubit's imperfections." />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Crect x='6' y='6' width='20' height='20' fill='none' stroke='%23fff' stroke-width='1.5'/%3E%3Crect x='14' y='14' width='4' height='4' fill='%23ff5a1f'/%3E%3C/svg%3E" />
-  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Quantum Grain puts a photograph on a quantum circuit as the amplitudes of a prepared state, the way Moth's quantum-audio package puts sound there. You cannot read an amplitude. You measure it, many times, and the pixel you get back is an estimate from a finite number of shots. Few shots, real grain. Run it on a real QPU through Moth's Atlas API and the result also carries the device's own decoherence." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b1dc8'/%3E%3Crect x='7' y='8' width='18' height='14' rx='3.5' fill='%23efe8d8'/%3E%3Ccircle cx='16' cy='15' r='3.2' fill='%23ff3b1f'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#2b1dc8" />
   <meta property="og:title" content="Quantum Grain" />
-  <meta property="og:description" content="Each block of a photo becomes the amplitudes of a quantum state. Measuring it a finite number of times gives back the pixel only approximately. The gap is real shot noise, and on a real QPU through Atlas it's real decoherence too, neither one a filter's guess." />
+  <meta property="og:description" content="A photo on a quantum circuit. Few measurements, real grain: shot noise, and on Atlas, real decoherence." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary" />
+  <link rel="preload" href="assets/fonts/anybody.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <div class="topbar">
+  <a class="skip" href="#bench">Skip to the bench</a>
+
+  <header class="topbar">
     <div class="topbar-inner">
-      <span class="topbar-name"><b>Maxence Laisne</b> · London</span>
-      <nav class="topbar-links" aria-label="Elsewhere">
+      <a class="topbar-name" href="#top"><b>Maxence Laisne</b><span>London</span></a>
+      <nav class="topbar-links" id="topbar-links" aria-label="Elsewhere">
         <a href="http://www.linkedin.com/in/maxence-laisne" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://mlaisne.substack.com/" target="_blank" rel="noopener">Substack</a>
         <a href="https://github.com/max-lsne" target="_blank" rel="noopener">GitHub</a>
@@ -28,193 +29,281 @@
         <a href="https://checker-team-965.notion.site/Book-List-Maxence-L-19d7e6af9763809aaafbdf5a9a92692c" target="_blank" rel="noopener">Reading list</a>
         <a href="https://www.notion.so/Information-Diet-33a7e6af976380059c9ec6796f3cd697" target="_blank" rel="noopener">News diet</a>
       </nav>
+      <div class="topbar-tools">
+        <button class="menu-btn" id="links-toggle" type="button" aria-expanded="false" aria-controls="topbar-links">Links</button>
+        <button class="switch" id="sound-switch" type="button" role="switch" aria-checked="true" aria-label="Sound">
+          <span class="switch-label">Sound</span>
+          <span class="switch-track"><span class="switch-thumb"></span></span>
+        </button>
+      </div>
     </div>
-  </div>
-  <header class="hero">
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="hero-scrim" aria-hidden="true"></div>
-    <div class="hero-inner">
-      <p class="eyebrow"><span class="reveal" style="--d:0">In the arena</span> <span class="reveal" style="--d:1">·</span> <span class="reveal" style="--d:2">2026-09-26</span> <span class="reveal" style="--d:3">·</span> <span class="reveal" style="--d:4">Moth Hack, built on Atlas</span></p>
-      <p class="pron reveal" style="--d:5"><b>grain</b> · <i>noun</i> · the fine, granular texture a picture has when it's rebuilt from too little evidence, here, too few measurements of a quantum state</p>
-      <h1 id="scramble-title" data-final="Quantum Grain">Quantum Grain</h1>
-      <p class="lede reveal" style="--d:7">A photograph's pixels become the <em>amplitudes</em> of a quantum state. There's no way to read an amplitude, only <em>measure</em> it.</p>
-      <p class="sub reveal" style="--d:8">A block of pixels becomes a quantum circuit's amplitudes, the same method Moth's <span class="mono">quantum-audio</span> package uses for sound. Amplitudes can't be read, only measured, and few measurements make a <b>grainy</b> result. The <b>atlas</b> engine runs the same idea on a real quantum processor instead, through one of Moth's own Atlas engines.</p>
-    </div>
-    <div class="scroll-cue" aria-hidden="true"><i></i>scroll</div>
   </header>
 
-  <div class="grain-field" aria-hidden="true"></div>
-  <div class="wrap">
+  <main>
+    <!-- ======================= hero ======================= -->
+    <section class="hero" id="top">
+      <img class="hero-fallback" src="assets/scene.webp" alt="" />
+      <canvas id="hero-gl" aria-hidden="true"></canvas>
+      <h1 class="hero-title">Quantum Grain</h1>
 
-    <section id="how">
-      <p class="section-tag">Where the grain comes from</p>
-      <h2>An amplitude is not a number you can read</h2>
-      <p>An <span class="mono">n</span>-pixel block takes <span class="mono">log₂(n)</span> qubits: 64 pixels, 6 qubits. Encoding means the pixel values become amplitudes, normalised so their squares sum to one.</p>
-      <p class="pull">Measurement is the only operation a quantum state allows. It returns one bitstring, with probability equal to the square of the amplitude, and destroys the state. Repeat it, count outcomes, and the frequency estimates the probability.</p>
-      <p>That estimate carries noise: at <span class="mono">S</span> shots, uncertainty runs around <span class="mono">1⁄√S</span>, the same law behind shot noise in a photon count or a Geiger counter. A few hundred shots, visible grain; tens of thousands, none.</p>
-    </section>
+      <div class="hero-copy">
+        <p class="eyebrow">Moth Hack · London 2026</p>
+        <p class="lede">A photograph's pixels become the <em>amplitudes</em> of a quantum state. There's no way to read an amplitude, only <em>measure</em> it.</p>
+        <div class="hero-keys">
+          <a class="key key--vermilion" href="#bench" data-key><span>Open the bench</span><i class="arrow" aria-hidden="true"></i></a>
+          <a class="textlink" href="#how">How it works</a>
+        </div>
+      </div>
+      <p class="hero-hint">Move the lens to measure more of the photo. Press and hold for a longer exposure.</p>
 
-    <section id="rule">
-      <p class="section-tag">The one relation, read three ways</p>
-      <h2>Shots buy fidelity; qubits spend it</h2>
-      <div class="laws">
-        <div class="law-card card-spot reveal-up">
-          <p class="law-stat mono">1⁄√S</p>
-          <h3>Fidelity rises with shots, but only as a square root.</h3>
-          <p>Halving the noise takes <em>four times</em> the shots, not two. On a real QPU, shots are queued time on a scarce device.</p>
-        </div>
-        <div class="law-card card-spot reveal-up">
-          <p class="law-stat mono">×4</p>
-          <h3>Bigger blocks spend the same shot budget on exponentially more amplitudes.</h3>
-          <p>An 8×8 block (6 qubits) and a 16×16 block (8 qubits) look close, but the second has <em>four times</em> as many amplitude buckets sharing the same <span class="mono">S</span> shots. Coarser detail costs less per pixel; finer detail gets fewer shots per amplitude.</p>
-        </div>
-        <div class="law-card card-spot reveal-up">
-          <p class="law-stat mono">+ε</p>
-          <h3>A real device adds a floor no shot count erases.</h3>
-          <p>A simulator's only error is shot noise, which vanishes as <span class="mono">S → ∞</span>. A real QPU also decoheres, its gates aren't perfect, its readout misfires. That floor sits under the shot noise, untouched by more shots, and no simulator can fake it.</p>
-        </div>
+      <div class="hero-read">
+        <p class="hero-read-num"><b id="lens-shots">1 000</b><span>shots under the lens</span></p>
+        <p class="hero-read-hint">Move the lens to measure more of the photo. Press and hold for a longer exposure.</p>
       </div>
     </section>
 
-    <section id="ladder">
-      <p class="section-tag">Four states, from a clean frame to a useless one</p>
-      <h2>Around the one loop: encode, measure, decode</h2>
-      <div class="ladder-grid">
-        <figure class="ladder-card card-spot v-keep reveal-up">
-          <div class="ladder-media"><img src="assets/ladder-clean.webp" alt="Sample image reconstructed at 4 000 shots: clean, grain invisible" loading="lazy" /></div>
-          <figcaption>
-            <span class="ladder-head"><span class="ladder-num mono">01</span><span class="ladder-title">Clean</span></span>
-            <span class="rung-note">Shots to spare. Reconstruction close to the original; grain invisible in practice.</span>
-          </figcaption>
-        </figure>
-        <figure class="ladder-card card-spot v-keep reveal-up">
-          <div class="ladder-media"><img src="assets/ladder-grainy.webp" alt="Sample image reconstructed at 1 000 shots: grainy, structure and colour hold" loading="lazy" /></div>
-          <figcaption>
-            <span class="ladder-head"><span class="ladder-num mono">02</span><span class="ladder-title">Grainy</span></span>
-            <span class="rung-note">Fewer shots, or a bigger block. Structure and colour hold; fine detail turns into a visible, even texture, exactly what <span class="mono">1⁄√S</span> predicts.</span>
-          </figcaption>
-        </figure>
-        <figure class="ladder-card card-spot v-drift reveal-up">
-          <div class="ladder-media"><img src="assets/ladder-noisy.webp" alt="Sample image reconstructed at 200 shots: noisy, patchwork between blocks" loading="lazy" /></div>
-          <figcaption>
-            <span class="ladder-head"><span class="ladder-num mono">03</span><span class="ladder-title">Noisy</span></span>
-            <span class="rung-note">Shots stretched over too many amplitudes. Each block drifts from its neighbours: still recognisable, visibly patchwork.</span>
-          </figcaption>
-        </figure>
-        <figure class="ladder-card card-spot v-dead reveal-up">
-          <div class="ladder-media"><img src="assets/ladder-collapsed.webp" alt="Sample image reconstructed at 50 shots: collapsed, barely better than a guess" loading="lazy" /></div>
-          <figcaption>
-            <span class="ladder-head"><span class="ladder-num mono">04</span><span class="ladder-title">Collapsed</span></span>
-            <span class="rung-note">A handful of shots, or real decoherence on top. Barely better than a guess: blocky, discoloured, sometimes unrecognisable. Too few measurements, quantum or not.</span>
-          </figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section id="hands">
-      <p class="section-tag">Who reads it, and for what</p>
-      <h2>The same grain, three ways</h2>
-      <div class="hands">
-        <div class="hand card-spot reveal-up">
-          <h3>The compressionist</h3>
-          <p class="role">wants the least noise per shot</p>
-          <p>Reads <span class="mono">PSNR</span> against shots and block size the way a codec engineer reads bitrate against distortion: a lossy quantum channel, shots standing in for bits.</p>
+    <!-- ======================= how ======================= -->
+    <section class="how" id="how">
+      <div class="wrap">
+        <p class="kicker"><span class="num">01</span><span class="kicker-label">Where the grain comes from</span></p>
+        <div class="how-top">
+          <h2>An amplitude is not a number you can read</h2>
+          <p class="how-note">Below, one 8×8 block of the photo goes through the same arithmetic as the bench. Take shots and watch 64 pixels come back from counted outcomes.</p>
         </div>
-        <div class="hand card-spot reveal-up">
-          <h3>The hardware skeptic</h3>
-          <p class="role">wants proof this needed a QPU</p>
-          <p>Checks the job id and machine Atlas reports, then runs the same photo twice. A simulator repeats itself exactly; real hardware drifts with its calibration. No simulator can fake that drift.</p>
-        </div>
-        <div class="hand card-spot reveal-up">
-          <h3>The media artist</h3>
-          <p class="role">wants a texture, not an error</p>
-          <p>Dials the shot count down on purpose, the way photographers once chose faster, grainier film for its look.</p>
-        </div>
-      </div>
-    </section>
 
-    <section id="bench">
-      <p class="section-tag">The bench</p>
-      <h2>Encode a photo, measure it, and look at what came back</h2>
-      <p>Drop in a photo or use the sample, pick a <b>shot budget</b>, pick an <b>engine</b>. <span class="mono">simulator</span> runs this page's own block loop instantly; <b>block size</b> sets qubits per circuit. <span class="mono">atlas</span> sends the whole photo to <span class="mono">tessa-image-v1</span>, one of Moth's own engines, on a real quantum processor. Real hardware queues: seconds to minutes.</p>
-
-      <div class="bench">
-        <div class="bench-grid">
-          <div>
-            <div id="verdict" class="verdict v-keep" role="status" aria-live="off">
-              <span class="dot"></span><span id="verdict-word">Ready</span><small id="verdict-small">load a photo to begin</small>
-            </div>
-            <div class="stage">
-              <div class="frames">
-                <div class="frame">
-                  <span class="frame-label">Original</span>
-                  <canvas id="before" width="256" height="256"></canvas>
-                  <label class="dropzone" id="drop" for="file-input">drop a photo, click to choose, or use the sample</label>
-                  <input type="file" id="file-input" accept="image/*" class="sr-only" />
-                </div>
-                <div class="frame">
-                  <span class="frame-label" id="after-label">Reconstructed</span>
-                  <canvas id="after" width="256" height="256"></canvas>
-                  <button class="btn" id="use-sample" type="button">Use sample image</button>
-                </div>
-              </div>
-            </div>
-            <p class="hint">
-              <b>Read it:</b> <span class="mono">block</span> sets qubits per circuit on <span class="mono">simulator</span>; <span class="mono">shots</span> sets measurements per state. Higher PSNR, closer measurement. <span class="mono">atlas</span> also shows the job id and device.
-            </p>
-            <p class="hint">
-              <b>Keys:</b> <kbd>R</kbd> run · <kbd>1</kbd>/<kbd>2</kbd>/<kbd>3</kbd> block 4/8/16 · <kbd>[</kbd>/<kbd>]</kbd> fewer/more shots · <kbd>S</kbd> simulator · <kbd>A</kbd> atlas · <kbd>U</kbd> use sample.
-            </p>
-            <p id="say" class="sr-only" aria-live="polite"></p>
+        <div class="lab" id="lab">
+          <div class="lab-panel">
+            <figure class="lab-cell">
+              <div class="lab-view"><canvas id="lab-orig" width="8" height="8" role="img" aria-label="An 8 by 8 block of pixels from the photo, enlarged"></canvas></div>
+              <figcaption><b>Encode</b><span>An <span class="mono">n</span>-pixel block takes <span class="mono">log<sub>2</sub>&nbsp;n</span> qubits: 64 pixels, 6 qubits. The pixel values become amplitudes, normalised so their squares sum to one.</span></figcaption>
+            </figure>
+            <figure class="lab-cell lab-cell--bars">
+              <div class="lab-view"><svg id="lab-bars" viewBox="0 0 400 190" role="img" aria-label="For each of the 64 pixels, an outline for its true probability and a filled bar for the share of shots that landed on it"></svg></div>
+              <figcaption><b>Measure</b><span>A measurement returns one bitstring, with probability equal to the square of the amplitude, and destroys the state. Repeat it and count: the frequencies (fill) estimate the probabilities (outline).</span></figcaption>
+            </figure>
+            <figure class="lab-cell">
+              <div class="lab-view"><canvas id="lab-dec" width="8" height="8" role="img" aria-label="The same 8 by 8 block rebuilt from the counted shots"></canvas></div>
+              <figcaption><b>Decode</b><span>The estimate carries noise. At <span class="mono">S</span> shots the error runs near <span class="frac">1/√S</span>, the same law behind shot noise in a photon count or a Geiger counter.</span></figcaption>
+            </figure>
           </div>
-
-          <div class="controls">
-            <div class="ctl">
-              <label>Block size <span class="val" id="lab-block">8×8 · 6 qubits</span></label>
-              <div class="seg" role="group" aria-label="Block size">
-                <button type="button" data-block="4" aria-pressed="false">4×4</button>
-                <button type="button" data-block="8" aria-pressed="true">8×8</button>
-                <button type="button" data-block="16" aria-pressed="false">16×16</button>
-              </div>
+          <div class="lab-bar">
+            <div class="lab-keys" role="group" aria-label="Take shots">
+              <button class="key key--small" type="button" data-key data-add="10"><span>+10 shots</span></button>
+              <button class="key key--small" type="button" data-key data-add="100"><span>+100</span></button>
+              <button class="key key--small" type="button" data-key data-add="1000"><span>+1 000</span></button>
+              <button class="key key--small" type="button" data-key id="lab-reset"><span>Reset</span></button>
             </div>
-
-            <div class="ctl">
-              <label for="in-shots">Shots <span class="val" id="lab-shots">2 000</span></label>
-              <input id="in-shots" type="range" min="0" max="8" step="1" value="4" />
-              <p class="ctl-note">shot noise falls as <b>1⁄√shots</b>: four times the shots for half the noise</p>
-            </div>
-
-            <div class="ctl">
-              <label>Engine</label>
-              <div class="seg" role="group" aria-label="Execution engine">
-                <button type="button" data-engine="simulator" aria-pressed="true">simulator</button>
-                <button type="button" data-engine="atlas" aria-pressed="false">atlas (real QPU)</button>
-              </div>
-            </div>
-
-            <div id="reading" class="reading"></div>
-
-            <div class="bench-actions">
-              <button class="btn primary" id="run" type="button">Run</button>
-              <button class="btn" id="reset" type="button">Reset</button>
-            </div>
+            <p class="lab-read" aria-live="off"><b id="lab-s">0</b> shots<span class="lab-sep"></span><b id="lab-db">–</b> dB</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="close">
-      <p class="section-tag">The discipline in the word, and the one it breaks</p>
-      <h2>Grain, honestly measured</h2>
-      <p>Every other page in this series runs entirely in your browser, no backend. This one needs one: a real measurement can't be simulated honestly without faking data or running an actual quantum computer. <span class="mono">simulator</span> runs this page's own amplitude-encoding implementation, modelled on Moth's <span class="mono">quantum-audio</span> package; <span class="mono">atlas</span> calls one of Atlas's own engines, <span class="mono">tessa-image-v1</span>. Nothing on screen is faked, and the reading panel always says which engine produced it.</p>
-      <p>Run it: <span class="mono">pip install -r requirements.txt && python server.py</span>, then open <span class="mono">http://localhost:5057</span>. Full source, including the Atlas adapter, is in this folder.</p>
+    <!-- ======================= shots ======================= -->
+    <section class="shots" id="shots">
+      <div class="wrap">
+        <p class="kicker"><span class="num">02</span><span class="kicker-label">Four states, one photo</span></p>
+        <h2>Shots buy fidelity; qubits spend it</h2>
+
+        <div class="stage" id="stage">
+          <div class="stage-pin">
+            <p class="kicker stage-kicker"><span class="num">02</span><span class="kicker-label">Four states, one photo</span></p>
+            <figure class="plate" id="plate">
+              <div class="plate-frame">
+              <img class="plate-img is-on" data-shots="4000" src="assets/frame-04000.webp" alt="The studio photo reconstructed from 4000 shots: clean." />
+              <img class="plate-img" data-shots="1000" src="assets/frame-01000.webp" alt="The studio photo reconstructed from 1000 shots: grainy." loading="lazy" />
+              <img class="plate-img" data-shots="50" src="assets/frame-00050.webp" alt="The studio photo reconstructed from 50 shots: noisy and patchy." loading="lazy" />
+              <img class="plate-img" data-shots="10" src="assets/frame-00010.webp" alt="The studio photo reconstructed from 10 shots: almost black, a few lit points." loading="lazy" />
+                <span class="plate-flash" aria-hidden="true"></span>
+              </div>
+              <figcaption class="plate-cap">The same photo, rebuilt from <b id="plate-shots">4 000</b> shots. Real simulator output, 8×8 blocks.</figcaption>
+            </figure>
+
+            <div class="readout">
+              <ol class="states">
+              <li class="state is-on" data-shots="4000" data-db="31.3" data-name="Clean">
+                <p class="state-db"><b>31<i class="dp"></i>3</b><span>dB</span></p>
+                <h3>Clean</h3>
+                <p class="state-text">Shots to spare. Reconstruction close to the original; grain invisible in practice.</p>
+              </li>
+              <li class="state" data-shots="1000" data-db="25.3" data-name="Grainy">
+                <p class="state-db"><b>25<i class="dp"></i>3</b><span>dB</span></p>
+                <h3>Grainy</h3>
+                <p class="state-text">Fewer shots, or a bigger block. Structure and colour hold; fine detail turns into a visible, even texture, exactly what <span class="frac">1/√S</span> predicts.</p>
+              </li>
+              <li class="state" data-shots="50" data-db="10.2" data-name="Noisy">
+                <p class="state-db"><b>10<i class="dp"></i>2</b><span>dB</span></p>
+                <h3>Noisy</h3>
+                <p class="state-text">Shots stretched over too many amplitudes. Each block drifts from its neighbours: still recognisable, visibly patchwork.</p>
+              </li>
+              <li class="state" data-shots="10" data-db="7.6" data-name="Collapsed">
+                <p class="state-db"><b>7<i class="dp"></i>6</b><span>dB</span></p>
+                <h3>Collapsed</h3>
+                <p class="state-text">A handful of shots, or real decoherence on top. Barely better than a guess. Too few measurements, quantum or not.</p>
+              </li>
+              </ol>
+              <div class="index" role="group" aria-label="Jump to a state">
+                <button class="key key--latch key--tab is-on" type="button" data-key data-i="0" aria-pressed="true"><span>Clean</span></button>
+                <button class="key key--latch key--tab" type="button" data-key data-i="1" aria-pressed="false"><span>Grainy</span></button>
+                <button class="key key--latch key--tab" type="button" data-key data-i="2" aria-pressed="false"><span>Noisy</span></button>
+                <button class="key key--latch key--tab" type="button" data-key data-i="3" aria-pressed="false"><span>Collapsed</span></button>
+              </div>
+              <div class="chart" id="chart-wrap">
+                <svg id="chart" viewBox="0 0 560 168" role="img" aria-describedby="chart-desc" aria-label="Quality against shots"></svg>
+                <p class="sr-only" id="chart-desc">Peak signal to noise ratio rises about ten decibels for every tenfold increase in shots: 7.6 dB at 10 shots, 10.2 at 50, 17.2 at 200, 25.3 at 1000, 31.3 at 4000, 37.2 at 16000.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <dl class="laws">
+          <div class="law">
+            <dt class="law-sym">1/√S</dt>
+            <dd><b>Fidelity rises with shots, but only as a square root.</b> Halving the noise takes four times the shots, not two. On a real QPU, shots are queued time on a scarce device.</dd>
+          </div>
+          <div class="law">
+            <dt class="law-sym">×4</dt>
+            <dd><b>Bigger blocks spend the same shot budget on exponentially more amplitudes.</b> An 8×8 block (6 qubits) and a 16×16 block (8 qubits) look close, but the second has four times as many amplitude buckets sharing the same <span class="mono">S</span>.</dd>
+          </div>
+          <div class="law">
+            <dt class="law-sym">+ε</dt>
+            <dd><b>A real device adds a floor no shot count erases.</b> A simulator's only error is shot noise, which vanishes as <span class="mono">S → ∞</span>. A real QPU also decoheres, its gates aren't perfect, its readout misfires.</dd>
+          </div>
+        </dl>
+      </div>
     </section>
 
-    <footer>
-      <p>In the arena · one page a day, each built on a single old working word and the discipline hidden inside it. For one day, on a real quantum processor instead of an idealised law. · 2026-09-26 · <a href="../">index</a></p>
-    </footer>
+    <!-- ======================= bench ======================= -->
+    <section class="bench-sec" id="bench">
+      <div class="wrap">
+        <p class="kicker"><span class="num">03</span><span class="kicker-label">The bench</span></p>
+        <h2>Measure your own photo</h2>
+        <p class="bench-intro">Drop in a photo or use the sample. Turn the knob for shots, pick a block size and an engine, press Run. <span class="mono">simulator</span> runs this page's own block loop in a blink. <span class="mono">atlas</span> sends the whole photo to <span class="mono">tessa-image-v1</span> on a real quantum processor; real hardware queues, seconds to minutes.</p>
+      </div>
 
-  </div>
-  <script src="script.js"></script>
+      <div class="chassis" role="group" aria-label="Measurement bench">
+        <div class="chassis-head">
+          <p class="chassis-model">Measurement bench</p>
+          <p class="chassis-leds" aria-hidden="true"><span class="led led--green is-on"></span><span class="led" id="led-busy"></span></p>
+        </div>
+
+        <div class="lcd" id="verdict" role="status" aria-live="off">
+          <div class="lcd-head">
+            <span class="lcd-state"><span class="led" id="verdict-led"></span><span class="lcd-verdict" id="verdict-word">Ready</span></span>
+            <small id="verdict-small">load a photo to begin</small>
+          </div>
+          <div class="lcd-rows" id="reading"></div>
+        </div>
+
+        <div class="screens">
+          <figure class="screen" id="screen-before">
+            <figcaption>Original</figcaption>
+            <div class="screen-glass">
+              <canvas id="before" width="256" height="192"></canvas>
+              <label class="dropzone" id="drop" for="file-input"><span>Drop a photo here<br />or click to choose</span></label>
+              <input type="file" id="file-input" accept="image/*" class="sr-only" />
+            </div>
+          </figure>
+          <figure class="screen" id="screen-after">
+            <figcaption id="after-label">Reconstructed</figcaption>
+            <div class="screen-glass">
+              <canvas id="after" width="256" height="192"></canvas>
+              <span class="screen-hint" id="after-hint">Press Run to measure</span>
+              <span class="scan" id="scan" aria-hidden="true"></span>
+            </div>
+          </figure>
+        </div>
+        <p id="say" class="sr-only" aria-live="polite"></p>
+
+        <div class="controls">
+          <div class="controls-col">
+            <div class="group group--block">
+              <p class="group-label">Block <span id="lab-block">8×8 · 6 qubits</span></p>
+              <div class="key-row" role="group" aria-label="Block size">
+                <button class="key key--latch" type="button" data-key data-block="4" aria-pressed="false"><span>4×4</span></button>
+                <button class="key key--latch" type="button" data-key data-block="8" aria-pressed="true"><span>8×8</span></button>
+                <button class="key key--latch" type="button" data-key data-block="16" aria-pressed="false"><span>16×16</span></button>
+              </div>
+            </div>
+            <div class="group group--engine">
+              <p class="group-label">Engine</p>
+              <button class="slide" id="engine-switch" type="button" role="switch" aria-checked="false" aria-label="Use the Atlas real QPU engine">
+                <span class="slide-opt slide-opt--a"><i class="led" aria-hidden="true"></i>Simulator</span>
+                <span class="slide-track" aria-hidden="true"><span class="slide-thumb"></span></span>
+                <span class="slide-opt slide-opt--b"><i class="led" aria-hidden="true"></i>Atlas <small>real QPU</small></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="controls-col controls-col--knob">
+            <div class="group group--shots">
+              <p class="group-label">Shots <span id="lab-shots">1 000</span></p>
+              <div class="knob-wrap" id="knob-wrap">
+                <svg class="knob-scale" id="knob-scale" viewBox="-120 -120 240 240" aria-hidden="true"></svg>
+                <div class="knob" id="knob" role="slider" tabindex="0" aria-label="Shots per measurement" aria-valuemin="0" aria-valuemax="8" aria-valuenow="4" aria-valuetext="1 000 shots">
+                  <div class="knob-body"><i class="knob-mark"></i></div>
+                </div>
+              </div>
+              <p class="group-hint">Drag, scroll or use the arrow keys. Shortcuts: R run, 1 2 3 block, S A engine, U sample.</p>
+            </div>
+          </div>
+
+          <div class="controls-col">
+            <div class="group group--actions">
+              <button class="key key--vermilion key--run" type="button" id="run" data-key><i class="led" aria-hidden="true"></i><span>Run</span></button>
+              <div class="key-row key-row--small">
+                <button class="key key--small" type="button" id="use-sample" data-key><span>Sample</span></button>
+                <button class="key key--small" type="button" id="load" data-key><span>Load</span></button>
+                <button class="key key--small" type="button" id="reset" data-key><span>Reset</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= close ======================= -->
+    <section class="close" id="close">
+      <div class="wrap">
+        <p class="kicker"><span class="num">04</span><span class="kicker-label">The discipline in the word, and the one it breaks</span></p>
+        <div class="close-grid">
+          <div class="close-main">
+            <h2>Grain, honestly measured</h2>
+            <p>Every other page in this series runs entirely in your browser, no backend. This one needs one: a real measurement can't be simulated honestly without faking data or running an actual quantum computer. <span class="mono">simulator</span> runs this page's own amplitude-encoding implementation, modelled on Moth's <span class="mono">quantum-audio</span> package; <span class="mono">atlas</span> calls one of Atlas's own engines, <span class="mono">tessa-image-v1</span>. The photograph above is real simulator output at six shot counts, mixed live by a shader. The reading panel always says which engine produced a result.</p>
+          </div>
+          <div class="runbox">
+            <p class="runbox-label">Run it</p>
+            <code id="run-cmd" data-copy="pip install -r requirements.txt &amp;&amp; python server.py">pip install -r requirements.txt<br />python server.py</code>
+            <button class="key key--small" type="button" id="copy-cmd" data-key><span>Copy</span></button>
+            <p class="runbox-note">Then open <span class="mono">localhost:5057</span>. Full source, including the Atlas adapter, is in this folder.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <p class="foot-name">Maxence Laisne</p>
+      <ul class="foot-links">
+        <li><a href="http://www.linkedin.com/in/maxence-laisne" target="_blank" rel="noopener"><span>LinkedIn</span><i aria-hidden="true">↗</i></a></li>
+        <li><a href="https://mlaisne.substack.com/" target="_blank" rel="noopener"><span>Substack</span><i aria-hidden="true">↗</i></a></li>
+        <li><a href="https://github.com/max-lsne" target="_blank" rel="noopener"><span>GitHub</span><i aria-hidden="true">↗</i></a></li>
+        <li><a href="https://www.strava.com/athletes/23872777" target="_blank" rel="noopener"><span>Strava</span><i aria-hidden="true">↗</i></a></li>
+        <li><a href="https://checker-team-965.notion.site/Book-List-Maxence-L-19d7e6af9763809aaafbdf5a9a92692c" target="_blank" rel="noopener"><span>Reading list</span><i aria-hidden="true">↗</i></a></li>
+        <li><a href="https://www.notion.so/Information-Diet-33a7e6af976380059c9ec6796f3cd697" target="_blank" rel="noopener"><span>News diet</span><i aria-hidden="true">↗</i></a></li>
+      </ul>
+      <div class="foot-meta">
+        <p>Built for Moth Hack, London 2026. One page a day, each built on a single old working word and the discipline hidden inside it.</p>
+        <p>2026-09-26 · <a href="../">index</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/sound.js"></script>
+  <script src="js/hero.js"></script>
+  <script src="js/bench.js"></script>
+  <script src="js/page.js"></script>
+  <script src="js/lab.js"></script>
 </body>
 </html>
