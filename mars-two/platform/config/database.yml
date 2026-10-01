@@ -1,0 +1,57 @@
+# Two roles against one physical database. See docs/adr/0002-tenancy-and-isolation.md.
+#
+#   primary  owner role `mars`. Has BYPASSRLS. Runs migrations, schema load and
+#            seeding, which legitimately write across every tenant.
+#   app      runtime role `mars_app`. NOSUPERUSER and NOBYPASSRLS, so every query
+#            it makes is filtered by policy, including queries written by someone
+#            who forgot to scope them.
+#
+# ApplicationRecord connects to `app`. Migrations use ActiveRecord::Base, which
+# stays on `primary`. Reaching the owner from application code requires an
+# explicit connected_to(role: :owner) block, which is greppable.
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV.fetch("MARS_DB_HOST", "127.0.0.1") %>
+  port: <%= ENV.fetch("MARS_DB_PORT", 5432) %>
+
+owner_credentials: &owner_credentials
+  username: <%= ENV.fetch("MARS_DB_OWNER_USER", "mars") %>
+  password: <%= ENV.fetch("MARS_DB_OWNER_PASSWORD", "mars") %>
+
+app_credentials: &app_credentials
+  username: <%= ENV.fetch("MARS_DB_APP_USER", "mars_app") %>
+  password: <%= ENV.fetch("MARS_DB_APP_PASSWORD", "mars_app") %>
+
+development:
+  primary:
+    <<: [*default, *owner_credentials]
+    database: mars_two_development
+  app:
+    <<: [*default, *app_credentials]
+    database: mars_two_development
+    database_tasks: false
+
+test:
+  primary:
+    <<: [*default, *owner_credentials]
+    database: mars_two_test
+  app:
+    <<: [*default, *app_credentials]
+    database: mars_two_test
+    database_tasks: false
+
+production:
+  primary:
+    <<: *default
+    database: <%= ENV.fetch("MARS_DB_NAME", "mars_two_production") %>
+    username: <%= ENV["MARS_DB_OWNER_USER"] %>
+    password: <%= ENV["MARS_DB_OWNER_PASSWORD"] %>
+  app:
+    <<: *default
+    database: <%= ENV.fetch("MARS_DB_NAME", "mars_two_production") %>
+    username: <%= ENV["MARS_DB_APP_USER"] %>
+    password: <%= ENV["MARS_DB_APP_PASSWORD"] %>
+    database_tasks: false
