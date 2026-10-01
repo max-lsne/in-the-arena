@@ -89,9 +89,19 @@ reading panel shows different fields per engine: block/qubit/PSNR detail for
   that on purpose: its entire point is a texture that only exists if a real
   measurement happened, and there's no honest way to simulate that
   in-browser.
-- `index.html` / `styles.css` / `script.js`: the bench itself, in the same
-  visual language as the rest of the series (localStorage, `aria-live`
-  status, full keyboard control, `prefers-reduced-motion`).
+- `index.html` / `styles.css` / `js/`: the page. `js/sound.js` synthesizes every
+  sound with WebAudio (keys bottom out in two strokes, the knob ratchets, a
+  run ticks like a Geiger counter, results ring a short chord; a switch in the
+  top bar mutes it, and nothing plays before the first gesture). `js/hero.js`
+  is a WebGL2 shader that mixes six real simulator frames of one photograph
+  per pixel from an exposure value your cursor controls. `js/lab.js` runs the
+  encode, measure, decode arithmetic on one 8x8 block in the browser.
+  `js/bench.js` and `js/page.js` are the instrument and the page behaviour.
+  Keyboard: R run, 1 2 3 block, [ ] shots, S / A engine, U sample. Fonts are
+  self-hosted in `assets/fonts` (Anybody, Hanken Grotesk, Doto).
+- `tools/`: the imagery is generated, not stock. `render_scene.py` is a numpy
+  raymarcher for the studio still life; `build_assets.py` turns it into the
+  six noise frames (real `quantum_pipeline` output), the matte, and the sample.
 
 ## Why this, for judging
 
