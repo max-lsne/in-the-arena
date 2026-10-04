@@ -216,20 +216,12 @@
     var ex = px + Math.cos(ang) * Rpx * eFrac, ey = py + Math.sin(ang) * Rpx * eFrac;
     var tx = px + Math.cos(ang) * Rpx, ty = py + Math.sin(ang) * Rpx;
 
-    // the swept paths — the tip's wide arc, the hand's small one
+    // the swept paths — the tip's wide arc, the hand's small one (short way)
+    var span = (a1 - a0) * swing;
     ctx.setLineDash([2, 4]); ctx.lineWidth = 1;
-    ctx.strokeStyle = withAlpha(col.load, 0.3);
-    ctx.beginPath(); ctx.arc(px, py, Rpx, a0 + (a1 - a0) * 0 * swing, a1); ctx.stroke();
-    ctx.strokeStyle = withAlpha(col.effort, 0.3);
-    ctx.beginPath(); ctx.arc(px, py, Rpx * eFrac, a0, a1); ctx.stroke();
+    ctx.strokeStyle = withAlpha(col.load, 0.3); shortArc(px, py, Rpx, a0, span);
+    ctx.strokeStyle = withAlpha(col.effort, 0.3); shortArc(px, py, Rpx * eFrac, a0, span);
     ctx.setLineDash([]);
-
-    // ghost of the rod at the start of the arc
-    if (!reduce) {
-      ctx.strokeStyle = withAlpha(col.effort, 0.14); ctx.lineWidth = 5; ctx.lineCap = "round";
-      ctx.beginPath(); ctx.moveTo(px, py);
-      ctx.lineTo(px + Math.cos(a0) * Rpx, py + Math.sin(a0) * Rpx); ctx.stroke();
-    }
 
     // the rod (a slight curve for the spring of it)
     ctx.strokeStyle = withAlpha(col.effort, 0.92); ctx.lineWidth = 5; ctx.lineCap = "round";
@@ -283,7 +275,7 @@
     ctx.fillStyle = withAlpha(col.field2, 0.9);
     roundRect(bx, by, bw, bh, 8); ctx.fill();
     ctx.strokeStyle = col.rule; ctx.lineWidth = 1; ctx.stroke();
-    label(ctx, col.faint, "the trade — reversed, equal all the same", bx + 12, by + 18, "left");
+    label(ctx, col.faint, "the trade — reversed, equal same", bx + 12, by + 18, "left");
 
     var areaTop = by + 42, areaH = bh - 92, baseY = areaTop + areaH;
     var maxForce = Math.max(r.drive, r.w, 1);
@@ -352,6 +344,10 @@
   }
 
   // ---- small canvas helpers -------------------------------------------
+  // draw the minor (short-way) arc of angular span `span` from angle `a`
+  function shortArc(cx, cy, r, a, span) {
+    ctx.beginPath(); ctx.arc(cx, cy, r, a, a + span, span < 0); ctx.stroke();
+  }
   function roundRect(x, y, w, h, r) {
     ctx.beginPath();
     ctx.moveTo(x + r, y);
