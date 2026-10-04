@@ -205,7 +205,7 @@
   // ---- the scene: a bar across a fulcrum, slab left, heave right -------
   function drawScene(col, accent, r, verdict) {
     var p = heaveP();
-    var x0 = 34, x1 = 268, yBar = 150;          // bar at rest, load end left, hand end right
+    var x0 = 30, x1 = 242, yBar = 150;          // bar at rest, load end left, hand end right
     var fx = x0 + (x1 - x0) * (r.f / 100);       // the fulcrum, at fraction f from the load end
     var fy = yBar;
 
@@ -234,9 +234,10 @@
     ctx.closePath(); ctx.fill(); ctx.stroke();
     label(ctx, col.brass2, "fulcrum", fx, yBar + 86, "center");
 
-    // the swept arcs (where each end can travel), faint
-    ctx.strokeStyle = withAlpha(col.effort, 0.18); ctx.lineWidth = 1; ctx.setLineDash([2, 4]);
-    arcHint(P1, fx, fy, 1); arcHint(P0, fx, fy, -1);
+    // the swept arcs (where each end travels), faint and short
+    ctx.strokeStyle = withAlpha(col.effort, 0.2); ctx.lineWidth = 1; ctx.setLineDash([2, 4]);
+    shortArc(fx, fy, Math.hypot(x1 - fx, 0), Math.atan2(P1[1] - fy, P1[0] - fx), -0.18);
+    shortArc(fx, fy, Math.hypot(fx - x0, 0), Math.atan2(P0[1] - fy, P0[0] - fx), 0.18);
     ctx.setLineDash([]);
 
     // the bar
@@ -276,10 +277,9 @@
     }
   }
 
-  function arcHint(P, fx, fy, dir) {
-    var rad = Math.hypot(P[0] - fx, P[1] - fy);
-    var a0 = Math.atan2(P[1] - fy, P[0] - fx);
-    ctx.beginPath(); ctx.arc(fx, fy, rad, a0 - dir * 0.16, a0 + dir * 0.02); ctx.stroke();
+  // draw the minor (short-way) arc of angular span `span` from angle `a`
+  function shortArc(cx, cy, r, a, span) {
+    ctx.beginPath(); ctx.arc(cx, cy, r, a, a + span, span < 0); ctx.stroke();
   }
 
   // ---- the work bars: force × distance in = out (equal areas) ----------
