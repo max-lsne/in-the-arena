@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pry — a first-class lever puts the fulcrum between your effort and the load, so a push down lifts a weight up; the advantage is the arm ratio (MA = effort arm ⁄ load arm), and moving the fulcrum trades force against travel — too far and the slab won't rise, too near and it lifts a hair</title>
+  <meta name="description" content="A pry bar is a first-class lever: the fulcrum sits between your hands and the load, so bearing down on the long arm lifts the weight on the short one — the one class that reverses the direction of a force. The advantage is pure geometry, the ratio of the arms: MA = effort arm ⁄ load arm. Set the fulcrum near the load and you get a huge force for a sliver of lift; set it near your hands and you can barely budge the slab. Between them is the placement that lifts it with the effort you have and the longest stroke it allows. Set the slab and the fulcrum and find it." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2312100b'/%3E%3Cline x1='5' y1='21' x2='27' y2='13' stroke='%234f6d8f' stroke-width='2.6' stroke-linecap='round'/%3E%3Cpath d='M18 15 L23 23 L13 23 Z' fill='none' stroke='%23b0892e' stroke-width='1.8' stroke-linejoin='round'/%3E%3Crect x='4' y='9' width='6' height='6' rx='1' fill='none' stroke='%23b06a3f' stroke-width='1.8'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#f1ece2" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#12100b" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Pry — a push down, a weight up" />
+  <meta property="og:description" content="A first-class lever puts the fulcrum between effort and load, so a push down lifts a weight up. The advantage is the arm ratio. Move the fulcrum and watch force trade against travel — too far and it won't rise, too near and it lifts a hair." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Fulcrum</a> · pry · <a href="../barrow/">barrow</a> · <a href="../cast/">cast</a> · 2026-10-04</p>
+      <p class="pron"><b>pry</b> · <i>verb</i> · /prʌɪ/ — to raise or part a thing with a lever, by putting a bar across a fixed point and bearing down on the far end; the oldest machine there is, a stick and a stone</p>
+      <h1>Pry</h1>
+      <p class="lede">A bar, a stone to rest it on, and a slab that will not move — until you put the stone in the right place.</p>
+      <p class="sub">A pry bar is the <b>first class</b> of lever, and the only one that turns a force around: the <b>fulcrum</b> sits <em>between</em> your hands and the load, so when you push the long end <em>down</em>, the short end lifts the weight <em>up</em>. All of its advantage is geometry — the <b>arm ratio</b>, how far your hands are from the fulcrum against how far the load is. Slide the fulcrum toward the slab and the ratio climbs: you can lift far more than you weigh, but the slab rises only a hair for a long push. Slide it toward your hands and the slab moves freely — but now you cannot shift it at all. The whole skill of prying is where you set the stone.</p>
+    </header>
+
+    <section id="how">
+      <p class="section-tag">Where the advantage comes from</p>
+      <h2>A rigid bar turns about one point</h2>
+      <p>Lay a bar across a fulcrum and it can do only one thing: turn about that point. Push one end down through some small arc and the other end sweeps up through the <em>same angle</em> — but the ends travel different distances, because the far end is further out. That difference in distance is the whole machine. The end that moves <em>further</em> is the end that is <em>easier</em> to move; the end that moves <em>less</em> is the end that moves with <em>more force</em>. A lever is a trade of one for the other, and nothing more.</p>
+
+      <p class="pull">A lever cannot make work. It can only spread a force over a longer distance, or gather it into a shorter one. What you gain in force you pay for, exactly, in travel.</p>
+
+      <p>Because the fulcrum is <em>between</em> the hands and the load, the two ends go opposite ways — your hands down, the load up. That reversal is the signature of the first class, and it is why a pry bar is the reach for anything pinned: a crowbar under a nail, a tyre iron under a bead, an oar against a thole. The same bar, with the fulcrum moved, is a balance, a pair of scissors, a seesaw. Move the one point and you choose the trade.</p>
+    </section>
+
+    <section id="rule">
+      <p class="section-tag">The one relation, read three ways</p>
+      <h2>Arm ratio, force, travel</h2>
+      <p>Call the distance from the fulcrum out to your hands the <span class="mono">effort arm</span>, and the distance from the fulcrum to the load the <span class="mono">load arm</span>. Take the effort you can bear down, <span class="mono">E</span>, and the weight of the slab, <span class="mono">W</span>. Idealise the bar as rigid and weightless and the fulcrum as frictionless, and the whole of it is one ratio read three ways:</p>
+
+      <ul class="law-list">
+        <li><b>The advantage is the arm ratio.</b> <span class="mono">MA = effort arm ⁄ load arm</span>. Set the fulcrum so your hands are three times as far out as the load and you push with a third of the weight — the geometry multiplies your force by three, and asks nothing else.</li>
+        <li><b>Force is multiplied by it.</b> The force delivered to the load is <span class="mono">E · MA</span>. It lifts when that reaches the weight: <span class="mono">E · MA ≥ W</span>. So the least advantage that will raise the slab is fixed by the load you have and the effort you can give — <span class="mono">MA = W ⁄ E</span> — and everything above that is margin.</li>
+        <li><b>Travel is divided by it.</b> The same ratio that multiplies force <em>divides</em> distance: the load rises <span class="mono">d ⁄ MA</span> for a hand-push of <span class="mono">d</span>. Work is conserved — <span class="mono">E · d = W · (d ⁄ MA)</span> — so a huge advantage buys a tiny lift, and you must re-set and pry again, and again.</li>
+      </ul>
+
+      <p>Those three are one fact. The arm ratio you set is the force you gain and the travel you lose, in the same breath — there is no dial for force alone. So the right place for the fulcrum is not as close to the load as it will go. It is the <em>furthest</em> point from the load that still lifts the slab: the least advantage that does the job, bought back as the longest stroke.</p>
+
+      <p class="pull">Too far from the load and the bar will not raise it. Too near and it raises it a hair. The art is the placement between, where it heaves — lifts, and lifts a useful amount.</p>
+    </section>
+
+    <section id="ladder">
+      <p class="section-tag">Four placements, from a dead slab to a nibble</p>
+      <h2>Around the one lift</h2>
+      <ol class="ladder">
+        <li><b>Strains.</b> <span class="rung-note">The fulcrum set far from the slab, out toward your hands. The load arm is long, the advantage below <span class="mono">W ⁄ E</span>, and the force the bar delivers never reaches the weight. You bear down with all you have and the slab does not stir — the geometry, not your strength, was short.</span></li>
+        <li><b>Heaves.</b> <span class="rung-note">The fulcrum placed so the advantage just clears the weight, with a little margin. The slab lifts — and lifts through the <em>longest</em> stroke this load allows, because you spent no more advantage than you had to. The whole aim: it moves, and it moves usefully.</span></li>
+        <li><b>Nibbles.</b> <span class="rung-note">The fulcrum crowded right up to the slab. The advantage is enormous and the slab rises easily — but only a sliver, because the travel was divided away. You lift, re-set the bar, lift, re-set: real work, in maddening crumbs.</span></li>
+        <li><b>Folds.</b> <span class="rung-note">The fulcrum pushed past the load, or the load so light the bar just tips. The arrangement is no longer a first-class lift at all — the ends no longer oppose, and the bar skids or flips rather than prying. The one point left its place between.</span></li>
+      </ol>
+    </section>
+
+    <section id="hands">
+      <p class="section-tag">Who sets the stone, and for what</p>
+      <h2>The same bar, three wants</h2>
+      <div class="hands">
+        <div class="hand">
+          <h3>The mover</h3>
+          <p class="role">wants it to shift at all</p>
+          <p>Faced with a block past any lift, slides the fulcrum close to it until the bar bites and the block stirs. Takes the huge advantage and the tiny stroke gladly — a crumb of motion beats a dead weight — and resets the bar as many times as the job needs.</p>
+        </div>
+        <div class="hand">
+          <h3>The fitter</h3>
+          <p class="role">wants a clean stroke</p>
+          <p>Wants the load up and <em>over</em> in one motion — a bead onto a rim, a crate onto a sill. Sets the fulcrum as far out as will still lift, trading surplus force for the longest sweep, so the thing clears in a single heave instead of a dozen.</p>
+        </div>
+        <div class="hand">
+          <h3>The weigher</h3>
+          <p class="role">wants the ratio read</p>
+          <p>Does not care to lift at all, but to <em>balance</em>: a known weight far out against an unknown near in, read off where the bar hangs level. Same first-class bar, same arm ratio — used not to multiply a force but to measure one. <span class="mono">E · a = W · b</span>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="bench">
+      <p class="section-tag">The bench</p>
+      <h2>Set the slab against the fulcrum</h2>
+      <p>A bar across a fulcrum, a heavy <b>slab</b> on the short arm, your <b>heave</b> on the long one. Set how much the slab <b>weighs</b> and where the <b>fulcrum</b> sits. Watch the arm ratio set the force the bar delivers and the stroke the slab lifts through: too far from the slab and the bar strains and will not raise it; too near and it lifts a hair and asks to be re-set. Press <em>Set the stone</em> to place the fulcrum at the furthest point that still lifts — the least advantage, the longest stroke.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div id="verdict" class="verdict v-keep" role="status" aria-live="off">
+              <span class="dot"></span><span>Heaves</span><small>lifts, and lifts a useful stroke</small>
+            </div>
+            <div class="stage" id="stage" aria-hidden="true"></div>
+            <p class="hint">
+              <b>Read it:</b> the <span class="mono">bar</span> turns about the <span class="mono">fulcrum</span>, your <span class="mono">heave</span> bearing the long arm down and the <span class="mono">slab</span> rising on the short — opposite ways, the first-class sign. The <span class="mono">work bars</span> show the trade: force × distance in equals force × distance out, equal areas always. The <span class="mono">advantage gauge</span> sets the arm ratio against the ratio this slab needs. Green when it heaves; amber when it only nibbles; oxblood when it strains dead.
+            </p>
+            <p class="hint">
+              <b>Keys:</b> <kbd>S</kbd> set the stone · <kbd>R</kbd> reset · <kbd>[</kbd> fulcrum toward you <kbd>]</kbd> toward the slab · <kbd>−</kbd>/<kbd>=</kbd> lighter / heavier slab · <kbd>space</kbd> heave again. A focused slider keeps its own arrows.
+            </p>
+            <p id="say" class="sr-only" aria-live="polite"></p>
+          </div>
+
+          <div class="controls">
+            <div class="ctl">
+              <label for="in-w">Slab <span class="val" id="lab-w">heavy</span></label>
+              <input id="in-w" type="range" min="40" max="400" step="5" value="240" />
+            </div>
+
+            <div class="ctl">
+              <label for="in-f">Fulcrum <span class="val" id="lab-f">mid-bar</span></label>
+              <input id="in-f" type="range" min="8" max="92" step="1" value="50"
+                     aria-describedby="f-note" />
+              <div class="xtrack"><span class="x-mark" id="f-mark"></span></div>
+              <p class="ctl-note" id="f-note">the furthest fulcrum that lifts: <b>—</b></p>
+            </div>
+
+            <div id="reading" class="reading"></div>
+
+            <div class="bench-actions">
+              <button class="btn" id="set" type="button">Set the stone</button>
+              <button class="btn" id="reset" type="button">Reset</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="close">
+      <p class="section-tag">The discipline in the word</p>
+      <h2>To raise a thing by where you stand on it</h2>
+      <p>To pry is not to be strong. It is to know that a weight past any lift becomes liftable the moment you put the fulcrum in the right place — and that the place is a choice, not a given. Crowd it to the load and you trade away your stroke for brute force; stand it off and you trade force for reach, until there is too little left to lift at all. The bar makes no work and keeps no secrets: whatever force it hands you, it takes back in distance, to the last foot-pound. The craft is reading the load against your own strength and setting the one point so the slab moves — and moves as far as it can for the heave you have. Too far and it strains; too near and it nibbles; and the best is rarely the most.</p>
+
+      <p>This page is one HTML file, one stylesheet, one script — no build, no account, no network once it has loaded. The bar is idealised as rigid and weightless and the pivot as frictionless, but the arithmetic is exact: the force delivered is <span class="mono">E · (effort arm ⁄ load arm)</span>, the lift is the hand-travel divided by that same ratio, and the two multiply to the one conserved product, <span class="mono">E · d<sub>in</sub> = W · d<sub>out</sub></span>.</p>
+    </section>
+
+    <footer>
+      <p>Fulcrum · pry · first of three classes for a single old working word, made the same morning. · 2026-10-04 · <a href="../">the three</a> · <a href="../../">index</a></p>
+    </footer>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
