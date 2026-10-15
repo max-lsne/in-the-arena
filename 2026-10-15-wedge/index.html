@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedge — a moving inclined plane that multiplies a push by its taper (MA = cot α) and, alone among the simple machines, can hold what it lifts: it self-locks exactly when its taper angle falls inside the friction cone, α ≤ φ, and springs back out the instant it does not</title>
+  <meta name="description" content="A wedge is an inclined plane you drive instead of climb — two shallow faces meeting at an edge, pushed in along their length to force apart whatever they enter. Its advantage is pure taper: the ideal force it delivers is cot α times the force you give it, bought back exactly in travel, the wedge creeping cot α as far as the work it moves — the same force-for-distance coin the lever trades in. What sets the wedge apart is friction, and friction is the whole of it. With a friction angle φ = arctan μ, driving a wedge in against a load W takes P = W·tan(α + φ), and backing it out takes W·tan(α − φ); so a wedge stays where it is driven — it self-locks — exactly when its taper lies inside the friction cone, α ≤ φ. That one inequality is the machine. Steepen the wedge and it delivers more work for less travel and runs more efficiently, η = tan α / tan(α + φ); but the holding margin φ − α shrinks as you do, and the instant α passes φ the load drives the wedge back out on its own. The best wedge is the steepest one that still holds — α just under φ. Set the taper, the faces and the load, and watch it bite, hold, labour, or spring." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2317140d'/%3E%3Cpath d='M5 23 L26 12 L26 23 Z' fill='none' stroke='%235b7f9c' stroke-width='2.4' stroke-linejoin='round'/%3E%3Cpath d='M5 23 L26 12' stroke='%235b7f9c' stroke-width='2.4' stroke-linecap='round'/%3E%3Cpath d='M9 9 L16 15' stroke='%23b98a34' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M12.6 9 L9 9 L9 12.6' fill='none' stroke='%23b98a34' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#141009" media="(prefers-color-scheme: dark)" />
+  <meta property="og:title" content="Wedge — a moving incline that multiplies force and, alone, can hold what it lifts" />
+  <meta property="og:description" content="A wedge trades force for distance by its taper (MA = cot α) like any lever — but friction lets it do the one thing a lever cannot: hold. It self-locks exactly when α ≤ φ = arctan μ. Steepen it for efficiency and the holding margin shrinks; past the friction cone it springs back out. Set the taper against the friction and find the steepest wedge that still holds." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow">In the arena · 2026-10-15</p>
+      <p class="pron"><b>wedge</b> · <i>noun</i> · /wɛdʒ/ — a piece tapering to a thin edge, driven between two things or into one to force them apart, lift, split, or hold fast; from Old English <i>wecg</i>, a wedge, a mass of metal — the simple machine that is an inclined plane set moving</p>
+      <h1>Wedge</h1>
+      <p class="lede">An inclined plane you <em>drive</em> instead of climb — and the one simple machine that can <em>hold</em> what it lifts.</p>
+      <p class="sub">A ramp lets a weight go up a gentle slope for a gentle push; a wedge is that ramp laid on its side and shoved endwise, so the gentle push becomes a great sideways force at the faces. Split a log, lift a shed corner, seat a machine on folding steel shims, hold an axe-head on its haft — all one shape: two shallow faces meeting at an edge, forcing apart whatever they enter. The shallower the taper the greater the force, and the further the wedge must travel to deliver it — the same trade of force for distance a lever makes. But a wedge keeps a second account the lever never opens. <b>Friction</b> along the faces can grip hard enough that the load cannot push the wedge back out — the wedge <em>self-locks</em>, and stays exactly where it was driven. That grip is the wedge's gift and its whole danger: steepen the wedge for more work and less travel and the grip thins, until, past a line the friction draws, the load spits it out the instant you stop pushing.</p>
+    </header>
+
+    <section id="how">
+      <p class="section-tag">Where the force comes from</p>
+      <h2>A ramp shoved endwise</h2>
+      <p>Picture the gentler cousin first. To raise a barrel to a ledge you roll it up a ramp: a small push along a long slope does the work a large lift would, and the ratio is pure geometry — slope length over slope height. A wedge is that same inclined plane, but instead of the load climbing a fixed ramp, the ramp is driven under the load. Give the wedge a taper half-angle <span class="mono">α</span> — the angle each face makes with the line you drive along — and every length <span class="mono">s</span> you push it in lifts the work only <span class="mono">s·tan α</span>. A shallow wedge barely lifts per inch of drive, so it must travel far; in exchange, the force it musters at the face is large.</p>
+
+      <p class="pull">The wedge creeps a long way to move the work a little — and that is exactly why the little move comes with such force. Distance in, force out: the lever's bargain, carried on an edge.</p>
+
+      <p>Idealise the faces as frictionless for a moment and the bargain is exact. The force delivered to the load is <span class="mono">cot α</span> times the force you drive with: a 10° wedge multiplies by about six, a 5° wedge by eleven. That is the wedge's <em>ideal mechanical advantage</em>, and it is bought back, to the last foot-pound, in travel — you push <span class="mono">cot α</span> times as far as the load moves, so the work in equals the work out and nothing is made. A wedge, like every simple machine, only spreads a force thin over a long path or gathers it into a short one. But no real wedge is frictionless, and in a wedge, unlike a lever, friction is not a loss to be minimised. It is the second half of the machine.</p>
+    </section>
+
+    <section id="rule">
+      <p class="section-tag">The one inequality, read three ways</p>
+      <h2>The taper, the friction cone, and what holds</h2>
+      <p>Take the taper half-angle <span class="mono">α</span>, the coefficient of friction between the faces <span class="mono">μ</span>, and from it the <em>friction angle</em> <span class="mono">φ = arctan μ</span> — the steepest slope a surface can hold a resting weight on before it slides. Drive the wedge against a resistance <span class="mono">W</span> normal to its face, and the whole of the wedge is three lines read off <span class="mono">α</span> against <span class="mono">φ</span>:</p>
+
+      <ul class="law-list">
+        <li><b>It costs more to drive, less to withdraw, than the taper alone.</b> Pushing a wedge in takes <span class="mono">P = W·tan(α + φ)</span> — the taper plus the friction, both fought on the way in. Backing it out takes <span class="mono">W·tan(α − φ)</span> — the taper now helping, the friction still resisting. Friction is added going in and subtracted coming out, so the two are never the same price.</li>
+        <li><b>It self-locks exactly inside the friction cone.</b> When <span class="mono">α ≤ φ</span> the withdrawal force <span class="mono">W·tan(α − φ)</span> turns negative: the load cannot push the wedge out — you must <em>pull</em> it. The wedge stays where it was driven. This is the one trick no lever, pulley, or gear train can do unaided: <b>hold its own output with nothing holding it.</b> A wedge is a one-way machine made of nothing but an angle and a rub.</li>
+        <li><b>Efficiency and grip pull opposite ways.</b> The fraction of your work the wedge delivers is <span class="mono">η = tan α ⁄ tan(α + φ)</span>, and it <em>rises</em> as the wedge steepens — a steeper wedge wastes less in the faces and travels less to do the job. But the holding margin <span class="mono">φ − α</span> <em>shrinks</em> as it steepens, and the instant <span class="mono">α</span> passes <span class="mono">φ</span> the wedge springs back out. So the best wedge is never the shallowest, for all its force, nor the steepest, which will not hold — it is the <em>steepest one still inside the cone</em>, <span class="mono">α</span> a hair under <span class="mono">φ</span>: the most work delivered, and still held.</li>
+      </ul>
+
+      <p>Those three are one inequality turned three ways. The friction that makes the wedge grip is the friction that makes it dear to drive; the taper that makes it efficient is the taper that lets it slip. You cannot have a wedge that is cheap to seat, holds like a vice, and comes out easily — the same angle sets all three, and reads differently in each. Choose the account you care about, and the other two are decided for you.</p>
+
+      <p class="pull">Self-locking is friction standing in for a hand. Trust the grip, and you trust the rub to stay — an oiled face, a polished one, a trace of wear, and the line moves under you.</p>
+    </section>
+
+    <section id="ladder">
+      <p class="section-tag">Four states, from a wedge that holds to one that springs</p>
+      <h2>Around the one edge</h2>
+      <ol class="ladder">
+        <li><b>Holds.</b> <span class="rung-note">The taper sits well inside the friction cone, <span class="mono">α</span> comfortably below <span class="mono">φ</span>, with efficiency enough to be worth driving. It bites, it lifts, and it stays — you can let go of it. The gib key, the cotter, the taper pin: a wedge whose whole job is to be driven once and not move again.</span></li>
+        <li><b>On the edge.</b> <span class="rung-note">The taper has crept up near the friction line, <span class="mono">α</span> just under <span class="mono">φ</span>. It still holds, and holds efficiently — but barely. A film of oil, a polished face, a little wear drops <span class="mono">φ</span> toward <span class="mono">α</span> and the grip is gone. A wedge that leans on all of its friction has nothing in reserve.</span></li>
+        <li><b>Thankless.</b> <span class="rung-note">The taper is far below the cone, <span class="mono">α ≪ φ</span>. The force is enormous and the hold is absolute — but the efficiency <span class="mono">η</span> is tiny: you drive it a vast way, most of your work turns to heat in the faces, and it is murder to get back out. Force bought far too dear in distance; a wedge that works, and that you will come to hate.</span></li>
+        <li><b>Springs.</b> <span class="rung-note">The taper has passed the friction line, <span class="mono">α &gt; φ</span>. The wedge is no longer self-locking: the load drives it straight back out the moment you stop pushing. A splitting wedge is built to want this — the halves fly, the crack runs. A holding wedge that reaches it is simply ruined.</span></li>
+      </ol>
+    </section>
+
+    <section id="hands">
+      <p class="section-tag">Who reads it, and for what</p>
+      <h2>The same edge, three ways</h2>
+      <div class="hands">
+        <div class="hand">
+          <h3>The fitter</h3>
+          <p class="role">wants it to hold</p>
+          <p>Drives a gib, a cotter, a taper key to lock a wheel on a shaft, and needs it to stay put under a day of vibration. Chooses a shallow taper well inside the friction cone — <span class="mono">α</span> safely below <span class="mono">φ</span> — and accepts the low efficiency and the hard drive as the price of a joint that never shakes loose.</p>
+        </div>
+        <div class="hand">
+          <h3>The splitter</h3>
+          <p class="role">wants it to run</p>
+          <p>Sinks a felling or splitting wedge into timber and wants the crack to open and the halves to part. A steep taper, often past the friction line, so the wood's own spring-back keeps the faces working and the wedge does not seize in a log it half-opened — it must bite, drive, and be freed for the next blow.</p>
+        </div>
+        <div class="hand">
+          <h3>The rigger</h3>
+          <p class="role">wants the steepest that still holds</p>
+          <p>Levels a machine on folding steel wedges, backing one against another under a foot that must sit to a thousandth and not creep. Picks the steepest taper the friction he can trust will still lock — <span class="mono">α</span> a hair under <span class="mono">φ</span> — so the shim seats with the least drive and holds the setting all the same.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="bench">
+      <p class="section-tag">The bench</p>
+      <h2>Set the taper against the friction</h2>
+      <p>A wedge driven under a load, between two faces that rub. Set the <b>taper</b> — how shallow or steep the wedge is — and watch the force it delivers and the travel it costs trade against each other. Choose the <b>faces</b>, from oiled steel through dry metal to a rough, rusted pair, and watch the <em>friction cone</em> <span class="mono">φ</span> widen or shrink — the line the taper must stay inside to hold. Set the <b>load</b> the wedge works against: it scales the forces but not the regime, for whether the wedge holds, labours, or springs is pure geometry and friction, set by <span class="mono">α</span> against <span class="mono">φ</span> alone. Press <em>Seat it</em> to set the steepest taper that still self-locks on these faces — the most work delivered, and still held.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div id="verdict" class="verdict v-keep" role="status" aria-live="off">
+              <span class="dot"></span><span>Holds</span><small>driven once, it stays</small>
+            </div>
+            <div class="stage" id="stage" aria-hidden="true"></div>
+            <p class="hint">
+              <b>Read it:</b> the <span class="mono">wedge</span> is driven in by your push <span class="mono">P</span> and forces the <span class="mono">load</span> up against its grip; the <span class="mono">friction cone</span> on the gauge is the band of tapers that self-lock, and the needle is where this <span class="mono">taper</span> falls. The <span class="mono">curve</span> plots efficiency and advantage against the taper, with the spring line where the hold gives out. Green while it holds; amber when it holds only barely or works thanklessly; oxblood when the taper springs the wedge back out.
+            </p>
+            <p class="hint">
+              <b>Keys:</b> <kbd>S</kbd> seat it · <kbd>R</kbd> reset · <kbd>1</kbd>–<kbd>4</kbd> pick the faces · <kbd>[</kbd> shallower <kbd>]</kbd> steeper · <kbd>−</kbd>/<kbd>=</kbd> less / more load. A focused slider keeps its own arrows.
+            </p>
+            <p id="say" class="sr-only" aria-live="polite"></p>
+          </div>
+
+          <div class="controls">
+            <div class="ctl">
+              <label for="in-taper">Taper <span class="val" id="lab-taper">12.0°</span></label>
+              <input id="in-taper" type="range" min="2" max="38" step="0.5" value="12"
+                     aria-describedby="t-note" />
+              <div class="xtrack"><span class="x-mark" id="t-mark"></span></div>
+              <p class="ctl-note" id="t-note">the steepest taper that still holds on these faces: <b>—</b></p>
+            </div>
+
+            <div class="ctl">
+              <label>Faces</label>
+              <div class="seg" role="group" aria-label="The rubbing faces">
+                <button type="button" data-faces="oiled" aria-pressed="false">oiled</button>
+                <button type="button" data-faces="steel" aria-pressed="false">steel</button>
+                <button type="button" data-faces="dry" aria-pressed="true">dry</button>
+                <button type="button" data-faces="rough" aria-pressed="false">rough</button>
+              </div>
+            </div>
+
+            <div class="ctl">
+              <label for="in-load">Load <span class="val" id="lab-load">8.0 kN</span></label>
+              <input id="in-load" type="range" min="0.5" max="24" step="0.5" value="8" />
+            </div>
+
+            <div id="reading" class="reading"></div>
+
+            <div class="bench-actions">
+              <button class="btn" id="seat" type="button">Seat it</button>
+              <button class="btn" id="reset" type="button">Reset</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="close">
+      <p class="section-tag">The discipline in the word</p>
+      <h2>An angle that stands in for a hand</h2>
+      <p>The wedge is the oldest cutting and lifting tool there is, and the simplest machine by far — nothing but an inclined plane freed from the ground and driven. Everything it does is read off one angle against one other: the taper <span class="mono">α</span> it is ground to, and the friction angle <span class="mono">φ</span> the faces happen to have. Set them side by side and the whole machine falls out. Shallow against the cone and it holds like a vice and drives like a punishment; steep and inside the cone and it holds lightly and delivers well; steep and past the cone and it will not hold at all. The force-for-distance bargain it strikes is the lever's own — the same coin the <a href="../2026-10-04-fulcrum/">fulcrum</a> counts, where the best lever is likewise the least advantage that does the job, never the most. But the self-locking the wedge gets from friction is a thing the lever cannot buy: it is the same one-way grip that makes a <a href="../2026-09-21-worm/">worm</a> gear drive its wheel and never be back-driven, and the near-cousin of the <a href="../2026-09-24-pawl/">pawl</a>, which holds a ratchet one way with a tooth where the wedge holds with an angle. A screw is only a wedge wrapped round a cylinder, and self-locks by the same inequality.</p>
+
+      <p>The discipline is to know which of the three accounts you are keeping — force, efficiency, or grip — and to spend the taper on that one, knowing it settles the other two. If you want it to hold, buy the hold with a shallow angle and pay in drive and travel; if you want it to work, steepen it toward the cone and give up the margin; and never forget that the grip you are trusting is only friction, which a drop of oil or a season of wear can take away. The wedge is an angle doing the work of a hand that holds — and like any hand, it can let go.</p>
+
+      <p>Each page is one HTML file, one stylesheet, one script. No build, no account, no network once it has loaded. The faces are idealised as flat and the load as a single normal force, but the shape is exact: the advantage runs as <span class="mono">cot α</span>, the drive-in force as <span class="mono">W·tan(α + φ)</span>, the efficiency as <span class="mono">tan α ⁄ tan(α + φ)</span>, and the wedge self-locks on exactly the one condition that <span class="mono">α ≤ φ</span>.</p>
+    </section>
+
+    <footer>
+      <p>In the arena · one page a day, each built on a single old working word and the discipline hidden inside it. · 2026-10-15 · <a href="../">index</a></p>
+    </footer>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
