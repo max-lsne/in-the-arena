@@ -164,6 +164,10 @@
       ['Friction cone <span class="tag c">φ</span>', deg(r.phiDeg) + '<span class="unit"> · holds if α ≤ φ</span>', ""],
       ['Advantage <span class="tag">MA</span>', times(r.maReal) + '<span class="unit"> · force ÷ push</span>', ""],
       ['Drive-in <span class="tag">P</span>', kn(r.drive) + '<span class="unit"> · W·tan(α+φ)</span>', ""],
+      [r.holds ? 'Free it <span class="tag">P′</span>' : 'It ejects <span class="tag">P′</span>',
+        (r.holds ? kn(r.extract) + '<span class="unit"> · pull to free</span>'
+                 : kn(r.extract) + '<span class="unit"> · load frees it</span>'),
+        r.holds ? "good" : "bad"],
       ['Efficiency <span class="tag">η</span>', pct(r.eta) + '<span class="unit"> · work out ÷ in</span>', etaClass],
       ["Holding margin", holdVal, holdClass]
     ];
@@ -202,7 +206,7 @@
   var canvas = document.createElement("canvas");
   var ctx = canvas.getContext("2d");
   stageEl.appendChild(canvas);
-  var W = 560, H = 470, DPR = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+  var W = 560, H = 540, DPR = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
 
   function sizeCanvas() {
     canvas.width = W * DPR; canvas.height = H * DPR;
@@ -242,6 +246,7 @@
     drawScene(col, accent, cur);
     drawCurve(col, accent, cur);
     drawWork(col, accent, cur);
+    drawHoldBar(col, accent, cur);
     drawGauge(col, accent, cur);
   }
 
@@ -452,14 +457,50 @@
     label(ctx, col.faint, "η = work out ÷ work in", ix + iw / 2, iy + ih - 12, "center");
   }
 
+  // ---- the force bar: what it takes to drive in, and to free it ---------
+  // The crux of self-locking, read as two forces on one scale: the push P that
+  // drives the wedge in, and what the back-out costs. When it holds, freeing it
+  // takes a pull — the load alone cannot; when it springs, the load ejects it.
+  function drawHoldBar(col, accent, cur) {
+    var bx = 24, by = 404, bw = W - 48, bh = 56;
+    ctx.fillStyle = withAlpha(col.field2, 0.9);
+    roundRect(bx, by, bw, bh, 8); ctx.fill();
+    ctx.strokeStyle = col.rule; ctx.lineWidth = 1; ctx.stroke();
+    label(ctx, col.faint, "the force to drive in, and to free it", bx + 12, by + 15, "left");
+
+    var fx0 = 150, fx1 = W - 44;
+    var fmax = Math.max(cur.drive, cur.extract, 0.5) * 1.12;
+    var len = function (f) { return clamp(f, 0, fmax) / fmax * (fx1 - fx0); };
+
+    // row 1 — the push that drives it in, P = W·tan(α+φ)
+    var y1 = by + 30;
+    label(ctx, col.ink, "drive in", bx + 12, y1 + 3, "left");
+    ctx.fillStyle = withAlpha(cur.verdict === "springs" ? col.dead : col.iron, 0.55);
+    roundRect(fx0, y1 - 6, Math.max(2, len(cur.drive)), 10, 3); ctx.fill();
+    label(ctx, col.iron2, kn(cur.drive), fx0 + len(cur.drive) + 6, y1 + 3, "left");
+
+    // row 2 — what the back-out costs: a pull to free (holds) or the load's eject (springs)
+    var y2 = by + 46;
+    label(ctx, col.ink, cur.holds ? "free it" : "it ejects", bx + 12, y2 + 3, "left");
+    var bc = cur.holds ? col.timber : col.dead;
+    ctx.fillStyle = withAlpha(bc, cur.holds ? 0.5 : 0.55);
+    roundRect(fx0, y2 - 6, Math.max(2, len(cur.extract)), 10, 3); ctx.fill();
+    var tail = cur.holds ? kn(cur.extract) + " pull — it holds" : kn(cur.extract) + " — the load frees it";
+    label(ctx, cur.holds ? col.timber2 : col.dead, tail, fx0 + len(cur.extract) + 6, y2 + 3, "left");
+
+    // the shared zero the bars grow from
+    ctx.strokeStyle = withAlpha(col.faint, 0.4); ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(fx0, y1 - 10); ctx.lineTo(fx0, y2 + 10); ctx.stroke();
+  }
+
   // ---- the gauge: the taper against the friction cone -------------------
   function drawGauge(col, accent, cur) {
-    var bx = 24, by = 404, bw = W - 48, bh = 52;
+    var bx = 24, by = 474, bw = W - 48, bh = 52;
     ctx.fillStyle = withAlpha(col.field2, 0.96);
     roundRect(bx, by, bw, bh, 8); ctx.fill();
     ctx.strokeStyle = col.rule; ctx.lineWidth = 1; ctx.stroke();
 
-    var gx0 = 60, gx1 = W - 70, gy = 434;
+    var gx0 = 60, gx1 = W - 70, gy = 504;
     var xFor = function (a) { return gx0 + clamp(a, A_MIN, A_MAX) / A_MAX * (gx1 - gx0); };
 
     ctx.strokeStyle = col.rule; ctx.lineWidth = 1;

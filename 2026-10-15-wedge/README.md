@@ -73,13 +73,15 @@ scales the forces but not the regime. Press *Seat it* to set the steepest taper 
 self-locks on these faces — the most work delivered, and still held.
 
 The panel reads the taper and its travel ratio `1:cot α`, the friction cone `φ` the faces
-give, the advantage `MA = cot(α + φ)`, the drive-in force `P = W·tan(α + φ)`, the efficiency
-`η`, and the holding margin `φ − α` — positive while it holds, negative when it springs. The
-curve plots efficiency rising and advantage falling against the taper, with the spring line
-at `α = φ` and the band just inside it where the hold grows thin; the work panel splits your
-effort into the share that reaches the load and the share lost to friction in the faces; and
-the gauge below sets the taper against the friction cone, green where it self-locks, amber on
-the edge, oxblood where it springs.
+give, the advantage `MA = cot(α + φ)`, the drive-in force `P = W·tan(α + φ)`, the force to
+free it `P′ = W·tan(α − φ)`, the efficiency `η`, and the holding margin `φ − α` — positive
+while it holds, negative when it springs. The curve plots efficiency rising and advantage
+falling against the taper, with the spring line at `α = φ` and the band just inside it where
+the hold grows thin; the work panel splits your effort into the share that reaches the load
+and the share lost to friction in the faces; the force bar sets the push that drives it in
+against what the back-out costs — a pull to free it while it holds, the load's own eject once
+it springs; and the gauge below sets the taper against the friction cone, green where it
+self-locks, amber on the edge, oxblood where it springs.
 
 The taper, the faces and the load are kept in `localStorage`, so a reader finds the bench as
 they left it. A live status line (`aria-live`) reads each state to a screen reader — the
