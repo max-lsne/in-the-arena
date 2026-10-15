@@ -81,7 +81,9 @@ the hold grows thin; the work panel splits your effort into the share that reach
 and the share lost to friction in the faces; the force bar sets the push that drives it in
 against what the back-out costs — a pull to free it while it holds, the load's own eject once
 it springs; and the gauge below sets the taper against the friction cone, green where it
-self-locks, amber on the edge, oxblood where it springs.
+self-locks, amber on the edge, oxblood where it springs — with a faint brass line marking
+where that cone would shrink to if the faces were oiled, a reminder that the grip you trust
+is only friction, and friction can go.
 
 The taper, the faces and the load are kept in `localStorage`, so a reader finds the bench as
 they left it. A live status line (`aria-live`) reads each state to a screen reader — the
