@@ -191,7 +191,7 @@
     seatMark.style.left = frac(seat) + "%";
 
     if (!r.holds) tNote.innerHTML = "springs — steepen below the cone; it self-locks at <b>" + deg(r.phiDeg) + "</b> and under";
-    else if (r.verdict === "edge") tNote.innerHTML = "on the edge of the cone — a safer seat is <b>" + deg(seat) + "</b>";
+    else if (r.verdict === "edge") tNote.innerHTML = "on the edge — a drop of oil would free it; a safer seat is <b>" + deg(seat) + "</b>";
     else if (Math.abs(state.taper - seat) <= A_STEP + 1e-6) tNote.innerHTML = "the steepest taper that still holds here: <b>" + deg(seat) + "</b>";
     else if (state.taper < seat) tNote.innerHTML = "room to steepen — still holds up to <b>" + deg(seat) + "</b>";
     else tNote.innerHTML = "past the safe seat of <b>" + deg(seat) + "</b> — near the spring line";
@@ -332,7 +332,7 @@
     // f — friction along the face; up the slope while driving in, down it as it ejects
     var flen = springs ? -22 : 22;
     arrow(ctx, col.timber2, contactX, contactY + 2, contactX - Math.cos(aRad) * flen, contactY + 2 + Math.sin(aRad) * flen, 1.4, 5);
-    label(ctx, col.timber2, "f = μN", contactX + 8, contactY + 17, "left");
+    label(ctx, col.timber2, "f = μN", contactX + 4, contactY + 18, "left");
 
     // P — the push driving the wedge in, on its thick end
     var pCol = springs ? col.dead : col.iron;
@@ -342,7 +342,7 @@
     // the taper angle, an arc at the thin edge between anvil and upper face
     ctx.strokeStyle = withAlpha(springs ? col.dead : col.iron2, 0.85); ctx.lineWidth = 1.2;
     ctx.beginPath(); ctx.arc(edgeX, baseY, 26, Math.PI, Math.PI + aRad, false); ctx.stroke();
-    label(ctx, springs ? col.dead : col.iron2, "α " + deg(cur.aDeg), edgeX - 42, baseY - 8, "center");
+    label(ctx, springs ? col.dead : col.iron2, "α " + deg(cur.aDeg), edgeX - 32, baseY - 7, "center");
 
     // the caption, top-left so it never meets the load label
     if (springs) label(ctx, col.dead, driveFrac < 0.5 ? "it springs back out" : "no hold — the load ejects it", 48, 26, "left");
@@ -523,6 +523,17 @@
     ctx.strokeStyle = withAlpha(col.dead, 0.85); ctx.lineWidth = 1.6;
     ctx.beginPath(); ctx.moveTo(coneX, gy - 12); ctx.lineTo(coneX, gy + 12); ctx.stroke();
     label(ctx, col.faint, "φ " + deg(cur.phiDeg), coneX, gy + 22, "center");
+
+    // where the cone would fall if the faces were oiled (μ halved) — the hold moves
+    // left, toward the taper. The grip you trust is only friction, and friction can go.
+    if (cur.faces !== "oiled") {
+      var phiOil = Math.atan(cur.f.mu * 0.5) / DEG;
+      var oilX = xFor(phiOil);
+      ctx.strokeStyle = withAlpha(col.timber2, 0.8); ctx.lineWidth = 1.3; ctx.setLineDash([2, 3]);
+      ctx.beginPath(); ctx.moveTo(oilX, gy - 8); ctx.lineTo(oilX, gy + 8); ctx.stroke();
+      ctx.setLineDash([]);
+      label(ctx, col.timber2, "oiled", oilX - 4, gy + 22, "right");
+    }
 
     label(ctx, col.faint, "taper α inside the friction cone — self-locks left of φ", (gx0 + gx1) / 2, gy - 15, "center");
     label(ctx, col.faint, A_MAX + "°", maxX, gy + 22, "right");
