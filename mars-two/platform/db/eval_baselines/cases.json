@@ -1,0 +1,2201 @@
+{
+  "generator_version": "1",
+  "seed": 20260912,
+  "as_of": "2026-09-12",
+  "cases": [
+    {
+      "detector": "churn_risk",
+      "company": "clausemark",
+      "subject": "CLA-C0002",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 7,
+        "score": 0.4911,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "clausemark",
+      "subject": "CLA-C0008",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 10,
+        "score": 0.1904,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "clausemark",
+      "subject": "CLA-C0009",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 8,
+        "score": 0.2835,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "clausemark",
+      "subject": "CLA-C0023",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 9,
+        "score": 0.2,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "clausemark",
+      "subject": "CLA-C0038",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 6,
+        "score": 0.7411,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "deskwright",
+      "subject": "DES-C0004",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 8,
+        "score": 0.6935,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "deskwright",
+      "subject": "DES-C0008",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 9,
+        "score": 0.6708,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "deskwright",
+      "subject": "DES-C0077",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 7,
+        "score": 0.706,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "deskwright",
+      "subject": "DES-C0105",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 10,
+        "score": 0.6697,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "deskwright",
+      "subject": "DES-C0108",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 6,
+        "score": 0.73,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "meterpath",
+      "subject": "MET-C0014",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 9,
+        "score": 0.6968,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "meterpath",
+      "subject": "MET-C0031",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 8,
+        "score": 0.7,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "meterpath",
+      "subject": "MET-C0033",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 6,
+        "score": 0.7298,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "meterpath",
+      "subject": "MET-C0042",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 10,
+        "score": 0.529,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "meterpath",
+      "subject": "MET-C0050",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 7,
+        "score": 0.7201,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "northquay",
+      "subject": "NOR-C0015",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 7,
+        "score": 0.7359,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "northquay",
+      "subject": "NOR-C0024",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 8,
+        "score": 0.7354,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "northquay",
+      "subject": "NOR-C0046",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 6,
+        "score": 0.7436,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "northquay",
+      "subject": "NOR-C0049",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 9,
+        "score": 0.7282,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "northquay",
+      "subject": "NOR-C0052",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 10,
+        "score": 0.7209,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "roomcast",
+      "subject": "ROO-C0016",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 10,
+        "score": 0.6854,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "roomcast",
+      "subject": "ROO-C0032",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 6,
+        "score": 0.7254,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "roomcast",
+      "subject": "ROO-C0038",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 8,
+        "score": 0.7156,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "roomcast",
+      "subject": "ROO-C0061",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 7,
+        "score": 0.7205,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "roomcast",
+      "subject": "ROO-C0102",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 9,
+        "score": 0.7047,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "sayline",
+      "subject": "SAY-C0005",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 10,
+        "score": 0.2,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "sayline",
+      "subject": "SAY-C0016",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 6,
+        "score": 0.6782,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "sayline",
+      "subject": "SAY-C0038",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 8,
+        "score": 0.2133,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "sayline",
+      "subject": "SAY-C0053",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 7,
+        "score": 0.4669,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "sayline",
+      "subject": "SAY-C0067",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 9,
+        "score": 0.2,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "tidyrecord",
+      "subject": "TID-C0001",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 7,
+        "score": 0.708,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "tidyrecord",
+      "subject": "TID-C0003",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 9,
+        "score": 0.5016,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "tidyrecord",
+      "subject": "TID-C0018",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 10,
+        "score": 0.3683,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "tidyrecord",
+      "subject": "TID-C0045",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 6,
+        "score": 0.7527,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "tidyrecord",
+      "subject": "TID-C0049",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 8,
+        "score": 0.5509,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "vaultline",
+      "subject": "VAU-C0004",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 10,
+        "score": 0.2717,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "vaultline",
+      "subject": "VAU-C0005",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 8,
+        "score": 0.5559,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "vaultline",
+      "subject": "VAU-C0012",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 6,
+        "score": 0.723,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "vaultline",
+      "subject": "VAU-C0045",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 9,
+        "score": 0.5286,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "vaultline",
+      "subject": "VAU-C0087",
+      "planted": null,
+      "found": {
+        "kind": "ranked",
+        "rank": 7,
+        "score": 0.7189,
+        "within_recall_k": false
+      },
+      "verdict": "unplanted"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "clausemark",
+      "subject": "CLA-C0001",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 4,
+        "score": 0.8004,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "clausemark",
+      "subject": "CLA-C0004",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 1,
+        "score": 0.8683,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "clausemark",
+      "subject": "CLA-C0007",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 2,
+        "score": 0.8497,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "clausemark",
+      "subject": "CLA-C0011",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 3,
+        "score": 0.8008,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "clausemark",
+      "subject": "CLA-C0029",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 5,
+        "score": 0.7945,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "deskwright",
+      "subject": "DES-C0042",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 3,
+        "score": 0.8022,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "deskwright",
+      "subject": "DES-C0073",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 4,
+        "score": 0.8017,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "deskwright",
+      "subject": "DES-C0085",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 1,
+        "score": 0.8536,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "deskwright",
+      "subject": "DES-C0098",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 2,
+        "score": 0.8246,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "deskwright",
+      "subject": "DES-C0106",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 5,
+        "score": 0.7934,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "meterpath",
+      "subject": "MET-C0009",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 3,
+        "score": 0.8021,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "meterpath",
+      "subject": "MET-C0010",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 4,
+        "score": 0.7999,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "meterpath",
+      "subject": "MET-C0023",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 1,
+        "score": 0.8403,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "meterpath",
+      "subject": "MET-C0051",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 5,
+        "score": 0.7995,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "meterpath",
+      "subject": "MET-C0060",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 2,
+        "score": 0.804,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "northquay",
+      "subject": "NOR-C0008",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 1,
+        "score": 0.8009,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "northquay",
+      "subject": "NOR-C0013",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 5,
+        "score": 0.7951,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "northquay",
+      "subject": "NOR-C0029",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 4,
+        "score": 0.7964,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "northquay",
+      "subject": "NOR-C0034",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 2,
+        "score": 0.7994,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "northquay",
+      "subject": "NOR-C0040",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 3,
+        "score": 0.7992,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "roomcast",
+      "subject": "ROO-C0013",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 5,
+        "score": 0.7986,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "roomcast",
+      "subject": "ROO-C0062",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 3,
+        "score": 0.835,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "roomcast",
+      "subject": "ROO-C0076",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 1,
+        "score": 0.8482,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "roomcast",
+      "subject": "ROO-C0087",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 2,
+        "score": 0.8353,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "roomcast",
+      "subject": "ROO-C0108",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 4,
+        "score": 0.8206,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "sayline",
+      "subject": "SAY-C0009",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 4,
+        "score": 0.7979,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "sayline",
+      "subject": "SAY-C0033",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 5,
+        "score": 0.7908,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "sayline",
+      "subject": "SAY-C0048",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 1,
+        "score": 0.8461,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "sayline",
+      "subject": "SAY-C0049",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 2,
+        "score": 0.8404,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "sayline",
+      "subject": "SAY-C0072",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 3,
+        "score": 0.8385,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "tidyrecord",
+      "subject": "TID-C0008",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 4,
+        "score": 0.8002,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "tidyrecord",
+      "subject": "TID-C0023",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 1,
+        "score": 0.8515,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "tidyrecord",
+      "subject": "TID-C0029",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 3,
+        "score": 0.8007,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "tidyrecord",
+      "subject": "TID-C0048",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 2,
+        "score": 0.8473,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "tidyrecord",
+      "subject": "TID-C0054",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 5,
+        "score": 0.7964,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "vaultline",
+      "subject": "VAU-C0008",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 5,
+        "score": 0.7976,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "vaultline",
+      "subject": "VAU-C0061",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 4,
+        "score": 0.801,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "vaultline",
+      "subject": "VAU-C0074",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 3,
+        "score": 0.8018,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "vaultline",
+      "subject": "VAU-C0076",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 1,
+        "score": 0.8789,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "churn_risk",
+      "company": "vaultline",
+      "subject": "VAU-C0077",
+      "planted": {
+        "kind": "at_risk"
+      },
+      "found": {
+        "kind": "ranked",
+        "rank": 2,
+        "score": 0.863,
+        "within_recall_k": true
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "clausemark",
+      "subject": "CLA-A0035-DUP",
+      "planted": {
+        "kind": "duplicate_account"
+      },
+      "found": {
+        "kind": "duplicate_account"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "clausemark",
+      "subject": "CLA-O00001",
+      "planted": {
+        "kind": "close_date_in_past"
+      },
+      "found": {
+        "kind": "close_date_in_past"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "clausemark",
+      "subject": "CLA-O00002",
+      "planted": {
+        "kind": "close_date_in_past"
+      },
+      "found": {
+        "kind": "close_date_in_past"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "clausemark",
+      "subject": "CLA-O00171",
+      "planted": {
+        "kind": "amount_contradicts_contract"
+      },
+      "found": {
+        "kind": "amount_contradicts_contract"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "deskwright",
+      "subject": "DES-A0046",
+      "planted": {
+        "kind": "owner_departed"
+      },
+      "found": {
+        "kind": "owner_departed"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "deskwright",
+      "subject": "DES-A0120-DUP",
+      "planted": {
+        "kind": "duplicate_account"
+      },
+      "found": {
+        "kind": "duplicate_account"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "deskwright",
+      "subject": "DES-O00001",
+      "planted": {
+        "kind": "close_date_in_past"
+      },
+      "found": {
+        "kind": "close_date_in_past"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "deskwright",
+      "subject": "DES-O00006",
+      "planted": {
+        "kind": "close_date_in_past"
+      },
+      "found": {
+        "kind": "close_date_in_past"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "deskwright",
+      "subject": "DES-O00596",
+      "planted": {
+        "kind": "amount_contradicts_contract"
+      },
+      "found": {
+        "kind": "amount_contradicts_contract"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "meterpath",
+      "subject": "MET-A0011-DUP",
+      "planted": {
+        "kind": "duplicate_account"
+      },
+      "found": {
+        "kind": "duplicate_account"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "meterpath",
+      "subject": "MET-A0018",
+      "planted": {
+        "kind": "owner_departed"
+      },
+      "found": {
+        "kind": "owner_departed"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "meterpath",
+      "subject": "MET-O00001",
+      "planted": {
+        "kind": "close_date_in_past"
+      },
+      "found": {
+        "kind": "close_date_in_past"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "meterpath",
+      "subject": "MET-O00006",
+      "planted": {
+        "kind": "close_date_in_past"
+      },
+      "found": {
+        "kind": "close_date_in_past"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "meterpath",
+      "subject": "MET-O00051",
+      "planted": {
+        "kind": "amount_contradicts_contract"
+      },
+      "found": {
+        "kind": "amount_contradicts_contract"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "northquay",
+      "subject": "NOR-A0031-DUP",
+      "planted": {
+        "kind": "duplicate_account"
+      },
+      "found": {
+        "kind": "duplicate_account"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "northquay",
+      "subject": "NOR-A0048",
+      "planted": {
+        "kind": "owner_departed"
+      },
+      "found": {
+        "kind": "owner_departed"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "northquay",
+      "subject": "NOR-O00001",
+      "planted": {
+        "kind": "close_date_in_past"
+      },
+      "found": {
+        "kind": "close_date_in_past"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "northquay",
+      "subject": "NOR-O00002",
+      "planted": {
+        "kind": "close_date_in_past"
+      },
+      "found": {
+        "kind": "close_date_in_past"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "northquay",
+      "subject": "NOR-O00151",
+      "planted": {
+        "kind": "amount_contradicts_contract"
+      },
+      "found": {
+        "kind": "amount_contradicts_contract"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "roomcast",
+      "subject": "ROO-A0005",
+      "planted": {
+        "kind": "owner_departed"
+      },
+      "found": {
+        "kind": "owner_departed"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "roomcast",
+      "subject": "ROO-A0081-DUP",
+      "planted": {
+        "kind": "duplicate_account"
+      },
+      "found": {
+        "kind": "duplicate_account"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "roomcast",
+      "subject": "ROO-O00001",
+      "planted": {
+        "kind": "close_date_in_past"
+      },
+      "found": {
+        "kind": "close_date_in_past"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "roomcast",
+      "subject": "ROO-O00006",
+      "planted": {
+        "kind": "close_date_in_past"
+      },
+      "found": {
+        "kind": "close_date_in_past"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "roomcast",
+      "subject": "ROO-O00401",
+      "planted": {
+        "kind": "amount_contradicts_contract"
+      },
+      "found": {
+        "kind": "amount_contradicts_contract"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "sayline",
+      "subject": "SAY-A0005",
+      "planted": {
+        "kind": "owner_departed"
+      },
+      "found": {
+        "kind": "owner_departed"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "sayline",
+      "subject": "SAY-A0029-DUP",
+      "planted": {
+        "kind": "duplicate_account"
+      },
+      "found": {
+        "kind": "duplicate_account"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "sayline",
+      "subject": "SAY-O00001",
+      "planted": {
+        "kind": "close_date_in_past"
+      },
+      "found": {
+        "kind": "close_date_in_past"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "sayline",
+      "subject": "SAY-O00002",
+      "planted": {
+        "kind": "close_date_in_past"
+      },
+      "found": {
+        "kind": "close_date_in_past"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "sayline",
+      "subject": "SAY-O00141",
+      "planted": {
+        "kind": "amount_contradicts_contract"
+      },
+      "found": {
+        "kind": "amount_contradicts_contract"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "tidyrecord",
+      "subject": "TID-A0040-DUP",
+      "planted": {
+        "kind": "duplicate_account"
+      },
+      "found": {
+        "kind": "duplicate_account"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "tidyrecord",
+      "subject": "TID-O00001",
+      "planted": {
+        "kind": "close_date_in_past"
+      },
+      "found": {
+        "kind": "close_date_in_past"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "tidyrecord",
+      "subject": "TID-O00011",
+      "planted": {
+        "kind": "close_date_in_past"
+      },
+      "found": {
+        "kind": "close_date_in_past"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "tidyrecord",
+      "subject": "TID-O00196",
+      "planted": {
+        "kind": "amount_contradicts_contract"
+      },
+      "found": {
+        "kind": "amount_contradicts_contract"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "vaultline",
+      "subject": "VAU-A0087",
+      "planted": {
+        "kind": "owner_departed"
+      },
+      "found": {
+        "kind": "owner_departed"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "vaultline",
+      "subject": "VAU-A0106-DUP",
+      "planted": {
+        "kind": "duplicate_account"
+      },
+      "found": {
+        "kind": "duplicate_account"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "vaultline",
+      "subject": "VAU-O00001",
+      "planted": {
+        "kind": "close_date_in_past"
+      },
+      "found": {
+        "kind": "close_date_in_past"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "crm_hygiene",
+      "company": "vaultline",
+      "subject": "VAU-O00006",
+      "planted": {
+        "kind": "close_date_in_past"
+      },
+      "found": {
+        "kind": "close_date_in_past"
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "onboarding_stalls",
+      "company": "deskwright",
+      "subject": "DES-C0027",
+      "planted": {
+        "kind": "Admin training"
+      },
+      "found": {
+        "kind": "Admin training",
+        "days_blocked": 119
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "onboarding_stalls",
+      "company": "deskwright",
+      "subject": "DES-C0032",
+      "planted": {
+        "kind": "Tenant provisioned"
+      },
+      "found": {
+        "kind": "Tenant provisioned",
+        "days_blocked": 70
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "onboarding_stalls",
+      "company": "meterpath",
+      "subject": "MET-C0016",
+      "planted": {
+        "kind": "Pilot group live"
+      },
+      "found": {
+        "kind": "Pilot group live",
+        "days_blocked": 59
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "onboarding_stalls",
+      "company": "meterpath",
+      "subject": "MET-C0036",
+      "planted": {
+        "kind": "Admin training"
+      },
+      "found": {
+        "kind": "Admin training",
+        "days_blocked": 45
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "onboarding_stalls",
+      "company": "northquay",
+      "subject": "NOR-C0001",
+      "planted": {
+        "kind": "Identity integration"
+      },
+      "found": {
+        "kind": "Identity integration",
+        "days_blocked": 83
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "onboarding_stalls",
+      "company": "northquay",
+      "subject": "NOR-C0008",
+      "planted": {
+        "kind": "Kickoff call"
+      },
+      "found": {
+        "kind": "Kickoff call",
+        "days_blocked": 135
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "onboarding_stalls",
+      "company": "roomcast",
+      "subject": "ROO-C0006",
+      "planted": {
+        "kind": "Identity integration"
+      },
+      "found": {
+        "kind": "Identity integration",
+        "days_blocked": 52
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "onboarding_stalls",
+      "company": "roomcast",
+      "subject": "ROO-C0026",
+      "planted": {
+        "kind": "Admin training"
+      },
+      "found": {
+        "kind": "Admin training",
+        "days_blocked": 103
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "onboarding_stalls",
+      "company": "sayline",
+      "subject": "SAY-C0002",
+      "planted": {
+        "kind": "Full rollout signed off"
+      },
+      "found": {
+        "kind": "Full rollout signed off",
+        "days_blocked": 61
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "onboarding_stalls",
+      "company": "sayline",
+      "subject": "SAY-C0031",
+      "planted": {
+        "kind": "Identity integration"
+      },
+      "found": {
+        "kind": "Identity integration",
+        "days_blocked": 95
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "onboarding_stalls",
+      "company": "tidyrecord",
+      "subject": "TID-C0007",
+      "planted": {
+        "kind": "Tenant provisioned"
+      },
+      "found": {
+        "kind": "Tenant provisioned",
+        "days_blocked": 45
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "onboarding_stalls",
+      "company": "tidyrecord",
+      "subject": "TID-C0022",
+      "planted": {
+        "kind": "Pilot group live"
+      },
+      "found": {
+        "kind": "Pilot group live",
+        "days_blocked": 123
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "onboarding_stalls",
+      "company": "vaultline",
+      "subject": "VAU-C0005",
+      "planted": {
+        "kind": "Kickoff call"
+      },
+      "found": {
+        "kind": "Kickoff call",
+        "days_blocked": 104
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "onboarding_stalls",
+      "company": "vaultline",
+      "subject": "VAU-C0025",
+      "planted": {
+        "kind": "Tenant provisioned"
+      },
+      "found": {
+        "kind": "Tenant provisioned",
+        "days_blocked": 65
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "clausemark",
+      "subject": "CLA-0017",
+      "planted": {
+        "kind": "seat_growth_unbilled",
+        "amount_cents": 6765335
+      },
+      "found": {
+        "kind": "seat_growth_unbilled",
+        "amount_cents": 6765335
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "clausemark",
+      "subject": "CLA-0022",
+      "planted": {
+        "kind": "uplift_not_applied",
+        "amount_cents": 148270
+      },
+      "found": {
+        "kind": "uplift_not_applied",
+        "amount_cents": 148270
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "clausemark",
+      "subject": "CLA-0026",
+      "planted": {
+        "kind": "expired_discount_still_applied",
+        "amount_cents": 693326
+      },
+      "found": {
+        "kind": "expired_discount_still_applied",
+        "amount_cents": 693326
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "clausemark",
+      "subject": "CLA-0039",
+      "planted": {
+        "kind": "currency_mismatch",
+        "amount_cents": 838986
+      },
+      "found": {
+        "kind": "currency_mismatch",
+        "amount_cents": 838986
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "deskwright",
+      "subject": "DES-0081",
+      "planted": {
+        "kind": "uplift_not_applied",
+        "amount_cents": 2998257
+      },
+      "found": {
+        "kind": "uplift_not_applied",
+        "amount_cents": 2998257
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "deskwright",
+      "subject": "DES-0082",
+      "planted": {
+        "kind": "expired_discount_still_applied",
+        "amount_cents": 3346176
+      },
+      "found": {
+        "kind": "expired_discount_still_applied",
+        "amount_cents": 3346176
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "deskwright",
+      "subject": "DES-0110",
+      "planted": {
+        "kind": "currency_mismatch",
+        "amount_cents": 38190
+      },
+      "found": {
+        "kind": "currency_mismatch",
+        "amount_cents": 38190
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "deskwright",
+      "subject": "DES-0111",
+      "planted": {
+        "kind": "seat_growth_unbilled",
+        "amount_cents": 49535
+      },
+      "found": {
+        "kind": "seat_growth_unbilled",
+        "amount_cents": 49535
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "meterpath",
+      "subject": "MET-0008",
+      "planted": {
+        "kind": "seat_growth_unbilled",
+        "amount_cents": 33803
+      },
+      "found": {
+        "kind": "seat_growth_unbilled",
+        "amount_cents": 33803
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "meterpath",
+      "subject": "MET-0023",
+      "planted": {
+        "kind": "currency_mismatch",
+        "amount_cents": 201558
+      },
+      "found": {
+        "kind": "currency_mismatch",
+        "amount_cents": 201558
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "meterpath",
+      "subject": "MET-0037",
+      "planted": {
+        "kind": "uplift_not_applied",
+        "amount_cents": 1911880
+      },
+      "found": {
+        "kind": "uplift_not_applied",
+        "amount_cents": 1911880
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "meterpath",
+      "subject": "MET-0038",
+      "planted": {
+        "kind": "expired_discount_still_applied",
+        "amount_cents": 4728336
+      },
+      "found": {
+        "kind": "expired_discount_still_applied",
+        "amount_cents": 4728336
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "northquay",
+      "subject": "NOR-0029",
+      "planted": {
+        "kind": "uplift_not_applied",
+        "amount_cents": 502370
+      },
+      "found": {
+        "kind": "uplift_not_applied",
+        "amount_cents": 502370
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "northquay",
+      "subject": "NOR-0031",
+      "planted": {
+        "kind": "currency_mismatch",
+        "amount_cents": 40788
+      },
+      "found": {
+        "kind": "currency_mismatch",
+        "amount_cents": 40788
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "northquay",
+      "subject": "NOR-0048",
+      "planted": {
+        "kind": "seat_growth_unbilled",
+        "amount_cents": 1146702
+      },
+      "found": {
+        "kind": "seat_growth_unbilled",
+        "amount_cents": 1146702
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "northquay",
+      "subject": "NOR-0049",
+      "planted": {
+        "kind": "expired_discount_still_applied",
+        "amount_cents": 1461888
+      },
+      "found": {
+        "kind": "expired_discount_still_applied",
+        "amount_cents": 1461888
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "roomcast",
+      "subject": "ROO-0010",
+      "planted": {
+        "kind": "expired_discount_still_applied",
+        "amount_cents": 1198896
+      },
+      "found": {
+        "kind": "expired_discount_still_applied",
+        "amount_cents": 1198896
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "roomcast",
+      "subject": "ROO-0025",
+      "planted": {
+        "kind": "seat_growth_unbilled",
+        "amount_cents": 10979250
+      },
+      "found": {
+        "kind": "seat_growth_unbilled",
+        "amount_cents": 10979250
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "roomcast",
+      "subject": "ROO-0064",
+      "planted": {
+        "kind": "currency_mismatch",
+        "amount_cents": 256392
+      },
+      "found": {
+        "kind": "currency_mismatch",
+        "amount_cents": 256392
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "roomcast",
+      "subject": "ROO-0108",
+      "planted": {
+        "kind": "uplift_not_applied",
+        "amount_cents": 584460
+      },
+      "found": {
+        "kind": "uplift_not_applied",
+        "amount_cents": 584460
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "sayline",
+      "subject": "SAY-0010",
+      "planted": {
+        "kind": "seat_growth_unbilled",
+        "amount_cents": 817828
+      },
+      "found": {
+        "kind": "seat_growth_unbilled",
+        "amount_cents": 817828
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "sayline",
+      "subject": "SAY-0037",
+      "planted": {
+        "kind": "currency_mismatch",
+        "amount_cents": 537072
+      },
+      "found": {
+        "kind": "currency_mismatch",
+        "amount_cents": 537072
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "sayline",
+      "subject": "SAY-0054",
+      "planted": {
+        "kind": "uplift_not_applied",
+        "amount_cents": 4145906
+      },
+      "found": {
+        "kind": "uplift_not_applied",
+        "amount_cents": 4145906
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "sayline",
+      "subject": "SAY-0069",
+      "planted": {
+        "kind": "expired_discount_still_applied",
+        "amount_cents": 348260
+      },
+      "found": {
+        "kind": "expired_discount_still_applied",
+        "amount_cents": 348260
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "tidyrecord",
+      "subject": "TID-0008",
+      "planted": {
+        "kind": "currency_mismatch",
+        "amount_cents": 125526
+      },
+      "found": {
+        "kind": "currency_mismatch",
+        "amount_cents": 125526
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "tidyrecord",
+      "subject": "TID-0016",
+      "planted": {
+        "kind": "expired_discount_still_applied",
+        "amount_cents": 687528
+      },
+      "found": {
+        "kind": "expired_discount_still_applied",
+        "amount_cents": 687528
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "tidyrecord",
+      "subject": "TID-0028",
+      "planted": {
+        "kind": "seat_growth_unbilled",
+        "amount_cents": 573996
+      },
+      "found": {
+        "kind": "seat_growth_unbilled",
+        "amount_cents": 573996
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "tidyrecord",
+      "subject": "TID-0040",
+      "planted": {
+        "kind": "uplift_not_applied",
+        "amount_cents": 584298
+      },
+      "found": {
+        "kind": "uplift_not_applied",
+        "amount_cents": 584298
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "vaultline",
+      "subject": "VAU-0036",
+      "planted": {
+        "kind": "uplift_not_applied",
+        "amount_cents": 26255
+      },
+      "found": {
+        "kind": "uplift_not_applied",
+        "amount_cents": 26255
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "vaultline",
+      "subject": "VAU-0040",
+      "planted": {
+        "kind": "currency_mismatch",
+        "amount_cents": 722922
+      },
+      "found": {
+        "kind": "currency_mismatch",
+        "amount_cents": 722922
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "vaultline",
+      "subject": "VAU-0050",
+      "planted": {
+        "kind": "seat_growth_unbilled",
+        "amount_cents": 188085
+      },
+      "found": {
+        "kind": "seat_growth_unbilled",
+        "amount_cents": 188085
+      },
+      "verdict": "match"
+    },
+    {
+      "detector": "revenue_leakage",
+      "company": "vaultline",
+      "subject": "VAU-0102",
+      "planted": {
+        "kind": "expired_discount_still_applied",
+        "amount_cents": 1504320
+      },
+      "found": {
+        "kind": "expired_discount_still_applied",
+        "amount_cents": 1504320
+      },
+      "verdict": "match"
+    }
+  ]
+}

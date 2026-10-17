@@ -1,0 +1,68 @@
+/* Design tokens, from docs/design/brief.md. Values are not invented here. */
+
+:root {
+  --ground: #edeff1;
+  --surface: #f8f9fa;
+  --ink: #1a2430;
+  --ink-soft: #5a6875;
+  --rule: #d3d9de;
+  --focus: #2b4c7e;
+
+  /* Deviation. Never the only signal: a value outside its band is also drawn
+     outside the band, so the display works without colour vision. */
+  --below: #b23a48;
+  --above: #2e7d6b;
+
+  /* Eight company hues, held at similar lightness so no company reads as more
+     important than another. */
+  --co-vaultline: #3d5a8a;
+  --co-meterpath: #9a5b32;
+  --co-northquay: #4a7a54;
+  --co-deskwright: #7a4a82;
+  --co-sayline: #b0763b;
+  --co-tidyrecord: #2f7b8c;
+  --co-roomcast: #a34a5e;
+  --co-clausemark: #5c6470;
+
+  --measure: 62ch;
+  --gutter: clamp(16px, 3vw, 40px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: Archivo, "Helvetica Neue", Arial, sans-serif;
+  font-variation-settings: "wdth" 100;
+  /* Digits align vertically in a column. That is what makes a register
+     scannable, and it is the functional half of the instinct that usually
+     reaches for a monospace face. */
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Motion answers a click. It does not announce a page. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

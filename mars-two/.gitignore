@@ -1,0 +1,23 @@
+.env
+.env.local
+*.log
+node_modules/
+.DS_Store
+
+platform/log/
+platform/tmp/
+platform/storage/
+platform/.bundle/
+platform/vendor/bundle/
+
+intelligence/.venv/
+intelligence/__pycache__/
+intelligence/**/__pycache__/
+intelligence/.pytest_cache/
+intelligence/.ruff_cache/
+
+web/dist/
+web/.vite/
+
+# Eval run outputs are regenerated; baselines are committed
+intelligence/evals/runs/
