@@ -68,8 +68,11 @@ single shear line, the **bitting** `Lᵢ` (the cut key, each stack's lift — se
 the binding pin amber), which pin is binding now, how many of `n` are set, and the plug's
 rotation from locked to open. The scene colours each driver by its state: oxblood where it
 still crosses the seam and holds, amber for the one pin binding under torque, green for a break
-brought to the shear line. The gauge below shows the plug barred from turning until the last
-pin sets, then swinging free, with a dot per stack filling as it sets and the binding one ringed.
+brought to the shear line. A **binding-order panel** ranks the stacks by how far each chamber
+drifts off the true line — the ladder a pick climbs, top to bottom, set rungs going green and
+the one binding now called out; collapse the tolerance and the bars collapse with it, the order
+gone. The gauge below shows the plug barred from turning until the last pin sets, then swinging
+free, with a dot per stack filling as it sets and the binding one ringed.
 
 The pins and tolerance are kept in `localStorage`, so a reader finds the bench as they left it;
 the cut key is kept too, so the same lock greets them until they rekey. A live status line
