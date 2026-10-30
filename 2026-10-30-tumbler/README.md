@@ -85,13 +85,20 @@ the one binding now called out; collapse the tolerance and the bars collapse wit
 gone. The gauge below shows the plug barred from turning until the last pin sets, then swinging
 free, with a dot per stack filling as it sets and the binding one ringed.
 
-The pins and tolerance are kept in `localStorage`, so a reader finds the bench as they left it;
-the cut key is kept too, so the same lock greets them until they rekey. A live status line
-(`aria-live`) reads each state to a screen reader — the lock, how true it is cut, which pin
-binds, how many are set, and whether it is locked, binding, or open — debounced past slider
-drags. Under `prefers-reduced-motion` the pins and plug are shown at their settled places
-rather than animated, and *Pick it* resolves straight to the open arrangement; a live change to
-the setting is honoured. The whole bench works from the keyboard — <kbd>K</kbd> inserts the
+The pins, tolerance and drivers are kept in `localStorage`, so a reader finds the bench as they
+left it; the cut key is kept too, so the same lock greets them until they rekey. A live status
+line (`aria-live`) reads the bench to a screen reader, and it is written to be *followed*, not
+just sampled: each pick step is spoken as it happens — "pin 3 set", "pin 1 caught in a false
+set", "spool pin 4 cleared, the plug counter-rotates" — so the binding order is audible in
+sequence, led by the event just taken and then the running state (the lock, how true it is cut,
+how many are set and how many false, which pin binds, and whether it is locked, binding, in a
+false set, or open). A discrete action speaks at once; a slider drag is debounced so it does not
+chatter. The canvas carries its own live label for when a pointer or focus lands on it, and each
+control names its keyboard shortcut (`aria-keyshortcuts`). Under `prefers-reduced-motion` the
+pins and plug are shown at their settled places rather than animated, and *Pick it* resolves
+straight to the open arrangement; a live change to the setting is honoured — turn it on mid-pick
+and the run settles to its finished state rather than animating the rest. The whole bench works
+from the keyboard. The whole bench works from the keyboard — <kbd>K</kbd> inserts the
 key, <kbd>P</kbd> picks it, <kbd>N</kbd> sets the next pin, <kbd>X</kbd> rekeys, <kbd>D</kbd>
 toggles standard drivers and spools, <kbd>R</kbd> resets, <kbd>[</kbd>/<kbd>]</kbd> remove and
 add pins, and <kbd>−</kbd>/<kbd>=</kbd> tighten and loosen the tolerance.
