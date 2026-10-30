@@ -42,6 +42,16 @@ torque you put on the plug to turn it; and the one figure the catalogue never pr
 Tighten the tolerance and the lock grows harder to pick, dearer to make, and — past a point no
 lock reaches — impossible to pick and useless without its key.
 
+A driver pinning the plug is the same trick as a [wedge](../2026-10-15-wedge/) that self-locks
+or a [pawl](../2026-09-24-pawl/) whose tooth drops behind a ratchet: a part that holds by sitting
+across a line it is not meant to cross. The spool's false set, where the plug gives a little and
+then takes it back, is cousin to the one-way grip of the [worm](../2026-09-21-worm/) that drives
+its wheel and will not be back-driven. But what no machine in that company shares is the tumbler's
+flaw-as-method: the [fulcrum](../2026-10-04-fulcrum/) and the wedge both reward the *least* that
+does the job and punish excess, yet neither can be undone by exploiting how badly it was built.
+The lock alone hands its secret up, one pin at a time, *because* it was made a little wrong — and
+the better it is made, the less it will yield to anything but the key.
+
 ## Four states
 
 - **Locked** — no key, no torque. Springs hold every break below the shear line; every driver
