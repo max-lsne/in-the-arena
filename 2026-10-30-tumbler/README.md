@@ -56,17 +56,28 @@ lock reaches — impossible to pick and useless without its key.
 ## The bench
 
 A pin-tumbler lock in cross-section: a plug that wants to turn inside a fixed shell, a row of
-spring-loaded stacks crossing the shear line between them. Set the number of **pins** and the
-**tolerance** the chambers are cut to. Press *Insert key* to raise every break to the line at
-once and watch the plug swing free; press *Pick it* to put torque on the plug and let it set
-the pins one at a time, in binding order; or *Set next pin* to take that order a rung at a time
-yourself. *Rekey* cuts a fresh bitting. Drop the tolerance to zero and the pick stalls — with
-no pin binding first, there is no order to climb, and only the key will open it.
+spring-loaded stacks crossing the shear line between them. Set the number of **pins**, the
+**tolerance** the chambers are cut to, and whether the drivers are **standard** or **spools**.
+Press *Insert key* to raise every break to the line at once and watch the plug swing free;
+press *Pick it* to put torque on the plug and let it set the pins one at a time, in binding
+order; or *Set next pin* to take that order a rung at a time yourself. *Rekey* cuts a fresh
+bitting. Drop the tolerance to zero and the pick stalls — with no pin binding first, there is
+no order to climb, and only the key will open it.
+
+Fit **spool drivers** and the pick meets the lock's own counter-measure. A spool is a driver
+waisted in the middle; when it reaches the shear line the plug rotates into the groove instead
+of stopping, giving a **false set** — the plug over-rotates and feels nearly open, but the
+spool's rim is caught on the seam and the lock is not open at all. The fresh binds run as
+before, but each spool catches false rather than setting; then a second pass clears them, and
+as each spool is pushed past its rim the plug *counter-rotates* a notch — the backward give
+that tells a picker a security pin has just set. It is the same shear line, read through a pin
+built to lie about where it is.
 
 The panel reads the pins, the tolerance (and whether it leaves a binding order to climb), the
-single shear line, the **bitting** `Lᵢ` (the cut key, each stack's lift — set pins shown green,
-the binding pin amber), which pin is binding now, how many of `n` are set, and the plug's
-rotation from locked to open. The scene colours each driver by its state: oxblood where it
+drivers (standard, or how many are spools), the **bitting** `Lᵢ` (the cut key, each stack's
+lift — set pins shown green, the binding pin amber), which pin is binding now and whether it is
+a spool, how many of `n` are set and how many caught in a false set, and the plug's rotation
+from locked to open. The scene colours each driver by its state: oxblood where it
 still crosses the seam and holds, amber for the one pin binding under torque, green for a break
 brought to the shear line. A **binding-order panel** ranks the stacks by how far each chamber
 drifts off the true line — the ladder a pick climbs, top to bottom, set rungs going green and
@@ -81,9 +92,9 @@ binds, how many are set, and whether it is locked, binding, or open — debounce
 drags. Under `prefers-reduced-motion` the pins and plug are shown at their settled places
 rather than animated, and *Pick it* resolves straight to the open arrangement; a live change to
 the setting is honoured. The whole bench works from the keyboard — <kbd>K</kbd> inserts the
-key, <kbd>P</kbd> picks it, <kbd>N</kbd> sets the next pin, <kbd>X</kbd> rekeys, <kbd>R</kbd>
-resets, <kbd>[</kbd>/<kbd>]</kbd> remove and add pins, and <kbd>−</kbd>/<kbd>=</kbd> tighten and
-loosen the tolerance.
+key, <kbd>P</kbd> picks it, <kbd>N</kbd> sets the next pin, <kbd>X</kbd> rekeys, <kbd>D</kbd>
+toggles standard drivers and spools, <kbd>R</kbd> resets, <kbd>[</kbd>/<kbd>]</kbd> remove and
+add pins, and <kbd>−</kbd>/<kbd>=</kbd> tighten and loosen the tolerance.
 
 Each page is one HTML file, one stylesheet, one script. No build, no account, no network once
 it has loaded. The chambers are idealised and the plug's turn is drawn as a slide, but the

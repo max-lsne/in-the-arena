@@ -107,6 +107,13 @@
               <input type="range" id="in-tol" min="0" max="100" step="5" value="55" />
               <p class="ctl-note" id="tol-note"></p>
             </div>
+            <div class="ctl">
+              <label id="lab-sec">Drivers</label>
+              <div class="seg" id="seg-sec" role="group" aria-labelledby="lab-sec">
+                <button type="button" data-sec="0" aria-pressed="true">standard</button>
+                <button type="button" data-sec="1" aria-pressed="false">spools</button>
+              </div>
+            </div>
             <div class="reading" id="reading"></div>
           </div>
         </div>
@@ -124,7 +131,8 @@
           <b>Pick it</b> puts torque on the plug and sets the pins in binding order; <b>Set next pin</b> takes that order one rung at a time.
           The <em>shear line</em> is the seam between plug and shell; a driver crossing it is what holds.
           The <em>binding-order panel</em> ranks the chambers by how far each drifts off the true line — the ladder a pick climbs, top to bottom.
-          <b>Rekey</b> cuts a fresh bitting. Keys: <kbd>K</kbd> key, <kbd>P</kbd> pick, <kbd>N</kbd> set next, <kbd>X</kbd> rekey, <kbd>R</kbd> reset,
+          Fit <b>spool</b> drivers and each catches in a <em>false set</em> before it clears — the plug over-rotates, then counter-rotates as it lets go.
+          <b>Rekey</b> cuts a fresh bitting. Keys: <kbd>K</kbd> key, <kbd>P</kbd> pick, <kbd>N</kbd> set next, <kbd>X</kbd> rekey, <kbd>D</kbd> drivers, <kbd>R</kbd> reset,
           <kbd>[</kbd>/<kbd>]</kbd> fewer/more pins, <kbd>−</kbd>/<kbd>=</kbd> tighter/looser tolerance.
         </p>
         <p class="sr-only" id="say" role="status" aria-live="polite"></p>
