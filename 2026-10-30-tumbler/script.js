@@ -201,7 +201,7 @@
   var canvas = document.createElement("canvas");
   var ctx = canvas.getContext("2d");
   stageEl.appendChild(canvas);
-  var W = 560, H = 430, DPR = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+  var W = 560, H = 556, DPR = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
 
   function sizeCanvas() {
     canvas.width = W * DPR; canvas.height = H * DPR;
@@ -251,6 +251,7 @@
     };
     ctx.clearRect(0, 0, W, H);
     drawLock(col);
+    drawBindingPanel(col);
     drawGauge(col);
   }
 
@@ -419,9 +420,59 @@
     }
   }
 
+  // ---- the binding-order panel: why tolerance makes a sequence ----------
+  // Each chamber sits a little off the true line; under torque the plug binds on the one
+  // offset furthest in the turning direction, and sets in that order. The panel plots the
+  // offset of each stack (signed, to the right binds sooner), ranked top to bottom — the
+  // ladder a pick climbs. Collapse the tolerance and the bars collapse: no offset, no order.
+  function drawBindingPanel(col) {
+    var bx = 24, by = 298, bw = W - 48, bh = 130;
+    ctx.fillStyle = withAlpha(col.field2, 0.9);
+    roundRect(bx, by, bw, bh, 8); ctx.fill();
+    ctx.strokeStyle = col.rule; ctx.lineWidth = 1; ctx.stroke();
+    label(ctx, col.faint, "binding order — the chambers' drift off the true line, ranked", bx + 12, by + 18, "left");
+
+    var n = state.pins, b = bindingPin(), open = sim.mode === "open";
+    var zeroX = bx + 150;                         // the true line; bars grow right (binds sooner) or left
+    var barMax = (bx + bw - 20) - zeroX;          // room to the right
+    var rowH = Math.min(17, (bh - 36) / Math.max(1, n));
+    var y0 = by + 30;
+
+    // the true line
+    ctx.strokeStyle = withAlpha(col.ink, 0.22); ctx.lineWidth = 1; ctx.setLineDash([2, 3]);
+    ctx.beginPath(); ctx.moveTo(zeroX, y0 - 4); ctx.lineTo(zeroX, y0 + rowH * n + 2); ctx.stroke();
+    ctx.setLineDash([]);
+    label(ctx, col.faint, "true", zeroX, by + bh - 6, "center");
+
+    if (!hasOrder()) {
+      label(ctx, col.dead, "machined true — every chamber on the line, no pin binds first", (bx + bw) / 2, y0 + rowH * n / 2 + 4, "center");
+      return;
+    }
+
+    for (var r = 0; r < n; r++) {
+      var i = order[r], y = y0 + r * rowH + rowH / 2;
+      var set = sim.set[i] || open;
+      var off = dir[i] * tolFrac();               // −1..1 scaled by tolerance
+      var c = set ? col.keep : (i === b ? col.drift : col.steel2);
+
+      // rank + which pin
+      label(ctx, set ? col.keep : (i === b ? col.drift : col.faint), (r + 1) + ".", bx + 14, y + 3, "left");
+      label(ctx, set ? col.keep : (i === b ? col.drift : col.soft), "pin " + (i + 1), bx + 36, y + 3, "left");
+
+      // the signed offset bar
+      var len = off * barMax * 0.9;
+      ctx.fillStyle = withAlpha(c, set ? 0.5 : (i === b ? 0.6 : 0.35));
+      var bxs = len >= 0 ? zeroX : zeroX + len;
+      roundRect(bxs, y - 4, Math.max(2, Math.abs(len)), 8, 2); ctx.fill();
+
+      if (i === b && !open) label(ctx, col.drift, "binds now", zeroX + Math.max(len, 8) + 8, y + 3, "left");
+      else if (set) label(ctx, col.keep, "set", zeroX + (len >= 0 ? len : 0) + 8, y + 3, "left");
+    }
+  }
+
   // ---- the gauge: the plug from locked to open, and the pins set --------
   function drawGauge(col) {
-    var bx = 24, by = 300, bw = W - 48, bh = 110;
+    var bx = 24, by = 438, bw = W - 48, bh = 110;
     ctx.fillStyle = withAlpha(col.field2, 0.9);
     roundRect(bx, by, bw, bh, 8); ctx.fill();
     ctx.strokeStyle = col.rule; ctx.lineWidth = 1; ctx.stroke();
