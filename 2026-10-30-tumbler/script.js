@@ -459,22 +459,25 @@
 
   function drawPick(col, shift, b) {
     // a tension wrench putting torque on the plug, and the pick at the binding pin
-    var ty = PLUG_BOT - 13;
+    var ty = PLUG_BOT - 13, open = sim.mode === "open";
     ctx.strokeStyle = withAlpha(col.steel2, 0.85); ctx.lineWidth = 2.4; ctx.lineCap = "round";
     ctx.beginPath(); ctx.moveTo(FX0 + 20 + shift, ty); ctx.lineTo(FX1 - 70 + shift, ty); ctx.stroke();
     ctx.lineCap = "butt";
-    // torque arrow, in the direction the plug turns
-    arrow(ctx, col.steel2, FX0 + 44 + shift, ty + 12, FX0 + 70 + shift, ty + 12, 1.6, 6);
-    label(ctx, col.steel2, "torque", FX0 + 24 + shift, ty + 16, "left");
+    if (!open) {
+      // torque arrow, in the direction the plug turns, while it is still being worked
+      arrow(ctx, col.steel2, FX0 + 46 + shift, ty + 13, FX0 + 72 + shift, ty + 13, 1.6, 6);
+      label(ctx, col.steel2, "torque", FX0 + 6 + shift, ty + 16, "left");
+    } else {
+      // open: the tension is simply held; no active turning arrow to crowd the label
+      label(ctx, col.steel2, "tension held", FX0 + 24 + shift, ty + 16, "left");
+    }
     // the pick itself, reaching up to the binding pin
-    if (b >= 0 && sim.mode !== "open") {
+    if (b >= 0 && !open) {
       var x = pinX(b);
       ctx.strokeStyle = withAlpha(col.ink, 0.6); ctx.lineWidth = 1.6; ctx.lineCap = "round";
       ctx.beginPath(); ctx.moveTo(FX1 - 70 + shift, ty - 2); ctx.lineTo(x + shift, breakY(b) + 10); ctx.stroke();
       ctx.lineCap = "butt";
       label(ctx, col.soft, "pick", FX1 - 66 + shift, PLUG_BOT + 2, "left");
-    } else if (sim.mode === "open") {
-      label(ctx, col.steel2, "tension held", FX0 + 24 + shift, PLUG_BOT + 2, "left");
     }
   }
 
@@ -515,15 +518,15 @@
       var c = set ? col.keep : (fls || i === b ? col.drift : col.steel2);
       var nameCol = set ? col.keep : (fls || i === b ? col.drift : col.soft);
 
-      // rank + which pin (a spool marked)
-      label(ctx, set ? col.keep : (fls || i === b ? col.drift : col.faint), (r + 1) + ".", bx + 14, y + 3, "left");
-      label(ctx, nameCol, "pin " + (i + 1) + (isSpool(i) ? "◦" : ""), bx + 36, y + 3, "left");
-
-      // the signed offset bar
+      // the signed offset bar, drawn first so the rank and pin labels stay legible over it
       var len = off * barMax * 0.9;
       ctx.fillStyle = withAlpha(c, set ? 0.5 : (fls || i === b ? 0.6 : 0.35));
       var bxs = len >= 0 ? zeroX : zeroX + len;
       roundRect(bxs, y - 4, Math.max(2, Math.abs(len)), 8, 2); ctx.fill();
+
+      // rank + which pin (a spool marked)
+      label(ctx, set ? col.keep : (fls || i === b ? col.drift : col.faint), (r + 1) + ".", bx + 14, y + 3, "left");
+      label(ctx, nameCol, "pin " + (i + 1) + (isSpool(i) ? "◦" : ""), bx + 36, y + 3, "left");
 
       var tx = zeroX + (len >= 0 ? len : 0) + 8;
       if (i === b && !open) label(ctx, col.drift, sim.falseSet[i] ? "clear now" : "binds now", tx, y + 3, "left");
