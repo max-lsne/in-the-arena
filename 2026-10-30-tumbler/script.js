@@ -49,7 +49,8 @@
       return {
         pins: clampInt(o.pins, PINS_MIN, PINS_MAX),
         tol: clamp(Math.round(+o.tol / 5) * 5, 0, 100),
-        seed: (o.seed | 0) || 1
+        seed: (o.seed | 0) || 1,
+        security: o.security ? 1 : 0
       };
     } catch (e) { return null; }
   }
@@ -57,31 +58,38 @@
     try { window.localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
   }
 
-  var state = loadState() || { pins: PINS_DEF, tol: 55, seed: (Date.now() & 0x7fffffff) || 1 };
+  var state = loadState() || { pins: PINS_DEF, tol: 55, seed: (Date.now() & 0x7fffffff) || 1, security: 0 };
 
   // the cut lock: a bitting Lᵢ (how far each stack must rise to the shear line) and a drift
   // dirᵢ in [-1,1] (how far off-line each chamber sits). Binding order is the drift, ranked.
-  var L = [], dir = [], order = [];
+  var L = [], dir = [], order = [], spoolBase = [];
   function cutLock() {
     var rb = mulberry32(state.seed);
     var rd = mulberry32(state.seed ^ 0x9e3779b9);
-    L = []; dir = [];
+    var rs = mulberry32(state.seed ^ 0x85ebca6b);
+    L = []; dir = []; spoolBase = [];
     for (var i = 0; i < state.pins; i++) {
       L.push(1 + Math.floor(rb() * CUT_LEVELS));      // 1..CUT_LEVELS
       dir.push(rd() * 2 - 1);                          // −1..1
+      spoolBase.push(rs() < 0.55);                     // which drivers would be spools, if fitted
     }
     // avoid a key that is one flat depth — a lock worth drawing has shoulders
     var flat = L.every(function (v) { return v === L[0]; });
     if (flat) L[Math.floor(state.pins / 2)] = ((L[0] + 1) % CUT_LEVELS) + 1;
+    // a security cylinder worth the name has at least one spool to catch on
+    if (!spoolBase.some(Boolean)) spoolBase[Math.floor(state.pins / 2)] = true;
     order = L.map(function (_, i) { return i; }).sort(function (a, b) { return dir[b] - dir[a]; });
   }
   cutLock();
+  function isSpool(i) { return !!(state.security && spoolBase[i]); }
+  function spoolCount() { var c = 0; for (var i = 0; i < state.pins; i++) if (isSpool(i)) c++; return c; }
 
   // the live interaction, not persisted: a lock is always found relocked
   var sim = {
     mode: "locked",      // locked | picking | open
     openedBy: null,      // "key" | "pick"
-    set: [],             // which drivers are trapped above the shear line
+    set: [],             // which drivers are trapped above the shear line (truly set)
+    falseSet: [],        // spool drivers caught on their rim — a false set, not open
     stalled: false,      // a pick was attempted with no binding order
     lift: [],            // animated lift per stack, in cut units
     rot: 0               // animated plug rotation, 0..1
@@ -89,8 +97,8 @@
   function relock() {
     stopPick();
     sim.mode = "locked"; sim.openedBy = null; sim.stalled = false;
-    sim.set = []; for (var i = 0; i < state.pins; i++) sim.set.push(false);
-    sim.lift = []; for (var j = 0; j < state.pins; j++) sim.lift.push(0);
+    sim.set = []; sim.falseSet = []; sim.lift = [];
+    for (var i = 0; i < state.pins; i++) { sim.set.push(false); sim.falseSet.push(false); sim.lift.push(0); }
     sim.rot = 0;
   }
   relock();
@@ -98,22 +106,35 @@
   function tolFrac() { return state.tol / 100; }
   function hasOrder() { return tolFrac() >= TOL_FLOOR; }
   function setsCount() { var c = 0; for (var i = 0; i < sim.set.length; i++) if (sim.set[i]) c++; return c; }
-  // the pin now carrying the torque: first in binding order that is not yet set
+  function falseCount() { var c = 0; for (var i = 0; i < sim.falseSet.length; i++) if (sim.falseSet[i] && !sim.set[i]) c++; return c; }
+
+  // the next stack to work, and whether this is a fresh bind or a spool to clear:
+  // first run the fresh binds in order (standard pins set, spools catch false), then come
+  // back and clear the spools that are falsely set — the pass that counter-rotates the plug.
+  function nextToAct() {
+    var k, i;
+    for (k = 0; k < order.length; k++) { i = order[k]; if (!sim.set[i] && !sim.falseSet[i]) return { i: i, fresh: true }; }
+    for (k = 0; k < order.length; k++) { i = order[k]; if (!sim.set[i] && sim.falseSet[i]) return { i: i, fresh: false }; }
+    return { i: -1, fresh: true };
+  }
+  // the pin now carrying the torque (for the scene's highlight)
   function bindingPin() {
     if (sim.mode !== "picking" || !hasOrder()) return -1;
-    for (var k = 0; k < order.length; k++) if (!sim.set[order[k]]) return order[k];
-    return -1;
+    return nextToAct().i;
   }
 
   // ---- targets the animation eases toward ------------------------------
   function liftTarget(i) {
     if (sim.mode === "open" || sim.openedBy === "key") return L[i];   // key raises every stack to the line
     if (sim.set[i]) return L[i];                                      // a set stack is parked at the line
+    if (sim.falseSet[i]) return Math.max(0, L[i] - 0.7);              // caught on the spool rim, a touch short
     return 0;                                                         // slack: resting at the bottom
   }
   function rotTarget() {
     if (sim.mode === "open") return 1;
-    if (sim.mode === "picking") return clamp(0.05 + 0.05 * setsCount(), 0, 0.32);  // the plug creeps as pins set
+    // the plug creeps as pins set; a false set over-rotates further than a true set, so
+    // clearing a spool (false → true) makes the plug counter-rotate — the pick's tell
+    if (sim.mode === "picking") return clamp(0.05 + 0.05 * setsCount() + 0.13 * falseCount(), 0, 0.52);
     return 0;
   }
 
@@ -123,6 +144,7 @@
   var labPins = $("lab-pins"), labTol = $("lab-tol"), tolNote = $("tol-note");
   var verdictEl = $("verdict"), readingEl = $("reading"), stageEl = $("stage"), sayEl = $("say");
   var btnKey = $("key"), btnPick = $("pick"), btnStep = $("step"), btnRekey = $("rekey"), btnReset = $("reset");
+  var secBtns = Array.prototype.slice.call(document.querySelectorAll("#seg-sec [data-sec]"));
 
   inPins.min = PINS_MIN; inPins.max = PINS_MAX;
 
@@ -138,6 +160,7 @@
     labPins.textContent = state.pins;
     labTol.textContent = TOL_WORD(tolFrac());
     inPins.value = state.pins; inTol.value = state.tol;
+    secBtns.forEach(function (bn) { bn.setAttribute("aria-pressed", String(+bn.dataset.sec === state.security)); });
     var k = setsCount(), n = state.pins;
     btnStep.disabled = sim.mode === "open";
     btnPick.disabled = sim.mode === "open";
@@ -147,25 +170,31 @@
     } else if (sim.mode === "open") {
       tolNote.innerHTML = sim.openedBy === "key" ? "open — the key answered every pin at once" : "open — picked, " + n + " pins in binding order";
     } else if (sim.mode === "picking") {
-      tolNote.innerHTML = "picking — <b>" + k + " of " + n + "</b> set, binding on pin " + (bindingPin() + 1);
+      var f = falseCount(), bp = bindingPin();
+      tolNote.innerHTML = f > 0
+        ? "false set — <b class=\"warn\">" + f + " spool" + (f > 1 ? "s" : "") + " caught</b>; clear " + (sim.falseSet[bp] ? "pin " + (bp + 1) : "it") + " and the plug counter-rotates"
+        : "picking — <b>" + k + " of " + n + "</b> set, binding on pin " + (bp + 1);
     } else {
-      tolNote.innerHTML = "the looser the fit, the sharper the order a pick can climb";
+      tolNote.innerHTML = state.security
+        ? "spools catch false before they set — the plug gives, then takes it back"
+        : "the looser the fit, the sharper the order a pick can climb";
     }
   }
 
   var VERDICT = {
     locked:  { cls: "v-rest",  word: "Locked",  note: "every driver across the seam" },
     picking: { cls: "v-drift", word: "Binding", note: "one pin carries the torque" },
+    falseSet:{ cls: "v-drift", word: "False set", note: "the plug caught on a spool rim" },
     stalled: { cls: "v-rest",  word: "Machined true", note: "no binding order — key only" },
     openKey: { cls: "v-keep",  word: "Open",    note: "the key answered it whole" },
     openPick:{ cls: "v-keep",  word: "Open",    note: "picked, pin by pin" }
   };
 
   function render() {
-    var n = state.pins, k = setsCount(), b = bindingPin();
+    var n = state.pins, k = setsCount(), f = falseCount(), b = bindingPin();
     var v;
     if (sim.mode === "open") v = sim.openedBy === "key" ? VERDICT.openKey : VERDICT.openPick;
-    else if (sim.mode === "picking") v = sim.stalled && !hasOrder() ? VERDICT.stalled : VERDICT.picking;
+    else if (sim.mode === "picking") v = sim.stalled && !hasOrder() ? VERDICT.stalled : (f > 0 ? VERDICT.falseSet : VERDICT.picking);
     else v = sim.stalled && !hasOrder() ? VERDICT.stalled : VERDICT.locked;
 
     verdictEl.className = "verdict " + v.cls;
@@ -180,16 +209,18 @@
       : sim.rot > 0.01 ? pct(sim.rot) + '<span class="unit"> turned</span>'
       : '<span class="unit">at rest</span>';
 
-    var setClass = k === n && n > 0 ? "good" : k > 0 ? "warn" : "";
-    var bindVal = b >= 0 ? '<span class="warn">pin ' + (b + 1) + "</span>" : (sim.mode === "open" ? "—" : (!hasOrder() ? '<span class="bad">none</span>' : "—"));
+    var setClass = k === n && n > 0 ? "good" : (f > 0 ? "warn" : (k > 0 ? "warn" : ""));
+    var bindVal = b >= 0 ? '<span class="warn">pin ' + (b + 1) + (isSpool(b) ? " · spool" : "") + "</span>" : (sim.mode === "open" ? "—" : (!hasOrder() ? '<span class="bad">none</span>' : "—"));
+    var setVal = k + " of " + n + (f > 0 ? '<span class="unit"> · ' + f + " false</span>" : "");
+    var secVal = state.security ? '<span class="warn">spools ×' + spoolCount() + "</span>" : '<span class="unit">standard</span>';
 
     var rows = [
       ["Pins <span class=\"tag s\">n</span>", n + '<span class="unit"> stacks</span>', ""],
       ["Tolerance", TOL_WORD(tolFrac()) + '<span class="unit"> · ' + (hasOrder() ? "has order" : "no order") + "</span>", hasOrder() ? "" : "bad"],
-      ["Shear line", '1 plane<span class="unit"> · all breaks</span>', ""],
+      ["Drivers", secVal, ""],
       ["Bitting <span class=\"tag\">Lᵢ</span>", '<span style="letter-spacing:.14em">' + bitting + "</span>", ""],
       ["Binding", bindVal, ""],
-      ["Set", k + " of " + n, setClass],
+      ["Set", setVal, setClass],
       ["Plug", plugVal, ""]
     ];
     readingEl.innerHTML = rows.map(function (row) {
@@ -294,32 +325,36 @@
     for (var i = 0; i < state.pins; i++) {
       var x = pinX(i);
       var set = sim.set[i] || open;
+      var fls = sim.falseSet[i] && !sim.set[i] && !open;    // a spool caught false
+      var spool = isSpool(i);
       var bk = breakY(i);
       var atLine = Math.abs(bk - SL) < 0.8;
-      // the key pin rides with the plug; a set or opened pin shows its sheared seam
-      var keyShift = set ? shift : 0;
+      // the key pin rides with the plug; a set, false-set or opened pin shows its sheared seam
+      var keyShift = (set || fls) ? shift : 0;
 
       // spring in the shell, compressing as the driver rises
       drawSpring(col, x, SHELL_TOP + 2, bk - DRV - 2);
 
-      // driver pin (upper) — anchored to the shell, fixed in x
-      var dCol = set ? col.keep : (i === b ? col.drift : (bk > SL + 0.8 ? col.dead : col.steel2));
-      pinBar(col, x, bk - DRV, bk, dCol, false);
+      // driver pin (upper) — anchored to the shell, fixed in x; a spool is waisted
+      var dCol = set ? col.keep : (fls ? col.drift : (i === b ? col.drift : (bk > SL + 0.8 ? col.dead : col.steel2)));
+      pinBar(col, x, bk - DRV, bk, dCol, false, spool);
 
       // key pin (lower) — anchored to the plug, slides with it
       var kBottom = Math.min(PLUG_BOT - 14, bk + (PLUG_BOT - 20 - SL));
-      var kCol = set ? col.keep : (i === b ? col.drift : col.brass2);
-      pinBar(col, x + keyShift, bk, kBottom, kCol, true);
+      var kCol = set ? col.keep : (fls ? col.drift : (i === b ? col.drift : col.brass2));
+      pinBar(col, x + keyShift, bk, kBottom, kCol, true, false);
 
       // the break marker — green on the line, else its state colour
-      ctx.fillStyle = atLine ? col.keep : (i === b ? col.drift : (bk > SL ? col.dead : col.brass2));
+      ctx.fillStyle = atLine ? col.keep : (fls || i === b ? col.drift : (bk > SL ? col.dead : col.brass2));
       ctx.beginPath(); ctx.arc(x + keyShift * 0.5, bk, 2.4, 0, TWO_PI); ctx.fill();
 
-      // the binding pin, called out
+      // the pin being worked, called out; a false-set spool flagged where it stands
       if (i === b && !open) {
-        label(ctx, col.drift, "binds", x, SHELL_TOP - 8, "center");
+        label(ctx, col.drift, sim.falseSet[i] ? "clear" : "binds", x, SHELL_TOP - 8, "center");
         ctx.strokeStyle = withAlpha(col.drift, 0.5); ctx.lineWidth = 1; ctx.setLineDash([2, 2]);
         ctx.beginPath(); ctx.moveTo(x, SHELL_TOP - 4); ctx.lineTo(x, bk); ctx.stroke(); ctx.setLineDash([]);
+      } else if (fls) {
+        label(ctx, col.drift, "false", x, SHELL_TOP - 8, "center");
       }
       // pin number, under the keyway
       label(ctx, atLine ? col.keep : col.faint, String(i + 1), x + keyShift, PLUG_BOT + 16, "center");
@@ -335,18 +370,35 @@
     if (open) { cap = sim.openedBy === "key" ? "every break on the line — the plug turns" : "picked — every driver trapped above the seam"; capCol = col.keep; }
     else if (sim.mode === "picking") {
       if (!hasOrder()) { cap = "machined true — nothing binds first, no order to climb"; capCol = col.dead; }
+      else if (falseCount() > 0) { cap = "false set — a spool caught; clear it and the plug counter-rotates"; capCol = col.drift; }
       else { cap = "torque on — set the binding pin, the load passes on"; capCol = col.drift; }
     } else { cap = "locked — every driver crosses the shear line"; capCol = col.soft; }
     label(ctx, capCol, cap, FX0 + 6, 30, "left");
   }
 
-  function pinBar(col, x, yTop, yBot, c, lower) {
-    var w = 15;
-    if (yBot - yTop < 1) return;
+  function pinBar(col, x, yTop, yBot, c, lower, spool) {
+    var w = 15, h = yBot - yTop;
+    if (h < 1) return;
+    if (spool && h > 26) {
+      // a spool driver: two end caps and a waisted neck — the groove the plug catches in
+      var nw = 7, cap = clamp(h * 0.28, 7, 12), t = 3;
+      var xl = x - w / 2, xr = x + w / 2, nl = x - nw / 2, nr = x + nw / 2;
+      ctx.beginPath();
+      ctx.moveTo(xl, yTop); ctx.lineTo(xr, yTop);
+      ctx.lineTo(xr, yTop + cap); ctx.lineTo(nr, yTop + cap + t);
+      ctx.lineTo(nr, yBot - cap - t); ctx.lineTo(xr, yBot - cap);
+      ctx.lineTo(xr, yBot); ctx.lineTo(xl, yBot);
+      ctx.lineTo(xl, yBot - cap); ctx.lineTo(nl, yBot - cap - t);
+      ctx.lineTo(nl, yTop + cap + t); ctx.lineTo(xl, yTop + cap);
+      ctx.closePath();
+      ctx.fillStyle = withAlpha(c, 0.26); ctx.fill();
+      ctx.strokeStyle = withAlpha(c, 0.85); ctx.lineWidth = 1.3; ctx.lineJoin = "round"; ctx.stroke();
+      return;
+    }
     ctx.fillStyle = withAlpha(c, 0.26);
-    roundRect(x - w / 2, yTop, w, yBot - yTop, 3); ctx.fill();
+    roundRect(x - w / 2, yTop, w, h, 3); ctx.fill();
     ctx.strokeStyle = withAlpha(c, 0.85); ctx.lineWidth = 1.3;
-    roundRect(x - w / 2, yTop, w, yBot - yTop, 3); ctx.stroke();
+    roundRect(x - w / 2, yTop, w, h, 3); ctx.stroke();
     // a rounded cap at the free end to tell key pin (bottom) from driver (top)
     ctx.fillStyle = withAlpha(c, 0.85);
     var cy = lower ? yBot - 2 : yTop + 2;
@@ -452,21 +504,25 @@
     for (var r = 0; r < n; r++) {
       var i = order[r], y = y0 + r * rowH + rowH / 2;
       var set = sim.set[i] || open;
+      var fls = sim.falseSet[i] && !sim.set[i] && !open;
       var off = dir[i] * tolFrac();               // −1..1 scaled by tolerance
-      var c = set ? col.keep : (i === b ? col.drift : col.steel2);
+      var c = set ? col.keep : (fls || i === b ? col.drift : col.steel2);
+      var nameCol = set ? col.keep : (fls || i === b ? col.drift : col.soft);
 
-      // rank + which pin
-      label(ctx, set ? col.keep : (i === b ? col.drift : col.faint), (r + 1) + ".", bx + 14, y + 3, "left");
-      label(ctx, set ? col.keep : (i === b ? col.drift : col.soft), "pin " + (i + 1), bx + 36, y + 3, "left");
+      // rank + which pin (a spool marked)
+      label(ctx, set ? col.keep : (fls || i === b ? col.drift : col.faint), (r + 1) + ".", bx + 14, y + 3, "left");
+      label(ctx, nameCol, "pin " + (i + 1) + (isSpool(i) ? "◦" : ""), bx + 36, y + 3, "left");
 
       // the signed offset bar
       var len = off * barMax * 0.9;
-      ctx.fillStyle = withAlpha(c, set ? 0.5 : (i === b ? 0.6 : 0.35));
+      ctx.fillStyle = withAlpha(c, set ? 0.5 : (fls || i === b ? 0.6 : 0.35));
       var bxs = len >= 0 ? zeroX : zeroX + len;
       roundRect(bxs, y - 4, Math.max(2, Math.abs(len)), 8, 2); ctx.fill();
 
-      if (i === b && !open) label(ctx, col.drift, "binds now", zeroX + Math.max(len, 8) + 8, y + 3, "left");
-      else if (set) label(ctx, col.keep, "set", zeroX + (len >= 0 ? len : 0) + 8, y + 3, "left");
+      var tx = zeroX + (len >= 0 ? len : 0) + 8;
+      if (i === b && !open) label(ctx, col.drift, sim.falseSet[i] ? "clear now" : "binds now", tx, y + 3, "left");
+      else if (set) label(ctx, col.keep, "set", tx, y + 3, "left");
+      else if (fls) label(ctx, col.drift, "false set", tx, y + 3, "left");
     }
   }
 
@@ -573,16 +629,17 @@
   var pickTimer = null;
   function stopPick() { if (pickTimer) { clearTimeout(pickTimer); pickTimer = null; } }
 
-  // set the one pin now binding; return false if there is nothing to set
+  // work the one pin now binding; return false if there is nothing left to do.
+  // a standard pin sets on one touch; a spool catches false first, then clears on a later
+  // pass — two touches, and the plug counter-rotates when it clears
   function setNext() {
     if (sim.mode === "open") return false;
     sim.mode = "picking";
     if (!hasOrder()) { sim.stalled = true; return false; }
-    var b = bindingPin();
-    if (b < 0) {                           // all set — the last one frees the plug
-      sim.mode = "open"; sim.openedBy = "pick"; return false;
-    }
-    sim.set[b] = true;
+    var a = nextToAct();
+    if (a.i < 0) { sim.mode = "open"; sim.openedBy = "pick"; return false; }
+    if (a.fresh && isSpool(a.i)) sim.falseSet[a.i] = true;          // the spool catches — a false set
+    else { sim.set[a.i] = true; sim.falseSet[a.i] = false; }        // a true set (or clearing a spool)
     if (setsCount() >= state.pins) { sim.mode = "open"; sim.openedBy = "pick"; }
     return true;
   }
@@ -593,7 +650,7 @@
     sim.mode = "picking";
     if (!hasOrder()) { sim.stalled = true; update(); return; }
     if (reduce) {                          // no running action — resolve to the settled open state
-      for (var k = 0; k < state.pins; k++) sim.set[order[k]] = true;
+      for (var k = 0; k < state.pins; k++) { sim.set[order[k]] = true; sim.falseSet[order[k]] = false; }
       sim.mode = "open"; sim.openedBy = "pick"; update(); return;
     }
     var tick = function () {
@@ -618,6 +675,13 @@
     update();
   });
 
+  secBtns.forEach(function (bn) {
+    bn.addEventListener("click", function () {
+      state.security = +bn.dataset.sec;
+      relock(); update();                   // a fresh lock, so the pins start standard or spooled from the top
+    });
+  });
+
   btnKey.addEventListener("click", function () {
     stopPick();
     sim.mode = "open"; sim.openedBy = "key"; sim.stalled = false;
@@ -638,16 +702,18 @@
     if (!sayEl) return;
     if (sayTimer) clearTimeout(sayTimer);
     sayTimer = setTimeout(function () {
-      var n = state.pins, k = setsCount(), b = bindingPin();
-      var head = "A " + n + "-pin lock, chambers cut " + TOL_WORD(tolFrac())
+      var n = state.pins, k = setsCount(), f = falseCount(), b = bindingPin();
+      var sec = state.security ? " with " + spoolCount() + " spool driver" + (spoolCount() > 1 ? "s" : "") : "";
+      var head = "A " + n + "-pin lock" + sec + ", chambers cut " + TOL_WORD(tolFrac())
         + (hasOrder() ? " — so under torque the pins bind in an order. " : " — machined so true that no pin binds before the others. ");
       var tail;
       if (sim.mode === "open") {
         tail = sim.openedBy === "key"
           ? "Open: the key raised every break to the shear line at once, and the plug turned."
-          : "Open: picked, all " + n + " drivers trapped above the shear line, one at a time, and the plug swung free.";
+          : "Open: picked, all " + n + " drivers trapped above the shear line" + (state.security ? ", the spools cleared past their rims" : "") + ", and the plug swung free.";
       } else if (sim.mode === "picking") {
         if (!hasOrder()) tail = "Nothing to pick: with no binding order there is no first pin, so the plug cannot be opened pin by pin. Loosen the tolerance, or use the key.";
+        else if (f > 0) tail = "False set: " + k + " of " + n + " truly set, and " + f + " spool" + (f > 1 ? "s" : "") + " caught on their rims — the plug has over-rotated and feels open but is not. Clear pin " + (b + 1) + " and the plug counter-rotates to a true set.";
         else tail = "Picking: " + k + " of " + n + " pins set. Pin " + (b + 1) + " is binding now — it carries the torque; set it and the load passes to the next.";
       } else {
         tail = "Locked at rest: every driver pin crosses the shear line and pins the plug. Insert the key to raise all breaks to the line at once, or pick it to set them in order.";
@@ -667,6 +733,7 @@
     else if (k === "n" || k === "N" || k === " ") btnStep.click();
     else if (k === "x" || k === "X") btnRekey.click();
     else if (k === "r" || k === "R") btnReset.click();
+    else if (k === "d" || k === "D") { state.security = state.security ? 0 : 1; relock(); update(); }  // toggle drivers
     else if (k === "]") { state.pins = clampInt(state.pins + 1, PINS_MIN, PINS_MAX); cutLock(); relock(); update(); }
     else if (k === "[") { state.pins = clampInt(state.pins - 1, PINS_MIN, PINS_MAX); cutLock(); relock(); update(); }
     else if (k === "=" || k === "+") { state.tol = clamp(state.tol + 5, 0, 100); update(); }
