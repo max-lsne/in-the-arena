@@ -226,6 +226,12 @@
     readingEl.innerHTML = rows.map(function (row) {
       return '<div class="row"><span class="k">' + row[0] + '</span><span class="v ' + row[2] + '">' + row[1] + "</span></div>";
     }).join("");
+
+    // keep the canvas's own label current, for when focus or a cursor lands on the image
+    if (stageEl) {
+      stageEl.setAttribute("aria-label", "Pin-tumbler lock, " + n + " pins" + (state.security ? " with " + spoolCount() + " spool drivers" : "")
+        + ": " + v.word.toLowerCase() + (sim.mode !== "open" ? ", " + k + " of " + n + " set" : "") + ".");
+    }
   }
 
   // ---- the stage (canvas) ----------------------------------------------
@@ -629,18 +635,21 @@
   var pickTimer = null;
   function stopPick() { if (pickTimer) { clearTimeout(pickTimer); pickTimer = null; } }
 
+  var lastAction = "";   // the most recent discrete event, spoken first in the live region
+
   // work the one pin now binding; return false if there is nothing left to do.
   // a standard pin sets on one touch; a spool catches false first, then clears on a later
   // pass — two touches, and the plug counter-rotates when it clears
   function setNext() {
     if (sim.mode === "open") return false;
     sim.mode = "picking";
-    if (!hasOrder()) { sim.stalled = true; return false; }
+    if (!hasOrder()) { sim.stalled = true; lastAction = "Nothing binds — with no order there is no first pin."; return false; }
     var a = nextToAct();
     if (a.i < 0) { sim.mode = "open"; sim.openedBy = "pick"; return false; }
-    if (a.fresh && isSpool(a.i)) sim.falseSet[a.i] = true;          // the spool catches — a false set
-    else { sim.set[a.i] = true; sim.falseSet[a.i] = false; }        // a true set (or clearing a spool)
-    if (setsCount() >= state.pins) { sim.mode = "open"; sim.openedBy = "pick"; }
+    if (a.fresh && isSpool(a.i)) { sim.falseSet[a.i] = true; lastAction = "Pin " + (a.i + 1) + " caught in a false set."; }  // the spool catches
+    else if (a.fresh) { sim.set[a.i] = true; sim.falseSet[a.i] = false; lastAction = "Pin " + (a.i + 1) + " set."; }         // a true set
+    else { sim.set[a.i] = true; sim.falseSet[a.i] = false; lastAction = "Spool pin " + (a.i + 1) + " cleared — the plug counter-rotates."; }  // clearing a spool
+    if (setsCount() >= state.pins) { sim.mode = "open"; sim.openedBy = "pick"; lastAction += " The plug is open."; }
     return true;
   }
 
@@ -648,14 +657,14 @@
     stopPick();
     if (sim.mode === "open") return;
     sim.mode = "picking";
-    if (!hasOrder()) { sim.stalled = true; update(); return; }
+    if (!hasOrder()) { sim.stalled = true; lastAction = "Nothing to pick — no binding order."; update(true); return; }
     if (reduce) {                          // no running action — resolve to the settled open state
       for (var k = 0; k < state.pins; k++) { sim.set[order[k]] = true; sim.falseSet[order[k]] = false; }
-      sim.mode = "open"; sim.openedBy = "pick"; update(); return;
+      sim.mode = "open"; sim.openedBy = "pick"; lastAction = "Picked — every pin set in binding order. The plug is open."; update(true); return;
     }
     var tick = function () {
       var more = setNext();
-      update();
+      update(true);
       if (more && sim.mode === "picking") pickTimer = setTimeout(tick, 620);
       else pickTimer = null;
     };
@@ -663,7 +672,9 @@
   }
 
   // ---- wiring ----------------------------------------------------------
-  function update() { syncLabels(); render(); announce(); saveState(); }
+  // immediate = a discrete action (button, key, step) worth speaking at once; a slider drag
+  // leaves it false, so the status is debounced and does not chatter through the drag
+  function update(immediate) { syncLabels(); render(); announce(immediate); saveState(); }
 
   inPins.addEventListener("input", function () {
     state.pins = clampInt(inPins.value, PINS_MIN, PINS_MAX);
@@ -678,27 +689,32 @@
   secBtns.forEach(function (bn) {
     bn.addEventListener("click", function () {
       state.security = +bn.dataset.sec;
-      relock(); update();                   // a fresh lock, so the pins start standard or spooled from the top
+      relock();                             // a fresh lock, so the pins start standard or spooled from the top
+      lastAction = state.security ? "Spool drivers fitted — the lock relocked." : "Standard drivers fitted — the lock relocked.";
+      update(true);
     });
   });
 
   btnKey.addEventListener("click", function () {
     stopPick();
     sim.mode = "open"; sim.openedBy = "key"; sim.stalled = false;
-    for (var i = 0; i < state.pins; i++) sim.set[i] = true;
-    update();
+    for (var i = 0; i < state.pins; i++) { sim.set[i] = true; sim.falseSet[i] = false; }
+    lastAction = "Key inserted.";
+    update(true);
   });
   btnPick.addEventListener("click", autoPick);
-  btnStep.addEventListener("click", function () { stopPick(); setNext(); update(); });
+  btnStep.addEventListener("click", function () { stopPick(); setNext(); update(true); });
   btnRekey.addEventListener("click", function () {
     state.seed = (Math.floor(Math.random() * 0x7fffffff)) || 1;
-    cutLock(); relock(); update();
+    cutLock(); relock();
+    lastAction = "Rekeyed — a fresh bitting cut.";
+    update(true);
   });
-  btnReset.addEventListener("click", function () { relock(); update(); });
+  btnReset.addEventListener("click", function () { relock(); lastAction = "Relocked."; update(true); });
 
   // ---- screen-reader status (debounced, so a slider drag doesn't chatter) ----
   var sayTimer = null;
-  function announce() {
+  function announce(immediate) {
     if (!sayEl) return;
     if (sayTimer) clearTimeout(sayTimer);
     sayTimer = setTimeout(function () {
@@ -718,8 +734,11 @@
       } else {
         tail = "Locked at rest: every driver pin crosses the shear line and pins the plug. Insert the key to raise all breaks to the line at once, or pick it to set them in order.";
       }
-      sayEl.textContent = head + tail;
-    }, 260);
+      // lead with the discrete event just taken (set, caught, cleared, opened), then the state
+      var lead = lastAction ? lastAction + " " : "";
+      lastAction = "";
+      sayEl.textContent = lead + head + tail;
+    }, immediate ? 0 : 260);
   }
 
   // ---- keyboard --------------------------------------------------------
@@ -733,23 +752,40 @@
     else if (k === "n" || k === "N" || k === " ") btnStep.click();
     else if (k === "x" || k === "X") btnRekey.click();
     else if (k === "r" || k === "R") btnReset.click();
-    else if (k === "d" || k === "D") { state.security = state.security ? 0 : 1; relock(); update(); }  // toggle drivers
-    else if (k === "]") { state.pins = clampInt(state.pins + 1, PINS_MIN, PINS_MAX); cutLock(); relock(); update(); }
-    else if (k === "[") { state.pins = clampInt(state.pins - 1, PINS_MIN, PINS_MAX); cutLock(); relock(); update(); }
-    else if (k === "=" || k === "+") { state.tol = clamp(state.tol + 5, 0, 100); update(); }
-    else if (k === "-" || k === "_") { state.tol = clamp(state.tol - 5, 0, 100); update(); }
+    else if (k === "d" || k === "D") { state.security = state.security ? 0 : 1; relock(); lastAction = state.security ? "Spool drivers fitted." : "Standard drivers fitted."; update(true); }
+    else if (k === "]") { state.pins = clampInt(state.pins + 1, PINS_MIN, PINS_MAX); cutLock(); relock(); lastAction = state.pins + " pins."; update(true); }
+    else if (k === "[") { state.pins = clampInt(state.pins - 1, PINS_MIN, PINS_MAX); cutLock(); relock(); lastAction = state.pins + " pins."; update(true); }
+    else if (k === "=" || k === "+") { state.tol = clamp(state.tol + 5, 0, 100); update(true); }
+    else if (k === "-" || k === "_") { state.tol = clamp(state.tol - 5, 0, 100); update(true); }
     else return;
     e.preventDefault();
   });
 
-  // follow a live change to the motion setting
+  // follow a live change to the motion setting; if it turns on mid-pick, stop stepping and
+  // settle straight to the finished arrangement rather than finishing the run as animation
   if (reduceMQ && reduceMQ.addEventListener) {
-    reduceMQ.addEventListener("change", function (e) { reduce = e.matches; });
+    reduceMQ.addEventListener("change", function (e) {
+      reduce = e.matches;
+      if (reduce && pickTimer) {
+        stopPick();
+        for (var k = 0; k < state.pins; k++) { sim.set[order[k]] = true; sim.falseSet[order[k]] = false; }
+        sim.mode = "open"; sim.openedBy = "pick";
+        lastAction = "Reduced motion on — the pick settled to open.";
+        update(true);
+      }
+    });
   }
   // repaint on theme flips so canvas colours follow
   if (window.matchMedia) {
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
   }
+
+  // name each control's shortcut, so assistive tech announces it
+  btnKey.setAttribute("aria-keyshortcuts", "K");
+  btnPick.setAttribute("aria-keyshortcuts", "P");
+  btnStep.setAttribute("aria-keyshortcuts", "N");
+  btnRekey.setAttribute("aria-keyshortcuts", "X");
+  btnReset.setAttribute("aria-keyshortcuts", "R");
 
   // ---- go --------------------------------------------------------------
   update();
