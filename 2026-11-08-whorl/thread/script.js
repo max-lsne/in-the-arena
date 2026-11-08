@@ -164,7 +164,7 @@
 
   // ---- the unwound triangle + block + friction cone (bottom) ----
   function drawRamp(d) {
-    const baseY = 400, Ax = 70, baseLen = 360;
+    const baseY = 404, Ax = 62, baseLen = 436;
     // rise exaggerated for legibility but proportional to tan(lead)
     const riseVis = Math.min(150, Math.tan(d.lead) * baseLen * 4.2);
     const Bx = Ax + baseLen, Cy = baseY - riseVis;
@@ -188,7 +188,7 @@
     ctx.setLineDash([3, 3]); ctx.strokeStyle = C.steel2;
     ctx.beginPath(); ctx.moveTo(Bx, baseY); ctx.lineTo(Bx, Cy); ctx.stroke();
     ctx.setLineDash([]);
-    label('base = 2πr (one turn round)', (Ax + Bx) / 2, baseY + 18, C.inkFaint, 10, 'center');
+    label('base = 2πr — one turn round', Ax + 4, baseY + 18, C.inkFaint, 10, 'left');
     ctx.save(); ctx.translate(Bx + 14, (baseY + Cy) / 2); ctx.rotate(-Math.PI / 2);
     label('rise = pitch', 0, 0, C.inkFaint, 10, 'center'); ctx.restore();
 
@@ -198,7 +198,7 @@
     label('λ ' + (trueLead * DEG).toFixed(1) + '°', Ax + 44, baseY - 8, C.brass2, 11, 'left', '500');
 
     // block riding the slope
-    const t = 0.30 + 0.5 * animSeat;                       // position along hypotenuse
+    const t = 0.32 + 0.30 * animSeat;                      // position along hypotenuse
     const bx = Ax + (Bx - Ax) * t, by = baseY - riseVis * t;
     const u = { x: Math.cos(lead), y: -Math.sin(lead) };    // up-slope
     const dn = { x: Math.sin(lead), y: Math.cos(lead) };    // into-surface normal (down-right)
@@ -217,7 +217,7 @@
 
     // friction cone about the into-surface normal, half-angle phi
     const phi = d.fric;
-    const L = 108;
+    const L = 88;
     const baseAng = Math.atan2(dn.y, dn.x);
     const e1 = baseAng - phi, e2 = baseAng + phi;
     ctx.fillStyle = C.steel; ctx.globalAlpha = 0.14;
@@ -237,8 +237,9 @@
     // weight vector straight down — inside cone => holds
     const inside = trueLead < phi;
     const wcol = inside ? C.keep : C.dead;
-    arrow(cxp, cyp, cxp, cyp + 70, wcol, 2.4, 10);
-    label('weight', cxp - 6, cyp + 70 + 14, wcol, 10, 'right');
+    const wlen = Math.min(56, baseY - cyp - 8);
+    arrow(cxp, cyp, cxp, cyp + wlen, wcol, 2.4, 10);
+    label('weight', cxp - 10, cyp + wlen * 0.6, wcol, 10, 'right');
 
     // verdict glyph near block
     label(inside ? 'holds' : 'slides', bx, by - 26, wcol, 12, 'center', '500');
