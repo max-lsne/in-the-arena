@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seat — a detent is a potential well cut on purpose; a spring presses a ball into a notch, and the deepest point of the notch is the lowest place its energy can sit, so the ball rests there with no torque at all and, nudged off, is pushed straight back. The restoring torque is the spring force times the local slope of the notch flank, zero at the bottom and rising as you climb out; near the bottom it is a plain torsional spring and the ball wiggles back like a pendulum. Deeper notch, stiffer flank, more preload — each stiffens the seat. Set the preload, the depth, and the spacing, and feel the well it cuts.</title>
+  <meta name="description" content="A detent is a potential well made on purpose. A spring holds a ball against a wheel whose rim is notched; the bottom of a notch is where the spring is least compressed, so it is the lowest energy the ball can have, and the ball rests there holding the wheel still with no torque. Nudge the wheel off the bottom and the ball must ride up the flank, compressing the spring, which pushes it back: a restoring torque equal to the spring force times the slope of the flank, zero at the seat and growing as you climb. Near the bottom the well is very nearly a parabola, so the ball returns like a mass on a spring, overshooting and settling. Preload, depth and spacing each set how steep the sides are and how firmly the seat holds. Drag the wheel off its seat and let go." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Ccircle cx='14' cy='16' r='9' fill='none' stroke='%235f8a9c' stroke-width='1.4'/%3E%3Cpath d='M14 7 a9 9 0 0 1 0 0 M11.5 7.6 a9 9 0 0 1 5 0' fill='none' stroke='%238fb0c0' stroke-width='1.1'/%3E%3Cpath d='M14 7l-1.6 2.2a2 2 0 0 0 3.2 0z' fill='%23121310' stroke='%235f8a9c' stroke-width='1.1'/%3E%3Ccircle cx='14' cy='8.6' r='2' fill='%23d6b25c' stroke='%23b0892e' stroke-width='1'/%3E%3Cpath d='M23 4.5 l0 3 l3 -1.2 l-3 -1 l3 -1.2 l-3 -1' fill='none' stroke='%23b5683a' stroke-width='1.2' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Seat — a well cut on purpose, and the ball that rests in it" />
+  <meta property="og:description" content="A detent is a potential well made on purpose. The bottom of the notch is the lowest the ball's energy can go, so it rests there with no torque; nudge it and the flank pushes it back. Set the preload, depth and spacing, and feel the seat." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Detent</a> · seat · <a href="../climb/">climb</a> · <a href="../dial/">dial</a> · 2026-11-10</p>
+      <p class="pron"><b>seat</b> · <i>noun</i> · /siːt/ — the shaped recess a part rests in and is located by; from Old Norse <i>sæti</i>, a place to sit — and so, the cut notch that gives a spring-pressed ball one place to settle, and holds it there against nothing but its own shape</p>
+      <h1>Seat</h1>
+      <p class="lede">A spring presses a ball into a notch, and the bottom of the notch is the one place it wants to be.</p>
+      <p class="sub">A <b>detent</b> is a <em>potential well cut on purpose</em>. A spring holds a ball against a wheel whose rim has a notch pressed into it. The bottom of the notch is where the spring is stretched out longest and pushing least — the <b>lowest energy the ball can have</b> — so left alone, the ball sits there and the wheel does not move: no catch, no latch, just a shape the ball has rolled to the bottom of. Nudge the wheel a little and the ball has to ride <em>up</em> the side of the notch, squeezing the spring, which pushes straight back down the slope. That push is a <b>restoring torque</b> — zero at the very bottom, growing the further you climb — and it is the whole of why a detent holds a position and snaps back to it. Drag the wheel off its seat and let go.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">One notch, one ball, one place to rest</h2>
+      <p>Drag the wheel to roll the ball up out of its seat, then let go — it falls back to the bottom, overshoots, and settles, because near the bottom the notch is almost a perfect bowl and the ball returns like a weight on a spring. The lower panel is that bowl drawn as <span class="mono">energy against angle</span>: the ball is the marble in it. Steepen the sides — deeper notch, closer spacing, more preload — and the same nudge is thrown back harder.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-keep" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">Seated — resting at the bottom, no torque</span>
+              <small id="verdict-sub">at rest</small>
+            </div>
+            <div class="stage">
+              <canvas id="mech" width="560" height="320" aria-label="A notched steel wheel with a spring-pressed brass ball resting in one notch; drag to roll the ball out of its seat."></canvas>
+            </div>
+            <div class="stage">
+              <canvas id="well" width="560" height="190" aria-label="The energy of the ball plotted against the wheel's angle: a bowl with the ball shown as a marble at its current position."></canvas>
+            </div>
+            <p class="hint"><b>Drag</b> the wheel left or right to climb the flank, then release to let it settle. <kbd>←</kbd> <kbd>→</kbd> nudge it; <kbd>space</kbd> gives it a kick. Push past the <em>crest</em> and it falls into the next seat.</p>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="preload">Spring preload <span class="val"><span id="preload-v">8.0</span> N</span></label>
+                <input type="range" id="preload" min="1" max="20" step="0.5" value="8" />
+                <p class="ctl-note">How hard the spring presses the ball into the seat even at the bottom. More preload, a firmer rest.</p>
+              </div>
+              <div class="ctl">
+                <label for="depth">Notch depth <span class="val"><span id="depth-v">3.0</span> mm</span></label>
+                <input type="range" id="depth" min="0.5" max="6" step="0.1" value="3" />
+                <p class="ctl-note">How far the ball must lift to clear the notch. Deeper seats hold harder and run to a higher crest.</p>
+              </div>
+              <div class="ctl">
+                <label for="pitch">Seat spacing <span class="val"><span id="pitch-v">44</span>°</span></label>
+                <input type="range" id="pitch" min="18" max="90" step="1" value="44" />
+                <p class="ctl-note">The angle from one seat's bottom to the next. Close spacing makes a narrow, steep-sided well; wide spacing a shallow, lazy one.</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k">off <span class="tag">seat</span></span><span class="v" id="r-angle">0.0°</span></div>
+              <div class="row"><span class="k">restoring <span class="tag">torque</span></span><span class="v" id="r-torque">0 N·mm</span></div>
+              <div class="row"><span class="k">spring <span class="tag">force</span></span><span class="v" id="r-force">8.0 N</span></div>
+              <div class="row"><span class="k">seat <span class="tag s">stiffness</span></span><span class="v" id="r-stiff">—</span></div>
+              <div class="row"><span class="k">climbed <span class="tag s">to crest</span></span><span class="v" id="r-climb">0%</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="nudge" type="button">Nudge</button>
+              <button class="btn" id="kick" type="button">Kick</button>
+              <button class="btn" id="reset" type="button">Reset</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">What the well says</p>
+      <h2 id="law-h">Why a shape can hold a position</h2>
+      <ul class="law-list">
+        <li>The ball rests where its <b>energy is least</b>, and the least is the bottom of the notch, where the spring is longest. Nothing clamps it there — it simply has nowhere lower to go.</li>
+        <li>The <b>restoring torque</b> is the spring force times the <em>slope</em> of the flank: <span class="mono">τ = F · dx/dθ</span>. At the very bottom the slope is zero, so the torque is zero — a detent holds a position while asking for no force to hold it.</li>
+        <li>Climb a little and the slope grows almost in step with the angle, so near the seat the well is a <b>parabola</b> and the ball behaves like a torsional spring: nudge it and it swings back, overshoots, and settles.</li>
+        <li>The seat's <b>stiffness</b> — how hard it throws a small nudge back — rises with preload, with depth, and with closeness of spacing: <span class="mono">κ ≈ F₀ · 2(πd/P)²/π</span> near the bottom. Steeper sides, firmer seat.</li>
+        <li>The well has <b>edges</b>. Ride up past the crest — the top of the flank, halfway to the next notch — and the slope flips: now it pushes you <em>on</em>, into the next seat. That edge is the whole subject of <a href="../climb/">climb</a>.</li>
+      </ul>
+      <p class="pull">A latch holds by getting in the way. A detent holds by being the bottom of a bowl — the ball is not trapped, it has merely <em>arrived</em>.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The three</p>
+      <h2 id="sib-h">One sprung ball, three things to ask of it</h2>
+      <div class="siblings">
+        <a href="../seat/" aria-current="page"><span class="w">Seat</span><span class="d">the well itself — where it rests and why it returns</span></a>
+        <a href="../climb/"><span class="w">Climb</span><span class="d">the force to leave — how hard the click is to break</span></a>
+        <a href="../dial/"><span class="w">Dial</span><span class="d">a ring of seats — discrete, repeatable, counted stops</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Detent · a sprung click-stop, read three ways · 2026-11-10 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
