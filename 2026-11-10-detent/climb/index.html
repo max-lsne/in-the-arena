@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Climb — to leave a detent you must drive the ball up and over the crest, against a torque that rises from zero at the seat to a peak partway up the flank and then falls away; that peak is the breakaway, the firmness of the click, and turning with any less than it only holds you on the flank while turning with more snaps you over into the next seat. The peak rises with notch depth, with a stiffer or more preloaded spring, and with steeper flanks — a finer pitch, more notches round the wheel. Set the geometry and raise the applied torque until it clicks.</title>
+  <meta name="description" content="A detent holds a position for free, but leaving one costs a definite amount. To move off a seat the ball must ride up the flank and over the crest, and the detent resists with a torque that climbs from zero at the bottom to a peak partway up, then falls back to zero at the crest. That peak is the breakaway torque — the firmness of the click. Apply less and the wheel settles on the rising flank and holds; apply more and there is no resting place short of the crest, so it accelerates over and clicks into the next seat. Drive it harder still and it ratchets through detent after detent. The breakaway rises with notch depth, with spring preload and stiffness, and with flank steepness, which a finer pitch and more notches sharpen. Set the depth, the count and the preload, then raise the applied torque until it breaks." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Ccircle cx='15' cy='17' r='8.5' fill='none' stroke='%235f8a9c' stroke-width='1.4'/%3E%3Cpath d='M15 8.5l-1.5 2.1a1.9 1.9 0 0 0 3 0z' fill='%23121310' stroke='%235f8a9c' stroke-width='1.1'/%3E%3Ccircle cx='15' cy='10' r='1.9' fill='%23d6b25c' stroke='%23b0892e' stroke-width='1'/%3E%3Cpath d='M24.5 9 a7 7 0 0 1 1.8 6.5' fill='none' stroke='%23bd8a1c' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M26.8 14.2l-.5 2.4-2-1.4z' fill='%23bd8a1c'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Climb — the force to leave a detent, and the click when it gives" />
+  <meta property="og:description" content="Leaving a detent costs a definite amount. The ball must ride up the flank against a torque that peaks partway up — the breakaway. Turn with less and it holds; turn with more and it snaps to the next seat. Set the geometry and raise the torque until it clicks." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Detent</a> · <a href="../seat/">seat</a> · climb · <a href="../dial/">dial</a> · 2026-11-10</p>
+      <p class="pron"><b>climb</b> · <i>verb</i> · /klaɪm/ — to go up against a slope and the force that holds you to it; from Old English <i>climban</i>, to clamber — and so, the ride a ball makes up the flank of a notch, and the peak of resistance it must pass before it drops into the next</p>
+      <h1>Climb</h1>
+      <p class="lede">A detent costs nothing to rest in — and a definite, repeatable amount to leave.</p>
+      <p class="sub">To move off a seat, the ball has to be driven <em>up and over</em> the crest. All the way up the flank the spring pushes back, and that pushback is a torque that starts at zero in the seat, <b>rises to a peak</b> partway up, and falls back to zero right at the crest. That peak is the <b>breakaway torque</b> — the firmness of the click, the thing your fingers read as a good knob or a stiff one. Turn with any less than it, and the wheel settles somewhere on the flank and <em>holds</em>: there is a resting place for your push. Turn with more, and there is no resting place short of the crest — so the ball runs over and <b>clicks</b> into the next seat. Raise the torque and feel for the edge.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">Push harder until it gives</h2>
+      <p>The lower panel is the detent's resistance drawn against angle — <span class="mono">torque against the turn</span> — one notch wide, with the <em>breakaway</em> marked at its peak. Raise the applied torque (the flat line) and watch the operating dot climb the near flank. While the line sits below the peak it finds the curve and stops; lift it past the peak and the dot has nowhere to rest, so the wheel snaps over the crest to the next seat. Hold it well above and the detent <em>ratchets</em>, clicking through one notch after another.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-keep" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">Holding — below breakaway</span>
+              <small id="verdict-sub">at rest on the flank</small>
+            </div>
+            <div class="stage">
+              <canvas id="mech" width="560" height="300" aria-label="A notched wheel with a sprung ball, an applied torque turning it; the ball climbs the flank of a notch toward the crest."></canvas>
+            </div>
+            <div class="stage">
+              <canvas id="curve" width="560" height="200" aria-label="The detent's resisting torque plotted against angle across one notch, with the breakaway peak marked and the applied-torque level shown as a line."></canvas>
+            </div>
+            <p class="hint"><b>Drag</b> the applied-torque slider, or press <button class="btn" id="turn" type="button" style="padding:2px 10px">hold to turn →</button> to ramp it up. <kbd>↑</kbd> <kbd>↓</kbd> adjust; past the <em>peak</em> it clicks over.</p>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="applied">Applied torque <span class="val"><span id="applied-v">0</span> N·mm</span></label>
+                <input type="range" id="applied" min="0" max="800" step="1" value="0" />
+                <p class="ctl-note">How hard you turn the wheel. Below breakaway it holds; <b class="warn">at</b> breakaway it gives.</p>
+              </div>
+              <div class="ctl">
+                <label for="notches">Notches round the wheel <span class="val"><span id="notches-v">12</span></span></label>
+                <input type="range" id="notches" min="6" max="24" step="1" value="12" />
+                <p class="ctl-note">More notches pack the flanks steeper — a finer, crisper click, and more stops per turn.</p>
+              </div>
+              <div class="ctl">
+                <label for="depth">Notch depth <span class="val"><span id="depth-v">3.0</span> mm</span></label>
+                <input type="range" id="depth" min="0.5" max="6" step="0.1" value="3" />
+                <p class="ctl-note">A deeper notch runs to a higher crest — a firmer click, harder to break.</p>
+              </div>
+              <div class="ctl">
+                <label for="preload">Spring preload <span class="val"><span id="preload-v">8.0</span> N</span></label>
+                <input type="range" id="preload" min="1" max="20" step="0.5" value="8" />
+                <p class="ctl-note">A stiffer press raises the whole resistance, peak and all.</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k"><span class="tag">breakaway</span> torque</span><span class="v" id="r-break">— N·mm</span></div>
+              <div class="row"><span class="k">applied <span class="tag">now</span></span><span class="v" id="r-applied">0 N·mm</span></div>
+              <div class="row"><span class="k">margin <span class="tag">to break</span></span><span class="v" id="r-margin">100%</span></div>
+              <div class="row"><span class="k">lead flank <span class="tag s">angle</span></span><span class="v" id="r-angle">—</span></div>
+              <div class="row"><span class="k">clicks <span class="tag s">counted</span></span><span class="v" id="r-clicks">0</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="reset" type="button">Reset to seat</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">What the peak says</p>
+      <h2 id="law-h">Why a click has a size</h2>
+      <ul class="law-list">
+        <li>The resistance is the spring force times the flank slope: <span class="mono">τ(φ) = (F₀ + k·x)·dx/dφ</span>. Zero at the seat, zero again at the crest, and a <b>peak</b> in between — that peak is the breakaway.</li>
+        <li>Below breakaway there is always an angle on the rising flank where resistance <em>equals</em> your push, and it is <b>stable</b>: lean harder into it and the resistance climbs to meet you. So the wheel holds, off-seat, wherever your torque lands on the flank.</li>
+        <li>At breakaway that meeting point reaches the top of the flank's steepness. One hair more and there is <b>no equilibrium</b> short of the crest — the ball runs over and drops into the next seat. That sudden give is the click.</li>
+        <li>The peak rises with <b>depth</b>, with <b>preload and stiffness</b>, and with <b>flank steepness</b> — and a finer pitch (more notches) steepens the flanks, so a many-notched dial clicks crisper and harder for the same depth.</li>
+        <li>Drive well past breakaway and the wheel never finds a seat to rest in: it <b>ratchets</b>, clicking through notch after notch for as long as you overpush — a knob spun too hard, a torque-limiter letting go.</li>
+      </ul>
+      <p class="pull">The seat holds for nothing. The crest charges a toll. A detent is a rest with a <em>price on the exit</em> — and the price is the click you feel.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The three</p>
+      <h2 id="sib-h">One sprung ball, three things to ask of it</h2>
+      <div class="siblings">
+        <a href="../seat/"><span class="w">Seat</span><span class="d">the well itself — where it rests and why it returns</span></a>
+        <a href="../climb/" aria-current="page"><span class="w">Climb</span><span class="d">the force to leave — how hard the click is to break</span></a>
+        <a href="../dial/"><span class="w">Dial</span><span class="d">a ring of seats — discrete, repeatable, counted stops</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Detent · a sprung click-stop, read three ways · 2026-11-10 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
