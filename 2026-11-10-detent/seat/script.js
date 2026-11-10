@@ -351,5 +351,6 @@
   $('reset').addEventListener('click', () => { S.phi = nearestSeat(S.phi); S.omega = 0; });
 
   window.addEventListener('resize', () => { drawMech(); drawWell(); });
+  live.textContent = 'Seated at the bottom of the notch. Drag the wheel to roll the ball off its seat, then release.';
   requestAnimationFrame(frame);
 })();

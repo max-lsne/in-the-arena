@@ -349,5 +349,6 @@
   });
 
   window.addEventListener('resize', () => { drawMech(); drawCurve(); });
+  live.textContent = `At rest in the seat. Breakaway torque ${breakaway().toFixed(0)} newton-millimetres. Raise the applied torque to find it.`;
   requestAnimationFrame(frame);
 })();

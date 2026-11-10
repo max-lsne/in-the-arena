@@ -320,5 +320,6 @@
   $('zero').addEventListener('click', () => { S.zeroPhi = nearestSeat(S.phi); S.clicks = 0; announce(true); });
 
   window.addEventListener('resize', () => { drawMech(); drawWash(); });
+  live.textContent = `A dial of ${S.N} stops, resting on stop 0. Drag it round, or use the arrow keys to click from stop to stop.`;
   requestAnimationFrame(frame);
 })();
