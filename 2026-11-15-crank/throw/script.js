@@ -17,7 +17,7 @@
   const S = {
     r: 26,                 // throw, mm
     rpm: 34,               // crank speed
-    theta: 0,              // crank angle, rad (0 = pin at far end, x = +r)
+    theta: 50 * Math.PI / 180,  // crank angle, rad (open on a representative, lively angle)
     running: true,
     dragging: false, dragA0: 0, dragX0: 0, lastX: 0, lastT: 0, dragW: 0,
   };
@@ -306,6 +306,6 @@
 
   window.addEventListener('resize', () => { drawMech(); drawTrace(); });
   if (RM.matches) setRun(false);
-  live.textContent = 'A crank turning a pin round a circle, driving a slider back and forth along one guide. Let it run, or drag it by hand.';
+  live.textContent = `A crank turning a pin round a circle, driving a slider along one guide. Stroke ${(2 * S.r).toFixed(0)} millimetres, peak speed ${(S.r * omega()).toFixed(0)} millimetres per second. Let it run, or drag it by hand.`;
   requestAnimationFrame(frame);
 })();

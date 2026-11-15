@@ -292,6 +292,6 @@
 
   window.addEventListener('resize', () => { drawMech(); drawPlot(); });
   if (RM.matches) setRun(false);
-  live.textContent = 'A slider-crank with a real, finite connecting rod. The rod tilts as it turns, bending the piston’s motion away from a pure sine. Let it run or drag it.';
+  live.textContent = `A slider-crank with a real connecting rod, ratio n = ${S.n.toFixed(1)}. The rod tilts as it turns, adding a second harmonic of ${h2pct().toFixed(1)} percent of stroke, so the piston’s motion is not a pure sine. Let it run or drag it.`;
   requestAnimationFrame(frame);
 })();

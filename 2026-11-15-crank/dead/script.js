@@ -333,6 +333,6 @@
 
   window.addEventListener('resize', () => { drawMech(); drawPlot(); });
   if (RM.matches) setRun(false);
-  live.textContent = 'A slider-crank with a steady force on the slider. The moment arm — and the torque — fall to zero at the two dead centres. Turn it by hand or let it run.';
+  live.textContent = `A slider-crank with a steady force on the slider. At ${(norm(S.theta) / DEG).toFixed(0)} degrees the moment arm is ${Math.abs(slope(S.theta)).toFixed(0)} millimetres; it, and the torque, fall to zero at the two dead centres, 0 and 180 degrees. Turn it by hand or let it run.`;
   requestAnimationFrame(frame);
 })();
