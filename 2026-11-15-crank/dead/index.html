@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dead — a crank turns only because the push on its slider acts through a moment arm about the shaft, and twice in every revolution that arm goes to nothing. At the two dead centres — the slider at the far end of its stroke and at the near end — the crank, the rod and the line of stroke all fall into a single straight line through the axis, so the rod's pull passes dead through the centre and makes no turn however hard it pushes. The torque the slider delivers is the force times the slope of the stroke, F·dx/dθ, and that slope is zero at both ends; a single cylinder stopped on a dead point cannot start itself, and only a flywheel's stored turning carries it across. Set the rod and the force, and find the two angles where the push is wasted.</title>
+  <meta name="description" content="A crank turns because a force on its slider acts through a moment arm about the shaft axis — and twice every revolution that arm vanishes. At the two dead centres, top and bottom of the stroke, the rod, the crank web and the line of stroke all lie along one line through the axis, so the rod's thrust points straight at the centre and exerts no torque, no matter how hard the slider is pushed. The torque delivered to the shaft is the slider force times the slope of the slider's travel, F·dx/dθ, and that slope passes through zero at both ends of the stroke. This is why a single-cylinder engine stopped on a dead centre cannot start itself from that angle, and why a flywheel — carrying stored rotation through the blind spot — is not an optional smoother but a necessity. Set the rod ratio and the gas force, turn the crank, and watch the torque curve fall to nothing at the two dead points and peak partway between them." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Ccircle cx='11' cy='16' r='7' fill='none' stroke='%235f8a9c' stroke-width='1.4'/%3E%3Ccircle cx='11' cy='16' r='1.6' fill='%238fb0c0'/%3E%3Cline x1='4' y1='16' x2='30' y2='16' stroke='%23a3402b' stroke-width='1.4' stroke-dasharray='2 2'/%3E%3Ccircle cx='18' cy='16' r='2' fill='%23d6b25c' stroke='%23b0892e' stroke-width='1'/%3E%3Cline x1='18' y1='16' x2='30' y2='16' stroke='%23b5683a' stroke-width='1.6'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Dead — the two points where a push makes no turn" />
+  <meta property="og:description" content="Twice a revolution the rod, crank and stroke fall into one line through the axis, the moment arm goes to zero, and the slider's push buys no torque. That is why a single cylinder can't start from a dead centre, and why a flywheel carries it through." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Crank</a> · <a href="../throw/">throw</a> · dead · <a href="../rod/">rod</a> · 2026-11-15</p>
+      <p class="pron"><b>dead centre</b> · <i>noun</i> · the crank position at which the connecting rod and the crank lie in one straight line, so a thrust along the rod yields no turning moment; the stroke's two still points, where the mechanism is, for an instant, <i>dead</i> to force</p>
+      <h1>Dead</h1>
+      <p class="lede">Twice in every turn, you can push the slider as hard as you like and the shaft will not move.</p>
+      <p class="sub">A crank turns because the rod's thrust reaches the shaft <em>off to one side</em> of the axis — through a <b>moment arm</b> — and the turn it makes is force times that arm. But the arm is not fixed. At the two ends of the stroke, the crank web, the rod and the line of stroke all fall into <b>one straight line through the axis</b>: the rod now points dead at the centre, its thrust has no sideways reach at all, and the moment arm is <b>zero</b>. These are the <b>dead centres</b> — top and bottom — and on them the slider's push, however great, makes no torque. The torque delivered is the force times the <em>slope</em> of the slider's travel, <span class="mono">F·dx/dθ</span>, and that slope passes through zero at each end. A single cylinder stalled on a dead point cannot start itself; it takes a <a href="../2026-09-25-flywheel/">flywheel</a>'s stored turning to carry it across.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">Where the push is wasted</h2>
+      <p>Turn the crank and watch two things at once: the mechanism, with the <b>moment arm</b> drawn as the perpendicular from the shaft axis to the rod's line of thrust; and the <span class="mono">torque</span> curve for a steady gas force on the slider, swept out over a full revolution. The arm swells to a peak partway down the stroke and collapses to nothing at each end — and where the arm is nothing, the torque is nothing, whatever the force. Those two zeros are the dead centres. Shorten the rod and the curve goes lopsided; the dead points never move.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-keep" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">Driving — the rod's thrust well off the axis, torque near its peak</span>
+              <small id="verdict-sub">turning</small>
+            </div>
+            <div class="stage">
+              <canvas id="mech" width="560" height="300" aria-label="A slider-crank with a finite connecting rod. The perpendicular distance from the shaft axis to the rod's line of thrust — the moment arm — is drawn, shrinking to zero as the slider reaches each end of its stroke."></canvas>
+            </div>
+            <div class="stage">
+              <canvas id="plot" width="560" height="180" aria-label="The torque on the crankshaft from a steady slider force, plotted against crank angle over one revolution. It falls to zero at the two dead centres and peaks between them."></canvas>
+            </div>
+            <p class="hint"><b>Drag</b> the crank, or let it run. <kbd>space</kbd> runs or pauses; <kbd>←</kbd> <kbd>→</kbd> step. Stop it on a <em>dead centre</em> and press <b>Push</b> — full force, and the shaft stays put.</p>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="ratio">Rod ratio <span class="val">n = <span id="ratio-v">3.5</span></span></label>
+                <input type="range" id="ratio" min="1.5" max="6" step="0.1" value="3.5" />
+                <p class="ctl-note">The rod length in throws, <b>n = L/r</b>. A short rod makes the torque curve lean toward the first half of the stroke; it never moves the dead points, which are pure geometry.</p>
+              </div>
+              <div class="ctl">
+                <label for="force">Gas force <span class="val"><span id="force-v">100</span> N</span></label>
+                <input type="range" id="force" min="20" max="200" step="5" value="100" />
+                <p class="ctl-note">A steady push on the slider, as from cylinder pressure. It scales the whole torque curve up and down — but zero times any arm is still zero.</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k">crank <span class="tag">angle θ</span></span><span class="v" id="r-theta">70°</span></div>
+              <div class="row"><span class="k">moment <span class="tag s">arm</span></span><span class="v" id="r-arm">—</span></div>
+              <div class="row"><span class="k">torque <span class="tag">now</span></span><span class="v" id="r-torque">—</span></div>
+              <div class="row"><span class="k">peak <span class="tag">torque</span></span><span class="v" id="r-peak">—</span></div>
+              <div class="row"><span class="k">dead <span class="tag s">centres</span></span><span class="v" id="r-dead">0° · 180°</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="run" type="button" aria-pressed="true">Pause</button>
+              <button class="btn" id="push" type="button">Push</button>
+              <button class="btn" id="todead" type="button">To dead centre</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">What the dead point says</p>
+      <h2 id="law-h">Why a straight line makes no turn</h2>
+      <ul class="law-list">
+        <li>Torque is the slider force times the <b>slope of the stroke</b>: <span class="mono">T = F·dx/dθ</span>. It is the same slope the <a href="../throw/">throw</a> page drew as the slider's speed — a force delivered where the mechanism is quick, and wasted where it is slow.</li>
+        <li>At each <b>dead centre</b> the rod lies along the line of stroke, straight through the axis. Its thrust has <em>no</em> component across the crank, so the moment arm is zero and <span class="mono">dx/dθ = 0</span>: no torque, at any force.</li>
+        <li>There are exactly <b>two</b> per revolution — the far end (outer dead centre) and the near end (inner) — and they are fixed by geometry alone. Changing the rod or the force cannot move them, only reshape the curve between.</li>
+        <li>So a single cylinder delivers torque in <b>pulses</b> with two gaps, and cannot start itself from a gap. The fix is a <a href="../2026-09-25-flywheel/">flywheel</a>: rotation banked during the strong part of the stroke and spent carrying the crank through the dead point.</li>
+        <li>Multi-cylinder engines stagger their cranks so one cylinder is always off a dead centre while another sits on one — the gaps filled by phase, not by storage. One crank, though, has nothing to lean on but its own inertia.</li>
+      </ul>
+      <p class="pull">The crank's gift and its flaw are the same fact: it trades a turn for a push through an arm that must, twice a turn, pass through zero. Everything that spins to smooth an engine is there to pay that toll.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The three</p>
+      <h2 id="sib-h">One slider-crank, three things to ask of it</h2>
+      <div class="siblings">
+        <a href="../throw/"><span class="w">Throw</span><span class="d">the transform — a circle read as a line, the clean stroke of 2r</span></a>
+        <a href="../dead/" aria-current="page"><span class="w">Dead</span><span class="d">the blind spots — the two angles where a push makes no turn</span></a>
+        <a href="../rod/"><span class="w">Rod</span><span class="d">the distortion — how a finite link bends the sine out of true</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Crank · a slider-crank, read three ways · 2026-11-15 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
