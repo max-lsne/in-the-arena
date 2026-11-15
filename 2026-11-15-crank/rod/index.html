@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rod — the clean cosine of a crank is an ideal that wants an infinitely long connecting rod. A real rod has a length L, and as the crank turns the rod tilts to reach the pin, so the slider's travel is not r·cos θ but r·cos θ + √(L² − r²sin²θ): a cosine plus a second harmonic in twice the crank angle. The piston reaches its top speed before the crank is square, dwells a little longer at the near end than the far, and is flung harder at the far dead centre than the near, because its acceleration there is greater in the ratio (n+1) to (n−1), with n the rod in throws. The shorter the rod, the stronger the bend — and the reason balance shafts turn at twice crank speed to cancel it. Set the rod ratio and watch the real motion pull away from the ideal sine.</title>
+  <meta name="description" content="The clean cosine of a crank is an ideal that assumes an infinitely long connecting rod, always parallel to the stroke. A real rod has length L, and as the crank turns it must tilt to keep hold of the pin. That tilt adds a term: the slider's travel becomes r·cos θ + √(L² − r²·sin²θ), which is a cosine plus a smaller wave at twice the crank angle — a second harmonic. The consequences are all asymmetry: the piston reaches peak speed before the crank is square to the stroke, spends slightly longer near the inner end than the outer, and is accelerated harder at the outer dead centre than the inner, in the ratio (n+1):(n−1) where n = L/r is the rod measured in throws. A short rod exaggerates every one of these; a long rod softens them toward the ideal sine. The second harmonic is exactly what engine balance shafts, spun at twice crankshaft speed, exist to cancel. Set the rod ratio and watch the real motion pull away from the pure sine of the throw page." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Cpath d='M3 16 q7 -11 14 0 q7 11 12 0' fill='none' stroke='%235f8a9c' stroke-width='1.6'/%3E%3Cpath d='M3 16 q7 -8 14 0 q7 8 12 0' fill='none' stroke='%23b5683a' stroke-width='1.2' stroke-dasharray='2 2'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Rod — the finite link that bends the sine" />
+  <meta property="og:description" content="The crank's clean cosine wants an infinite rod. A real rod of length L tilts as it turns, adding a second harmonic: the piston peaks early, dwells at one end, and is flung harder at the other. The shorter the rod, the stronger the bend — the thing balance shafts cancel." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Crank</a> · <a href="../throw/">throw</a> · <a href="../dead/">dead</a> · rod · 2026-11-15</p>
+      <p class="pron"><b>connecting rod</b> · <i>noun</i> · the rigid link joining the crank pin to the slider; it both carries the force between them and, having a length of its own, tilts as the crank turns — and so quietly rewrites the motion it is only meant to transmit</p>
+      <h1>Rod</h1>
+      <p class="lede">The clean cosine was a promise the rod can only half keep.</p>
+      <p class="sub">The <a href="../throw/">throw</a> page's tidy <span class="mono">x = r·cos θ</span> assumes a rod so long it never tilts — always parallel to the stroke. A real rod has a length <span class="mono">L</span>, and to keep hold of a pin that is swinging off to the side it must <b>lean</b>, by an angle <span class="mono">β</span> with <span class="mono">sin β = (r/L)·sin θ</span>. That lean feeds back into the slider, so its travel is really <span class="mono">r·cos θ + √(L² − r²sin²θ)</span> — a cosine with a smaller wave at <em>twice</em> the crank angle riding on it, a <b>second harmonic</b>. Everything odd about a real piston follows: it hits <b>top speed before the crank is square</b>, <b>dwells</b> a touch longer at the near end, and is <b>flung harder at the far dead centre</b> than the near, in the ratio <span class="mono">(n+1):(n−1)</span> with <span class="mono">n = L/r</span>. Shorten the rod and the bend grows; lengthen it and the motion creeps back toward the ideal sine.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">The real motion against the ideal sine</h2>
+      <p>The slider-crank runs above; the faint open marker is where an infinite-rod slider would be at the same angle — the ideal — and the solid block is where the real, tilting rod actually puts it. Below, the chosen curve is drawn both ways: the <span style="color:var(--steel-2)">real</span> motion solid, the <span style="color:var(--spring-2)">ideal</span> sine dashed. Watch the two agree at the dead centres and part company in between. Shorten the rod and the gap opens; lengthen it and the solid line settles onto the dashed one.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-drift" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">The rod leaning — the real slider running ahead of the ideal</span>
+              <small id="verdict-sub">obliquity</small>
+            </div>
+            <div class="stage">
+              <canvas id="mech" width="560" height="240" aria-label="A slider-crank with a finite connecting rod that visibly tilts as the crank turns. A faint open marker shows where an infinite-rod slider would sit; the solid block shows where the real rod puts it."></canvas>
+            </div>
+            <div class="stage">
+              <canvas id="plot" width="560" height="210" aria-label="The chosen quantity — slider travel, speed, or acceleration — over one crank revolution, drawn for the real finite rod as a solid line and for the ideal infinite rod as a dashed sine."></canvas>
+            </div>
+            <div class="legend">
+              <span><i style="background:var(--steel)"></i> real rod (n = <span id="leg-n">3.5</span>)</span>
+              <span><i style="background:var(--spring);height:0;border-top:2px dashed var(--spring)"></i> ideal · infinite rod</span>
+            </div>
+            <p class="hint"><b>Drag</b> the crank or let it run. <kbd>space</kbd> runs or pauses; <kbd>←</kbd> <kbd>→</kbd> step. Switch the plot between <em>travel</em>, <em>speed</em>, and <em>throw-off</em> (acceleration).</p>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="ratio">Rod ratio <span class="val">n = <span id="ratio-v">3.5</span></span></label>
+                <input type="range" id="ratio" min="1.5" max="8" step="0.1" value="3.5" />
+                <p class="ctl-note">The rod length in throws, <b>n = L/r</b>. Road engines sit near <b>3–4</b>; long, slow marine and stationary engines run <b>5</b> and up for smoothness. Below <b>2</b> the bend is severe.</p>
+              </div>
+              <div class="ctl">
+                <label>Plot</label>
+                <div class="seg" id="view" role="group" aria-label="Quantity to plot">
+                  <button type="button" data-v="pos" aria-pressed="true">travel</button>
+                  <button type="button" data-v="vel" aria-pressed="false">speed</button>
+                  <button type="button" data-v="acc" aria-pressed="false">throw-off</button>
+                </div>
+                <p class="ctl-note">Travel, its rate (speed), or its rate of change (acceleration — the <b>throw-off</b> the rod and piston must withstand).</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k">crank <span class="tag">angle θ</span></span><span class="v" id="r-theta">70°</span></div>
+              <div class="row"><span class="k">rod <span class="tag s">lean β</span></span><span class="v" id="r-beta">—</span></div>
+              <div class="row"><span class="k">2nd <span class="tag">harmonic</span></span><span class="v" id="r-h2">—</span></div>
+              <div class="row"><span class="k">peak <span class="tag s">speed at</span></span><span class="v" id="r-vmax">—</span></div>
+              <div class="row"><span class="k">throw-off <span class="tag s">far:near</span></span><span class="v" id="r-accr">—</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="run" type="button" aria-pressed="true">Pause</button>
+              <button class="btn" id="long" type="button">Lengthen to ideal</button>
+              <button class="btn" id="short" type="button">Shorten</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">What the lean costs</p>
+      <h2 id="law-h">Why a real piston is not a sine</h2>
+      <ul class="law-list">
+        <li>Expand the root for a long rod and the travel is <span class="mono">≈ r·cos θ + (r²/4L)·cos 2θ</span> plus a constant. The first term is the ideal; the <b>cos 2θ</b> is the <em>second harmonic</em>, with amplitude <span class="mono">r/(4n)</span> — a wave at twice the crank frequency that no amount of balancing the crank can remove.</li>
+        <li>Because of it the piston reaches <b>peak speed before 90°</b> — the crank and rod are square to <em>each other</em>, not the crank to the stroke — and the asymmetry grows as the rod shortens.</li>
+        <li>The <b>acceleration</b>, and so the inertia force, is <span class="mono">r·ω²·(cos θ + cos 2θ/n)</span>: at the far dead centre the two terms add to <span class="mono">(1 + 1/n)</span>, at the near they subtract to <span class="mono">(1 − 1/n)</span>. The far end is thrown harder — which is where the gudgeon pin and small end take their beating.</li>
+        <li>The lean also pushes the piston <b>sideways</b> against the cylinder wall — <b>piston slap</b> and thrust-face wear — with a force proportional to <span class="mono">tan β</span>, largest at mid-stroke where the rod leans most.</li>
+        <li>Engines cancel the second harmonic with <b>balance shafts</b> geared to turn at <em>twice</em> crank speed, carrying weights timed to oppose it. A longer rod needs less of this; it is the cheapest balancer there is, paid for in height and weight.</li>
+      </ul>
+      <p class="pull">The rod is asked only to carry the force between a turn and a line. But it has a length, and length has opinions — so the humblest link in the engine is also the one that decides the shape of every stroke.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The three</p>
+      <h2 id="sib-h">One slider-crank, three things to ask of it</h2>
+      <div class="siblings">
+        <a href="../throw/"><span class="w">Throw</span><span class="d">the transform — a circle read as a line, the clean stroke of 2r</span></a>
+        <a href="../dead/"><span class="w">Dead</span><span class="d">the blind spots — the two angles where a push makes no turn</span></a>
+        <a href="../rod/" aria-current="page"><span class="w">Rod</span><span class="d">the distortion — how a finite link bends the sine out of true</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Crank · a slider-crank, read three ways · 2026-11-15 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
