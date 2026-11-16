@@ -217,6 +217,13 @@
     ctx.strokeStyle = C.rule; ctx.lineWidth = 1.4;
     ctx.beginPath(); ctx.moveTo(X(0), Y(0)); ctx.lineTo(X(1), Y(1)); ctx.stroke();
 
+    // the four quarter points, where drive and driven agree exactly (phi = theta)
+    for (const f of [0, 0.25, 0.5, 0.75, 1]) {
+      ctx.beginPath(); ctx.arc(X(f), Y(f), 3, 0, 2 * Math.PI);
+      ctx.fillStyle = C.field; ctx.fill();
+      ctx.lineWidth = 1.4; ctx.strokeStyle = C.steel2; ctx.stroke();
+    }
+
     // the S-curve phi(theta)
     ctx.beginPath();
     for (let i = 0; i <= 240; i++) {
@@ -343,6 +350,11 @@
 
   window.addEventListener('resize', () => { drawMech(); drawTrace(); });
   if (RM.matches) setRun(false);
-  live.textContent = `A universal joint at a ${(S.beta / DEG).toFixed(0)} degree bend. The drive turns steadily; the output turns once for once but leads and lags within the turn. Let it run, or drag it by hand.`;
+  {
+    const dev0 = wrap(phiOf(S.theta) - S.theta);
+    const state0 = Math.abs(dev0) < 1.2 * DEG ? 'in step with the drive'
+      : `the output ${Math.abs(dev0 / DEG).toFixed(0)} degrees ${dev0 >= 0 ? 'ahead of' : 'behind'} the steady turn`;
+    live.textContent = `A universal joint at a ${(S.beta / DEG).toFixed(0)} degree bend, opening with ${state0}. The drive turns steadily; the output turns once for once but leads and lags within the turn. Let it run, or drag it by hand.`;
+  }
   requestAnimationFrame(frame);
 })();
