@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Double — two universal joints, rightly phased, that carry a turn round a corner evenly. A single Cardan joint runs its output fast then slow, twice a turn; put a second joint in line through an intermediate shaft, make the two bend angles equal, and set the middle yokes square, and the second joint's flutter is the exact inverse of the first's. Surge meets drag, revolution by revolution, and the far shaft turns as steadily as the drive — a true constant-velocity joint, the thing on every driveshaft and every front wheel. Get the phase wrong and the two errors add instead, doubling the shudder. Set the bends and the phase and watch the net speed go flat, or watch it heave.</title>
+  <meta name="description" content="One universal joint cannot carry a turn across an angle evenly — its output surges and drags twice per revolution. Two joints can. Stage a second Cardan joint after the first, through an intermediate shaft, with the two bend angles equal and the intermediate yokes correctly phased (square to each other), and the velocity ripple of the second joint exactly cancels that of the first: the output turns at precisely the input rate at every instant. This is the double-Cardan constant-velocity joint, used in driveshafts and steering columns. Phase the yokes wrongly and the two ripples add rather than cancel, doubling the flutter; make the bend angles unequal and a residual flutter remains. Set both bends and the phase and watch the net output speed flatten to a constant line — or heave worse than a single joint ever did." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Cline x1='3' y1='11' x2='13' y2='11' stroke='%235f8a9c' stroke-width='2.2'/%3E%3Cline x1='13' y1='11' x2='19' y2='21' stroke='%235f8a9c' stroke-width='2.2'/%3E%3Cline x1='19' y1='21' x2='29' y2='21' stroke='%235f8a9c' stroke-width='2.2'/%3E%3Ccircle cx='13' cy='11' r='2.3' fill='%23b5683a'/%3E%3Ccircle cx='19' cy='21' r='2.3' fill='%23b5683a'/%3E%3Cpath d='M3 27 H29' stroke='%234f8a4a' stroke-width='2'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Double — two joints, phased, whose errors cancel" />
+  <meta property="og:description" content="A single Cardan joint flutters; two in line, equal-angled and rightly phased, cancel to a constant turn — the constant-velocity joint on every driveshaft. Phase them wrong and the shudder doubles. Set the bends and watch the net go flat." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Cardan</a> · <a href="../angle/">angle</a> · <a href="../ripple/">ripple</a> · double · 2026-11-16</p>
+      <p class="pron"><b>double</b> · <i>verb</i> · /ˈdʌb.əl/ — to set a second of a thing behind the first; here to answer one joint's error with another's, so the two faults, equal and opposed, leave nothing between them</p>
+      <h1>Double</h1>
+      <p class="lede">One joint cannot carry a turn evenly. Two can — by each making the other's mistake.</p>
+      <p class="sub">A single Cardan joint's flutter looks like a fault to be endured. It is really a fault to be <em>paired</em>. Send the wavering output of the first joint into a <b>second joint</b>, through a short <b>intermediate shaft</b>, and arrange two things: make the second bend <b>equal</b> to the first, and set the two yokes on the middle shaft <b>square</b> to each other — the right <b>phase</b>. Then the second joint runs fast exactly where the first ran slow, and slow exactly where it ran fast. The surge and the drag meet and cancel, turn by turn, and the output comes out as steady as the drive went in: a <b>constant-velocity</b> drive, the quiet trick inside every propshaft and every front wheel. Break either condition — the wrong phase, or unequal bends — and the cure fails: phase them wrong and the two ripples <em>add</em>, and the shaft shudders twice as hard as with one joint alone.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">Two wrongs, timed to make a right</h2>
+      <p>The drive enters at the left, crosses the first joint to the sloping intermediate shaft, and crosses the second joint to the output on the right. The lower panel draws the <b>net</b> output speed against the input angle. A single joint's flutter is there in faint outline for comparison; the solid curve is the pair. Get the phase and the bends right and that solid curve lies <b>flat</b> on the even line — a turn carried round two corners without a tremor. Get them wrong and watch it heave past even the single joint.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-rest" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">Constant velocity — the net output dead even, every instant</span>
+              <small id="verdict-sub">cancelled</small>
+            </div>
+            <div class="stage">
+              <canvas id="mech" width="560" height="300" aria-label="Two universal joints in line: a drive shaft, a first joint, a sloping intermediate shaft, a second joint, and the output shaft. The crosses tumble as the whole train turns."></canvas>
+            </div>
+            <div class="stage">
+              <canvas id="trace" width="560" height="170" aria-label="The net output-to-input speed ratio of the two joints plotted against input angle, with a single joint's flutter shown faintly behind. When phased with equal bends the net curve is a flat line at one."></canvas>
+            </div>
+            <p class="hint"><b>Drag</b> the train to turn it by hand, or let it run. <kbd>space</kbd> runs or pauses it; <kbd>←</kbd> <kbd>→</kbd> step the angle. The faint curve is <em>one</em> joint; the solid curve is the <em>pair</em>.</p>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label>Phase of the middle yokes</label>
+                <div class="seg" id="phase" role="group" aria-label="Phase of the intermediate yokes">
+                  <button type="button" data-v="1" aria-pressed="true">Phased ✓</button>
+                  <button type="button" data-v="0" aria-pressed="false">Crossed ✗</button>
+                </div>
+                <p class="ctl-note"><b>Phased</b> sets the two intermediate yokes square — the second joint undoes the first. <b class="warn">Crossed</b> aligns them, and the errors add instead.</p>
+              </div>
+              <div class="ctl">
+                <label for="b1">First bend <span class="val"><span id="b1-v">30</span>°</span></label>
+                <input type="range" id="b1" min="0" max="55" step="1" value="30" />
+                <p class="ctl-note">The angle at the first joint.</p>
+              </div>
+              <div class="ctl">
+                <label for="b2">Second bend <span class="val"><span id="b2-v">30</span>°</span></label>
+                <input type="range" id="b2" min="0" max="55" step="1" value="30" />
+                <p class="ctl-note">The angle at the second joint. Cancellation needs it <b>equal</b> to the first; any mismatch leaves a residue.</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k">net ratio <span class="tag">ω₃/ω₁</span></span><span class="v" id="r-ratio">1.00</span></div>
+              <div class="row"><span class="k">net swing <span class="tag s">fast · slow</span></span><span class="v" id="r-span">1.00 · 1.00</span></div>
+              <div class="row"><span class="k">net flutter <span class="tag s">peak-to-peak</span></span><span class="v" id="r-depth">±0%</span></div>
+              <div class="row"><span class="k">one joint <span class="tag s">for compare</span></span><span class="v" id="r-one">±15%</span></div>
+              <div class="row"><span class="k">verdict <span class="tag s">of this setup</span></span><span class="v" id="r-verdict">constant</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="run" type="button" aria-pressed="true">Pause</button>
+              <button class="btn" id="match" type="button">Match the bends</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">Why two wrongs make a right</p>
+      <h2 id="law-h">The two conditions, and what each one buys</h2>
+      <ul class="law-list">
+        <li>Each joint multiplies the speed by its own ratio. In series, the net is the <b>product</b>: <span class="mono">ω₃/ω₁ = (ω₂/ω₁)·(ω₃/ω₂)</span>. The question is only whether the second factor is the first turned upside down.</li>
+        <li><b>Equal bends.</b> The size of a joint's flutter is set by its bend angle. For the second to swing exactly as deep as the first, the two angles must match: <span class="mono">β₂ = β₁</span>. Unequal, and the deeper joint's ripple pokes through.</li>
+        <li><b>Right phase.</b> The second joint must run fast <em>when the first runs slow</em>. That timing is set by squaring the two yokes on the intermediate shaft — a quarter-turn offset. With it, the extremes line up as reciprocals, <span class="mono">(1/cos β)·(cos β) = 1</span>, at <b>every</b> angle.</li>
+        <li>Meet both and the product is <span class="mono">1</span> for all <span class="mono">θ</span> — flat, exact, at any bend, even a steep one. This is the <b>double-Cardan constant-velocity joint</b>; the same bargain, hidden in a ball-and-cage, is the CV joint on a front axle.</li>
+        <li>Get the phase wrong and the two ripples add: the flutter roughly <b>doubles</b>. The cure and the curse are the same mechanism, a quarter-turn apart — which is why the error that <a href="../angle/">one joint</a> cannot escape and <a href="../ripple/">feels</a> as a shudder is, in the end, not fought but <em>folded in half against itself</em>.</li>
+      </ul>
+      <p class="pull">The fault was never in the joint. It was in asking one corner to do what only two, in agreement, can — each running wrong in just the way that rights the other.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The three</p>
+      <h2 id="sib-h">One cross-and-yoke, three things to ask of it</h2>
+      <div class="siblings">
+        <a href="../angle/"><span class="w">Angle</span><span class="d">the lead and lag — a steady turn carried round a corner comes out uneven</span></a>
+        <a href="../ripple/"><span class="w">Ripple</span><span class="d">the flutter — the output speed swinging twice a turn, deeper with the bend</span></a>
+        <a href="../double/" aria-current="page"><span class="w">Double</span><span class="d">the cure — two joints, phased, whose errors cancel to a constant turn</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Cardan · a universal joint, read three ways · 2026-11-16 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
