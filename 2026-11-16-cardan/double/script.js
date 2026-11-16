@@ -196,6 +196,11 @@
       ctx.beginPath(); ctx.moveTo(X(frac), y0); ctx.lineTo(X(frac), y1); ctx.stroke(); ctx.setLineDash([]);
       ctx.fillText(lab, X(frac), y1 + 15);
     }
+    // the band a single joint would wander through, for the pair to sit against
+    ctx.fillStyle = C.inkFaint; ctx.globalAlpha = 0.09;
+    ctx.fillRect(x0, Y(sMax), x1 - x0, Y(sMin) - Y(sMax));
+    ctx.globalAlpha = 1;
+
     // even line
     ctx.strokeStyle = C.rule; ctx.lineWidth = 1.4;
     ctx.beginPath(); ctx.moveTo(x0, Y(1)); ctx.lineTo(x1, Y(1)); ctx.stroke();
@@ -329,6 +334,12 @@
 
   window.addEventListener('resize', () => { drawMech(); drawTrace(); });
   if (RM.matches) { setRun(false); S.theta = 30 * DEG; }
-  live.textContent = `Two universal joints in line. Phased with equal bends, their flutters cancel and the output turns constant; crossed or mismatched, a flutter remains. Let it run, or drag it.`;
+  {
+    const [mn0, mx0] = netSpan(); const flat0 = (mx0 - mn0) < 0.004;
+    const s0 = flat0 ? 'phased with equal bends, the net output constant — no flutter'
+      : (!S.phased ? `crossed, the two flutters adding to plus or minus ${((mx0 - mn0) / 2 * 100).toFixed(0)} percent`
+        : `bends unequal, a residual flutter of plus or minus ${((mx0 - mn0) / 2 * 100).toFixed(0)} percent`);
+    live.textContent = `Two universal joints in line, opening ${s0}. Phased with equal bends their flutters cancel; crossed or mismatched, a flutter remains. Let it run, or drag it.`;
+  }
   requestAnimationFrame(frame);
 })();
