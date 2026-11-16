@@ -209,6 +209,15 @@
     }
     ctx.lineWidth = 2.4; ctx.strokeStyle = C.brass; ctx.stroke();
 
+    // the twice-a-turn extremes: fast at 0 and 180, slow at 90 and 270
+    if (hi - lo > 1e-3) {
+      for (const [frac, val, col] of [[0, hi, C.drift], [0.25, lo, C.dead], [0.5, hi, C.drift], [0.75, lo, C.dead], [1, hi, C.drift]]) {
+        ctx.beginPath(); ctx.arc(X(frac), Y(val), 3, 0, 2 * Math.PI);
+        ctx.fillStyle = C.field; ctx.fill();
+        ctx.lineWidth = 1.4; ctx.strokeStyle = col; ctx.stroke();
+      }
+    }
+
     // present marker
     const th = norm(S.theta), rr = ratioOf(th);
     const mx = X(th / (2 * Math.PI)), my = Y(rr);
@@ -296,6 +305,10 @@
 
   window.addEventListener('resize', () => { drawMech(); drawTrace(); });
   if (RM.matches) { setRun(false); S.theta = 0; }
-  live.textContent = `A universal joint at a ${(S.beta / DEG).toFixed(0)} degree bend running steadily. The output speed swings between ${rMax().toFixed(2)} and ${rMin().toFixed(2)} times the input, twice a turn. Let it run, or drag it.`;
+  {
+    const r0 = ratioOf(S.theta);
+    const s0 = Math.abs(r0 - 1) < 0.01 ? 'even with the input' : `${r0 > 1 ? 'surging at' : 'dragging at'} ${r0.toFixed(2)} times the input`;
+    live.textContent = `A universal joint at a ${(S.beta / DEG).toFixed(0)} degree bend running steadily, opening ${s0}. The output speed swings between ${rMax().toFixed(2)} and ${rMin().toFixed(2)} times the input, twice a turn. Let it run, or drag it.`;
+  }
   requestAnimationFrame(frame);
 })();
