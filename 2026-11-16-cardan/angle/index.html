@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Angle — a universal joint carries a turn around a corner, but not evenly. Two shafts meet at a bend angle β and are tied by a cross — a four-armed spider gripped at each end by a forked yoke. Turn the first shaft steadily and the second turns too, once for once over a whole revolution, but within the turn it runs ahead and then behind: its angle is not θ but arctan(tan θ ⁄ cos β), an S-shaped wobble about the straight line. Twice a turn the two agree exactly — at the quarter points — and twice between they are farthest apart, the output leading, then lagging, by a few degrees that grow with the bend. Set the bend and watch a steady turn come out uneven.</title>
+  <meta name="description" content="A universal (Cardan, or Hooke's) joint lets one shaft drive another set at an angle. A cross-shaped spider is held at its four arms by two forked yokes, one on each shaft; the shafts meet at a bend angle β. Over a full revolution the driven shaft turns exactly once for each turn of the driver, but it does not keep step within the turn: its angle is arctan(tan θ ⁄ cos β), an S-shaped lead-and-lag about the straight y = x. At the four quarter points the two shafts agree; between them the output runs ahead by a few degrees, then behind by the same, and the size of that wobble grows with the bend. Set the bend angle and the drive speed and watch a steady input come out as an uneven output — the plain fault a single joint cannot escape." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Cline x1='3' y1='16' x2='15' y2='16' stroke='%235f8a9c' stroke-width='2.4'/%3E%3Cline x1='17' y1='16' x2='29' y2='9' stroke='%235f8a9c' stroke-width='2.4'/%3E%3Cg stroke='%23b5683a' stroke-width='2' stroke-linecap='round'%3E%3Cline x1='16' y1='10' x2='16' y2='22'/%3E%3Cline x1='11' y1='16' x2='21' y2='16'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='2.1' fill='%23d6b25c'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Angle — a joint that bends a shaft and keeps it turning" />
+  <meta property="og:description" content="Two shafts meet at a bend; a cross carries the turn across. The driven shaft turns once for once, but inside the turn it leads and lags — arctan(tan θ ⁄ cos β), an S about the straight line. Set the bend and watch a steady turn come out uneven." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Cardan</a> · angle · <a href="../ripple/">ripple</a> · <a href="../double/">double</a> · 2026-11-16</p>
+      <p class="pron"><b>cardan</b> · <i>noun</i> · /ˈkɑːdən/ — the cross-and-yoke joint that lets a turn pass between two shafts set at an angle, after Gerolamo Cardano, who described it in 1545; also a <i>universal joint</i>, or Hooke's joint, for the English scientist who gave its geometry</p>
+      <h1>Angle</h1>
+      <p class="lede">A turn can be carried around a corner. It cannot be carried around a corner evenly.</p>
+      <p class="sub">A <b>universal joint</b> ties two shafts that do not line up. Each shaft ends in a forked <b>yoke</b>; between them sits a <b>cross</b> — a four-armed spider, one pair of arms held by each yoke. Turn the first shaft and the cross tumbles, and the second shaft is dragged round with it. The two shafts meet at a <b>bend angle</b> <span class="mono">β</span>, and across a whole revolution the output turns exactly once for each turn of the input — nothing is lost. But it does not keep step <em>within</em> the turn. As one yoke tips toward the plane of the bend its grip on the cross shortens, and the far shaft is hurried along; a quarter-turn later it is held back. The output angle is <span class="mono">arctan(tan θ / cos β)</span> — an S-shaped lead and lag about the straight line, agreeing four times a turn, adrift between. Flatten the bend and the wobble shrinks to nothing; open it, and it grows.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">One steady turn in, one uneven turn out</h2>
+      <p>The drive shaft, on the left, turns at a constant rate — its yoke sweeps round like a clock hand. The driven shaft, bent away by <span class="mono">β</span>, turns with it but not in step: a faint ghost hand marks where an even turn <em>would</em> be, and the solid hand runs ahead of it, then behind. The lower panel plots the output angle against the input: a straight diagonal would mean perfect step; the real curve bows above the line, then below, crossing it at the four quarter points where the two briefly agree.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-rest" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">Square on — the output caught up with the drive</span>
+              <small id="verdict-sub">turning</small>
+            </div>
+            <div class="stage">
+              <canvas id="mech" width="560" height="300" aria-label="A universal joint seen in a cut-away: a steel drive shaft on the left ending in a brass yoke, a copper cross at the centre, and a second brass yoke on a driven shaft bent away by the bend angle. A faint hand marks where an even turn would be; the solid hand shows the true output."></canvas>
+            </div>
+            <div class="stage">
+              <canvas id="trace" width="560" height="170" aria-label="Output shaft angle plotted against input shaft angle: an S-shaped curve bowing above then below the straight diagonal of perfect step, crossing it at the quarter points."></canvas>
+            </div>
+            <p class="hint"><b>Drag</b> the drive shaft to turn it by hand, or let it run. <kbd>space</kbd> runs or pauses it; <kbd>←</kbd> <kbd>→</kbd> step the angle. The <em>ghost</em> hand is an even turn; the solid one is the truth.</p>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="beta">Bend angle <span class="val"><span id="beta-v">30</span>°</span></label>
+                <input type="range" id="beta" min="0" max="60" step="1" value="30" />
+                <p class="ctl-note">How far the driven shaft is set off the drive. At <b>0°</b> the joint is straight and the output keeps perfect step; the wider the bend, the larger the lead and lag.</p>
+              </div>
+              <div class="ctl">
+                <label for="rpm">Drive speed <span class="val"><span id="rpm-v">26</span> rpm</span></label>
+                <input type="range" id="rpm" min="0" max="90" step="2" value="26" />
+                <p class="ctl-note">How fast the drive shaft turns. It sets the pace, not the shape — the lead and lag is the bend's doing, and rides on top whatever the speed.</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k">input <span class="tag s">θ</span></span><span class="v" id="r-in">0°</span></div>
+              <div class="row"><span class="k">output <span class="tag">φ</span></span><span class="v" id="r-out">0°</span></div>
+              <div class="row"><span class="k">lead / lag <span class="tag">φ − θ</span></span><span class="v" id="r-dev">0°</span></div>
+              <div class="row"><span class="k">worst <span class="tag s">of this bend</span></span><span class="v" id="r-max">±0°</span></div>
+              <div class="row"><span class="k">agree <span class="tag s">4× a turn</span></span><span class="v" id="r-quarter">0 · 90 · 180 · 270°</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="run" type="button" aria-pressed="true">Pause</button>
+              <button class="btn" id="lead" type="button">To worst lead</button>
+              <button class="btn" id="agree" type="button">To an agreement</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">Why the corner costs evenness</p>
+      <h2 id="law-h">The one relation, read for its wobble</h2>
+      <ul class="law-list">
+        <li>Project the driving yoke's arm onto the driven shaft's plane and the geometry falls out: <span class="mono">tan φ = tan θ / cos β</span>. Since <span class="mono">cos β ≤ 1</span>, the output tangent is always <em>stretched</em> — but the stretch bites unevenly, and the net over a turn is exactly one revolution for one.</li>
+        <li>At <span class="mono">θ = 0, 90, 180, 270°</span> the formula gives <span class="mono">φ = θ</span> — the <b>quarter points</b>, where input and output agree. These are the only four angles at which they are truly in step.</li>
+        <li>Between them the output <b>leads</b> through one quarter and <b>lags</b> through the next, by up to roughly <span class="mono">β²/4</span> for small bends — about <span class="mono">4°</span> at a <span class="mono">30°</span> bend, near <span class="mono">11°</span> at <span class="mono">45°</span>. The error is a wobble, not a drift: it always comes back.</li>
+        <li>Flatten the bend and the cross barely tumbles — <span class="mono">cos β → 1</span>, <span class="mono">φ → θ</span>, the joint vanishes into a plain coupling. Open the bend toward <span class="mono">90°</span> and the yoke's grip collapses: the relation breaks down, which is why a real joint is kept well short of a right angle.</li>
+        <li>The uneven <em>angle</em> is only the half of it. Differentiate, and the uneven <em>speed</em> appears — a flutter twice a turn, the subject of <a href="../ripple/">ripple</a>; cancel it with a second joint, and you have the shaft under every car — <a href="../double/">double</a>.</li>
+      </ul>
+      <p class="pull">The joint keeps its promise over the whole turn and breaks it at every instant inside — one revolution out for one in, but never the same revolution at the same moment.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The three</p>
+      <h2 id="sib-h">One cross-and-yoke, three things to ask of it</h2>
+      <div class="siblings">
+        <a href="../angle/" aria-current="page"><span class="w">Angle</span><span class="d">the lead and lag — a steady turn carried round a corner comes out uneven</span></a>
+        <a href="../ripple/"><span class="w">Ripple</span><span class="d">the flutter — the output speed swinging twice a turn, deeper with the bend</span></a>
+        <a href="../double/"><span class="w">Double</span><span class="d">the cure — two joints, phased, whose errors cancel to a constant turn</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Cardan · a universal joint, read three ways · 2026-11-16 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
