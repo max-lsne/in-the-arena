@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ripple — a universal joint runs its output fast, then slow, twice every turn. Drive one shaft of a Cardan joint at a steady rate and the other does not come out steady: its speed is the ratio cos β ⁄ (1 − sin²β·cos²θ), swinging between a fast 1/cos β when the driving yoke lies in the plane of the bend and a slow cos β a quarter-turn later. Twice a revolution it surges, twice it drags — a second harmonic, the same lopsided flutter a short connecting rod writes into a piston. The deeper the bend, the harder it shudders, and the faster the shaft, the more that shudder is felt. Set the bend and read the output speed against the even input.</title>
+  <meta name="description" content="A universal (Cardan) joint carries a turn across an angle, but not at an even rate. If the driving shaft turns steadily, the driven shaft's angular speed is ω₂/ω₁ = cos β / (1 − sin²β·cos²θ), where β is the bend and θ the driver's roll. It swings twice per revolution between a maximum 1/cos β — when the driving yoke lies in the plane of the two shafts — and a minimum cos β a quarter-turn later. That twice-a-turn surge and drag is a second harmonic, the same signature a short connecting rod leaves on a piston; it grows with the bend and is felt harder the faster the shaft runs. It is why a single joint on a steep, fast driveshaft hums, vibrates and wears, and why cars do not use one alone. Set the bend angle and watch the output speed flutter above and below the steady input." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Cpath d='M3 16 Q9 6 16 16 T29 16' fill='none' stroke='%23b0892e' stroke-width='2.2'/%3E%3Cline x1='3' y1='16' x2='29' y2='16' stroke='%235f8a9c' stroke-width='1' stroke-dasharray='2 3'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Ripple — the twice-a-turn flutter a single joint can't help" />
+  <meta property="og:description" content="Drive a Cardan joint steadily and the output speed swings twice a turn — cos β ⁄ (1 − sin²β·cos²θ), from fast 1/cos β to slow cos β. A second harmonic, deeper with the bend. Set it, and see the flutter." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Cardan</a> · <a href="../angle/">angle</a> · ripple · <a href="../double/">double</a> · 2026-11-16</p>
+      <p class="pron"><b>ripple</b> · <i>noun</i> · /ˈrɪp.əl/ — a small, regular rise and fall riding on a steady flow; here the twice-a-turn surge and drag of a joint's output, a flutter that comes back on every revolution it cannot smooth away</p>
+      <h1>Ripple</h1>
+      <p class="lede">The corner does not just shift the turn. It makes the turn breathe.</p>
+      <p class="sub">The uneven angle of a universal joint has a second face. If the output is always a little ahead, then behind, then ahead again, then its <b>speed</b> must run fast, then slow, then fast — because position is just speed added up. Differentiate the joint's law and out comes the <b>velocity ratio</b>, <span class="mono">ω₂/ω₁ = cos β / (1 − sin²β·cos²θ)</span>: the output turns at up to <span class="mono">1/cos β</span> of the input rate when the driving yoke lies in the plane of the bend, and as little as <span class="mono">cos β</span> a quarter-turn later. It <b>swings twice</b> for every single turn of the shaft — a <em>second harmonic</em>, the same lopsided breathing a short connecting <a href="../../2026-11-15-crank/rod/">rod</a> gives a piston. Flatten the bend and the breath goes shallow; steepen it, and the shaft shudders. And since it is a flutter of speed, it is felt harder the faster you run — which is the whole reason a single joint is never trusted with a fast, steep drive.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">A steady drive, a breathing output</h2>
+      <p>The joint on the left runs at a constant input rate; the needle on the right is the output speed, reading against an <b>even</b> mark at the input rate, a <b>fast</b> mark at <span class="mono">1/cos β</span> and a <b>slow</b> mark at <span class="mono">cos β</span>. Watch it surge up and sag down — twice for every turn of the shaft. The lower panel draws that speed against the input angle: a curve that rides above the even line, dips below, and comes back, its depth set entirely by the bend.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-rest" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">Even — the output speed crossing the input rate</span>
+              <small id="verdict-sub">turning</small>
+            </div>
+            <div class="stage">
+              <canvas id="mech" width="560" height="300" aria-label="A universal joint at a bend running steadily on the left, and on the right a speed gauge whose needle swings between a slow mark and a fast mark as the output speeds and slows."></canvas>
+            </div>
+            <div class="stage">
+              <canvas id="trace" width="560" height="170" aria-label="The output-to-input speed ratio plotted against input angle: a curve swinging twice per revolution above and below the even line of ratio one."></canvas>
+            </div>
+            <p class="hint"><b>Drag</b> the joint to turn it by hand, or let it run. <kbd>space</kbd> runs or pauses it; <kbd>←</kbd> <kbd>→</kbd> step the angle. The needle leads nothing — it only reports how fast the far shaft is turning <em>now</em>.</p>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="beta">Bend angle <span class="val"><span id="beta-v">30</span>°</span></label>
+                <input type="range" id="beta" min="0" max="60" step="1" value="30" />
+                <p class="ctl-note">How far the driven shaft is bent off the drive. The flutter depth is set by this alone: <b>±0%</b> at a straight joint, growing fast as the bend opens.</p>
+              </div>
+              <div class="ctl">
+                <label for="rpm">Drive speed <span class="val"><span id="rpm-v">26</span> rpm</span></label>
+                <input type="range" id="rpm" min="0" max="90" step="2" value="26" />
+                <p class="ctl-note">The steady input rate. It does not change the <em>shape</em> of the flutter, only its size in real terms — and the shudder a machine feels grows with it.</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k">input <span class="tag s">ω₁</span></span><span class="v" id="r-in">26 rpm</span></div>
+              <div class="row"><span class="k">output <span class="tag">ω₂</span></span><span class="v" id="r-out">26 rpm</span></div>
+              <div class="row"><span class="k">ratio <span class="tag">ω₂/ω₁</span></span><span class="v" id="r-ratio">1.00</span></div>
+              <div class="row"><span class="k">swing <span class="tag s">fast · slow</span></span><span class="v" id="r-span">1.00 · 1.00</span></div>
+              <div class="row"><span class="k">flutter <span class="tag s">peak-to-peak</span></span><span class="v" id="r-depth">±0%</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="run" type="button" aria-pressed="true">Pause</button>
+              <button class="btn" id="fast" type="button">To fastest</button>
+              <button class="btn" id="slow" type="button">To slowest</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">Why the speed swings twice</p>
+      <h2 id="law-h">From an uneven angle to a breathing speed</h2>
+      <ul class="law-list">
+        <li>Speed is the slope of position. Take <span class="mono">tan φ = tan θ / cos β</span> and differentiate: <span class="mono">ω₂/ω₁ = cos β / (1 − sin²β·cos²θ)</span>. The output rate is never the input rate except where the two happen to cross.</li>
+        <li>The <b>denominator</b> carries <span class="mono">cos²θ</span>, which repeats every half-turn — so the ratio repeats <b>twice per revolution</b>. One turn of the shaft, two full breaths of the output. That doubling is what makes it a <em>second harmonic</em>.</li>
+        <li>It is <b>fastest</b>, <span class="mono">1/cos β</span>, at <span class="mono">θ = 0, 180°</span>, where the driving yoke lies in the plane of the two shafts; <b>slowest</b>, <span class="mono">cos β</span>, at <span class="mono">θ = 90, 270°</span>, square to it. The two extremes are exact reciprocals — the output borrows speed and pays it back.</li>
+        <li>The <b>depth</b> is all the bend's: at <span class="mono">10°</span> the swing is about <span class="mono">±1.5%</span>, at <span class="mono">30°</span> near <span class="mono">±15%</span>, at <span class="mono">45°</span> fully <span class="mono">±41%</span>. A gentle corner barely stirs; a steep one heaves.</li>
+        <li>Because it is a flutter of <em>rate</em>, its real violence scales with speed: the accelerations it demands go as the <b>square</b> of the rpm. That is the hum and the wear — and the reason the error is not endured but <a href="../double/">cancelled</a>.</li>
+      </ul>
+      <p class="pull">A single joint keeps honest books over the turn and cheats on the beat: every revolution it hands back exactly what it took, and every instant between, it is either in debt or in credit.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The three</p>
+      <h2 id="sib-h">One cross-and-yoke, three things to ask of it</h2>
+      <div class="siblings">
+        <a href="../angle/"><span class="w">Angle</span><span class="d">the lead and lag — a steady turn carried round a corner comes out uneven</span></a>
+        <a href="../ripple/" aria-current="page"><span class="w">Ripple</span><span class="d">the flutter — the output speed swinging twice a turn, deeper with the bend</span></a>
+        <a href="../double/"><span class="w">Double</span><span class="d">the cure — two joints, phased, whose errors cancel to a constant turn</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Cardan · a universal joint, read three ways · 2026-11-16 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
