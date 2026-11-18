@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Control — the same swashplate, split into two jobs, flies a helicopter. A non-rotating plate under the spinning rotor can be raised bodily, adding the same pitch to every blade at every azimuth — collective, which is lift; and it can be tilted, adding a once-per-turn swing that peaks at one compass bearing — cyclic, which is steering. A blade's pitch is their sum, A₀ + A₁·cos(ψ − φ): a flat offset with a single wave laid over it, a constant plus a first harmonic. Raise the plate for height; lean it for direction; one disc carries both commands into the turning frame at once. Set the lift and the lean and watch the flat and the wave add.</title>
+  <meta name="description" content="A helicopter's swashplate does two independent jobs with one tilted, slidable disc. Raised bodily (collective), it adds an equal pitch to every blade all the way round — more lift. Tilted (cyclic), it adds a once-per-revolution variation that peaks at a chosen azimuth — the rotor disc tips and the craft moves that way. A blade's pitch as it sweeps is the sum, θ(ψ) = A₀ + A₁·cos(ψ − φ): a constant (collective) plus a first harmonic (cyclic magnitude and direction). The rotating head reads one non-rotating plate as two separate commands. Set collective, cyclic magnitude and cyclic direction and watch a flat lift and a single wave superpose into the pitch schedule the blades fly." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Cline x1='16' y1='6' x2='16' y2='26' stroke='%235f8a9c' stroke-width='2'/%3E%3Cline x1='5' y1='14' x2='27' y2='18' stroke='%23b5683a' stroke-width='3' stroke-linecap='round'/%3E%3Cline x1='6' y1='20' x2='26' y2='20' stroke='%234f8a4a' stroke-width='1.6' stroke-dasharray='2 2'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Control — one plate, a lift and a lean, flying a helicopter" />
+  <meta property="og:description" content="Raise the swashplate for lift (collective); tilt it to steer (cyclic). Blade pitch is their sum, A₀ + A₁·cos(ψ − φ) — a constant plus a first harmonic. Set the lift and the lean and watch the flat and the wave add." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Swash</a> · <a href="../stroke/">stroke</a> · <a href="../ring/">ring</a> · control · 2026-11-18</p>
+      <p class="pron"><b>control</b> · <i>here</i> — the swashplate read backwards: a stationary plate whose <i>height</i> and <i>tilt</i> are carried into the spinning rotor as a pitch for every blade, the two commands a helicopter is flown by</p>
+      <h1>Control</h1>
+      <p class="lede">Raise the plate and it lifts. Lean the plate and it flies.</p>
+      <p class="sub">Run the swashplate the other way and it stops being a pump and becomes a <b>command</b>. Under a helicopter's rotor sits a plate that does not spin; above it, the blades do. Push the whole plate <em>up</em> — <b>collective</b> — and every blade, wherever it is in its sweep, takes the same extra pitch: more bite, more lift, everywhere at once. <em>Tilt</em> the plate — <b>cyclic</b> — and now a blade takes more pitch on one side of the circle and less on the other, a single swing per turn. The rotor disc tips toward the low side and the craft slides that way. A blade's pitch as it comes round is just the sum: <span class="mono">A₀ + A₁·cos(ψ − φ)</span> — a flat offset with one wave laid over it, a <em>constant plus a first harmonic</em>. One plate, two knobs, read by the turning head as two separate orders.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">A flat lift, a single wave, laid one on the other</h2>
+      <p>On the left, the plate under the rotor: raise it with collective and the whole ring of pitch climbs; tilt it with cyclic and the ring takes on a lean, high on one bearing and low on the opposite. The blades sweep round, each taking the pitch the plate hands it at that azimuth. On the right, that pitch unrolled against azimuth — the flat <em>collective</em> line, the <em>cyclic</em> cosine, and their <b>sum</b>, the schedule a blade actually flies. Set cyclic to zero and the sum is flat: pure lift. Open it and the wave appears, peaking where the plate is highest.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-mid" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">Lift and a forward lean</span>
+              <small id="verdict-sub">turning</small>
+            </div>
+            <div class="stage">
+              <canvas id="mech" width="560" height="300" aria-label="A rotor mast with a non-rotating swashplate beneath the blades. Collective raises the whole plate; cyclic tilts it. The blades sweep round, each taking the pitch the plate sets at its azimuth, drawn as a ring of bars whose height is the blade pitch — a wave of pitch running round the circle when cyclic is applied."></canvas>
+            </div>
+            <div class="stage">
+              <canvas id="trace" width="560" height="170" aria-label="Blade pitch unrolled against azimuth: a flat collective line, a cyclic cosine wave, and their sum. The sum peaks at the cyclic direction and dips half a turn away."></canvas>
+            </div>
+            <p class="hint"><b>Drag</b> the rotor to turn it, or let it run. <kbd>space</kbd> runs or pauses; <kbd>←</kbd> <kbd>→</kbd> step the sweep. Set cyclic to <b>0</b> for pure lift; open it to steer.</p>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="coll">Collective <span class="val"><span id="coll-v">6</span>°</span></label>
+                <input type="range" id="coll" min="0" max="12" step="1" value="6" />
+                <p class="ctl-note">How far the whole plate is raised — the pitch added to <b>every</b> blade equally. It sets lift: more collective, more bite all the way round, the craft climbs.</p>
+              </div>
+              <div class="ctl">
+                <label for="cyc">Cyclic <span class="val"><span id="cyc-v">3</span>°</span></label>
+                <input type="range" id="cyc" min="0" max="8" step="1" value="3" />
+                <p class="ctl-note">How far the plate is tilted — the <em>amplitude</em> of the once-a-turn swing. It sets how hard the disc tips, and so how hard the craft is pushed. At <b>0</b> the plate is level and lift is even.</p>
+              </div>
+              <div class="ctl">
+                <label for="dir">Cyclic direction <span class="val"><span id="dir-v">0</span>°</span></label>
+                <input type="range" id="dir" min="0" max="350" step="10" value="0" />
+                <p class="ctl-note"><em>Which way</em> the plate leans — the azimuth <b>φ</b> where pitch peaks. It aims the lean; turn it and the high side of the disc walks round the compass.</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k">collective <span class="tag">A₀</span></span><span class="v" id="r-coll">6°</span></div>
+              <div class="row"><span class="k">cyclic <span class="tag">A₁</span></span><span class="v" id="r-cyc">3°</span></div>
+              <div class="row"><span class="k">peak pitch at <span class="tag s">φ</span></span><span class="v" id="r-phi">0°</span></div>
+              <div class="row"><span class="k">pitch range <span class="tag s">min–max</span></span><span class="v" id="r-range">3–9°</span></div>
+              <div class="row"><span class="k">this blade <span class="tag">θ(ψ)</span></span><span class="v" id="r-blade">6°</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="run" type="button" aria-pressed="true">Pause</button>
+              <button class="btn" id="hover" type="button">Pure lift</button>
+              <button class="btn" id="bank" type="button">Full lean</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">Why one plate gives two commands</p>
+      <h2 id="law-h">The one relation, read for its parts</h2>
+      <ul class="law-list">
+        <li>A non-rotating plate has exactly three freedoms a pilot can set: a <b>height</b> and a <b>tilt</b> (two axes of tilt, read as a magnitude and a direction). The rotating head samples the plate at each blade's azimuth <span class="mono">ψ</span>, and height-plus-tilt sampled round a circle is precisely <span class="mono">A₀ + A₁·cos(ψ − φ)</span> — a constant and a first harmonic, nothing more and nothing less.</li>
+        <li>The <b>constant</b> <span class="mono">A₀</span> is <em>collective</em>: it lifts every blade's pitch the same, so it cannot steer — it can only change how hard the whole disc pulls. It is the swashplate's <a href="../stroke/">stroke</a> offset, applied to all azimuths at once.</li>
+        <li>The <b>first harmonic</b> <span class="mono">A₁·cos(ψ − φ)</span> is <em>cyclic</em>: its <em>amplitude</em> <span class="mono">A₁</span> is how hard, its <em>phase</em> <span class="mono">φ</span> is which way. One blade, coming round, pitches up through half the circle and down through the other half — exactly the single stroke of <a href="../stroke/">stroke</a>, now carried as a command instead of a displacement.</li>
+        <li>The two are <b>orthogonal</b>: a constant and a cosine share no overlap over a turn, so collective and cyclic do not bleed into each other. Raise the plate and the lean is untouched; tilt it and the mean lift is untouched. That independence is why a pilot can hold height and change heading at the same time, on one plate.</li>
+        <li>One honest complication the rotor adds: a blade is a spinning mass, so its <em>flap</em> response to a pitch input lags about a <b>quarter turn</b> — gyroscopic precession, the <a href="../../2026-08-30-geneva/">timing</a> problem again. The linkage is simply clocked 90° ahead to pay for it, so the disc tips where the pilot points. The <em>algebra</em> here — constant plus first harmonic — is untouched; only its phase is pre-rotated.</li>
+      </ul>
+      <p class="pull">Lift is the part of the pitch that is the same everywhere; steering is the part that is different somewhere. One plate holds both because a height and a tilt are all a circle can carry.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The three</p>
+      <h2 id="sib-h">One slanted plate, three things to ask of it</h2>
+      <div class="siblings">
+        <a href="../stroke/"><span class="w">Stroke</span><span class="d">the clean sine — a tilt read by one follower as a pure, undistorted rise and fall</span></a>
+        <a href="../ring/"><span class="w">Ring</span><span class="d">the delivery — followers set round the plate, their strokes summing to a steady flow</span></a>
+        <a href="../control/" aria-current="page"><span class="w">Control</span><span class="d">the two jobs — a lift laid under a lean, one plate steering by collective and cyclic</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Swash · a slanted plate, read three ways · 2026-11-18 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
