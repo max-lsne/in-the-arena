@@ -124,11 +124,11 @@
     const pr = rim.map(p => proj(p.x, p.y, p.z));
     ctx.beginPath(); pr.forEach((p, i) => i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)); ctx.closePath();
     const grad = ctx.createLinearGradient(cx - sc, cy - sc, cx + sc, cy + sc);
-    grad.addColorStop(0, withA(C.brassB, 0.40)); grad.addColorStop(1, withA(C.brass, 0.28));
+    grad.addColorStop(0, withA(C.brassB, 0.52)); grad.addColorStop(1, withA(C.brass, 0.34));
     ctx.fillStyle = grad; ctx.fill();
-    ctx.strokeStyle = C.brass; ctx.lineWidth = 2; ctx.stroke();
+    ctx.strokeStyle = C.brass; ctx.lineWidth = 2.2; ctx.stroke();
 
-    // followers — draw back-to-front by depth so overlap reads
+    // followers — short pistons seated on the plate, drawn back-to-front so overlap reads
     const items = [];
     for (let k = 0; k < S.N; k++) {
       const a = psi(k);
@@ -137,16 +137,22 @@
       items.push({ k, wx, wy, zc, vel: velK(k) });
     }
     items.sort((p, q) => q.wy - p.wy); // far (large +y projects up) first
+    const stub = 0.42;                 // piston length above its contact, plate units
     items.forEach(it => {
       const tip = proj(it.wx, it.wy, it.zc);
-      const rtop = proj(it.wx, it.wy, 1.65);
+      const rtop = proj(it.wx, it.wy, it.zc + stub);
       const deliv = it.vel > 0.02;
-      ctx.strokeStyle = deliv ? C.copper : withA(C.inkFaint, 0.7);
-      ctx.lineWidth = deliv ? 4.2 : 3; ctx.lineCap = 'round';
+      // guide collar at the top of the piston
+      ctx.strokeStyle = withA(C.rule, 0.9); ctx.lineWidth = 7; ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.moveTo(rtop.x, rtop.y); ctx.lineTo(proj(it.wx, it.wy, it.zc + stub * 0.4).x, proj(it.wx, it.wy, it.zc + stub * 0.4).y); ctx.stroke();
+      // piston rod
+      ctx.strokeStyle = deliv ? C.copper : withA(C.inkFaint, 0.75);
+      ctx.lineWidth = deliv ? 4.4 : 3.2; ctx.lineCap = 'round';
       ctx.beginPath(); ctx.moveTo(rtop.x, rtop.y); ctx.lineTo(tip.x, tip.y); ctx.stroke();
+      // contact shoe (with delivering glow)
+      if (deliv) { ctx.fillStyle = withA(C.keep, 0.22); ctx.beginPath(); ctx.arc(tip.x, tip.y, 9, 0, 7); ctx.fill(); }
       ctx.fillStyle = deliv ? C.keep : C.inkFaint;
-      ctx.beginPath(); ctx.arc(tip.x, tip.y, deliv ? 4.5 : 3.2, 0, 7); ctx.fill();
-      if (deliv) { ctx.fillStyle = withA(C.keep, 0.25); ctx.beginPath(); ctx.arc(tip.x, tip.y, 8, 0, 7); ctx.fill(); }
+      ctx.beginPath(); ctx.arc(tip.x, tip.y, deliv ? 4.6 : 3.3, 0, 7); ctx.fill();
     });
     ctx.lineCap = 'butt';
 
@@ -284,5 +290,7 @@
 
   window.addEventListener('resize', draw);
   computeStat(); syncLabels(); draw();
+  // speak the opening state once, so a screen reader meets the bench already set
+  if (live) { const odd = S.N % 2 === 1; live.textContent = `A swashplate pump with ${S.N} followers, ${odd ? 'odd' : 'even'}. Their staggered strokes sum to a flow rippling ${(stat.ripple * 100).toFixed(1)} percent at ${odd ? 2 * S.N : S.N} times a turn. Drag the plate or press space to run.`; }
   requestAnimationFrame(tick);
 })();
