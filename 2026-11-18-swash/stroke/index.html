@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stroke — a swashplate trades a steady spin for a clean stroke. A disc is fixed to a turning shaft but set aslant, tilted by an angle α from square. A follower — a rod held parallel to the shaft, barred from turning — rests its tip against the plate's face; as the shaft spins the slanted face sweeps under the tip, lifting it and letting it fall once per turn. Its travel is z = r·tan α·sin θ: a pure sine, its whole amplitude set by the tilt and the follower's stand-off radius, with none of the lopsided bulge a connecting rod writes into a crank's stroke. Open the tilt and the stroke grows; lay it flat and the follower stands still. Set the slant and watch a turn come out as a clean rise and fall.</title>
+  <meta name="description" content="A swashplate is a disc fixed to a shaft but tilted off square by an angle α. A follower rod, kept from rotating, rides the plate's face at a radius r and is driven back and forth as the slant sweeps past. Its displacement is exactly z = r·tan α·sin θ — a pure sinusoid whose amplitude is r·tan α and whose stroke is 2·r·tan α, set only by the tilt and the radius, never distorted by rod length the way a slider-crank is. Set the tilt angle and the drive speed and watch a steady rotation come out as a clean, symmetric rise and fall." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Cline x1='16' y1='4' x2='16' y2='28' stroke='%235f8a9c' stroke-width='2.2'/%3E%3Cline x1='6' y1='11' x2='26' y2='21' stroke='%23b5683a' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='22' cy='9' r='2.4' fill='%23d6b25c'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Stroke — a slanted disc turns a spin into a clean rise and fall" />
+  <meta property="og:description" content="A disc tilted on a turning shaft; a rod rides its face and is pushed out and drawn back once a turn. The travel is r·tan α·sin θ — a pure sine, amplitude set by the tilt alone. Set the slant and watch a turn come out as a stroke." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Swash</a> · stroke · <a href="../ring/">ring</a> · <a href="../control/">control</a> · 2026-11-18</p>
+      <p class="pron"><b>swash</b> · <i>noun</i> · /swɒʃ/ — a disc fixed aslant to a turning shaft, so that its spin is read by a follower as a back-and-forth; the <i>swashplate</i> or wobble-plate, heart of the axial-piston pump and the helicopter rotor head</p>
+      <h1>Stroke</h1>
+      <p class="lede">Tilt a disc on a spinning shaft, and a turn becomes a stroke.</p>
+      <p class="sub">Set a disc square to a shaft and it is just a flywheel; set it <b>aslant</b> — tilted off square by an angle <span class="mono">α</span> — and its rim rides high on one side and low on the other. Hold a <b>follower</b> against its face — a rod kept from turning, free only to slide along the shaft — and as the shaft spins the high side comes round, lifts the rod, and the low side lets it fall. One turn, one full stroke. And the travel is the cleanest thing in the whole catalogue: <span class="mono">z = r·tan α·sin θ</span>, a <em>pure sine</em>. Its amplitude is just <span class="mono">r·tan α</span> — the stand-off radius times the tilt — and nothing distorts it. Where a <a href="../../2026-11-15-crank/rod/">slider-crank</a> bends its sine with the geometry of a finite rod, the swash has no rod to bend; it writes the plainest rise and fall a rotation can be turned into.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">One steady turn in, one clean stroke out</h2>
+      <p>On the left, the shaft is seen end-on and in profile: the tilted plate sweeps round, and a single follower rides its face, pushed out as the high side passes and drawn back as the low side comes under. On the right, the follower's position is laid out against the turn — a sine that rolls on forever. A faint curve marks the <em>bent</em> sine a short-rodded crank would draw for the same stroke; the swash's own curve sits clean on top of the true sine, never leaning. The follower runs fastest as it crosses the middle, and stalls for an instant at each dead end.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-mid" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">Crossing the middle — the slant biting hardest</span>
+              <small id="verdict-sub">turning</small>
+            </div>
+            <div class="stage">
+              <canvas id="mech" width="560" height="300" aria-label="A swashplate seen in profile: a vertical shaft carries a disc tilted off square by the tilt angle; a follower rod rests on the plate's face at a stand-off radius and is pushed up and down as the plate sweeps round. A gauge at the side marks the follower's travel between its two dead ends."></canvas>
+            </div>
+            <div class="stage">
+              <canvas id="trace" width="560" height="170" aria-label="The follower's displacement plotted against shaft angle: a pure sine wave. A faint second curve shows the lopsided, rod-bent sine a slider-crank would draw for the same stroke, bulging on one side."></canvas>
+            </div>
+            <p class="hint"><b>Drag</b> the shaft to turn it by hand, or let it run. <kbd>space</kbd> runs or pauses; <kbd>←</kbd> <kbd>→</kbd> step the angle. The faint curve is a crank's bent sine; the solid one is the swash's clean one.</p>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="tilt">Tilt angle <span class="val"><span id="tilt-v">22</span>°</span></label>
+                <input type="range" id="tilt" min="0" max="45" step="1" value="22" />
+                <p class="ctl-note">How far the plate is set off square. At <b>0°</b> the plate is flat and the follower never moves; the steeper the tilt, the longer the stroke — it grows as <b>tan α</b>, slowly at first, then fast toward a right angle.</p>
+              </div>
+              <div class="ctl">
+                <label for="radius">Stand-off radius <span class="val"><span id="radius-v">1.0</span> r</span></label>
+                <input type="range" id="radius" min="40" max="130" step="2" value="100" />
+                <p class="ctl-note">How far out from the shaft the follower rides. The stroke scales straight with it — twice the radius, twice the travel — the second lever the plate gives you after the tilt.</p>
+              </div>
+              <div class="ctl">
+                <label for="rpm">Drive speed <span class="val"><span id="rpm-v">24</span> rpm</span></label>
+                <input type="range" id="rpm" min="0" max="80" step="2" value="24" />
+                <p class="ctl-note">How fast the shaft turns. It sets the pace of the stroke, not its length — the sine's height is the tilt's doing and rides on top whatever the speed.</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k">turn <span class="tag s">θ</span></span><span class="v" id="r-theta">0°</span></div>
+              <div class="row"><span class="k">follower <span class="tag">z</span></span><span class="v" id="r-z">0.00 r</span></div>
+              <div class="row"><span class="k">stroke <span class="tag">2·r·tan α</span></span><span class="v" id="r-stroke">0.00 r</span></div>
+              <div class="row"><span class="k">speed <span class="tag s">ż ⁄ ω</span></span><span class="v" id="r-vel">0.00 r</span></div>
+              <div class="row"><span class="k">dead ends <span class="tag s">at</span></span><span class="v" id="r-dead">90 · 270°</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="run" type="button" aria-pressed="true">Pause</button>
+              <button class="btn" id="tomid" type="button">To mid-stroke</button>
+              <button class="btn" id="todead" type="button">To a dead end</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">Why the stroke is clean</p>
+      <h2 id="law-h">The one relation, read for its purity</h2>
+      <ul class="law-list">
+        <li>Drop a line from the follower's tip to the plane the plate would fill if it were square. The tilted face lifts that plane by its slope times the across-shaft reach of the tip: <span class="mono">z = r·tan α·sin θ</span>. There is no second term — the follower slides straight along the shaft, so nothing foreshortens its travel.</li>
+        <li>That is the whole difference from a <a href="../../2026-11-15-crank/">crank</a>. A crank's piston hangs off a <em>finite</em> rod, and the rod's swing adds a <span class="mono">cos 2θ</span> bulge — the <a href="../../2026-11-15-crank/rod/">second harmonic</a> — that hurries the near dead end and eases the far one. The swash has no rod; its follower is rigid along the axis, so the bulge is zero and the sine stays true.</li>
+        <li>The <b>stroke</b> — the full travel between dead ends — is <span class="mono">2·r·tan α</span>. Two knobs set it and nothing else: the <em>tilt</em>, through <span class="mono">tan α</span>, and the <em>radius</em>, straight. Double either and the stroke doubles; lay the plate flat and it falls to nothing.</li>
+        <li>The follower is fastest where it crosses the middle — <span class="mono">θ = 0, 180°</span>, speed <span class="mono">r·tan α·ω</span> — and dead stopped at the ends — <span class="mono">θ = 90, 270°</span>, where it turns around. Those two dead ends are the swash's version of a crank's top and bottom, but reached on a clean cosine of speed, symmetric fore and aft.</li>
+        <li>Run the plate the other way and the trade reverses: push the follower and the plate must turn — an axial-piston <b>pump</b> drives fluid exactly so. Set a <em>ring</em> of followers round the one plate and their strokes stagger into a steady delivery — the subject of <a href="../ring/">ring</a>; split the plate's job into a lift and a lean and you can steer a helicopter with it — <a href="../control/">control</a>.</li>
+      </ul>
+      <p class="pull">A crank fakes a sine and misses by a harmonic. The swash doesn't fake it — the slant <em>is</em> the sine, drawn once per turn with a straightedge.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The three</p>
+      <h2 id="sib-h">One slanted plate, three things to ask of it</h2>
+      <div class="siblings">
+        <a href="../stroke/" aria-current="page"><span class="w">Stroke</span><span class="d">the clean sine — a tilt read by one follower as a pure, undistorted rise and fall</span></a>
+        <a href="../ring/"><span class="w">Ring</span><span class="d">the delivery — followers set round the plate, their strokes summing to a steady flow</span></a>
+        <a href="../control/"><span class="w">Control</span><span class="d">the two jobs — a lift laid under a lean, one plate steering by collective and cyclic</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Swash · a slanted plate, read three ways · 2026-11-18 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
