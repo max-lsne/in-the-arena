@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ring — a ring of followers set round one swashplate sums their staggered strokes into a near-steady flow. Each of N followers rides the same tilted disc at the same radius but a different azimuth, so each draws the same pure sine shifted by 2π⁄N; on a pump the ones on their out-stroke deliver, and their velocities add. The total is flat but for a small ripple at N times a turn — and an odd N ripples far less than an even one, which is why axial-piston pumps are built with seven or nine pistons, not six or eight. Set the count and watch the delivery flatten, and odd beat even.</title>
+  <meta name="description" content="A swashplate pump sets N followers (pistons) equally around one tilted disc. Each rides the plate at the same radius but a different azimuth ψ_k = 2πk/N, so each reciprocates as the same sine shifted by a full share of a turn. The pistons on their out-stroke are connected to the discharge port, and their velocities sum to the delivered flow Q(θ). The sum is nearly constant but carries a flow ripple at N times a revolution — and an odd piston count ripples markedly less than the neighbouring even one, the reason real axial-piston pumps almost always use an odd number of pistons. Set the count, the tilt and the speed and watch the staggered strokes sum to a near-steady delivery." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%235f8a9c' stroke-width='1.6'/%3E%3Cg fill='%23b5683a'%3E%3Ccircle cx='16' cy='7' r='2.1'/%3E%3Ccircle cx='24' cy='20' r='2.1'/%3E%3Ccircle cx='8' cy='20' r='2.1'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='2.3' fill='%23d6b25c'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Ring — many staggered strokes that sum to a near-steady flow" />
+  <meta property="og:description" content="N followers round one tilted plate, each the same sine a share of a turn apart. The delivering ones add to a flow that is flat but for a small ripple at N a turn — and odd beats even. Set the count and watch the delivery flatten." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Swash</a> · <a href="../stroke/">stroke</a> · ring · <a href="../control/">control</a> · 2026-11-18</p>
+      <p class="pron"><b>ring</b> · <i>here</i> — the set of followers placed evenly round one swashplate, each a share of a turn behind the last, so their strokes overlap into a steady delivery; the working heart of the axial-piston pump</p>
+      <h1>Ring</h1>
+      <p class="lede">One stroke pulses. Many strokes, staggered, nearly pour.</p>
+      <p class="sub">A single follower on a swashplate draws a clean sine — but a sine spends half its time giving and half taking back, and alone it <em>pulses</em>. Set a <b>ring</b> of followers round the one plate — <span class="mono">N</span> of them, each at the same radius but a different azimuth, each a full <span class="mono">1/N</span> of a turn behind its neighbour — and you have a pump. At every instant some followers are driving out while others draw back; connect the out-strokers to a port and their flows <b>add</b>. The sum is almost flat. Almost: a small <b>ripple</b> rides on it, at <span class="mono">N</span> times a turn, and here is the quiet rule the pump-builders live by — an <em>odd</em> <span class="mono">N</span> ripples far less than an even one. The same lopsided-sum lesson the <a href="../../2026-11-16-cardan/ripple/">Cardan joint</a> teaches, run the other way: here many wrongs are arranged to nearly cancel.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">Many staggered strokes, one near-steady sum</h2>
+      <p>On the left, the tilted plate with its ring of followers — each riding the face at its own azimuth, a wave of lift running round the disc. The ones driving outward (delivering) glow; the ones drawing back sit quiet. On the right, the summed delivery against the turn: a band that would be dead flat if the strokes filled each other perfectly, carrying instead a small ripple. The faint curves beneath are the individual contributions that add up to it. Change the count and watch the ripple breathe — deep and slow for an even ring, shallow and quick for an odd one.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-mid" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">Seven followers — a shallow, quick ripple</span>
+              <small id="verdict-sub">turning</small>
+            </div>
+            <div class="stage">
+              <canvas id="mech" width="560" height="300" aria-label="A swashplate seen in three-quarter view with a ring of follower rods set evenly around it, each riding the tilted face at a different azimuth so the ring shows a wave of height running round the disc. The followers driving outward glow; those drawing back sit quiet."></canvas>
+            </div>
+            <div class="stage">
+              <canvas id="trace" width="560" height="170" aria-label="The summed delivery flow plotted against shaft angle: a nearly flat band carrying a small ripple at N times a turn, with the individual follower contributions drawn faintly beneath. A dashed line marks the mean flow."></canvas>
+            </div>
+            <p class="hint"><b>Drag</b> the plate to turn it, or let it run. <kbd>space</kbd> runs or pauses; <kbd>←</kbd> <kbd>→</kbd> step the turn. Try <b>6</b> against <b>7</b> — one knob, the whole lesson.</p>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="count">Followers <span class="val"><span id="count-v">7</span></span></label>
+                <input type="range" id="count" min="2" max="12" step="1" value="7" />
+                <p class="ctl-note">How many rods ride the one plate. More is smoother — but <b>parity</b> matters more than count up close: an <b>odd</b> ring ripples far less than the even one just below it. Pumps pick <b>7</b> or <b>9</b>.</p>
+              </div>
+              <div class="ctl">
+                <label for="tilt">Tilt angle <span class="val"><span id="tilt-v">20</span>°</span></label>
+                <input type="range" id="tilt" min="4" max="40" step="1" value="20" />
+                <p class="ctl-note">The plate's slant — the stroke of every follower at once, and so the pump's displacement per turn. The ripple is a <em>fraction</em> of the flow, so its percentage barely moves with tilt; the mean rides straight up with it.</p>
+              </div>
+              <div class="ctl">
+                <label for="rpm">Drive speed <span class="val"><span id="rpm-v">22</span> rpm</span></label>
+                <input type="range" id="rpm" min="0" max="80" step="2" value="22" />
+                <p class="ctl-note">How fast the shaft turns. It scales the whole delivery and the ripple together — faster pours more, and ripples faster, but at the same percentage.</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k">followers <span class="tag s">N</span></span><span class="v" id="r-n">7 · odd</span></div>
+              <div class="row"><span class="k">mean flow <span class="tag">Q̄</span></span><span class="v" id="r-mean">0.00</span></div>
+              <div class="row"><span class="k">ripple <span class="tag">Δ ⁄ Q̄</span></span><span class="v" id="r-ripple">0.0%</span></div>
+              <div class="row"><span class="k">ripple rate <span class="tag s">per turn</span></span><span class="v" id="r-freq">14×</span></div>
+              <div class="row"><span class="k">delivering <span class="tag s">now</span></span><span class="v" id="r-deliv">3 of 7</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="run" type="button" aria-pressed="true">Pause</button>
+              <button class="btn" id="odd" type="button">Make it odd</button>
+              <button class="btn" id="even" type="button">Make it even</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">Why odd beats even</p>
+      <h2 id="law-h">The one relation, read for its sum</h2>
+      <ul class="law-list">
+        <li>Each follower draws the same sine, shifted: follower <span class="mono">k</span> is at <span class="mono">z_k = r·tan α·sin(θ − 2πk/N)</span>. Its velocity, the flow it gives, is the cosine of the same. The ones with velocity <em>outward</em> are on the discharge port; their velocities <b>add</b> to the delivery <span class="mono">Q(θ) = Σ max(0, cos(θ − 2πk/N))</span>.</li>
+        <li>That sum of <em>rectified</em> cosines is flat to first order — the mean is <span class="mono">N/π</span> times the single-stroke peak — but not perfectly. Where one follower's velocity crosses zero, it drops out of the sum and another picks up; the hand-off leaves a small <b>cusp</b>, and the cusps repeat at <span class="mono">N</span> per turn.</li>
+        <li>The <b>parity</b> is the whole trick. With an <em>even</em> ring the followers come in opposing pairs — as one hands off, its opposite hands off too, so the cusps coincide and <em>deepen</em>, ripple at <span class="mono">N</span> per turn. With an <em>odd</em> ring the hand-offs interleave, falling halfway between, so they partly fill each other and the ripple runs at <span class="mono">2N</span> per turn and far shallower.</li>
+        <li>In numbers: a three-follower ring ripples near <span class="mono">14%</span>, five near <span class="mono">5%</span>, seven near <span class="mono">2.5%</span>, nine near <span class="mono">1.5%</span> — while an <em>even</em> ring ripples about as much as the odd one two below it. That is why the catalogue is full of <b>7-</b> and <b>9-piston</b> pumps and nearly empty of 6 and 8.</li>
+        <li>The tilt sets how much it pours; the count sets how smoothly. Smooth it further and you reach for a <a href="../../2026-09-25-flywheel/">flywheel</a> on the shaft or an accumulator on the line — but the ring has already done most of the smoothing for free, at the source. The same plate, split instead into a lift and a lean, becomes a <a href="../control/">control</a>.</li>
+      </ul>
+      <p class="pull">Six pistons and seven differ by one part in seven of iron — and by a factor of five in how quietly the pump runs. The whole saving is in the parity.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The three</p>
+      <h2 id="sib-h">One slanted plate, three things to ask of it</h2>
+      <div class="siblings">
+        <a href="../stroke/"><span class="w">Stroke</span><span class="d">the clean sine — a tilt read by one follower as a pure, undistorted rise and fall</span></a>
+        <a href="../ring/" aria-current="page"><span class="w">Ring</span><span class="d">the delivery — followers set round the plate, their strokes summing to a steady flow</span></a>
+        <a href="../control/"><span class="w">Control</span><span class="d">the two jobs — a lift laid under a lean, one plate steering by collective and cyclic</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Swash · a slanted plate, read three ways · 2026-11-18 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
