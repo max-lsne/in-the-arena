@@ -237,6 +237,20 @@
     }
     ctx.stroke();
 
+    // tick the two dead ends (90, 270 — speed zero) and the two mid-strokes (0, 180 — fastest)
+    const Xt = (deg) => x0 + (x1 - x0) * deg / 360;
+    [[90, C.dead], [270, C.dead]].forEach(([d, col]) => {
+      const px = Xt(d), py = Y(A * Math.sin(d * DEG));
+      ctx.strokeStyle = col; ctx.lineWidth = 1.6;
+      ctx.beginPath(); ctx.moveTo(px, py - 5); ctx.lineTo(px, py + 5); ctx.stroke();
+    });
+    [[0, C.keep], [180, C.keep], [360, C.keep]].forEach(([d, col]) => {
+      const px = Xt(d), py = Y(0);
+      ctx.fillStyle = col; ctx.beginPath(); ctx.arc(px, py, 2.4, 0, 7); ctx.fill();
+    });
+    label(ctx, 'dead', Xt(90), Y(A) - 10, C.dead, 'center');
+    label(ctx, 'fast', Xt(0) + 16, Y(0) - 9, C.keep, 'center');
+
     // current point
     const th = ((S.theta % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
     const cxp = x0 + (x1 - x0) * th / (2 * Math.PI), cyp = Y(A * Math.sin(th));
@@ -350,5 +364,7 @@
 
   window.addEventListener('resize', draw);
   syncLabels(); draw();
+  // speak the opening state once, so a screen reader meets the bench already set
+  if (live) { live.textContent = `A swashplate at ${Math.round(S.alpha / DEG)} degrees tilt. One follower rides its face, drawing a pure sine of stroke ${(2 * amp()).toFixed(2)} radii, fastest at the middle, still at the dead ends. Drag the shaft or press space to run.`; }
   requestAnimationFrame(tick);
 })();
