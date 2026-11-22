@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arch — roll a wheel along a straight line and watch a point on its rim. It does not go straight and it does not go round; it writes an arch — the cycloid — rising from the rail in a cusp, sweeping over the top, falling to a cusp again, one arch per turn of the wheel. The rim point is the slowest thing on the wheel where it touches down — dead still for an instant, because the contact point is the pivot the whole wheel turns about — and the fastest at the top, where it moves at twice the speed of the hub. Slide the tracing point in off the rim and the cusps round into gentle curtate humps; slide it out past the rim, as a train wheel's flange sits, and the path loops backward below the rail. Set the wheel rolling and see the arch drawn.</title>
+  <meta name="description" content="A cycloid is the curve traced by a point on the rim of a circle rolling along a straight line, x = r(φ − sin φ), y = r(1 − cos φ). It rises from the line in a cusp, arches over, and returns to a cusp once per revolution. The rim point is momentarily at rest at the cusp — the contact point is the instantaneous centre of rotation — and moves at twice the hub speed at the top of the arch. A point inside the rim traces a smooth curtate cycloid; a point outside it, like a train wheel's flange, traces a prolate cycloid that loops backward below the rail. Roll the wheel and watch the arch draw itself." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Cline x1='3' y1='25' x2='29' y2='25' stroke='%235f8a9c' stroke-width='2'/%3E%3Cpath d='M3 25 Q9 7 16 7 Q23 7 29 25' fill='none' stroke='%23b5683a' stroke-width='2.4'/%3E%3Ccircle cx='16' cy='15' r='7.5' fill='none' stroke='%23d6b25c' stroke-width='2'/%3E%3Ccircle cx='16' cy='7' r='2.1' fill='%23b5683a'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Arch — a rolling wheel's rim writes a cycloid" />
+  <meta property="og:description" content="A point on a rolling wheel does not go straight or round — it writes an arch, cusp to cusp, still at the bottom and twice hub-speed at the top. Roll the wheel and watch it drawn." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Cycloid</a> · arch · <a href="../brachistochrone/">brachistochrone</a> · <a href="../tautochrone/">tautochrone</a> · 2026-11-22</p>
+      <p class="pron"><b>cycloid</b> · <i>noun</i> · /ˈsʌɪklɔɪd/ — the curve traced by a single point on the rim of a circle as it rolls, without slipping, along a straight line; one <i>arch</i> per turn of the wheel, cusp to cusp</p>
+      <h1>Arch</h1>
+      <p class="lede">Roll a wheel along a line, and a point on its rim writes an arch.</p>
+      <p class="sub">Paint a dot on the edge of a wheel and roll it along a rail. The dot does not travel in a straight line — it is on the wheel — and it does not go round in a circle — the wheel is moving on. It does a third thing: it writes an <b>arch</b>, rising off the rail in a sharp <b>cusp</b>, sweeping up and over, coming down to a cusp again, one arch for every turn. That curve is the <em>cycloid</em>, <span class="mono">x = r(φ − sin φ), y = r(1 − cos φ)</span>. Two facts hide in it, dead against intuition: at the bottom, where the dot touches the rail, it is <b>momentarily at rest</b> — the contact point is the pivot the whole wheel is turning about — and at the top it moves at <b>twice the speed of the hub</b>. The height alone is a clean raised cosine, kin to the <a href="../../2026-11-18-swash/stroke/">swash</a>'s sine; it is the rolling that bends it sideways into cusps.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">One turn of the wheel, one arch</h2>
+      <p>The wheel rolls along the rail and the marked point traces its curve behind it. A faint line runs from the point to where the wheel touches down: that contact is the <em>instantaneous centre</em>, the point the whole wheel is pivoting about this instant, and the marked point's speed is just its distance from that centre times the turning rate — so the speed falls to <em>nothing</em> at the cusp, where the point <em>is</em> the contact, and rises to twice the hub's speed at the top. Slide the tracing point in off the rim and the cusps soften to rounded humps; slide it out past the rim and the path dips below the rail and loops <em>backward</em> — the paradox of the train wheel, part of whose flange is always travelling the wrong way.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-mid" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">Over the top — moving at twice the hub's speed</span>
+              <small id="verdict-sub">rolling</small>
+            </div>
+            <div class="stage">
+              <canvas id="mech" width="560" height="300" aria-label="A wheel rolling rightward along a horizontal rail. A marked point on the wheel traces a curve: an arch that rises from the rail in a cusp, sweeps over the top, and falls to a cusp again. A faint line joins the marked point to the point where the wheel touches the rail — the pivot it is turning about — and an arrow shows the point's velocity, long at the top and vanishing at the cusp."></canvas>
+            </div>
+            <div class="stage">
+              <canvas id="trace" width="560" height="170" aria-label="The marked point's horizontal velocity plotted against roll angle, in units of the hub's speed. For a point on the rim it runs from zero at the cusp to two at the top. For a point outside the rim it dips below zero near the cusp — the point moving backward — and that region is shaded."></canvas>
+            </div>
+            <p class="hint"><b>Drag</b> the wheel to roll it by hand, or let it run. <kbd>space</kbd> runs or pauses; <kbd>←</kbd> <kbd>→</kbd> step the roll. The shaded dip below zero is the part of the stroke that travels backward.</p>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="krad">Point radius <span class="val"><span id="krad-v">0.94</span> r</span></label>
+                <input type="range" id="krad" min="30" max="160" step="2" value="94" />
+                <p class="ctl-note">How far out the traced point sits, as a fraction of the wheel's radius. <b>On the rim (1.0)</b> it writes the true cycloid, cusps and all. <b>Inside</b> gives a <em>curtate</em> curve, rounded humps that never stop; <b>outside</b> a <em>prolate</em> one that loops below the rail and runs backward.</p>
+              </div>
+              <div class="ctl">
+                <label for="rpm">Roll speed <span class="val"><span id="rpm-v">18</span> rpm</span></label>
+                <input type="range" id="rpm" min="0" max="60" step="2" value="18" />
+                <p class="ctl-note">How fast the wheel turns. It sets the pace, not the shape — the arch is the same curve drawn quickly or slowly, and the cusp is still a dead stop at any speed.</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k">roll <span class="tag s">φ</span></span><span class="v" id="r-phi">0°</span></div>
+              <div class="row"><span class="k">height <span class="tag">y</span></span><span class="v" id="r-y">0.00 r</span></div>
+              <div class="row"><span class="k">speed <span class="tag s">|v| ⁄ hub</span></span><span class="v" id="r-speed">0.00</span></div>
+              <div class="row"><span class="k">horizontal <span class="tag s">vx ⁄ hub</span></span><span class="v" id="r-vx">0.00</span></div>
+              <div class="row"><span class="k">arch length <span class="tag">per turn</span></span><span class="v" id="r-arc">8.00 r</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="run" type="button" aria-pressed="false">Run</button>
+              <button class="btn" id="tocusp" type="button">To the cusp</button>
+              <button class="btn" id="totop" type="button">To the top</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">What the arch is made of</p>
+      <h2 id="law-h">The one relation, read for its surprises</h2>
+      <ul class="law-list">
+        <li>The curve is <span class="mono">x = r(φ − sin φ), y = r(1 − cos φ)</span>, φ the angle the wheel has rolled through. The <span class="mono">r·φ</span> is the hub marching forward at the roll; the <span class="mono">−r·sin φ</span> and <span class="mono">r(1 − cos φ)</span> are the point swinging round the hub. Their sum is the arch.</li>
+        <li>Take the velocity, <span class="mono">(r − r cos φ, r sin φ)</span> per unit roll. At the cusp (<span class="mono">φ = 0</span>) both parts are zero: the point is <b>at rest</b>. That is not a trick of the algebra — the wheel touches the rail there, the contact point is the <em>instantaneous centre of rotation</em>, and a point sitting on the pivot cannot be moving. At the top (<span class="mono">φ = π</span>) the horizontal speed is <span class="mono">2r</span>: the top of a rolling wheel outruns its hub <b>two to one</b>.</li>
+        <li>Move the tracing point to radius <span class="mono">ρ</span> and it becomes <span class="mono">x = rφ − ρ sin φ, y = r − ρ cos φ</span>. Its horizontal speed is <span class="mono">r − ρ cos φ</span>. For a point <em>outside</em> the rim (<span class="mono">ρ &gt; r</span>) this goes <b>negative</b> near the cusp — the point travels backward. A train's wheel-flange reaches below the rail-head, so at every instant a slice of the train is moving the wrong way.</li>
+        <li>One arch is exactly <span class="mono">8r</span> long — eight radii, a length with no <span class="mono">π</span> in it, which so surprised the seventeenth century that Wren's rectification of it was a small sensation. The area under one arch is <span class="mono">3πr²</span>, precisely three times the wheel that drew it.</li>
+        <li>The <em>height</em> alone, <span class="mono">r(1 − cos φ)</span>, is a plain raised cosine — the same clean rise and fall the <a href="../../2026-11-18-swash/stroke/">swash</a> plate makes, and close kin to a <a href="../../2026-11-15-crank/">crank</a>'s stroke. What makes the cycloid its own curve is the sideways <span class="mono">sin φ</span>, the roll smearing that rise along the rail. Turn the same curve <em>upside down</em> and it stops being a curiosity and becomes the answer to two hard questions — the <a href="../brachistochrone/">quickest slide</a> and the <a href="../tautochrone/">evenest fall</a>.</li>
+      </ul>
+      <p class="pull">A wheel rolls forward, steadily; the dot on its rim stalls, races, and — if it reaches past the rim — turns and runs backward. All of it is one arch.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The three</p>
+      <h2 id="sib-h">One rolling curve, three things to ask of it</h2>
+      <div class="siblings">
+        <a href="../arch/" aria-current="page"><span class="w">Arch</span><span class="d">the curve itself — a rim point's path, cusp to cusp, still at the bottom and double-speed at the top</span></a>
+        <a href="../brachistochrone/"><span class="w">Brachistochrone</span><span class="d">the quickest slide — turned over, the cycloid is the fastest ramp between two points</span></a>
+        <a href="../tautochrone/"><span class="w">Tautochrone</span><span class="d">the evenest fall — on the same cup, beads from any height arrive together</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Cycloid · a rolling curve, read three ways · 2026-11-22 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
