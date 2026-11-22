@@ -199,7 +199,7 @@
     const padL = 42, padR = 16, padT = 14, padB = 26;
     const x0 = padL, x1 = w - padR, y0 = padT, y1 = h - padB;
     // vertical scale: vx/hub ranges 1-k .. 1+k; keep a fixed, generous window
-    const vmax = 2.2, vmin = -0.9;
+    const vmax = 2.7, vmin = -0.9;
     const Y = (v) => y1 - (v - vmin) / (vmax - vmin) * (y1 - y0);
     const X = (phi) => x0 + (x1 - x0) * phi / PHIMAX;
 
@@ -211,8 +211,8 @@
     ctx.beginPath(); ctx.moveTo(x0, y1); ctx.lineTo(x0, y0); ctx.stroke();
     ctx.strokeStyle = withA(C.dead, 0.5); ctx.lineWidth = 1; ctx.setLineDash([4, 4]);
     ctx.beginPath(); ctx.moveTo(x0, yZero); ctx.lineTo(x1, yZero); ctx.stroke(); ctx.setLineDash([]);
-    label(ctx, 'forward', x0 + 4, Y(1.6), C.inkFaint, 'left');
-    label(ctx, 'back', x0 + 4, Y(-0.5), C.dead, 'left');
+    label(ctx, 'forward', x1 - 4, Y(1.6), C.inkFaint, 'right');
+    label(ctx, 'back', x1 - 4, Y(-0.55), C.dead, 'right');
 
     // reference line at hub speed (1)
     ctx.strokeStyle = withA(C.steel, 0.5); ctx.lineWidth = 1; ctx.setLineDash([2, 4]);
@@ -260,6 +260,7 @@
     const vx = VXc(phi);
     $('r-vx').textContent = (vx >= 0 ? '+' : '') + vx.toFixed(2);
     $('r-arc').textContent = archLen().toFixed(2) + ' r';
+    $('r-class').textContent = S.k < 0.98 ? 'curtate' : S.k > 1.02 ? 'prolate' : 'common';
 
     const spd = Spd(phi), backward = vx < -0.02;
     const nearCusp = Math.min(phi, PHIMAX - phi) < 0.22;
