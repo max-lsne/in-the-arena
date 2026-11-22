@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brachistochrone — the curve of quickest descent. Release a bead at a high point and let it slide, without friction, to a lower point off to one side. Which track gets it there soonest? Not the straight line — that is the shortest road, but a slow one, because the bead is sluggish at the start when it most needs speed. A circular arc does better. The fastest of all is an upside-down cycloid, the same curve a rolling wheel writes, now hung as a ramp with its cusp at the start: it plunges steeply first to buy speed, then levels toward the finish, and when the finish is far to the side it even dives below the target and climbs back up, because the time it saves going fast outweighs the extra distance. Set the target and race the three beads.</title>
+  <meta name="description" content="The brachistochrone is the curve of fastest descent: the path along which a frictionless bead, starting from rest, slides between two points in the least time under gravity. Johann Bernoulli posed it in 1696; the answer is an inverted cycloid, the same curve traced by a point on a rolling wheel, with its cusp at the starting point. It beats the straight line (shortest but slow to build speed) and the circular arc. When the endpoint is far to the side the brachistochrone dips below it and rises back, trading distance for speed. Race a straight, a circular, and a cycloidal track and watch the cycloid arrive first." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Cpath d='M6 7 Q8 23 26 25' fill='none' stroke='%23b5683a' stroke-width='2.6'/%3E%3Cline x1='6' y1='7' x2='26' y2='25' stroke='%235f8a9c' stroke-width='1.6' stroke-dasharray='2 2'/%3E%3Ccircle cx='6' cy='7' r='2.4' fill='%23d6b25c'/%3E%3Ccircle cx='26' cy='25' r='2.4' fill='%234f8a4a'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Brachistochrone — the cycloid is the fastest slide" />
+  <meta property="og:description" content="A frictionless bead slides fastest down not a straight line nor a circle but an upside-down cycloid, plunging first to buy speed. Race the three and watch it win." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Cycloid</a> · <a href="../arch/">arch</a> · brachistochrone · <a href="../tautochrone/">tautochrone</a> · 2026-11-22</p>
+      <p class="pron"><b>brachistochrone</b> · <i>noun</i> · /brəˈkɪstəkrəʊn/ — from Greek <i>brákhistos</i>, shortest, and <i>khrónos</i>, time: the curve down which a body slides between two points in the least time</p>
+      <h1>Brachistochrone</h1>
+      <p class="lede">The quickest way down is not the straight way.</p>
+      <p class="sub">Hold a bead at <span class="mono">A</span> and let it slide, frictionless, to a lower point <span class="mono">B</span> off to the side. The straight ramp is the <em>shortest</em> road — and a slow one, because the bead crawls at the start, where it has no speed, and never makes it up. Bow the track into a <b>circular arc</b> and it arrives sooner. But the fastest track of all is an <b>upside-down cycloid</b> — the very <a href="../arch/">arch</a> a rolling wheel writes, hung with its cusp at <span class="mono">A</span>. It <em>plunges</em> first, steep and vertical, to buy speed while the distance is cheap, then eases toward <span class="mono">B</span>. Johann Bernoulli set this as a challenge to the mathematicians of Europe in 1696; Newton, the story goes, solved it in a night. Race the three and watch the cycloid come home first.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">Three tracks, one drop</h2>
+      <p>All three beads leave <span class="mono">A</span> at the same instant, from rest, and feel the same gravity; the only difference is the track under them. Watch the order they arrive. The straight bead leads for a heartbeat — it has the shortest way — and then the others, having spent their first moment falling nearly straight down, come past it with the speed that early plunge bought. Drag <span class="mono">B</span>, or set its reach and drop, and the race re-runs. Push <span class="mono">B</span> far to the side and the cycloid will <em>dive below it</em> and climb back to finish — proof that the least-time path is not the least-distance one.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-mid" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">The cycloid home first</span>
+              <small id="verdict-sub">ready</small>
+            </div>
+            <div class="stage">
+              <canvas id="mech" width="560" height="330" aria-label="Three tracks drop from a high point A at the upper left to a lower point B at the right: a straight line, a circular arc, and an inverted cycloid. A bead rides each. When released, all three start together; the cycloid bead reaches B first, having plunged steeply at the start to gain speed."></canvas>
+            </div>
+            <div class="stage">
+              <canvas id="trace" width="560" height="150" aria-label="A race chart: for each of the three tracks, the fraction of the track completed plotted against time. The cycloid's curve reaches the top — the finish — first, then the arc, then the straight line. A moving cursor marks the current time."></canvas>
+            </div>
+            <p class="hint"><b>Drag</b> the target <span class="mono">B</span> on the track, or use the sliders. <kbd>space</kbd> drops the beads again; <kbd>R</kbd> resets them to the top. The chart shows how much of each track is run as time passes.</p>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="reach">Target reach <span class="val"><span id="reach-v">320</span></span></label>
+                <input type="range" id="reach" min="120" max="420" step="4" value="320" />
+                <p class="ctl-note">How far to the side <span class="mono">B</span> sits. The farther the reach, the more the cycloid <b>dips below</b> the target before rising to it — the counter-intuitive heart of the thing, spending distance to buy time.</p>
+              </div>
+              <div class="ctl">
+                <label for="drop">Target drop <span class="val"><span id="drop-v">150</span></span></label>
+                <input type="range" id="drop" min="40" max="220" step="4" value="150" />
+                <p class="ctl-note">How far below <span class="mono">A</span> the target sits. A steeper drop favours every track, but shifts the cycloid's advantage — a shallow, far target is where it wins biggest.</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k">straight <span class="tag s">line</span></span><span class="v" id="r-line">—</span></div>
+              <div class="row"><span class="k">circular <span class="tag">arc</span></span><span class="v" id="r-arc">—</span></div>
+              <div class="row"><span class="k">cycloid <span class="tag">brachistochrone</span></span><span class="v" id="r-cyc">—</span></div>
+              <div class="row"><span class="k">beats the line by</span><span class="v" id="r-margin">—</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="drop-btn" type="button">Drop</button>
+              <button class="btn" id="reset" type="button">Reset</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">Why the plunge pays</p>
+      <h2 id="law-h">The one curve, read as a ramp</h2>
+      <ul class="law-list">
+        <li>The time down a track is <span class="mono">T = ∫ ds ⁄ v</span>, and for a frictionless bead starting from rest the speed depends only on how far it has <em>fallen</em>: <span class="mono">v = √(2g·y)</span>. So to go fast you must fall early — but falling early is distance spent going down, not across. The brachistochrone is the exact balance of the two, and it is a <b>cycloid</b> with its cusp at the start.</li>
+        <li>The straight line is the shortest path and loses anyway, because the bead idles through the start at low speed. The circular arc, tangent to the vertical at <span class="mono">A</span> like the cycloid, plunges too and comes much closer — but only the cycloid gets the balance exactly right the whole way down.</li>
+        <li>The giveaway is this: when <span class="mono">B</span> is far to the side, the cycloid passes <em>below</em> it and climbs back up to finish. A bead that overshoots downward and returns beats one that never dips, because the speed banked in the dip more than pays back the climb. Least time is <b>not</b> least distance.</li>
+        <li>The curve is <span class="mono">x = a(θ − sin θ), y = a(1 − cos θ)</span>, the same two lines as the <a href="../arch/">arch</a> — only now read downward, as a slope a bead runs on, with <span class="mono">a</span> and the sweep <span class="mono">θ</span> fixed so it threads from <span class="mono">A</span> to <span class="mono">B</span>. One curve; turned over, it stops describing a wheel and starts solving a race.</li>
+        <li>Snell's law hides inside it. Bernoulli's own trick was to treat the falling bead like a ray of light through ever-faster layers, bending so that <span class="mono">sin θ ⁄ v</span> stays constant — and that bending law, integrated, <em>is</em> the cycloid. The same curve that is quickest down is also the one that is <a href="../tautochrone/">evenest in time</a> from any height — the next page.</li>
+      </ul>
+      <p class="pull">The short way is the straight way. The fast way falls first, and is willing to go below its own target to get there sooner.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The three</p>
+      <h2 id="sib-h">One rolling curve, three things to ask of it</h2>
+      <div class="siblings">
+        <a href="../arch/"><span class="w">Arch</span><span class="d">the curve itself — a rim point's path, cusp to cusp, still at the bottom and double-speed at the top</span></a>
+        <a href="../brachistochrone/" aria-current="page"><span class="w">Brachistochrone</span><span class="d">the quickest slide — turned over, the cycloid is the fastest ramp between two points</span></a>
+        <a href="../tautochrone/"><span class="w">Tautochrone</span><span class="d">the evenest fall — on the same cup, beads from any height arrive together</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Cycloid · a rolling curve, read three ways · 2026-11-22 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>

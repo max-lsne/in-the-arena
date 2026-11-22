@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tautochrone — line a cup with an upside-down cycloid, let several beads go from different heights at the same instant, and they all reach the bottom together — and stay in step forever after. The time to the bottom is π√(r/g), with no amplitude in it: a bead dropped from the rim and a bead dropped an inch from the bottom arrive at the same moment, because on this one curve the slide is pure simple-harmonic motion in the bead's own arc length, and a harmonic oscillator keeps the same period whatever its swing. A round bowl only fakes it, and only for small swings — its wide swings run slow and the beads drift apart. It is why Huygens hung a pendulum on cycloidal cheeks to make a clock that keeps time however far it swings. Release the beads and watch them meet.</title>
+  <meta name="description" content="The tautochrone is the curve on which the time to the lowest point is the same from every starting height. It is a cycloid: on an inverted cycloid, a bead's slide is exactly simple-harmonic in its arc length from the bottom, s'' = -(g/4a)s, so the quarter-period π√(a/g) carries no amplitude. Beads released from different heights at once all reach the bottom together and stay in phase. A circular bowl is only approximately isochronous — its larger swings take longer and the beads drift apart. Huygens used cycloidal cheek-plates to make a pendulum isochronous, the basis of his accurate clock. Release several beads and watch them meet at the bottom." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Cpath d='M4 8 Q16 32 28 8' fill='none' stroke='%23b5683a' stroke-width='2.4'/%3E%3Ccircle cx='8' cy='12' r='2.1' fill='%234f8a4a'/%3E%3Ccircle cx='24' cy='12' r='2.1' fill='%23d6b25c'/%3E%3Ccircle cx='16' cy='24' r='2.1' fill='%235f8a9c'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Tautochrone — on a cycloid cup, beads from any height arrive together" />
+  <meta property="og:description" content="Line a cup with an upside-down cycloid and beads let go from any height reach the bottom at the same instant — the slide is simple-harmonic, the period carries no amplitude. Huygens' isochronous pendulum. Release and watch." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Cycloid</a> · <a href="../arch/">arch</a> · <a href="../brachistochrone/">brachistochrone</a> · tautochrone · 2026-11-22</p>
+      <p class="pron"><b>tautochrone</b> · <i>noun</i> · /ˈtɔːtəkrəʊn/ — from Greek <i>tautó</i>, the same, and <i>khrónos</i>, time: the curve on which the time to the bottom is the same from any starting height</p>
+      <h1>Tautochrone</h1>
+      <p class="lede">From any height, the same time down.</p>
+      <p class="sub">Line a cup with an upside-down <a href="../arch/">cycloid</a> and set a row of beads on it at different heights. Let them all go at once. They do a thing a round bowl never quite does: they reach the bottom <b>together</b> — not nearly, exactly — and stay in step for every swing after. The far bead has more track to cover, but it starts higher and runs faster, and on this one curve the two cancel perfectly. The reason is clean: on a cycloid the slide is <b>simple-harmonic motion</b> in the bead's own arc length, <span class="mono">s̈ = −(g⁄4a)·s</span>, and a harmonic oscillator keeps the same period whatever its amplitude. The time to the bottom is <span class="mono">π√(a⁄g)</span>, with no height in it. Huygens saw this in 1659 and bent a pendulum onto cycloidal cheeks to make a clock that keeps time however wide it swings — the <a href="../../2026-07-30-escapement/">escapement</a>'s problem, solved from the other side.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">Let them go, and watch them meet</h2>
+      <p>All the beads are released at the same instant, from rest, from wherever you set them. On the <b>cycloid</b> cup they arrive at the bottom in lock-step and cross it together forever; the trace below shows their heights over time sharing the same zeros, the same period, nested one inside another. Switch the cup to a <b>circle</b> — matched so the two agree for tiny swings — and the spell breaks: the wide swings run slow, the beads smear apart, and the bottom-crossings fan out. That gap is the error every pendulum clock fights, and the cycloid is the shape that makes it zero.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-mid" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">In step — every bead reaches the bottom together</span>
+              <small id="verdict-sub">cycloid</small>
+            </div>
+            <div class="stage">
+              <canvas id="mech" width="560" height="300" aria-label="A cup lined with an inverted cycloid, with several beads resting on it at different heights. When released, all the beads slide down and reach the bottom at the same instant, then swing up the far side together. A toggle changes the cup to a circular bowl, on which the beads instead drift out of step."></canvas>
+            </div>
+            <div class="stage">
+              <canvas id="trace" width="560" height="160" aria-label="Each bead's height plotted against time. On the cycloid cup every curve crosses the bottom at the same instants and shares one period, nested inside one another. On the circle, the curves have different periods and their bottom-crossings spread apart."></canvas>
+            </div>
+            <p class="hint"><b>Release</b> drops the beads again; <kbd>space</kbd> runs or pauses; <kbd>C</kbd> switches the cup between cycloid and circle. The marks under the trace are where each bead first reaches the bottom.</p>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="size">Cup size <span class="val"><span id="size-v">64</span></span></label>
+                <input type="range" id="size" min="46" max="78" step="1" value="64" />
+                <p class="ctl-note">How big the cup is, the cycloid's <span class="mono">a</span>. It sets the <em>pace</em> — a bigger cup gives a longer time to the bottom, <span class="mono">π√(a⁄g)</span> — but changes nothing about the beads arriving <b>together</b>; that is the shape's doing, not the size's.</p>
+              </div>
+              <div class="ctl">
+                <label for="spread">Release heights <span class="val"><span id="spread-v">wide</span></span></label>
+                <input type="range" id="spread" min="30" max="98" step="2" value="92" />
+                <p class="ctl-note">How high the topmost bead starts; the rest are spread below it. On the cycloid the arrival is the same whatever the spread — that is the whole point. On the circle, the wider you spread them, the more they drift.</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k">cup <span class="tag">shape</span></span><span class="v" id="r-shape">cycloid</span></div>
+              <div class="row"><span class="k">to the bottom <span class="tag">π√(a⁄g)</span></span><span class="v" id="r-period">—</span></div>
+              <div class="row"><span class="k">arrival spread <span class="tag s">max − min</span></span><span class="v" id="r-spread">0.00 s</span></div>
+              <div class="row"><span class="k">beads</span><span class="v" id="r-beads">5</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="run" type="button" aria-pressed="true">Pause</button>
+              <button class="btn" id="release" type="button">Release</button>
+              <button class="btn" id="shape" type="button">Cup: cycloid</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">Why the height cancels</p>
+      <h2 id="law-h">The one curve, read as a cup</h2>
+      <ul class="law-list">
+        <li>Measure arc length <span class="mono">s</span> from the bottom of the cup. On the cycloid it works out to <span class="mono">s = 4a·sin(φ⁄2)</span>, and the height climbed is <span class="mono">y = s²⁄8a</span> — the height is <em>exactly</em> quadratic in the arc length. A quadratic potential is a spring, and a spring is a harmonic oscillator.</li>
+        <li>So the slide obeys <span class="mono">s̈ = −(g⁄4a)·s</span>: simple-harmonic motion in the distance along the curve. Its period is <span class="mono">2π√(4a⁄g)</span>, and the time from release to the bottom is a quarter of that, <span class="mono">π√(a⁄g)</span> — no amplitude, no height, nothing about <em>where</em> the bead started. That is the tautochrone property, dropped straight out of the algebra.</li>
+        <li>A <b>circle</b> is not quite this. Its arc-length potential is <span class="mono">y = R(1 − cos(s⁄R))</span>, quadratic only for small <span class="mono">s</span>; the real motion is a pendulum, whose period grows with the swing. Match the circle's radius to the cycloid's bottom curvature (<span class="mono">R = 4a</span>) and the two agree for a whisker of a swing — then diverge, the wide circular swings always running a touch slow.</li>
+        <li>The curve is the same <span class="mono">x = a(θ − sin θ), y = a(1 − cos θ)</span> as the <a href="../arch/">arch</a> and the <a href="../brachistochrone/">brachistochrone</a> — read now as a valley rather than a wheel-track or a ramp. One cycloid is at once the quickest way down <em>and</em> the one whose descent time forgets where it began.</li>
+        <li>Huygens built it. A pendulum bob hung on a string that wraps a pair of cycloidal <em>cheeks</em> swings along a cycloid (the cycloid is its own <em>evolute</em>), so its period stops depending on how far it swings — an isochronous clock. In practice the cheeks' friction cost more than the amplitude error they cured, and the trick fell out of use; but as a piece of geometry it is perfect, and it is the same curve, met a third time.</li>
+      </ul>
+      <p class="pull">Drop a bead high, drop a bead low. On a circle the high one dawdles. On a cycloid they touch the bottom in the same breath.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The three</p>
+      <h2 id="sib-h">One rolling curve, three things to ask of it</h2>
+      <div class="siblings">
+        <a href="../arch/"><span class="w">Arch</span><span class="d">the curve itself — a rim point's path, cusp to cusp, still at the bottom and double-speed at the top</span></a>
+        <a href="../brachistochrone/"><span class="w">Brachistochrone</span><span class="d">the quickest slide — turned over, the cycloid is the fastest ramp between two points</span></a>
+        <a href="../tautochrone/" aria-current="page"><span class="w">Tautochrone</span><span class="d">the evenest fall — on the same cup, beads from any height arrive together</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Cycloid · a rolling curve, read three ways · 2026-11-22 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
