@@ -250,8 +250,8 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 3px co
 }
 .law-list li em { color: var(--ink); font-style: italic; }
 .law-list li b { color: var(--ink); }
-.law-list a, section > p a, .sub a { color: var(--spring-2); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--spring) 40%, transparent); }
-.law-list a:hover, section > p a:hover, .sub a:hover { border-bottom-color: var(--spring); }
+.law-list a, section > p a, .sub a, .ctl-note a { color: var(--spring-2); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--spring) 40%, transparent); }
+.law-list a:hover, section > p a:hover, .sub a:hover, .ctl-note a:hover { border-bottom-color: var(--spring); }
 
 .pull {
   font-family: var(--serif); font-size: clamp(1.15rem, 3vw, 1.5rem); line-height: 1.32;
