@@ -271,7 +271,8 @@
 
   // ---------- opening state ----------
   rebuild(); syncLabels();
-  if (RM.matches) { const apex = curve.reduce((a, p) => p.y > a.y ? p : a, curve[0]); S.phi = apex.phi; }
+  // open with the pen resting on the flat top, so the first look is the straight part
+  { const apex = curve.reduce((a, p) => p.y > a.y ? p : a, curve[0]); S.phi = apex.phi; }
   draw();
   if (live) {
     const ratio = run > 1 && bowMax > 0 ? Math.round(run / bowMax) : 0;
