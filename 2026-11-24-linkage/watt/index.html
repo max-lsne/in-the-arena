@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Watt — the linkage that draws a nearly straight line, and the empire it guided. James Watt's double-acting steam engine pushed as well as pulled, so the piston rod had to be held to a straight path without a rigid slide, which iron of the 1780s could not yet make true. His answer, the parallel motion, was a four-bar linkage: two equal rockers on two fixed pins, a coupler bar across their tips, and a pen at the coupler's midpoint. That midpoint traces a long thin figure-eight, and through the crossing in the middle the curve hugs a straight line closely enough to guide the rod. It is only an approximation — the line bows, and curls into hooks at the ends of the stroke — but a bow smaller than the tolerances of the age. Watt called it the invention he was most proud of. Rock the beam, trace the eight, and magnify the error to watch the straight part quietly bow.</title>
+  <meta name="description" content="The Watt linkage (1784) draws an approximately straight line from a four-bar mechanism: two equal rockers on fixed pivots, a coupler across their tips, and a tracing point at the coupler's midpoint. The midpoint traces a figure-eight (a lemniscate-like curve); across the central crossing the path is very nearly straight, which Watt used to guide the piston rod of his double-acting engine — the parallel motion he prized above his other inventions. The straight segment is only the central part of the eight: push the stroke to its ends and the path hooks into the lobes. Rock the mechanism through its working stroke and magnify the deviation to see where 'nearly straight' begins to bow." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Cpath d='M7 20 C7 12 13 12 16 16 C19 20 25 20 25 12 C25 7 19 7 16 11 C13 15 7 15 7 20 Z' fill='none' stroke='%23b5683a' stroke-width='2'/%3E%3Cline x1='4' y1='26' x2='28' y2='26' stroke='%235f8a9c' stroke-width='1.6'/%3E%3Ccircle cx='16' cy='13.5' r='2.2' fill='%23bd8a1c'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Watt — the linkage that draws a nearly straight line" />
+  <meta property="og:description" content="Two equal rockers, a coupler, and a pen at its midpoint tracing a figure-eight whose central crossing is near-straight — the parallel motion that guided Watt's piston rod." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Linkage</a> · watt · <a href="../peaucellier/">peaucellier</a> · <a href="../chebyshev/">chebyshev</a> · 2026-11-24</p>
+      <p class="pron"><b>parallel motion</b> · <i>noun</i> · a four-bar linkage whose coupler-midpoint traces a path with a long near-straight central stretch, used to guide a point along an approximate straight line</p>
+      <h1>Watt</h1>
+      <p class="lede">Nearly straight — and good enough to build an empire on.</p>
+      <p class="sub">The double-acting engine of 1784 <em>pushed</em> as well as pulled, so the piston rod had to be held to a straight path — and no chain could push, no slide of that decade could be cut true enough. Watt's answer was a <b>four-bar linkage</b>: two equal rockers on two fixed pins, a coupler across their tips, and a pen at the coupler's <b>midpoint</b>. That midpoint traces a long thin <b>figure-eight</b>, and through the crossing in the middle the curve hugs a straight line closely enough to guide the rod. It is a <em>near-miss</em> — the line bows, and hooks into the lobes at the ends of the stroke — but a bow finer than the iron it moved. "I am more proud of the parallel motion," he wrote, "than of any other invention I have ever made." Rock the beam and watch it draw; magnify the strip and watch it bow.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">Two rockers, a coupler, a near-straight stroke</h2>
+      <p>The two fixed pins carry equal rockers; the coupler joins their tips, and the pen rides its <b>midpoint</b>. As the beam rocks, the pen runs across the top of a faint <b>figure-eight</b> — nearly straight through the middle, then curling down into a <b>hook</b> at each end as it falls into a lobe. The pale curve is the whole eight the midpoint could trace; the bright stroke is the working part the mechanism actually runs. The strip beneath magnifies how far the stroke departs from a true straight line — flat across the centre, flaring where the hooks begin. Watt used only the straight centre, and sized his engine so the rod never reached the hooks.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-near" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">Running nearly straight</span>
+              <small id="verdict-sub">ready</small>
+            </div>
+            <div class="stage">
+              <canvas id="mech" width="560" height="360" aria-label="The Watt linkage. Two fixed pins at the bottom carry two equal rockers that splay upward; a coupler bar joins their tips, and the pen sits at the coupler's midpoint. A faint figure-eight shows the whole curve the midpoint can trace. As the rockers rock, the pen runs along the near-straight top of the eight, curling into a downward hook at each end of the stroke."></canvas>
+            </div>
+            <div class="stage">
+              <canvas id="err" width="560" height="120" aria-label="A magnified straightness strip: the pen's departure from a best-fit straight line, amplified, plotted along the stroke. It is flat across the central working region and flares upward into the hooks at both ends of the stroke."></canvas>
+            </div>
+            <p class="hint"><b>Drag</b> the pen to run the beam by hand, or press <kbd>space</kbd> to rock it. <kbd>E</kbd> shows or hides the full figure-eight. The strip is the straightness, magnified <span id="mag-label">40×</span>.</p>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="coupler">Coupler <span class="mono">L</span> <span class="val"><span id="coupler-v">66</span></span></label>
+                <input type="range" id="coupler" min="48" max="92" step="1" value="66" />
+                <p class="ctl-note">Length of the bar across the rocker tips. It <b>fattens or thins the eight</b>: a shorter coupler makes a leaner eight with a longer, flatter straight run; too long and the hooks crowd in and the straight part shrinks.</p>
+              </div>
+              <div class="ctl">
+                <label for="rocker">Rocker <span class="mono">r</span> <span class="val"><span id="rocker-v">96</span></span></label>
+                <input type="range" id="rocker" min="78" max="116" step="1" value="96" />
+                <p class="ctl-note">Length of the two equal swinging arms. Longer rockers flatten the stroke — the farther the pivot, the straighter the swing near the top — at the cost of a taller, lankier machine.</p>
+              </div>
+              <div class="ctl">
+                <label for="span">Pivot span <span class="mono">2s</span> <span class="val"><span id="span-v">100</span></span></label>
+                <input type="range" id="span" min="72" max="128" step="2" value="100" />
+                <p class="ctl-note">Distance between the two fixed pins. With the coupler and rockers, it tunes where the straight run falls and how long it is — the three lengths together are the whole design.</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k">pen path <span class="tag">midpoint</span></span><span class="v" id="r-kind">figure-eight</span></div>
+              <div class="row"><span class="k">usable straight run</span><span class="v" id="r-run">—</span></div>
+              <div class="row"><span class="k">max bow (central)</span><span class="v" id="r-bow">—</span></div>
+              <div class="row"><span class="k">straightness</span><span class="v" id="r-ratio">—</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="run-btn" type="button" aria-pressed="false">Rock the beam</button>
+              <button class="btn" id="eight-btn" type="button" aria-pressed="true">Figure-eight</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">Why it is nearly, not exactly</p>
+      <h2 id="law-h">A straight line borrowed from a figure-eight</h2>
+      <ul class="law-list">
+        <li>Two equal rockers swing on fixed pins; a coupler joins their tips. By symmetry the coupler's <b>midpoint</b> is the one point whose sideways wander from the two rockers <em>cancels</em> to first and second order near the centre — so its path is flat there, where any other point on the coupler would swing in a plain arc.</li>
+        <li>The full path is a <b>lemniscate</b> — a figure-eight — and only its <em>central crossing</em> is near-straight. The cancellation is not perfect: a third-order term survives, so the line <b>bows</b>, gently at the middle and sharply into the <b>hooks</b> where the stroke falls into the lobes. There is no setting that makes the bow vanish; it can only be made small.</li>
+        <li>You buy straightness with <b>length</b>. Longer rockers flatten the swing near the top; a leaner coupler stretches the straight run. Watt tuned the three lengths until the residual bow over his working stroke was finer than the bore and bearings could feel — then stopped, because <em>finer than it matters</em> is the engineer's definition of straight.</li>
+        <li>It is the opposite bargain to <a href="../peaucellier/">Peaucellier</a>'s. Watt spends <b>four bars</b> and accepts a bow; Peaucellier spends <b>seven</b> and a theorem and gets a line that is straight by proof. For eighty years everyone paid Watt's price, because four bars are cheap, "nearly" was always enough, and no one yet knew the exact price could be paid at all.</li>
+        <li>The same four-bar, re-proportioned, is <a href="../chebyshev/">Chebyshev's</a> linkage — and Chebyshev asked the question Watt did not: of all the near-straight four-bars, which bows <em>least</em>? The hunt for that best approximation grew into a whole branch of mathematics, and taught a linkage to walk.</li>
+      </ul>
+      <p class="pull">Watt did not draw a straight line. He drew a figure-eight so patiently that its middle could be mistaken for one — and ran an engine down the mistake.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The three</p>
+      <h2 id="sib-h">One straight line, three linkages that draw it</h2>
+      <div class="siblings">
+        <a href="../watt/" aria-current="page"><span class="w">Watt</span><span class="d">nearly straight — a four-bar whose coupler midpoint traces a figure-eight with a near-straight crossing, good enough to guide a piston</span></a>
+        <a href="../peaucellier/"><span class="w">Peaucellier</span><span class="d">exactly straight — seven bars form an inversor, and the inverse of a circle through the centre is a true line</span></a>
+        <a href="../chebyshev/"><span class="w">Chebyshev</span><span class="d">nearly straight, and walking — the best four-bar approximation, turned under to pace a level floor</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Linkage · a straight line drawn three ways · 2026-11-24 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>

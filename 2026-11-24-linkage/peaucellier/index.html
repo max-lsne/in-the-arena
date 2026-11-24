@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Peaucellier — the first linkage to draw an exactly straight line. For most of the age of steam, no machine could turn a crank and get a dead-straight line out of it; every joint swings in a circle, and a straight line seemed to be forever out of reach of pure bar-and-pin motion. Watt's famous parallel motion only came close. In 1864 a French army officer, Charles-Nicolas Peaucellier, found the answer: seven bars arranged as a geometric inversor. A rhombus of four equal bars, two long arms anchoring it to a fixed pin, and a crank — and the pen traces a line true to the last decimal, not an approximation that happens to look straight but a straight line forced by the theorem that the inverse of a circle through the centre is a line. Turn the crank and watch the pen run perfectly straight; then push the crank pin off its circle and watch the line bow into an arc.</title>
+  <meta name="description" content="The Peaucellier–Lipkin linkage (1864) is the first planar linkage that draws an exactly straight line from rotary input — not an approximation but a line that is straight by proof. Seven bars form a geometric inversor: a four-bar rhombus, two equal long arms to a fixed pivot O, and a driving crank. The mechanism physically computes OP·OP′ = d²−b², so P′ is the inverse of P through O; when a crank constrains P to a circle passing through O, the inverse P′ is forced onto a perfect straight line. Turn the crank to trace the exact line; move the crank pin off the circle-through-O and the straight line bows into a circular arc." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Cline x1='24' y1='5' x2='24' y2='27' stroke='%234f8a4a' stroke-width='2.4'/%3E%3Cpath d='M6 16 L15 9 L24 16 L15 23 Z' fill='none' stroke='%23b0892e' stroke-width='1.8'/%3E%3Cline x1='6' y1='16' x2='15' y2='9' stroke='%235f8a9c' stroke-width='1.8'/%3E%3Ccircle cx='6' cy='16' r='2.3' fill='%235f8a9c'/%3E%3Ccircle cx='24' cy='16' r='2.3' fill='%23b5683a'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Peaucellier — the linkage that draws an exactly straight line" />
+  <meta property="og:description" content="Seven bars, two fixed pins, and a theorem: the inverse of a circle through the centre is a straight line. The first exact straight-line linkage, 1864. Turn the crank and watch the pen run true." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Linkage</a> · <a href="../watt/">watt</a> · peaucellier · <a href="../chebyshev/">chebyshev</a> · 2026-11-24</p>
+      <p class="pron"><b>Peaucellier–Lipkin cell</b> · <i>noun</i> · /poʊsɛlˈjeɪ ˈlɪpkɪn/ — a seven-bar linkage that converts a point's circular motion into exactly straight-line motion, by physically performing a geometric inversion</p>
+      <h1>Peaucellier</h1>
+      <p class="lede">A straight line, drawn true — by bars and pins alone.</p>
+      <p class="sub">Every pin swings in a <em>circle</em>; that is all a pivot can do. So for eighty years after Watt it was an open question whether a linkage could draw a dead-straight line at all, or only ever a clever <a href="../watt/">near-miss</a>. In 1864 Charles-Nicolas Peaucellier, an officer of the French engineers, answered it with <b>seven bars</b>: a rhombus of four equal links, two long equal arms pinning it to a fixed point <span class="mono">O</span>, and a crank. The machine is an <b>inversor</b> — it holds <span class="mono">OP · OP′</span> constant — and because the inverse of a circle through <span class="mono">O</span> is a straight line, constraining the inner point <span class="mono">P</span> to such a circle forces the pen <span class="mono">P′</span> onto a line <em>exact to the last decimal</em>. Turn the crank and watch it run true; then slide the crank pin off its circle and watch the straight line bow.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">Seven bars, one true line</h2>
+      <p>The crank on the right pivot swings the inner point <span class="mono">P</span> around a circle. Two long arms of length <span class="mono">d</span> run from the fixed pin <span class="mono">O</span> to the sides of a rhombus of four equal bars of length <span class="mono">b</span>; the pen <span class="mono">P′</span> sits at the rhombus's far corner, always on the ray <span class="mono">O→P</span>, at the distance that keeps <span class="mono">OP · OP′ = d² − b²</span>. When the crank's circle passes exactly through <span class="mono">O</span>, the pen draws a <b>perfect vertical line</b>. The thin trail is the path the pen has swept; the magnified strip beneath shows how far it strays from true — flat on the knife-edge, bowing the instant the crank pin leaves its circle.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-exact" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">The pen runs exactly straight</span>
+              <small id="verdict-sub">ready</small>
+            </div>
+            <div class="stage">
+              <canvas id="mech" width="560" height="360" aria-label="The Peaucellier linkage. A fixed pin O on the left; a driving crank on a second fixed pin swings an inner point P around a circle that passes through O. From O, two long equal arms reach to the two side corners of a rhombus of four equal bars; the pen sits at the rhombus's far corner, on the straight line through O and P. As the crank turns, the pen traces a dead-straight vertical line."></canvas>
+            </div>
+            <div class="stage">
+              <canvas id="err" width="560" height="120" aria-label="A magnified straightness strip: the pen's horizontal deviation from a true vertical line, amplified so the eye can read it, plotted against its height. For the exact linkage the strip is flat on zero; when the crank pin is off its circle the strip bows to one side."></canvas>
+            </div>
+            <p class="hint"><b>Drag</b> the pen <span class="mono">P′</span> to run the linkage by hand, or press <kbd>space</kbd> to turn the crank. <kbd>C</kbd> clears the trail. The strip below is the straightness, magnified <span id="mag-label">200×</span>.</p>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="offset">Crank pin off true <span class="val"><span id="offset-v">0</span></span></label>
+                <input type="range" id="offset" min="-28" max="28" step="1" value="0" />
+                <p class="ctl-note">Slides the crank's fixed pin so its circle no longer passes through <span class="mono">O</span>. At <b>0</b> the circle threads <span class="mono">O</span> and the pen is <b>exactly straight</b>; move off and the line <b>bows into an arc</b> — the inversor still works, but it is now inverting the wrong circle.</p>
+              </div>
+              <div class="ctl">
+                <label for="arm">Long arm <span class="mono">d</span> <span class="val"><span id="arm-v">104</span></span></label>
+                <input type="range" id="arm" min="88" max="118" step="1" value="104" />
+                <p class="ctl-note">Length of the two arms from <span class="mono">O</span>. With the rhombus side <span class="mono">b</span>, it sets the inversion constant <span class="mono">d² − b²</span> — and so <em>where</em> the straight line falls, not whether it is straight.</p>
+              </div>
+              <div class="ctl">
+                <label for="rho">Rhombus side <span class="mono">b</span> <span class="val"><span id="rho-v">58</span></span></label>
+                <input type="range" id="rho" min="42" max="74" step="1" value="58" />
+                <p class="ctl-note">Side of the four equal bars. It must stay shorter than the arm <span class="mono">d</span> for the cell to close; the pair <span class="mono">(d, b)</span> fix the inversion, and the whole rhombus flexes to keep it.</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k">pen path <span class="tag">P′</span></span><span class="v" id="r-kind">exact line</span></div>
+              <div class="row"><span class="k">max deviation</span><span class="v" id="r-dev">0.00 px</span></div>
+              <div class="row"><span class="k"><span class="mono">OP · OP′</span></span><span class="v" id="r-prod">—</span></div>
+              <div class="row"><span class="k"><span class="mono">d² − b²</span></span><span class="v" id="r-const">—</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="run-btn" type="button" aria-pressed="false">Turn the crank</button>
+              <button class="btn" id="clear" type="button">Clear trail</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">Why it is exact, not nearly</p>
+      <h2 id="law-h">Inversion, built out of bars</h2>
+      <ul class="law-list">
+        <li>The four equal bars of the rhombus keep <span class="mono">P</span> and the pen <span class="mono">P′</span> symmetric about the line through their two side corners — so <span class="mono">O</span>, <span class="mono">P</span> and <span class="mono">P′</span> are always <b>collinear</b>, the pen forever on the ray out of <span class="mono">O</span> through <span class="mono">P</span>.</li>
+        <li>A short piece of Pythagoras on the rhombus and the two arms gives the key identity: <span class="mono">OP · OP′ = d² − b²</span>, a <b>constant</b> fixed only by the bar lengths. The pen is the <em>geometric inverse</em> of <span class="mono">P</span> in a circle of radius <span class="mono">√(d² − b²)</span> centred at <span class="mono">O</span>. The machine does not approximate the inversion; it <em>is</em> one.</li>
+        <li>Inversion's one magic fact: the image of a circle that <b>passes through the centre</b> <span class="mono">O</span> is a <b>straight line</b> (and nothing else maps to a line). So the moment you pin <span class="mono">P</span> to a circle through <span class="mono">O</span> — one extra crank does it — the pen <span class="mono">P′</span> is thrown onto an exact line, perpendicular to the line of centres.</li>
+        <li>That is the whole trick, and why it is <em>exact</em>: there is no small-angle fudge, no stretch of the curve that merely looks straight. Move the crank pin so its circle <b>misses</b> <span class="mono">O</span>, and the image is no longer a line but an arc — the pen bows, and the magnified strip shows it at once. Least error is not nearly-zero here; on the knife-edge it is <b>zero</b>.</li>
+        <li>It settled an eighty-year question. Watt believed an exact straight-line linkage was impossible and built the best <a href="../watt/">approximation</a> he could; Chebyshev, hunting the <a href="../chebyshev/">best possible</a> near-miss, grew a theory of approximation out of the failure. Peaucellier's rhombus proved them both wrong by proving the thing could be done at all — "the most beautiful theorem in elementary kinematics," Sylvester called the family it opened.</li>
+      </ul>
+      <p class="pull">Watt drew a line that was nearly straight. Peaucellier drew one that was straight, and could prove it from the lengths of his bars.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The three</p>
+      <h2 id="sib-h">One straight line, three linkages that draw it</h2>
+      <div class="siblings">
+        <a href="../watt/"><span class="w">Watt</span><span class="d">nearly straight — a four-bar whose coupler midpoint traces a figure-eight with a near-straight crossing, good enough to guide a piston</span></a>
+        <a href="../peaucellier/" aria-current="page"><span class="w">Peaucellier</span><span class="d">exactly straight — seven bars form an inversor, and the inverse of a circle through the centre is a true line</span></a>
+        <a href="../chebyshev/"><span class="w">Chebyshev</span><span class="d">nearly straight, and walking — the best four-bar approximation, turned under to pace a level floor</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Linkage · a straight line drawn three ways · 2026-11-24 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
