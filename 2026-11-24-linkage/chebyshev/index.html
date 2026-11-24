@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chebyshev — the best near-straight four-bar, and the machine that learned to walk on it. Pafnuty Chebyshev did not just want a linkage that drew a nearly straight line; he wanted the one that bowed the least, and the hunt for that best possible approximation helped grow a whole branch of mathematics. His four-bar, in the proportion two to five to five to four, carries a pen at the coupler's midpoint, and that point traces a closed curve with a long, remarkably flat top. Then he saw what the flat was for: turn it downward so it becomes the sole of a foot, set several linkages on one frame a quarter-cycle apart, and at every instant at least one foot is pressing the flat — so the frame rides forward dead level while the feet pace a straight floor beneath it. That was his Plantigrade machine of 1878, one of the first walking mechanisms. Trace the flat, turn it under, and watch the body ride level as the feet walk.</title>
+  <meta name="description" content="The Chebyshev linkage is a four-bar in the proportion 2:5:5:4 whose coupler-midpoint traces a closed curve with a long, nearly flat top — Chebyshev's search for the best possible straight-line approximation, which helped found approximation theory. Flip the flat segment downward to make it a foot's sole, mount several linkages on one frame a quarter-cycle out of phase, and at least one foot is always on the flat: the frame rides forward at constant height while the feet pace a straight floor. That is Chebyshev's Plantigrade machine (1878), an early walking mechanism. Trace the flat-topped curve and magnify its straightness, then switch to walk mode and watch the body ride level on straight-line feet." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Cpath d='M5 11 H19 C19 18 23 22 27 24' fill='none' stroke='%23b5683a' stroke-width='2'/%3E%3Cline x1='4' y1='26' x2='28' y2='26' stroke='%235f8a9c' stroke-width='1.6'/%3E%3Cline x1='12' y1='6' x2='12' y2='11' stroke='%23b0892e' stroke-width='1.8'/%3E%3Ccircle cx='12' cy='11' r='2.1' fill='%234f8a4a'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Chebyshev — the best near-straight four-bar, and it walks" />
+  <meta property="og:description" content="A four-bar whose coupler midpoint traces a flat-topped curve — the best straight-line approximation Chebyshev could find. Turn the flat under, phase several, and it walks on straight-line feet." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Linkage</a> · <a href="../watt/">watt</a> · <a href="../peaucellier/">peaucellier</a> · chebyshev · 2026-11-24</p>
+      <p class="pron"><b>Chebyshev linkage</b> · <i>noun</i> · /ˈtʃɛbɪʃɒf/ — a four-bar linkage proportioned so its coupler midpoint traces a path with a long near-straight segment; turned under and phased, the basis of an early walking machine</p>
+      <h1>Chebyshev</h1>
+      <p class="lede">The best near-miss — and it learned to walk.</p>
+      <p class="sub"><a href="../watt/">Watt</a> tuned his four-bar until the bow was small enough. Pafnuty Chebyshev asked the sharper question: of <em>all</em> near-straight four-bars, which bows <b>least</b>? Chasing that best possible approximation, he helped found a branch of mathematics — and found a four-bar, in the proportion <b>2 : 5 : 5 : 4</b>, whose coupler <b>midpoint</b> traces a closed curve with a long, flat top. Then he saw what the flat was <em>for</em>: turn it downward to make the sole of a foot, set several linkages on one frame a quarter-turn apart, and at every instant some foot is pressing the flat — so the frame rides <b>dead level</b> while the feet pace a straight floor. His <b>Plantigrade machine</b>, 1878, one of the first walkers. Trace the flat; then turn it under and watch it walk.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">A flat-topped curve, and the best you can hold</h2>
+      <p>The four-bar runs and the pen at the coupler's <b>midpoint</b> traces its closed curve; the top is the near-straight part, and the strip magnifies how little it bows across the <b>working run</b> you ask for. Two things to try. Slide the tracing point off the midpoint and the flat <em>spoils</em> — the midpoint is the best point, as Chebyshev proved. Then stretch the working run: the longer a straight stroke you demand, the worse the straightness you can keep — the honest trade every approximate linkage makes, and the reason Chebyshev's whole question was <em>how little</em> bow is possible. That flat, held at constant height and nearly constant speed, is also what a foot needs — the seed of his walking machine below.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-near" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">Tracing the flat top</span>
+              <small id="verdict-sub">ready</small>
+            </div>
+            <div class="stage">
+              <canvas id="mech" width="560" height="360" aria-label="The Chebyshev four-bar — two fixed pins at the base, two equal long links, a short coupler — with the pen at the coupler midpoint tracing a closed curve whose top is a long near-straight segment. A dashed line marks the working run; the part of the curve inside it is drawn bright."></canvas>
+            </div>
+            <div class="stage">
+              <canvas id="err" width="560" height="120" aria-label="A magnified straightness strip: the flat top's departure from a true horizontal line, amplified, plotted across the working run. It is near-flat for the midpoint pen and bows into an arc as the pen is moved off-centre or the run is lengthened."></canvas>
+            </div>
+            <p class="hint"><b>Drag</b> the pen to run it by hand, or press <kbd>space</kbd> to drive it. <kbd>M</kbd> re-centres the pen on the coupler. The strip is the straightness, magnified <span id="mag-label">60×</span>.</p>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="point">Tracing point <span class="val"><span id="point-v">midpoint</span></span></label>
+                <input type="range" id="point" min="30" max="70" step="1" value="50" />
+                <p class="ctl-note">Where the pen sits along the coupler, from one end to the other. The <b>midpoint</b> (centre) is Chebyshev's best choice; slide either way and the flat top <b>bows</b>, the straight run spoiling fastest of all exactly where the straightness was finest.</p>
+              </div>
+              <div class="ctl">
+                <label for="run">Working run <span class="val"><span id="run-v">1.30</span></span></label>
+                <input type="range" id="run" min="50" max="260" step="2" value="130" />
+                <p class="ctl-note">How long a straight stroke you demand, in base-units (the pins sit <b>4</b> apart). Ask for more and the straightness you can hold <b>falls away</b> — a short run is nearly true, a long one visibly bows. There is no run on which it is exactly straight; that is the whole difference from <a href="../peaucellier/">Peaucellier</a>.</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k">pen path <span class="tag" id="r-tag">midpoint</span></span><span class="v" id="r-kind">flat-topped</span></div>
+              <div class="row"><span class="k">working run</span><span class="v" id="r-run">—</span></div>
+              <div class="row"><span class="k">max bow</span><span class="v" id="r-bow">—</span></div>
+              <div class="row"><span class="k" id="r-l4">straightness</span><span class="v" id="r-ratio">—</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="run-btn" type="button" aria-pressed="false">Drive it</button>
+              <button class="btn" id="recentre" type="button">Re-centre pen</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">Why the flat, and why it walks</p>
+      <h2 id="law-h">The best approximation, turned into a stride</h2>
+      <ul class="law-list">
+        <li>Chebyshev's question was not "is it straight enough?" but "is it the <em>straightest possible</em>?" The answer — the curve that minimises the <b>largest</b> deviation over the run — is the heart of <b>minimax approximation</b>, and the polynomials and the whole theory that carry his name grew in part from chasing it through linkages like this one.</li>
+        <li>The proportion <span class="mono">2 : 5 : 5 : 4</span> — coupler, two equal links, base — puts the <b>midpoint</b> of the coupler on a curve with a long flat top: it bows only a part in forty or so across a run near a third of the base, and straighter still across any shorter stretch. Move the pen off the midpoint and the symmetry breaks; the flat tilts and bows, worst of all right where it was best.</li>
+        <li>Here is the gift hiding in the flat: along it the foot moves not only at <b>constant height</b> but at nearly <b>constant horizontal speed</b>. So a body rolling forward at a steady pace can keep a foot <em>planted</em> there without slip — the straight line is exactly the condition for a level, slip-free stride.</li>
+        <li>Turn the flat under to make a sole, and phase several legs a fraction of a cycle apart. The stance phases <b>overlap</b>: before one foot lifts, the next has landed, so the count of feet on the floor never falls to zero and the body never drops. The <a href="../">whole folder</a>'s straight line becomes, here, the floor a machine can walk — Chebyshev's <b>Plantigrade machine</b>, 1878.</li>
+        <li>It is the same bargain as <a href="../watt/">Watt</a>'s — four bars, a bow you make small rather than zero — but pushed to its mathematical limit, and then put to work. Where <a href="../peaucellier/">Peaucellier</a> spent three more bars to make the bow vanish by proof, Chebyshev kept the bow, made it the smallest it could be, and discovered it was small enough to carry a walking weight.</li>
+      </ul>
+      <p class="pull">Watt's line was good enough to guide a piston; Chebyshev's was good enough to stand on — and then to walk.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The three</p>
+      <h2 id="sib-h">One straight line, three linkages that draw it</h2>
+      <div class="siblings">
+        <a href="../watt/"><span class="w">Watt</span><span class="d">nearly straight — a four-bar whose coupler midpoint traces a figure-eight with a near-straight crossing, good enough to guide a piston</span></a>
+        <a href="../peaucellier/"><span class="w">Peaucellier</span><span class="d">exactly straight — seven bars form an inversor, and the inverse of a circle through the centre is a true line</span></a>
+        <a href="../chebyshev/" aria-current="page"><span class="w">Chebyshev</span><span class="d">nearly straight, and walking — the best four-bar approximation, turned under to pace a level floor</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Linkage · a straight line drawn three ways · 2026-11-24 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -42,8 +42,8 @@ whole of planar mechanism is built, and a dead-straight line is the hardest hone
   partly out of this exact chase — and when he turned the flat segment downward and set several in phase,
   the flats became **footfalls**: his *Plantigrade machine*, 1878, a table that walks on straight-line
   feet while its body rides dead level.
-  Trace the flat → turn it under → set the legs in phase and watch the body ride level as the feet pace a
-  straight floor.
+  Trace the flat → slide the pen off the midpoint and watch it bow, worst where it was best → stretch the
+  working run and watch the straightness you can hold fall away.
 
 ## The one problem
 
