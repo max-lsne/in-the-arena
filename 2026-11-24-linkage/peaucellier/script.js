@@ -157,6 +157,12 @@
     ctx.strokeStyle = withA(C.steel, 0.5); ctx.lineWidth = 1; ctx.setLineDash([2, 3]);
     ctx.beginPath(); ctx.arc(SX(O2.x), SY(O2.y), WORLD.k * rc(), 0, TAU); ctx.stroke(); ctx.setLineDash([]);
 
+    // the circle of inversion, radius sqrt(d^2 - b^2) about O: P and the pen are inverse in it
+    const rInv = Math.sqrt(Math.max(0, rho2()));
+    ctx.strokeStyle = withA(C.inkFaint, 0.55); ctx.lineWidth = 1; ctx.setLineDash([1, 4]);
+    ctx.beginPath(); ctx.arc(SX(O.x), SY(O.y), WORLD.k * rInv, 0, TAU); ctx.stroke(); ctx.setLineDash([]);
+    label(ctx, '√(d²−b²)', SX(O.x) + WORLD.k * rInv * 0.71 + 2, SY(O.y) - WORLD.k * rInv * 0.71, C.inkFaint, 'left');
+
     // pen trail
     if (penPath.length) {
       ctx.strokeStyle = withA(C.copper, 0.5); ctx.lineWidth = 1.6; ctx.beginPath();
