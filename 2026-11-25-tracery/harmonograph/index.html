@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harmonograph — the Lissajous figure given friction, and the nested drawing it spirals into. Take the two perpendicular oscillations that draw a standing figure and let them slowly die away, as every real pendulum must. The closed curve no longer closes onto itself: each loop falls a little short of the last, so the figure spirals inward, loop within loop within loop, and the pen comes to rest at the centre having drawn a whole nested rosette from a single release. Detune the two frequencies a hair off their ratio and the shrinking figure also turns as it dies, winding the loops into a slow helix of petals. It is a Victorian drawing machine — two weighted pendulums, one for each axis, a pen on a gimballed arm, a sheet of paper — and it made, mechanically and without a motor, the engine-turned curves that guilloché and banknote lathes cut by gear. Set the two frequencies, the phase and the decay, and press draw to watch the pen spiral in.</title>
+  <meta name="description" content="The harmonograph: a Lissajous figure with damping. Two perpendicular oscillations, x = e^(−d·t)·sin(fx·t + δ) and y = e^(−d·t)·sin(fy·t), decay exponentially as a real pendulum does, so the curve never closes — it spirals inward, loop nested within loop, until the pen rests at the centre. A slight detune of the two frequencies makes the shrinking figure also precess, winding the loops into a rotating rosette. The Victorian lateral harmonograph was two pendulums and a gimballed pen; it drew mechanically the same engine-turned curves that guilloché lathes cut by gear. Set the frequencies, phase and decay and press draw to watch a single release spiral into a nested figure." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Cpath d='M16 6 a10 10 0 1 0 0.1 0 M16 10 a6 6 0 1 1 -0.1 0 M16 13 a3 3 0 1 0 0.1 0' fill='none' stroke='%23b5683a' stroke-width='1.5'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Harmonograph — the Lissajous figure given friction, spiralling into a nested drawing" />
+  <meta property="og:description" content="Let two perpendicular oscillations decay, and the closed figure spirals inward loop within loop — the Victorian drawing machine's rosette, from a single release." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Tracery</a> · <a href="../figure/">figure</a> · <a href="../blackburn/">blackburn</a> · harmonograph · 2026-11-25</p>
+      <p class="pron"><b>harmonograph</b> · <i>noun</i> · a drawing machine in which two damped pendulums move a pen in perpendicular directions, tracing a Lissajous figure that spirals inward as the swing dies</p>
+      <h1>Harmonograph</h1>
+      <p class="lede">The figure given friction — and the nested rosette it dies into.</p>
+      <p class="sub">Take the two perpendicular oscillations that draw a standing <a href="../figure/">figure</a> and let them slowly <b>die away</b>, as every real pendulum must. The closed curve no longer closes: each loop falls a little short of the last, so the figure <b>spirals inward</b>, loop within loop within loop, and the pen comes to rest at the centre having drawn a whole nested rosette from a <em>single release</em>. <b>Detune</b> the frequencies a hair and the shrinking figure also turns as it dies, winding the loops into a slow helix of petals. It is a <b>Victorian drawing machine</b> — two weighted pendulums, a pen on a gimballed arm, a sheet of paper — and it made by hand, without a motor, the engine-turned curves that guilloché lathes cut by gear.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">One release, a figure that winds down</h2>
+      <p>Press <b>draw</b> and the pen starts at full swing, tracing the figure its frequency ratio would draw — but each pass the <b>envelope</b> (the faint ring) shrinks, and the curve steps inward. The decay is a plain <span class="mono">e<sup>−d·t</sup></span>: a fixed <em>fraction</em> of swing lost each beat, so the loops crowd ever closer as the pen nears the centre. The whole drawing is made in one go, from one push, and left on the paper — ink, not a trace that fades. Tune the two frequencies near a simple ratio for a clean rosette; nudge one off and the rosette <b>precesses</b> into a wreath.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-decay" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">Ready to draw</span>
+              <small id="verdict-sub">ready</small>
+            </div>
+            <div class="stage">
+              <canvas id="harm" width="560" height="440" aria-label="A sheet of paper on which the harmonograph draws. A single release sends the pen around a Lissajous figure whose amplitude decays exponentially — a faint ring shows the shrinking envelope — so the curve spirals inward, loop nested within loop, winding to rest at the centre. A slight detune makes the whole figure rotate as it decays."></canvas>
+            </div>
+            <p class="hint"><b>Draw</b> runs one release; <kbd>space</kbd> draws or pauses, <kbd>N</kbd> starts a fresh sheet. The faint ring is the swing's shrinking <span id="env-label">envelope</span>.</p>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="fx">Horizontal <span class="mono">f<sub>x</sub></span> <span class="val"><span id="fx-v">2.00</span></span></label>
+                <input type="range" id="fx" min="1.00" max="4.00" step="0.01" value="2.00" />
+                <p class="ctl-note">Frequency of the side-to-side pendulum. With <span class="mono">f<sub>y</sub></span> it sets the figure the pen would draw undamped; the decay then spirals that figure inward.</p>
+              </div>
+              <div class="ctl">
+                <label for="fy">Vertical <span class="mono">f<sub>y</sub></span> <span class="val"><span id="fy-v">3.01</span></span></label>
+                <input type="range" id="fy" min="1.00" max="4.00" step="0.01" value="3.01" />
+                <p class="ctl-note">Frequency of the up-and-down pendulum. Set it to a near whole-number <b>ratio</b> of <span class="mono">f<sub>x</sub></span> for a clean rosette; leave a small <b>detune</b> and the rosette turns as it fades.</p>
+              </div>
+              <div class="ctl">
+                <label for="phase">Phase <span class="mono">δ</span> <span class="val"><span id="phase-v">0</span>°</span></label>
+                <input type="range" id="phase" min="0" max="180" step="1" value="0" />
+                <p class="ctl-note">The offset between the two pendulums at release. It rotates and reshapes the rosette — the same figure entered at a different instant of its two swings.</p>
+              </div>
+              <div class="ctl">
+                <label for="decay">Decay <span class="mono">d</span> <span class="val"><span id="decay-v">28</span></span></label>
+                <input type="range" id="decay" min="4" max="100" step="1" value="28" />
+                <p class="ctl-note">How fast the swing dies. <b>Low</b> decay draws many loops before resting — a dense figure; <b>high</b> decay spirals quickly to the centre in a few open loops. It sets how many petals the sheet collects.</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k">ratio <span class="tag">nearest</span></span><span class="v" id="r-ratio">2 : 3</span></div>
+              <div class="row"><span class="k">detune</span><span class="v" id="r-detune">—</span></div>
+              <div class="row"><span class="k">swings to half</span><span class="v" id="r-half">—</span></div>
+              <div class="row"><span class="k">figure</span><span class="v" id="r-kind">—</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="run-btn" type="button" aria-pressed="false">Draw</button>
+              <button class="btn" id="new-btn" type="button">New sheet</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">Why it spirals in</p>
+      <h2 id="law-h">The same figure, losing amplitude a fixed fraction a beat</h2>
+      <ul class="law-list">
+        <li>Undamped, the pen obeys the pure <a href="../figure/">figure</a>: two sines at right angles, a closed curve for a rational ratio. <b>Damping</b> multiplies each by a shrinking envelope <span class="mono">e<sup>−d·t</sup></span> — the signature of friction, which takes a fixed <em>fraction</em> of the swing per unit time, not a fixed amount.</li>
+        <li>So each time around, the curve returns <b>not</b> to its start but to a point scaled a little toward the centre. The closed figure becomes an <b>open spiral of itself</b>: loop nested inside loop, each a touch smaller, converging on the origin where all the energy has gone.</li>
+        <li>Lower the decay and the pen loses less per beat, so it draws <b>more loops</b> before resting — a denser rosette. Raise it and the figure winds to the centre in a few sweeps. The decay alone sets the <em>number of petals</em> the sheet collects.</li>
+        <li><b>Detune</b> the frequencies off their ratio and two things happen at once: the figure precesses (as in the ideal case) <em>and</em> it shrinks — so the nested loops also <b>rotate</b>, winding into a wreath or a many-pointed star. Almost every famous harmonograph drawing is a simple ratio with a deliberate small detune.</li>
+        <li>The machine is older than the oscilloscope and does the same arithmetic in brass and gravity. Its decaying rosettes are kin to <b>guilloché</b> — the engine-turned interlacing on watch dials and banknotes — which a geared lathe cuts by compounding two rotations, the <a href="../blackburn/">Blackburn</a> figure's industrial cousin.</li>
+      </ul>
+      <p class="pull">Give the perfect figure a little friction and it stops repeating and starts <em>accumulating</em> — the drawing is the record of a single swing spending itself.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The three</p>
+      <h2 id="sib-h">One figure, drawn three ways</h2>
+      <div class="siblings">
+        <a href="../figure/"><span class="w">Figure</span><span class="d">the ideal — two pure sines at right angles, and the standing curve the ratio and phase decide</span></a>
+        <a href="../blackburn/"><span class="w">Blackburn</span><span class="d">the pendulum that draws it — a bob on a forked string with two periods, writing the figure in sand</span></a>
+        <a href="../harmonograph/" aria-current="page"><span class="w">Harmonograph</span><span class="d">the figure dying — add friction, and the closed curve spirals inward into a nested drawing</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Tracery · a point pulled two ways at once · 2026-11-25 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
