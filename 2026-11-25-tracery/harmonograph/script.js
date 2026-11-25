@@ -106,6 +106,21 @@
     ctx.strokeStyle = withA(C.rule, 1); ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(PAPER.CX - 5, PAPER.CY); ctx.lineTo(PAPER.CX + 5, PAPER.CY); ctx.moveTo(PAPER.CX, PAPER.CY - 5); ctx.lineTo(PAPER.CX, PAPER.CY + 5); ctx.stroke();
   }
+  function drawGhost(ctx) {
+    // the undamped closed figure the decaying rosette winds inside — only when near a simple ratio,
+    // where a single closed figure exists to wind within; the precessing wreath has none.
+    const b = ratioInfo();
+    const pct = Math.abs((S.fx / S.fy / (b.p / b.q) - 1) * 100);
+    if (pct > 1.5) return;
+    ctx.strokeStyle = withA(C.y, 0.22); ctx.lineWidth = 1.2; ctx.setLineDash([2, 4]); ctx.beginPath();
+    const N = 600;
+    for (let i = 0; i <= N; i++) {
+      const s = TAU * i / N;
+      const X = MX(Math.sin(b.p * s + S.phase * DEG)), Y = MY(Math.sin(b.q * s));
+      i ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y);
+    }
+    ctx.stroke(); ctx.setLineDash([]);
+  }
   function drawCurve(ctx) {
     if (pts.length < 2) return;
     ctx.strokeStyle = C.pen; ctx.lineWidth = 1.5; ctx.lineJoin = 'round'; ctx.lineCap = 'round';
@@ -127,6 +142,7 @@
     const { ctx, w, h } = fit(cv, BASE_W, BASE_H);
     ctx.clearRect(0, 0, w, h);
     drawPaper(ctx);
+    drawGhost(ctx);
     drawCurve(ctx);
     drawEnvAndPen(ctx);
     setVerdict();
