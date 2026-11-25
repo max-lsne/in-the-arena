@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blackburn — the pendulum that draws a Lissajous figure in sand. Hang a bob from a forked string: a single cord from the ceiling down to a knot, then split into a Y down to the weight. Swing it in the plane of the fork and the whole length does the swinging — a long, slow pendulum. Swing it across that plane and only the short stretch below the knot can move — a quick one. The bob feels one period one way and a different period the other, and the figure it traces as it swings between them is a Lissajous curve, drawn not by electronics but by gravity and a bag of sand with a hole in it. Make the two lengths a square-number ratio and the figure closes — four-to-one in length is two-to-one in period, a clean bow; nine-to-four is three-to-two, a trefoil. Leave the lengths untuned and the figure slowly turns, because the two periods no longer keep step. Set the long and short lengths and watch the sand pendulum draw.</title>
+  <meta name="description" content="The Blackburn pendulum: a bob on a forked (Y-shaped) string that has one long effective length when it swings in the plane of the fork and a short one when it swings across that plane. The two lengths give two periods, T = 2π√(L/g), and the bob traces a Lissajous figure — a physical realisation of two perpendicular oscillations. The period ratio is √(L_long/L_short), so square-number length ratios give simple closed figures: 4:1 in length is 2:1 in period (a bow), 9:4 is 3:2 (a trefoil). Untuned lengths give an irrational period ratio, and the figure precesses. Named for Hugh Blackburn, 1844. Set the two lengths and watch a sand pendulum draw the figure." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Cline x1='16' y1='3' x2='16' y2='13' stroke='%235f8a9c' stroke-width='2'/%3E%3Cline x1='16' y1='13' x2='11' y2='22' stroke='%235f8a9c' stroke-width='1.6'/%3E%3Cline x1='16' y1='13' x2='21' y2='22' stroke='%235f8a9c' stroke-width='1.6'/%3E%3Ccircle cx='16' cy='23' r='3' fill='%23b5683a'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Blackburn — the pendulum that draws a Lissajous figure in sand" />
+  <meta property="og:description" content="A bob on a forked string: long period one way, short the other. Square-tune the lengths and the figure closes; leave them untuned and it turns." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Tracery</a> · <a href="../figure/">figure</a> · blackburn · <a href="../harmonograph/">harmonograph</a> · 2026-11-25</p>
+      <p class="pron"><b>Blackburn pendulum</b> · <i>noun</i> · a bob on a forked string with two different swing periods in two perpendicular planes, tracing a Lissajous figure under gravity alone</p>
+      <h1>Blackburn</h1>
+      <p class="lede">A pendulum with two periods, drawing the figure in sand.</p>
+      <p class="sub">Hang a bob from a <b>forked</b> string — one cord from the ceiling down to a knot, then a <b>Y</b> down to the weight. Swing it <em>in the plane of the fork</em> and the whole length swings: a long, slow pendulum. Swing it <em>across</em> that plane and only the short stretch below the knot can move: a quick one. The bob keeps <b>one period one way and another the other</b>, and the path it traces between them is a Lissajous figure — drawn not by electronics but by gravity and a leaking bag of sand. Make the two lengths a <b>square-number ratio</b> and the figure closes; leave them untuned and it slowly <b>turns</b>, because the two periods no longer keep step.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">One bob, two lengths, a figure in the tray</h2>
+      <p>The sand tray is seen from <b>above</b> — a plan view of where the bob rides. Beside it, in <b>elevation</b>, is the forked string: the long drop from pivot to bob swings <b>slowly</b>; the short drop from the fork swings <b>fast</b>. A pendulum's period is <span class="mono">T = 2π√(L/g)</span>, so the ratio of the two periods is <span class="mono">√(L<sub>long</sub>/L<sub>short</sub>)</span> — the square root of the length ratio. That square root is why the clean figures want <b>square numbers</b>: four-to-one in length is two-to-one in period, nine-to-four is three-to-two. Between those the figure will not close; it drifts.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-closed" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">A closed figure</span>
+              <small id="verdict-sub">ready</small>
+            </div>
+            <div class="stage">
+              <canvas id="pend" width="560" height="440" aria-label="On the left, a plan view of a sand tray with the Lissajous figure the bob draws. On the right, an elevation of the forked string: a long cord from a ceiling pivot down to a fork knot, then a short Y down to the bob, with braces marking the long and short lengths. The bob sways gently in the elevation while the plan-view figure is traced."></canvas>
+            </div>
+            <p class="hint"><b>Drag</b> left or right across the tray to swing it faster or slower; press <kbd>space</kbd> to release the bob, <kbd>R</kbd> to rake the sand clean. Square-ratio lengths draw a closed figure.</p>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="llong">Long length <span class="mono">L<sub>long</sub></span> <span class="val"><span id="llong-v">0.90</span> m</span></label>
+                <input type="range" id="llong" min="0.30" max="1.20" step="0.01" value="0.90" />
+                <p class="ctl-note">The <b>full</b> drop, pivot to bob — the pendulum that swings in the plane of the fork. Longer means a <b>slower</b> swing in that direction, <span class="mono">T = 2π√(L/g)</span>.</p>
+              </div>
+              <div class="ctl">
+                <label for="lshort">Short length <span class="mono">L<sub>short</sub></span> <span class="val"><span id="lshort-v">0.40</span> m</span></label>
+                <input type="range" id="lshort" min="0.10" max="1.00" step="0.01" value="0.40" />
+                <p class="ctl-note">The drop below the <b>fork</b> — the pendulum that swings across the plane. The ratio of lengths sets the ratio of periods through its <b>square root</b>; kept below the long length.</p>
+              </div>
+              <div class="ctl">
+                <label for="tilt">Release corner <span class="mono">δ</span> <span class="val"><span id="tilt-v">corner</span></span></label>
+                <input type="range" id="tilt" min="0" max="90" step="1" value="0" />
+                <p class="ctl-note">Where the bob is let go. From a <b>corner</b> (0°) both swings start together — the figure opens symmetric; part-way round and the figure is caught at a different phase, the same curve seen from another instant.</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k">long period <span class="tag">slow</span></span><span class="v" id="r-tlong">—</span></div>
+              <div class="row"><span class="k">short period <span class="tag s">fast</span></span><span class="v" id="r-tshort">—</span></div>
+              <div class="row"><span class="k">period ratio</span><span class="v" id="r-ratio">—</span></div>
+              <div class="row"><span class="k">nearest tuning</span><span class="v" id="r-tune">—</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="run-btn" type="button" aria-pressed="false">Release</button>
+              <button class="btn" id="rake-btn" type="button">Rake clean</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">Why a square root hides in it</p>
+      <h2 id="law-h">Two lengths, and the periods they keep</h2>
+      <ul class="law-list">
+        <li>A pendulum's period depends only on its <b>length</b>, not on how far or how heavy it swings: <span class="mono">T = 2π√(L/g)</span>. The forked string gives the bob <em>two</em> lengths at once — the whole cord in the plane of the fork, the stub below the knot across it — so the bob honestly keeps <b>two periods</b>, one per direction.</li>
+        <li>The period ratio is <span class="mono">T<sub>short</sub>/T<sub>long</sub> = √(L<sub>short</sub>/L<sub>long</sub>)</span> — a <b>square root</b>. That is the whole character of the thing: to get a period ratio of 2:1 you need a length ratio of <b>4:1</b>, for 3:2 a ratio of <b>9:4</b>, for 3:1 a ratio of 9:1. The figure wants square numbers because the clock is hidden under a root.</li>
+        <li>When the lengths are square-tuned the two periods are <b>commensurate</b> — they share a common beat — so the bob returns to its start and the figure <b>closes</b>, exactly as the pure <a href="../figure/">figure</a> does with whole-number frequencies. The sand draws one curve, over and over, in the same place.</li>
+        <li>Off a square ratio the periods are <b>incommensurate</b>: the bob never quite comes home, each pass lands a little rotated, and the figure <b>precesses</b> — the same slow turning the ideal figure shows when you detune it, here written in sand. A real tray's drift is the plainest proof the tuning is not exact.</li>
+        <li>This is gravity doing by analogue what an oscilloscope does with voltages: Hugh Blackburn rigged it in <b>1844</b>, and generations met Lissajous figures first as a <b>sand pendulum</b> on a schoolroom bench — the figure made physical, with a bob for a pen and the floor for a screen.</li>
+      </ul>
+      <p class="pull">The bob is not clever. It only knows how to swing — but it is asked to swing to two clocks at once, and the quarrel between them is the figure.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The three</p>
+      <h2 id="sib-h">One figure, drawn three ways</h2>
+      <div class="siblings">
+        <a href="../figure/"><span class="w">Figure</span><span class="d">the ideal — two pure sines at right angles, and the standing curve the ratio and phase decide</span></a>
+        <a href="../blackburn/" aria-current="page"><span class="w">Blackburn</span><span class="d">the pendulum that draws it — a bob on a forked string with two periods, writing the figure in sand</span></a>
+        <a href="../harmonograph/"><span class="w">Harmonograph</span><span class="d">the figure dying — add friction, and the closed curve spirals inward into a nested drawing</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Tracery · a point pulled two ways at once · 2026-11-25 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
