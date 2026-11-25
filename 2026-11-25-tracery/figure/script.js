@@ -143,6 +143,25 @@
     ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
   }
 
+  function drawTouches(ctx) {
+    // ticks where the curve runs tangent to each edge — x extremes on the sides (brass),
+    // y extremes on top and bottom (steel). Only meaningful for the closed (untuned-off) figure.
+    const d = px();
+    const mark = (X, Y, dx, dy, col) => { ctx.strokeStyle = col; ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(X, Y); ctx.lineTo(X + dx, Y + dy); ctx.stroke(); };
+    for (let k = 0; k < S.nx; k++) {
+      let s = (((Math.PI / 2 - d) + TAU * k) / S.nx % TAU + TAU) % TAU;
+      mark(BX(1), BY(Math.sin(S.ny * s)), 6, 0, C.x2);
+      let s2 = (((-Math.PI / 2 - d) + TAU * k) / S.nx % TAU + TAU) % TAU;
+      mark(BX(-1), BY(Math.sin(S.ny * s2)), -6, 0, C.x2);
+    }
+    for (let k = 0; k < S.ny; k++) {
+      let s = ((Math.PI / 2 + TAU * k) / S.ny % TAU + TAU) % TAU;
+      mark(BX(Math.sin(S.nx * s + d)), BY(1), 0, -6, C.y2);
+      let s2 = ((3 * Math.PI / 2 + TAU * k) / S.ny % TAU + TAU) % TAU;
+      mark(BX(Math.sin(S.nx * s2 + d)), BY(-1), 0, 6, C.y2);
+    }
+  }
+
   function drawPen(ctx) {
     const p = pt(S.u);
     const X = BX(p.x), Y = BY(p.y);
@@ -165,6 +184,7 @@
     ctx.clearRect(0, 0, w, h);
     drawBox(ctx);
     drawFigure(ctx);
+    if (S.detune === 0) drawTouches(ctx);
     drawDrives(ctx);
     drawPen(ctx);
     setVerdict();
