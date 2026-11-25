@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Figure — the Lissajous curve, drawn by two oscillations set at right angles. Pull a point from side to side with one plain sine and up and down with another, and the path it writes is a standing figure whose shape is fixed entirely by the ratio of the two frequencies and the phase between them. When the ratio is a ratio of whole numbers the figure closes on itself — a line, an ellipse, a bow, a braid — and the whole curve repeats forever; a two-to-three gives a trefoil, a three-to-four a woven lattice. Nudge one frequency a hair off and the closed figure begins to turn slowly, as if the curve were a wire loop rotated in the hand. It is how an oscilloscope compares an unknown frequency against a known one: tune until the figure stands still, and the ratio you read off the lobes is the ratio of the frequencies. Set the two frequencies, slide the phase, and watch the pen draw the standing curve.</title>
+  <meta name="description" content="The Lissajous figure: the path traced by a point driven by two perpendicular sinusoids, x = sin(nx·t + phase) and y = sin(ny·t). The shape depends only on the frequency ratio nx:ny and the phase. A rational ratio gives a closed curve that repeats — 1:1 an ellipse, 1:2 a parabola-like bow, 2:3 a trefoil, 3:4 a woven braid — and the number of times the curve touches the top edge versus the side edge reads off the ratio. Detune one frequency slightly and the standing figure precesses. This is the oscilloscope method for comparing frequencies: adjust until the figure holds still. Set nx, ny and the phase and watch the pen trace the standing figure." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Cpath d='M6 16 C6 9 12 7 16 11 C20 15 26 13 26 16 C26 23 20 25 16 21 C12 17 6 19 6 16 Z' fill='none' stroke='%23b5683a' stroke-width='2'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Figure — the Lissajous curve, drawn by two oscillations at right angles" />
+  <meta property="og:description" content="Two perpendicular sines, a frequency ratio and a phase — and the standing figure they write. Rational ratio, closed curve; detune, and it turns." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Tracery</a> · figure · <a href="../blackburn/">blackburn</a> · <a href="../harmonograph/">harmonograph</a> · 2026-11-25</p>
+      <p class="pron"><b>Lissajous figure</b> · <i>noun</i> · the closed curve traced by a point driven by two perpendicular oscillations, its shape fixed by the ratio of their frequencies and the phase between them</p>
+      <h1>Figure</h1>
+      <p class="lede">Two sines set at right angles, and the standing curve they write.</p>
+      <p class="sub">Pull a point <b>side to side</b> with one plain sine and <b>up and down</b> with another, and the path it traces is a figure whose shape depends on almost nothing — only the <b>ratio</b> of the two frequencies and the <b>phase</b> between them. When the ratio is a ratio of whole numbers the figure <b>closes</b> and repeats forever: a 1:1 is an ellipse that opens and shuts as you slide the phase; a 2:3 a trefoil; a 3:4 a woven braid. Count how often the curve kisses the top edge against how often it kisses the side, and you have read the ratio straight off the shape — which is exactly how an <b>oscilloscope</b> measures one frequency against another: tune until the figure stands still. Set the two frequencies, slide the phase, and watch the pen draw.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">Two drives, one figure</h2>
+      <p>Along the <b>bottom</b> runs the horizontal drive — a plain sine of frequency <span class="mono">n<sub>x</sub></span>; up the <b>left</b> runs the vertical drive, frequency <span class="mono">n<sub>y</sub></span>. The pen sits where the two meet: its shadow falls straight down to the one and straight across to the other. As both drives run, the pen writes the <b>figure</b> in the box. A whole-number ratio makes a closed curve; the <b>left and right</b> edges are touched <span class="mono">n<sub>x</sub></span> times a cycle and the <b>top and bottom</b> edges <span class="mono">n<sub>y</sub></span> times, so the figure wears its ratio on its face. Slide the phase and watch the figure breathe; detune a frequency a hair and watch it slowly turn.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-closed" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">A closed figure</span>
+              <small id="verdict-sub">ready</small>
+            </div>
+            <div class="stage">
+              <canvas id="fig" tabindex="0" width="560" height="440" aria-label="A square box holding the Lissajous figure, with the horizontal drive sine drawn along the bottom edge and the vertical drive sine up the left edge. The pen rides the figure, with thin shadow lines dropping to each drive. The curve touches the top edge a number of times equal to the horizontal frequency and the side edge a number equal to the vertical frequency."></canvas>
+            </div>
+            <p class="hint"><b>Drag</b> on the box to scrub the pen along the curve, or press <kbd>space</kbd> to run it. <kbd>D</kbd> shows or hides the two drives along the edges. <kbd>←</kbd> <kbd>→</kbd> slide the phase.</p>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="nx">Horizontal <span class="mono">n<sub>x</sub></span> <span class="val"><span id="nx-v">3</span></span></label>
+                <input type="range" id="nx" min="1" max="7" step="1" value="3" />
+                <p class="ctl-note">Frequency of the <b>side-to-side</b> drive. It sets how many times the figure touches the <b>left and right</b> edges in one cycle — the vertical lobes counted across.</p>
+              </div>
+              <div class="ctl">
+                <label for="ny">Vertical <span class="mono">n<sub>y</sub></span> <span class="val"><span id="ny-v">2</span></span></label>
+                <input type="range" id="ny" min="1" max="7" step="1" value="2" />
+                <p class="ctl-note">Frequency of the <b>up-and-down</b> drive. It sets how many times the figure touches the <b>top and bottom</b> edges — the horizontal lobes counted down. The ratio <span class="mono">n<sub>x</sub>:n<sub>y</sub></span> is the whole figure.</p>
+              </div>
+              <div class="ctl">
+                <label for="phase">Phase <span class="mono">δ</span> <span class="val"><span id="phase-v">90</span>°</span></label>
+                <input type="range" id="phase" min="0" max="180" step="1" value="90" />
+                <p class="ctl-note">The head start of the horizontal drive over the vertical. At a 1:1 it swings the figure from a <b>line</b> (0°) through an <b>ellipse</b> to a <b>circle</b> (90°) and back — the same curve, caught at different instants of the two sines.</p>
+              </div>
+              <div class="ctl">
+                <label for="detune">Detune <span class="val"><span id="detune-v">0.00</span></span></label>
+                <input type="range" id="detune" min="-30" max="30" step="1" value="0" />
+                <p class="ctl-note">A small offset added to the horizontal frequency, in hundredths. Off a whole-number ratio the figure no longer closes — it <b>precesses</b>, turning steadily as the phase it is caught at drifts. Zero it to stand the figure still.</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k">ratio <span class="tag">reduced</span></span><span class="v" id="r-ratio">3 : 2</span></div>
+              <div class="row"><span class="k">edge touches <span class="tag s">⇔ : ⇕</span></span><span class="v" id="r-touch">—</span></div>
+              <div class="row"><span class="k">figure</span><span class="v" id="r-kind">—</span></div>
+              <div class="row"><span class="k">closes after</span><span class="v" id="r-close">—</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="run-btn" type="button" aria-pressed="false">Trace</button>
+              <button class="btn" id="drive-btn" type="button" aria-pressed="true">Drives</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">Why the shape is only the ratio</p>
+      <h2 id="law-h">A curve that wears its frequencies on its face</h2>
+      <ul class="law-list">
+        <li>The pen obeys <span class="mono">x = sin(n<sub>x</sub>t + δ)</span>, <span class="mono">y = sin(n<sub>y</sub>t)</span> — two independent oscillations, nothing coupling them but the single clock <span class="mono">t</span> they share. The amplitudes only set the size of the box; the <b>shape</b> is carried entirely by the ratio <span class="mono">n<sub>x</sub>:n<sub>y</sub></span> and the phase <span class="mono">δ</span>.</li>
+        <li>When <span class="mono">n<sub>x</sub>:n<sub>y</sub></span> is a <b>ratio of whole numbers</b> <span class="mono">p:q</span>, both sines return to their start together after a time <span class="mono">2π·q/n<sub>y</sub></span>, and the curve <b>closes</b> — a finite figure retraced forever. Every rational ratio is a different closed figure; the <em>simpler</em> the ratio, the simpler the figure.</li>
+        <li>The curve runs tangent to its box wherever a drive reaches full stretch: it kisses a <b>left or right</b> edge <span class="mono">n<sub>x</sub></span> times a cycle and a <b>top or bottom</b> edge <span class="mono">n<sub>y</sub></span> times. <b>Count the touches on two edges and you have the ratio</b> — read straight off the drawing, with no measurement of time at all.</li>
+        <li>Slide the <b>phase</b> and the figure deforms without changing its ratio: a 1:1 passes line → ellipse → circle → ellipse → line, because you are catching the <em>same two sines</em> at a different offset. The phase chooses which cross-section of the figure faces you; the ratio chooses the figure.</li>
+        <li><b>Detune</b> a frequency by a hair and the ratio turns irrational: the curve never quite closes, so each pass lands at a slightly shifted phase and the whole figure <b>precesses</b>, turning slowly like a wire loop in the hand. On an oscilloscope this drift is the signal that two frequencies are <em>not yet equal</em> — and stilling the figure is how you make them so.</li>
+      </ul>
+      <p class="pull">Two of the plainest motions there are, set across each other, and the shared clock braids them into a figure that could not be guessed from either sine alone.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The three</p>
+      <h2 id="sib-h">One figure, drawn three ways</h2>
+      <div class="siblings">
+        <a href="../figure/" aria-current="page"><span class="w">Figure</span><span class="d">the ideal — two pure sines at right angles, and the standing curve the ratio and phase decide</span></a>
+        <a href="../blackburn/"><span class="w">Blackburn</span><span class="d">the pendulum that draws it — a bob on a forked string with two periods, writing the figure in sand</span></a>
+        <a href="../harmonograph/"><span class="w">Harmonograph</span><span class="d">the figure dying — add friction, and the closed curve spirals inward into a nested drawing</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Tracery · a point pulled two ways at once · 2026-11-25 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
