@@ -240,6 +240,8 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 3px co
 .btn:active { transform: translateY(1px); }
 .btn[aria-pressed=true] { background: var(--brass); color: #fff; border-color: var(--brass); }
 @media (prefers-color-scheme: dark) { .btn[aria-pressed=true] { color: #1a1206; } }
+.btn:focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
+.stage canvas:focus-visible { outline: 2px solid color-mix(in srgb, var(--spring) 55%, transparent); outline-offset: 3px; border-radius: 6px; }
 
 /* ---- law list ---- */
 .law-list { list-style: none; padding: 0; margin: 10px 0 0; max-width: 74ch; }
