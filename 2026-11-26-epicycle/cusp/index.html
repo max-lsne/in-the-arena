@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cusp — the curve a point on a rolling wheel's rim writes, rolled on a fixed ring. Roll a small wheel on the outside of a larger ring and a pen on its rim traces an epicycloid; roll it on the inside and the same pen traces a hypocycloid. The whole figure is carried by one number: the ratio of the two radii. Reduce it to lowest terms and you have the figure's two readings at once — how many cusps it has, and how many times the wheel must travel around the ring before the curve closes on itself and repeats. One cusp outside is a heart-shaped cardioid, two a kidney-shaped nephroid; three inside is a deltoid, four an astroid, and two inside is the Tusi couple, where the curve collapses to a straight line swept back and forth along a diameter. The cusps are the instants the pen comes momentarily to rest as its point of the rim touches the ring, so counting them reads the ratio straight off the drawing. Give the wheel a little slip and the ratio turns irrational: the star never quite closes, and each pass lands rotated, the whole figure turning slowly. Set the two radii, roll the wheel inside or outside, and watch the pen draw.</title>
+  <meta name="description" content="Epicycloids and hypocycloids: the roulette a pen on a rolling wheel's rim traces against a fixed ring. The shape is set entirely by the ratio of the ring radius R to the wheel radius r. Reduced to p:q, the curve has p cusps and closes after q turns of the wheel around the ring. Named cases: cardioid (1 cusp, outside), nephroid (2, outside), deltoid (3, inside), astroid (4, inside), and the Tusi couple (2, inside) which degenerates to a straight diameter. The cusps mark where the pen touches the ring, so counting them reads the ratio off the figure. A small slip detunes the ratio and the star precesses. Set R and r, roll inside or outside, and watch the pen trace the figure." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23b0892e' stroke-width='1.3'/%3E%3Cpath d='M16 7 C20 11 25 12 25 16 C25 20 20 21 16 25 C12 21 7 20 7 16 C7 12 12 11 16 7 Z' fill='none' stroke='%23b5683a' stroke-width='2'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Cusp — epicycloids and hypocycloids, drawn by a wheel rolled on a ring" />
+  <meta property="og:description" content="A pen on a rolling wheel's rim. The ratio of the two radii sets the cusps and the closure; count the cusps and you have read the ratio. Cardioid, nephroid, deltoid, astroid." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Epicycle</a> · cusp · <a href="../rosette/">rosette</a> · 2026-11-26</p>
+      <p class="pron"><b>epicycloid</b> · <i>noun</i> · the curve traced by a point on the rim of a circle that rolls without slipping around the outside of a fixed circle — a <i>hypocycloid</i> when it rolls around the inside</p>
+      <h1>Cusp</h1>
+      <p class="lede">A wheel rolled on a wheel, and the pointed curve its rim writes.</p>
+      <p class="sub">Roll a small wheel around the <b>outside</b> of a fixed ring and a pen pinned to its rim draws an <b>epicycloid</b>; roll it around the <b>inside</b> and the same pen draws a <b>hypocycloid</b>. The whole figure is carried by a single number — the <b>ratio of the two radii</b>. Reduce that ratio to lowest terms <span class="mono">p:q</span> and you can read the figure before it is drawn: it will have <b>p cusps</b> and will <b>close after q turns</b> of the wheel around the ring. One cusp outside is a <em>cardioid</em>, two a <em>nephroid</em>; three inside is a <em>deltoid</em>, four an <em>astroid</em> — and two inside is the <em>Tusi couple</em>, which falls flat into a straight line. Set the radii, roll inside or out, and watch the pen draw.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">One wheel, rolled on a ring</h2>
+      <p>The gold circle is the <b>ring</b>, held still. The steel circle is the <b>wheel</b> that rolls on it without slipping; the dashed circle is the path its <b>centre</b> rides — a circle of radius <span class="mono">R+r</span> outside, <span class="mono">R−r</span> inside. The copper dot is the <b>pen</b>, fixed to the rim at the wheel's edge, and the copper line is the curve it leaves. Because the wheel does not slip, its own turning is locked to how far it has travelled, so the pen is driven at a fixed rate against the centre's march — and that one coupling is the whole figure. Where the pen's own point of the rim touches the ring, the pen stops dead for an instant: a <b>cusp</b>.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-closed" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">A closed star</span>
+              <small id="verdict-sub">ready</small>
+            </div>
+            <div class="stage">
+              <canvas id="fig" tabindex="0" width="520" height="460" aria-label="A fixed gold ring with a smaller steel wheel rolling on it, a dashed circle showing the path of the wheel's centre, and a copper pen on the wheel's rim tracing a pointed star-shaped curve. Dots mark the cusps where the pen touches the ring."></canvas>
+            </div>
+            <p class="hint"><b>Drag</b> on the figure to walk the pen along the curve, or press <kbd>space</kbd> to roll it. <kbd>I</kbd> moves the wheel inside or outside the ring; <kbd>C</kbd> marks the cusps; <kbd>←</kbd> <kbd>→</kbd> change the ring, <kbd>↑</kbd> <kbd>↓</kbd> the wheel.</p>
+            <div class="legend" aria-hidden="true">
+              <span><i class="l-ring"></i> ring R, held still</span>
+              <span><i class="l-wheel"></i> wheel r, rolling</span>
+              <span><i class="l-pen"></i> pen &amp; curve</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="ring">Ring <span class="mono">R</span> <span class="val"><span id="ring-v">5</span></span></label>
+                <input type="range" id="ring" min="2" max="9" step="1" value="5" />
+                <p class="ctl-note">Radius of the <b>fixed ring</b>, in whole units. With the wheel, it sets the ratio <span class="mono">R:r</span> that is the whole figure — a bigger ring against the same wheel means more cusps.</p>
+              </div>
+              <div class="ctl">
+                <label for="wheel">Wheel <span class="mono">r</span> <span class="val"><span id="wheel-v">2</span></span></label>
+                <input type="range" id="wheel" min="1" max="6" step="1" value="2" />
+                <p class="ctl-note">Radius of the <b>rolling wheel</b>. Rolling inside, it must be smaller than the ring. When <span class="mono">r</span> divides <span class="mono">R</span> evenly the curve closes in a <b>single turn</b>; otherwise it must wrap around more than once first.</p>
+              </div>
+              <div class="ctl">
+                <label for="slip">Slip <span class="val"><span id="slip-v">0.00</span></span></label>
+                <input type="range" id="slip" min="-40" max="40" step="1" value="0" />
+                <p class="ctl-note">A small error added to the no-slip rolling rate, in hundredths. Off the exact ratio the curve <b>never closes</b> — each pass lands a little rotated and the whole star <b>precesses</b>, turning slowly. Zero it to lock the figure.</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k">ratio <span class="tag">R : r reduced</span></span><span class="v" id="r-ratio">5 : 2</span></div>
+              <div class="row"><span class="k">cusps</span><span class="v" id="r-cusps">—</span></div>
+              <div class="row"><span class="k">closes after</span><span class="v" id="r-close">—</span></div>
+              <div class="row"><span class="k">curve</span><span class="v" id="r-kind">—</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="run-btn" type="button" aria-pressed="false">Roll</button>
+              <button class="btn" id="mode-btn" type="button" aria-pressed="false">Rolling outside</button>
+              <button class="btn" id="cusp-btn" type="button" aria-pressed="true">Cusps</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">Why the ratio is the whole figure</p>
+      <h2 id="law-h">A curve that wears its radii as cusps</h2>
+      <ul class="law-list">
+        <li>No slipping means the <b>arc rolled is the arc travelled</b>: when the wheel's centre has swung through an angle <span class="mono">θ</span> round the ring, the wheel has turned under it by exactly <span class="mono">(R/r)·θ</span>. The pen's two motions — the centre's swing and the wheel's spin — are therefore locked in the ratio <span class="mono">R:r</span>, and nothing else sets the shape.</li>
+        <li>Write the ratio in lowest terms <span class="mono">R:r = p:q</span>. The figure then has <b>p cusps</b>, evenly spaced, and <b>closes after q turns</b> of the wheel around the ring. A wheel that divides the ring evenly (<span class="mono">q = 1</span>) closes in one lap; a 5:2 needs two laps to shut, crossing itself into a five-pointed star.</li>
+        <li>A <b>cusp</b> is where the pen's own point of the rim is the one touching the ring: at that instant it is the pivot, momentarily still, and the curve comes to a sharp point. The cusps all sit <em>on the ring</em>, so <b>counting them against the ring reads the ratio</b> with no measurement at all.</li>
+        <li>Small ratios are the <b>named</b> curves. Outside: <span class="mono">R = r</span> is a <em>cardioid</em> (one cusp), <span class="mono">R = 2r</span> a <em>nephroid</em> (two). Inside: <span class="mono">R = 3r</span> a <em>deltoid</em>, <span class="mono">R = 4r</span> an <em>astroid</em>. And <span class="mono">R = 2r</span> inside is the <em>Tusi couple</em> — the wheel half the ring — where the rim point runs dead straight along a diameter: two circles making a line.</li>
+        <li><b>Slip</b> breaks the lock. Let the wheel turn a hair faster or slower than rolling demands and the rate is no longer the rational <span class="mono">p:q</span>: the pen never returns to a cusp it has already made, so the figure will not close and instead <b>precesses</b>, each near-repeat rotated from the last — the drawn record of a ratio that is almost, but not quite, whole.</li>
+      </ul>
+      <p class="pull">A wheel on a ring has only one freedom once it may not slip — and the curve is the whole of what that single freedom, counted in two radii, is made to say.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The two</p>
+      <h2 id="sib-h">Pen on the rim, and pen within it</h2>
+      <div class="siblings">
+        <a href="../cusp/" aria-current="page"><span class="w">Cusp</span><span class="d">the pen on the rim — epicycloids and hypocycloids, the pointed stars whose cusps count the ratio of the radii</span></a>
+        <a href="../rosette/"><span class="w">Rosette</span><span class="d">the pen drawn inside the rim — the spirograph, a hypotrochoid, the cusps rounded into woven petals</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Epicycle · a wheel rolled on a wheel · 2026-11-26 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
