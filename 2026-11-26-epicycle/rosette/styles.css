@@ -285,4 +285,7 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 3px co
 footer { padding: 30px 0 70px; border-top: 1px solid var(--rule); color: var(--ink-faint); font-family: var(--mono); font-size: 12.5px; }
 footer a { color: var(--ink-soft); }
 
-@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto; }
+  .verdict, .btn, .siblings a, input[type=range]::-webkit-slider-thumb { transition: none; }
+}
