@@ -153,6 +153,10 @@
 
   function drawWheel(ctx, F) {
     const c = centre(S.u), p = pen(S.u);
+    // rolling contact: the wheel meets the ring on the ray through its centre, at radius R
+    const kx = Math.cos(S.u), ky = Math.sin(S.u);
+    ctx.fillStyle = withA(C.wheel2, 0.9);
+    ctx.beginPath(); ctx.arc(F.X(S.R * kx), F.Y(S.R * ky), 2.8, 0, TAU); ctx.fill();
     // rolling wheel
     ctx.strokeStyle = withA(C.wheel, 0.95); ctx.lineWidth = 1.8;
     ctx.beginPath(); ctx.arc(F.X(c.x), F.Y(c.y), S.r * F.scale, 0, TAU); ctx.stroke();
@@ -295,11 +299,12 @@
   window.addEventListener('resize', draw);
 
   // ---------- opening state ----------
+  const article = (w) => (/^[aeiou]/i.test(w) ? 'an' : 'a');
   S.u = RM.matches ? period() * 0.33 : 0;
   syncLabels(); updateReading(); draw();
   if (live) {
     const { p, q } = ratio(), nm = curveName();
-    live.textContent = `A wheel of radius ${S.r} rolling ${out() ? 'outside' : 'inside'} a fixed ring of radius ${S.R}, with a pen on its rim. The radii reduce to ${p} to ${q}, so the pen writes a ${nm.name} with ${p} cusp${p === 1 ? '' : 's'}, closing after ${q === 1 ? 'one turn' : q + ' turns'} of the wheel around the ring. Press space to roll it, I to move the wheel inside or outside the ring, C to mark the cusps, and the arrow keys to change the two radii.`;
+    live.textContent = `A wheel of radius ${S.r} rolling ${out() ? 'outside' : 'inside'} a fixed ring of radius ${S.R}, with a pen on its rim. The radii reduce to ${p} to ${q}, so the pen writes ${article(nm.name)} ${nm.name} — ${p} cusp${p === 1 ? '' : 's'}, closing after ${q === 1 ? 'one turn' : q + ' turns'} of the wheel around the ring. Press space to roll it, I to move the wheel inside or outside the ring, C to mark the cusps, and the arrow keys to change the two radii.`;
   }
   requestAnimationFrame(tick);
 })();
