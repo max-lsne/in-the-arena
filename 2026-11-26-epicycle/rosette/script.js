@@ -128,6 +128,9 @@
   function drawWheel(ctx, F) {
     if (!S.showWheel) { drawPen(ctx, F); return; }
     const c = centre(S.u), p = pen(S.u);
+    // rolling contact: wheel meets ring on the ray through its centre, at radius R
+    ctx.fillStyle = withA(C.wheel2, 0.9);
+    ctx.beginPath(); ctx.arc(F.X(S.R * Math.cos(S.u)), F.Y(S.R * Math.sin(S.u)), 2.8, 0, TAU); ctx.fill();
     ctx.strokeStyle = withA(C.wheel, 0.9); ctx.lineWidth = 1.8;
     ctx.beginPath(); ctx.arc(F.X(c.x), F.Y(c.y), S.r * F.scale, 0, TAU); ctx.stroke();
     // the offset circle the pen rides (radius d about the centre)
@@ -159,7 +162,7 @@
   // how the petals sit: a plain circle at the centre, scallops shallow, loops when the pen reaches out far
   function figureKind() {
     const f = S.off / 100;
-    if (f <= 0.02) return { name: 'a plain circle — the deferent', kind: 'circle' };
+    if (f <= 0.04) return { name: 'a plain circle — the deferent', kind: 'circle' };
     if (f >= 0.98) return { name: 'cusped — on the rim, ' + (out() ? 'an epicycloid' : 'a hypocycloid'), kind: 'cusp' };
     // loops cross themselves when the pen outreaches the rolling-to-centre gap
     const looped = out() ? true : dist() > (S.R - 2 * S.r);
