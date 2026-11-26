@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rosette — the spirograph curve, drawn by a pen held inside a rolling wheel's rim. Take the same wheel rolled on a ring, but pin the pen short of the edge rather than on it, and the sharp points of the epicycloid round off into the woven petals a Spirograph toy makes. The figure is a hypotrochoid when the wheel rolls inside the ring, an epitrochoid when it rolls outside. The count is still set by the ratio of the two radii: reduce it to lowest terms and the number of outer petals is the numerator, the number of turns before the curve closes the denominator. What the pen's offset changes is only how deep the petals cut — hold the pen near the wheel's centre and the figure is a shallow scalloped ring; let it out toward the rim and the petals deepen into loops that cross themselves; take it all the way to the rim and the loops pinch into the cusps of the other page; bring it to the centre and the whole figure collapses to the plain circle the wheel's centre rides. Set the two radii and the pen offset, roll the wheel inside or outside, and watch the flower wind, petal over petal, until it closes on itself.</title>
+  <meta name="description" content="The spirograph curve: a hypotrochoid (wheel inside the ring) or epitrochoid (outside), traced by a pen held a distance d short of a rolling wheel's rim. The ratio of radii R:r, reduced to p:q, sets the figure: p outer petals, closing after q turns of the wheel. The pen offset d controls only how deep the petals cut — shallow scallops near the centre, self-crossing loops near the rim, cusps at the rim itself, a plain circle at the centre. A slip control detunes the rolling ratio and the rosette precesses. Set R, r and the offset, roll inside or outside, and watch the rosette wind and close." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Cg fill='none' stroke='%23b5683a' stroke-width='1.6'%3E%3Cellipse cx='16' cy='16' rx='9' ry='3.4'/%3E%3Cellipse cx='16' cy='16' rx='9' ry='3.4' transform='rotate(60 16 16)'/%3E%3Cellipse cx='16' cy='16' rx='9' ry='3.4' transform='rotate(120 16 16)'/%3E%3C/g%3E%3C/svg%3E" />
+  <meta property="og:title" content="Rosette — the spirograph, a pen drawn inside a wheel rolled on a ring" />
+  <meta property="og:description" content="Move the pen off the rim and the cusps round into petals — a hypotrochoid. The radii count the petals; the offset sets how deep they cut." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Epicycle</a> · <a href="../cusp/">cusp</a> · rosette · 2026-11-26</p>
+      <p class="pron"><b>hypotrochoid</b> · <i>noun</i> · the curve traced by a point fixed <i>inside</i> a circle that rolls around the inside of a fixed circle — the figure a spirograph winds</p>
+      <h1>Rosette</h1>
+      <p class="lede">The pen drawn in off the rim, and the flower it winds.</p>
+      <p class="sub">Take the same wheel rolled on a ring, but pin the pen <b>short of the edge</b> instead of on it, and the sharp cusps round off into petals — the woven flower a <b>spirograph</b> draws. Rolling inside the ring it is a <em>hypotrochoid</em>; outside, an <em>epitrochoid</em>. The <b>count</b> is still the ratio of the two radii: reduce <span class="mono">R:r</span> to <span class="mono">p:q</span> and there are <b>p petals</b>, closing after <b>q turns</b>. What the <b>offset</b> changes is only how deep the petals cut — near the centre a shallow scallop, out toward the rim deep loops that cross themselves, at the rim the cusps return, at the centre a plain circle. Set the radii and the offset, roll inside or out, and watch the flower wind.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">The pen, held short of the edge</h2>
+      <p>The gold circle is the <b>ring</b>, the steel circle the <b>wheel</b> rolling on it, exactly as before. What is new is the faint dotted circle inside the wheel: the <b>offset circle</b> of radius <span class="mono">d</span> that the pen now rides, short of the rim. The pen still turns at the no-slip rate against the centre's swing — so the <em>count</em> of petals is unchanged — but because it no longer reaches the ring it never quite stops, and the curve stays smooth. Slide the offset out to the rim and the dotted circle grows to the wheel; the petals sharpen toward cusps. Slide it to the centre and the circle vanishes to a point; the figure shrinks to the plain path the centre rides.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-closed" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">A closed rosette</span>
+              <small id="verdict-sub">ready</small>
+            </div>
+            <div class="stage">
+              <canvas id="fig" tabindex="0" width="520" height="460" aria-label="A fixed gold ring with a smaller steel wheel rolling inside it, a faint dotted circle inside the wheel marking where the pen rides short of the rim, and a copper pen tracing a many-petalled rosette that winds around the centre."></canvas>
+            </div>
+            <p class="hint"><b>Drag</b> on the figure to walk the pen along the rosette, or press <kbd>space</kbd> to wind it. <kbd>I</kbd> rolls inside or outside; <kbd>W</kbd> shows or hides the wheel; <kbd>←</kbd> <kbd>→</kbd> change the pen offset, <kbd>↑</kbd> <kbd>↓</kbd> the wheel.</p>
+            <div class="legend" aria-hidden="true">
+              <span><i class="l-ring"></i> ring R, held still</span>
+              <span><i class="l-wheel"></i> wheel r, rolling</span>
+              <span><i class="l-pen"></i> pen &amp; rosette</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="ring">Ring <span class="mono">R</span> <span class="val"><span id="ring-v">7</span></span></label>
+                <input type="range" id="ring" min="2" max="9" step="1" value="7" />
+                <p class="ctl-note">Radius of the <b>fixed ring</b>. With the wheel it sets the ratio <span class="mono">R:r</span>, and the <b>petal count</b> is the numerator of that ratio reduced.</p>
+              </div>
+              <div class="ctl">
+                <label for="wheel">Wheel <span class="mono">r</span> <span class="val"><span id="wheel-v">3</span></span></label>
+                <input type="range" id="wheel" min="1" max="6" step="1" value="3" />
+                <p class="ctl-note">Radius of the <b>rolling wheel</b> (smaller than the ring, rolling inside). Share a common factor with the ring and the petals <b>repeat sooner</b>; keep the two coprime and the flower runs its full count before closing.</p>
+              </div>
+              <div class="ctl">
+                <label for="off">Pen offset <span class="mono">d</span> <span class="val"><span id="off-v">0.72</span> r</span></label>
+                <input type="range" id="off" min="0" max="100" step="1" value="72" />
+                <p class="ctl-note">How far out the pen sits, as a fraction of the wheel's radius. At <span class="mono">0</span> it rides the centre (a plain circle); at <span class="mono">1</span> it rides the rim (cusps). Between, it sets how <b>deep</b> the petals cut and whether they <b>loop</b> over themselves.</p>
+              </div>
+              <div class="ctl">
+                <label for="slip">Slip <span class="val"><span id="slip-v">0.00</span></span></label>
+                <input type="range" id="slip" min="-40" max="40" step="1" value="0" />
+                <p class="ctl-note">A small error in the rolling rate, in hundredths. Off the exact ratio the rosette <b>never closes</b> — it precesses, each winding landing rotated from the last. Zero it to lock the flower.</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k">ratio <span class="tag">R : r reduced</span></span><span class="v" id="r-ratio">7 : 3</span></div>
+              <div class="row"><span class="k">petals</span><span class="v" id="r-lobes">—</span></div>
+              <div class="row"><span class="k">closes after</span><span class="v" id="r-close">—</span></div>
+              <div class="row"><span class="k">pen offset</span><span class="v" id="r-off">—</span></div>
+              <div class="row"><span class="k">figure</span><span class="v" id="r-kind">—</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="run-btn" type="button" aria-pressed="false">Wind</button>
+              <button class="btn" id="mode-btn" type="button" aria-pressed="true">Rolling inside</button>
+              <button class="btn" id="wheel-btn" type="button" aria-pressed="true">Wheel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">Why the offset only sets the depth</p>
+      <h2 id="law-h">The ratio counts the petals; the offset cuts them</h2>
+      <ul class="law-list">
+        <li>The pen's two turns are geared by the same no-slip ratio as on the <a href="../cusp/">rim</a>: the centre swings once round the ring while the wheel spins <span class="mono">R/r</span> times under it. Moving the pen in from the rim <em>shortens its reach</em> but does not touch that gearing, so the <b>petal count is still the ratio</b> — <span class="mono">R:r = p:q</span> gives <b>p petals</b>, closing after <b>q turns</b>.</li>
+        <li>The <b>offset</b> <span class="mono">d</span> sets only the <em>amplitude</em> of the fast turn against the slow one. Small <span class="mono">d</span>: the fast wobble is gentle and the petals are shallow <b>scallops</b>. Large <span class="mono">d</span>: the wobble outruns the drift and each petal throws a <b>loop</b> that crosses itself — the dense, over-woven flowers a spirograph is prized for.</li>
+        <li>The two <b>limits</b> are the neighbours of this curve. At <span class="mono">d = r</span> the pen is back on the rim and every petal pinches to a point: the <a href="../cusp/">cusped</a> epicycloid or hypocycloid. At <span class="mono">d = 0</span> the pen sits on the wheel's centre, which only rides the <em>deferent</em>, so the figure is a plain <b>circle</b> — the fast turn has nothing to say.</li>
+        <li>Because the count comes from the ratio, <b>common factors flatten the flower</b>: a 6:3 is really a 2:1, two petals, not six. The richest rosettes come from radii that are <b>coprime</b> — 7:3, 5:2 — where the wheel must travel its full several turns, laying every petal, before the curve finally meets its own start.</li>
+        <li><b>Slip</b> breaks the gearing just as it does on the rim: a rolling rate a hair off the rational ratio never brings the pen home, so the rosette does not close but <b>precesses</b>, each winding rotated from the one before — a flower drawn by a wheel that is forever almost, but never quite, in step with its ring.</li>
+      </ul>
+      <p class="pull">The ratio decides how many petals there are; the offset decides only how deep they are cut — the same flower, held nearer the rim or nearer the heart.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The two</p>
+      <h2 id="sib-h">Pen on the rim, and pen within it</h2>
+      <div class="siblings">
+        <a href="../cusp/"><span class="w">Cusp</span><span class="d">the pen on the rim — epicycloids and hypocycloids, the pointed stars whose cusps count the ratio of the radii</span></a>
+        <a href="../rosette/" aria-current="page"><span class="w">Rosette</span><span class="d">the pen drawn inside the rim — the spirograph, a hypotrochoid, the cusps rounded into woven petals</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Epicycle · a wheel rolled on a wheel · 2026-11-26 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
