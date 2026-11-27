@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cup — the bright curve light folds inside a circular mirror. Throw a sheet of parallel rays into a round cup and each one reflects off the inside as a chord; the chords cross, and along one curve they all crowd together and none of them cross it — that bright curve is the caustic, the thing you see burning across the bottom of a coffee cup in the sun. It is a nephroid, a two-cusped curve that is also an epicycloid, the very curve a wheel rolled on a wheel draws. Move the light to a point source instead and slide it in from far away: at infinity the caustic is the nephroid, and the instant the source lands on the rim of the cup it sharpens into a cardioid, a one-cusped heart. The caustic is computed the honest way — not drawn from a formula but found as the envelope of the reflected rays, the place where each chord meets the next, so the named curve emerges from the crossing light itself. Set the source, aim it, and watch the cup fold its curve of light.</title>
+  <meta name="description" content="The catacaustic of a circle: the bright curve a circular mirror folds its reflected light onto. Parallel rays give a nephroid (the coffee-cup caustic, a two-cusped epicycloid); a point source on the rim gives a cardioid (one cusp); a finite source between rim and infinity gives the caustics in between. Every reflected ray is a chord of the circle, and the caustic is the envelope of those chords — found here numerically, as the point where each chord meets its neighbour, so the curve is drawn by the crossing light rather than from a closed form. Move the source from the centre out to infinity and watch the cardioid open toward the nephroid." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%23b0892e' stroke-width='1.3'/%3E%3Cpath d='M7 12 C12 18 20 18 25 12' fill='none' stroke='%23b5683a' stroke-width='2'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Cup — the caustic a circular mirror folds its light onto" />
+  <meta property="og:description" content="Reflected rays are chords; the bright curve they all touch is the caustic. Parallel light gives a nephroid, a point source on the rim a cardioid — the same curves a wheel on a wheel draws." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Caustic</a> · cup · <a href="../envelope/">envelope</a> · 2026-11-27</p>
+      <p class="pron"><b>caustic</b> · <i>noun</i> · the bright curve or surface onto which a family of light rays is folded after reflection or refraction — the envelope of the rays, where they crowd together and burn</p>
+      <h1>Cup</h1>
+      <p class="lede">Light thrown into a round mirror, and the bright curve it folds itself onto.</p>
+      <p class="sub">Throw a sheet of <b>parallel rays</b> into a circular mirror and each one bounces off the inside as a <b>chord</b>. The chords cross everywhere — but along one curve they crowd together and <em>none of them cross it</em>: that bright curve is the <b>caustic</b>, the cusped glow you can see burning across the bottom of a coffee cup in the sun. For parallel light it is a <em>nephroid</em> — two cusps, and the very same curve a wheel rolled on a wheel draws. Swap the sheet for a <b>point source</b> and slide it inward: far away the caustic is still the nephroid, and the instant the source touches the <b>rim</b> it sharpens into a <em>cardioid</em>, a single cusp. Nothing here is drawn from a formula — the caustic is found as the <b>envelope</b> of the rays, the place each chord meets the next. Set the source, aim it, and watch the cup fold its light.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">One mirror, and the light it crowds</h2>
+      <p>The gold circle is the <b>mirror</b>, held still. Light arrives — either as a sheet of parallel rays aimed across it, or from a single bright <b>source</b> you can move — and each ray reflects off the inside as a <b>steel chord</b>, running from where it lands to where it strikes the far wall. Draw enough of them and you see the trick of it: the chords pile up along a <b>copper curve</b> and leave it clean on the bright side. That curve is the caustic. It is not laid down from an equation — it is read off the light, as the point where each reflected chord crosses its neighbour, which is exactly what an <em>envelope</em> is.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-named" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">A nephroid</span>
+              <small id="verdict-sub">ready</small>
+            </div>
+            <div class="stage">
+              <canvas id="fig" tabindex="0" width="520" height="460" aria-label="A gold circular mirror with light reflecting off its inside. Each reflected ray is drawn as a steel chord, and the chords crowd along a bright copper caustic curve — a two-cusped nephroid for parallel light, a one-cusped cardioid for a point source on the rim."></canvas>
+            </div>
+            <p class="hint"><b>Drag</b> on the figure to move the source (or aim the parallel sheet), or press <kbd>space</kbd> to sweep it round. <kbd>P</kbd> switches parallel light and a point source; <kbd>R</kbd> shows or hides the rays; <kbd>←</kbd> <kbd>→</kbd> aim the light, <kbd>↑</kbd> <kbd>↓</kbd> move the source in and out.</p>
+            <div class="legend" aria-hidden="true">
+              <span><i class="l-ring"></i> mirror, held still</span>
+              <span><i class="l-wheel"></i> reflected rays</span>
+              <span><i class="l-pen"></i> caustic</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="aim">Aim <span class="val"><span id="aim-v">210°</span></span></label>
+                <input type="range" id="aim" min="0" max="359" step="1" value="210" />
+                <p class="ctl-note">The direction the <b>parallel light</b> comes from, or the <b>angle of the source</b> around the mirror. Sweeping it turns the whole caustic with the light — the curve is rigid, carried round by its cusps.</p>
+              </div>
+              <div class="ctl" id="dist-ctl">
+                <label for="dist">Source distance <span class="val"><span id="dist-v">1.00 R</span></span></label>
+                <input type="range" id="dist" min="0" max="600" step="5" value="100" />
+                <p class="ctl-note">How far the <b>point source</b> sits from the mirror's centre, in radii. On the <b>rim</b> (<span class="mono">1 R</span>) the caustic is a <em>cardioid</em>; slide it <b>out</b> and the single cusp opens toward the two-cusped <em>nephroid</em> that parallel light, a source at infinity, draws exactly.</p>
+              </div>
+              <div class="ctl">
+                <label for="rays">Rays <span class="val"><span id="rays-v">120</span></span></label>
+                <input type="range" id="rays" min="16" max="220" step="1" value="120" />
+                <p class="ctl-note">How many reflected chords to draw. The caustic itself is computed from a far finer sampling, so it stays smooth however few rays are shown — more rays only make the crowding plainer to the eye.</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k">source</span><span class="v" id="r-source">point · 1.00 R</span></div>
+              <div class="row"><span class="k">caustic</span><span class="v" id="r-kind">cardioid</span></div>
+              <div class="row"><span class="k">cusps</span><span class="v" id="r-cusps">1</span></div>
+              <div class="row"><span class="k">found as</span><span class="v" id="r-how">envelope of chords</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="run-btn" type="button" aria-pressed="false">Sweep</button>
+              <button class="btn" id="mode-btn" type="button" aria-pressed="false">Point source</button>
+              <button class="btn" id="rays-btn" type="button" aria-pressed="true">Rays</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">Why the light crowds onto a curve</p>
+      <h2 id="law-h">A curve the rays all touch and none of them cross</h2>
+      <ul class="law-list">
+        <li>Each reflected ray is a <b>chord</b> of the mirror: it leaves the point it lands on, obeying <em>angle in equals angle out</em> about the radius, and runs straight to the far wall. The light as a whole is therefore a <b>family of lines</b> — one chord for every point the incoming light touches.</li>
+        <li>A family of lines, if the lines turn as they slide, has an <b>envelope</b>: a curve that every line of the family just touches, and that none of them crosses. The light pools along it because near the envelope two neighbouring rays meet almost at once — the rays <b>bunch</b>, and bunched light is bright. That bright curve is the <b>caustic</b>.</li>
+        <li>So the caustic can be found with no formula at all: take two reflected rays a hair apart and mark <b>where they cross</b>; do it all the way round and the crossing points trace the curve. That is exactly how this page draws it — the copper curve is a record of neighbouring chords meeting, not a plotted equation.</li>
+        <li>For a <b>circle</b> the answer has a name. <b>Parallel</b> light folds onto a <em>nephroid</em> — two cusps, half the mirror's width — the caustic you see in a sunlit cup. A point source <b>on the rim</b> folds onto a <em>cardioid</em> — one cusp. Both are <b>epicycloids</b>: the same curves a wheel rolled on a wheel traces on the <a href="../../2026-11-26-epicycle/">next page over</a>, arrived at from the opposite direction — there drawn by a rolling point, here by crossing light.</li>
+        <li>Slide the source from the rim <b>outward</b> and the cardioid's one cusp opens, the curve swelling through the whole <em>Cayley</em> family of caustics until, with the source infinitely far — parallel light — it settles on the nephroid's two. The mirror never changes; only how far the light starts from sets which caustic it will burn.</li>
+      </ul>
+      <p class="pull">The bright curve is not something the light lands on. It is the shape of the light agreeing with itself — the one place every ray, for an instant, is going the same way.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The two</p>
+      <h2 id="sib-h">Light that folds, and lines that wrap</h2>
+      <div class="siblings">
+        <a href="../cup/" aria-current="page"><span class="w">Cup</span><span class="d">the caustic of a circular mirror — reflected rays as chords, and the nephroid and cardioid their crossing folds onto</span></a>
+        <a href="../envelope/"><span class="w">Envelope</span><span class="d">the same idea without the light — the astroid a sliding ladder wraps, and the cardioid a times-table of chords winds</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Caustic · a curve wrapped by a family of lines · 2026-11-27 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
