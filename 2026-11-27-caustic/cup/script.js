@@ -134,7 +134,7 @@
   function kind() {
     if (S.mode === 'parallel') return { name: 'nephroid', note: 'parallel light — the coffee-cup caustic', cusps: 2, cls: 'named' };
     const d = S.dist / 100;
-    if (d < 0.05) return { name: 'a point at the centre', note: 'the light returns on itself', cusps: 0, cls: 'rest' };
+    if (d < 0.08) return { name: 'a point at the centre', note: 'the light returns on itself', cusps: 0, cls: 'rest' };
     if (Math.abs(d - 1) < 0.04) return { name: 'cardioid', note: 'the source on the rim', cusps: 1, cls: 'named' };
     if (d >= 5.4) return { name: 'a caustic, nearly a nephroid', note: 'the source far off, almost parallel', cusps: 2, cls: 'closed' };
     return { name: 'a caustic', note: 'source at ' + d.toFixed(2) + ' R', cusps: 2, cls: 'closed' };
@@ -168,6 +168,17 @@
       if (pen) ctx.lineTo(x, y); else { ctx.moveTo(x, y); pen = true; }
     }
     ctx.stroke();
+  }
+
+  function drawKiss(ctx, F) {
+    // a coarse sample of rays, each dotted where it touches the caustic: every ray is tangent to it
+    if (!S.showRays) return;
+    const M = 46;
+    ctx.fillStyle = withA(C.caustic2, 0.5);
+    for (let i = 0; i < M; i++) {
+      const t = causticAt(TAU * i / M);
+      if (t && Math.hypot(t.x, t.y) < 4) { ctx.beginPath(); ctx.arc(F.X(t.x), F.Y(t.y), 1.6, 0, TAU); ctx.fill(); }
+    }
   }
 
   function drawSource(ctx, F) {
@@ -224,6 +235,7 @@
     drawRays(ctx, F);
     drawMirror(ctx, F);
     drawCaustic(ctx, F);
+    drawKiss(ctx, F);
     drawSource(ctx, F);
     drawActive(ctx, F);
     setVerdict();
