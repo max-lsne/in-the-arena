@@ -166,6 +166,20 @@
     ctx.stroke();
   }
 
+  function cuspPoints() {
+    // the cusps the family promises, placed analytically — not hunted for on the drawn curve
+    if (S.mode === 'ladder') { const l = L(); return [{ x: l, y: 0 }, { x: -l, y: 0 }, { x: 0, y: l }, { x: 0, y: -l }]; }
+    if (!wholeMult()) return [];                      // an open figure has no settled cusps
+    // the m−1 cusps of the chord epicycloid sit at radius (m−1)/(m+1), angles (2k+1)π/(m−1)
+    const mi = Math.round(M()), n = mi - 1, rc = (mi - 1) / (mi + 1), out = [];
+    for (let k = 0; k < n; k++) { const ph = (2 * k + 1) * Math.PI / n; out.push({ x: rc * Math.cos(ph), y: rc * Math.sin(ph) }); }
+    return out;
+  }
+  function drawCusps(ctx, F) {
+    ctx.fillStyle = withA(C.guide2, 0.95);
+    for (const p of cuspPoints()) { ctx.beginPath(); ctx.arc(F.X(p.x), F.Y(p.y), 3.2, 0, TAU); ctx.fill(); }
+  }
+
   function drawActive(ctx, F) {
     const t = TAU * S.active, { A, B } = seg(t);
     ctx.strokeStyle = C.env2; ctx.lineWidth = 2.2;
@@ -187,6 +201,7 @@
     drawGuide(ctx, F);
     drawFamily(ctx, F);
     drawEnvelope(ctx, F);
+    drawCusps(ctx, F);
     drawActive(ctx, F);
     setVerdict();
   }
