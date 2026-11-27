@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Envelope — the curve a whole family of straight lines wraps itself around. Draw a line, then another a little turned and slid from it, and another, and another; each is straight, but the lines are all tangent to one curve that they crowd against and never cross, and that curve is their envelope. Lean a ladder in every position with its feet on two walls and the ladder-lines sweep out a four-pointed astroid. Mark the numbers round a clock face and join each to its double — one to two, two to four, three to six — and the chords wrap a heart-shaped cardioid; join each to its triple instead and they wrap a two-cusped nephroid. These are the very curves light folds onto in a round cup, and the curves a wheel rolled on a wheel draws, reached a third way: not by a moving point and not by reflected light, but by a family of lines agreeing on a boundary. The envelope is found honestly here, as the place each line meets the next, so the curve emerges from the crossing lines themselves. Pick a family, and watch the lines wrap their curve.</title>
+  <meta name="description" content="A curve as the envelope of a family of straight lines: the curve every line of the family touches and none crosses, found where each line meets its neighbour. Two families: a ladder sliding with its ends on the two axes wraps an astroid (a four-cusped hypocycloid); chords joining each point of a circle to its m-th multiple — the times-table construction — wrap an epicycloid with m−1 cusps, a cardioid at m=2 and a nephroid at m=3. These are the same named curves a wheel on a wheel rolls and that light folds onto in a circular mirror, reached from a third direction. A non-whole multiplier never closes and the figure precesses. The envelope is computed numerically as the intersection of adjacent lines, so it is drawn by the lines rather than from a formula." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Cpath d='M6 26 L26 6 M6 20 L20 6 M6 13 L13 6 M12 26 L26 12 M19 26 L26 19' stroke='%235f8a9c' stroke-width='1.1' fill='none'/%3E%3Cpath d='M6 26 C6 14 14 6 26 6' stroke='%23b5683a' stroke-width='2' fill='none'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Envelope — the curve a family of lines wraps around" />
+  <meta property="og:description" content="A ladder on two walls wraps an astroid; a times-table of chords wraps a cardioid or a nephroid. The same curves light folds onto and a wheel on a wheel draws — reached as the envelope of straight lines." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Caustic</a> · <a href="../cup/">cup</a> · envelope · 2026-11-27</p>
+      <p class="pron"><b>envelope</b> · <i>noun</i> · a curve that is tangent to every member of a family of curves — the boundary the family crowds against and does not cross</p>
+      <h1>Envelope</h1>
+      <p class="lede">Many straight lines, and the one curve they all agree to wrap.</p>
+      <p class="sub">Draw a line, then another a little turned and slid from it, then another — each dead straight, yet the lines all lean against <em>one curve</em> they touch and never cross. That curve is their <b>envelope</b>. Lean a <b>ladder</b> in every position with its feet on two walls and the ladder-lines wrap a four-pointed <em>astroid</em>. Or mark the numbers round a circle and join each to its <b>double</b> — the old times-table trick — and the chords wrap a <em>cardioid</em>; join each to its <b>triple</b> and they wrap a <em>nephroid</em>. These are the same curves light folds onto in the <a href="../cup/">cup</a> next door, and the same a wheel on a wheel draws — reached a third way, not by a rolling point nor by reflected light but by a <b>family of lines</b>. And the envelope is found the honest way: the place each line meets the next.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">A family of lines, and the curve they lean on</h2>
+      <p>The steel lines are the <b>family</b> — a ladder caught in many positions, or the chords of a times-table laid round a circle. Each is straight; none is bent. But where one line lies close to the next they cross, and those crossings crowd along a <b>copper curve</b> that the whole family leans against and no single line steps over. That is the <b>envelope</b>. Like the <a href="../cup/">caustic</a>, it is not drawn from an equation — it is read off the lines, as the point where each one meets its neighbour, which is the same thing as the curve each line is tangent to.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-named" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">An astroid</span>
+              <small id="verdict-sub">ready</small>
+            </div>
+            <div class="stage">
+              <canvas id="fig" tabindex="0" width="520" height="460" aria-label="A family of straight steel lines — either a ladder sliding with its ends on two axes, or chords joining points of a circle to their multiples — all tangent to a bright copper envelope curve: an astroid for the ladder, a cardioid or nephroid for the chords."></canvas>
+            </div>
+            <p class="hint"><b>Drag</b> on the figure to turn the family, or press <kbd>space</kbd> to sweep a single line round and watch it kiss the curve. <kbd>F</kbd> switches the ladder and the chords; <kbd>L</kbd> shows or hides the lines; <kbd>←</kbd> <kbd>→</kbd> change the length or the multiplier, <kbd>↑</kbd> <kbd>↓</kbd> the number of lines.</p>
+            <div class="legend" aria-hidden="true">
+              <span><i class="l-wheel"></i> the family of lines</span>
+              <span><i class="l-pen"></i> the envelope</span>
+              <span><i class="l-ring"></i> axes / circle</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl" id="len-ctl">
+                <label for="len">Ladder length <span class="val"><span id="len-v">1.60</span></span></label>
+                <input type="range" id="len" min="60" max="240" step="2" value="160" />
+                <p class="ctl-note">How long the <b>sliding ladder</b> is. Its two ends ride the two axes; through every angle it sweeps a line, and the lines wrap an <em>astroid</em> whose four cusps reach exactly the ladder's length along each axis.</p>
+              </div>
+              <div class="ctl" id="mult-ctl" hidden>
+                <label for="mult">Multiplier <span class="val"><span id="mult-v">2.00</span></span></label>
+                <input type="range" id="mult" min="200" max="700" step="2" value="200" />
+                <p class="ctl-note">Join each point of the circle to its <b>m-th</b> multiple — one to two, two to four — and the chords wrap an <b>epicycloid of m−1 cusps</b>: <span class="mono">2</span> a <em>cardioid</em>, <span class="mono">3</span> a <em>nephroid</em>, <span class="mono">4</span> a three-cusped curve. A multiplier that is <b>not whole</b> never closes — the figure <em>precesses</em>.</p>
+              </div>
+              <div class="ctl" id="lines-ctl">
+                <label for="lines">Lines <span class="val"><span id="lines-v">90</span></span></label>
+                <input type="range" id="lines" min="12" max="200" step="1" value="90" />
+                <p class="ctl-note">How many lines of the family to draw. The envelope is computed from a far finer sampling, so it stays smooth however few lines are shown — more lines only make the curve they wrap plainer.</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k">family</span><span class="v" id="r-family">sliding ladder</span></div>
+              <div class="row"><span class="k">envelope</span><span class="v" id="r-kind">astroid</span></div>
+              <div class="row"><span class="k">cusps</span><span class="v" id="r-cusps">4</span></div>
+              <div class="row"><span class="k">closes</span><span class="v" id="r-close">one turn</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="run-btn" type="button" aria-pressed="false">Sweep</button>
+              <button class="btn" id="mode-btn" type="button" aria-pressed="false">Sliding ladder</button>
+              <button class="btn" id="lines-btn" type="button" aria-pressed="true">Lines</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">Why straight lines make a curve</p>
+      <h2 id="law-h">A curve with no points of its own, only tangents</h2>
+      <ul class="law-list">
+        <li>A <b>family of lines</b> is a rule that gives one line for each value of a parameter — a ladder for each angle, a chord for each point of the circle. As the parameter advances the line <b>turns and slides</b>, and two lines an instant apart cross somewhere close by.</li>
+        <li>Follow that crossing as the two lines draw together: it settles onto a definite point, and the line at that instant is <b>tangent</b> there to the curve those crossings trace. That curve is the <b>envelope</b> — touched by every line of the family, crossed by none. A curve defined entirely by its tangents, never plotted point by point.</li>
+        <li>So it is found with no formula: take two neighbouring lines, mark <b>where they meet</b>, and sweep the parameter round. This page does exactly that — the copper curve is a record of adjacent lines crossing, the same method the <a href="../cup/">cup</a> uses on its reflected rays.</li>
+        <li>The <b>ladder</b> — a segment of fixed length with its ends on the two axes — wraps an <em>astroid</em>, the four-cusped hypocycloid. The <b>times-table of chords</b> — each circle point joined to its <span class="mono">m</span>-th multiple — wraps an <b>epicycloid of <span class="mono">m−1</span> cusps</b>: a <em>cardioid</em> at two, a <em>nephroid</em> at three. The same curves the <a href="../../2026-11-26-epicycle/">rolling wheel</a> draws and the mirror folds its light onto, arrived at from straight lines alone.</li>
+        <li>Make the multiplier <b>not whole</b> and the chords never return to a line they have drawn: the envelope will not close, and each near-repeat lands rotated, the whole figure <b>precessing</b> — the same drifting a <a href="../../2026-11-26-epicycle/cusp/">rolling ratio</a> shows when it slips off a whole number.</li>
+      </ul>
+      <p class="pull">Three ways to the one curve: roll a point along it, fold light onto it, or lay down the lines it leans on. The curve does not care which — it is only the agreement a family keeps at its edge.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The two</p>
+      <h2 id="sib-h">Light that folds, and lines that wrap</h2>
+      <div class="siblings">
+        <a href="../cup/"><span class="w">Cup</span><span class="d">the caustic of a circular mirror — reflected rays as chords, and the nephroid and cardioid their crossing folds onto</span></a>
+        <a href="../envelope/" aria-current="page"><span class="w">Envelope</span><span class="d">the same idea without the light — the astroid a sliding ladder wraps, and the cardioid a times-table of chords winds</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Caustic · a curve wrapped by a family of lines · 2026-11-27 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
