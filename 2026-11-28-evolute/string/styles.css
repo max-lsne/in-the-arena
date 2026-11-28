@@ -186,7 +186,7 @@ section > p b { color: var(--ink); }
   padding: 8px;
   margin-bottom: 12px;
 }
-.stage canvas { display: block; width: 100%; height: auto; }
+.stage canvas { display: block; width: 100%; height: auto; aspect-ratio: 520 / 460; }
 
 .hint { font-family: var(--mono); font-size: 12px; color: var(--ink-faint); line-height: 1.6; margin: 2px 2px 0; }
 .hint b { color: var(--spring-2); font-weight: 500; }
