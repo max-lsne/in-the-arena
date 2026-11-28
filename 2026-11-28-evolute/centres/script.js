@@ -164,6 +164,30 @@
     ctx.stroke();
   }
 
+  function drawKiss(ctx, F) {
+    // a coarse sample of normals, each dotted where it touches the evolute: every normal is tangent to it,
+    // and the point it touches is that point's centre of curvature — the envelope read off the family
+    if (!S.showNormals) return;
+    const M = 48;
+    ctx.fillStyle = withA(C.evo2, 0.5);
+    for (let i = 0; i < M; i++) {
+      const c = centre(TAU * i / M);
+      if (c && Math.hypot(c.x, c.y) < 6) { ctx.beginPath(); ctx.arc(F.X(c.x), F.Y(c.y), 1.6, 0, TAU); ctx.fill(); }
+    }
+  }
+
+  function drawCusps(ctx, F) {
+    // the four cusps sit at the ends of the two axes (t = 0, π/2, π, 3π/2), where the curvature is
+    // extremal and the centre pauses and reverses — placed analytically, not hunted on the drawn curve
+    if (Math.abs(bVal() - A) < 0.025) return;        // a circle: the evolute is a point, no cusps to mark
+    for (let k = 0; k < 4; k++) {
+      const c = centre(k * Math.PI / 2);
+      if (!c) continue;
+      ctx.fillStyle = C.base; ctx.beginPath(); ctx.arc(F.X(c.x), F.Y(c.y), 3.2, 0, TAU); ctx.fill();
+      ctx.strokeStyle = C.field; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.arc(F.X(c.x), F.Y(c.y), 3.2, 0, TAU); ctx.stroke();
+    }
+  }
+
   function drawActive(ctx, F) {
     const t = TAU * S.active, P = pt(t), c = centre(t);
     if (!c) return;
@@ -190,6 +214,8 @@
     drawNormals(ctx, F);
     drawEllipse(ctx, F);
     drawEvolute(ctx, F);
+    drawKiss(ctx, F);
+    drawCusps(ctx, F);
     drawActive(ctx, F);
     setVerdict();
   }
@@ -282,7 +308,7 @@
   syncLabels(); updateReading(); draw();
   if (live) {
     const k = kind();
-    live.textContent = `An ellipse with short-to-long axis ${bVal().toFixed(2)}. A point runs round it, and at each point the best-fitting circle of curvature has its centre a little way in along the normal. The track of those centres is the evolute — here ${k.name}, ${k.note} — and it is the same curve as the envelope of the ellipse's normals, drawn as the meeting of each normal with its neighbour. Press space to roll the point round, N to show or hide the normals, O the osculating circle, and the arrow keys to step the point or round and stretch the ellipse.`;
+    live.textContent = `An ellipse with short-to-long axis ${bVal().toFixed(2)}. A point runs round it, and at each point the best-fitting circle of curvature has its centre a little way in along the normal. The track of those centres is the evolute — here ${k.name}, ${k.note}${k.cusps ? ', its four cusps marked where the axes meet it' : ''} — and it is the same curve as the envelope of the ellipse's normals, drawn as the meeting of each normal with its neighbour. Press space to roll the point round, N to show or hide the normals, O the osculating circle, and the arrow keys to step the point or round and stretch the ellipse.`;
   }
   requestAnimationFrame(tick);
 })();
