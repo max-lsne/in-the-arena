@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>String — the involute, a taut string unwound from a curve, and the reverse of taking an evolute. Pin a thread along a curve and peel it off keeping it tight; the free end draws a new curve, the involute. The thread is always a straight tangent to the curve at the point it last left, exactly as long as the arc it has let go of — so the curve it was unwound from is the envelope of the new curve's normals, which is to say the old curve is the evolute of the involute just drawn. Unwinding and taking the evolute are the same move run in opposite directions: one throws a curve's curvature away into a companion curve, the other winds it back. Unwind a string from a circle and you get the spiral that shapes the flank of every gear tooth; from a cycloid, an equal cycloid, the curve Huygens hung a pendulum along to make it keep true time; from an astroid, a larger astroid twice its size. The involute is computed the honest way, as a string let out by real arc length, not plotted from a formula. Pick a base curve and let the string out.</title>
+  <meta name="description" content="The involute: the curve traced by the free end of a taut string unwound from a base curve, and the exact reverse of taking an evolute. The string stays tangent to the base at the point it last leaves and has length equal to the arc already released, so the base is the evolute of the involute — the envelope of its normals. Unwinding from a circle gives the involute of a circle, the gear-tooth spiral; from a cycloid, a congruent cycloid (Huygens' isochronous pendulum); from an astroid, an astroid twice the size. The involute is built numerically, as a string let out by true arc length, not drawn from a closed form." />
+  <meta name="theme-color" content="#efeae1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121310" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121310'/%3E%3Ccircle cx='13' cy='17' r='6' fill='none' stroke='%23b0892e' stroke-width='1.3'/%3E%3Cpath d='M13 11 C20 11 24 16 23 24' fill='none' stroke='%23b5683a' stroke-width='2'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="String — the involute a taut string unwinds, the reverse of taking an evolute" />
+  <meta property="og:description" content="Unwind a tight string from a curve and the free end draws its involute; the curve is the evolute of what you drew. A circle gives the gear-tooth spiral, a cycloid an equal cycloid, an astroid a larger astroid." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="hero">
+      <p class="eyebrow"><a href="../">Evolute</a> · <a href="../centres/">centres</a> · string · 2026-11-28</p>
+      <p class="pron"><b>involute</b> · <i>noun</i> · the curve traced by the end of a taut string unwound from another curve — the reverse of the evolute, which that other curve then is</p>
+      <h1>String</h1>
+      <p class="lede">A tight thread peeled off a curve, and the new curve its free end writes.</p>
+      <p class="sub">Pin a thread along a curve and peel it off, keeping it <b>tight</b>. The free end draws a new curve — the <b>involute</b> — and the thread is always a straight <b>tangent</b> to the base at the point it last left, exactly as long as the arc it has let go of. That one fact closes the circle with the <a href="../centres/">page before</a>: because every taut thread is tangent to the base, the base is the <b>envelope of the involute's normals</b> — which is to say the base is the <em>evolute</em> of the involute just drawn. <b>Unwinding and taking the evolute are one move run backwards.</b> Let a string off a <b>circle</b> and you get the spiral that shapes every <em>gear tooth</em>; off a <b>cycloid</b>, an equal cycloid, the curve <em>Huygens</em> hung a pendulum along to keep true time; off an <b>astroid</b>, a larger astroid. Nothing is drawn from a formula — the string is let out by real <b>arc length</b>, and the curve follows its end.</p>
+    </header>
+
+    <section aria-labelledby="bench-h">
+      <p class="section-tag">The bench</p>
+      <h2 id="bench-h">One base curve, and the string let off it</h2>
+      <p>The gold curve is the <b>base</b>, held still. A <b>steel thread</b> is pinned at one end and peeled away, drawn tight; the <b>copper curve</b> is the path of its free end. At any moment the thread runs straight from the point it last left the base — tangent there — out to its tip, and its length is exactly the arc it has released. Draw the thread at many stages at once and you see the trick of it: every thread touches the base, so the base is the curve all those threads wrap — the envelope of the new curve's normals, its evolute. Let the string all the way out and the involute is complete; the base is the evolute it came from.</p>
+
+      <div class="bench">
+        <div class="bench-grid">
+          <div>
+            <div class="verdict v-named" id="verdict" role="status">
+              <span class="dot"></span><span id="verdict-text">The involute of a circle</span>
+              <small id="verdict-sub">ready</small>
+            </div>
+            <div class="stage">
+              <canvas id="fig" tabindex="0" width="520" height="460" aria-label="A gold base curve with a steel thread unwound from it. The thread stays tangent to the base at the point it last leaves, and its free end traces a copper involute curve; many threads drawn at once all touch the base, which is the evolute of the involute."></canvas>
+            </div>
+            <p class="hint"><b>Drag</b> across the figure to let the string out and reel it in, or press <kbd>space</kbd> to unwind. <kbd>B</kbd> changes the base curve, <kbd>T</kbd> shows or hides the threads; <kbd>←</kbd> <kbd>→</kbd> let out or reel in by hand.</p>
+            <div class="legend" aria-hidden="true">
+              <span><i class="l-ring"></i> base curve, held still</span>
+              <span><i class="l-wheel"></i> taut threads</span>
+              <span><i class="l-pen"></i> involute</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="controls">
+              <div class="ctl">
+                <label for="base">Base curve <span class="val"><span id="base-v">circle</span></span></label>
+                <input type="range" id="base" min="0" max="2" step="1" value="0" />
+                <p class="ctl-note">The curve the string is unwound from. A <b>circle</b> gives the gear-tooth spiral; a <b>cycloid</b> an equal cycloid, Huygens' isochrone; an <b>astroid</b> a larger astroid. Each base is the <em>evolute</em> of the involute it pays out.</p>
+              </div>
+              <div class="ctl">
+                <label for="wind">String let out <span class="val"><span id="wind-v">100%</span></span></label>
+                <input type="range" id="wind" min="0" max="100" step="1" value="100" />
+                <p class="ctl-note">How much of the thread has been peeled off. At <span class="mono">0</span> the tip sits on the base; as it climbs, the free end swings out along the <b>tangent</b>, each new stage adding the arc just released to the thread's length.</p>
+              </div>
+              <div class="ctl">
+                <label for="threads">Threads <span class="val"><span id="threads-v">22</span></span></label>
+                <input type="range" id="threads" min="4" max="80" step="1" value="22" />
+                <p class="ctl-note">How many stages of the thread to draw at once. The involute itself is computed from a far finer sampling; more threads only make the <b>envelope</b> plainer — every one of them tangent to the base.</p>
+              </div>
+            </div>
+
+            <div class="reading" aria-live="off">
+              <div class="row"><span class="k">base</span><span class="v" id="r-base">circle</span></div>
+              <div class="row"><span class="k">involute</span><span class="v" id="r-kind">a spiral</span></div>
+              <div class="row"><span class="k">string out</span><span class="v" id="r-len">1.57 r</span></div>
+              <div class="row"><span class="k">found as</span><span class="v" id="r-how">tangent, by arc length</span></div>
+            </div>
+
+            <div class="bench-actions">
+              <button class="btn" id="run-btn" type="button" aria-pressed="false">Unwind</button>
+              <button class="btn" id="base-btn" type="button" aria-pressed="false">Base: circle</button>
+              <button class="btn" id="thread-btn" type="button" aria-pressed="true">Threads</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="law-h">
+      <p class="section-tag">Why the string draws the evolute's own curve back</p>
+      <h2 id="law-h">Unwinding is the evolute run backwards</h2>
+      <ul class="law-list">
+        <li>Hold the thread tight and let a little more off. The piece just released was wrapped against the base; now it swings out straight, <b>tangent</b> to the base at the point it leaves, and its length has grown by exactly that released arc. The free end moves square to the thread — so the thread is the <b>normal</b> of the curve the end is drawing.</li>
+        <li>That makes the base the <b>envelope of the involute's normals</b>: every taut thread is one of the involute's normals, and every thread touches the base. By the <a href="../centres/">definition on the other page</a>, the envelope of a curve's normals is its <b>evolute</b> — so the base you unwound from is the evolute of the involute you drew. Unwinding <em>is</em> the evolute, taken backwards.</li>
+        <li>So the two operations undo each other. Take a curve's evolute and you fold its curvature away into a companion curve; unwind a string from that companion and you get the original back (up to how far off the pin you started — a curve has one evolute but a whole family of involutes, one for each length of string). Forward on the <a href="../centres/">centres</a> page, backward here.</li>
+        <li>Which involute you get depends only on the base. A <b>circle</b> pays out the <em>involute of a circle</em>, an Archimedean-looking spiral whose coils stay a constant thread's-width apart — the exact flank a gear tooth needs so that meshing teeth roll without sliding. A <b>cycloid</b> pays out an <em>equal cycloid</em>, shifted by half an arch: the fact Huygens used to swing a pendulum between two cycloidal cheeks so its period would not drift with amplitude. An <b>astroid</b> pays out an astroid <em>twice as large</em>.</li>
+        <li>Every one of these is read off the string, not plotted. The page lays down the base, measures real arc length along it, and sets the thread's tip one tangent-segment of that length out from each point. The copper curve is a record of a tight string let go — and the gold base beneath it is the curve that string was wound on, its evolute.</li>
+      </ul>
+      <p class="pull">A curve and its evolute are the same thing read two ways: wind a string on, and you have the curvature folded away; let the string off, and you have it back.</p>
+    </section>
+
+    <section aria-labelledby="sib-h">
+      <p class="section-tag">The two</p>
+      <h2 id="sib-h">The curve the centres ride, and the string that winds it back</h2>
+      <div class="siblings">
+        <a href="../centres/"><span class="w">Centres</span><span class="d">the evolute of an ellipse — the track of its centres of curvature, which is also the envelope of its normals</span></a>
+        <a href="../string/" aria-current="page"><span class="w">String</span><span class="d">the reverse move — unwind a taut string from a curve and the free end traces an involute, whose evolute is the curve you unwound from</span></a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Evolute · the second curve a curve keeps · 2026-11-28 · <a href="../">index</a></p>
+    </footer>
+  </div>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
