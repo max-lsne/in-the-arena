@@ -134,6 +134,18 @@
     }
     ctx.stroke();
   }
+  function drawFeet(ctx, F) {
+    // where each taut thread leaves the base — tangent there. The feet lie strung along the base itself:
+    // every thread is one of the involute's normals and every one touches the base, so the base is the
+    // envelope of those normals — the evolute of the involute the string is drawing.
+    if (!S.showThreads) return;
+    const w = windIdx(); if (w < 1) return;
+    ctx.fillStyle = withA(C.base2, 0.55);
+    for (let k = 1; k <= S.threads; k++) {
+      const i = Math.round(k / S.threads * w); if (i < 1) continue;
+      ctx.beginPath(); ctx.arc(F.X(SMP.base[i].x), F.Y(SMP.base[i].y), 1.7, 0, TAU); ctx.fill();
+    }
+  }
   function drawInvolute(ctx, F) {
     const w = windIdx(); if (w < 1) return;
     const iv = SMP.invo;
@@ -164,6 +176,7 @@
     const F = frame(w, h);
     drawThreads(ctx, F);
     drawBase(ctx, F);
+    drawFeet(ctx, F);
     drawInvolute(ctx, F);
     drawActive(ctx, F);
     setVerdict();
@@ -254,7 +267,7 @@
   syncLabels(); updateReading(); draw();
   if (live) {
     const def = BASES[S.base];
-    live.textContent = `A taut string unwound from a ${def.label}. The free end traces an involute — here ${def.kind}, ${def.note} — while every taut thread stays tangent to the base, so the base is the evolute of the curve the string draws. Press space to unwind the string, B to change the base curve, T to show or hide the threads, and the arrow keys to let the string out or reel it in by hand.`;
+    live.textContent = `A taut string unwound from a ${def.label}. The free end traces an involute — here ${def.kind}, ${def.note} — while every taut thread stays tangent to the base — its foot marked where it leaves — so the base is the evolute of the curve the string draws. Press space to unwind the string, B to change the base curve, T to show or hide the threads, and the arrow keys to let the string out or reel it in by hand.`;
   }
   requestAnimationFrame(tick);
 })();
